@@ -50,14 +50,19 @@ def load_patient():
         log_error(e, "LOAD_PATIENTS")
         return []
 
-def load_tests():
+def load_tests(active_only: bool = True):
     try:
         supabase : Client = init_supabase()
-        tests = supabase.table('tests').select("id","name","status").execute()
-        group_test = supabase.table('test_groups').select("id","group_name","status","component_ids").execute()
+        q_tests = supabase.table('tests').select("id","name","status")
+        q_groups = supabase.table('test_groups').select("id","group_name","status","component_ids")
+        if active_only:
+            q_tests = q_tests.eq("status", True)
+            q_groups = q_groups.eq("status", True)
+        tests = q_tests.execute()
+        group_test = q_groups.execute()
         
-        logger.info(f"Loaded {len(tests.data)} individual tests and {len(group_test.data)} test groups")
-        return {"tests": tests.data,"group_test":group_test.data}
+        logger.info(f"Loaded {len(tests.data)} individual tests and {len(group_test.data)} test groups (active_only={active_only})")
+        return {"tests": tests.data, "group_test": group_test.data}
     except Exception as e:
         log_error(e, "LOAD_TESTS")
         return {"tests": [], "group_test": []}

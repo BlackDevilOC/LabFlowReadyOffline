@@ -1,0 +1,62 @@
+{
+  "genders": [
+    {
+      "label": "MALE",
+      "value": "MALE"
+    },
+    {
+      "label": "FEMALE",
+      "value": "FEMALE"
+    },
+    {
+      "label": "OTHER",
+      "value": "OTHER"
+    }
+  ],
+  "relations": [
+    {
+      "label": "S/O",
+      "value": "S",
+      "description": "Son of"
+    },
+    {
+      "label": "D/O",
+      "value": "D",
+      "description": "Daughter of"
+    },
+    {
+      "label": "W/O",
+      "value": "W",
+      "description": "Wife of"
+    }
+  ],
+  "salutations": [
+    {
+      "label": "Mr.",
+      "value": "Mr.",
+      "default_gender": "MALE",
+      "default_relation": "S"
+    },
+    {
+      "label": "Mrs.",
+      "value": "Mrs.",
+      "default_gender": "FEMALE",
+      "default_relation": "W"
+    },
+    {
+      "label": "Miss.",
+      "value": "Miss.",
+      "default_gender": "FEMALE",
+      "default_relation": "D"
+    },
+    {
+      "label": "Baby",
+      "value": "Baby",
+      "default_gender": "",
+      "default_relation": "S"
+    }
+  ],
+  "default_values": {
+    "salutation": "Mrs."
+  }
+}

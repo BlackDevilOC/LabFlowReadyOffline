@@ -13594,3 +13594,454 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2026-08-08 14:56:13,889 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
 2026-08-08 14:56:14,733 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184134, date=None
 2026-08-08 14:56:14,778 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:54:41,241 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 19:55:27,172 - ERROR - [LabFlow] - Server did not start in time
+2026-08-08 19:58:05,047 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 19:58:08,156 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-08 19:58:08,196 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-08 19:58:08,376 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-08 19:58:08,396 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-08 19:58:09,816 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:13,521 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:14,258 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:14,553 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-08 19:58:14,555 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:15,411 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-08 19:58:15,412 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:15,707 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:16,279 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-08 19:58:16,281 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:17,025 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-08 19:58:17,026 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-08 19:58:17,033 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:17,372 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-08 19:58:17,544 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 19:58:18,263 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-08 19:58:18,471 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-08 19:58:18,674 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-08 19:58:18,853 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-08 19:58:18,855 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:19,141 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-08 19:58:19,142 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-08 19:58:19,722 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-08 19:58:19,792 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:20,459 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:20,945 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:22,114 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184138, date=None
+2026-08-08 19:58:22,156 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:28,882 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 19:58:28,924 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:28,924 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:29,938 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184138
+2026-08-08 19:58:30,004 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:30,461 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:31,551 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 19:58:31,565 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:47,527 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:58,882 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 19:58:59,410 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 19:58:59,436 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:58:59,447 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:00,040 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:00,093 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 19:59:00,180 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:00,631 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 19:59:09,343 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:54,531 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 19:59:55,394 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 19:59:55,425 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:55,431 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:55,771 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 19:59:55,802 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:55,812 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:55,995 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 19:59:56,043 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 19:59:56,524 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:00:09,877 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:00:31,563 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:00:32,314 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:00:32,368 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:00:32,814 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:04:01,851 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:04:04,764 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:04:05,441 - INFO - [LabFlow] - Cloud settings pushed to Supabase by Anonymous
+2026-08-08 20:04:06,558 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:06:48,896 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 20:06:52,679 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-08 20:06:52,720 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-08 20:06:53,036 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-08 20:06:53,056 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-08 20:06:54,451 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:06:57,589 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:06:58,307 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:06:58,580 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-08 20:06:58,590 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:06:58,887 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-08 20:06:58,889 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:06:59,214 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:06:59,527 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-08 20:06:59,528 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:06:59,896 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-08 20:06:59,898 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-08 20:06:59,906 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:00,178 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-08 20:07:00,385 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-08 20:07:00,424 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:07:00,583 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-08 20:07:00,774 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-08 20:07:00,966 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-08 20:07:00,968 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:01,217 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-08 20:07:01,219 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-08 20:07:01,343 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:07:01,464 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:02,182 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:07:11,810 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:20,435 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:21,252 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:21,903 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:22,151 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:22,439 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:22,543 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:22,677 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:22,990 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:23,103 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:35,736 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:35,977 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:36,343 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:36,452 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:38,308 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:39,084 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:39,669 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:40,270 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:07:42,253 - ERROR - [LabFlow] - [USER: System] [API_CLOUD_SETTINGS_PUSH] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] name 'FETCHEDDATA_DIR' is not defined
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 1868, in api_cloud_settings_push
+    registration_opts = _load_registration_options()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 1834, in _load_registration_options
+    path = os.path.join(FETCHEDDATA_DIR, "registration_options.json")
+                        ^^^^^^^^^^^^^^^
+NameError: name 'FETCHEDDATA_DIR' is not defined
+2026-08-08 20:08:24,678 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:08:25,022 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:08:45,812 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:08:46,606 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:08:47,367 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:08:47,418 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:08:47,829 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:12:32,649 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 20:12:35,020 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-08 20:12:35,060 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-08 20:12:35,131 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-08 20:12:35,152 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-08 20:12:47,166 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:49,983 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:50,586 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:50,836 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-08 20:12:50,838 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:51,117 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-08 20:12:51,118 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:51,391 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:51,634 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-08 20:12:51,636 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:51,943 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-08 20:12:51,944 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-08 20:12:51,950 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:52,212 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-08 20:12:52,408 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-08 20:12:52,463 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:12:53,001 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-08 20:12:53,065 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:53,121 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-08 20:12:53,291 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-08 20:12:53,385 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:12:53,454 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-08 20:12:53,468 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:53,506 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:12:53,719 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-08 20:12:53,725 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-08 20:12:53,915 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:13:04,365 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:05,656 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:05,897 - INFO - [LabFlow] - Cloud settings pulled from Supabase by Anonymous
+2026-08-08 20:13:07,034 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:08,577 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:13:08,993 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:13:09,046 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:10,113 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:13:11,497 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 20:13:11,529 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:11,529 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:12,128 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:13,209 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184138
+2026-08-08 20:13:13,265 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:13,820 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:14,200 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:13:14,214 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:16,648 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:18,194 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184138
+2026-08-08 20:13:18,204 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 20:13:18,237 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:18,237 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:18,561 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-08 20:13:18,589 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:19,167 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:19,827 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:20,882 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184138, date=None
+2026-08-08 20:13:20,931 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:13:33,188 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:06,048 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 20:18:08,355 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-08 20:18:08,398 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-08 20:18:08,532 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-08 20:18:08,551 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-08 20:18:09,831 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:13,361 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:14,122 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:14,398 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-08 20:18:14,399 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:14,930 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-08 20:18:14,932 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:15,194 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:15,455 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-08 20:18:15,456 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:15,827 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-08 20:18:15,828 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-08 20:18:15,834 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:16,097 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-08 20:18:16,292 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-08 20:18:16,343 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:18:16,506 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-08 20:18:16,682 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-08 20:18:16,872 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-08 20:18:16,873 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:17,407 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-08 20:18:17,408 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-08 20:18:33,252 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:18:33,365 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:18:33,830 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:19:18,396 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:19:41,154 - INFO - [LabFlow] - Registration options updated by Anonymous
+2026-08-08 20:19:49,644 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:19:50,084 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:19:50,136 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:19:50,720 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:19:58,900 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 20:19:58,963 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:19:58,964 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:19:59,683 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:19:59,980 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:20:00,032 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:20:00,568 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:20:58,315 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:21:01,445 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:21:01,857 - INFO - [LabFlow] - Cloud settings pushed to Supabase by Anonymous
+2026-08-08 20:21:14,632 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:21:16,750 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:32,475 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 20:25:34,657 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-08 20:25:34,698 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-08 20:25:34,847 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-08 20:25:34,904 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-08 20:25:36,061 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:39,231 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:39,938 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:40,187 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-08 20:25:40,188 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:40,462 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-08 20:25:40,464 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:40,746 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:40,995 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-08 20:25:40,997 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:41,338 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-08 20:25:41,340 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-08 20:25:41,350 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:41,620 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-08 20:25:41,818 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-08 20:25:41,856 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:25:42,016 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-08 20:25:42,201 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-08 20:25:42,373 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-08 20:25:42,375 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:42,653 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-08 20:25:42,654 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-08 20:25:47,862 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:25:47,961 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:25:48,380 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:25:57,864 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:26:05,325 - INFO - [LabFlow] - Registration options updated by Anonymous
+2026-08-08 20:26:16,006 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:26:16,583 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:26:16,632 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:26:17,052 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:26:36,136 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:29:44,581 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:34:41,215 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 20:34:44,963 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-08 20:34:45,005 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-08 20:34:45,043 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:34:45,210 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-08 20:34:45,286 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-08 20:34:46,093 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-08 20:34:55,457 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:34:58,218 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:34:59,153 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:34:59,427 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-08 20:34:59,429 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:34:59,746 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-08 20:34:59,749 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:00,056 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:00,339 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-08 20:35:00,340 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:00,970 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-08 20:35:00,971 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-08 20:35:00,975 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:01,308 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-08 20:35:01,487 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:35:01,508 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-08 20:35:01,717 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-08 20:35:01,915 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-08 20:35:02,104 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-08 20:35:02,105 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:02,901 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:35:03,014 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:03,501 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:35:03,713 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-08 20:35:03,714 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-08 20:35:17,229 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:18,892 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:44,434 - INFO - [LabFlow] - Registration options updated by Anonymous
+2026-08-08 20:35:46,036 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:35:46,491 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:35:46,540 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:35:48,606 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:36:12,316 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:36:12,383 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:36:12,856 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:36:18,724 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:36:18,776 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:36:19,483 - INFO - [LabFlow] - Loaded 211 individual tests and 97 test groups
+2026-08-08 20:40:18,892 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:40:32,892 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:40:47,378 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:05,460 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 20:42:10,039 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-08 20:42:10,079 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-08 20:42:10,128 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:10,563 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-08 20:42:10,582 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-08 20:42:10,915 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-08 20:42:24,821 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:27,486 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:28,267 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:28,599 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-08 20:42:28,600 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:29,674 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-08 20:42:29,676 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:29,989 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:30,300 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-08 20:42:30,301 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:31,380 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-08 20:42:31,381 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-08 20:42:31,386 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:31,655 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-08 20:42:31,873 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-08 20:42:31,895 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:42:32,133 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-08 20:42:32,396 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-08 20:42:32,602 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-08 20:42:32,604 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:32,888 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-08 20:42:32,889 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-08 20:42:36,288 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:42:36,404 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:42:37,258 - INFO - [LabFlow] - Loaded 118 individual tests and 69 test groups (active_only=True)
+2026-08-08 20:42:59,736 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:42:59,791 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:00,324 - INFO - [LabFlow] - Loaded 118 individual tests and 69 test groups (active_only=True)
+2026-08-08 20:43:09,632 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:11,513 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:19,742 - INFO - [LabFlow] - Registration options updated by Anonymous
+2026-08-08 20:43:21,719 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:23,375 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:24,382 - INFO - [LabFlow] - Cloud settings pushed to Supabase by Anonymous
+2026-08-08 20:43:24,384 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:43:26,167 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:43:26,216 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:26,853 - INFO - [LabFlow] - Loaded 118 individual tests and 69 test groups (active_only=True)
+2026-08-08 20:43:32,288 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-08 20:43:32,329 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:32,720 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 20:43:32,752 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:32,755 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:33,622 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:33,711 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-08 20:43:33,736 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:34,344 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:34,729 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:35,305 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184138, date=None
+2026-08-08 20:43:35,350 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:37,520 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:43:37,573 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:37,983 - INFO - [LabFlow] - Loaded 118 individual tests and 69 test groups (active_only=True)
+2026-08-08 20:43:51,928 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:43:51,985 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:43:52,359 - INFO - [LabFlow] - Loaded 118 individual tests and 69 test groups (active_only=True)
+2026-08-08 20:44:06,863 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 20:44:06,897 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:44:06,902 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:44:07,576 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:44:10,244 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184138
+2026-08-08 20:44:10,307 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:44:11,083 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:44:11,482 - INFO - [LabFlow] - Loaded 118 individual tests and 69 test groups (active_only=True)
+2026-08-08 20:44:11,759 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:44:14,875 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:44:16,791 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184138
+2026-08-08 20:44:16,800 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184138, date=None
+2026-08-08 20:44:16,818 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:45:12,568 - INFO - [LabFlow] - Print layout saved by admin@admin.com for fingerprint calcium|complete blood count|hep b, c|li
+2026-08-08 20:45:14,705 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-08 20:45:14,736 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:45:14,745 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:45:15,202 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-08 20:45:15,225 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:45:16,138 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:45:16,532 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:45:18,680 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184138, date=None
+2026-08-08 20:45:18,699 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:45:23,152 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:45:23,205 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:45:23,628 - INFO - [LabFlow] - Loaded 118 individual tests and 69 test groups (active_only=True)
+2026-08-08 20:47:29,828 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-08 20:47:32,160 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-08 20:47:32,198 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-08 20:47:32,222 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:32,339 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-08 20:47:32,358 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-08 20:47:32,862 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-08 20:47:34,896 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:37,496 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:38,161 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:38,439 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-08 20:47:38,441 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:38,758 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-08 20:47:38,759 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:38,994 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:39,232 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-08 20:47:39,234 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:39,589 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-08 20:47:39,591 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-08 20:47:39,599 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:40,111 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-08 20:47:40,623 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-08 20:47:40,802 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-08 20:47:40,937 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-08 20:47:41,000 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-08 20:47:41,039 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:41,191 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-08 20:47:41,365 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-08 20:47:41,367 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-08 20:47:41,461 - INFO - [LabFlow] - Loaded 118 individual tests and 69 test groups (active_only=True)
+2026-08-08 20:47:41,667 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase

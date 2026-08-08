@@ -12,13 +12,6 @@
 
 {% block content %}
 <div class="registration-container">
-    <!-- UI Switch Banner -->
-    <div class="ui-switch-banner">
-        <span class="ui-switch-label">📋 Classic Dropdown UI</span>
-        <a href="/register" class="ui-switch-btn">
-            ✨ Try New Checkbox UI →
-        </a>
-    </div>
     <form action="{{ url_prefix }}/register/patient" method="post">
         <input type="hidden" id="userEmailInput" name="user_email" value="">
         <input type="hidden" id="userNameInput" name="user" value="">

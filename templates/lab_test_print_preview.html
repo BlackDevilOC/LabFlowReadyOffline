@@ -736,10 +736,29 @@
         return '';
     }
 
-    function toParamList(testValues) {
+    let currentGroupOrders = {};
+
+    function toParamList(testValues, testName) {
         // test_values is jsonb map: key -> {name,value,unit,normal_min,normal_max}
-        const values = testValues && typeof testValues === 'object' ? Object.values(testValues) : [];
-        return values.filter(v => v && typeof v === 'object');
+        if (!testValues || typeof testValues !== 'object') return [];
+        const values = Object.values(testValues).filter(v => v && typeof v === 'object');
+        
+        const targetOrder = currentGroupOrders && (currentGroupOrders[testName] || currentGroupOrders[(testName || '').trim()]);
+        if (targetOrder && Array.isArray(targetOrder) && targetOrder.length > 0) {
+            const orderMap = {};
+            targetOrder.forEach((name, idx) => {
+                if (name) orderMap[name.trim().toLowerCase()] = idx;
+            });
+            values.sort((a, b) => {
+                const na = (a.name || '').trim().toLowerCase();
+                const nb = (b.name || '').trim().toLowerCase();
+                const ia = na in orderMap ? orderMap[na] : 999;
+                const ib = nb in orderMap ? orderMap[nb] : 999;
+                if (ia !== ib) return ia - ib;
+                return na.localeCompare(nb);
+            });
+        }
+        return values;
     }
 
     function groupByCategoryAndTest(rows) {
@@ -749,7 +768,7 @@
             if (!out[cat]) out[cat] = {};
             const tname = (r.test_name || 'Test').trim() || 'Test';
             if (!out[cat][tname]) out[cat][tname] = { params: [], remarks: '' };
-            out[cat][tname].params.push(...toParamList(r.test_values));
+            out[cat][tname].params.push(...toParamList(r.test_values, tname));
             const rm = (r.remarks || '').trim();
             if (rm) {
                 const existing = out[cat][tname].remarks;
@@ -1279,6 +1298,7 @@
         currentPatient = payload.patient || {};
         allRows = payload.tests || [];
         currentSettings = settings;
+        currentGroupOrders = payload.group_orders || {};
 
         // Compute fingerprint and try to load saved layout
         currentFingerprint = computeFingerprint(allRows);

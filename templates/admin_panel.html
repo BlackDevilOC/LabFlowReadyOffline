@@ -281,6 +281,35 @@
         overflow-y: auto;
     }
 
+    /* Modal Popup Styles */
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 16px;
+    }
+
+    .modal-card {
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+        animation: modalScaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes modalScaleIn {
+        from { opacity: 0; transform: scale(0.96) translateY(8px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+        overflow-y: auto;
+    }
+
     .group-order-item {
         display: flex;
         align-items: center;
@@ -1034,6 +1063,69 @@
                 </button>
             </div>
 
+            <!-- Patient Registration Options & Defaults CRUD Card (Top of Page) -->
+            <div class="admin-card" style="background:white; border:1px solid #e2e8f0; border-radius:12px; padding:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+                    <div>
+                        <h3 style="font-size:1.1rem; font-weight:700; color:#0f172a; margin:0 0 4px 0;">📋 Patient Registration Options &amp; Defaults</h3>
+                        <p style="font-size:0.82rem; color:#64748b; margin:0;">Configure each Salutation with its individual Default Relation and Gender. Changes automatically pull to secondary PCs on startup/login.</p>
+                    </div>
+                    <button type="button" class="primary-btn" onclick="saveRegistrationOptionsAdmin()" style="background:#2563eb; color:white; font-size:0.88rem; padding:8px 18px; border-radius:8px; font-weight:600; cursor:pointer;">
+                        💾 Save Registration Options
+                    </button>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
+                    <!-- Salutations Column (Mapped to individual Relation + Gender) -->
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <h4 style="margin:0; font-size:0.9rem; color:#1e293b; font-weight:700;">Salutations ➔ Default Relation &amp; Gender</h4>
+                            <span style="font-size:10px; color:#64748b;">(Auto-pairs on selection)</span>
+                        </div>
+                        <div id="admin_salutations_list" style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px; max-height:220px; overflow-y:auto;"></div>
+                        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                            <input type="text" id="new_salutation_val" class="input-control" placeholder="Title (e.g. Dr.)" style="margin-bottom:0; font-size:0.82rem; padding:6px 8px; width:90px;">
+                            <select id="new_salutation_relation" class="input-control" style="margin-bottom:0; font-size:0.82rem; padding:6px 6px; flex:1; min-width:85px;">
+                                <option value="S">S/O</option>
+                                <option value="W">W/O</option>
+                                <option value="D">D/O</option>
+                                <option value="">No Relation</option>
+                            </select>
+                            <select id="new_salutation_gender" class="input-control" style="margin-bottom:0; font-size:0.82rem; padding:6px 6px; width:85px;">
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
+                                <option value="OTHER">Other</option>
+                                <option value="">Any</option>
+                            </select>
+                            <button type="button" class="primary-btn" style="padding:6px 12px; font-size:0.82rem; white-space:nowrap;" onclick="addSalutationAdmin()">+ Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Relations Column -->
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px;">
+                        <h4 style="margin:0 0 8px 0; font-size:0.9rem; color:#1e293b; font-weight:700;">Relation Codes &amp; Labels</h4>
+                        <div id="admin_relations_list" style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px; max-height:220px; overflow-y:auto;"></div>
+                        <div style="display:flex; gap:6px;">
+                            <input type="text" id="new_relation_val" class="input-control" placeholder="Code (e.g. M)" style="margin-bottom:0; font-size:0.82rem; padding:6px 8px; width:80px;">
+                            <input type="text" id="new_relation_label" class="input-control" placeholder="Label (e.g. M/O)" style="margin-bottom:0; font-size:0.82rem; padding:6px 8px; flex:1;">
+                            <button type="button" class="primary-btn" style="padding:6px 12px; font-size:0.82rem; white-space:nowrap;" onclick="addRelationAdmin()">+ Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Form Defaults Column -->
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px;">
+                        <h4 style="margin:0 0 8px 0; font-size:0.9rem; color:#1e293b; font-weight:700;">Default Form Opening Title</h4>
+                        <div>
+                            <label class="input-label" style="font-size:11px; margin-bottom:4px;">Default Initial Salutation</label>
+                            <select id="admin_def_salutation" class="input-control" style="margin-bottom:8px; font-size:0.85rem; padding:6px 8px;"></select>
+                            <p style="font-size:0.75rem; color:#64748b; line-height:1.4; margin:4px 0 0 0;">
+                                💡 When the registration page opens, it selects this title and immediately loads its paired relation &amp; gender.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Settings Bar -->
             <div
                 style="display:flex; flex-wrap:wrap; gap:16px; background:white; padding:16px 20px; border-radius:12px; border:1px solid #e2e8f0; align-items:center;">
@@ -1509,6 +1601,59 @@
     </main>
 </div>
 
+<!-- Interactive Modal for Editing Tests & Groups -->
+<div id="test-edit-modal" class="modal-overlay" style="display:none;" aria-hidden="true" onclick="if(event.target===this)closeTestEditModal()">
+    <div class="modal-card" style="max-width: 580px; width: 94%;">
+        <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center; padding: 14px 20px; border-bottom: 1px solid #f1f5f9; background: #f8fafc;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <h3 id="modal-edit-kind-badge" style="font-size: 1.05rem; color: #1e293b; margin: 0; font-weight: 700;">Edit Test</h3>
+                <span id="modal-edit-id-label" style="font-size: 11px; background: #e2e8f0; color: #475569; padding: 2px 6px; border-radius: 4px; font-weight: 600;"></span>
+            </div>
+            <button type="button" class="modal-close-btn" onclick="closeTestEditModal()" aria-label="Close" style="background:none; border:none; font-size:18px; cursor:pointer; color:#94a3b8; line-height:1; padding:2px 6px;">✕</button>
+        </div>
+        <div class="modal-body" style="padding: 16px 20px; max-height: 75vh; overflow-y: auto;">
+            <label class="input-label" style="font-size:12px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">Name</label>
+            <input id="modal-edit-name" class="input-control" placeholder="Test or Group Name" style="width:100%; box-sizing:border-box; margin-bottom:12px; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px;">
+
+            <label class="input-label" style="font-size:12px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">Category</label>
+            <select id="modal-edit-category" class="input-control" style="width:100%; box-sizing:border-box; margin-bottom:12px; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px;"></select>
+
+            <!-- Single Test Specific Fields -->
+            <div id="modal-edit-test-fields">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom:12px;">
+                    <div>
+                        <label class="input-label" style="font-size:12px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">Normal Min</label>
+                        <input id="modal-edit-min" class="input-control" placeholder="e.g. 13.0" style="width:100%; box-sizing:border-box; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px;">
+                    </div>
+                    <div>
+                        <label class="input-label" style="font-size:12px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">Normal Max</label>
+                        <input id="modal-edit-max" class="input-control" placeholder="e.g. 16.5" style="width:100%; box-sizing:border-box; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px;">
+                    </div>
+                </div>
+                <label class="input-label" style="font-size:12px; font-weight:600; color:#475569; margin-bottom:4px; display:block;">Unit</label>
+                <input id="modal-edit-unit" class="input-control" placeholder="e.g. g/dl" style="width:100%; box-sizing:border-box; margin-bottom:12px; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px;">
+            </div>
+
+            <!-- Test Group Specific Fields -->
+            <div id="modal-edit-group-fields" style="display:none;">
+                <label class="input-label" style="font-size:12px; font-weight:600; color:#475569; margin-bottom:2px; display:block;">Report display order</label>
+                <p style="font-size:11px; color:#64748b; margin:0 0 8px;">Use ↑ ↓ to control the order parameters appear on print preview and result entry.</p>
+                <div class="group-order-panel" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px;">
+                    <div style="display:flex; gap:8px; margin-bottom:8px;">
+                        <select id="modal-edit-group-picker" class="input-control" style="margin-bottom:0; flex:1; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px;"></select>
+                        <button type="button" class="primary-btn" style="white-space:nowrap; padding:6px 12px; background:#2563eb; color:#fff; border:none; border-radius:6px; cursor:pointer;" onclick="addModalGroupComponent()">Add test</button>
+                    </div>
+                    <ul id="modal-edit-group-order-list" class="group-order-list" style="list-style:none; padding:0; margin:0; max-height:220px; overflow-y:auto;"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" style="padding: 12px 20px; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #f1f5f9; background: #f8fafc;">
+            <button type="button" onclick="closeTestEditModal()" style="padding: 8px 16px; border: 1px solid #cbd5e1; background: #fff; border-radius: 6px; cursor: pointer; font-weight:600; font-size:12px; color:#475569;">Cancel</button>
+            <button type="button" id="modal-btn-save" onclick="saveModalEditedConfig()" style="padding: 8px 18px; background:#2563eb; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600; font-size:12px;">Save Changes</button>
+        </div>
+    </div>
+</div>
+
 <div id="accessDenied" class="full-screen-center" style="display: none;">
     <h1 style="color: #e53e3e; font-size: 2.5rem; margin-bottom: 1rem;">Access denied</h1>
     <p>Incorrect admin password.</p>
@@ -1521,6 +1666,16 @@
 {% block scripts %}
 <script>
     const OFFLINE_BASE = '/offline';
+
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
 
     let adminCatalog = { tests: [], groups: [], categories: {{ lab_categories | tojson }} };
     let editContext = { kind: null, id: null };
@@ -2128,7 +2283,7 @@
                     <div style="display:flex; gap:8px; align-items:center;">
                         ${statusBadge}
                         ${toggleBtn}
-                        <a href="/page/admin?view=tests-edit&type=test&id=${t.id}" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:600;">Edit</a>
+                        <button type="button" onclick="openTestEditModal('test', ${t.id})" style="font-size:11px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:600;text-decoration:underline;padding:2px 4px;">Edit</button>
                     </div>
                 </div>
             `}).join('') || '<div class="mini-row"><span style="color:#94a3b8;">No matching tests found</span></div>';
@@ -2154,7 +2309,7 @@
                         <div style="display:flex; gap:8px; align-items:center;">
                             ${statusBadge}
                             ${toggleBtn}
-                            <a href="/page/admin?view=tests-edit&type=group&id=${g.id}" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:600;">Edit</a>
+                            <button type="button" onclick="openTestEditModal('group', ${g.id})" style="font-size:11px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:600;text-decoration:underline;padding:2px 4px;">Edit</button>
                         </div>
                     </div>
                     <div class="group-order-preview" style="font-size:11px;color:#475569;">${formatGroupOrderPreview(g.component_ids || [])}</div>
@@ -2342,6 +2497,173 @@
             loadTestsCatalog();
         } else {
             alert(result.detail || 'Failed to create test group');
+        }
+    }
+
+    let modalEditContext = { kind: null, id: null };
+    let modalGroupOrderState = [];
+
+    function openTestEditModal(kind, id) {
+        modalEditContext = { kind, id };
+        const modal = document.getElementById('test-edit-modal');
+        if (!modal) return;
+
+        fillCategorySelect('modal-edit-category');
+        fillGroupPicker('modal-edit-group-picker');
+
+        const badge = document.getElementById('modal-edit-kind-badge');
+        const idLabel = document.getElementById('modal-edit-id-label');
+        const testFields = document.getElementById('modal-edit-test-fields');
+        const groupFields = document.getElementById('modal-edit-group-fields');
+
+        if (idLabel) idLabel.textContent = `ID: ${id}`;
+
+        if (kind === 'test') {
+            const item = adminCatalog.tests.find(t => t.id === id);
+            if (!item) return;
+            if (badge) badge.textContent = 'Edit Single Test';
+            if (testFields) testFields.style.display = '';
+            if (groupFields) groupFields.style.display = 'none';
+
+            document.getElementById('modal-edit-name').value = item.name || '';
+            fillCategorySelect('modal-edit-category', item.category || 'General');
+            document.getElementById('modal-edit-min').value = item.normal_min ?? '';
+            document.getElementById('modal-edit-max').value = item.normal_max ?? '';
+            document.getElementById('modal-edit-unit').value = item.unit || '';
+        } else {
+            const item = adminCatalog.groups.find(g => g.id === id);
+            if (!item) return;
+            if (badge) badge.textContent = 'Edit Test Group';
+            if (testFields) testFields.style.display = 'none';
+            if (groupFields) groupFields.style.display = '';
+
+            document.getElementById('modal-edit-name').value = item.group_name || '';
+            fillCategorySelect('modal-edit-category', item.category || 'Group Test');
+            modalGroupOrderState = [...(item.component_ids || [])];
+            renderModalGroupOrderList();
+        }
+
+        modal.style.display = 'flex';
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeTestEditModal() {
+        const modal = document.getElementById('test-edit-modal');
+        if (!modal) return;
+        modal.style.display = 'none';
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function renderModalGroupOrderList() {
+        const list = document.getElementById('modal-edit-group-order-list');
+        if (!list) return;
+        const testsMap = {};
+        (adminCatalog.tests || []).forEach(t => { testsMap[t.id] = t; });
+
+        if (!modalGroupOrderState.length) {
+            list.innerHTML = '<li style="padding:10px; color:#94a3b8; font-style:italic; text-align:center; font-size:12px;">No tests in this group yet. Pick from above.</li>';
+            return;
+        }
+
+        list.innerHTML = modalGroupOrderState.map((id, index) => {
+            const test = testsMap[id] || { name: `Test #${id}`, category: '' };
+            return `
+                <li class="group-order-item" style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; background:#fff; border:1px solid #e2e8f0; border-radius:6px; margin-bottom:4px; font-size:12px;">
+                    <div>
+                        <span style="font-weight:700; color:#2563eb; margin-right:6px;">${index + 1}.</span>
+                        <strong>${escapeHtml(test.name)}</strong>
+                        <span style="font-size:11px; color:#64748b; margin-left:4px;">(${escapeHtml(test.category || 'Test')})</span>
+                    </div>
+                    <div style="display:flex; gap:4px;">
+                        <button type="button" style="padding:2px 6px; border:1px solid #cbd5e1; background:#fff; border-radius:4px; cursor:pointer;" onclick="moveModalGroupComponent(${index}, -1)" ${index === 0 ? 'disabled' : ''}>↑</button>
+                        <button type="button" style="padding:2px 6px; border:1px solid #cbd5e1; background:#fff; border-radius:4px; cursor:pointer;" onclick="moveModalGroupComponent(${index}, 1)" ${index === modalGroupOrderState.length - 1 ? 'disabled' : ''}>↓</button>
+                        <button type="button" style="padding:2px 6px; border:1px solid #fecaca; background:#fee2e2; color:#b91c1c; border-radius:4px; cursor:pointer;" onclick="removeModalGroupComponent(${index})">✕</button>
+                    </div>
+                </li>
+            `;
+        }).join('');
+    }
+
+    function addModalGroupComponent() {
+        const picker = document.getElementById('modal-edit-group-picker');
+        if (!picker || !picker.value) return;
+        const id = parseInt(picker.value);
+        if (modalGroupOrderState.includes(id)) {
+            alert('This test is already in this group.');
+            return;
+        }
+        modalGroupOrderState.push(id);
+        renderModalGroupOrderList();
+        picker.value = '';
+    }
+
+    function moveModalGroupComponent(index, direction) {
+        const target = index + direction;
+        if (target < 0 || target >= modalGroupOrderState.length) return;
+        [modalGroupOrderState[index], modalGroupOrderState[target]] = [modalGroupOrderState[target], modalGroupOrderState[index]];
+        renderModalGroupOrderList();
+    }
+
+    function removeModalGroupComponent(index) {
+        modalGroupOrderState.splice(index, 1);
+        renderModalGroupOrderList();
+    }
+
+    async function saveModalEditedConfig() {
+        const btn = document.getElementById('modal-btn-save');
+        if (btn) { btn.disabled = true; btn.textContent = 'Saving...'; }
+        try {
+            if (modalEditContext.kind === 'test') {
+                const payload = {
+                    name: document.getElementById('modal-edit-name').value.trim(),
+                    category: document.getElementById('modal-edit-category').value,
+                    normal_min: document.getElementById('modal-edit-min').value.trim(),
+                    normal_max: document.getElementById('modal-edit-max').value.trim(),
+                    unit: document.getElementById('modal-edit-unit').value.trim(),
+                    status: true
+                };
+                const res = await fetch(`/api/admin/tests/${modalEditContext.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await res.json();
+                if (result.status === 'Success') {
+                    closeTestEditModal();
+                    await loadTestsCatalog();
+                } else {
+                    alert(result.detail || 'Failed to update test');
+                }
+            } else {
+                if (modalGroupOrderState.length === 0) {
+                    alert('Add at least one test to the group');
+                    return;
+                }
+                const payload = {
+                    group_name: document.getElementById('modal-edit-name').value.trim(),
+                    category: document.getElementById('modal-edit-category').value,
+                    component_ids: modalGroupOrderState,
+                    status: true
+                };
+                const res = await fetch(`/api/admin/test-groups/${modalEditContext.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await res.json();
+                if (result.status === 'Success') {
+                    closeTestEditModal();
+                    await loadTestsCatalog();
+                } else {
+                    alert(result.detail || 'Failed to update group');
+                }
+            }
+        } catch (e) {
+            alert('Error: ' + e.message);
+        } finally {
+            if (btn) { btn.disabled = false; btn.textContent = 'Save Changes'; }
         }
     }
 
@@ -3520,10 +3842,175 @@
         }
     }
 
+    // ── Registration Options CRUD Management ────────────────────────────────
+    let regOptionsState = {
+        salutations: [],
+        relations: [],
+        genders: [],
+        default_values: {}
+    };
+
+    async function loadRegistrationOptionsAdmin() {
+        try {
+            const res = await fetch('/api/admin/registration-options');
+            const data = await res.json();
+            if (data.status === 'Success' && data.options) {
+                regOptionsState = data.options;
+                renderRegistrationOptionsAdminUI();
+            }
+        } catch (e) {
+            console.error("Error loading registration options:", e);
+        }
+    }
+
+    function updateSalutationPropAdmin(idx, prop, val) {
+        if (!regOptionsState.salutations || !regOptionsState.salutations[idx]) return;
+        if (typeof regOptionsState.salutations[idx] === 'string') {
+            const strVal = regOptionsState.salutations[idx];
+            regOptionsState.salutations[idx] = { value: strVal, label: strVal };
+        }
+        regOptionsState.salutations[idx][prop] = val;
+    }
+
+    function renderRegistrationOptionsAdminUI() {
+        const salList = document.getElementById('admin_salutations_list');
+        const relList = document.getElementById('admin_relations_list');
+        const defSal = document.getElementById('admin_def_salutation');
+
+        if (salList) {
+            salList.innerHTML = (regOptionsState.salutations || []).map((s, idx) => {
+                const label = typeof s === 'string' ? s : (s.label || s.value || '');
+                const curRel = (typeof s === 'object' && s.default_relation !== undefined) ? s.default_relation : '';
+                const curGen = (typeof s === 'object' && s.default_gender !== undefined) ? s.default_gender : '';
+
+                const relOptions = [
+                    { val: '', lbl: 'No Relation' },
+                    ...(regOptionsState.relations || []).map(r => ({ val: r.value, lbl: r.label || r.value }))
+                ];
+
+                const genOptions = [
+                    { val: '', lbl: 'Any Gender' },
+                    { val: 'MALE', lbl: 'MALE' },
+                    { val: 'FEMALE', lbl: 'FEMALE' },
+                    { val: 'OTHER', lbl: 'OTHER' }
+                ];
+
+                const relSelect = `<select onchange="updateSalutationPropAdmin(${idx}, 'default_relation', this.value)" style="font-size:11px; padding:3px 5px; border:1px solid #cbd5e1; border-radius:4px; background:white;">` +
+                    relOptions.map(o => `<option value="${escapeHtml(o.val)}" ${(curRel === o.val) ? 'selected' : ''}>${escapeHtml(o.lbl)}</option>`).join('') +
+                    `</select>`;
+
+                const genSelect = `<select onchange="updateSalutationPropAdmin(${idx}, 'default_gender', this.value)" style="font-size:11px; padding:3px 5px; border:1px solid #cbd5e1; border-radius:4px; background:white;">` +
+                    genOptions.map(o => `<option value="${escapeHtml(o.val)}" ${(curGen === o.val) ? 'selected' : ''}>${escapeHtml(o.lbl)}</option>`).join('') +
+                    `</select>`;
+
+                return `
+                <div style="display:flex; justify-content:space-between; align-items:center; background:white; border:1px solid #cbd5e1; border-radius:8px; padding:6px 10px; font-size:12px; gap:8px;">
+                    <div style="font-weight:700; min-width:55px; color:#1e293b;">${escapeHtml(label)}</div>
+                    <div style="display:flex; gap:6px; align-items:center; flex:1; justify-content:flex-end;">
+                        ${relSelect}
+                        ${genSelect}
+                        <button type="button" onclick="removeSalutationAdmin(${idx})" style="border:none; background:none; color:#ef4444; font-weight:bold; cursor:pointer; font-size:14px; padding:2px 6px;">✕</button>
+                    </div>
+                </div>`;
+            }).join('') || '<div style="font-size:11px; color:#94a3b8; padding:8px;">No salutations configured</div>';
+        }
+
+        if (relList) {
+            relList.innerHTML = (regOptionsState.relations || []).map((r, idx) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; background:white; border:1px solid #cbd5e1; border-radius:8px; padding:6px 10px; font-size:12px;">
+                    <div>
+                        <strong>${escapeHtml(r.label || r.value)}</strong>
+                        ${r.description ? `<span style="font-size:10px; color:#64748b; margin-left:6px;">(${escapeHtml(r.description)})</span>` : ''}
+                    </div>
+                    <button type="button" onclick="removeRelationAdmin(${idx})" style="border:none; background:none; color:#ef4444; font-weight:bold; cursor:pointer; font-size:14px; padding:2px 6px;">✕</button>
+                </div>
+            `).join('') || '<div style="font-size:11px; color:#94a3b8; padding:8px;">No relations configured</div>';
+        }
+
+        if (defSal) {
+            defSal.innerHTML = `<option value="">— None —</option>` + (regOptionsState.salutations || []).map(s => {
+                const val = typeof s === 'string' ? s : (s.value || s.label || '');
+                const lbl = typeof s === 'string' ? s : (s.label || s.value || '');
+                const isSel = (regOptionsState.default_values?.salutation === val) ? 'selected' : '';
+                return `<option value="${escapeHtml(val)}" ${isSel}>${escapeHtml(lbl)}</option>`;
+            }).join('');
+        }
+    }
+
+    function addSalutationAdmin() {
+        const inp = document.getElementById('new_salutation_val');
+        const rel = document.getElementById('new_salutation_relation');
+        const gen = document.getElementById('new_salutation_gender');
+        if (!inp || !inp.value.trim()) return;
+        const val = inp.value.trim();
+        if (!regOptionsState.salutations) regOptionsState.salutations = [];
+        regOptionsState.salutations.push({
+            value: val,
+            label: val,
+            default_relation: rel ? rel.value : '',
+            default_gender: gen ? gen.value : ''
+        });
+        inp.value = '';
+        renderRegistrationOptionsAdminUI();
+    }
+
+    function removeSalutationAdmin(idx) {
+        if (!regOptionsState.salutations) return;
+        regOptionsState.salutations.splice(idx, 1);
+        renderRegistrationOptionsAdminUI();
+    }
+
+    function addRelationAdmin() {
+        const valInp = document.getElementById('new_relation_val');
+        const lblInp = document.getElementById('new_relation_label');
+        if (!valInp || !valInp.value.trim()) return;
+        const val = valInp.value.trim();
+        const lbl = (lblInp && lblInp.value.trim()) ? lblInp.value.trim() : val;
+        if (!regOptionsState.relations) regOptionsState.relations = [];
+        regOptionsState.relations.push({ value: val, label: lbl });
+        valInp.value = '';
+        if (lblInp) lblInp.value = '';
+        renderRegistrationOptionsAdminUI();
+    }
+
+    function removeRelationAdmin(idx) {
+        if (!regOptionsState.relations) return;
+        regOptionsState.relations.splice(idx, 1);
+        renderRegistrationOptionsAdminUI();
+    }
+
+    async function saveRegistrationOptionsAdmin() {
+        try {
+            const defSal = document.getElementById('admin_def_salutation');
+
+            regOptionsState.default_values = {
+                salutation: defSal ? defSal.value : "Mr."
+            };
+
+            const res = await fetch('/api/admin/registration-options', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(regOptionsState)
+            });
+            const data = await res.json();
+            if (data.status === 'Success') {
+                alert("✅ Patient Registration Options saved successfully!");
+                loadRegistrationOptionsAdmin();
+            } else {
+                alert("❌ Failed to save: " + (data.message || 'Error'));
+            }
+        } catch (e) {
+            alert("❌ Error: " + e.message);
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         initTestSelectionPage();
         if ("{{ current_view }}" === "print-settings") {
             loadAdminPrintSettings();
+        }
+        if ("{{ current_view }}" === "test-selection") {
+            loadRegistrationOptionsAdmin();
         }
     });
 

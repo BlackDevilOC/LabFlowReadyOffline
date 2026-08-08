@@ -1348,13 +1348,47 @@
         }
     }
 
+    let groupOrdersCatalog = {};
+
+    async function loadGroupOrders() {
+        try {
+            const res = await fetch('/api/admin/tests-catalog');
+            const data = await res.json();
+            if (data.status === 'Success') {
+                const testNamesById = {};
+                (data.tests || []).forEach(t => { if (t.id && t.name) testNamesById[t.id] = t.name; });
+                (data.groups || []).forEach(g => {
+                    const gName = (g.group_name || '').trim();
+                    const cIds = g.component_ids || [];
+                    if (gName && cIds.length) {
+                        groupOrdersCatalog[gName] = cIds.map(cid => testNamesById[cid]).filter(Boolean);
+                    }
+                });
+            }
+        } catch (_) {}
+    }
+
     function renderFormFields() {
         const container = document.getElementById('tests-container');
         let html = '';
 
         patientRecords.forEach((record, recordIndex) => {
             const testValues = record.test_values || {};
-            const keys = Object.keys(testValues);
+            let keys = Object.keys(testValues);
+
+            const targetOrder = groupOrdersCatalog[(record.test_name || '').trim()];
+            if (targetOrder && Array.isArray(targetOrder) && targetOrder.length > 0) {
+                const orderMap = {};
+                targetOrder.forEach((n, idx) => { orderMap[(n || '').trim().toLowerCase()] = idx; });
+                keys.sort((ka, kb) => {
+                    const na = (testValues[ka]?.name || '').trim().toLowerCase();
+                    const nb = (testValues[kb]?.name || '').trim().toLowerCase();
+                    const ia = na in orderMap ? orderMap[na] : 999;
+                    const ib = nb in orderMap ? orderMap[nb] : 999;
+                    if (ia !== ib) return ia - ib;
+                    return na.localeCompare(nb);
+                });
+            }
 
             html += `
                 <div class="test-section" data-record-id="${record.id}" data-record-index="${recordIndex}">
@@ -1790,6 +1824,7 @@
         if (window.LabFlowRemarks) {
             await LabFlowRemarks.loadCache();
         }
+        await loadGroupOrders();
         availableTests = await fetchTestsCatalog();
         await loadPatientTestData();
     });

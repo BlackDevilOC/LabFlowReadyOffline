@@ -383,11 +383,24 @@ def api_lab_print_payload(mr_no: int, date: str = None):
                 "created_at": row.get("created_at"),
                 "status": row.get("status") or "Pending",
             })
+        # Build group parameter order map from test_groups in DB
+        group_orders = {}
+        try:
+            tg_resp = supabase.table("test_groups").select("group_name, component_ids").execute()
+            t_resp = supabase.table("tests").select("id, name").execute()
+            test_names_by_id = {t["id"]: t["name"] for t in (t_resp.data or []) if t.get("id") and t.get("name")}
+            for g in (tg_resp.data or []):
+                g_name = (g.get("group_name") or "").strip()
+                c_ids = g.get("component_ids") or []
+                if g_name and c_ids:
+                    group_orders[g_name] = [test_names_by_id.get(cid) for cid in c_ids if test_names_by_id.get(cid)]
+        except Exception:
+            pass
 
-        return {"status": "ok", "patient": patient, "tests": normalized}
+        return {"status": "ok", "patient": patient, "tests": normalized, "group_orders": group_orders}
     except Exception as e:
         log_error(e, "API_LAB_PRINT_PAYLOAD")
-        return {"status": "error", "patient": None, "tests": []}
+        return {"status": "error", "patient": None, "tests": [], "group_orders": {}}
 
 
 @app.get("/api/admin/lab-categories")
@@ -1817,6 +1830,77 @@ async def api_admin_update_print_settings(request: Request):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+def _load_registration_options():
+    path = os.path.join(fetcheddata_dir, "registration_options.json")
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Error loading registration_options.json: {e}")
+    return None
+
+def _save_registration_options(data):
+    os.makedirs(fetcheddata_dir, exist_ok=True)
+    path = os.path.join(fetcheddata_dir, "registration_options.json")
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+    except Exception as e:
+        logger.error(f"Error saving registration_options.json: {e}")
+
+
+@app.get("/api/admin/registration-options")
+def api_get_registration_options():
+    """Retrieve registration dropdown options and default settings."""
+    opts = _load_registration_options()
+    if opts is None:
+        opts = {
+            "salutations": [
+                {"value": "Mr.", "label": "Mr.", "default_gender": "MALE"},
+                {"value": "Mrs.", "label": "Mrs.", "default_gender": "FEMALE"},
+                {"value": "Miss.", "label": "Miss.", "default_gender": "FEMALE"},
+                {"value": "Baby", "label": "Baby", "default_gender": ""}
+            ],
+            "relations": [
+                {"value": "S", "label": "S/O", "description": "Son of"},
+                {"value": "D", "label": "D/O", "description": "Daughter of"},
+                {"value": "W", "label": "W/O", "description": "Wife of"}
+            ],
+            "genders": [
+                {"value": "MALE", "label": "MALE"},
+                {"value": "FEMALE", "label": "FEMALE"},
+                {"value": "OTHER", "label": "OTHER"}
+            ],
+            "default_values": {
+                "salutation": "Mr.",
+                "relation": "S",
+                "gender": "MALE",
+                "shift": "MORNING"
+            }
+        }
+        _save_registration_options(opts)
+    return {"status": "Success", "options": opts}
+
+
+@app.post("/api/admin/registration-options")
+async def api_save_registration_options(request: Request):
+    """Save updated registration dropdown options and default values."""
+    try:
+        data = await request.json()
+        if not isinstance(data, dict):
+            raise HTTPException(status_code=400, detail="Invalid payload")
+        _save_registration_options(data)
+        actor = get_current_user(request, form_data=data)
+        logger.info(f"Registration options updated by {actor}")
+        return {"status": "Success", "message": "Registration options saved successfully"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        log_error(e, "API_SAVE_REGISTRATION_OPTIONS")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ─── Cloud Settings Sync (Push/Pull to Supabase) ──────────────────────────────
 
 @app.post("/api/admin/cloud-settings/push")
@@ -1831,10 +1915,12 @@ async def api_cloud_settings_push(request: Request):
         
         print_layouts = _load_print_layouts()
         test_selection_cfg = get_test_selection_config()
+        registration_opts = _load_registration_options()
         
         payload = {
             "print_layouts": print_layouts,
             "test_selection_config": test_selection_cfg,
+            "registration_options": registration_opts,
             "pushed_by": actor,
             "pushed_at": __import__("datetime").datetime.utcnow().isoformat() + "Z",
         }
@@ -1875,12 +1961,16 @@ async def api_cloud_settings_pull(request: Request):
         
         print_layouts = payload.get("print_layouts")
         test_selection_cfg = payload.get("test_selection_config")
+        registration_opts = payload.get("registration_options")
         
         if print_layouts is not None:
             _save_print_layouts(print_layouts)
             
         if test_selection_cfg is not None:
             save_test_selection_config(test_selection_cfg)
+
+        if registration_opts is not None:
+            _save_registration_options(registration_opts)
             
         logger.info(f"Cloud settings pulled from Supabase by {actor}")
         return {
@@ -1892,6 +1982,34 @@ async def api_cloud_settings_pull(request: Request):
     except Exception as e:
         log_error(e, "API_CLOUD_SETTINGS_PULL")
         raise HTTPException(status_code=500, detail=f"Failed to fetch cloud settings: {str(e)}")
+
+
+def _auto_pull_cloud_settings_sync():
+    """Background helper to pull latest master settings from Supabase Cloud on startup/login."""
+    try:
+        supabase = init_supabase()
+        res = supabase.table("app_settings").select("*").eq("setting_type", "all_app_settings").execute()
+        if res.data:
+            payload = res.data[0].get("payload") or {}
+            pl = payload.get("print_layouts")
+            tsc = payload.get("test_selection_config")
+            ro = payload.get("registration_options")
+            if pl is not None:
+                _save_print_layouts(pl)
+            if tsc is not None:
+                save_test_selection_config(tsc)
+            if ro is not None:
+                _save_registration_options(ro)
+            logger.info("Cloud sync auto-pull completed successfully from Supabase.")
+    except Exception as e:
+        logger.debug(f"Cloud auto-pull skipped (offline or unconfigured): {e}")
+
+
+@app.on_event("startup")
+def on_app_startup():
+    """Auto-pull cloud settings from Supabase on app startup in background."""
+    import threading
+    threading.Thread(target=_auto_pull_cloud_settings_sync, daemon=True).start()
 
 
 @app.get("/api/admin/cloud-settings/status")

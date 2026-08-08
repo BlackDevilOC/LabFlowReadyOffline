@@ -15,15 +15,125 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (userNameInput)  userNameInput.value  = displayUser;
     if (userIdInput)    userIdInput.value    = storedUserId;
 
-    // ── Shift dropdown ──────────────────────────────────────────────────
+    // ── Shift & Registration Options dropdowns ──────────────────────────
     await setupShiftDropdown();
+    await setupRegistrationOptions();
+
+    async function setupRegistrationOptions() {
+        let options = null;
+        try {
+            const res = await fetch("/fetcheddata/registration_options.json", { cache: "no-store" });
+            if (res.ok) {
+                options = await res.json();
+            }
+        } catch (err) {
+            console.warn("registration_options.json not loaded:", err);
+        }
+
+        const salutations = (options && Array.isArray(options.salutations) && options.salutations.length) ? options.salutations : [
+            { value: "Mr.", label: "Mr.", default_gender: "MALE" },
+            { value: "Mrs.", label: "Mrs.", default_gender: "FEMALE" },
+            { value: "Miss.", label: "Miss.", default_gender: "FEMALE" },
+            { value: "Baby", label: "Baby", default_gender: "" }
+        ];
+
+        const relations = (options && Array.isArray(options.relations) && options.relations.length) ? options.relations : [
+            { value: "S", label: "S/O" },
+            { value: "D", label: "D/O" },
+            { value: "W", label: "W/O" }
+        ];
+
+        const genders = (options && Array.isArray(options.genders) && options.genders.length) ? options.genders : [
+            { value: "MALE", label: "MALE" },
+            { value: "FEMALE", label: "FEMALE" },
+            { value: "OTHER", label: "OTHER" }
+        ];
+
+        const defaultVals = (options && options.default_values) || {};
+
+        const salutationSelect = document.getElementById("salutation");
+        const relationSelect = document.getElementById("relation");
+        const genderSelect = document.getElementById("gender");
+
+        if (relationSelect) {
+            const currentRelVal = relationSelect.value;
+            relationSelect.innerHTML = `<option value="">Select</option>` + relations.map(r => {
+                const val = typeof r === "string" ? r : (r.value || r.label);
+                const lbl = typeof r === "string" ? r : (r.label || r.value);
+                return `<option value="${val}">${lbl}</option>`;
+            }).join("");
+
+            if (defaultVals.relation) {
+                relationSelect.value = defaultVals.relation;
+            } else if (currentRelVal) {
+                relationSelect.value = currentRelVal;
+            }
+        }
+
+        if (genderSelect) {
+            const currentGenVal = genderSelect.value;
+            genderSelect.innerHTML = `<option value="">SELECT</option>` + genders.map(g => {
+                const val = typeof g === "string" ? g : (g.value || g.label);
+                const lbl = typeof g === "string" ? g : (g.label || g.value);
+                return `<option value="${val.toUpperCase()}">${lbl.toUpperCase()}</option>`;
+            }).join("");
+
+            if (defaultVals.gender) {
+                genderSelect.value = defaultVals.gender.toUpperCase();
+            } else if (currentGenVal) {
+                genderSelect.value = currentGenVal;
+            }
+        }
+
+        if (salutationSelect) {
+            const currentSalVal = salutationSelect.value;
+            salutationSelect.innerHTML = `<option value="">Select</option>` + salutations.map(s => {
+                const val = typeof s === "string" ? s : (s.value || s.label);
+                const lbl = typeof s === "string" ? s : (s.label || s.value);
+                const genderAttr = (typeof s === "object" && s.default_gender) ? ` data-gender="${s.default_gender}"` : "";
+                const relationAttr = (typeof s === "object" && s.default_relation) ? ` data-relation="${s.default_relation}"` : "";
+                return `<option value="${val}"${genderAttr}${relationAttr}>${lbl}</option>`;
+            }).join("");
+
+            if (defaultVals.salutation) {
+                salutationSelect.value = defaultVals.salutation;
+            } else if (currentSalVal) {
+                salutationSelect.value = currentSalVal;
+            }
+
+            const updateSalutationBindingsLive = () => {
+                const selectedOpt = salutationSelect.options[salutationSelect.selectedIndex];
+                if (!selectedOpt) return;
+                const defGender = selectedOpt.getAttribute("data-gender") || "";
+                const defRel = selectedOpt.getAttribute("data-relation") || "";
+
+                if (defGender && genderSelect) {
+                    genderSelect.value = defGender.toUpperCase();
+                    genderSelect.dispatchEvent(new Event("change", { bubbles: true }));
+                }
+
+                if (defRel && relationSelect) {
+                    relationSelect.value = defRel;
+                    relationSelect.dispatchEvent(new Event("change", { bubbles: true }));
+                }
+            };
+
+            salutationSelect.addEventListener("change", updateSalutationBindingsLive);
+            salutationSelect.addEventListener("input", updateSalutationBindingsLive);
+
+            // Live sync immediately on page load
+            if (salutationSelect.value) {
+                updateSalutationBindingsLive();
+            }
+        }
+    }
 
     async function setupShiftDropdown() {
         const select = document.getElementById("shift");
         if (!select) return;
 
         let shifts = [];
-        let defaultShift = localStorage.getItem("defaultShift") || "MORNING";
+        let defaultShift = localStorage.getItem("defaultShift") || localStorage.getItem("userShift") || "";
 
         try {
             const [shiftsRes, prefsRes] = await Promise.all([
@@ -102,13 +212,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }];
             }
 
+            const isStatusActive = (st) => {
+                if (st === undefined || st === null) return true;
+                if (typeof st === "boolean") return st;
+                if (typeof st === "number") return st === 1;
+                const s = String(st).trim().toLowerCase();
+                return s === "active" || s === "true" || s === "1";
+            };
+
             const showIndividualTests = Boolean(
                 data.allow_single_tests || data.test_selection_mode === "group_and_single"
             );
 
             const individualTests = showIndividualTests
                 ? (data.tests || [])
-                      .filter((t) => !t.name.startsWith("#"))
+                      .filter((t) => !t.name.startsWith("#") && isStatusActive(t.status))
                       .map((t) => {
                           const customCat = customCategories[String(t.id)];
                           return {
@@ -122,17 +240,19 @@ document.addEventListener("DOMContentLoaded", async () => {
                       })
                 : [];
 
-            const groupTests = (data.group_test || []).map((t) => {
-                const customCat = customCategories[t.group_name] || customCategories[String(t.id)];
-                return {
-                    id: t.id,
-                    name: t.group_name,
-                    status: t.status,
-                    value: JSON.stringify(t.component_ids),
-                    category: customCat || "Group Test",
-                    isGroup: true,
-                };
-            });
+            const groupTests = (data.group_test || [])
+                .filter((t) => isStatusActive(t.status))
+                .map((t) => {
+                    const customCat = customCategories[t.group_name] || customCategories[String(t.id)];
+                    return {
+                        id: t.id,
+                        name: t.group_name,
+                        status: t.status,
+                        value: JSON.stringify(t.component_ids),
+                        category: customCat || "Group Test",
+                        isGroup: true,
+                    };
+                });
 
             return [...groupTests, ...individualTests];
         } catch (error) {
