@@ -1,0 +1,855 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    :root {
+        /* Optimized defaults for small office paper (header disabled by default) */
+        --m-top: 10mm;
+        --m-right: 15mm;
+        --m-bottom: 20mm;
+        --m-left: 15mm;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* body styling removed to inherit main theme */
+
+    /* Navigation Controls */
+    #print-btn {
+        position: fixed;
+        top: 75px;
+        right: 80px;
+        z-index: 1000;
+        padding: 10px 20px;
+        cursor: pointer;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #admin-btn {
+        position: fixed;
+        top: 75px;
+        right: 20px;
+        z-index: 1000;
+        padding: 10px;
+        cursor: pointer;
+        background: #333;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+    }
+
+    #admin-panel {
+        display: none;
+        position: fixed;
+        top: 130px;
+        right: 20px;
+        width: 220px;
+        background: #222;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        z-index: 1001;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .admin-group {
+        margin-bottom: 12px;
+    }
+
+    .admin-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 11px;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .admin-group input {
+        width: 100%;
+        background: #444;
+        color: #fff;
+        border: 1px solid #666;
+        padding: 8px;
+        border-radius: 4px;
+    }
+
+    /* Report Paper Structure */
+    .report-page {
+        width: 210mm;
+        min-height: 270mm;
+        margin: 20px auto;
+        background: white;
+        padding: var(--m-top) var(--m-right) var(--m-bottom) var(--m-left);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: padding 0.1s ease;
+    }
+
+    /* Modern Patient Info Card – single professional strip */
+    .patient-info-card {
+        border: 1.5px solid #334155;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 25px;
+        background: #f8fafc;
+    }
+
+    .patient-info-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr 1.2fr;
+        gap: 12px 24px;
+    }
+
+    .info-row {
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 2px 0;
+        min-width: 0;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #475569;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .info-value {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        border-bottom: 1.5px solid #cbd5e1;
+        padding-bottom: 2px;
+        min-width: 0;
+        transition: border-bottom-color 0.2s ease;
+    }
+
+    .info-value:focus-within {
+        border-bottom-color: #2563eb;
+    }
+
+    input.iv-field,
+    select.iv-field {
+        border: none;
+        outline: none;
+        font-size: 13px;
+        font-family: inherit;
+        font-weight: 600;
+        color: #0f172a;
+        background: transparent;
+        padding: 0;
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* Unified Table System for Left-to-Right Pattern */
+    h3 {
+        font-size: 15px;
+        margin: 25px 0 10px 0;
+        text-transform: uppercase;
+        font-weight: bold;
+        border-left: 4px solid #333;
+        padding-left: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    /* Matching the reference column distribution */
+    .col-1 {
+        width: 40%;
+    }
+
+    /* Test Name */
+    .col-2 {
+        width: 25%;
+    }
+
+    /* Result */
+    .col-3 {
+        width: 35%;
+    }
+
+    /* Normal Range */
+
+    thead th {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+        font-size: 13px;
+        background-color: #fff;
+    }
+
+    td {
+        padding: 7px 8px;
+        font-size: 13px;
+        vertical-align: middle;
+        border: none;
+    }
+
+    /* Result Cell Logic */
+    .res-container {
+        display: flex;
+        align-items: baseline;
+    }
+
+    .res-val {
+        font-weight: bold;
+        border: none;
+        background: transparent;
+        width: 50px;
+        text-align: left;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+    }
+
+    .unit {
+        margin-left: 4px;
+        font-weight: normal;
+    }
+
+    /* Serology: dedicated two-column layout */
+    .serology-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .serology-table td:first-child {
+        width: 40%;
+    }
+
+    .serology-table td:nth-child(2) {
+        width: 60%;
+    }
+
+    .serology-table td {
+        padding: 7px 8px;
+        font-size: 13px;
+        vertical-align: middle;
+        border: none;
+    }
+
+    .serology-table .sero-val {
+        font-weight: bold;
+        border: none;
+        background: transparent;
+        width: 100px;
+        text-align: left;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+    }
+
+    /* Pathologist: Positioned 5 lines below last test */
+    .pathologist {
+        margin-top: 80px;
+        text-align: right;
+        font-weight: bold;
+        font-size: 15px;
+        padding-right: 15px;
+    }
+
+    @media print {
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        header,
+        nav,
+        .no-print,
+        .sidebar,
+        .top-bar {
+            display: none !important;
+        }
+
+        .main-content {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        body {
+            background: none;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .report-page {
+            margin: 0;
+            box-shadow: none;
+            border: none;
+            width: 100%;
+            min-height: unset !important;
+            page-break-after: avoid;
+            break-after: avoid;
+            overflow: hidden;
+        }
+
+        html,
+        body {
+            height: auto !important;
+            overflow: visible !important;
+        }
+
+        input,
+        select {
+            border: none !important;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .patient-info-card {
+            border: 1.5px solid #000 !important;
+            background: transparent !important;
+            border-radius: 8px !important;
+            padding: 12px 18px !important;
+        }
+
+        .info-value {
+            border-bottom: none !important;
+        }
+
+        input.iv-field,
+        select.iv-field {
+            font-weight: bold !important;
+            color: #000 !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<button id="print-btn" class="no-print" onclick="triggerPrint()">Print Report</button>
+<button id="admin-btn" class="no-print" onclick="toggleAdmin(event)">⚙</button>
+
+<div id="admin-panel" class="no-print">
+    <h4 style="margin-top:0">Margin Control (mm)</h4>
+    <div class="admin-group" style="margin-bottom:10px;">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:#fff;text-transform:none;font-size:12px;">
+            <input type="checkbox" id="inc-header" onchange="toggleHeaderSetting()"> Include Letterhead Header (30mm)
+        </label>
+    </div>
+    <div class="admin-group"><label>Top</label><input type="number" id="m-t" oninput="apply()" value="10"></div>
+    <div class="admin-group"><label>Bottom</label><input type="number" id="m-b" oninput="apply()" value="20"></div>
+    <div class="admin-group"><label>Left</label><input type="number" id="m-l" oninput="apply()" value="15"></div>
+    <div class="admin-group"><label>Right</label><input type="number" id="m-r" oninput="apply()" value="15"></div>
+</div>
+
+<div class="report-page">
+    <!-- Patient info – single professional card -->
+    <div class="patient-info-card">
+        <div class="patient-info-grid">
+            <!-- Row 1 -->
+            <!-- Column 1: Name -->
+            <div class="info-row">
+                <span class="info-label">Name:</span>
+                <span class="info-value">
+                    <input type="text" id="patient-name" class="iv-field iv-name" value="rehan"
+                        placeholder="ENTER PATIENT NAME" tabindex="1">
+                </span>
+            </div>
+            <!-- Column 2: Gender -->
+            <div class="info-row">
+                <span class="info-label">Gender:</span>
+                <span class="info-value">
+                    <select id="patient-gender" class="iv-field" style="cursor: pointer; width: 100%;" tabindex="2">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </span>
+            </div>
+            <!-- Column 3: Relation -->
+            <div class="info-row">
+                <span class="info-value">
+                    <select id="relation-type" class="iv-field"
+                        style="width: auto; max-width: 60px; margin-right: 6px; cursor: pointer;" tabindex="3">
+                        <option value="S/O:">S/O:</option>
+                        <option value="W/O:">W/O:</option>
+                        <option value="D/O:">D/O:</option>
+                    </select>
+                    <input type="text" id="relation-name" class="iv-field" value="Mehar ahmed"
+                        placeholder="ENTER RELATION NAME" tabindex="4">
+                </span>
+            </div>
+
+            <!-- Row 2 -->
+            <!-- Column 1: Patient MR # -->
+            <div class="info-row">
+                <span class="info-label">Patient MR #:</span>
+                <span class="info-value">
+                    <input type="text" id="mr-no" class="iv-field" value="24156" placeholder="ENTER MR #" tabindex="5">
+                </span>
+            </div>
+            <!-- Column 2: Date -->
+            <div class="info-row">
+                <span class="info-label">Date:</span>
+                <span class="info-value">
+                    <input type="text" id="report-date" class="iv-field" value="" tabindex="6">
+                </span>
+            </div>
+            <!-- Column 3: empty space to maintain structure -->
+            <div></div>
+        </div>
+    </div>
+
+    <h3>Hematology</h3>
+    <table>
+        <thead>
+            <tr>
+                <th class="col-1">Test Name</th>
+                <th class="col-2">Result</th>
+                <th class="col-3">Normal Ranges</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="row-hb">
+                <td>HAEMOGLOBIN</td>
+                <td class="res-container"><input type="text" class="res-val" id="val-hb" value="14.6" tabindex="7">
+                    <span class="unit">g/dl</span>
+                </td>
+                <td>M: 13.0 - 16.5 F: 12.0 - 15.0</td>
+            </tr>
+            <tr id="row-wbc">
+                <td>W.B.C</td>
+                <td class="res-container"><input type="text" class="res-val" id="val-wbc" value="6.6" tabindex="8">
+                    <span class="unit">x10E9/L</span>
+                </td>
+                <td>4.50 - 11.00</td>
+            </tr>
+            <tr id="row-neut">
+                <td>NEUTROPHILS</td>
+                <td class="res-container"><input type="text" class="res-val" id="val-neut" value="70" tabindex="9">
+                    <span class="unit">%</span>
+                </td>
+                <td>40.0 - 80.0</td>
+            </tr>
+            <tr id="row-lymph">
+                <td>LYMPHOCYTES</td>
+                <td class="res-container"><input type="text" class="res-val" id="val-lymph" value="25" tabindex="10">
+                    <span class="unit">%</span>
+                </td>
+                <td>20.0 - 40.0</td>
+            </tr>
+            <tr id="row-mono">
+                <td>MONOCYTES</td>
+                <td class="res-container"><input type="text" class="res-val" id="val-mono" value="03" tabindex="11">
+                    <span class="unit">%</span>
+                </td>
+                <td>2.0 - 10.0</td>
+            </tr>
+            <tr id="row-eosino">
+                <td>EOSINOPHILS</td>
+                <td class="res-container"><input type="text" class="res-val" id="val-eosino" value="02" tabindex="12">
+                    <span class="unit">%</span>
+                </td>
+                <td>0.0 - 6.0</td>
+            </tr>
+            <tr id="row-plt">
+                <td>PLATELETS</td>
+                <td class="res-container"><input type="text" class="res-val" id="val-plt" value="400" tabindex="13">
+                    <span class="unit">x10E9/L</span>
+                </td>
+                <td>150 – 450</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Serology</h3>
+    <table class="serology-table">
+        <tbody>
+            <tr id="row-hiv">
+                <td>Anti HIV ( ICT )</td>
+                <td>
+                    <select class="sero-val" id="val-hiv"
+                        style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
+                        tabindex="14">
+                        <option value="Negative">Negative</option>
+                        <option value="Positive">Positive</option>
+                        <option value="Not Performed">Not Performed</option>
+                    </select>
+                </td>
+                <td class="no-print" style="width: 40px; text-align: right;">
+                    <button class="remove-btn" onclick="removeRow('row-hiv')" title="Remove Test"
+                        style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
+                </td>
+            </tr>
+            <tr id="row-hbsag">
+                <td>HbsAg ( ICT )</td>
+                <td>
+                    <select class="sero-val" id="val-hbsag"
+                        style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
+                        tabindex="15">
+                        <option value="Negative">Negative</option>
+                        <option value="Positive">Positive</option>
+                        <option value="Not Performed">Not Performed</option>
+                    </select>
+                </td>
+                <td class="no-print" style="width: 40px; text-align: right;">
+                    <button class="remove-btn" onclick="removeRow('row-hbsag')" title="Remove Test"
+                        style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
+                </td>
+            </tr>
+            <tr id="row-hcv">
+                <td>Anti HCV ( ICT )</td>
+                <td>
+                    <select class="sero-val" id="val-hcv"
+                        style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
+                        tabindex="16">
+                        <option value="Negative">Negative</option>
+                        <option value="Positive">Positive</option>
+                        <option value="Not Performed">Not Performed</option>
+                    </select>
+                </td>
+                <td class="no-print" style="width: 40px; text-align: right;">
+                    <button class="remove-btn" onclick="removeRow('row-hcv')" title="Remove Test"
+                        style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
+                </td>
+            </tr>
+            <tr id="row-vdrl">
+                <td>VDRL</td>
+                <td>
+                    <select class="sero-val" id="val-vdrl"
+                        style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
+                        tabindex="17">
+                        <option value="Negative">Negative</option>
+                        <option value="Positive">Positive</option>
+                        <option value="Not Performed">Not Performed</option>
+                    </select>
+                </td>
+                <td class="no-print" style="width: 40px; text-align: right;">
+                    <button class="remove-btn" onclick="removeRow('row-vdrl')" title="Remove Test"
+                        style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 80px;">
+        <div></div>
+        <div class="pathologist" style="margin-top: 0; padding-right: 15px;">Pathologist</div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const panel = document.getElementById('admin-panel');
+    const btn = document.getElementById('admin-btn');
+
+    function toggleAdmin(e) {
+        e.stopPropagation();
+        if (panel.style.display === 'block') close();
+        else {
+            if (prompt("Admin Password:") === "admin") panel.style.display = 'block';
+        }
+    }
+
+    function toggleHeaderSetting() {
+        const inc = document.getElementById('inc-header').checked;
+        const mt = document.getElementById('m-t');
+        if (inc) {
+            mt.value = 30;
+        } else {
+            mt.value = 10;
+        }
+        apply();
+    }
+
+    function apply() {
+        const r = document.documentElement;
+        r.style.setProperty('--m-top', document.getElementById('m-t').value + 'mm');
+        r.style.setProperty('--m-bottom', document.getElementById('m-b').value + 'mm');
+        r.style.setProperty('--m-left', document.getElementById('m-l').value + 'mm');
+        r.style.setProperty('--m-right', document.getElementById('m-r').value + 'mm');
+    }
+
+    function close() {
+        const cfg = {
+            t: document.getElementById('m-t').value,
+            b: document.getElementById('m-b').value,
+            l: document.getElementById('m-l').value,
+            r: document.getElementById('m-r').value,
+            incHeader: document.getElementById('inc-header').checked
+        };
+        localStorage.setItem('medicalReportConfig', JSON.stringify(cfg));
+        panel.style.display = 'none';
+    }
+
+    document.addEventListener('click', (e) => {
+        if (panel.style.display === 'block' && !panel.contains(e.target) && e.target !== btn) close();
+    });
+
+    // Remove row logic
+    function removeRow(rowId) {
+        const row = document.getElementById(rowId);
+        if (row) {
+            row.remove();
+
+            // Set indicator state to unsaved changes
+            const syncDot = document.getElementById('sync-dot');
+            const syncText = document.getElementById('sync-text');
+            const syncStatus = document.getElementById('sync-status');
+            const badgeDot = document.getElementById('badge-dot');
+            const badgeText = document.getElementById('badge-text');
+            if (syncStatus) {
+                syncStatus.style.background = '#6c757d';
+                if (syncDot) syncDot.style.background = '#ffc107';
+                if (syncText) syncText.textContent = 'Unsaved Changes';
+            }
+            if (badgeDot) badgeDot.style.background = '#ffc107';
+            if (badgeText) badgeText.textContent = 'Unsaved Changes';
+        }
+    }
+
+    // Save Patient Record
+    async function saveFitnessRecord() {
+        const syncDot = document.getElementById('sync-dot');
+        const syncText = document.getElementById('sync-text');
+        const syncStatus = document.getElementById('sync-status');
+        const saveBtn = document.getElementById('save-btn');
+
+        function setStatus(state, text) {
+            const badgeDot = document.getElementById('badge-dot');
+            const badgeText = document.getElementById('badge-text');
+
+            if (syncStatus) {
+                if (syncText) syncText.textContent = text;
+            }
+
+            if (state === 'saving') {
+                if (syncStatus) syncStatus.style.background = '#007bff';
+                if (syncDot) syncDot.style.background = '#ffffff';
+                if (saveBtn) {
+                    saveBtn.disabled = true;
+                    saveBtn.textContent = 'Saving...';
+                }
+                if (badgeDot) badgeDot.style.background = '#007bff';
+                if (badgeText) badgeText.textContent = '... Saving to database';
+            } else if (state === 'synced') {
+                if (syncStatus) syncStatus.style.background = '#28a745';
+                if (syncDot) syncDot.style.background = '#ffffff';
+                if (saveBtn) {
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = 'Save Record';
+                }
+                if (badgeDot) badgeDot.style.background = '#28a745';
+                if (badgeText) badgeText.textContent = '✓ Record Saved to Database';
+            } else if (state === 'offline') {
+                if (syncStatus) syncStatus.style.background = '#dc3545';
+                if (syncDot) syncDot.style.background = '#ffffff';
+                if (saveBtn) {
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = 'Save Record';
+                }
+                if (badgeDot) badgeDot.style.background = '#ffc107';
+                if (badgeText) badgeText.textContent = 'Saved Locally (Sync Pending)';
+            }
+        }
+
+        setStatus('saving', 'Saving Record...');
+
+        const payload = {
+            patient_name: document.getElementById('patient-name')?.value || null,
+            gender: document.getElementById('patient-gender')?.value || null,
+            relation_type: document.getElementById('relation-type')?.value || null,
+            relation_name: document.getElementById('relation-name')?.value || null,
+            report_date: document.getElementById('report-date')?.value || null,
+            mr_no: document.getElementById('mr-no')?.value || null,
+
+            hb: document.getElementById('val-hb')?.value || null,
+            wbc: document.getElementById('val-wbc')?.value || null,
+            neut: document.getElementById('val-neut')?.value || null,
+            lymph: document.getElementById('val-lymph')?.value || null,
+            mono: document.getElementById('val-mono')?.value || null,
+            eosino: document.getElementById('val-eosino')?.value || null,
+            plt: document.getElementById('val-plt')?.value || null,
+
+            hiv: document.getElementById('val-hiv')?.value || null,
+            hbsag: document.getElementById('val-hbsag')?.value || null,
+            hcv: document.getElementById('val-hcv')?.value || null,
+            vdrl: document.getElementById('val-vdrl')?.value || null,
+            user_email: localStorage.getItem('userEmail') || 'Anonymous'
+        };
+
+        try {
+            const response = await fetch('/api/fitness/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                setStatus('synced', 'Record Saved');
+            } else {
+                throw new Error('Server returned error');
+            }
+        } catch (e) {
+            console.error("Save error:", e);
+            setStatus('offline', 'Saved Locally/Offline');
+
+            // Backup locally in local storage queue for sync retry
+            try {
+                const localQueue = JSON.parse(localStorage.getItem('fitnessSyncQueue') || '[]');
+                payload.offline_id = 'off_' + Date.now();
+                payload.queued_at = new Date().toISOString();
+                localQueue.push(payload);
+                localStorage.setItem('fitnessSyncQueue', JSON.stringify(localQueue));
+            } catch (err) {
+                console.error("Local storage error:", err);
+            }
+        }
+    }
+
+    async function triggerPrint() {
+        // Silently save record before printing
+        await saveFitnessRecord();
+        window.print();
+    }
+
+    window.onload = () => {
+        const s = JSON.parse(localStorage.getItem('medicalReportConfig'));
+        if (s) {
+            document.getElementById('m-t').value = s.t ?? 10;
+            document.getElementById('m-b').value = s.b;
+            document.getElementById('m-l').value = s.l;
+            document.getElementById('m-r').value = s.r;
+            if (s.incHeader !== undefined) {
+                document.getElementById('inc-header').checked = !!s.incHeader;
+            }
+            apply();
+        } else {
+            document.getElementById('m-t').value = 10;
+            document.getElementById('inc-header').checked = false;
+            apply();
+        }
+
+        // Auto-fetch today's date
+        const dateInput = document.getElementById('report-date');
+        if (dateInput) {
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            dateInput.value = dd + '/' + mm + '/' + yyyy;
+        }
+
+        // Auto-randomize CBC values within normal ranges
+        function rand(min, max, dec) {
+            return (Math.random() * (max - min) + min).toFixed(dec);
+        }
+        function randInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Set CBC values only if elements exist
+        const hbField = document.getElementById('val-hb');
+        if (hbField) hbField.value = rand(12.6, 15.5, 1);
+
+        const wbcField = document.getElementById('val-wbc');
+        if (wbcField) wbcField.value = rand(5.0, 9.5, 1);
+
+        const pltField = document.getElementById('val-plt');
+        if (pltField) pltField.value = randInt(200, 400);
+
+        // Differential must sum to 100
+        let neut = randInt(55, 70);
+        let lymph = randInt(20, 35);
+        let mono = randInt(2, 6);
+        let eosino = 100 - neut - lymph - mono;
+        // clamp eosinophils to valid range, adjust lymph if needed
+        if (eosino < 1) { lymph += eosino - 1; eosino = 1; }
+        if (eosino > 6) { lymph += eosino - 5; eosino = 5; }
+
+        const neutField = document.getElementById('val-neut');
+        if (neutField) neutField.value = String(neut).padStart(2, '0');
+
+        const lymphField = document.getElementById('val-lymph');
+        if (lymphField) lymphField.value = String(lymph).padStart(2, '0');
+
+        const monoField = document.getElementById('val-mono');
+        if (monoField) monoField.value = String(mono).padStart(2, '0');
+
+        const eosinoField = document.getElementById('val-eosino');
+        if (eosinoField) eosinoField.value = String(eosino).padStart(2, '0');
+
+        // Listen to changes on fields to reset status
+        const allInputs = document.querySelectorAll('.report-page input, .report-page select');
+        allInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                const syncDot = document.getElementById('sync-dot');
+                const syncText = document.getElementById('sync-text');
+                const syncStatus = document.getElementById('sync-status');
+                const badgeDot = document.getElementById('badge-dot');
+                const badgeText = document.getElementById('badge-text');
+                if (syncStatus) {
+                    syncStatus.style.background = '#6c757d';
+                    if (syncDot) syncDot.style.background = '#ffc107';
+                    if (syncText) syncText.textContent = 'Unsaved Changes';
+                }
+                if (badgeDot) badgeDot.style.background = '#ffc107';
+                if (badgeText) badgeText.textContent = 'Unsaved Changes';
+            });
+        });
+    };
+</script>
+
+<script>
+    // Pre-fill from Records page: if opened with ?prefill=1, load sessionStorage data
+    (function prefillFromRecords() {
+        const params = new URLSearchParams(window.location.search);
+        if (!params.get('prefill')) return;
+        const raw = sessionStorage.getItem('printRecord');
+        if (!raw) return;
+        try {
+            const r = JSON.parse(raw);
+            sessionStorage.removeItem('printRecord');
+            const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+            set('patient-name', r.patient_name);
+            set('patient-gender', r.gender);
+            set('relation-type', r.relation_type);
+            set('relation-name', r.relation_name);
+            set('mr-no', r.mr_no);
+            set('report-date', r.report_date);
+            // Hematology
+            set('val-hb', r.hb);
+            set('val-wbc', r.wbc);
+            set('val-neut', r.neut);
+            set('val-lymph', r.lymph);
+            set('val-mono', r.mono);
+            set('val-eosino', r.eosino);
+            set('val-plt', r.plt);
+            // Serology
+            set('val-hiv', r.hiv);
+            set('val-hbsag', r.hbsag);
+            set('val-hcv', r.hcv);
+            set('val-vdrl', r.vdrl);
+            // Auto-print after short delay for rendering
+            setTimeout(() => window.print(), 600);
+        } catch (e) { console.error('Prefill error:', e); }
+    })();
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{
+    "patient_name": "sanaullah",
+    "gender": "Male",
+    "relation_type": "S/O:",
+    "relation_name": " ",
+    "report_date": "25/05/2026",
+    "mr_no": "125",
+    "hb": "13.9",
+    "wbc": "8.2",
+    "neut": "60",
+    "lymph": "29",
+    "mono": "06",
+    "eosino": "05",
+    "plt": "225",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": null,
+    "user_email": "aman@aman.com",
+    "synced": true,
+    "saved_at": "2026-05-25 05:08:56"
+}

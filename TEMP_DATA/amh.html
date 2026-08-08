@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AMH Laboratory Report</title>
+    <style>
+        :root {
+            --m-top: 30mm;
+            --m-right: 15mm;
+            --m-bottom: 20mm;
+            --m-left: 15mm;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+        }
+
+        /* Navigation Controls */
+        #print-btn {
+            position: fixed;
+            top: 30px;
+            right: 85px;
+            z-index: 1000;
+            padding: 10px 22px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            transition: background 0.2s;
+        }
+
+        #print-btn:hover {
+            background: #0056b3;
+        }
+
+        #admin-btn {
+            position: fixed;
+            top: 30px;
+            right: 25px;
+            z-index: 1000;
+            padding: 10px;
+            cursor: pointer;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #admin-panel {
+            display: none;
+            position: fixed;
+            top: 85px;
+            right: 25px;
+            width: 220px;
+            background: #222;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-group {
+            margin-bottom: 12px;
+        }
+
+        .admin-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 11px;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+
+        .admin-group input {
+            width: 100%;
+            background: #444;
+            color: #fff;
+            border: 1px solid #666;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        /* Report Paper Structure */
+        .report-page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            padding: var(--m-top) var(--m-right) var(--m-bottom) var(--m-left);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+            transition: padding 0.1s ease;
+        }
+
+        /* Patient Header Grid Layout */
+        .patient-header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .info-box {
+            border: 1.5px solid #222;
+            border-radius: 18px; /* Increased rounded corners */
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #fff;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            font-size: 13.5px;
+        }
+
+        .info-label {
+            width: 115px;
+            font-weight: 600;
+            color: #333;
+            flex-shrink: 0;
+        }
+
+        .info-field {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 13.5px;
+            font-family: inherit;
+            outline: none;
+            color: #111;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        /* Section Headings */
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 25px 0 12px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #111;
+        }
+
+        /* Table Alignment & Formatting */
+        table.test-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        table.test-table thead th {
+            border-top: 1.5px solid #000;
+            border-bottom: 1.5px solid #000;
+            padding: 8px 6px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: bold;
+            color: #000;
+            background-color: #fff;
+        }
+
+        .col-test { width: 22%; }
+        .col-res  { width: 22%; }
+        .col-unit { width: 16%; }
+        .col-ref  { width: 40%; }
+
+        table.test-table td {
+            padding: 12px 6px;
+            font-size: 13.5px;
+            vertical-align: top;
+            border: none;
+        }
+
+        .res-input {
+            font-weight: bold;
+            font-size: 14.5px;
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 100%;
+            color: #000;
+        }
+
+        /* Ref Range Alignment Table */
+        .range-table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .range-table td {
+            padding: 1px 0 !important;
+            vertical-align: top;
+        }
+
+        .range-label {
+            width: 115px;
+            white-space: nowrap;
+            color: #222;
+        }
+
+        .range-val {
+            text-align: left;
+            font-weight: 500;
+            color: #111;
+        }
+
+        @media print {
+            .no-print,
+            #print-btn,
+            #admin-btn,
+            #admin-panel {
+                display: none !important;
+            }
+
+            body {
+                background: none;
+            }
+
+            .report-page {
+                margin: 0;
+                box-shadow: none;
+                border: none;
+                width: 100%;
+                min-height: unset !important;
+                page-break-after: avoid;
+                break-after: avoid;
+                overflow: hidden;
+            }
+
+            html,
+            body {
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            input {
+                border: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<button id="print-btn" class="no-print" onclick="window.print()">Print Report</button>
+<button id="admin-btn" class="no-print" onclick="toggleAdmin(event)">⚙</button>
+
+<div id="admin-panel" class="no-print">
+    <h4 style="margin-top:0">Margin Control (mm)</h4>
+    <div class="admin-group"><label>Top</label><input type="number" id="m-t" oninput="apply()" value="30"></div>
+    <div class="admin-group"><label>Bottom</label><input type="number" id="m-b" oninput="apply()" value="20"></div>
+    <div class="admin-group"><label>Left</label><input type="number" id="m-l" oninput="apply()" value="15"></div>
+    <div class="admin-group"><label>Right</label><input type="number" id="m-r" oninput="apply()" value="15"></div>
+</div>
+
+<div class="report-page">
+    <!-- Two Box Rounded Patient Header Layout -->
+    <div class="patient-header-grid">
+        <div class="info-box">
+            <div class="info-row">
+                <span class="info-label">Lab No:</span>
+                <input type="text" class="info-field" value="106">
+            </div>
+            <div class="info-row">
+                <span class="info-label">Name:</span>
+                <input type="text" class="info-field" value="Mrs. Koonj w/o. Abdul Rauf" style="font-weight: bold;">
+            </div>
+            <div class="info-row">
+                <span class="info-label">Age:</span>
+                <input type="text" class="info-field" value="70 Years">
+            </div>
+            <div class="info-row">
+                <span class="info-label">Ref By:</span>
+                <input type="text" class="info-field" value="GMMMC">
+            </div>
+        </div>
+
+        <div class="info-box">
+            <div class="info-row">
+                <span class="info-label">Branch:</span>
+                <input type="text" class="info-field" value="GMMMC">
+            </div>
+            <div class="info-row">
+                <span class="info-label">Ward/Unit:</span>
+                <input type="text" class="info-field" value="MU 1">
+            </div>
+            <div class="info-row">
+                <span class="info-label">Collection Time:</span>
+                <input type="text" id="report-date" class="info-field" value="">
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">IMMUNO CHEMISTRY</div>
+
+    <table class="test-table">
+        <thead>
+            <tr>
+                <th class="col-test">Test Name</th>
+                <th class="col-res">Result</th>
+                <th class="col-unit">Unit</th>
+                <th class="col-ref">Range</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="font-weight: bold;">AMH</td>
+                <td>
+                    <input type="text" class="res-input" value="1.25">
+                </td>
+                <td style="font-weight: bold;">ng/mL</td>
+                <td>
+                    <table class="range-table">
+                        <tr>
+                            <td class="range-label">Under 25 years:</td>
+                            <td class="range-val">3.0 – 5.0</td>
+                        </tr>
+                        <tr>
+                            <td class="range-label">25 – 29 years:</td>
+                            <td class="range-val">2.5 – 4.0</td>
+                        </tr>
+                        <tr>
+                            <td class="range-label">30 – 34 years:</td>
+                            <td class="range-val">1.5 – 3.5</td>
+                        </tr>
+                        <tr>
+                            <td class="range-label">35 – 39 years:</td>
+                            <td class="range-val">1.0 – 2.5</td>
+                        </tr>
+                        <tr>
+                            <td class="range-label">40 – 44 years:</td>
+                            <td class="range-val">0.5 – 1.5</td>
+                        </tr>
+                        <tr>
+                            <td class="range-label">45+ years:</td>
+                            <td class="range-val">&lt; 0.5</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const panel = document.getElementById('admin-panel');
+    const btn = document.getElementById('admin-btn');
+
+    function toggleAdmin(e) {
+        e.stopPropagation();
+        if (panel.style.display === 'block') close();
+        else {
+            if (prompt("Admin Password:") === "admin") panel.style.display = 'block';
+        }
+    }
+
+    function apply() {
+        const r = document.documentElement;
+        r.style.setProperty('--m-top', document.getElementById('m-t').value + 'mm');
+        r.style.setProperty('--m-bottom', document.getElementById('m-b').value + 'mm');
+        r.style.setProperty('--m-left', document.getElementById('m-l').value + 'mm');
+        r.style.setProperty('--m-right', document.getElementById('m-r').value + 'mm');
+    }
+
+    function close() {
+        const cfg = {
+            t: document.getElementById('m-t').value,
+            b: document.getElementById('m-b').value,
+            l: document.getElementById('m-l').value,
+            r: document.getElementById('m-r').value
+        };
+        localStorage.setItem('medicalReportConfig', JSON.stringify(cfg));
+        panel.style.display = 'none';
+    }
+
+    document.addEventListener('click', (e) => {
+        if (panel.style.display === 'block' && !panel.contains(e.target) && e.target !== btn) close();
+    });
+
+    window.onload = () => {
+        // Load custom margins if saved
+        const s = JSON.parse(localStorage.getItem('medicalReportConfig'));
+        if (s) {
+            document.getElementById('m-t').value = s.t;
+            document.getElementById('m-b').value = s.b;
+            document.getElementById('m-l').value = s.l;
+            document.getElementById('m-r').value = s.r;
+            apply();
+        }
+
+        // Auto-generate dynamic collection date & time on load
+        const dateInput = document.getElementById('report-date');
+        if (dateInput && !dateInput.value) {
+            const now = new Date();
+            const dd = String(now.getDate()).padStart(2, '0');
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const yyyy = now.getFullYear();
+            
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // convert 0 to 12
+            const formattedHours = String(hours).padStart(2, '0');
+
+            dateInput.value = `${dd}/${mm}/${yyyy} ${formattedHours}:${minutes} ${ampm}`;
+        }
+    };
+</script>
+</body>
+</html>

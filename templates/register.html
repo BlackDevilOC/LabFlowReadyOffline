@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/register.css') }}">
+<style>
+.ui-switch-banner{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-radius:8px;padding:10px 20px;margin-bottom:16px;border:1px solid rgba(0,195,255,.2)}
+.ui-switch-label{color:#00c3ff;font-weight:700;font-size:.85rem;letter-spacing:.05em}
+.ui-switch-btn{background:rgba(0,195,255,.1);color:#00c3ff;border:1px solid rgba(0,195,255,.3);border-radius:20px;padding:6px 16px;font-size:.8rem;font-weight:600;text-decoration:none;transition:all .2s ease}
+.ui-switch-btn:hover{background:rgba(0,195,255,.2);border-color:#00c3ff;text-decoration:none;color:#fff}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="registration-container">
+    <!-- UI Switch Banner -->
+    <div class="ui-switch-banner">
+        <span class="ui-switch-label">📋 Classic Dropdown UI</span>
+        <a href="/register" class="ui-switch-btn">
+            ✨ Try New Checkbox UI →
+        </a>
+    </div>
+    <form action="{{ url_prefix }}/register/patient" method="post">
+        <input type="hidden" id="userEmailInput" name="user_email" value="">
+        <input type="hidden" id="userNameInput" name="user" value="">
+        <input type="hidden" id="userIdInput" name="user_id" value="">
+        <!-- Section 1: Patient Personal Information -->
+        <div class="form-section personal-info-section">
+            <div class="section-header">
+                <h2>Patient Personal Information</h2>
+            </div>
+
+            <div class="form-grid">
+                <!-- Row 1 -->
+                <div class="form-group salutation-group">
+                    <label for="salutation">Salutation</label>
+                    <select id="salutation" name="salutation" required>
+                        <option value="">Select</option>
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Ms.">Miss.</option>
+                        <option value="Baby">Baby</option>
+                    </select>
+                </div>
+
+                <div class="form-group name-group">
+                    <label for="patient_name">Patient Name</label>
+                    <input type="text" id="patient_name" name="patient_name" placeholder="ENTER PATIENT NAME" required>
+                </div>
+
+                <div class="form-group relation-group">
+                    <label for="relation">Relation</label>
+                    <select id="relation" name="relation" required>
+                        <option value="">Select</option>
+                        <option value="S">S/O</option>
+                        <option value="D">D/O</option>
+                        <option value="W">W/O</option>
+                    </select>
+                </div>
+
+                <div class="form-group relation-name-group">
+                    <label for="relation_name">Relation Name</label>
+                    <input type="text" id="relation_name" name="relation_name" placeholder="ENTER RELATION NAME"
+                        required>
+                </div>
+
+                <div class="form-group mobile-group">
+                    <label for="mobile">Mobile</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="ENTER MOBILE NO." required>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="form-group gender-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">SELECT</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FEMALE">FEMALE</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+                </div>
+
+                <div class="form-group age-group">
+                    <label for="age">Age</label>
+                    <input type="text" id="age" name="age" placeholder="AGE" required>
+                </div>
+
+                <div class="form-group cnic-group">
+                    <label for="cnic">CNIC</label>
+                    <input type="text" id="cnic" name="cnic" placeholder="ENTER CNIC" required>
+                </div>
+
+                <div class="form-group token-group">
+                    <label for="patent_token">PATIENT TOKEN NO</label>
+                    <input type="text" id="patent_token" name="patient_token" value="0" placeholder="TOKEN (OPTIONAL)">
+                </div>
+
+                <div class="form-group shift-group">
+                    <label for="shift">Shift</label>
+                    <select id="shift" name="shift" required>
+                        <option value="">Loading shifts…</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-actions form-actions-top">
+            <button type="submit" class="btn-save">SAVE RECORD</button>
+        </div>
+
+        <!-- Section 2: Test Information -->
+        <div class="form-section test-info-section">
+            <div class="section-header red-header">
+                <h2>Test Information</h2>
+            </div>
+
+            <div class="test-grid">
+                {% for i in range(1, test_total_to_display + 1) %}
+                <div class="form-group">
+                    <label>Test {{ i }}</label>
+                    <select name="test_{{ i }}" class="test-select">
+                        <option value="">--SELECT TEST--</option>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+</div>
+<script src="{{ url_for('static', path='/js/register.js') }}"></script>
+{% endblock %}

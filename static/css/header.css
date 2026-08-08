@@ -1,0 +1,135 @@
+/* Top Bar Styling */
+.top-bar {
+    background-color: #ffffff;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Space between left and right sections */
+    padding: 0 20px;
+    /* Responsive padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Soft shadow */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Left Side: Logo and App Name */
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+}
+
+.app-name {
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 600;
+    color: #212529;
+    letter-spacing: -0.02em;
+}
+
+/* Right Side: User Profile and Dropdown */
+.user-section {
+    position: relative;
+    /* For absolute positioning of dropdown */
+    display: flex;
+    align-items: center;
+}
+
+.user-menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.user-menu-toggle:hover {
+    background-color: #f1f3f5;
+}
+
+.profile-icon {
+    width: 36px;
+    height: 36px;
+    background-color: #e3f2fd;
+    /* Light blue background */
+    color: #0d47a1;
+    /* Dark blue text/icon */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-name {
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+/* Dropdown Menu */
+.user-dropdown {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 160px;
+    z-index: 1001;
+}
+
+.user-dropdown.show {
+    display: block;
+}
+
+.logout-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    text-align: left;
+    color: #dc3545;
+    /* Red for logout */
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    background-color: transparent;
+    border: none;
+}
+
+.logout-btn:hover {
+    background-color: #ffe3e3;
+    color: #c92a2a;
+}
+
+/* Utility for responsive padding if needed explicitly on smaller screens */
+@media (max-width: 600px) {
+    .top-bar {
+        padding: 0 15px;
+    }
+
+    .user-name {
+        display: none;
+        /* Hide name on very small screens, keep icon */
+    }
+}

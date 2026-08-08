@@ -1,0 +1,400 @@
+/* Patient Report Print Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #111827;
+    --secondary-color: #4b5563;
+    --border-color: #e5e7eb;
+    --bg-light: #f9fafb;
+    --text-main: #1f2937;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 20px;
+    color: var(--text-main);
+}
+
+@media print {
+    body {
+        font-family: 'Source Serif 4', 'Cambria', 'Georgia', serif;
+    }
+
+    .category-title,
+    .group-name,
+    .column-headers-row th {
+        font-family: 'Source Serif 4', 'Cambria', 'Georgia', serif;
+    }
+}
+
+/* Floating Action Buttons */
+.print-actions {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    gap: 12px;
+    z-index: 1000;
+}
+
+.btn-print,
+.btn-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-print {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-print:hover {
+    background-color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-back {
+    background-color: white;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.btn-back:hover {
+    background-color: #f9fafb;
+    transform: translateY(-2px);
+    border-color: #d1d5db;
+}
+
+/* Screen View Container */
+.report-preview-container {
+    max-width: 950px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    min-height: 1120px;
+    /* On screen, footer pushes down */
+    position: relative;
+    padding-bottom: 180px;
+    /* Space for footer */
+}
+
+/* Header Area (Empty for Logo) - Visible on Screen, Hidden in Print (use margins) */
+.report-header {
+    height: 140px;
+    margin-bottom: 20px;
+    border: 1px dashed #eee;
+    /* Visual guide on screen */
+}
+
+/* Category Table - The Core Structure */
+.category-wrapper {
+    margin-bottom: 20px;
+    break-inside: avoid-page;
+}
+
+.category-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+/* Patient Info Card Grid (amh.html style) */
+.patient-info-boxes,
+.patient-header-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 12px !important;
+}
+
+.patient-info-box,
+.info-box {
+    border: 1.5px solid #222 !important;
+    border-radius: 14px !important;
+    padding: 10px 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    background: #ffffff !important;
+}
+
+@media print {
+    .patient-info-box,
+    .info-box {
+        background: #ffffff !important;
+        border: 1.5px solid #222 !important;
+    }
+}
+
+.info-row {
+    display: flex !important;
+    align-items: center !important;
+    font-size: 13px !important;
+    margin-bottom: 0 !important;
+}
+
+.info-label {
+    width: 125px !important;
+    min-width: 125px !important;
+    font-weight: 600 !important;
+    color: #333333 !important;
+    flex-shrink: 0 !important;
+}
+
+.info-value {
+    flex: 1 !important;
+    font-size: 13px !important;
+    color: #111111 !important;
+    font-weight: 500 !important;
+}
+
+/* Category Title (Inside Header) */
+.category-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: block;
+    margin: 12px 0 6px 0;
+    color: #111;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Column Headers - amh.html 1.5px solid top & bottom borders */
+.column-headers-row th {
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 6px;
+    background: #ffffff;
+    color: #000000;
+    border-top: 1.5px solid #000000 !important;
+    border-bottom: 1.5px solid #000000 !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+/* Column Widths */
+.col-test-name {
+    width: 28%;
+    text-align: left;
+    padding-left: 6px;
+}
+
+.col-result {
+    width: 18%;
+    text-align: left;
+}
+
+.col-unit {
+    width: 14%;
+    text-align: left;
+}
+
+.col-range {
+    width: 40%;
+    text-align: left;
+    padding-right: 6px;
+}
+
+
+/* Group Subheadings */
+.group-title-row td {
+    font-weight: 700;
+    font-size: 13.5px;
+    padding-top: 8px;
+    padding-bottom: 2px;
+    color: #000;
+    text-transform: uppercase;
+    border: none;
+}
+
+/* Fluid sub-section headers (Physical, Chemical, Microscopic) */
+.fluid-subsection-header td {
+    font-weight: 700;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    color: #111827;
+    text-transform: capitalize;
+    border: none;
+}
+
+/* Test Rows */
+.test-row td {
+    font-size: 13px;
+    padding: 4px 0;
+    vertical-align: top;
+    border: none;
+    /* No borders on rows */
+}
+
+/* Match body alignment to header */
+.test-name-cell {
+    width: 35%;
+    padding-left: 10px;
+}
+
+.result-cell {
+    width: 12%;
+    text-align: center;
+    font-weight: 400;
+    /* Normal weight result */
+}
+
+.unit-cell {
+    width: 13%;
+    text-align: left;
+    color: var(--secondary-color);
+}
+
+.range-cell {
+    width: 40%;
+    text-align: right;
+    padding-right: 10px;
+    color: var(--secondary-color);
+    font-size: 12px;
+}
+
+/* Footer - Screen View: Absolute Bottom */
+.report-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+    right: 40px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.sig-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer-info p {
+    margin: 2px 0;
+    font-size: 10px;
+    color: #666;
+}
+
+.sig-block {
+    text-align: center;
+    width: 200px;
+}
+
+.sig-line {
+    border-top: 1px solid #000;
+    margin-bottom: 5px;
+}
+
+.sig-text {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Print Specifics */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+        font-family: 'Source Serif 4', 'Cambria', 'Georgia', serif;
+    }
+
+    .report-preview-container {
+        box-shadow: none;
+        padding: 0;
+        width: 100%;
+        max-width: none;
+        min-height: auto;
+        /* Reset relative positioning */
+        position: static;
+        padding-bottom: 0;
+    }
+
+    .print-actions {
+        display: none;
+    }
+
+    /* Page Setup */
+    @page {
+        size: A4;
+        /* Spacing for Header/Logo on EVERY Page */
+        margin-top: 5cm;
+        /* Spacing for Footer on EVERY Page */
+        margin-bottom: 4cm;
+        margin-left: 1.5cm;
+        margin-right: 1.5cm;
+    }
+
+    /* Reduce spacing for header div since @page handles it */
+    .report-header {
+        display: none;
+        /* Hide the div, use margin instead */
+    }
+
+    /* Force page break after each category table */
+    .category-wrapper {
+        page-break-after: always;
+    }
+
+    /* Except the last one */
+    .last-category {
+        page-break-after: auto;
+    }
+
+    /* Repeating Headers */
+    .repeating-header {
+        display: table-header-group;
+    }
+
+    .category-table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    /* Clean up borders for print */
+    .patient-info-card-print {
+        border: 1px solid #ccc;
+    }
+
+    /* FIXED FOOTER ON EACH PAGE */
+    .report-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 3cm;
+        /* Same as ~margin-bottom logic */
+        padding-top: 10px;
+        background: white;
+        /* Opaque background */
+        border-top: none;
+        /* Or keep line if desired */
+        z-index: 1000;
+        /* Reset absolute positioning from screen view */
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

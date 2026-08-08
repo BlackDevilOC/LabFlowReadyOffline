@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/advanced-search.css') }}">
+<style>
+    :root {
+        --accent: #2563eb; --surface: #fff; --surface-2: #f8fafc; --border: #e2e8f0;
+        --text: #0f172a; --text-muted: #64748b; --radius: 10px;
+    }
+    .records-page { padding: 28px 32px; max-width: 1300px; }
+    .page-header { display: flex; justify-content: space-between; margin-bottom: 24px; }
+    .hdr-actions { display:flex; gap:10px; align-items:center; }
+    .page-header h1 { margin: 0; font-size: 22px; color: var(--text); }
+    .page-header p { margin: 5px 0 0; font-size: 13px; color: var(--text-muted); }
+    .back-btn { text-decoration: none; background: #2563eb; color: #fff; padding: 9px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+    .refresh-btn { background: #0f172a; color: #fff; padding: 9px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; border:none; cursor:pointer; }
+    .filter-bar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .filter-label { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); }
+    .filter-bar input, .filter-bar select { border: 1px solid var(--border); border-radius: 7px; padding: 7px 10px; background: var(--surface-2); font-size: 13px; }
+    .search-wrap { flex: 1; min-width: 200px; position: relative; }
+    .search-wrap input { width: 100%; padding: 7px 10px 7px 32px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface-2); font-size: 13px; box-sizing: border-box; }
+    .search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+    .btn-clear { border: 1px solid var(--border); border-radius: 7px; background: #fff; padding: 7px 12px; font-size: 12px; cursor: pointer; font-weight: 600; }
+    .extra-filters-drawer { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; display: none; }
+    .table-card { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: #fff; }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: var(--surface-2); }
+    th { text-align: left; padding: 12px 14px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
+    td { padding: 12px 14px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text); vertical-align: middle; }
+    .badge { display: inline-block; background: #eff6ff; color: #2563eb; padding: 2px 8px; border-radius: 5px; font-size: 12px; font-weight: 600; }
+    .status-ok { color: #16a34a; font-weight: 600; }
+    .status-pending { color: #d97706; font-weight: 600; }
+    .print-btn { background: #2563eb; color: #fff; border: none; border-radius: 7px; padding: 7px 13px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    .table-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; padding: 10px 14px; background: var(--surface-2); color: var(--text-muted); font-size: 12px; }
+    .page-size-label { font-size: 11px; font-weight: 600; margin-left: auto; }
+    .page-size-select { border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 12px; background: #fff; }
+    .pg { display: flex; gap: 4px; } .pg button { border: 1px solid var(--border); border-radius: 6px; background: #fff; width: 30px; height: 30px; cursor: pointer; }
+    .patient-rel { font-size: 11px; color: #64748b; margin-top: 2px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="records-page">
+    <div class="page-header">
+        <div>
+            <h1>Lab Test Print Records</h1>
+            <p>Search patients here; print preview loads full report data from the database using MR number (and date) only.</p>
+        </div>
+        <div class="hdr-actions">
+            <button class="refresh-btn" onclick="window.location.reload()">Refresh</button>
+            <a class="back-btn" href="{{ url_prefix }}/">Home</a>
+        </div>
+    </div>
+
+    <div class="filter-bar">
+        <span class="filter-label">Date</span><input type="date" id="single-date">
+        <span class="filter-label">Shift</span><select id="shift"><option value="all">All Shifts</option></select>
+        <span class="filter-label">Status</span><select id="status"><option value="all">All</option><option value="completed">Completed</option><option value="pending">Pending</option></select>
+        <span class="filter-label">Category</span><select id="category"><option value="all">All Categories</option></select>
+        <div class="search-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input id="search" type="text" placeholder="Quick search: name or MR no">
+        </div>
+        <button class="btn-clear" id="btn-advanced-toggle" type="button">Advanced Search</button>
+        <button class="btn-clear" id="clear">Clear All</button>
+    </div>
+
+    <div class="extra-filters-drawer" id="extra-filters-drawer">
+        <div id="advanced-search-root"></div>
+    </div>
+
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>MR No</th>
+                    <th>Patient</th>
+                    <th>Shift</th>
+                    <th>Tests</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"><tr><td colspan="7">Loading records...</td></tr></tbody>
+        </table>
+        <div class="table-footer">
+            <span id="showing">Showing 0 patients</span>
+            <label class="page-size-label" for="page-size-select">Per page</label>
+            <select id="page-size-select" class="page-size-select"></select>
+            <div class="pg" id="pg"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/advanced-search.js') }}"></script>
+<script src="{{ url_for('static', path='/js/list-pagination.js') }}"></script>
+<script>
+let allRecords = [];
+let filteredPatients = [];
+let pagePatients = [];
+let currentPage = 1;
+let lastUrl = '', timer = null, ctrl = null;
+let advSearchCategories = [];
+let advSearchReady = false;
+const CACHE_TTL_MS = 45000;
+const memCache = new Map();
+
+function getCache(url) {
+    const mem = memCache.get(url);
+    if (mem && (Date.now() - mem.ts) < CACHE_TTL_MS) return mem.data;
+    try {
+        const raw = sessionStorage.getItem(`lab_print_cache_${url}`);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if ((Date.now() - parsed.ts) < CACHE_TTL_MS) return parsed.data;
+    } catch {}
+    return null;
+}
+function setCache(url, data) {
+    memCache.set(url, { ts: Date.now(), data });
+    sessionStorage.setItem(`lab_print_cache_${url}`, JSON.stringify({ ts: Date.now(), data }));
+}
+
+function escapeHtml(text) {
+    if (text === null || text === undefined) return '';
+    const div = document.createElement('div');
+    div.textContent = String(text);
+    return div.innerHTML;
+}
+
+async function loadMeta() {
+    try {
+        const res = await fetch('/api/metadata/filters');
+        const data = await res.json();
+        advSearchCategories = data.categories || [];
+        document.getElementById('shift').innerHTML = '<option value="all">All Shifts</option>' +
+            (data.shifts || []).map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('');
+        document.getElementById('category').innerHTML = '<option value="all">All Categories</option>' +
+            advSearchCategories.map(c => `<option value="${c}">${c}</option>`).join('');
+        if (!advSearchReady) {
+            await AdvancedSearch.mount('#advanced-search-root', {
+                onChange: () => { lastUrl = ''; loadRecords(); },
+                categories: advSearchCategories,
+            });
+            advSearchReady = true;
+        }
+    } catch {}
+}
+
+async function loadRecords() {
+    const singleDate = document.getElementById('single-date').value;
+    const status = document.getElementById('status').value;
+    const shift = document.getElementById('shift').value;
+    const category = document.getElementById('category').value;
+    const search = document.getElementById('search').value.trim();
+    const advRoot = document.getElementById('advanced-search-root');
+    const advFilters = advRoot ? AdvancedSearch.getFilters(advRoot) : [];
+
+    const params = new URLSearchParams({ record_type: 'lab' });
+    if (singleDate) { params.set('date_from', singleDate); params.set('date_to', singleDate); }
+    if (status !== 'all') params.set('status', status);
+    if (shift !== 'all') params.set('shift', shift);
+    if (category !== 'all') params.set('category', category);
+    if (advFilters.length) params.set('filters', JSON.stringify(advFilters));
+    else if (search) params.set('search', search);
+
+    const url = `/api/print-records?${params.toString()}`;
+    if (url === lastUrl) return;
+    lastUrl = url;
+
+    const cached = getCache(url);
+    if (cached) {
+        allRecords = cached;
+        apply();
+        return;
+    }
+
+    if (ctrl) ctrl.abort();
+    ctrl = new AbortController();
+    document.getElementById('tbody').innerHTML = '<tr><td colspan="7">Loading records...</td></tr>';
+    try {
+        const res = await fetch(url, { signal: ctrl.signal });
+        const data = await res.json();
+        allRecords = data.records || [];
+        setCache(url, allRecords);
+        apply();
+    } catch (e) {
+        if (e.name !== 'AbortError') {
+            document.getElementById('tbody').innerHTML = '<tr><td colspan="7">Failed to load records.</td></tr>';
+        }
+    }
+}
+
+function apply() {
+    filteredPatients = ListPagination.groupLabRowsByPatient(allRecords);
+    currentPage = 1;
+    render();
+    pagination();
+}
+
+function render() {
+    const pageSize = ListPagination.getPageSize();
+    const start = (currentPage - 1) * pageSize;
+    pagePatients = filteredPatients.slice(start, start + pageSize);
+    document.getElementById('showing').textContent =
+        `Showing ${filteredPatients.length} patient${filteredPatients.length !== 1 ? 's' : ''}`;
+
+    if (!pagePatients.length) {
+        document.getElementById('tbody').innerHTML = '<tr><td colspan="7">No patients found.</td></tr>';
+        return;
+    }
+
+    document.getElementById('tbody').innerHTML = pagePatients.map(r => {
+        const date = (r.created_at || '').split('T')[0] || '—';
+        const mr = r.mr_no || '';
+        const singleDate = document.getElementById('single-date').value;
+        const href = mr ? `/page/lab-test-print/${mr}${singleDate ? `?date=${encodeURIComponent(singleDate)}` : ''}` : '#';
+        const rel = r.relation_type && r.relation_name ? `${r.relation_type} ${r.relation_name}` : '';
+        const statusHtml = r.status === 'Completed'
+            ? '<span class="status-ok">Completed</span>'
+            : '<span class="status-pending">Pending</span>';
+        const testBadges = ListPagination.renderTestBadges(r.tests);
+
+        return `
+        <tr>
+            <td>${date}</td>
+            <td><span class="badge">${escapeHtml(mr)}</span></td>
+            <td>
+                <div style="font-weight:600">${escapeHtml(r.patient_name || 'Unknown')}</div>
+                <div class="patient-rel">${rel ? escapeHtml(rel) : ''}</div>
+                <div style="font-size:10px;color:#2563eb;font-weight:600;margin-top:2px;">Token: ${escapeHtml(r.patient_token ?? '—')}</div>
+            </td>
+            <td>${escapeHtml(r.shift || '—')}</td>
+            <td>${testBadges || '—'}</td>
+            <td>${statusHtml}</td>
+            <td><button class="print-btn" type="button" onclick="window.location.href='${href}'">Print</button></td>
+        </tr>`;
+    }).join('');
+}
+
+function pagination() {
+    const total = Math.ceil(filteredPatients.length / ListPagination.getPageSize());
+    const pg = document.getElementById('pg');
+    if (total <= 1) { pg.innerHTML = ''; return; }
+    let html = `<button ${currentPage === 1 ? 'disabled' : ''} onclick="go(${currentPage - 1})">‹</button>`;
+    for (let i = 1; i <= total; i++) {
+        html += `<button ${i === currentPage ? 'style="background:#2563eb;color:#fff;border-color:#2563eb"' : ''} onclick="go(${i})">${i}</button>`;
+    }
+    html += `<button ${currentPage === total ? 'disabled' : ''} onclick="go(${currentPage + 1})">›</button>`;
+    pg.innerHTML = html;
+}
+
+function go(p) {
+    currentPage = p;
+    render();
+    pagination();
+}
+
+document.getElementById('single-date').addEventListener('change', () => { lastUrl = ''; loadRecords(); });
+document.getElementById('shift').addEventListener('change', () => { lastUrl = ''; loadRecords(); });
+document.getElementById('status').addEventListener('change', () => { lastUrl = ''; loadRecords(); });
+document.getElementById('category').addEventListener('change', () => { lastUrl = ''; loadRecords(); });
+document.getElementById('search').addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { lastUrl = ''; loadRecords(); }, 250);
+});
+
+document.getElementById('btn-advanced-toggle').addEventListener('click', () => {
+    const drawer = document.getElementById('extra-filters-drawer');
+    const open = drawer.style.display !== 'block';
+    drawer.style.display = open ? 'block' : 'none';
+});
+
+document.getElementById('clear').addEventListener('click', () => {
+    document.getElementById('single-date').value = '';
+    document.getElementById('search').value = '';
+    document.getElementById('shift').value = 'all';
+    document.getElementById('status').value = 'all';
+    document.getElementById('category').value = 'all';
+    const advRoot = document.getElementById('advanced-search-root');
+    if (advRoot) AdvancedSearch.clear(advRoot);
+    lastUrl = '';
+    loadRecords();
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+    ListPagination.bindPageSizeSelect(
+        document.getElementById('page-size-select'),
+        () => { currentPage = 1; render(); pagination(); }
+    );
+    await loadMeta();
+    await loadRecords();
+});
+</script>
+{% endblock %}

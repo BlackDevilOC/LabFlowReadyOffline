@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/register_new_ui.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="registration-container">
+    <form action="{{ url_prefix }}/register/patient" method="post" id="newRegisterForm">
+        <input type="hidden" id="userEmailInput" name="user_email" value="">
+        <input type="hidden" id="userNameInput" name="user" value="">
+        <input type="hidden" id="userIdInput" name="user_id" value="">
+
+        <!-- Hidden inputs for test values (checkbox mode submits via these) -->
+        <input type="hidden" name="test_1" id="h_test_1" value="">
+        <input type="hidden" name="test_2" id="h_test_2" value="">
+        <input type="hidden" name="test_3" id="h_test_3" value="">
+        <input type="hidden" name="test_4" id="h_test_4" value="">
+        <input type="hidden" name="test_5" id="h_test_5" value="">
+        <input type="hidden" name="test_6" id="h_test_6" value="">
+        <input type="hidden" name="test_7" id="h_test_7" value="">
+        <input type="hidden" name="test_8" id="h_test_8" value="">
+
+        <!-- UI Toggle Banner -->
+        <div class="ui-switch-banner">
+            <span class="ui-switch-label">✨ New Checkbox UI</span>
+            <a href="/register-classic" class="ui-switch-btn">
+                ⬅ Switch to Classic Dropdown UI
+            </a>
+        </div>
+
+        <!-- Section 1: Patient Personal Information -->
+        <div class="form-section personal-info-section">
+            <div class="section-header">
+                <h2>Patient Personal Information</h2>
+            </div>
+
+            <div class="form-grid">
+                <!-- Row 1 -->
+                <div class="form-group salutation-group">
+                    <label for="salutation">Salutation</label>
+                    <select id="salutation" name="salutation" required>
+                        <option value="">Select</option>
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Ms.">Miss.</option>
+                        <option value="Baby">Baby</option>
+                    </select>
+                </div>
+
+                <div class="form-group name-group">
+                    <label for="patient_name">Patient Name</label>
+                    <input type="text" id="patient_name" name="patient_name" placeholder="ENTER PATIENT NAME" required>
+                </div>
+
+                <div class="form-group relation-group">
+                    <label for="relation">Relation</label>
+                    <select id="relation" name="relation" required>
+                        <option value="">Select</option>
+                        <option value="S">S/O</option>
+                        <option value="D">D/O</option>
+                        <option value="W">W/O</option>
+                    </select>
+                </div>
+
+                <div class="form-group relation-name-group">
+                    <label for="relation_name">Relation Name</label>
+                    <input type="text" id="relation_name" name="relation_name" placeholder="ENTER RELATION NAME" required>
+                </div>
+
+                <div class="form-group mobile-group">
+                    <label for="mobile">Mobile</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="ENTER MOBILE NO." required>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="form-group gender-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">SELECT</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FEMALE">FEMALE</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+                </div>
+
+                <div class="form-group age-group">
+                    <label for="age">Age</label>
+                    <input type="text" id="age" name="age" placeholder="AGE" required>
+                </div>
+
+                <div class="form-group cnic-group">
+                    <label for="cnic">CNIC</label>
+                    <input type="text" id="cnic" name="cnic" placeholder="ENTER CNIC" required>
+                </div>
+
+                <div class="form-group token-group">
+                    <label for="patent_token">PATIENT TOKEN NO</label>
+                    <input type="text" id="patent_token" name="patient_token" value="0" placeholder="TOKEN (OPTIONAL)">
+                </div>
+
+                <div class="form-group shift-group">
+                    <label for="shift">Shift</label>
+                    <select id="shift" name="shift" required>
+                        <option value="">Loading shifts…</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Bar (Top): Save Record Button -->
+        <div class="form-actions form-actions-top">
+            <div class="form-actions-left">
+                <span class="selection-info" id="selectionInfo">Select up to 8 tests</span>
+            </div>
+            <button type="submit" class="btn-save" id="saveBtn">SAVE RECORD</button>
+        </div>
+
+        <!-- Section 2: Test Selection (Checkbox UI) -->
+        <div class="form-section test-info-section">
+            <div class="section-header red-header">
+                <div class="test-section-header-inner">
+                    <h2>Test Selection</h2>
+                    <div class="test-header-controls">
+                        <span class="selected-count-badge" id="selectedCountBadge">0 selected</span>
+                        <button type="button" class="btn-clear-all" id="clearAllBtn">✕ Clear All</button>
+                        <div class="search-wrap">
+                            <input type="text" id="testSearchInput" class="test-search-input" placeholder="🔍 Search tests…">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-checkbox-panel">
+                <!-- Quick Presets Bar -->
+                <div class="quick-preset-bar" id="quickPresetBar">
+                    <span class="preset-label">⚡ Quick Presets:</span>
+                    <button type="button" class="btn-preset-regular" id="btnPresetRegular">
+                        ⭐ Select Regular Package
+                    </button>
+                </div>
+
+                <!-- Selected tests pills strip -->
+                <div class="selected-tests-strip" id="selectedTestsStrip">
+                    <span class="strip-label">Selected:</span>
+                    <div class="strip-pills" id="stripPills">
+                        <span class="strip-empty">No tests selected yet</span>
+                    </div>
+                </div>
+
+                <!-- Checkbox Grid -->
+                <div class="test-checkbox-grid" id="testCheckboxGrid">
+                    <div class="loading-tests">
+                        <div class="spinner"></div>
+                        <span>Loading available tests…</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="{{ url_for('static', path='/js/register_new_ui.js') }}"></script>
+{% endblock %}

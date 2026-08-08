@@ -1,0 +1,2827 @@
+{
+  "components": [
+    {
+      "name": "0 .",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "T3",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 ng/mL",
+      "status": true
+    },
+    {
+      "name": "T4",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 ug/dl",
+      "status": true
+    },
+    {
+      "name": "TSH",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 uIU/mL",
+      "status": true
+    },
+    {
+      "name": "Age/Gender :",
+      "category": "Biochemistry",
+      "unit": "/Male.",
+      "normal_min": null,
+      "normal_max": "S/O. : - Report Date : 6/2/2026 11:38 AM Requesting Doctor : Requesting Hospital : Reported On:",
+      "status": true
+    },
+    {
+      "name": "Value )",
+      "category": "Biochemistry",
+      "unit": "ng/mL",
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "0 %",
+      "category": "Hematology",
+      "unit": ".0-6.0",
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "98 - 125",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 .",
+      "status": true
+    },
+    {
+      "name": "Ferritin",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 ng/mL",
+      "status": true
+    },
+    {
+      "name": "Hormone)",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 .",
+      "status": true
+    },
+    {
+      "name": "0 IU/L",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "0 ng/mL",
+      "category": "Microbiology",
+      "unit": "- 8.78",
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "RA Factor",
+      "category": "Serology",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 IU/mL",
+      "status": true
+    },
+    {
+      "name": "0 ng/dL",
+      "category": "Biochemistry",
+      "unit": "- 1.70",
+      "normal_min": null,
+      "normal_max": "H.Pylori Ag(Stool)",
+      "status": true
+    },
+    {
+      "name": "0 mIU/mL",
+      "category": "Biochemistry",
+      "unit": "- 5.60",
+      "normal_min": null,
+      "normal_max": "Hep B, C",
+      "status": true
+    },
+    {
+      "name": "0 mIU/L",
+      "category": "Biochemistry",
+      "unit": "- 5.60",
+      "normal_min": null,
+      "normal_max": "Typhi dot",
+      "status": true
+    },
+    {
+      "name": "( Gestational )",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "0 mg/dl",
+      "category": "Biochemistry",
+      "unit": "- 1.3",
+      "normal_min": null,
+      "normal_max": "UCE",
+      "status": true
+    },
+    {
+      "name": "Calcium",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 mg/dl",
+      "status": true
+    },
+    {
+      "name": "CPK",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 U/L",
+      "status": true
+    },
+    {
+      "name": "C-Reactive Protein",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 mg/L",
+      "status": true
+    },
+    {
+      "name": "LDH",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 U/L",
+      "status": true
+    },
+    {
+      "name": "ESR",
+      "category": "Hematology",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 mm/1st hr",
+      "status": true
+    },
+    {
+      "name": "Albumin",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 g/dl",
+      "status": true
+    },
+    {
+      "name": "Uric Acid",
+      "category": "Biochemistry",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 mg/dl",
+      "status": true
+    },
+    {
+      "name": "Blood Grouping",
+      "category": "Hematology",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": "0 .",
+      "status": true
+    },
+    {
+      "name": "Haemoglobin",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Total WBC Count",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "RBC Count",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Haematocrit (PCV)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "MCV",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "MCH",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "MCHC",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Platelet Count",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Neutrophils %",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Lymphocytes %",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Monocytes %",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Eosinophils %",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Basophils %",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Peripheral Blood Film",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "ESR (1 Hour)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Bleeding Time (BT)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Clotting Time (CT)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Prothrombin Time (PT)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "INR",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "APTT",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Urea",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Creatinine",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Total Bilirubin",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Direct Bilirubin",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Indirect Bilirubin",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "SGPT (ALT)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "SGOT (AST)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Alkaline Phosphatase (ALP)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Total Protein",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Globulin",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "A/G Ratio",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Total Cholesterol",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Triglycerides",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "HDL Cholesterol",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "LDL Cholesterol",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "VLDL",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Fasting Blood Sugar (FBS)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Random Blood Sugar (RBS)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "HbA1c",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Glucose Tolerance Test (GTT)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "T3 (Triiodothyronine)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "T4 (Thyroxine)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Free T3 (fT3)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Free T4 (fT4)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Sodium (Na+)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Potassium (K+)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Chloride (Cl-)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Calcium",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Phosphorus",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Magnesium",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Iron",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "TIBC",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Serum Ferritin",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Vitamin B12",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Vitamin D (25-OH)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Troponin I (Qualitative)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "CPK-MB",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "CRP (C-Reactive Protein)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "PSA (Total)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "AFP (Alpha-Fetoprotein)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Beta HCG",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "HBsAg (Hepatitis B)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Anti-HCV (Hepatitis C)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "HIV (1 & 2)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "VDRL / RPR (Syphilis)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Widal Test",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Dengue NS1 Antigen",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Dengue IgG / IgM",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Malaria Antigen (RDT)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "RF (Rheumatoid Factor)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "ASO Titre",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "ANA",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Typhidot (IgM / IgG)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Brucella Antibody",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Colour",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Appearance",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Reaction (pH)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Specific Gravity",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Protein",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Sugar (Glucose)",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Ketones",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Bilirubin",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Blood",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Nitrites",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Pus Cells",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "RBCs",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Epithelial Cells",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Casts",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Crystals",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Bacteria",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Consistency",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Parasites / Ova",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Occult Blood",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Urine Culture & Sensitivity",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Blood Culture & Sensitivity",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Sputum Culture & Sensitivity",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Wound Swab C & S",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Throat Swab C & S",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Volume",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Viscosity",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Total Count",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Active Motility",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Sluggish Motility",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Non-Motile",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Normal Morphology",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Abnormal Morphology",
+      "category": "Test",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true,
+      "is_heading": false
+    },
+    {
+      "name": "Bilirubin Total",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Bilirubin Direct",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "ALT (SGPT)",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "AST (SGOT)",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Urea",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Creatinine",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Urine Detail Report",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "MP-ICT",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Stool D/R",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Hemoglobin",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "VITAMIN D",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Prolactin",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Alpha Feto-Protein",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "HbsAg ELISA",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Anti HCV ELISA",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Total IgE Immunoglobulin",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Serum Beta hCG",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Dengue NS1",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "H. Pylori  Ab  ( ICT )",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Testosterone",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Toxo  IgG/IgM",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Zika IgG/IgM",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Calprotectin",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Ck-MB",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Anti CCP Plus",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Cortisol",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "D-Dimer",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Procalcitonin",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Progesterone",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Troponin T",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Myoglobin",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "HbsAg",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Blood C/S",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Anti HCV",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Anti-HIV",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Urine PT",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Urine C/S",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Serum Insulin",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "H.Pylori  Ag(Stool)",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Folic Acid (Folate)",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Stool C/S",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Troponin I",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Typhi dot",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Reticulocyte Count",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "LDL",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Cholestrol",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Stool For Occult Blood (Fob)",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Amylase",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Globulin Serum",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "PT (Prothrombin Time)",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "ANA PROFILE",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Cataract",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Ultrasound ( Whole Abdomen )",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Strip ( RBS )",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Malaria Parasite",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "...Vit-D",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Semen Analysis",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "IgE ( Immunoglobin E )",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "PROSTATE SPECIFIC ANTIGEN ( PSA )",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Pletelets",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "URINALYSIS REPORT",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Serum Lipase",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "H. Pylori IgG ( ELIZA)",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "ASOT",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "CA-125",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Magnesium",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Rubella IgG",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Dengue Serology",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "CHIKUNGUNYA",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Congo Virus",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "Serum Phosphorous",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    },
+    {
+      "name": "VDRL SYPHILIS",
+      "category": "General",
+      "unit": null,
+      "normal_min": null,
+      "normal_max": null,
+      "status": true
+    }
+  ],
+  "groups": [
+    {
+      "group_name": "Liver Function Test",
+      "category": "Biochemistry",
+      "component_names": [
+        "Bilirubin Total",
+        "Bilirubin Direct",
+        "ALT (SGPT)",
+        "AST",
+        "Alkaline Phosphatase"
+      ],
+      "status": true,
+      "legacy_id": 1
+    },
+    {
+      "group_name": "Bilirubin Total",
+      "category": "General",
+      "component_names": [
+        "Bilirubin Total"
+      ],
+      "status": true,
+      "legacy_id": 2
+    },
+    {
+      "group_name": "Bilirubin Direct",
+      "category": "General",
+      "component_names": [
+        "Bilirubin Direct"
+      ],
+      "status": true,
+      "legacy_id": 3
+    },
+    {
+      "group_name": "ALT (SGPT)",
+      "category": "General",
+      "component_names": [
+        "ALT (SGPT)"
+      ],
+      "status": true,
+      "legacy_id": 4
+    },
+    {
+      "group_name": "AST (SGOT)",
+      "category": "General",
+      "component_names": [
+        "AST (SGOT)"
+      ],
+      "status": true,
+      "legacy_id": 5
+    },
+    {
+      "group_name": "Urea",
+      "category": "General",
+      "component_names": [
+        "Urea"
+      ],
+      "status": true,
+      "legacy_id": 8
+    },
+    {
+      "group_name": "Creatinine",
+      "category": "General",
+      "component_names": [
+        "Creatinine"
+      ],
+      "status": true,
+      "legacy_id": 9
+    },
+    {
+      "group_name": "Lipid Profile",
+      "category": "Biochemistry",
+      "component_names": [
+        "Cholesterol",
+        "Triglyceride",
+        "HDL",
+        "LDL",
+        "VLDL-Cholesterol",
+        "Non-HDL Cholesterol"
+      ],
+      "status": true,
+      "legacy_id": 10
+    },
+    {
+      "group_name": "Glucose Random",
+      "category": "Biochemistry",
+      "component_names": [
+        "Urea",
+        "Creatinine"
+      ],
+      "status": true,
+      "legacy_id": 16
+    },
+    {
+      "group_name": "Uric Acid",
+      "category": "Biochemistry",
+      "component_names": [
+        "Uric Acid"
+      ],
+      "status": true,
+      "legacy_id": 17
+    },
+    {
+      "group_name": "Calcium",
+      "category": "Biochemistry",
+      "component_names": [
+        "Calcium"
+      ],
+      "status": true,
+      "legacy_id": 18
+    },
+    {
+      "group_name": "CPK",
+      "category": "Biochemistry",
+      "component_names": [
+        "CPK"
+      ],
+      "status": true,
+      "legacy_id": 20
+    },
+    {
+      "group_name": "LDH",
+      "category": "Biochemistry",
+      "component_names": [
+        "LDH"
+      ],
+      "status": true,
+      "legacy_id": 23
+    },
+    {
+      "group_name": "C-Reactive Protein",
+      "category": "Biochemistry",
+      "component_names": [
+        "C-Reactive Protein"
+      ],
+      "status": true,
+      "legacy_id": 26
+    },
+    {
+      "group_name": "Albumin",
+      "category": "Biochemistry",
+      "component_names": [
+        "Albumin"
+      ],
+      "status": true,
+      "legacy_id": 29
+    },
+    {
+      "group_name": "Urine Detail Report",
+      "category": "General",
+      "component_names": [
+        "Urine Detail Report"
+      ],
+      "status": true,
+      "legacy_id": 36
+    },
+    {
+      "group_name": "ESR",
+      "category": "Hematology",
+      "component_names": [
+        "ESR"
+      ],
+      "status": true,
+      "legacy_id": 38
+    },
+    {
+      "group_name": "Dengue Profile",
+      "category": "Serology",
+      "component_names": [
+        "Dengue Antigen NS-1",
+        "Dengue IgM",
+        "Dengue IgG"
+      ],
+      "status": true,
+      "legacy_id": 42
+    },
+    {
+      "group_name": "MP-ICT",
+      "category": "General",
+      "component_names": [
+        "MP-ICT"
+      ],
+      "status": true,
+      "legacy_id": 44
+    },
+    {
+      "group_name": "HbA1c",
+      "category": "Test",
+      "component_names": [
+        "HbA1c"
+      ],
+      "status": true,
+      "legacy_id": 49
+    },
+    {
+      "group_name": "Stool D/R",
+      "category": "General",
+      "component_names": [
+        "Stool D/R"
+      ],
+      "status": true,
+      "legacy_id": 54
+    },
+    {
+      "group_name": "Hemoglobin",
+      "category": "General",
+      "component_names": [
+        "Hemoglobin"
+      ],
+      "status": true,
+      "legacy_id": 55
+    },
+    {
+      "group_name": "Total Leukocyte Count",
+      "category": "Hematology",
+      "component_names": [
+        "W.B.C",
+        "Neutrophils",
+        "Lymphocytes",
+        "Monocytes",
+        "Eosinophils",
+        "Basophils"
+      ],
+      "status": true,
+      "legacy_id": 56
+    },
+    {
+      "group_name": "Blood Grouping",
+      "category": "Hematology",
+      "component_names": [
+        "Blood Grouping"
+      ],
+      "status": true,
+      "legacy_id": 59
+    },
+    {
+      "group_name": "TSH",
+      "category": "Biochemistry",
+      "component_names": [
+        "TSH"
+      ],
+      "status": true,
+      "legacy_id": 63
+    },
+    {
+      "group_name": "VITAMIN D",
+      "category": "General",
+      "component_names": [
+        "VITAMIN D"
+      ],
+      "status": true,
+      "legacy_id": 64
+    },
+    {
+      "group_name": "T3",
+      "category": "Biochemistry",
+      "component_names": [
+        "T3"
+      ],
+      "status": true,
+      "legacy_id": 66
+    },
+    {
+      "group_name": "T4",
+      "category": "Biochemistry",
+      "component_names": [
+        "T4"
+      ],
+      "status": true,
+      "legacy_id": 67
+    },
+    {
+      "group_name": "FSH ( Follicle Stimulating Hormone)",
+      "category": "Biochemistry",
+      "component_names": [
+        "Hormone)"
+      ],
+      "status": true,
+      "legacy_id": 70
+    },
+    {
+      "group_name": "LH (Leuteinizing Hormone)",
+      "category": "Biochemistry",
+      "component_names": [
+        "Hormone)"
+      ],
+      "status": true,
+      "legacy_id": 71
+    },
+    {
+      "group_name": "Prolactin",
+      "category": "General",
+      "component_names": [
+        "Prolactin"
+      ],
+      "status": true,
+      "legacy_id": 72
+    },
+    {
+      "group_name": "Electrolyte Panel",
+      "category": "Biochemistry",
+      "component_names": [
+        "Sodium",
+        "Potassium",
+        "Chloride"
+      ],
+      "status": true,
+      "legacy_id": 73
+    },
+    {
+      "group_name": "Ferritin",
+      "category": "Biochemistry",
+      "component_names": [
+        "Ferritin"
+      ],
+      "status": true,
+      "legacy_id": 75
+    },
+    {
+      "group_name": "RA Factor",
+      "category": "Serology",
+      "component_names": [
+        "RA Factor"
+      ],
+      "status": true,
+      "legacy_id": 78
+    },
+    {
+      "group_name": "Alpha Feto-Protein",
+      "category": "General",
+      "component_names": [
+        "Alpha Feto-Protein"
+      ],
+      "status": true,
+      "legacy_id": 81
+    },
+    {
+      "group_name": "HbsAg ELISA",
+      "category": "General",
+      "component_names": [
+        "HbsAg ELISA"
+      ],
+      "status": true,
+      "legacy_id": 87
+    },
+    {
+      "group_name": "Anti HCV ELISA",
+      "category": "General",
+      "component_names": [
+        "Anti HCV ELISA"
+      ],
+      "status": true,
+      "legacy_id": 88
+    },
+    {
+      "group_name": "Total IgE Immunoglobulin",
+      "category": "General",
+      "component_names": [
+        "Total IgE Immunoglobulin"
+      ],
+      "status": true,
+      "legacy_id": 91
+    },
+    {
+      "group_name": "Serum Beta hCG",
+      "category": "General",
+      "component_names": [
+        "Serum Beta hCG"
+      ],
+      "status": true,
+      "legacy_id": 96
+    },
+    {
+      "group_name": "Dengue NS1",
+      "category": "General",
+      "component_names": [
+        "Dengue NS1"
+      ],
+      "status": true,
+      "legacy_id": 99
+    },
+    {
+      "group_name": "H. Pylori  Ab  ( ICT )",
+      "category": "General",
+      "component_names": [
+        "H. Pylori  Ab  ( ICT )"
+      ],
+      "status": true,
+      "legacy_id": 106
+    },
+    {
+      "group_name": "COMPLETE BLOOD COUNT",
+      "category": "Hematology",
+      "component_names": [
+        "HAEMOGLOBIN",
+        "R.B.Cs",
+        "HEAMATOCRIT",
+        "M.C.V",
+        "M.C.H",
+        "M.C.H.C",
+        "W.B.C",
+        "NEUTROPHILS",
+        "LYMPHOCYTES",
+        "MONOCYTES",
+        "EOSINOPHILS",
+        "BASOPHILS",
+        "PLATELETS"
+      ],
+      "status": true,
+      "legacy_id": 107
+    },
+    {
+      "group_name": "Testosterone",
+      "category": "General",
+      "component_names": [
+        "Testosterone"
+      ],
+      "status": true,
+      "legacy_id": 123
+    },
+    {
+      "group_name": "Toxo  IgG/IgM",
+      "category": "General",
+      "component_names": [
+        "Toxo  IgG/IgM"
+      ],
+      "status": true,
+      "legacy_id": 124
+    },
+    {
+      "group_name": "Zika IgG/IgM",
+      "category": "General",
+      "component_names": [
+        "Zika IgG/IgM"
+      ],
+      "status": true,
+      "legacy_id": 125
+    },
+    {
+      "group_name": "Calprotectin",
+      "category": "General",
+      "component_names": [
+        "Calprotectin"
+      ],
+      "status": true,
+      "legacy_id": 126
+    },
+    {
+      "group_name": "Ck-MB",
+      "category": "General",
+      "component_names": [
+        "Ck-MB"
+      ],
+      "status": true,
+      "legacy_id": 127
+    },
+    {
+      "group_name": "Anti CCP Plus",
+      "category": "General",
+      "component_names": [
+        "Anti CCP Plus"
+      ],
+      "status": true,
+      "legacy_id": 128
+    },
+    {
+      "group_name": "Cortisol",
+      "category": "General",
+      "component_names": [
+        "Cortisol"
+      ],
+      "status": true,
+      "legacy_id": 129
+    },
+    {
+      "group_name": "D-Dimer",
+      "category": "General",
+      "component_names": [
+        "D-Dimer"
+      ],
+      "status": true,
+      "legacy_id": 130
+    },
+    {
+      "group_name": "Procalcitonin",
+      "category": "General",
+      "component_names": [
+        "Procalcitonin"
+      ],
+      "status": true,
+      "legacy_id": 131
+    },
+    {
+      "group_name": "Progesterone",
+      "category": "General",
+      "component_names": [
+        "Progesterone"
+      ],
+      "status": true,
+      "legacy_id": 132
+    },
+    {
+      "group_name": "Troponin T",
+      "category": "General",
+      "component_names": [
+        "Troponin T"
+      ],
+      "status": true,
+      "legacy_id": 133
+    },
+    {
+      "group_name": "CRP (C Reactive Protein)",
+      "category": "Biochemistry",
+      "component_names": [
+        "C-Reactive Protein"
+      ],
+      "status": true,
+      "legacy_id": 135
+    },
+    {
+      "group_name": "Myoglobin",
+      "category": "General",
+      "component_names": [
+        "Myoglobin"
+      ],
+      "status": true,
+      "legacy_id": 136
+    },
+    {
+      "group_name": "HbsAg",
+      "category": "General",
+      "component_names": [
+        "HbsAg"
+      ],
+      "status": true,
+      "legacy_id": 137
+    },
+    {
+      "group_name": "Blood C/S",
+      "category": "General",
+      "component_names": [
+        "Blood C/S"
+      ],
+      "status": true,
+      "legacy_id": 138
+    },
+    {
+      "group_name": "Anti HCV",
+      "category": "General",
+      "component_names": [
+        "Anti HCV"
+      ],
+      "status": true,
+      "legacy_id": 139
+    },
+    {
+      "group_name": "Anti-HIV",
+      "category": "General",
+      "component_names": [
+        "Anti-HIV"
+      ],
+      "status": true,
+      "legacy_id": 140
+    },
+    {
+      "group_name": "Urine PT",
+      "category": "General",
+      "component_names": [
+        "Urine PT"
+      ],
+      "status": true,
+      "legacy_id": 141
+    },
+    {
+      "group_name": "Urine C/S",
+      "category": "General",
+      "component_names": [
+        "Urine C/S"
+      ],
+      "status": true,
+      "legacy_id": 142
+    },
+    {
+      "group_name": "Serum Insulin",
+      "category": "General",
+      "component_names": [
+        "Serum Insulin"
+      ],
+      "status": true,
+      "legacy_id": 143
+    },
+    {
+      "group_name": "H.Pylori  Ag(Stool)",
+      "category": "General",
+      "component_names": [
+        "H.Pylori  Ag(Stool)"
+      ],
+      "status": true,
+      "legacy_id": 144
+    },
+    {
+      "group_name": "Serum Iron",
+      "category": "Test",
+      "component_names": [
+        "Serum Iron"
+      ],
+      "status": true,
+      "legacy_id": 146
+    },
+    {
+      "group_name": "Vitamin B12",
+      "category": "Test",
+      "component_names": [
+        "Vitamin B12"
+      ],
+      "status": true,
+      "legacy_id": 147
+    },
+    {
+      "group_name": "Folic Acid (Folate)",
+      "category": "General",
+      "component_names": [
+        "Folic Acid (Folate)"
+      ],
+      "status": true,
+      "legacy_id": 148
+    },
+    {
+      "group_name": "Stool C/S",
+      "category": "General",
+      "component_names": [
+        "Stool C/S"
+      ],
+      "status": true,
+      "legacy_id": 149
+    },
+    {
+      "group_name": "FT3",
+      "category": "Biochemistry",
+      "component_names": [
+        "T3"
+      ],
+      "status": true,
+      "legacy_id": 150
+    },
+    {
+      "group_name": "FT4",
+      "category": "Biochemistry",
+      "component_names": [
+        "T4"
+      ],
+      "status": true,
+      "legacy_id": 151
+    },
+    {
+      "group_name": "Troponin I",
+      "category": "General",
+      "component_names": [
+        "Troponin I"
+      ],
+      "status": true,
+      "legacy_id": 152
+    },
+    {
+      "group_name": "Iron Profile",
+      "category": "Biochemistry",
+      "component_names": [
+        "Serum Iron",
+        "Serum Ferritin",
+        "TIBC"
+      ],
+      "status": true,
+      "legacy_id": 153
+    },
+    {
+      "group_name": "Typhi dot",
+      "category": "General",
+      "component_names": [
+        "Typhi dot"
+      ],
+      "status": true,
+      "legacy_id": 154
+    },
+    {
+      "group_name": "Reticulocyte Count",
+      "category": "General",
+      "component_names": [
+        "Reticulocyte Count"
+      ],
+      "status": true,
+      "legacy_id": 155
+    },
+    {
+      "group_name": "LDL",
+      "category": "General",
+      "component_names": [
+        "LDL"
+      ],
+      "status": true,
+      "legacy_id": 156
+    },
+    {
+      "group_name": "Cholestrol",
+      "category": "General",
+      "component_names": [
+        "Cholestrol"
+      ],
+      "status": true,
+      "legacy_id": 157
+    },
+    {
+      "group_name": "Thyroid Profile",
+      "category": "Hormones / Endocrine",
+      "component_names": [
+        "T3",
+        "T4",
+        "TSH"
+      ],
+      "status": true,
+      "legacy_id": 158
+    },
+    {
+      "group_name": "Free Thyroid Profile",
+      "category": "Hormones / Endocrine",
+      "component_names": [
+        "FT3",
+        "FT4",
+        "TSH"
+      ],
+      "status": true,
+      "legacy_id": 159
+    },
+    {
+      "group_name": "Hep B, C",
+      "category": "Serology",
+      "component_names": [
+        "HbsAg ( ICT )",
+        "Anti HCV ( ICT )"
+      ],
+      "status": true,
+      "legacy_id": 160
+    },
+    {
+      "group_name": "Glucose Fasting",
+      "category": "Biochemistry",
+      "component_names": [
+        "Urea",
+        "Creatinine"
+      ],
+      "status": true,
+      "legacy_id": 161
+    },
+    {
+      "group_name": "Stool For Occult Blood (Fob)",
+      "category": "General",
+      "component_names": [
+        "Stool For Occult Blood (Fob)"
+      ],
+      "status": true,
+      "legacy_id": 162
+    },
+    {
+      "group_name": "Total Protein",
+      "category": "Biochemistry",
+      "component_names": [
+        "Total Protein",
+        "Albumin",
+        "Globulin",
+        "AG Ratio"
+      ],
+      "status": true,
+      "legacy_id": 163
+    },
+    {
+      "group_name": "Amylase",
+      "category": "General",
+      "component_names": [
+        "Amylase"
+      ],
+      "status": true,
+      "legacy_id": 164
+    },
+    {
+      "group_name": "Globulin Serum",
+      "category": "General",
+      "component_names": [
+        "Globulin Serum"
+      ],
+      "status": true,
+      "legacy_id": 165
+    },
+    {
+      "group_name": "Total Protein AG Ratio",
+      "category": "Biochemistry",
+      "component_names": [
+        "Total Protein",
+        "Albumin",
+        "Globulin",
+        "AG Ratio"
+      ],
+      "status": true,
+      "legacy_id": 166
+    },
+    {
+      "group_name": "PT (Prothrombin Time)",
+      "category": "General",
+      "component_names": [
+        "PT (Prothrombin Time)"
+      ],
+      "status": true,
+      "legacy_id": 167
+    },
+    {
+      "group_name": "APTT",
+      "category": "Test",
+      "component_names": [
+        "APTT"
+      ],
+      "status": true,
+      "legacy_id": 168
+    },
+    {
+      "group_name": "ANA PROFILE",
+      "category": "General",
+      "component_names": [
+        "ANA PROFILE"
+      ],
+      "status": true,
+      "legacy_id": 169
+    },
+    {
+      "group_name": "Cataract",
+      "category": "General",
+      "component_names": [
+        "Cataract"
+      ],
+      "status": true,
+      "legacy_id": 170
+    },
+    {
+      "group_name": "Ultrasound ( Whole Abdomen )",
+      "category": "General",
+      "component_names": [
+        "Ultrasound ( Whole Abdomen )"
+      ],
+      "status": true,
+      "legacy_id": 171
+    },
+    {
+      "group_name": "Strip ( RBS )",
+      "category": "General",
+      "component_names": [
+        "Strip ( RBS )"
+      ],
+      "status": true,
+      "legacy_id": 172
+    },
+    {
+      "group_name": "Malaria Parasite",
+      "category": "General",
+      "component_names": [
+        "Malaria Parasite"
+      ],
+      "status": true,
+      "legacy_id": 173
+    },
+    {
+      "group_name": "...Vit-D",
+      "category": "General",
+      "component_names": [
+        "...Vit-D"
+      ],
+      "status": true,
+      "legacy_id": 174
+    },
+    {
+      "group_name": "Urine Microalbumin",
+      "category": "Biochemistry",
+      "component_names": [
+        "Albumin"
+      ],
+      "status": true,
+      "legacy_id": 175
+    },
+    {
+      "group_name": "Semen Analysis",
+      "category": "General",
+      "component_names": [
+        "Semen Analysis"
+      ],
+      "status": true,
+      "legacy_id": 176
+    },
+    {
+      "group_name": "IgE ( Immunoglobin E )",
+      "category": "General",
+      "component_names": [
+        "IgE ( Immunoglobin E )"
+      ],
+      "status": true,
+      "legacy_id": 177
+    },
+    {
+      "group_name": "PROSTATE SPECIFIC ANTIGEN ( PSA )",
+      "category": "General",
+      "component_names": [
+        "PROSTATE SPECIFIC ANTIGEN ( PSA )"
+      ],
+      "status": true,
+      "legacy_id": 178
+    },
+    {
+      "group_name": "ANA ( ANTI NUCLEAR ANTIBODY )",
+      "category": "Biochemistry",
+      "component_names": [
+        "Urea",
+        "Creatinine"
+      ],
+      "status": true,
+      "legacy_id": 179
+    },
+    {
+      "group_name": "Pletelets",
+      "category": "General",
+      "component_names": [
+        "Pletelets"
+      ],
+      "status": true,
+      "legacy_id": 180
+    },
+    {
+      "group_name": "URINALYSIS REPORT",
+      "category": "General",
+      "component_names": [
+        "URINALYSIS REPORT"
+      ],
+      "status": true,
+      "legacy_id": 181
+    },
+    {
+      "group_name": "Serum Lipase",
+      "category": "General",
+      "component_names": [
+        "Serum Lipase"
+      ],
+      "status": true,
+      "legacy_id": 182
+    },
+    {
+      "group_name": "H. Pylori IgG ( ELIZA)",
+      "category": "General",
+      "component_names": [
+        "H. Pylori IgG ( ELIZA)"
+      ],
+      "status": true,
+      "legacy_id": 183
+    },
+    {
+      "group_name": "ASOT",
+      "category": "General",
+      "component_names": [
+        "ASOT"
+      ],
+      "status": true,
+      "legacy_id": 184
+    },
+    {
+      "group_name": "CA-125",
+      "category": "General",
+      "component_names": [
+        "CA-125"
+      ],
+      "status": true,
+      "legacy_id": 185
+    },
+    {
+      "group_name": "OGTT",
+      "category": "Biochemistry",
+      "component_names": [
+        "Blood Glucose Fasting",
+        "Blood Glucose 1 Hour",
+        "Blood Glucose 2 Hour"
+      ],
+      "status": true,
+      "legacy_id": 186
+    },
+    {
+      "group_name": "Magnesium",
+      "category": "General",
+      "component_names": [
+        "Magnesium"
+      ],
+      "status": true,
+      "legacy_id": 187
+    },
+    {
+      "group_name": "Rubella IgG",
+      "category": "General",
+      "component_names": [
+        "Rubella IgG"
+      ],
+      "status": true,
+      "legacy_id": 188
+    },
+    {
+      "group_name": "Dengue Serology",
+      "category": "General",
+      "component_names": [
+        "Dengue Serology"
+      ],
+      "status": true,
+      "legacy_id": 189
+    },
+    {
+      "group_name": "CHIKUNGUNYA",
+      "category": "General",
+      "component_names": [
+        "CHIKUNGUNYA"
+      ],
+      "status": true,
+      "legacy_id": 190
+    },
+    {
+      "group_name": "Congo Virus",
+      "category": "General",
+      "component_names": [
+        "Congo Virus"
+      ],
+      "status": true,
+      "legacy_id": 191
+    },
+    {
+      "group_name": "Serum Phosphorous",
+      "category": "General",
+      "component_names": [
+        "Serum Phosphorous"
+      ],
+      "status": true,
+      "legacy_id": 192
+    },
+    {
+      "group_name": "LFTs GMMMC",
+      "category": "Biochemistry",
+      "component_names": [
+        "Bilirubin Total",
+        "Bilirubin Direct",
+        "ALT (SGPT)",
+        "AST",
+        "Alkaline Phosphatase"
+      ],
+      "status": true,
+      "legacy_id": 193
+    },
+    {
+      "group_name": "UCE",
+      "category": "Biochemistry",
+      "component_names": [
+        "Urea",
+        "Creatinine",
+        "Sodium",
+        "Potassium",
+        "Chloride"
+      ],
+      "status": true,
+      "legacy_id": 194
+    },
+    {
+      "group_name": "UC",
+      "category": "Biochemistry",
+      "component_names": [
+        "Urea",
+        "Creatinine"
+      ],
+      "status": true,
+      "legacy_id": 196
+    },
+    {
+      "group_name": "VDRL SYPHILIS",
+      "category": "General",
+      "component_names": [
+        "VDRL SYPHILIS"
+      ],
+      "status": true,
+      "legacy_id": 197
+    }
+  ]
+}

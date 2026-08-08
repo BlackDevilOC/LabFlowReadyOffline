@@ -1,0 +1,22 @@
+{
+    "patient_name": "rehan",
+    "gender": "Male",
+    "relation_type": "S/O:",
+    "relation_name": "Mehar ahmed",
+    "report_date": "21/07/2026",
+    "mr_no": "24156",
+    "hb": "12.6",
+    "wbc": "5.3",
+    "neut": "55",
+    "lymph": "34",
+    "mono": "06",
+    "eosino": "05",
+    "plt": "366",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-07-21 12:35:50"
+}

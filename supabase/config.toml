@@ -1,0 +1,5 @@
+# LabFlow — Supabase local config (Edge Functions)
+# See: https://supabase.com/docs/guides/functions/function-configuration
+
+[functions.patient-portal]
+verify_jwt = false

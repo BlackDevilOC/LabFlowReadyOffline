@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Test Report</title>
+    <link rel="stylesheet" href="/static/css/patient_report.css">
+</head>
+
+<body>
+    <div class="print-actions">
+        <button class="btn-back" onclick="window.location.href='/update-results'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back
+        </button>
+        <button class="btn-print" onclick="window.print()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print Report
+        </button>
+    </div>
+
+    <div class="report-preview-container" id="reportContent">
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 400px;">
+            <p>Loading patient report...</p>
+        </div>
+    </div>
+
+    <script>
+        // Use Patient ID passed from backend
+        const patientId = {{ patient_id }};
+
+        async function initReport() {
+            try {
+                // Fetch data from existing APIs including Settings
+                const [patientResponse, groupsResponse, settingsResponse] = await Promise.all([
+                    fetch(`/api/patient/allinfo/${patientId}`),
+                    fetch('/api/patient/testgroups'),
+                    fetch('/api/setting/loadprintsetting')
+                ]);
+
+                const patientData = (await patientResponse.json()).Response;
+                const testGroups = await groupsResponse.json();
+                const settingsArray = await settingsResponse.json();
+                const printSettings = settingsArray && settingsArray.length > 0 ? settingsArray[0] : null;
+
+                if (!patientData) {
+                    document.getElementById('reportContent').innerHTML = '<p style="text-align:center; padding: 50px;">Patient not found.</p>';
+                    return;
+                }
+
+                if (printSettings) {
+                    applyPrintSettings(printSettings);
+                }
+
+                renderReport(patientData, testGroups, printSettings);
+            } catch (error) {
+                console.error('Error loading report:', error);
+                document.getElementById('reportContent').innerHTML = '<p style="text-align:center; padding: 50px; color: red;">Failed to load report data.</p>';
+            }
+        }
+
+        function applyPrintSettings(s) {
+            const style = document.createElement('style');
+            style.innerHTML = `
+                :root {
+                    --primary-color: ${s.primary_color || '#111827'};
+                    --secondary-color: ${s.secondary_color || '#4b5563'};
+                    --border-color: ${s.border_color || '#e5e7eb'};
+                    --bg-light: ${s.bg_light || '#f9fafb'};
+                    --text-main: ${s.text_main || '#1f2937'};
+                }
+
+                /* Dynamic Font Sizes & Spacing */
+                .category-title { 
+                    font-size: ${s.category_font_size || 14}px !important; 
+                    margin-top: ${s.category_padding_top != null ? s.category_padding_top : 12}px !important; 
+                    margin-bottom: ${s.category_padding_bottom != null ? s.category_padding_bottom : 6}px !important; 
+                    border-bottom: none !important; 
+                }
+                .group-name { 
+                    font-size: ${s.group_font_size || 13.5}px !important; 
+                    padding-top: ${s.group_padding_top != null ? s.group_padding_top : 8}px !important; 
+                    padding-bottom: ${s.group_padding_bottom != null ? s.group_padding_bottom : 2}px !important; 
+                    padding-left: ${s.group_padding_left || 0}px !important; 
+                }
+                .test-row td {
+                    padding-top: ${s.table_cell_padding_vertical != null ? s.table_cell_padding_vertical : 3}px !important;
+                    padding-bottom: ${s.table_cell_padding_vertical != null ? s.table_cell_padding_vertical : 3}px !important;
+                    padding-left: ${s.table_cell_padding_horizontal != null ? s.table_cell_padding_horizontal : 6}px !important;
+                    padding-right: ${s.table_cell_padding_horizontal != null ? s.table_cell_padding_horizontal : 6}px !important;
+                }
+                .test-name-cell { 
+                    font-size: ${s.test_name_font_size || 13.5}px !important; 
+                    font-weight: bold !important;
+                }
+                .result-cell { 
+                    font-size: ${s.result_font_size || 14.5}px !important; 
+                    font-weight: bold !important;
+                    text-align: left !important;
+                }
+                .range-cell { 
+                    font-size: ${s.result_font_size || 13.5}px !important; 
+                    text-align: left !important;
+                }
+                
+                .patient-info-boxes,
+                .patient-header-grid {
+                    display: grid !important;
+                    grid-template-columns: 1fr 1fr !important;
+                    gap: 14px !important;
+                    margin-bottom: ${s.patient_info_bottom_margin != null ? s.patient_info_bottom_margin : 12}px !important;
+                }
+                .patient-info-box,
+                .info-box {
+                    flex: 1 !important;
+                    border: 1.5px solid #222 !important;
+                    border-radius: ${s.patient_info_border_radius || 14}px !important;
+                    padding: ${s.patient_info_padding_vertical != null ? s.patient_info_padding_vertical : 10}px 14px !important;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    gap: 6px !important;
+                    background: white !important;
+                }
+                .info-row {
+                    font-size: 13px !important;
+                    margin-bottom: 0 !important;
+                    display: flex !important;
+                    align-items: center !important;
+                }
+                .info-label {
+                    font-weight: 600 !important;
+                    color: #333333 !important;
+                    width: 125px !important;
+                    min-width: 125px !important;
+                }
+                .info-value {
+                    font-weight: 500 !important;
+                    color: #111111 !important;
+                }
+                
+                .column-headers-row th {
+                    padding-top: ${s.table_header_padding_vertical || 8}px !important;
+                    padding-bottom: ${s.table_header_padding_vertical || 8}px !important;
+                    padding-left: ${s.table_header_padding_horizontal || 6}px !important;
+                    padding-right: ${s.table_header_padding_horizontal || 6}px !important;
+                    border-top: 1.5px solid #000 !important;
+                    border-bottom: 1.5px solid #000 !important;
+                    background: #fff !important;
+                    color: #000 !important;
+                }
+                .col-test-name { text-align: left !important; width: 28% !important; }
+                .col-result { text-align: left !important; width: 18% !important; }
+                .col-unit { text-align: left !important; width: 14% !important; }
+                .col-range { text-align: left !important; width: 40% !important; }
+                
+                .unit-cell {
+                    font-size: 13px !important;
+                    color: #111 !important;
+                    font-weight: bold !important;
+                    text-align: left !important;
+                }
+
+                .footer-info p { font-size: ${s.footer_font_size || 10}px !important; }
+                .sig-block { min-width: ${s.signature_block_min_width || 200}px !important; }
+                
+                .report-footer {
+                    margin-top: ${s.footer_margin_top || 10}px !important;
+                    padding-top: ${s.footer_padding_top || 10}px !important;
+                }
+
+                /* Force Header to Repeat on Every Page */
+                .repeating-header {
+                    display: table-header-group !important;
+                }
+                
+                @media print {
+                    @page {
+                        margin-top: ${s.page_top_margin}mm !important;
+                        margin-right: ${s.page_right_margin}mm !important;
+                        margin-bottom: ${s.page_bottom_margin}mm !important;
+                        margin-left: ${s.page_left_margin}mm !important;
+                    }
+                    /* Ensure groups don't break across pages */
+                    tbody {
+                        break-inside: avoid !important;
+                        page-break-inside: avoid !important;
+                    }
+                    .category-wrapper {
+                        break-inside: avoid !important;
+                        page-break-after: auto !important;
+                    }
+                    /* Ensure fixed footer repeats on every page */
+                     .report-footer {
+                        position: fixed !important;
+                        bottom: 0 !important;
+                        left: 0 !important;
+                        right: 0 !important;
+                        height: auto !important;
+                        background: white !important;
+                        padding: 10px 40px !important;
+                        border-top: 1px solid #ddd !important;
+                        z-index: 9999 !important;
+                        margin: 0 !important;
+                     }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        function renderReport(p, rawTestGroups, settings) {
+            const now = new Date();
+
+            // 1. Logic from Update Results Page - strict implementation
+            const { groupedTests, categoryGroups } = categorizeTests(p.patient_test_results, rawTestGroups);
+
+            // 2. Merge into Category-First Structure for Printing
+            const finalCategories = {};
+
+            // Add Groups to Categories
+            groupedTests.forEach(group => {
+                const cat = group.category || 'General';
+                if (!finalCategories[cat]) finalCategories[cat] = { groups: [], singles: [] };
+                finalCategories[cat].groups.push(group);
+            });
+
+            // Add Singles to Categories
+            Object.entries(categoryGroups).forEach(([cat, tests]) => {
+                const categoryName = cat || 'General';
+                if (!finalCategories[categoryName]) finalCategories[categoryName] = { groups: [], singles: [] };
+                finalCategories[categoryName].singles = tests;
+            });
+
+            // Footer Logic from Settings
+            const footerLine1 = settings?.footer_line1 || 'Electronic Signature: System Generated';
+            const footerLine2Raw = settings?.footer_line2 || 'Printed on: {timestamp}';
+            const footerLine2 = footerLine2Raw.replace('{timestamp}', now.toLocaleString());
+            const footerLine3 = settings?.footer_line3 || 'LabFlow Diagnostics System';
+
+            const showVerified = settings ? settings.display_verified_by : true;
+            const showPathologist = settings ? settings.display_pathologist_signature : true;
+
+            const rawRelation = `${p.relation_type || p.relation || ''}`.trim();
+            const relationMap = { W: 'W/O', S: 'S/O', D: 'D/O', C: 'C/O', H: 'H/O', F: 'F/O', M: 'M/O' };
+            const relationKey = rawRelation.replace(/\s+/g, '').toUpperCase();
+            const relationLabel = relationMap[relationKey] || rawRelation || 'Relation';
+            const reportDate = p.created_at ? new Date(p.created_at).toLocaleString() : now.toLocaleString();
+            const ageSex = `${p.age || ''} / ${p.gender || ''}`.replace(/^\/|\/$/g, '');
+
+            let html = `<!-- Header managed via @page margins -->`;
+
+            const categories = Object.keys(finalCategories).sort();
+
+            if (categories.length === 0) {
+                html += '<p style="text-align:center; padding: 20px;">No tests found for this patient.</p>';
+            }
+
+            categories.forEach((category, index) => {
+                const data = finalCategories[category];
+                // Check if category has any content
+                if (data.groups.length === 0 && data.singles.length === 0) return;
+
+                const isLast = index === categories.length - 1;
+
+                html += `
+                <div class="category-wrapper ${isLast ? 'last-category' : ''}">
+                    <table class="category-table">
+                        <thead class="repeating-header">
+                            <tr>
+                                <td colspan="4" class="header-cell">
+                                    <!-- Patient Info Section (amh.html 2-box rounded design with original fields) -->
+                                    <div class="patient-info-boxes patient-header-grid">
+                                        <div class="patient-info-box info-box" style="border-radius: ${settings?.patient_info_border_radius || 18}px !important;">
+                                            <div class="info-row"><span class="info-label">Patient MR # :</span> <span class="info-value">${escapeHtml(p.mr_no || 'N/A')}</span></div>
+                                            <div class="info-row"><span class="info-label">Patient Name :</span> <span class="info-value" style="font-weight: 700;">${escapeHtml(p.salutation || '')} ${escapeHtml(p.patient_name || '')}</span></div>
+                                            <div class="info-row"><span class="info-label">Report Date :</span> <span class="info-value">${escapeHtml(reportDate)}</span></div>
+                                            <div class="info-row"><span class="info-label">Shift :</span> <span class="info-value">${escapeHtml((p.shift || 'N/A').toUpperCase())}</span></div>
+                                        </div>
+                                        <div class="patient-info-box info-box" style="border-radius: ${settings?.patient_info_border_radius || 18}px !important;">
+                                            <div class="info-row"><span class="info-label">Age/Gender :</span> <span class="info-value">${escapeHtml(ageSex || '—')}</span></div>
+                                            <div class="info-row"><span class="info-label">${escapeHtml(relationLabel)} :</span> <span class="info-value">${escapeHtml(p.relation_name || '—')}</span></div>
+                                            <div class="info-row"><span class="info-label">Reported On :</span> <span class="info-value">${now.toLocaleString()}</span></div>
+                                            <div class="info-row"><span class="info-label">Patient Token No:</span> <span class="info-value">${escapeHtml(p.patient_token ?? '—')}</span></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Category Title Block inside header ensures it stays with table if flow breaks -->
+                                    <div class="category-title-block">
+                                        <span class="category-title">${escapeHtml(category)}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr class="column-headers-row">
+                                <th class="col-test-name">Test Name</th>
+                                <th class="col-result">Result</th>
+                                <th class="col-unit">Unit</th>
+                                <th class="col-range">Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                // Render Groups
+                // Order and subheadings are driven entirely by component_ids in the DB.
+                // Any test whose name starts with '#' is treated as a sub-heading row:
+                //   - The '#' is stripped and the text is rendered as a section divider.
+                //   - No result / unit / range columns are shown for subheadings.
+                // To add or reorder subheadings, just insert/move '#'-prefixed rows in
+                // the tests table and update component_ids accordingly — no code changes needed.
+                data.groups.forEach(group => {
+                    html += `
+                        <tbody class="group-body">
+                            <tr class="group-title-row">
+                                <td colspan="4" class="group-name">${escapeHtml(group.groupName)}</td>
+                            </tr>
+                    `;
+
+                    group.tests.forEach(testResult => {
+                        const testName = testResult.tests?.name || '';
+
+                        if (testName.startsWith('#')) {
+                            // Sub-heading row — strip the leading '#' and render as a section divider
+                            const headingText = testName.substring(1);
+                            html += `<tr class="fluid-subsection-header"><td colspan="4">${escapeHtml(headingText)}</td></tr>`;
+                        } else {
+                            // Strip common fluid prefixes for cleaner display inside groups
+                            const nameUpper = testName.toUpperCase();
+                            let displayName = testName;
+                            if (nameUpper.startsWith('CSF ')) displayName = testName.substring(4);
+                            else if (nameUpper.startsWith('ASCITIC ')) displayName = testName.substring(8);
+                            else if (nameUpper.startsWith('PLEURAL ')) displayName = testName.substring(8);
+                            else if (nameUpper.startsWith('FLUID ')) displayName = testName.substring(6);
+                            testResult._displayName = displayName;
+                            html += renderTestRow(testResult);
+                        }
+                    });
+
+                    html += `
+                            <tr><td colspan="4" style="height: 4px;"></td></tr>
+                        </tbody>
+                    `;
+                });
+
+                // Render Singles — without individual subheadings
+                if (data.singles.length > 0) {
+                    html += `<tbody class="group-body">`;
+                    data.singles.forEach(testResult => {
+                        html += renderTestRow(testResult);
+                    });
+                    html += `
+                            <tr><td colspan="4" style="height: 10px;"></td></tr>
+                        </tbody>
+                    `;
+                }
+
+                html += `
+                        </tbody>
+                    </table>
+                </div>
+                `;
+            });
+
+            // Dynamic Footer Signature Block
+            let signaturesHTML = '';
+
+            if (showVerified) {
+                signaturesHTML += `
+                    <div class="sig-block">
+                         <div class="sig-line"></div>
+                         <span class="sig-text">Verified By</span>
+                    </div>`;
+            }
+            if (showPathologist) {
+                signaturesHTML += `
+                    <div class="sig-block">
+                         <div class="sig-line"></div>
+                         <span class="sig-text">Pathologist Signature</span>
+                    </div>`;
+            }
+
+            // Footer Section
+            html += `
+                 <footer class="report-footer">
+                    <div class="sig-section">
+                        <div class="footer-info">
+                            <p>${escapeHtml(footerLine1)}</p>
+                            <p>${escapeHtml(footerLine2)}</p>
+                            <p>${escapeHtml(footerLine3)}</p>
+                        </div>
+                        ${signaturesHTML}
+                    </div>
+                </footer>
+            `;
+
+            document.getElementById('reportContent').innerHTML = html;
+        }
+
+        function renderTestRow(res) {
+            const test = res.tests || {};
+            let resultValue = (res.result_value && res.result_value !== '0') ? res.result_value : '';
+            if (res.result_value === '0') resultValue = '0'; // Keep explicit 0
+
+            let normalRange = '';
+            if (test.normal_min !== null && test.normal_max !== null) {
+                normalRange = `${test.normal_min} – ${test.normal_max}`;
+            } else if (test.normal_min !== null) {
+                normalRange = `&ge; ${test.normal_min}`;
+            } else if (test.normal_max !== null) {
+                normalRange = `&le; ${test.normal_max}`;
+            }
+
+            const displayName = res._displayName || test.name || '';
+
+            return `
+                <tr class="test-row">
+                    <td class="test-name-cell" style="font-weight: bold;">${escapeHtml(displayName)}</td>
+                    <td class="result-cell" style="font-weight: bold; font-size: 14.5px;">${escapeHtml(resultValue)}</td>
+                    <td class="unit-cell" style="font-weight: bold; color: #111;">${escapeHtml(test.unit || '')}</td>
+                    <td class="range-cell">${normalRange}</td>
+                </tr>
+            `;
+        }
+
+        // COPIED & ADAPTED FROM update_results.js
+        function categorizeTests(testResults, testGroups) {
+            const groupedTests = [];
+            const categoryGroups = {};
+            const usedTestIds = new Set();
+            const patientTestIds = testResults.map(r => r.test_id);
+
+            // 1. Check for complete Test Groups
+            if (testGroups && Array.isArray(testGroups)) {
+                testGroups.forEach(group => {
+                    const allComponentsPresent = group.component_ids.every(id => patientTestIds.includes(id));
+
+                    if (allComponentsPresent && group.status) {
+                        const groupTests = testResults.filter(r => group.component_ids.includes(r.test_id));
+
+                        groupTests.sort((a, b) => {
+                            return group.component_ids.indexOf(a.test_id) - group.component_ids.indexOf(b.test_id);
+                        });
+
+                        groupedTests.push({
+                            groupName: group.group_name,
+                            category: group.category || 'General',
+                            tests: groupTests
+                        });
+
+                        group.component_ids.forEach(id => usedTestIds.add(id));
+                    }
+                });
+            }
+
+            // 2. Group remaining tests by category
+            testResults.forEach(result => {
+                if (!usedTestIds.has(result.test_id)) {
+                    const category = result.tests?.category || 'General';
+                    if (!categoryGroups[category]) {
+                        categoryGroups[category] = [];
+                    }
+                    categoryGroups[category].push(result);
+                }
+            });
+
+            return { groupedTests, categoryGroups };
+        }
+
+        function escapeHtml(text) {
+            if (text === null || text === undefined) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Start loading
+        initReport();
+    </script>
+</body>
+
+</html>

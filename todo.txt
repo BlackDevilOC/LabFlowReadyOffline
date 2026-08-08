@@ -1,0 +1,9 @@
+tell me if i add an new column in tests and also add one more peramter {
+  "param_58": {
+    "name": "MP-ICT",
+    "unit": null,
+    "value": "negative",
+    "normal_max": null,
+    "normal_min": null, "select":["negative","positive"] or "text":["negative","positive"]
+  }
+} 

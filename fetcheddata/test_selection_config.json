@@ -1,0 +1,48 @@
+{
+  "allow_single_tests": true,
+  "mode": "group_and_single",
+  "categories_order": [
+    "Popular",
+    "Regular"
+  ],
+  "custom_categories": {
+    "COMPLETE BLOOD COUNT": "Popular",
+    "Glucose Random (RBS)": "Popular",
+    "Hep B, C": "Popular",
+    "UCE": "Popular",
+    "Albumin": "Popular",
+    "Amylase": "Popular",
+    "Calcium": "Popular",
+    "Dengue NS1 (ICT)": "Popular",
+    "Liver Function Test": "Popular",
+    "MP-ICT": "Popular",
+    "Serum Amylase": "Popular",
+    "Uric Acid": "Popular",
+    "VDRL SYPHILIS": "Popular"
+  },
+  "quick_presets": [
+    {
+      "id": "p1",
+      "name": "Routine Package",
+      "tests": [
+        "COMPLETE BLOOD COUNT",
+        "Liver Function Test",
+        "UCE",
+        "Hep B, C"
+      ],
+      "auto_select": true
+    }
+  ],
+  "category_styles": {
+    "Popular": "fancy",
+    "General": "simple",
+    "Group Test": "fancy"
+  },
+  "regular_preset": [
+    "COMPLETE BLOOD COUNT",
+    "Liver Function Test",
+    "UCE",
+    "Hep B, C"
+  ],
+  "auto_select_regular": true
+}

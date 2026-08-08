@@ -1,0 +1,17 @@
+
+pyinstaller --noconfirm LabFlow.spec
+
+
+Exception in thread Thread-1 (_run_server):
+Traceback (most recent call last):
+  File "threading.py", line 1038, in _bootstrap_inner
+  File "threading.py", line 975, in run
+  File "build.py", line 127, in _run_server
+  File "pyimod02_importers.py", line 457, in exec_module
+  File "main.py", line 56, in <module>
+  File "pyimod02_importers.py", line 457, in exec_module
+  File "offline\app.py", line 22, in <module>
+ModuleNotFoundError: No module named 'database'
+
+
+

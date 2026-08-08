@@ -1,0 +1,25 @@
+LabFlow seed import notes
+========================
+
+1) Import patients_seed.csv into table: patients
+   - Do NOT import column 'id' (auto-generated).
+   - Include mr_no so test rows can link.
+   - Do NOT import user_id (leave NULL; empty string breaks bigint).
+
+2) Import test_results_all_seed.csv into table: test_results_all
+   - test_values is empty JSON: {}
+   - status: Pending (no result entry)
+
+3) This batch: MR 100056 .. 104055 (4000 patients)
+
+4) After import, reset mr_no sequence (SQL editor):
+   SELECT setval(pg_get_serial_sequence('patients', 'mr_no'),
+          (SELECT MAX(mr_no) FROM patients));
+
+5) Verify in app: register one new real patient, search update/print lists.
+
+Current Supabase (at generation time):
+  patients count: 1
+  test_results_all count: 2
+  tests catalog count: 136
+  max mr_no before seed: 100055

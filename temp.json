@@ -1,0 +1,48 @@
+{
+    {
+    "name": "Total Bilirubin",
+    "value": "0",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+  },
+  {
+
+    "name": "Direct Bilirubin",
+    "value": "0",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null
+  },
+  {
+
+    "name": "Indirect Bilirubin",
+    "value": "0",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null
+  },
+  {
+
+    "name": "SGPT (ALT)",
+    "value": "0",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null
+  },
+  {
+
+    "name": "SGOT (AST)",
+    "value": "0",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null
+  },
+  {
+
+    "name": "Alkaline Phosphatase (ALP)",
+    "value": "0",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null
+  },

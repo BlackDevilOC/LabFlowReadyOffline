@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabFlow Sales Invoice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            background: #f3f4f6;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .doc-page {
+            width: 210mm;
+            min-height: 296mm;
+            padding: 14mm 20mm;
+            margin: 10px auto;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            page-break-after: always;
+        }
+
+        .input-field {
+            border-bottom: 1px dotted #000;
+            outline: none;
+            padding: 0 5px;
+            background: transparent;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 6px;
+        }
+
+        .pricing-table th {
+            background: #1e293b;
+            color: white;
+            padding: 6px 10px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-table th:last-child {
+            text-align: right;
+        }
+
+        .pricing-table td {
+            padding: 6px 10px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 12px;
+        }
+
+        .pricing-table td:last-child {
+            text-align: right;
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+        .pricing-table .total-row td {
+            background: #1e293b;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            border: none;
+        }
+
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+            }
+
+            .doc-page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                min-height: 100vh;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-900">
+
+    <div class="no-print bg-amber-100 text-amber-800 p-3 text-center text-sm font-medium">
+        Press <b>Ctrl + P</b> to save as PDF. Fill all fields before printing.
+    </div>
+
+    <!-- ===================== PAGE 1: INVOICE ===================== -->
+    <div class="doc-page">
+        <div class="text-right text-gray-400 text-[10px] italic">Invoice ID: LF-2026-____</div>
+        <h2
+            class="text-2xl font-extrabold text-center border-b-4 border-slate-900 pb-2 mb-6 uppercase tracking-tighter">
+            Software Sale Invoice</h2>
+
+        <!-- Seller & Buyer -->
+        <div class="grid grid-cols-2 gap-8 mb-5 text-sm">
+            <div>
+                <h3 class="font-bold text-slate-800 mb-1 underline decoration-blue-500">Seller (Developer)</h3>
+                <p class="font-bold text-lg">Rehan Ahmed</p>
+                <p class="text-gray-600">Software Developer</p>
+                <p>Contact: <input type="text" class="input-field w-40" placeholder="+92-XXX-XXXXXXX"></p>
+            </div>
+            <div>
+                <h3 class="font-bold text-slate-800 mb-1 underline decoration-blue-500">Client (Buyer)</h3>
+                <p class="mt-1">Name: <input type="text" class="input-field w-48 text-base font-semibold"
+                        placeholder="Buyer Full Name"></p>
+                <p class="mt-1">Contact: <input type="text" class="input-field w-40" placeholder="+92-XXX-XXXXXXX"></p>
+            </div>
+        </div>
+
+        <!-- Private Transaction Note -->
+        <div class="bg-gray-50 border border-gray-200 p-3 mb-5 rounded-md">
+            <h4 class="text-[10px] font-bold uppercase text-gray-700 mb-1 italic">Private Transaction Note:</h4>
+            <p class="text-[10px] text-gray-600 leading-tight">
+                This sale is a <strong>private agreement</strong> between the Seller and the Buyer (Individual). While
+                the software is deployed at a government facility for operational assistance, this transaction is
+                independent of the facility's official procurement or administration. The Buyer assumes all
+                responsibility for the use of the software within the facility.
+            </p>
+        </div>
+
+        <!-- Where it's being used -->
+        <div class="border border-slate-300 rounded-lg p-2.5 mb-4 bg-slate-50 text-sm">
+            <p class="font-bold text-[11px] uppercase tracking-wider text-slate-600 mb-1.5">Operational Deployment
+                Location</p>
+            <p>Hospital / Lab Name: <input type="text" class="input-field w-72"
+                    placeholder="e.g. DHQ Hospital, Rahim Yar Khan"></p>
+        </div>
+
+        <!-- Product Info -->
+        <div class="border-2 border-slate-100 rounded-xl p-2.5 mb-4 bg-slate-50/50 text-sm">
+            <p class="mb-0.5"><strong>Product:</strong> LabFlow – Laboratory Management System</p>
+            <p class="mb-0.5"><strong>License:</strong> One-Time Purchase (Perpetual Use)</p>
+            <p class="mb-0.5"><strong>Deployment:</strong> Localhost Desktop Version (.exe)</p>
+            <p><strong>Database:</strong> Secure Online Integration</p>
+        </div>
+
+        <!-- Core Features -->
+        <h3 class="font-bold text-slate-800 mb-1.5 uppercase text-[11px] tracking-widest">Core Features Included:</h3>
+        <ul class="grid grid-cols-2 gap-y-1 gap-x-8 mb-4 text-sm">
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Patient Record
+                Management</li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Test Report Generation
+            </li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Local Executable (.exe)
+            </li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Database Connectivity
+            </li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Print-Ready Reporting
+            </li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Installation &
+                Configuration</li>
+        </ul>
+
+        <!-- =================== PRICING TABLE =================== -->
+        <h3 class="font-bold text-slate-800 mb-2 uppercase text-[11px] tracking-widest">Pricing Breakdown:</h3>
+        <table class="pricing-table" id="pricingTable">
+            <thead>
+                <tr>
+                    <th style="width:8%">#</th>
+                    <th>Item Description</th>
+                    <th style="width:22%">Amount (PKR)</th>
+                    <th style="width:8%" class="no-print"></th>
+                </tr>
+            </thead>
+            <tbody id="pricingBody">
+                <tr>
+                    <td>1</td>
+                    <td>LabFlow Software – Base License</td>
+                    <td>15,000</td>
+                    <td class="no-print"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Fitness Report Generator (Add-on Module)</td>
+                    <td>3,000</td>
+                    <td class="no-print"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr class="total-row">
+                    <td colspan="2" style="text-align:right; padding-right:20px;">TOTAL</td>
+                    <td id="grandTotal">18,000</td>
+                    <td class="no-print"></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- Add New Item Form -->
+        <div class="no-print bg-blue-50 border border-blue-200 rounded-lg p-2.5 mb-4">
+            <p class="text-[11px] font-bold text-blue-800 uppercase tracking-wider mb-1.5">➕ Add New Item</p>
+            <div class="flex gap-2 items-end">
+                <div class="flex-1">
+                    <label class="text-[10px] text-gray-500 font-semibold">Item Name</label>
+                    <input type="text" id="newItemName"
+                        class="w-full border border-blue-300 rounded px-2 py-1 text-sm outline-none focus:border-blue-500"
+                        placeholder="e.g. Custom Module">
+                </div>
+                <div class="w-32">
+                    <label class="text-[10px] text-gray-500 font-semibold">Price (PKR)</label>
+                    <input type="number" id="newItemPrice"
+                        class="w-full border border-blue-300 rounded px-2 py-1 text-sm outline-none focus:border-blue-500"
+                        placeholder="0">
+                </div>
+                <button onclick="addItem()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-1.5 rounded font-semibold transition">Add</button>
+            </div>
+        </div>
+
+        <!-- Sale Date / Payment -->
+        <div class="flex justify-between items-end border-t-2 border-slate-100 pt-2.5 mb-4">
+            <div class="space-y-1 text-sm">
+                <p><strong>Sale Date:</strong> <input type="text" class="input-field w-32" value="___ / ___ / 2026"></p>
+                <p><strong>Payment Mode:</strong> <input type="text" class="input-field w-40"
+                        placeholder="Cash / Bank Transfer"></p>
+            </div>
+        </div>
+
+        <!-- Declaration -->
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-2 mb-4">
+            <p class="text-[11px] text-amber-900 leading-tight">
+                <strong>Declaration:</strong> This document confirms that the LabFlow software has been sold, installed,
+                and is operational.
+                This is a one-time purchase. Any future feature additions, modifications, or upgrades will be charged
+                separately as per developer rates.
+            </p>
+        </div>
+
+        <!-- Signatures -->
+        <div class="flex justify-between mt-2">
+            <div class="text-center">
+                <div class="w-44 border-b border-black mb-1 mt-6"></div>
+                <p class="font-bold text-[11px] uppercase">Seller Signature</p>
+                <p class="text-[9px] text-gray-500">Rehan Ahmed</p>
+            </div>
+            <div class="text-center">
+                <div class="w-44 border-b border-black mb-1 mt-6"></div>
+                <p class="font-bold text-[11px] uppercase">Buyer Signature</p>
+                <p class="text-[9px] text-gray-500">(Individual Capacity)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== PAGE 2: DEPLOYMENT CONFIRMATION ===================== -->
+    <div class="doc-page">
+        <h2 class="text-xl font-bold text-center border-b-2 border-slate-800 pb-2 mb-6 uppercase">Software Deployment
+            Confirmation</h2>
+        <p class="text-sm mb-6">This document certifies that <strong>Mr. Rehan Ahmed</strong> has delivered
+            <strong>"LabFlow"</strong> to the undersigned client as a direct, private transaction. The software is
+            actively being used at the facility mentioned below.
+        </p>
+
+        <!-- Where it's being used -->
+        <div class="border border-slate-300 rounded-lg p-4 mb-6 bg-slate-50 text-sm">
+            <p class="font-bold text-[11px] uppercase tracking-wider text-slate-600 mb-2">Deployment Location</p>
+            <p>Hospital / Lab Name: <input type="text" class="input-field w-72"
+                    placeholder="e.g. DHQ Hospital, Rahim Yar Khan"></p>
+        </div>
+
+        <div class="bg-slate-50 p-5 rounded-lg border border-slate-200 mb-6 text-sm">
+            <h3 class="font-bold mb-3 underline">Technical Delivery Checkpoints:</h3>
+            <ul class="space-y-3">
+                <li>[✓] System installed as desktop executable (.exe) on localhost.</li>
+                <li>[✓] Production-ready online database connection verified.</li>
+                <li>[✓] Client has received initial operational training.</li>
+            </ul>
+        </div>
+
+        <h3 class="font-bold mb-3 uppercase text-[11px]">Agreement Terms:</h3>
+        <ul class="list-disc ml-6 space-y-1 mb-10 text-xs text-gray-700">
+            <li>Software delivered in 100% working condition.</li>
+            <li>Purchase grants usage rights (No source code ownership).</li>
+            <li>Technical support outside setup is subject to additional fees.</li>
+            <li>This is a private agreement; the destination facility/institution is not a party to this invoice.</li>
+        </ul>
+
+        <!-- Signatures -->
+        <div class="grid grid-cols-3 gap-10 text-sm mt-16">
+            <div class="text-center">
+                <div class="w-full border-b border-black mb-1 mt-10"></div>
+                <p class="font-bold text-xs uppercase">Delivered By</p>
+                <p class="text-[10px] text-gray-600">Rehan Ahmed</p>
+                <p class="text-[9px] text-gray-400">Software Developer</p>
+            </div>
+            <div class="text-center">
+                <div class="w-full border-b border-black mb-1 mt-10"></div>
+                <p class="font-bold text-xs uppercase">Buyer (Individual)</p>
+                <p class="text-[10px]">Name: <input type="text" class="input-field w-24 text-[10px]"></p>
+            </div>
+            <div class="text-center">
+                <div class="w-full border-b border-black mb-1 mt-10"></div>
+                <p class="font-bold text-xs uppercase">Pathologist</p>
+                <p class="text-[9px] text-gray-500">Sign & Stamp</p>
+                <p class="text-[8px] text-gray-400 italic mt-1">(Proof of software usage at facility)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== JAVASCRIPT ===================== -->
+    <script>
+        let itemCounter = 2;
+
+        function formatNumber(num) {
+            return num.toLocaleString('en-PK');
+        }
+
+        function parsePrice(str) {
+            return parseInt(str.replace(/,/g, ''), 10) || 0;
+        }
+
+        function recalculate() {
+            const rows = document.querySelectorAll('#pricingBody tr');
+            let total = 0;
+            let index = 1;
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                cells[0].textContent = index++;
+                total += parsePrice(cells[2].textContent);
+            });
+            document.getElementById('grandTotal').textContent = formatNumber(total);
+        }
+
+        function addItem() {
+            const name = document.getElementById('newItemName').value.trim();
+            const price = parseInt(document.getElementById('newItemPrice').value, 10);
+
+            if (!name || !price || price <= 0) {
+                alert('Please enter a valid item name and price.');
+                return;
+            }
+
+            itemCounter++;
+            const tbody = document.getElementById('pricingBody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${itemCounter}</td>
+                <td>${name}</td>
+                <td>${formatNumber(price)}</td>
+                <td class="no-print">
+                    <button onclick="removeItem(this)" class="text-red-500 hover:text-red-700 text-xs font-bold px-1.5 py-0.5 rounded border border-red-300 hover:bg-red-50 transition" title="Remove">✕</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+
+            document.getElementById('newItemName').value = '';
+            document.getElementById('newItemPrice').value = '';
+            recalculate();
+        }
+
+        function removeItem(btn) {
+            btn.closest('tr').remove();
+            recalculate();
+        }
+    </script>
+
+</body>
+
+</html>

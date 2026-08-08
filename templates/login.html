@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | GMMMC Pathology Lab</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/login.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="login-container">
+        <!-- Mode Selection Section -->
+        <div id="modeSelectionSection" class="login-card">
+            <div class="brand">
+                <img src="{{ url_for('static', path='/images/hospital_logo.png') }}" alt="GMMMC Sukkur" class="logo">
+                <h1>GMMMC Pathology Lab</h1>
+                <p>Select connection mode to proceed</p>
+            </div>
+
+            <div class="mode-cards">
+                <div class="mode-card" id="btnOnlineMode">
+                    <div class="mode-icon font-blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                        </svg>
+                    </div>
+                    <div class="mode-info">
+                        <h3>Online Mode</h3>
+                        <p>Real-time sync, requires active internet.</p>
+                    </div>
+                </div>
+
+                <div class="mode-card" id="btnOfflineMode">
+                    <div class="mode-icon font-green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                            <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.5"></path>
+                            <path d="M5 12.5a10.94 10.94 0 0 1 5.17-2.39"></path>
+                            <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+                            <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                            <path d="M12 20h.01"></path>
+                        </svg>
+                    </div>
+                    <div class="mode-info">
+                        <h3>Offline Mode</h3>
+                        <p>Works locally without internet connection.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mode-footer">
+                <button type="button" class="admin-gear-btn" id="adminAccessBtn" title="Admin Panel" onclick="openAdminPanel()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span>Admin Panel</span>
+                </button>
+            </div>
+
+            <!-- Admin Password Modal -->
+            <div id="adminModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">
+                <div style="background:#fff; border-radius:16px; padding:32px; max-width:380px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                    <div style="text-align:center; margin-bottom:20px;">
+                        <div style="width:48px; height:48px; background:linear-gradient(135deg,#1a202c,#2d3748); border-radius:12px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </div>
+                        <h2 style="margin:0; font-size:1.25rem; color:#1a202c; font-family:'Inter',sans-serif;">Admin Access</h2>
+                        <p style="margin:6px 0 0; font-size:0.85rem; color:#718096;">Enter admin password to continue</p>
+                    </div>
+                    <div id="adminModalError" style="display:none; background:#FEE2E2; color:#991B1B; padding:8px 12px; border-radius:8px; font-size:0.8rem; margin-bottom:12px; text-align:center;">Incorrect password. Try again.</div>
+                    <input type="password" id="adminPwdInput" placeholder="••••••••••••••"
+                        style="width:100%; box-sizing:border-box; border:1.5px solid #e2e8f0; border-radius:10px; padding:10px 14px; font-size:0.95rem; margin-bottom:14px; outline:none; font-family:'Inter',sans-serif;"
+                        onkeydown="if(event.key==='Enter') submitAdminPwd()">
+                    <div style="display:flex; gap:10px;">
+                        <button type="button" onclick="closeAdminModal()"
+                            style="flex:1; padding:10px; border:1.5px solid #e2e8f0; background:#fff; border-radius:10px; cursor:pointer; font-size:0.9rem; color:#64748b; font-family:'Inter',sans-serif;">
+                            Cancel
+                        </button>
+                        <button type="button" onclick="submitAdminPwd()"
+                            style="flex:1; padding:10px; background:linear-gradient(135deg,#1a202c,#4a5568); color:#fff; border:none; border-radius:10px; cursor:pointer; font-size:0.9rem; font-weight:600; font-family:'Inter',sans-serif;">
+                            Enter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Form Section -->
+        <div id="loginFormSection" class="login-card" style="display: none;">
+            <div class="back-to-mode" id="btnBackToMode">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back to Mode Selection</span>
+            </div>
+            <div class="brand">
+                <img src="{{ url_for('static', path='/images/hospital_logo.png') }}" alt="GMMMC Sukkur" class="logo">
+                <h1>Online Login</h1>
+                <p>Pathology Lab of GMMMC Sukkur</p>
+            </div>
+
+            <div id="errorBox" class="error-msg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span id="errorMessage">Invalid credentials</span>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="userSelect">Select User</label>
+                    <div class="input-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <select id="userSelect" class="login-select" required>
+                            <option value="">Loading users…</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <input type="email" id="email" placeholder="Select a user above" readonly required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" id="loginBtn" class="login-btn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="spinner" id="loader"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        &copy; GMMMC Sukkur Pathology Lab. All rights reserved.
+    </footer>
+
+    <script src="{{ url_for('static', path='/js/auth.js') }}"></script>
+    <script>
+        // ── Admin Access Modal ──────────────────────────────────────
+        const ADMIN_PASSWORD = 'youcannotenter';
+        const IS_OFFLINE = {{ 'true' if is_offline else 'false' }};
+        const workspaceMode = localStorage.getItem('workspaceMode') || 'online';
+        const ADMIN_URL = (IS_OFFLINE || workspaceMode === 'offline') ? '/offline/page/admin' : '/page/admin';
+
+        function openAdminPanel() {
+            const modal = document.getElementById('adminModal');
+            modal.style.display = 'flex';
+            document.getElementById('adminPwdInput').value = '';
+            document.getElementById('adminModalError').style.display = 'none';
+            setTimeout(() => document.getElementById('adminPwdInput').focus(), 50);
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function submitAdminPwd() {
+            const val = document.getElementById('adminPwdInput').value;
+            const errEl = document.getElementById('adminModalError');
+            if (val === ADMIN_PASSWORD) {
+                sessionStorage.setItem('admin_authed', 'true');
+                errEl.style.display = 'none';
+                closeAdminModal();
+                window.location.href = ADMIN_URL;
+            } else {
+                errEl.style.display = 'block';
+                document.getElementById('adminPwdInput').value = '';
+                document.getElementById('adminPwdInput').focus();
+                // Shake animation
+                const modal = document.getElementById('adminModal').querySelector('div');
+                modal.style.animation = 'shake 0.4s ease';
+                setTimeout(() => modal.style.animation = '', 400);
+            }
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('adminModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAdminModal();
+        });
+    </script>
+    <style>
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20%,60% { transform: translateX(-8px); }
+            40%,80% { transform: translateX(8px); }
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System Sales Documents</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            background: #f3f4f6;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* The container for the page */
+        .doc-page {
+            width: 210mm;
+            height: 296mm;
+            /* Slightly less than A4 to prevent bleed-over */
+            padding: 15mm 20mm;
+            margin: 10px auto;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+        }
+
+        .input-field {
+            border-bottom: 1px dotted #000;
+            outline: none;
+            padding: 0 5px;
+            background: transparent;
+        }
+
+        /* Fix for the signature lines cutting off */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+            }
+
+            .doc-page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                height: 100vh;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-900">
+
+    <div class="no-print bg-amber-100 text-amber-800 p-3 text-center text-sm font-medium">
+        Press <b>Ctrl + P</b> to save as PDF. The signature lines are now fixed to fit on Page 1.
+    </div>
+
+    <div class="doc-page">
+        <div class="text-right text-gray-400 text-[10px] italic">Invoice ID: LF-2026-____</div>
+        <h2
+            class="text-2xl font-extrabold text-center border-b-4 border-slate-900 pb-2 mb-6 uppercase tracking-tighter">
+            Software Sale Invoice</h2>
+
+        <div class="grid grid-cols-2 gap-8 mb-6 text-sm">
+            <div>
+                <h3 class="font-bold text-slate-800 mb-1 underline decoration-blue-500">Seller (Developer)</h3>
+                <p><input type="text" class="font-bold text-lg" placeholder="ANAS"></p>
+                <p class="text-gray-600">Software Developer</p>
+                <p>Contact: <input type="text" class="input-field w-40" placeholder="+92-XXX-XXXXXXX"></p>
+            </div>
+            <div>
+                <h3 class="font-bold text-slate-800 mb-1 underline decoration-blue-500">Client (Buyer)</h3>
+                <input type="text" class="input-field w-full text-lg font-semibold" placeholder="Enter School Name">
+                <input type="text" class="input-field w-full text-sm mt-2" placeholder="Enter Buyer Address">
+            </div>
+        </div>
+
+        <div class="border-2 border-slate-100 rounded-xl p-4 mb-6 bg-slate-50/50 text-sm">
+            <p class="mb-1"><strong>Product:</strong> School Management System</p>
+            <p class="mb-1"><strong>License:</strong> One-Time Purchase (Perpetual Use)</p>
+            <p class="mb-1"><strong>Deployment:</strong> Localhost Desktop Version (.exe)</p>
+            <p><strong>Database:</strong> Secure Online Integration</p>
+        </div>
+
+        <h3 class="font-bold text-slate-800 mb-3 uppercase text-[11px] tracking-widest">Core Features Included:</h3>
+        <ul class="grid grid-cols-2 gap-y-2 gap-x-8 mb-6 text-sm">
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Attendance Tracking</li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Role Assignments</li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Secure Login System</li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Student Records
+                Management</li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Fee Management</li>
+            <li class="flex items-center"><span class="mr-2 text-blue-600 text-[10px]">●</span> Print-Ready Reporting
+            </li>
+        </ul>
+
+        <div class="flex justify-between items-end border-t-2 border-slate-100 pt-4 mb-8">
+            <div class="space-y-2 text-sm">
+                <p><strong>Sale Date:</strong> <input type="text" class="input-field w-32" value="___ / ___ / 2026"></p>
+                <p><strong>Payment Mode:</strong> <input type="text" class="input-field w-40"
+                        placeholder="Cash / Bank Transfer"></p>
+            </div>
+            <div class="bg-slate-900 text-white p-4 rounded-lg text-right">
+                <p class="text-[10px] uppercase tracking-widest opacity-70">Total Amount Paid</p>
+                <p class="text-2xl font-bold leading-none">PKR <input type="text"
+                        class="bg-transparent border-b border-slate-500 outline-none w-24 text-center"
+                        placeholder="00,000"></p>
+            </div>
+        </div>
+
+        <div class="bg-amber-50 border-l-4 border-amber-400 p-3 mb-10">
+            <p class="text-[11px] text-amber-900 leading-tight">
+                <strong>Declaration:</strong> This document confirms that the School Management System software has been
+                sold, installed, and is operational.
+                This is a one-time purchase. Any future feature additions, modifications, or upgrades will be charged
+                separately as per developer rates.
+            </p>
+        </div>
+
+        <div class="flex justify-between mt-8">
+            <div class="text-center">
+                <div class="w-48 border-b border-black mb-1"></div>
+                <p class="font-bold text-[11px] uppercase">Seller Signature</p>
+            </div>
+            <div class="text-center">
+                <div class="w-48 border-b border-black mb-1"></div>
+                <p class="font-bold text-[11px] uppercase">Client Signature & Stamp</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="doc-page">
+        <h2 class="text-xl font-bold text-center border-b-2 border-slate-800 pb-2 mb-8 uppercase">Software Deployment
+            Confirmation</h2>
+        <p class="text-sm mb-6">This document certifies that <strong>Mr. Anas</strong> has delivered the <strong>“School
+                Management System”</strong> to the undersigned client.</p>
+
+        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 mb-8 text-sm">
+            <h3 class="font-bold mb-3 underline">Technical Delivery Checkpoints:</h3>
+            <ul class="space-y-3">
+                <li>[✓] System installed as desktop executable (.exe) on localhost.</li>
+                <li>[✓] Production-ready online database connection verified.</li>
+                <li>[✓] Client has received initial operational training.</li>
+            </ul>
+        </div>
+
+        <h3 class="font-bold mb-3 uppercase text-[11px]">Agreement Terms:</h3>
+        <ul class="list-disc ml-6 space-y-1 mb-10 text-xs text-gray-700">
+            <li>Software delivered in 100% working condition.</li>
+            <li>Purchase grants usage rights (No source code ownership).</li>
+            <li>Technical support outside setup is subject to additional fees.</li>
+        </ul>
+
+        <div class="grid grid-cols-2 gap-20 text-sm mt-20">
+            <div>
+                <p class="font-bold text-xs mb-8 uppercase opacity-60">Delivered By:</p>
+                <p class="border-b border-black pb-1">Anas</p>
+            </div>
+            <div>
+                <p class="font-bold text-xs mb-4 uppercase opacity-60">Accepted By (Client):</p>
+                <div class="space-y-4">
+                    <p class="text-xs">Name: <input type="text" class="input-field w-full"></p>
+                    <p class="text-xs">Sign/Stamp: <span class="border-b border-black inline-block w-full h-4"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

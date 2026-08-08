@@ -1,0 +1,22 @@
+{
+    "patient_name": "UME AREEBA",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "SHAMS-UD-DIN",
+    "report_date": "07/08/2026",
+    "mr_no": "6176",
+    "hb": "13.3",
+    "wbc": "6.4",
+    "neut": "70",
+    "lymph": "22",
+    "mono": "06",
+    "eosino": "02",
+    "plt": "232",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-07 12:03:59"
+}

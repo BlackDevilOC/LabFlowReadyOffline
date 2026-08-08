@@ -1,0 +1,1797 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    .enter-results-container {
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 12px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+
+    .back-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+    }
+
+    .back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        background: #f3f4f6;
+        border: 1px solid #d1d5db;
+        cursor: pointer;
+        color: #374151;
+        transition: background 0.15s;
+    }
+
+    .back-btn:hover {
+        background: #e5e7eb;
+    }
+
+    .back-header h1 {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0;
+        color: #1f2937;
+    }
+
+    /* Patient Details Panel */
+    .patient-summary {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .summary-item {
+        display: flex;
+        flex-direction: column;
+        min-width: 150px;
+    }
+
+    .summary-label {
+        font-size: 10px;
+        font-weight: 600;
+        color: #6b7280;
+        text-transform: uppercase;
+    }
+
+    .summary-value {
+        font-size: 13px;
+        font-weight: 700;
+        color: #111827;
+        margin-top: 1px;
+    }
+
+    /* Tests Container and Sections */
+    #tests-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    /* When there is only one test, don't stretch it full-width */
+    #tests-container.single-test {
+        /* Keep the same "card" size feel as multi-test grid */
+        grid-template-columns: 360px;
+        justify-content: start;
+    }
+
+    .test-section {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        padding: 4px 6px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .test-section-title {
+        font-size: 11px;
+        font-weight: 700;
+        color: #ffffff;
+        background: #1e293b;
+        margin: -4px -6px 4px -6px;
+        padding: 3px 7px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+    }
+
+    .test-title-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .test-title-left span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 240px;
+    }
+
+    .test-title-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .save-test-btn {
+        background: #22c55e;
+        border: 1px solid #16a34a;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        transition: background 0.15s, border-color 0.15s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .save-test-btn:hover {
+        background: #16a34a;
+        border-color: #15803d;
+    }
+
+    .save-test-btn:disabled {
+        background: #86efac;
+        border-color: #86efac;
+        cursor: not-allowed;
+    }
+
+    .delete-test-btn {
+        background: transparent;
+        border: none;
+        color: #ef4444;
+        cursor: pointer;
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        transition: background 0.15s, color 0.15s;
+    }
+
+    .delete-test-btn:hover {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .test-category-badge {
+        font-size: 8px;
+        background: #3b82f6;
+        color: #ffffff;
+        padding: 1px 5px;
+        border-radius: 3px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* Parameter Tables */
+    .param-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2px;
+    }
+
+    .param-table th {
+        font-size: 10px;
+        font-weight: bold;
+        color: #000000;
+        border-bottom: 1px solid #0f172a;
+        padding: 2px 3px;
+        text-align: left;
+        font-family: 'Georgia', serif;
+    }
+
+    .param-table th.th-details {
+        width: 35%;
+    }
+
+    .param-table th.th-range {
+        width: 30%;
+    }
+
+    .param-table th.th-result {
+        width: 35%;
+    }
+
+    .param-table td {
+        /* Keep row height tight – roughly ~8–10px vertical spacing */
+        padding: 0 3px;
+        vertical-align: middle;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 10px;
+    }
+
+    .param-label {
+        font-weight: 700;
+        color: #000000;
+        font-size: 10px;
+        text-transform: uppercase;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .param-range-text {
+        font-size: 10px;
+        color: #000000;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .param-input-cell input {
+        width: 100%;
+        height: 22px;
+        padding: 1px 6px;
+        border: 1px solid #94a3b8;
+        font-family: monospace;
+        font-size: 12px;
+        outline: none;
+        background: #ffffff;
+        box-sizing: border-box;
+        border-radius: 3px;
+    }
+
+    .param-input-cell input:focus {
+        border-color: #2563eb;
+        background: #eff6ff;
+        box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.15);
+    }
+
+    .test-remarks-wrap {
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px dashed #e2e8f0;
+    }
+
+    .test-remarks-label {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 3px;
+    }
+
+    .test-remarks-input {
+        width: 100%;
+        min-height: 44px;
+        max-height: 88px;
+        padding: 5px 8px;
+        border: 1px solid #94a3b8;
+        border-radius: 4px;
+        font-size: 11px;
+        font-family: inherit;
+        color: #0f172a;
+        background: #fffbeb;
+        resize: vertical;
+        outline: none;
+        box-sizing: border-box;
+        line-height: 1.35;
+    }
+
+    .test-remarks-input:focus {
+        border-color: #d97706;
+        background: #ffffff;
+        box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.12);
+    }
+
+    .test-remarks-input::placeholder {
+        color: #94a3b8;
+        font-style: italic;
+    }
+
+    .remarks-input-row {
+        display: flex;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    .remarks-input-row .test-remarks-input {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .remarks-pick-btn {
+        flex: 0 0 36px;
+        width: 36px;
+        min-height: 44px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        color: #fff;
+        font-size: 22px;
+        font-weight: 300;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+        transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .remarks-pick-btn:hover {
+        transform: scale(1.04);
+        box-shadow: 0 3px 10px rgba(37, 99, 235, 0.45);
+    }
+
+    .remarks-pick-btn:active {
+        transform: scale(0.98);
+    }
+
+    .remarks-pick-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* Shared remarks picker popup (body) */
+    .remarks-picker-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10050;
+        background: rgba(15, 23, 42, 0.45);
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+
+    .remarks-picker-overlay.open {
+        display: flex;
+    }
+
+    .remarks-picker-dialog {
+        width: 100%;
+        max-width: 420px;
+        max-height: min(70vh, 520px);
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .remarks-picker-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px 8px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .remarks-picker-header h4 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .remarks-picker-close {
+        border: none;
+        background: #f1f5f9;
+        color: #64748b;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .remarks-picker-close:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+    }
+
+    .remarks-picker-context {
+        margin: 0;
+        padding: 6px 14px 0;
+        font-size: 11px;
+        color: #64748b;
+    }
+
+    .remarks-picker-search {
+        margin: 8px 12px 6px;
+        padding: 8px 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .remarks-picker-search:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    .remarks-picker-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 4px 8px 12px;
+    }
+
+    .remarks-picker-section {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #94a3b8;
+        padding: 8px 8px 4px;
+    }
+
+    .remarks-picker-item-text {
+        flex: 1;
+        min-width: 0;
+        text-align: left;
+    }
+
+    .remarks-picker-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        background: #f8fafc;
+        color: #0f172a;
+        font-size: 12px;
+        line-height: 1.35;
+        padding: 10px 12px;
+        margin-bottom: 4px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .remarks-picker-item:hover {
+        background: #eff6ff;
+        color: #1e40af;
+    }
+
+    .remarks-picker-badge {
+        flex-shrink: 0;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 999px;
+        background: #fef3c7;
+        color: #b45309;
+    }
+
+    .remarks-picker-empty {
+        display: none;
+        margin: 0;
+        padding: 16px;
+        text-align: center;
+        font-size: 12px;
+        color: #94a3b8;
+    }
+
+    /* Actions */
+    .actions-bar {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        border-top: 1px solid #e5e7eb;
+        padding-top: 12px;
+        margin-top: 12px;
+        position: sticky;
+        bottom: 0;
+        background: #f8fafc;
+        z-index: 5;
+    }
+
+    /* Toast */
+    .toast {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        background: #111827;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 10px 12px;
+        min-width: 220px;
+        max-width: 320px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+        z-index: 9999;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .toast.success {
+        border-color: rgba(34, 197, 94, 0.35);
+    }
+
+    .toast.error {
+        border-color: rgba(239, 68, 68, 0.35);
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .btn-cancel {
+        background: #ffffff;
+        border: 1px solid #d1d5db;
+        color: #4b5563;
+    }
+
+    .btn-cancel:hover {
+        background: #f3f4f6;
+    }
+
+    .btn-save {
+        background: #2563eb;
+        border: 1px solid #2563eb;
+        color: #ffffff;
+    }
+
+    .btn-save:hover {
+        background: #1d4ed8;
+    }
+
+    .btn-save:disabled {
+        background: #93c5fd;
+        border-color: #93c5fd;
+        cursor: not-allowed;
+    }
+
+    .loading-state {
+        text-align: center;
+        padding: 26px;
+        font-weight: 600;
+        color: #6b7280;
+        grid-column: 1 / -1;
+    }
+
+    .error-state {
+        text-align: center;
+        padding: 26px;
+        font-weight: 700;
+        color: #dc2626;
+        grid-column: 1 / -1;
+    }
+
+    .add-test-section {
+        background: #f8fafc;
+        border: 2px dashed #94a3b8;
+        border-radius: 4px;
+        padding: 12px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 100px;
+        align-self: start;
+    }
+
+    .add-test-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #2563eb;
+        background: #eff6ff;
+        color: #2563eb;
+        cursor: pointer;
+        transition: background 0.15s, transform 0.12s, border-color 0.15s;
+    }
+
+    .add-test-toggle-btn:hover {
+        background: #dbeafe;
+        border-color: #1d4ed8;
+        transform: scale(1.05);
+    }
+
+    .add-test-toggle-btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .add-test-label {
+        font-size: 10px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .add-test-dropdown-wrap {
+        display: none;
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .add-test-dropdown-wrap.open {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .add-test-search-box {
+        position: relative;
+        width: 100%;
+    }
+
+    .add-test-search-input {
+        width: 100%;
+        height: 32px;
+        border: 1px solid #94a3b8;
+        border-radius: 6px;
+        font-size: 11px;
+        padding: 0 10px;
+        background: #ffffff;
+        color: #0f172a;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .add-test-search-input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    .add-test-list-container {
+        max-height: 160px;
+        overflow-y: auto;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        background: #ffffff;
+        padding: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .add-test-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        color: #1e293b;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.1s;
+    }
+
+    .add-test-item:hover,
+    .add-test-item.selected {
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+
+    .add-test-item-name {
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .add-test-item-badge {
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 4px;
+        letter-spacing: 0.03em;
+        flex-shrink: 0;
+        margin-left: 6px;
+    }
+
+    .add-test-item-badge.group {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+
+    .add-test-item-badge.single {
+        background: #f1f5f9;
+        color: #475569;
+    }
+
+    .add-test-empty {
+        padding: 10px;
+        text-align: center;
+        font-size: 11px;
+        color: #94a3b8;
+        font-style: italic;
+    }
+
+    .add-test-confirm-btn {
+        height: 28px;
+        border: 1px solid #2563eb;
+        background: #2563eb;
+        color: #ffffff;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .add-test-confirm-btn:hover {
+        background: #1d4ed8;
+    }
+
+    .add-test-confirm-btn:disabled {
+        background: #93c5fd;
+        border-color: #93c5fd;
+        cursor: not-allowed;
+    }
+
+    .no-tests-hint {
+        text-align: center;
+        padding: 16px;
+        font-weight: 600;
+        color: #64748b;
+        grid-column: 1 / -1;
+    }
+
+    .summary-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .btn-edit-info {
+        border: 1px solid #d1d5db;
+        background: #fff;
+        color: #374151;
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .btn-edit-info:hover {
+        background: #f3f4f6;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .modal-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        width: 480px;
+        max-width: 92%;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 18px;
+        border-bottom: 1px solid #e5e7eb;
+        background: #f9fafb;
+    }
+
+    .modal-header h2 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .modal-close-btn {
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: #6b7280;
+        padding: 4px;
+    }
+
+    .modal-body {
+        padding: 18px;
+        overflow-y: auto;
+    }
+
+    .form-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .form-group label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #6b7280;
+        text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select {
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        padding: 7px 10px;
+        font-size: 13px;
+    }
+
+    .form-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 10px;
+    }
+
+    .form-row-2.equal {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        padding: 12px 18px;
+        border-top: 1px solid #e5e7eb;
+        background: #f9fafb;
+    }
+
+    .modal-btn-cancel,
+    .modal-btn-save {
+        border-radius: 6px;
+        padding: 7px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .modal-btn-cancel {
+        border: 1px solid #d1d5db;
+        background: #fff;
+        color: #374151;
+    }
+
+    .modal-btn-save {
+        border: none;
+        background: #2563eb;
+        color: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="enter-results-container">
+    <div class="back-header">
+        <button class="back-btn" onclick="window.location.href='/update-results'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+        </button>
+        <h1>Enter Patient Test Results</h1>
+    </div>
+
+    <!-- Patient Info Summary (filled from API on load; not from list page) -->
+    <div class="patient-summary">
+        <div class="summary-item">
+            <span class="summary-label">Patient Name</span>
+            <span class="summary-value" id="patient-name">—</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">MR Number</span>
+            <span class="summary-value" id="patient-mr">—</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Age / Gender</span>
+            <span class="summary-value" id="patient-age-gender">—</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Token No</span>
+            <span class="summary-value" id="patient-token">—</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Shift</span>
+            <span class="summary-value" id="patient-shift">—</span>
+        </div>
+        <div class="summary-actions">
+            <button type="button" class="btn-edit-info" onclick="openUpdateInfoModal()">Update Patient Info</button>
+        </div>
+    </div>
+
+    <div id="update-info-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-labelledby="update-info-title">
+            <div class="modal-header">
+                <h2 id="update-info-title">Update Patient Info</h2>
+                <button type="button" class="modal-close-btn" onclick="closeUpdateInfoModal()" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="update-info-form" onsubmit="event.preventDefault(); savePatientInfo();">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="modal-name">Patient Name</label>
+                            <input type="text" id="modal-name" required>
+                        </div>
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label for="modal-relation">Relation</label>
+                                <select id="modal-relation">
+                                    <option value="S/O">S/O</option>
+                                    <option value="D/O">D/O</option>
+                                    <option value="W/O">W/O</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-relation-name">Father/Husband Name</label>
+                                <input type="text" id="modal-relation-name">
+                            </div>
+                        </div>
+                        <div class="form-row-2 equal">
+                            <div class="form-group">
+                                <label for="modal-age">Age</label>
+                                <input type="number" id="modal-age">
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-gender">Gender</label>
+                                <select id="modal-gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row-2 equal">
+                            <div class="form-group">
+                                <label for="modal-shift">Shift</label>
+                                <select id="modal-shift"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-token">Token No</label>
+                                <input type="text" id="modal-token">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal-mobile">Mobile Number</label>
+                            <input type="text" id="modal-mobile">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn-cancel" onclick="closeUpdateInfoModal()">Cancel</button>
+                <button type="button" class="modal-btn-save" onclick="savePatientInfo()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tests and parameters container -->
+    <div id="tests-container">
+        <div class="loading-state">Loading patient's test records...</div>
+    </div>
+
+    <!-- Save / Cancel Actions -->
+    <div class="actions-bar">
+        <button class="btn btn-cancel" onclick="window.location.href='/update-results'">Cancel</button>
+        <button class="btn btn-save" id="btn-save-all" onclick="saveAllResults()">Save Test Results</button>
+    </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/remarks-suggest.js') }}"></script>
+<script>
+    const MR_NO = "{{ mr_no }}";
+    let patientRecords = []; // Holds array of test records
+    let availableTests = [];
+    let addTestDropdownOpen = false;
+
+    function normalizeTestRecord(record) {
+        let tv = record.test_values;
+        let remarks = record.remarks;
+        if (tv && typeof tv === 'object' && !Array.isArray(tv)) {
+            if ((remarks === null || remarks === undefined || remarks === '') && tv.remarks) {
+                remarks = tv.remarks;
+            }
+            if (tv.test_values && typeof tv.test_values === 'object') {
+                tv = tv.test_values;
+            }
+            tv = Object.fromEntries(
+                Object.entries(tv).filter(([k]) => k !== 'remarks' && k !== 'test_values')
+            );
+        } else {
+            tv = tv || {};
+        }
+        record.test_values = tv;
+        record.remarks = remarks || '';
+        return record;
+    }
+
+    let currentFilteredAddTests = [];
+    let selectedAddTestIndex = -1;
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    async function fetchTestsCatalog() {
+        try {
+            const response = await fetch("/tests");
+            if (!response.ok) return [];
+            const data = await response.json();
+            const showIndividualTests = Boolean(data.allow_single_tests || data.test_selection_mode === 'group_and_single');
+            const individualTests = showIndividualTests
+                ? (data.tests || [])
+                    .filter(t => !t.name.startsWith('#'))
+                    .map(t => ({
+                        id: t.id,
+                        name: t.name,
+                        status: t.status,
+                        value: t.id,
+                        isGroup: false
+                    }))
+                : [];
+            const groupTests = (data.group_test || []).map(t => ({
+                id: t.id,
+                name: t.group_name,
+                status: t.status,
+                value: JSON.stringify(t.component_ids),
+                isGroup: true
+            }));
+            return [...individualTests, ...groupTests];
+        } catch (e) {
+            console.error("Error fetching tests:", e);
+            return [];
+        }
+    }
+
+    function getExistingTestNames() {
+        return new Set(
+            patientRecords
+                .map(r => (r.test_name || '').trim().toLowerCase())
+                .filter(Boolean)
+        );
+    }
+
+    function renderAddTestOptions(query = '') {
+        const listContainer = document.getElementById('add-test-list-container');
+        const confirmBtn = document.getElementById('add-test-confirm-btn');
+        const valInput = document.getElementById('add-test-selected-value');
+        if (!listContainer) return;
+
+        const existing = getExistingTestNames();
+        // Strictly filter out inactive tests (test.status !== true) and tests already assigned to patient
+        const activeAvailable = availableTests.filter(test => {
+            if (test.status !== true) return false;
+            if (existing.has((test.name || '').trim().toLowerCase())) return false;
+            return true;
+        });
+
+        const q = query.trim().toLowerCase();
+        currentFilteredAddTests = q
+            ? activeAvailable.filter(t => (t.name || '').toLowerCase().includes(q))
+            : activeAvailable;
+
+        selectedAddTestIndex = -1;
+        if (valInput) valInput.value = '';
+        if (confirmBtn) confirmBtn.disabled = true;
+
+        if (activeAvailable.length === 0) {
+            listContainer.innerHTML = `<div class="add-test-empty">All available active tests are already assigned.</div>`;
+            return;
+        }
+
+        if (currentFilteredAddTests.length === 0) {
+            listContainer.innerHTML = `<div class="add-test-empty">No matching active tests found.</div>`;
+            return;
+        }
+
+        listContainer.innerHTML = currentFilteredAddTests.map((t, idx) => `
+            <div class="add-test-item" data-index="${idx}" onclick="selectAddTestItem(${idx})" ondblclick="confirmAndAddSingleTest(${idx})">
+                <span class="add-test-item-name">${escapeHtml(t.name)}</span>
+                <span class="add-test-item-badge ${t.isGroup ? 'group' : 'single'}">${t.isGroup ? 'Group' : 'Single'}</span>
+            </div>
+        `).join('');
+    }
+
+    function selectAddTestItem(index) {
+        const listContainer = document.getElementById('add-test-list-container');
+        const confirmBtn = document.getElementById('add-test-confirm-btn');
+        const valInput = document.getElementById('add-test-selected-value');
+        if (!listContainer || index < 0 || index >= currentFilteredAddTests.length) return;
+
+        selectedAddTestIndex = index;
+        const items = listContainer.querySelectorAll('.add-test-item');
+        items.forEach((item, i) => {
+            item.classList.toggle('selected', i === index);
+            if (i === index) item.scrollIntoView({ block: 'nearest' });
+        });
+
+        const selectedTest = currentFilteredAddTests[index];
+        if (valInput) valInput.value = selectedTest.value;
+        if (confirmBtn) confirmBtn.disabled = false;
+    }
+
+    function confirmAndAddSingleTest(index) {
+        selectAddTestItem(index);
+        addSingleTest();
+    }
+
+    function onAddTestSearchInput(val) {
+        renderAddTestOptions(val);
+    }
+
+    function onAddTestKeyDown(e) {
+        if (!addTestDropdownOpen) return;
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (currentFilteredAddTests.length === 0) return;
+            let next = selectedAddTestIndex + 1;
+            if (next >= currentFilteredAddTests.length) next = 0;
+            selectAddTestItem(next);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (currentFilteredAddTests.length === 0) return;
+            let prev = selectedAddTestIndex - 1;
+            if (prev < 0) prev = currentFilteredAddTests.length - 1;
+            selectAddTestItem(prev);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (selectedAddTestIndex >= 0 && selectedAddTestIndex < currentFilteredAddTests.length) {
+                addSingleTest();
+            } else if (currentFilteredAddTests.length === 1) {
+                selectAddTestItem(0);
+                addSingleTest();
+            }
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            toggleAddTestDropdown(false);
+        }
+    }
+
+    function buildAddTestSectionHtml() {
+        return `
+            <div class="add-test-section" id="add-test-section">
+                <button type="button" class="add-test-toggle-btn" id="add-test-toggle-btn" title="Add test" onclick="toggleAddTestDropdown()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <span class="add-test-label">Add Test</span>
+                <div class="add-test-dropdown-wrap" id="add-test-dropdown-wrap">
+                    <div class="add-test-search-box">
+                        <input type="text" id="add-test-search-input" class="add-test-search-input" placeholder="Type to search test..." autocomplete="off" oninput="onAddTestSearchInput(this.value)" onkeydown="onAddTestKeyDown(event)">
+                        <input type="hidden" id="add-test-selected-value" value="">
+                    </div>
+                    <div class="add-test-list-container" id="add-test-list-container">
+                        <!-- Filtered active test items -->
+                    </div>
+                    <button type="button" class="add-test-confirm-btn" id="add-test-confirm-btn" onclick="addSingleTest()" disabled>Add Test</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function toggleAddTestDropdown(forceOpen) {
+        const wrap = document.getElementById('add-test-dropdown-wrap');
+        const searchInput = document.getElementById('add-test-search-input');
+        if (!wrap) return;
+
+        addTestDropdownOpen = typeof forceOpen === 'boolean' ? forceOpen : !addTestDropdownOpen;
+        wrap.classList.toggle('open', addTestDropdownOpen);
+
+        if (addTestDropdownOpen) {
+            if (searchInput) searchInput.value = '';
+            renderAddTestOptions('');
+            const existing = getExistingTestNames();
+            const activeAvailable = availableTests.filter(t => t.status === true && !existing.has((t.name || '').trim().toLowerCase()));
+            if (activeAvailable.length === 0) {
+                showToast('All available active tests are already assigned', 'error');
+            } else if (searchInput) {
+                setTimeout(() => searchInput.focus(), 50);
+            }
+        }
+    }
+
+    async function addSingleTest() {
+        const valInput = document.getElementById('add-test-selected-value');
+        const confirmBtn = document.getElementById('add-test-confirm-btn');
+        const toggleBtn = document.getElementById('add-test-toggle-btn');
+        const selectedTest = valInput ? valInput.value : '';
+        if (!selectedTest) {
+            showToast('Please select a test from the list first', 'error');
+            return;
+        }
+
+        if (confirmBtn) {
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = 'Adding...';
+        }
+        if (toggleBtn) toggleBtn.disabled = true;
+
+        try {
+            const res = await fetch(`/api/test-results/patient/${MR_NO}/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': localStorage.getItem('userEmail') || ''
+                },
+                body: JSON.stringify({ selected_test: selectedTest })
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                showToast('Test added successfully', 'success');
+                addTestDropdownOpen = false;
+                await loadPatientTestData();
+            } else {
+                showToast(result.message || 'Failed to add test', 'error');
+            }
+        } catch (e) {
+            showToast(`Error: ${e.message}`, 'error');
+        } finally {
+            if (confirmBtn) {
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = 'Add Test';
+            }
+            if (toggleBtn) toggleBtn.disabled = false;
+        }
+    }
+
+    async function loadPatientTestData() {
+        const container = document.getElementById('tests-container');
+        try {
+            const res = await fetch(`/api/test-results/patient/${MR_NO}`);
+            const result = await res.json();
+            if (result.status === 'Success' && result.records && result.records.length > 0) {
+                patientRecords = result.records.map(normalizeTestRecord);
+                applyPatientToSummary(result.patient);
+                renderFormFields();
+            } else if (result.status === 'Success' && result.patient) {
+                patientRecords = [];
+                applyPatientToSummary(result.patient);
+                renderFormFields();
+            } else {
+                container.innerHTML = `
+                    <div class="error-state">
+                        Failed to retrieve test records for this patient.
+                    </div>
+                `;
+            }
+        } catch (e) {
+            console.error(e);
+            container.innerHTML = `
+                <div class="error-state">
+                    Error loading data: ${e.message}
+                </div>
+            `;
+        }
+    }
+
+    function renderFormFields() {
+        const container = document.getElementById('tests-container');
+        let html = '';
+
+        patientRecords.forEach((record, recordIndex) => {
+            const testValues = record.test_values || {};
+            const keys = Object.keys(testValues);
+
+            html += `
+                <div class="test-section" data-record-id="${record.id}" data-record-index="${recordIndex}">
+                    <h3 class="test-section-title">
+                        <div class="test-title-left">
+                            <span>${record.test_name || 'Lab Report'}</span>
+                        </div>
+                        <div class="test-title-actions">
+                            <span class="test-category-badge">${record.category || 'General'}</span>
+                            <button class="save-test-btn" type="button" onclick="saveSingleTest(${record.id})">Save</button>
+                            <button class="delete-test-btn" title="Delete test" onclick="deleteTestRecord(${record.id})" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                    <path d="M10 11v6"></path>
+                                    <path d="M14 11v6"></path>
+                                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </h3>
+                    <table class="param-table">
+                        <thead>
+                            <tr>
+                                <th class="th-details">Details</th>
+                                <th class="th-range">Range</th>
+                                <th class="th-result">Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            if (keys.length === 0) {
+                html += `<tr><td colspan="3" style="text-align: center; color: #6b7280; padding: 10px;">No parameters configured for this test.</td></tr>`;
+            } else {
+                keys.forEach((key, keyIndex) => {
+                    const param = testValues[key];
+                    const name = param.name || 'Component';
+                    const value = param.value !== undefined ? param.value : '';
+                    const unit = param.unit || '';
+
+                    let rangeStr = '—';
+                    if (param.normal_min !== undefined && param.normal_min !== null && param.normal_max !== undefined && param.normal_max !== null) {
+                        rangeStr = `${param.normal_min} - ${param.normal_max}`;
+                    } else if (param.normal_range) {
+                        rangeStr = param.normal_range;
+                    }
+                    if (unit) {
+                        rangeStr += ` ${unit}`;
+                    }
+
+                    html += `
+                        <tr>
+                            <td class="param-label" title="${name}">${name}</td>
+                            <td class="param-range-text">${rangeStr}</td>
+                            <td class="param-input-cell">
+                                <input type="text" 
+                                       class="param-input-field" 
+                                       data-record-index="${recordIndex}" 
+                                       data-param-key="${key}" 
+                                       data-tab-order="${recordIndex}-${keyIndex}"
+                                       value="${value}" 
+                                       placeholder="-"
+                                       onfocus="this.select();">
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            const remarksVal = (record.remarks || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            html += `
+                        </tbody>
+                    </table>
+                    <div class="test-remarks-wrap" data-test-name="${(record.test_name || '').replace(/"/g, '&quot;')}" data-category="${(record.category || '').replace(/"/g, '&quot;')}">
+                        <label class="test-remarks-label" for="remarks-${record.id}">Remarks</label>
+                        <div class="remarks-input-row">
+                            <textarea
+                                id="remarks-${record.id}"
+                                class="test-remarks-input remarks-field"
+                                data-record-id="${record.id}"
+                                rows="2"
+                                maxlength="500"
+                                placeholder="Optional notes — or use + for common remarks">${remarksVal}</textarea>
+                            <button type="button" class="remarks-pick-btn" title="Choose common remark" aria-label="Choose common remark">+</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        if (patientRecords.length === 0) {
+            html += `<div class="no-tests-hint">No tests assigned yet. Use the button below to add one.</div>`;
+        }
+
+        html += buildAddTestSectionHtml();
+
+        container.innerHTML = html;
+        container.classList.toggle('single-test', patientRecords.length === 1);
+
+        const addSelect = document.getElementById('add-test-select');
+        if (addSelect) populateAddTestDropdown(addSelect);
+        if (addTestDropdownOpen) {
+            document.getElementById('add-test-dropdown-wrap')?.classList.add('open');
+        }
+
+        setupCompactNavigation();
+
+        window.__patientRecordsForRemarks = patientRecords;
+        if (window.LabFlowRemarks) {
+            LabFlowRemarks.initAllIn(container);
+        }
+
+        const btnSave = document.getElementById('btn-save-all');
+        if (btnSave) btnSave.disabled = patientRecords.length === 0;
+    }
+
+    function getDeletingPerson() {
+        const name = (localStorage.getItem('userName') || '').trim();
+        if (name) return name;
+        const email = (localStorage.getItem('userEmail') || '').trim();
+        if (email) return email.includes('@') ? email.split('@')[0] : email;
+        return 'Anonymous';
+    }
+
+    function showToast(message, type = 'success') {
+        const el = document.getElementById('toast');
+        if (!el) return;
+        el.textContent = message;
+        el.classList.remove('success', 'error', 'show');
+        el.classList.add(type === 'error' ? 'error' : 'success');
+        // Force reflow so animation restarts
+        void el.offsetWidth;
+        el.classList.add('show');
+        window.clearTimeout(window.__toastTimer);
+        window.__toastTimer = window.setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    function syncRemarksFromDom(recordId) {
+        const ta = document.querySelector(`.remarks-field[data-record-id="${recordId}"]`);
+        const rec = patientRecords.find(r => String(r.id) === String(recordId));
+        if (rec && ta) rec.remarks = ta.value.trim();
+        return rec?.remarks ?? '';
+    }
+
+    function syncTestValuesFromSection(section, recordIndex) {
+        const inputs = section.querySelectorAll('.param-input-field');
+        inputs.forEach(input => {
+            const idx = parseInt(input.dataset.recordIndex);
+            const key = input.dataset.paramKey;
+            if (idx === recordIndex && key && patientRecords[idx]?.test_values?.[key]) {
+                patientRecords[idx].test_values[key].value = input.value;
+            }
+        });
+    }
+
+    async function saveSingleTest(recordId) {
+        if (!recordId) return;
+
+        const section = document.querySelector(`.test-section[data-record-id="${recordId}"]`);
+        if (!section) return;
+
+        const btn = section.querySelector('.save-test-btn');
+        if (btn) {
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+        }
+
+        const recordIndex = parseInt(section.dataset.recordIndex);
+        syncTestValuesFromSection(section, recordIndex);
+        const remarks = syncRemarksFromDom(recordId);
+        const rec = patientRecords[recordIndex];
+        const testValues = Object.fromEntries(
+            Object.entries(rec?.test_values || {}).filter(([k]) => k !== 'remarks' && k !== 'test_values')
+        );
+
+        try {
+            const res = await fetch(`/api/test-results/update/${recordId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ test_values: testValues, remarks: remarks || '' })
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                showToast('Saved test results', 'success');
+            } else {
+                showToast('Failed to save test', 'error');
+            }
+        } catch (e) {
+            showToast(`Error: ${e.message}`, 'error');
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.textContent = 'Save';
+            }
+        }
+    }
+
+    async function deleteTestRecord(recordId) {
+        if (!recordId) return;
+        const rec = patientRecords.find(r => String(r.id) === String(recordId));
+        const testName = rec?.test_name ? ` (${rec.test_name})` : '';
+        if (!confirm(`Delete this test${testName}?`)) return;
+
+        try {
+            const res = await fetch(`/api/test-results/delete/${recordId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ person_deleting: getDeletingPerson() })
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                patientRecords = patientRecords.filter(r => String(r.id) !== String(recordId));
+                if (patientRecords.length === 0) {
+                    const btnSave = document.getElementById('btn-save-all');
+                    if (btnSave) btnSave.disabled = true;
+                }
+                renderFormFields();
+            } else {
+                alert('Failed to delete test. Please try again.');
+            }
+        } catch (e) {
+            alert('Error deleting test: ' + e.message);
+        }
+    }
+
+    function setupCompactNavigation() {
+        const fields = Array.from(document.querySelectorAll('.param-input-field'));
+        fields.forEach((field, index) => {
+            field.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    const next = fields[index + 1];
+                    if (next) next.focus();
+                } else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    const prev = fields[index - 1];
+                    if (prev) prev.focus();
+                }
+            });
+        });
+    }
+
+    async function saveAllResults(options = {}) {
+        const btnSave = document.getElementById('btn-save-all');
+        if (btnSave) {
+            btnSave.textContent = options.redirectToPrint ? 'Saving & Opening Print…' : 'Saving results...';
+            btnSave.disabled = true;
+        }
+
+        // Build payload: Dict of record_id -> test_values
+        const payload = {};
+
+        // Loop over each input field and assign its value back to our patientRecords structure
+        const inputs = document.querySelectorAll('.param-input-field');
+        inputs.forEach(input => {
+            const recordIndex = parseInt(input.dataset.recordIndex);
+            const paramKey = input.dataset.paramKey;
+
+            if (!isNaN(recordIndex) && paramKey) {
+                const record = patientRecords[recordIndex];
+                if (record && record.test_values && record.test_values[paramKey]) {
+                    record.test_values[paramKey].value = input.value;
+                }
+            }
+        });
+
+        // Pack payload: remarks go to DB column, test_values = parameters only
+        patientRecords.forEach(record => {
+            syncRemarksFromDom(record.id);
+            const cleanValues = Object.fromEntries(
+                Object.entries(record.test_values || {}).filter(([k]) => k !== 'remarks' && k !== 'test_values')
+            );
+            payload[record.id] = {
+                test_values: cleanValues,
+                remarks: record.remarks || ''
+            };
+        });
+
+        try {
+            const res = await fetch(`/api/test-results/patient/update/${MR_NO}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                if (options.redirectToPrint) {
+                    window.location.href = `/page/lab-test-print/${MR_NO}`;
+                } else {
+                    window.location.href = '/update-results';
+                }
+            } else {
+                alert("Failed to save results. Check logs for details.");
+                if (btnSave) {
+                    btnSave.textContent = 'Save Test Results';
+                    btnSave.disabled = false;
+                }
+            }
+        } catch (e) {
+            alert("Error saving results: " + e.message);
+            if (btnSave) {
+                btnSave.textContent = 'Save Test Results';
+                btnSave.disabled = false;
+            }
+        }
+    }
+
+    // Keyboard Shortcuts: Ctrl + P (Save & Print), Ctrl + Enter (Save)
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+            e.preventDefault();
+            saveAllResults({ redirectToPrint: true });
+        } else if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            saveAllResults({ redirectToPrint: false });
+        }
+    });
+
+    function normalizeGenderValue(gender) {
+        const g = String(gender || '').trim();
+        if (!g) return 'Male';
+        const upper = g.toUpperCase();
+        if (upper === 'MALE' || upper === 'M') return 'Male';
+        if (upper === 'FEMALE' || upper === 'F') return 'Female';
+        if (upper === 'OTHER' || upper === 'O') return 'Other';
+        if (g === 'Male' || g === 'Female' || g === 'Other') return g;
+        return g;
+    }
+
+    function setSelectValue(selectEl, value, fallbackValue = '') {
+        if (!selectEl) return;
+        const v = String(value ?? '').trim();
+        if (v && Array.from(selectEl.options).some(o => o.value === v || o.value.toUpperCase() === v.toUpperCase())) {
+            const match = Array.from(selectEl.options).find(
+                o => o.value === v || o.value.toUpperCase() === v.toUpperCase()
+            );
+            if (match) selectEl.value = match.value;
+            return;
+        }
+        if (fallbackValue) setSelectValue(selectEl, fallbackValue, '');
+    }
+
+    async function populateModalShiftOptions(selectedShift) {
+        const select = document.getElementById('modal-shift');
+        if (!select) return;
+        let shifts = ['MORNING', 'EVENING', 'NIGHT', 'HOLIDAY', 'OPD'];
+        try {
+            const res = await fetch('/fetcheddata/shifts.json', { cache: 'no-store' });
+            if (res.ok) {
+                const data = await res.json();
+                const fromFile = (data.shifts || []).map(s => (s.shift || s.name || '').trim()).filter(Boolean);
+                if (fromFile.length) shifts = fromFile;
+            }
+        } catch (_) { /* use defaults */ }
+        select.innerHTML = shifts.map(s => `<option value="${s}">${s}</option>`).join('');
+        setSelectValue(select, selectedShift, shifts[0] || 'MORNING');
+    }
+
+    function applyPatientToSummary(patient) {
+        if (!patient) return;
+        document.getElementById('patient-name').textContent = patient.patient_name || 'Unknown';
+        document.getElementById('patient-mr').textContent = patient.mr_no ?? MR_NO;
+        document.getElementById('patient-age-gender').textContent =
+            `${patient.age ?? '—'} / ${patient.gender || '—'}`;
+        document.getElementById('patient-token').textContent = patient.patient_token ?? '—';
+        document.getElementById('patient-shift').textContent = patient.shift || '—';
+    }
+
+    async function openUpdateInfoModal() {
+        const modal = document.getElementById('update-info-modal');
+        try {
+            const res = await fetch(`/api/patient/info/${MR_NO}`, { cache: 'no-store' });
+            const result = await res.json();
+            if (result.status !== 'Success' || !result.patient) {
+                showToast(result.message || 'Could not load patient from database', 'error');
+                return;
+            }
+            const p = result.patient;
+            document.getElementById('modal-name').value = p.patient_name || '';
+            setSelectValue(document.getElementById('modal-relation'), p.relation, 'S/O');
+            document.getElementById('modal-relation-name').value = p.relation_name || '';
+            document.getElementById('modal-age').value = p.age ?? '';
+            setSelectValue(document.getElementById('modal-gender'), normalizeGenderValue(p.gender), 'Male');
+            await populateModalShiftOptions(p.shift);
+            document.getElementById('modal-token').value = p.patient_token ?? '';
+            document.getElementById('modal-mobile').value = p.mobile || '';
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+        } catch (e) {
+            showToast('Error loading patient info: ' + e.message, 'error');
+        }
+    }
+
+    function closeUpdateInfoModal() {
+        const modal = document.getElementById('update-info-modal');
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+    }
+
+    async function savePatientInfo() {
+        const payload = {
+            patient_name: document.getElementById('modal-name').value,
+            relation: document.getElementById('modal-relation').value,
+            relation_name: document.getElementById('modal-relation-name').value,
+            age: document.getElementById('modal-age').value,
+            gender: document.getElementById('modal-gender').value,
+            shift: document.getElementById('modal-shift').value,
+            patient_token: document.getElementById('modal-token').value,
+            mobile: document.getElementById('modal-mobile').value,
+        };
+        try {
+            const res = await fetch(`/api/patient/update-info/${MR_NO}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                closeUpdateInfoModal();
+                showToast('Patient info updated', 'success');
+                await loadPatientTestData();
+            } else {
+                showToast('Failed to update patient info', 'error');
+            }
+        } catch (e) {
+            showToast('Error updating info: ' + e.message, 'error');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (window.LabFlowRemarks) {
+            await LabFlowRemarks.loadCache();
+        }
+        availableTests = await fetchTestsCatalog();
+        await loadPatientTestData();
+    });
+</script>
+{% endblock %}

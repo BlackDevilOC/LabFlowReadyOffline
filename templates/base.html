@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/sidebar.css') }}">
+    {% block head %}{% endblock %}
+    <script>
+        window.APP_PREFIX = "{{ url_prefix }}";
+        (function() {
+            const workspaceMode = localStorage.getItem('workspaceMode') || 'online';
+            const isOfflinePath = window.location.pathname.startsWith('/offline');
+            
+            if (!navigator.onLine && workspaceMode !== 'offline') {
+                localStorage.setItem('workspaceMode', 'offline');
+                window.location.href = '/offline' + window.location.pathname + window.location.search;
+                return;
+            }
+            
+            if (workspaceMode === 'offline' && !isOfflinePath && window.location.pathname !== '/logout') {
+                window.location.href = '/offline' + window.location.pathname + window.location.search;
+                return;
+            }
+            
+            const originalFetch = window.fetch;
+            window.fetch = function(input, init) {
+                if (typeof input === 'string' && input.startsWith('/') && !input.startsWith('/static/') && window.APP_PREFIX) {
+                    if (!input.startsWith(window.APP_PREFIX)) {
+                        input = window.APP_PREFIX + input;
+                    }
+                }
+                return originalFetch(input, init);
+            };
+        })();
+    </script>
+</head>
+
+<body{% if body_class %} class="{{ body_class }}"{% endif %}>
+
+    <header class="top-bar">
+        <a class="brand-section" href="{{ url_prefix }}/" title="Go to Home" style="text-decoration:none;">
+            <img src="/static/images/hospital_logo.png" alt="Hospital" class="brand-logo">
+            <span class="app-name">GMMMC Pathology Lab</span>
+            {% if is_offline %}
+            <span class="offline-badge" style="background-color: #ef4444; color: white; padding: 4px 10px; border-radius: 9999px; font-weight: 600; font-size: 11px; margin-left: 8px; text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.15);">
+                <span style="width: 6px; height: 6px; background-color: white; border-radius: 50%; display: inline-block; animation: pulse-blink 1.5s infinite;"></span>
+                Offline
+            </span>
+            <style>
+                @keyframes pulse-blink {
+                    0% { opacity: 0.4; transform: scale(0.9); }
+                    50% { opacity: 1; transform: scale(1.1); }
+                    100% { opacity: 0.4; transform: scale(0.9); }
+                }
+            </style>
+            {% endif %}
+        </a>
+
+        <div class="user-section">
+            <div class="user-menu-toggle" id="userMenuToggle">
+                <div class="profile-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <span class="user-name">{{ name }}</span>
+            </div>
+            <div class="user-dropdown" id="userDropdown">
+                <a href="{{ url_prefix }}/logout" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-container {% if hide_sidebar %}no-sidebar{% endif %}">
+        {% if not hide_sidebar %}
+        {% include 'sidebar.html' %}
+        {% endif %}
+
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', path='/js/permissions.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/base.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/sidebar.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

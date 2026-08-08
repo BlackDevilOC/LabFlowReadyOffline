@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LabFlow Capacity & Cost Planning</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121a33;
+      --card-2: #172247;
+      --text: #e8edf7;
+      --muted: #9db0d4;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --accent: #60a5fa;
+      --border: #2a3a67;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Segoe UI, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 20% -10%, #223a7a 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 26px 16px 36px; }
+    h1 { margin: 0; font-size: 28px; }
+    .subtitle { margin-top: 6px; color: var(--muted); font-size: 14px; }
+    .grid { display: grid; gap: 14px; margin-top: 16px; }
+    .grid.two { grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); }
+    .grid.three { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card {
+      background: linear-gradient(180deg, var(--card-2), var(--card));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    .card h2 { margin: 0 0 10px; font-size: 18px; }
+    .muted { color: var(--muted); }
+    .flow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: center; text-align: center; }
+    .node { border: 1px solid var(--border); border-radius: 10px; padding: 8px 6px; font-size: 12px; background: rgba(255,255,255,0.03); }
+    .arrow { color: var(--accent); font-weight: 700; }
+    .inputs { display: grid; gap: 8px; }
+    .row { display: grid; grid-template-columns: 1fr 120px; gap: 8px; align-items: center; }
+    input, select {
+      width: 100%; background: #0f1731; border: 1px solid var(--border); color: var(--text);
+      border-radius: 8px; padding: 7px 9px; font-size: 14px;
+    }
+    .kv { display: grid; grid-template-columns: 1fr auto; gap: 8px; font-size: 14px; }
+    .pill {
+      display: inline-block; padding: 4px 9px; border-radius: 999px; font-size: 12px; font-weight: 700;
+      border: 1px solid transparent;
+    }
+    .ok { background: rgba(34,197,94,0.2); color: #86efac; border-color: rgba(34,197,94,0.5); }
+    .warn { background: rgba(245,158,11,0.2); color: #fde68a; border-color: rgba(245,158,11,0.5); }
+    .bad { background: rgba(239,68,68,0.2); color: #fecaca; border-color: rgba(239,68,68,0.5); }
+    .score { font-size: 34px; font-weight: 800; letter-spacing: 0.3px; }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .btn {
+      border: 1px solid var(--border); background: #1a2852; color: #dbeafe;
+      padding: 7px 10px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 700;
+    }
+    ul { margin: 8px 0 0; padding-left: 18px; }
+    li { margin: 5px 0; color: var(--muted); font-size: 14px; }
+    @media (max-width: 900px) {
+      .flow { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>LabFlow Capacity, Cost & Survivability Planner</h1>
+    <div class="subtitle">Tailored for your expected usage: 1–3 concurrent users, ~400–500 registrations/day, heavy register workflow, single update/print operator.</div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Operational Flow</h2>
+        <div class="flow">
+          <div class="node">Register</div><div class="arrow">→</div>
+          <div class="node">Assign Tests</div><div class="arrow">→</div>
+          <div class="node">Update Results</div><div class="arrow">→</div>
+          <div class="node">Print</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid two">
+      <div class="card">
+        <h2>Scenario Inputs</h2>
+        <div style="margin-bottom:8px;"><button class="btn" id="presetBtn">Load Your Estimate (Recommended)</button></div>
+        <div class="inputs">
+          <div class="row"><label for="minUsers">Min Concurrent Users</label><input id="minUsers" type="number" min="1" value="1" /></div>
+          <div class="row"><label for="maxUsers">Max Concurrent Users</label><input id="maxUsers" type="number" min="1" value="3" /></div>
+          <div class="row"><label for="regUsers">Users on Register Page</label><input id="regUsers" type="number" min="1" value="2" /></div>
+          <div class="row"><label for="printUsers">Users on Update/Print</label><input id="printUsers" type="number" min="0" value="1" /></div>
+          <div class="row"><label for="patientsDay">New Patients / Day</label><input id="patientsDay" type="number" min="1" value="500" /></div>
+          <div class="row"><label for="testsPerPatient">Avg Tests / Patient</label><input id="testsPerPatient" type="number" min="1" value="5" /></div>
+          <div class="row"><label for="printsPercent">Patients Printed (%)</label><input id="printsPercent" type="number" min="0" max="100" value="70" /></div>
+          <div class="row"><label for="workHours">Work Hours / Day</label><input id="workHours" type="number" min="1" value="12" /></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Derived Daily Load</h2>
+        <div class="kv">
+          <span class="muted">Patient Creates / day</span><strong id="outPatients">0</strong>
+          <span class="muted">Test Rows Writes / day</span><strong id="outTestRows">0</strong>
+          <span class="muted">Result Updates / day</span><strong id="outUpdates">0</strong>
+          <span class="muted">Print Actions / day</span><strong id="outPrints">0</strong>
+          <span class="muted">Peak Requests / sec (estimated)</span><strong id="outPeakRps">0</strong>
+          <span class="muted">Estimated DB Ops / sec at peak</span><strong id="outDbOpsSec">0</strong>
+        </div>
+        <div style="margin-top:10px;">
+          <span id="capacityBadge" class="pill ok">Likely Stable</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid two">
+      <div class="card">
+        <h2>Can Supabase Free Handle This?</h2>
+        <div class="score" id="scoreText">88 / 100</div>
+        <div id="scoreBadge" class="pill ok" style="margin-top:6px;">Yes, likely for this load</div>
+        <ul id="tierNotes"></ul>
+        <div class="hint">This is a practical planning estimate (not an official SLA or benchmark).</div>
+      </div>
+
+      <div class="card">
+        <h2>Budget-Friendly Deployment Plan</h2>
+        <ul id="costPlan">
+          <li>Use current web app + free Supabase while validating real volume.</li>
+          <li>Keep backend minimal (single process) and optimize DB indexes early.</li>
+          <li>Later move to desktop app packaging to reduce hosting overhead.</li>
+          <li>Keep Supabase as managed DB/auth; run app local/on cheap VPS if needed.</li>
+          <li>Add request caching for metadata and print list filters.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Real-World Survivability Checklist</h2>
+      <ul id="checks">
+        <li><input type="checkbox" /> Indexes exist for `mr_no`, `created_at`, `status`, `category`</li>
+        <li><input type="checkbox" /> Filter/search requests are debounced and cancel in-flight calls</li>
+        <li><input type="checkbox" /> Offline queue logic tested (network drop and retry)</li>
+        <li><input type="checkbox" /> DB query latency monitored on peak shift</li>
+        <li><input type="checkbox" /> Daily backup/export strategy in place</li>
+        <li><input type="checkbox" /> Print performance tested with realistic data volume</li>
+      </ul>
+      <div style="margin-top:10px;">
+        <span id="surviveBadge" class="pill warn">Needs checklist completion</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ids = ["minUsers","maxUsers","regUsers","printUsers","patientsDay","testsPerPatient","printsPercent","workHours"];
+    ids.forEach(id => document.getElementById(id).addEventListener("input", recalc));
+    document.getElementById("checks").addEventListener("change", recalc);
+    document.getElementById("presetBtn").addEventListener("click", () => {
+      document.getElementById("minUsers").value = 1;
+      document.getElementById("maxUsers").value = 3;
+      document.getElementById("regUsers").value = 2;
+      document.getElementById("printUsers").value = 1;
+      document.getElementById("patientsDay").value = 500;
+      document.getElementById("testsPerPatient").value = 5;
+      document.getElementById("printsPercent").value = 70;
+      document.getElementById("workHours").value = 12;
+      recalc();
+    });
+
+    function n(id) {
+      const v = parseFloat(document.getElementById(id).value);
+      return Number.isFinite(v) ? v : 0;
+    }
+    function setBadge(el, cls, text) { el.className = "pill " + cls; el.textContent = text; }
+
+    function recalc() {
+      const minUsers = n("minUsers");
+      const maxUsers = n("maxUsers");
+      const regUsers = n("regUsers");
+      const printUsers = n("printUsers");
+      const patientsDay = n("patientsDay");
+      const testsPerPatient = n("testsPerPatient");
+      const printsPercent = n("printsPercent");
+      const workHours = Math.max(1, n("workHours"));
+
+      const creates = patientsDay;
+      const testRows = patientsDay * testsPerPatient;
+      const updates = patientsDay * testsPerPatient; // each test row gets a final value update
+      const prints = Math.round((patientsDay * printsPercent) / 100);
+
+      // lightweight request model
+      const avgUsers = (minUsers + maxUsers) / 2;
+      const reqPerUserMin = regUsers > printUsers ? 3.0 : 2.0;
+      const normalRps = (avgUsers * reqPerUserMin) / 60;
+      const peakRps = normalRps * 1.8;
+      const dbOpsSec = peakRps * 2.2;
+
+      document.getElementById("outPatients").textContent = creates.toLocaleString();
+      document.getElementById("outTestRows").textContent = testRows.toLocaleString();
+      document.getElementById("outUpdates").textContent = updates.toLocaleString();
+      document.getElementById("outPrints").textContent = prints.toLocaleString();
+      document.getElementById("outPeakRps").textContent = peakRps.toFixed(2);
+      document.getElementById("outDbOpsSec").textContent = dbOpsSec.toFixed(1);
+
+      let score = 92;
+      if (patientsDay > 600) score -= 8;
+      if (patientsDay > 900) score -= 10;
+      if (dbOpsSec > 25) score -= 8;
+      if (dbOpsSec > 45) score -= 10;
+      if (maxUsers > 6) score -= 10;
+      score = Math.max(35, Math.min(98, Math.round(score)));
+
+      document.getElementById("scoreText").textContent = `${score} / 100`;
+      const scoreBadge = document.getElementById("scoreBadge");
+      const capBadge = document.getElementById("capacityBadge");
+      if (score >= 80) {
+        setBadge(scoreBadge, "ok", "Yes, likely for this load");
+        setBadge(capBadge, "ok", "Likely Stable");
+      } else if (score >= 60) {
+        setBadge(scoreBadge, "warn", "Borderline, optimize first");
+        setBadge(capBadge, "warn", "Monitor carefully at peak");
+      } else {
+        setBadge(scoreBadge, "bad", "Risky on free tier");
+        setBadge(capBadge, "bad", "Needs architecture changes");
+      }
+
+      const notes = [];
+      const perHourPatients = patientsDay / workHours;
+      notes.push(`Expected registration pace: ~${perHourPatients.toFixed(1)} patients/hour.`);
+      notes.push(`At ${patientsDay} patients/day and ${testsPerPatient} tests/patient, write load is moderate for low concurrency.`);
+      notes.push("With 1-3 concurrent users, free-tier DB throughput is usually enough if queries are indexed.");
+      notes.push("Main risk is not concurrency; main risk is unoptimized filters and missing indexes over time.");
+      if (patientsDay > 700) notes.push("If daily volume grows above ~700+, watch DB CPU and query latency; consider paid tier.");
+      document.getElementById("tierNotes").innerHTML = notes.map(x => `<li>${x}</li>`).join("");
+
+      const checked = Array.from(document.querySelectorAll("#checks input")).filter(x => x.checked).length;
+      const survive = document.getElementById("surviveBadge");
+      if (checked >= 5) setBadge(survive, "ok", "Strong survivability posture");
+      else if (checked >= 3) setBadge(survive, "warn", "Good start, needs hardening");
+      else setBadge(survive, "bad", "High operational risk until checklist is done");
+    }
+
+    recalc();
+  </script>
+</body>
+</html>
+

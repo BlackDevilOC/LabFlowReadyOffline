@@ -1,0 +1,1315 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/advanced-search.css') }}">
+<style>
+    :root {
+        --accent: #2563eb;
+        --accent-light: #eff6ff;
+        --accent-hover: #1d4ed8;
+        --green: #16a34a;
+        --green-light: #f0fdf4;
+        --amber: #d97706;
+        --amber-light: #fffbeb;
+        --red: #dc2626;
+        --surface: #ffffff;
+        --surface-2: #f8fafc;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --radius: 10px;
+        --shadow: 0 1px 3px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, .1);
+    }
+
+    .records-page {
+        padding: 28px 32px;
+        max-width: 1300px;
+    }
+
+    /* ---- Header ---- */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 28px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0;
+    }
+
+    .page-header p {
+        margin: 4px 0 0;
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+
+    .new-report-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius);
+        padding: 10px 18px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background .18s, transform .15s;
+    }
+
+    .new-report-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+    }
+
+    /* ---- Stats strip ---- */
+    .stats-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .stat-chip {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: var(--shadow);
+    }
+
+    .stat-chip .chip-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .chip-icon.blue {
+        background: var(--accent-light);
+        color: var(--accent);
+    }
+
+    .chip-icon.green {
+        background: var(--green-light);
+        color: var(--green);
+    }
+
+    .chip-icon.amber {
+        background: var(--amber-light);
+        color: var(--amber);
+    }
+
+    .stat-chip .chip-val {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1;
+    }
+
+    .stat-chip .chip-label {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 3px;
+    }
+
+    /* ---- Filters ---- */
+    .filter-bar {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+        box-shadow: var(--shadow);
+    }
+
+    .filter-label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: var(--text-muted);
+        white-space: nowrap;
+    }
+
+    .filter-bar input[type="date"],
+    .filter-bar select {
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 7px 11px;
+        font-size: 13px;
+        color: var(--text);
+        background: var(--surface-2);
+        outline: none;
+        transition: border .15s;
+    }
+
+    .filter-bar input[type="date"]:focus,
+    .filter-bar select:focus {
+        border-color: var(--accent);
+    }
+
+    .search-wrap {
+        flex: 1;
+        min-width: 200px;
+        position: relative;
+    }
+
+    .search-wrap svg {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+    }
+
+    .search-wrap input {
+        width: 100%;
+        padding: 8px 12px 8px 34px;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        font-size: 13px;
+        color: var(--text);
+        background: var(--surface-2);
+        outline: none;
+        transition: border .15s;
+        box-sizing: border-box;
+    }
+
+    .search-wrap input:focus {
+        border-color: var(--accent);
+    }
+
+    .filter-divider {
+        width: 1px;
+        height: 28px;
+        background: var(--border);
+    }
+
+    .filter-type-btns {
+        display: flex;
+        gap: 6px;
+    }
+
+    .ftype-btn {
+        padding: 6px 13px;
+        border-radius: 7px;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        background: var(--surface-2);
+        color: var(--text-muted);
+        transition: all .15s;
+    }
+
+    .ftype-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+    }
+
+    .btn-clear {
+        padding: 7px 14px;
+        border-radius: 7px;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        background: transparent;
+        color: var(--text-muted);
+        transition: all .15s;
+    }
+
+    .btn-clear:hover {
+        background: var(--surface-2);
+        color: var(--text);
+    }
+
+    /* ---- Table card ---- */
+    .table-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+
+    .table-card table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-card thead {
+        background: var(--surface-2);
+    }
+
+    .table-card th {
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .table-card td {
+        padding: 14px 16px;
+        font-size: 13px;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+    }
+
+    .table-card tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table-card tbody tr {
+        transition: background .12s;
+    }
+
+    .table-card tbody tr:hover {
+        background: var(--surface-2);
+    }
+
+    .col-date {
+        width: 100px;
+    }
+
+    .col-mr {
+        width: 80px;
+    }
+
+    .col-name {
+        width: 220px;
+    }
+
+    .col-type {
+        width: auto;
+        max-width: 240px;
+        vertical-align: middle;
+    }
+
+    .tests-cell {
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+    }
+
+    .tests-badges-row {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 4px;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .tests-badge {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    .tests-more {
+        flex-shrink: 0;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-muted);
+        padding: 2px 7px;
+        border-radius: 4px;
+        background: var(--surface-2);
+        border: 1px dashed var(--border);
+        cursor: default;
+    }
+
+    .tests-tooltip {
+        display: none;
+        position: absolute;
+        z-index: 200;
+        left: 0;
+        top: calc(100% + 6px);
+        min-width: 160px;
+        max-width: 300px;
+        padding: 10px 12px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, .12);
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.45;
+        color: var(--text);
+        white-space: normal;
+        pointer-events: none;
+    }
+
+    .tests-cell:hover .tests-tooltip {
+        display: block;
+    }
+
+    .col-status {
+        width: 100px;
+    }
+
+    .col-actions {
+        width: 240px;
+        text-align: right;
+    }
+
+    .patient-name {
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .patient-rel {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 2px;
+    }
+
+    .mr-badge {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 2px 8px;
+        border-radius: 5px;
+    }
+
+    .type-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        padding: 3px 9px;
+        border-radius: 5px;
+    }
+
+    .type-fitness {
+        background: #f0f9ff;
+        color: #0369a1;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 20px;
+    }
+
+    .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+    }
+
+    .status-synced {
+        background: var(--green-light);
+        color: var(--green);
+    }
+
+    .status-synced .status-dot {
+        background: var(--green);
+    }
+
+    .status-pending {
+        background: var(--amber-light);
+        color: var(--amber);
+    }
+
+    .status-pending .status-dot {
+        background: var(--amber);
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: .3;
+        }
+    }
+
+    .print-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        padding: 7px 13px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background .15s, transform .12s;
+    }
+
+    .print-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+    }
+
+    /* ---- Empty / Loading states ---- */
+    .table-empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+    }
+
+    .table-empty svg {
+        margin-bottom: 14px;
+        opacity: .35;
+    }
+
+    .table-empty p {
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .table-loading {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    /* ---- Pagination ---- */
+    .table-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px 16px;
+        border-top: 1px solid var(--border);
+        font-size: 12px;
+        color: var(--text-muted);
+        background: var(--surface-2);
+    }
+
+    .page-size-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-left: auto;
+    }
+
+    .page-size-select {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 4px 8px;
+        font-size: 12px;
+        background: var(--surface);
+        color: var(--text);
+    }
+
+    .pagination {
+        display: flex;
+        gap: 4px;
+    }
+
+    .pg-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        transition: all .12s;
+    }
+
+    .pg-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .pg-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+    }
+
+    .load-all-toggle,
+    .range-load-panel {
+        display: none !important;
+    }
+
+    .load-all-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text);
+        cursor: pointer;
+        user-select: none;
+        padding: 6px 10px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface-2);
+    }
+
+    .load-all-toggle input {
+        accent-color: var(--accent);
+    }
+
+    .range-load-panel {
+        display: none;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: var(--radius);
+        padding: 12px 14px;
+        margin-bottom: 14px;
+    }
+
+    .range-load-panel.active {
+        display: flex;
+    }
+
+    .range-load-panel label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #1d4ed8;
+    }
+
+    .range-load-panel input[type="date"] {
+        border: 1px solid #93c5fd;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 13px;
+        background: #fff;
+    }
+
+    .btn-load-range {
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        padding: 8px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .btn-load-range:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .range-hint {
+        font-size: 11px;
+        color: #1e40af;
+        flex: 1;
+        min-width: 200px;
+    }
+
+    /* ---- Extra Filters Drawer ---- */
+    .extra-filters-drawer {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        margin-bottom: 16px;
+        animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .extra-filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .extra-filter-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .extra-filter-item label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .extra-filter-item select {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 8px 12px;
+        font-size: 13px;
+        color: var(--text);
+        outline: none;
+        background: var(--surface-2);
+        transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .extra-filter-item select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        background: var(--surface);
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="records-page">
+
+    <!-- Header -->
+    <div class="page-header">
+        <div>
+            <h1>Update Test Results</h1>
+            <p>Search and open a patient to enter or update test results (data loads from the database on the next page).</p>
+        </div>
+        <a href="{{ url_prefix }}/register" class="new-report-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            New Patient
+        </a>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="stats-strip">
+        <div class="stat-chip">
+            <div class="chip-icon blue">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+            </div>
+            <div>
+                <div class="chip-val" id="stat-total">—</div>
+                <div class="chip-label">Total Records</div>
+            </div>
+        </div>
+        <div class="stat-chip">
+            <div class="chip-icon green">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <div>
+                <div class="chip-val" id="stat-synced">—</div>
+                <div class="chip-label">Completed</div>
+            </div>
+        </div>
+        <div class="stat-chip">
+            <div class="chip-icon amber">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+            </div>
+            <div>
+                <div class="chip-val" id="stat-pending">—</div>
+                <div class="chip-label">Pending Results</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar">
+        <span class="filter-label">Date</span>
+        <input type="date" id="filter-single-date" title="Select Date" style="border: 1px solid var(--border); border-radius: var(--radius); padding: 6px 12px; font-size: 13px; color: var(--text); outline: none; background: var(--surface-2);">
+
+        <span class="filter-label" style="margin-left: 8px;">Shift</span>
+        <select id="filter-shift-outside" style="border: 1px solid var(--border); border-radius: var(--radius); padding: 6px 12px; font-size: 13px; color: var(--text); outline: none; background: var(--surface-2); min-width: 120px;">
+            <option value="all">All Shifts</option>
+        </select>
+
+        <div class="filter-divider"></div>
+
+        <div class="filter-type-btns">
+            <button class="ftype-btn active" data-status="all">All</button>
+            <button class="ftype-btn" data-status="completed">Completed</button>
+            <button class="ftype-btn" data-status="pending">Pending</button>
+        </div>
+
+        <div class="filter-divider"></div>
+
+        <div class="search-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="search-input" placeholder="Search by name or MR no…">
+        </div>
+
+        <button class="btn-clear" id="btn-toggle-extra-filters"
+            style="display:flex;align-items:center;gap:6px;background:none;border:1px solid var(--border);padding:6px 12px;font-size:12px;font-weight:600;border-radius:var(--radius);cursor:pointer;color:var(--text);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+            </svg>
+            Advanced Filters
+        </button>
+        <button class="btn-clear" id="btn-clear-filters">Clear</button>
+
+        <label class="load-all-toggle" title="Load every record between From and To dates (in chunks)">
+            <input type="checkbox" id="toggle-load-all-range">
+            Load full date range
+        </label>
+    </div>
+
+    <!-- Full range loader (visible when toggle on) -->
+    <div class="range-load-panel" id="range-load-panel">
+        <label for="range-from">From</label>
+        <input type="date" id="range-from">
+        <label for="range-to">To</label>
+        <input type="date" id="range-to">
+        <button type="button" class="btn-load-range" id="btn-load-range">Load range</button>
+        <span class="range-hint" id="range-hint">Select From and To, then Load range. Fetches all matching rows in chunks (may take a moment on large ranges).</span>
+    </div>
+
+    <!-- Extra Filters Drawer -->
+    <div class="extra-filters-drawer" id="extra-filters-drawer" style="display:none;">
+        <div class="extra-filters-grid">
+            <div class="extra-filter-item">
+                <label for="filter-category">Test Category</label>
+                <select id="filter-category" style="border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; font-size: 13px; color: var(--text); outline: none; background: var(--surface-2);">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+        </div>
+        <div id="advanced-search-root" style="margin-top:14px;"></div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-date">Date</th>
+                    <th class="col-mr">MR No</th>
+                    <th class="col-name">Patient</th>
+                    <th class="col-type">Test</th>
+                    <th class="col-status">Status</th>
+                    <th class="col-actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="records-tbody">
+                <tr>
+                    <td colspan="6" class="table-loading">Loading records…</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-footer">
+            <span id="showing-label">Showing 0 records</span>
+            <label class="page-size-label" for="page-size-select">Per page</label>
+            <select id="page-size-select" class="page-size-select" title="Rows per page"></select>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/advanced-search.js') }}"></script>
+<script src="{{ url_for('static', path='/js/list-pagination.js') }}"></script>
+<script>
+    let allRecords = [];
+    let filteredRecords = [];
+    let currentPage = 1;
+    let activeStatus = 'all';
+    let lastRequestedUrl = '';
+    let fetchController = null;
+    let advSearchCategories = [];
+    let advSearchReady = false;
+    let listMeta = {};
+    let loadAllInProgress = false;
+
+    const getShortTestName = (name) => ListPagination.getShortTestName(name);
+    const MAX_VISIBLE_TESTS = 3;
+
+    function escapeHtml(text) {
+        if (text == null) return '';
+        const div = document.createElement('div');
+        div.textContent = String(text);
+        return div.innerHTML;
+    }
+
+    function renderTestBadgesCell(tests) {
+        if (!tests || !tests.length) return '—';
+
+        const badgeHtml = (t) => {
+            const badgeStyle = t.status === 'Completed'
+                ? 'background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;'
+                : 'background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;';
+            const shortName = escapeHtml(getShortTestName(t.test_name));
+            return `<span class="type-badge tests-badge" style="padding:2px 8px;border-radius:4px;display:inline-block;font-size:11px;font-weight:bold;${badgeStyle}">${shortName}</span>`;
+        };
+
+        const allNames = tests.map(t => getShortTestName(t.test_name)).join(', ');
+
+        if (tests.length <= MAX_VISIBLE_TESTS) {
+            return `<div class="tests-cell"><div class="tests-badges-row">${tests.map(badgeHtml).join('')}</div></div>`;
+        }
+
+        const visible = tests.slice(0, MAX_VISIBLE_TESTS).map(badgeHtml).join('');
+        const extra = tests.length - MAX_VISIBLE_TESTS;
+        return `
+            <div class="tests-cell">
+                <div class="tests-badges-row">
+                    ${visible}
+                    <span class="tests-more">+${extra}…</span>
+                </div>
+                <div class="tests-tooltip">${escapeHtml(allNames)}</div>
+            </div>`;
+    }
+
+    // ---- Toggle Advanced Filters Drawer ----
+    document.getElementById('btn-toggle-extra-filters').addEventListener('click', () => {
+        const drawer = document.getElementById('extra-filters-drawer');
+        const btn = document.getElementById('btn-toggle-extra-filters');
+        if (drawer.style.display === 'none') {
+            drawer.style.display = 'block';
+            btn.style.borderColor = 'var(--accent)';
+            btn.style.color = 'var(--accent)';
+        } else {
+            drawer.style.display = 'none';
+            btn.style.borderColor = 'var(--border)';
+            btn.style.color = 'var(--text)';
+        }
+    });
+
+    // ---- Fetch filter metadata from DB on boot ----
+    async function populateFilterMetadata() {
+        try {
+            const res = await fetch('/api/metadata/filters');
+            const data = await res.json();
+            if (data.status === 'Success') {
+                const shifts = data.shifts || [];
+                const categories = data.categories || [];
+                advSearchCategories = categories;
+                if (!advSearchReady) {
+                    await AdvancedSearch.mount('#advanced-search-root', {
+                        onChange: () => { lastRequestedUrl = ''; loadRecords(true); },
+                        categories: advSearchCategories,
+                    });
+                    advSearchReady = true;
+                }
+
+                // Populate Outside Shift
+                const shiftSelectOutside = document.getElementById('filter-shift-outside');
+                if (shiftSelectOutside) {
+                    shiftSelectOutside.innerHTML = '<option value="all">All Shifts</option>' +
+                        shifts.map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('');
+                }
+
+                // Populate Modal Shift
+                const modalShift = document.getElementById('modal-shift');
+                if (modalShift) {
+                    modalShift.innerHTML = shifts.map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('');
+                }
+
+                // Populate Category
+                const categorySelect = document.getElementById('filter-category');
+                if (categorySelect) {
+                    categorySelect.innerHTML = '<option value="all">All Categories</option>' +
+                        categories.map(c => `<option value="${c}">${c}</option>`).join('');
+                }
+            }
+        } catch (e) {
+            console.error("Failed to load dropdown filter metadata from DB:", e);
+        }
+    }
+
+    function isLoadAllMode() {
+        return document.getElementById('toggle-load-all-range').checked;
+    }
+
+    function syncRangePanelVisibility() {
+        const on = isLoadAllMode();
+        document.getElementById('range-load-panel').classList.toggle('active', on);
+        if (on) {
+            document.getElementById('filter-single-date').value = '';
+        }
+    }
+
+    function buildListParams() {
+        const params = new URLSearchParams();
+        const search = document.getElementById('search-input').value.trim();
+        const shift = document.getElementById('filter-shift-outside').value;
+        const category = document.getElementById('filter-category').value;
+        const loadAll = isLoadAllMode();
+
+        if (loadAll) {
+            const from = document.getElementById('range-from').value;
+            const to = document.getElementById('range-to').value;
+            if (from) params.set('date_from', from);
+            if (to) params.set('date_to', to);
+            params.set('load_all', 'true');
+        } else {
+            const singleDate = document.getElementById('filter-single-date').value;
+            if (singleDate) {
+                params.set('date_from', singleDate);
+                params.set('date_to', singleDate);
+            }
+        }
+
+        const advRoot = document.getElementById('advanced-search-root');
+        const advFilters = advRoot ? AdvancedSearch.getFilters(advRoot) : [];
+        if (advFilters.length) {
+            params.set('filters', JSON.stringify(advFilters));
+        } else if (search) {
+            params.set('search', search);
+        }
+        if (activeStatus && activeStatus !== 'all') params.set('status', activeStatus);
+        if (shift && shift !== 'all') params.set('shift', shift);
+        if (category && category !== 'all') params.set('category', category);
+        return { params, loadAll, advFilters };
+    }
+
+    async function fetchOneListPage(params, offset = 0) {
+        if (params.get('load_all') === 'true') {
+            params.set('offset', String(offset));
+        }
+        const url = `/api/patient/basic/100?${params.toString()}`;
+        const res = await fetch(url, { signal: fetchController.signal });
+        return res.json();
+    }
+
+    async function loadRecords(force = false) {
+        const { params, loadAll } = buildListParams();
+
+        if (loadAll) {
+            const from = document.getElementById('range-from').value;
+            const to = document.getElementById('range-to').value;
+            if (!from || !to) {
+                document.getElementById('range-hint').textContent =
+                    'Please select both From and To dates, then click Load range.';
+                return;
+            }
+            return loadFullDateRange(params, force);
+        }
+
+        const url = `/api/patient/basic/100?${params.toString()}`;
+        if (!force && url === lastRequestedUrl) return;
+        lastRequestedUrl = url;
+
+        if (fetchController) fetchController.abort();
+        fetchController = new AbortController();
+        setLoading(true, 'Loading records…');
+        try {
+            const data = await fetchOneListPage(new URLSearchParams(params), 0);
+            allRecords = data.Response || [];
+            listMeta = data.meta || {};
+            allRecords.forEach(r => { r.synced = (r.status === 'Completed'); });
+            allRecords.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+        } catch (e) {
+            if (e.name === 'AbortError') return;
+            allRecords = [];
+            listMeta = {};
+        }
+        applyFilters();
+        setLoading(false);
+    }
+
+    async function loadFullDateRange(baseParams, force = false) {
+        const urlKey = `/api/patient/basic/100?${baseParams.toString()}&load_all=1`;
+        if (!force && loadAllInProgress) return;
+        if (!force && lastRequestedUrl === urlKey && allRecords.length) return;
+
+        if (fetchController) fetchController.abort();
+        fetchController = new AbortController();
+        loadAllInProgress = true;
+        lastRequestedUrl = urlKey;
+        allRecords = [];
+        let offset = 0;
+        let chunkNum = 0;
+
+        setLoading(true, 'Loading range (chunk 1)…');
+        document.getElementById('btn-load-range').disabled = true;
+
+        try {
+            while (true) {
+                chunkNum += 1;
+                const params = new URLSearchParams(baseParams);
+                document.getElementById('range-hint').textContent =
+                    `Loading chunk ${chunkNum}… (${allRecords.length} rows so far)`;
+                setLoading(true, `Loading range (chunk ${chunkNum})…`);
+
+                const data = await fetchOneListPage(params, offset);
+                const batch = data.Response || [];
+                listMeta = data.meta || {};
+
+                batch.forEach(r => { r.synced = (r.status === 'Completed'); });
+                allRecords.push(...batch);
+
+                if (!listMeta.has_more || !batch.length) break;
+                offset = listMeta.next_offset ?? (offset + batch.length);
+                if (offset >= 100000) break;
+            }
+
+            allRecords.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+            document.getElementById('range-hint').textContent =
+                `Loaded ${allRecords.length} test rows for selected range.`;
+        } catch (e) {
+            if (e.name !== 'AbortError') {
+                document.getElementById('range-hint').textContent =
+                    `Load failed: ${e.message}. ${allRecords.length} rows loaded before error.`;
+            }
+        } finally {
+            loadAllInProgress = false;
+            document.getElementById('btn-load-range').disabled = false;
+            setLoading(false);
+            applyFilters();
+        }
+    }
+
+    function applyFilters() {
+        filteredRecords = ListPagination.groupLabRowsByPatient(allRecords);
+        filteredRecords.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+        currentPage = 1;
+        renderStats();
+        renderTable();
+        renderPagination();
+    }
+
+    // ---- Stats ----
+    function renderStats() {
+        const total = filteredRecords.length;
+        const synced = filteredRecords.filter(r => r.status === 'Completed').length;
+        const pending = filteredRecords.filter(r => r.status === 'Pending').length;
+        
+        document.getElementById('stat-total').textContent = total;
+        document.getElementById('stat-synced').textContent = synced;
+        document.getElementById('stat-pending').textContent = pending;
+    }
+
+    // ---- Table ----
+    function renderTable() {
+        const tbody = document.getElementById('records-tbody');
+        const pageSize = ListPagination.getPageSize();
+        const start = (currentPage - 1) * pageSize;
+        const page = filteredRecords.slice(start, start + pageSize);
+
+        document.getElementById('showing-label').textContent =
+            `Showing ${filteredRecords.length} patient${filteredRecords.length !== 1 ? 's' : ''}` +
+            (listMeta.truncated ? ' (first 1000 matches)' : '');
+
+        if (page.length === 0) {
+            tbody.innerHTML = `
+                <tr><td colspan="6" class="table-empty">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <p>No patients found</p>
+                </td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = page.map(r => {
+            const date = r.created_at?.split('T')[0] || '—';
+            const mrNo = r.mr_no || '—';
+            const name = r.patient_name || 'Unknown';
+            const rel = r.relation_type && r.relation_name
+                ? `${r.relation_type} ${r.relation_name}` : '';
+            const statusHtml = r.status === 'Completed'
+                ? `<span class="status-badge status-synced"><span class="status-dot"></span>Completed</span>`
+                : `<span class="status-badge status-pending"><span class="status-dot"></span>Pending</span>`;
+
+            // Display individual tests as badges; truncate with … and show full list on hover
+            const testBadges = renderTestBadgesCell(r.tests);
+
+            return `
+            <tr>
+                <td class="col-date" style="color:var(--text-muted);font-size:12px;">${date}</td>
+                <td class="col-mr"><span class="mr-badge">${mrNo}</span></td>
+                <td class="col-name">
+                    <div class="patient-name">${name}</div>
+                    <div class="patient-rel" style="display: flex; flex-direction: column; gap: 2px;">
+                        ${rel ? `<span>${rel}</span>` : ''}
+                        <span style="font-size:10px; color:#2563eb; font-weight:600; text-transform: uppercase;">Shift: ${r.shift || '—'} | Token: ${r.patient_token || '—'}</span>
+                    </div>
+                </td>
+                <td class="col-type">${testBadges}</td>
+                <td class="col-status">${statusHtml}</td>
+                <td class="col-actions" style="text-align:right;">
+                    <button class="print-btn" onclick="window.location.href='/page/enter-results-patient/' + ${mrNo}">
+                        Update Results
+                    </button>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    // ---- Pagination ----
+    function renderPagination() {
+        const total = Math.ceil(filteredRecords.length / ListPagination.getPageSize());
+        const pg = document.getElementById('pagination');
+        if (total <= 1) { pg.innerHTML = ''; return; }
+
+        let html = '';
+        html += `<button class="pg-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goPage(${currentPage - 1})">‹</button>`;
+        for (let i = 1; i <= total; i++) {
+            if (total > 7 && i > 2 && i < total - 1 && Math.abs(i - currentPage) > 1) {
+                if (i === 3 || i === total - 2) html += `<span class="pg-btn" style="cursor:default">…</span>`;
+                continue;
+            }
+            html += `<button class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+        }
+        html += `<button class="pg-btn" ${currentPage === total ? 'disabled' : ''} onclick="goPage(${currentPage + 1})">›</button>`;
+        pg.innerHTML = html;
+    }
+
+    function goPage(p) {
+        currentPage = p;
+        renderTable();
+        renderPagination();
+    }
+
+    function setLoading(on, message = 'Loading records…') {
+        if (on) {
+            document.getElementById('records-tbody').innerHTML =
+                `<tr><td colspan="6" class="table-loading">${message}</td></tr>`;
+        }
+    }
+
+    // ---- Filter controls ----
+    document.querySelectorAll('.ftype-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.ftype-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeStatus = btn.dataset.status;
+            lastRequestedUrl = '';
+            loadRecords(true);
+        });
+    });
+
+    let searchTimer;
+    document.getElementById('search-input').addEventListener('input', () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(loadRecords, 250);
+    });
+
+    document.getElementById('filter-single-date').addEventListener('change', () => {
+        if (isLoadAllMode()) return;
+        lastRequestedUrl = '';
+        loadRecords(true);
+    });
+
+    document.getElementById('toggle-load-all-range').addEventListener('change', () => {
+        syncRangePanelVisibility();
+        lastRequestedUrl = '';
+        if (!isLoadAllMode()) {
+            document.getElementById('range-from').value = '';
+            document.getElementById('range-to').value = '';
+            loadRecords(true);
+        }
+    });
+
+    document.getElementById('btn-load-range').addEventListener('click', () => {
+        lastRequestedUrl = '';
+        loadRecords(true);
+    });
+
+    document.getElementById('filter-shift-outside').addEventListener('change', () => {
+        lastRequestedUrl = '';
+        loadRecords(true);
+    });
+    document.getElementById('filter-category').addEventListener('change', () => {
+        lastRequestedUrl = '';
+        loadRecords(true);
+    });
+
+    document.getElementById('btn-clear-filters').addEventListener('click', () => {
+        document.getElementById('filter-single-date').value = '';
+        document.getElementById('range-from').value = '';
+        document.getElementById('range-to').value = '';
+        document.getElementById('toggle-load-all-range').checked = false;
+        syncRangePanelVisibility();
+        document.getElementById('search-input').value = '';
+        const advRoot = document.getElementById('advanced-search-root');
+        if (advRoot) AdvancedSearch.clear(advRoot);
+        document.getElementById('filter-shift-outside').value = 'all';
+        document.getElementById('filter-category').value = 'all';
+        document.querySelectorAll('.ftype-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.ftype-btn[data-status="all"]').classList.add('active');
+        activeStatus = 'all';
+        lastRequestedUrl = '';
+        listMeta = {};
+        document.getElementById('range-hint').textContent =
+            'Select From and To, then Load range. Fetches all matching rows in chunks (may take a moment on large ranges).';
+        loadRecords(true);
+    });
+
+    // ---- Boot ----
+    document.addEventListener('DOMContentLoaded', async () => {
+        syncRangePanelVisibility();
+        ListPagination.bindPageSizeSelect(
+            document.getElementById('page-size-select'),
+            () => { currentPage = 1; renderTable(); renderPagination(); }
+        );
+        await Promise.allSettled([populateFilterMetadata(), loadRecords()]);
+    });
+</script>
+
+{% endblock %}

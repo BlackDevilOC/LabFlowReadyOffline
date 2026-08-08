@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    :root {
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --radius: 14px;
+        --border: #e2e8f0;
+        --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    .hub-page { padding: 28px 32px; max-width: 1100px; margin: 0 auto; }
+    .page-header { margin-bottom: 30px; }
+    .page-header h1 { margin: 0; font-size: 24px; font-weight: 800; color: var(--text); }
+    .page-header p { margin: 6px 0 0; color: var(--text-muted); font-size: 14px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 22px; }
+    .card {
+        background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+        box-shadow: var(--shadow); padding: 24px; min-height: 220px; display: flex; flex-direction: column;
+    }
+    .card h2 { margin: 0; font-size: 20px; color: var(--text); }
+    .sub { margin-top: 6px; text-transform: uppercase; letter-spacing: .05em; font-size: 11px; font-weight: 700; color: #2563eb; }
+    .desc { margin-top: 16px; color: var(--text-muted); font-size: 13px; line-height: 1.5; flex: 1; }
+    .btn {
+        align-self: flex-end; display: inline-flex; gap: 8px; align-items: center;
+        background: #2563eb; color: #fff; text-decoration: none; border-radius: 8px;
+        padding: 10px 15px; font-size: 13px; font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hub-page">
+    <div class="page-header">
+        <h1>Print Records</h1>
+        <p>Select which report stream you want to browse and print.</p>
+    </div>
+    <div class="cards">
+        <div class="card">
+            <h2>Fitness Print Records</h2>
+            <div class="sub">Medical Fitness Reports</div>
+            <div class="desc">View synced and pending fitness records, search quickly, and print with the existing fitness print format.</div>
+            <a class="btn" href="/page/fitness-records">Open Fitness Records</a>
+        </div>
+        <div class="card">
+            <h2>Lab Test Print Records</h2>
+            <div class="sub">Pathology / Lab Results</div>
+            <div class="desc">Browse lab test records with shift-focused table and comprehensive filters. Lab print rendering will be added next.</div>
+            <a class="btn" href="/page/lab-print-records">Open Lab Records</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

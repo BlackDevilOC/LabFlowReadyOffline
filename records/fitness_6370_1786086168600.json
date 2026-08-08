@@ -1,0 +1,22 @@
+{
+    "patient_name": "LUBNA",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "ASAD ULLAH MEMON",
+    "report_date": "07/08/2026",
+    "mr_no": "6370",
+    "hb": "13.6",
+    "wbc": "5.2",
+    "neut": "66",
+    "lymph": "29",
+    "mono": "04",
+    "eosino": "01",
+    "plt": "333",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-07 12:02:48"
+}

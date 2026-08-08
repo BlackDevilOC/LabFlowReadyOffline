@@ -1,0 +1,1030 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/advanced-search.css') }}">
+<style>
+    :root {
+        --accent: #2563eb;
+        --accent-light: #eff6ff;
+        --accent-hover: #1d4ed8;
+        --green: #16a34a;
+        --green-light: #f0fdf4;
+        --amber: #d97706;
+        --amber-light: #fffbeb;
+        --red: #dc2626;
+        --surface: #ffffff;
+        --surface-2: #f8fafc;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --radius: 10px;
+        --shadow: 0 1px 3px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, .1);
+    }
+
+    .records-page {
+        padding: 28px 32px;
+        max-width: 1300px;
+    }
+
+    /* ---- Header ---- */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 28px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0;
+    }
+
+    .page-header p {
+        margin: 4px 0 0;
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+
+    .new-report-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius);
+        padding: 10px 18px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background .18s, transform .15s;
+    }
+
+    .new-report-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+    }
+
+    /* ---- Stats strip ---- */
+    .stats-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .stat-chip {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: var(--shadow);
+    }
+
+    .stat-chip .chip-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .chip-icon.blue {
+        background: var(--accent-light);
+        color: var(--accent);
+    }
+
+    .chip-icon.green {
+        background: var(--green-light);
+        color: var(--green);
+    }
+
+    .chip-icon.amber {
+        background: var(--amber-light);
+        color: var(--amber);
+    }
+
+    .stat-chip .chip-val {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1;
+    }
+
+    .stat-chip .chip-label {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 3px;
+    }
+
+    /* ---- Filters ---- */
+    .filter-bar {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+        box-shadow: var(--shadow);
+    }
+
+    .filter-label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: var(--text-muted);
+        white-space: nowrap;
+    }
+
+    .filter-bar input[type="date"],
+    .filter-bar select {
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        padding: 7px 11px;
+        font-size: 13px;
+        color: var(--text);
+        background: var(--surface-2);
+        outline: none;
+        transition: border .15s;
+    }
+
+    .filter-bar input[type="date"]:focus,
+    .filter-bar select:focus {
+        border-color: var(--accent);
+    }
+
+    .search-wrap {
+        flex: 1;
+        min-width: 200px;
+        position: relative;
+    }
+
+    .search-wrap svg {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+    }
+
+    .search-wrap input {
+        width: 100%;
+        padding: 8px 12px 8px 34px;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        font-size: 13px;
+        color: var(--text);
+        background: var(--surface-2);
+        outline: none;
+        transition: border .15s;
+        box-sizing: border-box;
+    }
+
+    .search-wrap input:focus {
+        border-color: var(--accent);
+    }
+
+    .filter-divider {
+        width: 1px;
+        height: 28px;
+        background: var(--border);
+    }
+
+    .filter-type-btns {
+        display: flex;
+        gap: 6px;
+    }
+
+    .ftype-btn {
+        padding: 6px 13px;
+        border-radius: 7px;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        background: var(--surface-2);
+        color: var(--text-muted);
+        transition: all .15s;
+    }
+
+    .ftype-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+    }
+
+    .btn-clear {
+        padding: 7px 14px;
+        border-radius: 7px;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        background: transparent;
+        color: var(--text-muted);
+        transition: all .15s;
+    }
+
+    .btn-clear:hover {
+        background: var(--surface-2);
+        color: var(--text);
+    }
+
+    /* ---- Table card ---- */
+    .table-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+    }
+
+    .table-card table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-card thead {
+        background: var(--surface-2);
+    }
+
+    .table-card th {
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .table-card td {
+        padding: 14px 16px;
+        font-size: 13px;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+    }
+
+    .table-card tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table-card tbody tr {
+        transition: background .12s;
+    }
+
+    .table-card tbody tr:hover {
+        background: var(--surface-2);
+    }
+
+    .col-date {
+        width: 100px;
+    }
+
+    .col-mr {
+        width: 100px;
+    }
+
+    .col-name {
+        min-width: 160px;
+    }
+
+    .col-type {
+        width: 110px;
+    }
+
+    .col-status {
+        width: 110px;
+    }
+
+    .col-actions {
+        width: 90px;
+        text-align: right;
+    }
+
+    .patient-name {
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .patient-rel {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 2px;
+    }
+
+    .mr-badge {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent);
+        background: var(--accent-light);
+        padding: 2px 8px;
+        border-radius: 5px;
+    }
+
+    .type-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        padding: 3px 9px;
+        border-radius: 5px;
+    }
+
+    .type-fitness {
+        background: #f0f9ff;
+        color: #0369a1;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 20px;
+    }
+
+    .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+    }
+
+    .status-synced {
+        background: var(--green-light);
+        color: var(--green);
+    }
+
+    .status-synced .status-dot {
+        background: var(--green);
+    }
+
+    .status-pending {
+        background: var(--amber-light);
+        color: var(--amber);
+    }
+
+    .status-pending .status-dot {
+        background: var(--amber);
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: .3;
+        }
+    }
+
+    .print-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        padding: 7px 13px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background .15s, transform .12s;
+    }
+
+    .print-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+    }
+
+    /* ---- Empty / Loading states ---- */
+    .table-empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+    }
+
+    .table-empty svg {
+        margin-bottom: 14px;
+        opacity: .35;
+    }
+
+    .table-empty p {
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .table-loading {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    /* ---- Pagination ---- */
+    .table-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px 16px;
+        border-top: 1px solid var(--border);
+        font-size: 12px;
+        color: var(--text-muted);
+        background: var(--surface-2);
+    }
+
+    .page-size-label { font-size: 11px; font-weight: 600; margin-left: auto; }
+    .page-size-select { border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 12px; background: var(--surface); }
+
+    .pagination {
+        display: flex;
+        gap: 4px;
+    }
+
+    .pg-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        transition: all .12s;
+    }
+
+    .pg-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .pg-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+    }
+
+    .extra-filters-drawer {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .extra-filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .extra-filter-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .extra-filter-item label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .extra-filter-item select,
+    .extra-filter-item input {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 8px 12px;
+        font-size: 13px;
+        color: var(--text);
+        outline: none;
+        background: var(--surface-2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="records-page">
+
+    <!-- Header -->
+    <div class="page-header">
+        <div>
+            <h1>Fitness Print Records</h1>
+            <p>View and print all fitness examination reports</p>
+        </div>
+        <a href="/page/print-records" class="new-report-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 5 5 12 12 19"></polyline>
+            </svg>
+            Back To Print Hub
+        </a>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="stats-strip">
+        <div class="stat-chip">
+            <div class="chip-icon blue">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+            </div>
+            <div>
+                <div class="chip-val" id="stat-total">—</div>
+                <div class="chip-label">Total Records</div>
+            </div>
+        </div>
+        <div class="stat-chip">
+            <div class="chip-icon green">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <div>
+                <div class="chip-val" id="stat-synced">—</div>
+                <div class="chip-label">Saved to Database</div>
+            </div>
+        </div>
+        <div class="stat-chip">
+            <div class="chip-icon amber">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+            </div>
+            <div>
+                <div class="chip-val" id="stat-pending">—</div>
+                <div class="chip-label">Pending Sync</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar">
+        <span class="filter-label">Date</span>
+        <input type="date" id="filter-single-date" title="Select Date">
+
+        <div class="filter-type-btns">
+            <button class="ftype-btn active" data-status="all">All Status</button>
+            <button class="ftype-btn" data-status="synced">Saved</button>
+            <button class="ftype-btn" data-status="pending">Pending</button>
+        </div>
+
+        <div class="filter-divider"></div>
+
+        <div class="search-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="search-input" placeholder="Search by name or MR no…">
+        </div>
+
+        <button class="btn-clear" id="btn-toggle-extra-filters">Advanced Filters</button>
+        <button class="btn-clear" id="btn-clear-filters">Clear</button>
+    </div>
+
+    <div class="extra-filters-drawer" id="extra-filters-drawer" style="display:none;">
+        <div class="extra-filters-grid">
+            <div class="extra-filter-item">
+                <label for="filter-from">From Date</label>
+                <input type="date" id="filter-from">
+            </div>
+            <div class="extra-filter-item">
+                <label for="filter-to">To Date</label>
+                <input type="date" id="filter-to">
+            </div>
+            <div class="extra-filter-item"></div>
+        </div>
+        <div id="advanced-search-root" style="margin-top:14px;"></div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-date">Date</th>
+                    <th class="col-mr">MR No</th>
+                    <th class="col-name">Patient</th>
+                    <th class="col-type">Details</th>
+                    <th class="col-status">Status</th>
+                    <th class="col-actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="records-tbody">
+                <tr>
+                    <td colspan="6" class="table-loading">Loading records…</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-footer">
+            <span id="showing-label">Showing 0 records</span>
+            <label class="page-size-label" for="page-size-select">Per page</label>
+            <select id="page-size-select" class="page-size-select"></select>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/advanced-search.js') }}"></script>
+<script src="{{ url_for('static', path='/js/list-pagination.js') }}"></script>
+<script>
+    let allRecords = [];
+    let filteredRecords = [];
+    let currentPage = 1;
+    let activeStatus = 'all';
+    const CACHE_TTL_MS = 45000;
+    let lastRequestedUrl = '';
+    let fetchController = null;
+    const memCache = new Map();
+    let advSearchReady = false;
+
+    function getCachedData(url) {
+        const mem = memCache.get(url);
+        if (mem && (Date.now() - mem.ts) < CACHE_TTL_MS) return mem.data;
+        try {
+            const raw = sessionStorage.getItem(`fitness_records_cache_${url}`);
+            if (!raw) return null;
+            const parsed = JSON.parse(raw);
+            if ((Date.now() - parsed.ts) < CACHE_TTL_MS) return parsed.data;
+        } catch {}
+        return null;
+    }
+
+    function setCachedData(url, data) {
+        const wrapped = { ts: Date.now(), data };
+        memCache.set(url, wrapped);
+        try {
+            sessionStorage.setItem(`fitness_records_cache_${url}`, JSON.stringify(wrapped));
+        } catch {}
+    }
+
+    // ---- Fetch records from server ----
+    async function loadRecords() {
+        const singleDate = document.getElementById('filter-single-date').value;
+        let from = document.getElementById('filter-from').value;
+        let to = document.getElementById('filter-to').value;
+        const search = document.getElementById('search-input').value.trim();
+        if (singleDate) {
+            from = singleDate;
+            to = singleDate;
+        }
+
+        const params = new URLSearchParams();
+        if (from) params.set('date_from', from);
+        if (to) params.set('date_to', to);
+        const advRoot = document.getElementById('advanced-search-root');
+        const advFilters = advRoot ? AdvancedSearch.getFilters(advRoot) : [];
+        if (advFilters.length) {
+            params.set('filters', JSON.stringify(advFilters));
+        } else if (search) {
+            params.set('search', search);
+        }
+        const url = `/api/fitness/records?${params.toString()}`;
+
+        if (url === lastRequestedUrl) return;
+        lastRequestedUrl = url;
+
+        const cached = getCachedData(url);
+        if (cached) {
+            allRecords = cached;
+            applyFilters();
+            return;
+        }
+        if (fetchController) fetchController.abort();
+        fetchController = new AbortController();
+
+        setLoading(true);
+        try {
+            const res = await fetch(url, { signal: fetchController.signal });
+            const data = await res.json();
+            allRecords = data.records || [];
+            setCachedData(url, allRecords);
+        } catch (e) {
+            if (e.name === 'AbortError') return;
+            allRecords = [];
+        }
+        applyFilters();
+        setLoading(false);
+    }
+
+    function applyFilters() {
+        allRecords.sort((a, b) => {
+            const da = new Date(a.created_at || a.report_date || 0).getTime();
+            const db = new Date(b.created_at || b.report_date || 0).getTime();
+            return db - da;
+        });
+        filteredRecords = allRecords.filter(r => {
+            if (activeStatus === 'synced') return r.synced === true;
+            if (activeStatus === 'pending') return r.synced === false;
+            return true;
+        });
+        currentPage = 1;
+        renderStats();
+        renderTable();
+        renderPagination();
+    }
+
+    // ---- Stats ----
+    function renderStats() {
+        const synced = allRecords.filter(r => !!r.synced).length;
+        const pending = allRecords.filter(r => !r.synced).length;
+        document.getElementById('stat-total').textContent = allRecords.length;
+        document.getElementById('stat-synced').textContent = synced;
+        document.getElementById('stat-pending').textContent = pending;
+    }
+
+    // ---- Table ----
+    function renderTable() {
+        const tbody = document.getElementById('records-tbody');
+        const pageSize = ListPagination.getPageSize();
+        const start = (currentPage - 1) * pageSize;
+        const page = filteredRecords.slice(start, start + pageSize);
+
+        document.getElementById('showing-label').textContent =
+            `Showing ${filteredRecords.length} record${filteredRecords.length !== 1 ? 's' : ''}`;
+
+        if (page.length === 0) {
+            tbody.innerHTML = `
+                <tr><td colspan="6" class="table-empty">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <p>No records found</p>
+                </td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = page.map(r => {
+            const date = r.report_date || r.created_at?.split('T')[0] || '—';
+            const mrNo = r.mr_no || '—';
+            const name = r.patient_name || 'Unknown';
+            const rel = r.relation_type && r.relation_name
+                ? `${r.relation_type} ${r.relation_name}` : '';
+            const synced = !!r.synced;
+            const statusHtml = synced
+                ? `<span class="status-badge status-synced"><span class="status-dot"></span>Saved</span>`
+                : `<span class="status-badge status-pending"><span class="status-dot"></span>Pending</span>`;
+            const details = `${r.gender || '—'}${r.relation_type ? ` • ${r.relation_type} ${r.relation_name || ''}` : ''}`;
+
+            return `
+            <tr>
+                <td class="col-date" style="color:var(--text-muted);font-size:12px;">${date}</td>
+                <td class="col-mr"><span class="mr-badge">${mrNo}</span></td>
+                <td class="col-name">
+                    <div class="patient-name">${name}</div>
+                    ${rel ? `<div class="patient-rel">${rel}</div>` : ''}
+                </td>
+                <td class="col-type"><span class="type-badge type-fitness">Fitness</span><div style="font-size:11px;color:#334155;margin-top:4px;">${details}</div></td>
+                <td class="col-status">${statusHtml}</td>
+                <td class="col-actions" style="text-align:right;">
+                    <button class="print-btn" onclick="printRecord(${JSON.stringify(r).replace(/"/g, '&quot;')})">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
+                        </svg>
+                        Print
+                    </button>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    // ---- Pagination ----
+    function renderPagination() {
+        const total = Math.ceil(filteredRecords.length / ListPagination.getPageSize());
+        const pg = document.getElementById('pagination');
+        if (total <= 1) { pg.innerHTML = ''; return; }
+
+        let html = '';
+        // Prev
+        html += `<button class="pg-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goPage(${currentPage - 1})">‹</button>`;
+        for (let i = 1; i <= total; i++) {
+            if (total > 7 && i > 2 && i < total - 1 && Math.abs(i - currentPage) > 1) {
+                if (i === 3 || i === total - 2) html += `<span class="pg-btn" style="cursor:default">…</span>`;
+                continue;
+            }
+            html += `<button class="pg-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+        }
+        // Next
+        html += `<button class="pg-btn" ${currentPage === total ? 'disabled' : ''} onclick="goPage(${currentPage + 1})">›</button>`;
+        pg.innerHTML = html;
+    }
+
+    function goPage(p) {
+        currentPage = p;
+        renderTable();
+        renderPagination();
+    }
+
+    function setLoading(on) {
+        if (on) {
+            document.getElementById('records-tbody').innerHTML =
+                `<tr><td colspan="6" class="table-loading">Loading records…</td></tr>`;
+        }
+    }
+
+    // ---- Print: render in hidden iframe and print directly ----
+    function printRecord(r) {
+        const date = r.report_date || '';
+        const name = r.patient_name || '';
+        const gender = r.gender || 'Male';
+        const relType = r.relation_type || 'S/O:';
+        const relName = r.relation_name || '';
+        const mrNo = r.mr_no || '';
+
+        // Build hematology rows (only if value exists)
+        const hemaTests = [
+            { name: 'HAEMOGLOBIN', val: r.hb, unit: 'g/dl', range: 'M: 13.0 - 16.5 F: 12.0 - 15.0' },
+            { name: 'W.B.C', val: r.wbc, unit: 'x10E9/L', range: '4.50 - 11.00' },
+            { name: 'NEUTROPHILS', val: r.neut, unit: '%', range: '40.0 - 80.0' },
+            { name: 'LYMPHOCYTES', val: r.lymph, unit: '%', range: '20.0 - 40.0' },
+            { name: 'MONOCYTES', val: r.mono, unit: '%', range: '2.0 - 10.0' },
+            { name: 'EOSINOPHILS', val: r.eosino, unit: '%', range: '0.0 - 6.0' },
+            { name: 'PLATELETS', val: r.plt, unit: 'x10E9/L', range: '150 – 450' },
+        ];
+
+        const seroTests = [
+            { name: 'Anti HIV ( ICT )', val: r.hiv },
+            { name: 'HbsAg ( ICT )', val: r.hbsag },
+            { name: 'Anti HCV ( ICT )', val: r.hcv },
+            { name: 'VDRL', val: r.vdrl },
+        ];
+
+        const hemaRows = hemaTests
+            .filter(t => t.val)
+            .map(t => `<tr><td>${t.name}</td><td style="font-weight:bold">${t.val} <span style="font-weight:normal">${t.unit}</span></td><td>${t.range}</td></tr>`)
+            .join('');
+
+        const seroRows = seroTests
+            .filter(t => t.val && t.val !== 'Not Performed')
+            .map(t => `<tr><td>${t.name}</td><td style="font-weight:bold">${t.val}</td></tr>`)
+            .join('');
+
+        const html = `<!DOCTYPE html><html><head><style>
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+            body { font-family: system-ui, -apple-system, sans-serif; padding: 10mm 15mm 20mm 15mm; }
+            .patient-info-card { border: 1.5px solid #000; border-radius: 8px; padding: 12px 18px; margin-bottom: 25px; }
+            .patient-info-grid { display: grid; grid-template-columns: 1.2fr 0.8fr 1.2fr; gap: 12px 24px; }
+            .info-row { font-size: 13px; display: flex; align-items: center; gap: 8px; padding: 2px 0; min-width: 0; }
+            .info-label { font-weight: 600; color: #475569; white-space: nowrap; flex-shrink: 0; }
+            .info-value { font-weight: bold; color: #000; }
+            h3 { font-size: 15px; margin: 25px 0 10px 0; text-transform: uppercase; font-weight: bold; border-left: 4px solid #333; padding-left: 10px; }
+            table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+            thead th { border: 1px solid black; padding: 8px; text-align: left; font-size: 13px; }
+            td { padding: 7px 8px; font-size: 13px; vertical-align: middle; }
+            .col-1 { width: 40%; } .col-2 { width: 25%; } .col-3 { width: 35%; }
+            .sero-table td:first-child { width: 40%; } .sero-table td:nth-child(2) { width: 60%; }
+            .pathologist { margin-top: 80px; text-align: right; font-weight: bold; font-size: 15px; padding-right: 15px; }
+            @media print { body { padding: 10mm 15mm 20mm 15mm; } }
+        </style></head><body>
+            <div class="patient-info-card">
+                <div class="patient-info-grid">
+                    <!-- Row 1 -->
+                    <div class="info-row"><span class="info-label">Name:</span><span class="info-value">${name}</span></div>
+                    <div class="info-row"><span class="info-label">Gender:</span><span class="info-value">${gender}</span></div>
+                    <div class="info-row"><span class="info-label">Relation:</span><span class="info-value">${relType} ${relName}</span></div>
+                    
+                    <!-- Row 2 -->
+                    <div class="info-row"><span class="info-label">Patient MR #:</span><span class="info-value">${mrNo}</span></div>
+                    <div class="info-row"><span class="info-label">Date:</span><span class="info-value">${date}</span></div>
+                    <div></div>
+                </div>
+            </div>
+            ${hemaRows ? `<h3>Hematology</h3>
+            <table><thead><tr><th class="col-1">Test Name</th><th class="col-2">Result</th><th class="col-3">Normal Ranges</th></tr></thead>
+            <tbody>${hemaRows}</tbody></table>` : ''}
+            ${seroRows ? `<h3>Serology</h3>
+            <table class="sero-table"><tbody>${seroRows}</tbody></table>` : ''}
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:80px">
+                <div></div><div class="pathologist">Pathologist</div>
+            </div>
+        </body></html>`;
+
+        // Create hidden iframe, inject content, print
+        let iframe = document.getElementById('print-iframe');
+        if (iframe) iframe.remove();
+        iframe = document.createElement('iframe');
+        iframe.id = 'print-iframe';
+        iframe.style.cssText = 'position:fixed;left:-9999px;top:0;width:210mm;height:297mm;border:none;';
+        document.body.appendChild(iframe);
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open();
+        doc.write(html);
+        doc.close();
+        iframe.contentWindow.focus();
+        setTimeout(() => {
+            iframe.contentWindow.print();
+        }, 400);
+    }
+
+    // ---- Filter controls ----
+    document.querySelectorAll('.ftype-btn[data-status]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.ftype-btn[data-status]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeStatus = btn.dataset.status;
+            loadRecords();
+        });
+    });
+    document.getElementById('btn-toggle-extra-filters').addEventListener('click', () => {
+        const drawer = document.getElementById('extra-filters-drawer');
+        drawer.style.display = drawer.style.display === 'none' ? 'block' : 'none';
+    });
+
+    let searchTimer;
+    document.getElementById('search-input').addEventListener('input', () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(loadRecords, 250);
+    });
+
+    document.getElementById('filter-single-date').addEventListener('change', loadRecords);
+    document.getElementById('filter-from').addEventListener('change', loadRecords);
+    document.getElementById('filter-to').addEventListener('change', loadRecords);
+
+    document.getElementById('btn-clear-filters').addEventListener('click', () => {
+        document.getElementById('filter-single-date').value = '';
+        document.getElementById('filter-from').value = '';
+        document.getElementById('filter-to').value = '';
+        document.getElementById('search-input').value = '';
+        const advRoot = document.getElementById('advanced-search-root');
+        if (advRoot) AdvancedSearch.clear(advRoot);
+        document.querySelectorAll('.ftype-btn[data-status]').forEach(b => b.classList.remove('active'));
+        document.querySelector('.ftype-btn[data-status="all"]').classList.add('active');
+        activeStatus = 'all';
+        lastRequestedUrl = '';
+        loadRecords();
+    });
+
+    // ---- Boot ----
+    document.addEventListener('DOMContentLoaded', async () => {
+        ListPagination.bindPageSizeSelect(
+            document.getElementById('page-size-select'),
+            () => { currentPage = 1; renderTable(); renderPagination(); }
+        );
+        try {
+            const res = await fetch('/api/metadata/filters');
+            const data = await res.json();
+            if (!advSearchReady) {
+                await AdvancedSearch.mount('#advanced-search-root', {
+                    onChange: () => { lastRequestedUrl = ''; loadRecords(); },
+                    categories: data.categories || [],
+                });
+                advSearchReady = true;
+            }
+        } catch {}
+        await loadRecords();
+    });
+</script>
+
+{% endblock %}

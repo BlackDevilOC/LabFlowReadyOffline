@@ -1,0 +1,22 @@
+{
+    "patient_name": "sana",
+    "gender": "Female",
+    "relation_type": "W/O:",
+    "relation_name": "ahmed",
+    "report_date": "25/05/2026",
+    "mr_no": "456456",
+    "hb": "15.2",
+    "wbc": "8.5",
+    "neut": "63",
+    "lymph": "28",
+    "mono": "06",
+    "eosino": "03",
+    "plt": "318",
+    "hiv": "Positive",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": null,
+    "user_email": "aman@aman.com",
+    "synced": true,
+    "saved_at": "2026-05-25 04:56:48"
+}

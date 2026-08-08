@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Welcome Hero Section -->
+    <section class="welcome-section">
+        <div class="welcome-content">
+            <h1>Welcome back, <span class="user-display-name">{{ name }}</span></h1>
+            <p>Your laboratory overview is ready. Manage patients, update test results, and generate reports all in one
+                place.</p>
+        </div>
+        <div class="welcome-bg-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Brief Stats Overview -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon icon-blue">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+            </div>
+            <div class="stat-info">
+                <h3>Total Patients</h3>
+                <div class="value">2,543</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon icon-green">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+            </div>
+            <div class="stat-info">
+                <h3>Tests Completed</h3>
+                <div class="value">12,890</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon icon-purple">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+            </div>
+            <div class="stat-info">
+                <h3>Pending Reports</h3>
+                <div class="value">42</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Action Cards -->
+    <div class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+            <a href="{{ url_prefix }}/register" class="action-card">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                    </svg>
+                    New Registration
+                    <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </h3>
+                <p>Register a new patient, assign tests, and generate an instant payment invoice for them.</p>
+            </a>
+
+            <a href="{{ url_prefix }}/update-results" class="action-card">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    Update Results
+                    <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </h3>
+                <p>Manage the laboratory queue, enter test result values, and finalize medical reports for patients.</p>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Dynamic name update from localStorage
+        const storedName = localStorage.getItem('userName');
+        const userEmail = localStorage.getItem('userEmail');
+
+        const nameElements = document.querySelectorAll('.user-display-name');
+
+        if (storedName && storedName.trim() !== '') {
+            nameElements.forEach(el => el.textContent = storedName);
+        } else if (userEmail) {
+            const displayName = userEmail.split('@')[0];
+            nameElements.forEach(el => el.textContent = displayName.charAt(0).toUpperCase() + displayName.slice(1));
+        }
+    });
+</script>
+{% endblock %}

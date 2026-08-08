@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/analytics.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="analyticsView" style="display:none;">
+<div class="analytics-page" data-view="{{ current_view }}">
+<div class="analytics-wrapper">
+    <aside class="analytics-nav">
+        <div class="analytics-nav-label">Analytics Suite</div>
+        <a href="/page/analytics?view=overview"
+            class="analytics-nav-item {% if current_view == 'overview' %}active{% endif %}" data-view="overview">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Overview
+        </a>
+        <a href="/page/analytics?view=telemetry"
+            class="analytics-nav-item {% if current_view == 'telemetry' %}active{% endif %}" data-view="telemetry">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Patient &amp; Staff Telemetry
+        </a>
+        <a href="/page/analytics?view=tests"
+            class="analytics-nav-item {% if current_view == 'tests' %}active{% endif %}" data-view="tests">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Test Diagnostics &amp; Ratios
+        </a>
+        <a href="/page/admin?view=overview" class="analytics-nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Admin Console
+        </a>
+    </aside>
+
+    <main class="analytics-main">
+        <header class="analytics-header">
+            <div>
+                <h1>
+                    {% if current_view == 'telemetry' %}Patient &amp; Staff Telemetry
+                    {% elif current_view == 'tests' %}Test Diagnostics &amp; Ratios
+                    {% else %}Operational Analytics Overview{% endif %}
+                    <span id="cacheBadge" class="cache-badge" style="display:none;">Cached</span>
+                </h1>
+                <p>Pathologist reporting suite — filter by date range to refresh all metrics and charts.</p>
+            </div>
+            <div class="analytics-toolbar">
+                <div class="range-presets">
+                    <button type="button" class="preset-btn active" data-preset="today">Today</button>
+                    <button type="button" class="preset-btn" data-preset="week">This Week</button>
+                    <button type="button" class="preset-btn" data-preset="month">This Month</button>
+                </div>
+                <div class="date-field">
+                    <label for="dateFrom">From</label>
+                    <input type="date" id="dateFrom">
+                </div>
+                <div class="date-field">
+                    <label for="dateTo">To</label>
+                    <input type="date" id="dateTo">
+                </div>
+                <button type="button" class="action-btn secondary" id="btnRefresh">Refresh</button>
+                <button type="button" class="action-btn export" id="btnExportPdf">Export PDF</button>
+            </div>
+        </header>
+
+        {% if current_view == 'overview' %}
+        <div class="quick-links">
+            <a class="quick-link" href="/page/analytics?view=telemetry">Staff throughput deep-dive →</a>
+            <a class="quick-link" href="/page/analytics?view=tests">Test ratios &amp; categories →</a>
+        </div>
+        {% endif %}
+
+        <section class="kpi-grid" id="kpiGrid"></section>
+
+        {% if current_view == 'overview' %}
+        <div class="chart-grid">
+            <div class="chart-card span-8">
+                <h3>Patient Registration Volume (Time Series)</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartRegistrations"></canvas></div>
+            </div>
+            <div class="chart-card span-4">
+                <h3>Result Parameter Distribution</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartResultRatio"></canvas></div>
+            </div>
+            <div class="chart-card span-12">
+                <h3>Test Volume by Category</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartCategories"></canvas></div>
+            </div>
+        </div>
+        {% elif current_view == 'telemetry' %}
+        <div class="chart-grid">
+            <div class="chart-card span-6">
+                <h3>Registration Velocity (Daily)</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartRegistrations"></canvas></div>
+            </div>
+            <div class="chart-card span-6">
+                <h3>Peak Hours (Registrations by Hour)</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartHourly"></canvas></div>
+            </div>
+            <div class="chart-card span-12">
+                <h3>Throughput by Operator</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartOperators"></canvas></div>
+            </div>
+        </div>
+        <div class="chart-card span-12" style="margin-top:0;">
+            <h3>Operator Attribution Table</h3>
+            <div class="data-table-wrap">
+                <table class="data-table" id="operatorTable">
+                    <thead>
+                        <tr>
+                            <th>Operator / Receptionist</th>
+                            <th>Registrations</th>
+                            <th>Primary Shift</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="chart-grid">
+            <div class="chart-card span-8">
+                <h3>Test Volume by Category (Segmented Bar)</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartCategories"></canvas></div>
+            </div>
+            <div class="chart-card span-4">
+                <h3>Normal vs Abnormal Parameters</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartResultRatio"></canvas></div>
+            </div>
+            <div class="chart-card span-12">
+                <h3>Top 10 Most Requested Tests</h3>
+                <div class="chart-canvas-wrap"><canvas id="chartTopTests"></canvas></div>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+</div>
+
+<div class="loading-overlay" id="analyticsLoading">
+    <div class="loading-box">Loading analytics…</div>
+</div>
+</div>
+</div>
+
+<div id="analyticsAccessDenied" class="analytics-access-denied" style="display:none;">
+    <h1>Access denied</h1>
+    <p>Incorrect admin password.</p>
+    <a href="/">Return Home</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/analytics-dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,123 @@
+(c) Microsoft Corporation. All rights reserved.
+
+D:\rehan\LABFLOW2.0\LabFlowReady>d:\rehan\LABFLOW2.0\LabFlowReady\.
+venv\Scripts\activate.bat
+
+(labflow) D:\rehan\LABFLOW2.0\LabFlowReady>uv run python build.py
+2026-06-16 11:17:51,374 - INFO - [LabFlow] - Launching desktop wind
+ow (splash) at 0,102
+2026-06-16 11:17:56,654 - INFO - [LabFlow] - Server ready — loading
+ login page
+INFO:LabFlowOffline:Offline App Started. Parent path: D:\rehan\LABF
+LOW2.0\LabFlowReady
+2026-06-16 11:18:02,489 - INFO - [LabFlow] - App started. Assets pa
+th: D:\rehan\LABFLOW2.0\LabFlowReady
+INFO:LabFlow:App started. Assets path: D:\rehan\LABFLOW2.0\LabFlowR
+eady
+2026-06-16 11:18:02,697 - INFO - [LabFlow] - Starting Uvicorn serve
+r for desktop window...
+INFO:LabFlow:Starting Uvicorn server for desktop window...
+ERROR:    [Errno 10048] error while attempting to bind on address (
+'127.0.0.1', 8000): only one usage of each socket address (protocol
+/network address/port) is normally permitted
+[pywebview] Failed to delete user data folder: [WinError 5] Access 
+is denied: 'C:\\Users\\lal\\AppData\\Local\\Temp\\tmpujo3dj2i\\EBWe
+bView\\CrashpadMetrics-active.pma'
+WARNING:pywebview:Failed to delete user data folder: [WinError 5] A
+ccess is denied: 'C:\\Users\\lal\\AppData\\Local\\Temp\\tmpujo3dj2i
+\\EBWebView\\CrashpadMetrics-active.pma'
+
+(labflow) D:\rehan\LABFLOW2.0\LabFlowReady>uv run python build.py
+2026-06-16 11:28:07,700 - INFO - [LabFlow] - Launching desktop wind
+ow (splash) at 0,102
+2026-06-16 11:28:10,094 - INFO - [LabFlow] - Server ready — loading
+ login page
+INFO:LabFlowOffline:Offline App Started. Parent path: D:\rehan\LABF
+LOW2.0\LabFlowReady
+2026-06-16 11:28:13,978 - INFO - [LabFlow] - App started. Assets pa
+th: D:\rehan\LABFLOW2.0\LabFlowReady
+INFO:LabFlow:App started. Assets path: D:\rehan\LABFLOW2.0\LabFlowR
+eady
+2026-06-16 11:28:14,012 - INFO - [LabFlow] - Starting Uvicorn serve
+r for desktop window...
+
+(labflow) D:\rehan\LABFLOW2.0\LabFlowReady>
+ *  History restored 
+
+Microsoft Windows [Version 10.0.19045.6466]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\rehan\LABFLOW2.0\LabFlowReady>d:\rehan\LABFLOW2.0\LabFlowReady\.venv\Scripts\activate.bat
+
+(labflow) D:\rehan\LABFLOW2.0\LabFlowReady>uv run python build.py
+2026-06-28 13:28:54,868 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+INFO:LabFlowOffline:Offline App Started. Parent path: D:\rehan\LABFLOW2.0\LabFlowReady
+2026-06-28 13:29:04,728 - INFO - [LabFlow] - App started. Assets path: D:\rehan\LABFLOW2.0\LabFlowReady
+INFO:LabFlow:App started. Assets path: D:\rehan\LABFLOW2.0\LabFlowReady
+2026-06-28 13:29:04,783 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+INFO:LabFlow:Starting Uvicorn server for desktop window...
+2026-06-28 13:29:05,316 - INFO - [LabFlow] - Server ready — loading login page
+INFO:LabFlow:Server ready — loading login page
+2026-06-28 13:29:05,354 - DEBUG - [LabFlow] - Accessing Login Page
+DEBUG:LabFlow:Accessing Login Page
+2026-06-28 13:29:11,643 - DEBUG - [LabFlow] - Accessing Login Page
+DEBUG:LabFlow:Accessing Login Page
+2026-06-28 13:29:12,330 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=is_active%2Cpermissions&limit=1 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=id%2Cname%2Cemail&is_active=eq.True&order=name.asc "HTTP/2 200 OK"
+2026-06-28 13:29:14,960 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=is_active%2Cpermissions&limit=1 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=id%2Cname%2Cemail&is_active=eq.True&order=name.asc "HTTP/2 200 OK"
+2026-06-28 13:29:17,785 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&email=eq.admin%40admin.com&limit=1 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=is_active%2Cpermissions&limit=1 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=shift&id=eq.1&limit=1 "HTTP/2 200 OK"
+2026-06-28 13:29:18,502 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&is_active=eq.True&order=id.desc&limit=1 "HTTP/2 200 OK"       
+2026-06-28 13:29:18,756 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/INFO:LabFlow:Invoice settings cached to fetcheddata/
+2026-06-28 13:29:18,756 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&is_active=eq.True&order=id.desc&limit=1 "HTTP/2 200 OK"
+2026-06-28 13:29:19,058 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+INFO:LabFlow:Lab print settings cached to fetcheddata/print_settings.json
+2026-06-28 13:29:19,064 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=id%2Cshift%2Ccreated_at&order=id.asc "HTTP/2 200 OK"
+2026-06-28 13:29:19,356 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=id%2Cemail%2Cdefault_shift_id&id=eq.1&limit=1 "HTTP/2 200 OK"
+2026-06-28 13:29:19,640 - INFO - [LabFlow] - User preferences cached to fetcheddata/INFO:LabFlow:User preferences cached to fetcheddata/
+2026-06-28 13:29:19,640 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=id%2Cremark_text%2Ctest_name%2Ccategory%2Cusage_count%2Csort_order%2Cis_active%2Ccreated_at%2Cupdated_at&is_active=eq.True&order=sort_order.asc%2Cusage_count.desc "HTTP/2 200 OK"
+2026-06-28 13:29:20,024 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+INFO:LabFlow:Remarks cached to fetcheddata/remarks.json
+2026-06-28 13:29:20,556 - DEBUG - [LabFlow] - Accessing Home Page
+DEBUG:LabFlow:Accessing Home Page
+2026-06-28 13:29:38,301 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+DEBUG:LabFlow:Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients "HTTP/2 201 Created"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 201 Created"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 201 Created"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 201 Created"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 201 Created"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_stsults_all "HTTP/2 201 Created"
+results_all "HTTP/2 400 Bad Request"                                             st_
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/testFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 201 Created"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all "HTTP/2 201 Created"
+ERROR:LabFlowOffline:offline sync-selected failed: database is locked
+ERROR:LabFlowOffline:offline-sync-log failed: no such column: synced_at
+2026-06-28 13:30:36,901 - DEBUG - [LabFlow] - Accessing Login Page
+DEBUG:LabFlow:Accessing Login Pag

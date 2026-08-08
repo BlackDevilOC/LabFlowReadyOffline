@@ -1,0 +1,90 @@
+{
+  "complete blood count|hep b, c|liver function test|mp-ict|pt (prothrombin time)|uce": {
+    "page_map": {
+      "COMPLETE BLOOD COUNT": 0,
+      "Hep B, C": 0,
+      "PT (Prothrombin Time)": 0,
+      "MP-ICT": 0,
+      "Liver Function Test": 1,
+      "UCE": 1
+    },
+    "test_order": [
+      "Liver Function Test",
+      "UCE",
+      "COMPLETE BLOOD COUNT",
+      "Hep B, C",
+      "PT (Prothrombin Time)",
+      "MP-ICT"
+    ],
+    "saved_by": "admin@admin.com",
+    "saved_at": "2026-08-07T15:30:02.390264Z",
+    "test_count": 6,
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|hep b, c|liver function test|uce": {
+    "page_map": {
+      "COMPLETE BLOOD COUNT": 0,
+      "Liver Function Test": 0,
+      "UCE": 0,
+      "Hep B, C": 0
+    },
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C"
+    ],
+    "saved_by": "admin@admin.com",
+    "saved_at": "2026-08-07T09:50:13.137682Z",
+    "test_count": 4,
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|hep b, c|liver function test|uc": {
+    "page_map": {
+      "COMPLETE BLOOD COUNT": 0,
+      "UC": 0,
+      "Hep B, C": 0,
+      "Liver Function Test": 0
+    },
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UC",
+      "Hep B, C"
+    ],
+    "saved_by": "admin@admin.com",
+    "saved_at": "2026-08-07T13:15:47.738204Z",
+    "test_count": 4,
+    "display_options": {
+      "show_category_title": true,
+      "show_group_test_title": true,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|hba1c": {
+    "page_map": {
+      "COMPLETE BLOOD COUNT": 0,
+      "HbA1c": 0
+    },
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "HbA1c"
+    ],
+    "saved_by": "admin@admin.com",
+    "saved_at": "2026-08-07T15:38:50.244967Z",
+    "test_count": 2,
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  }
+}

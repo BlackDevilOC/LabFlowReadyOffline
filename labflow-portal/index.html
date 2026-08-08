@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Lab Results — LabFlow</title>
+    <link rel="stylesheet" href="portal.css">
+    <script src="config.js"></script>
+</head>
+<body>
+    <div id="login-view" class="login-view">
+        <div class="login-card">
+            <h1 class="login-title" id="hospital-name">Lab Results Portal</h1>
+            <p class="login-subtitle">Enter your lab number and PIN from your receipt.</p>
+            <form id="login-form" autocomplete="off">
+                <label for="mr_no">Lab / MR number</label>
+                <input type="text" id="mr_no" name="mr_no" inputmode="numeric" placeholder="e.g. 12345">
+
+                <label for="patient_token">Or patient token (optional)</label>
+                <input type="text" id="patient_token" name="patient_token" placeholder="If shown on receipt instead of MR#">
+
+                <label for="pin">PIN / password</label>
+                <input type="password" id="pin" name="pin" inputmode="numeric" placeholder="From your receipt" required>
+
+                <p id="login-error" class="login-error" role="alert" hidden></p>
+                <button type="submit" class="btn-primary" id="login-btn">View results</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="report-view" class="report-view" hidden>
+        <div class="print-actions">
+            <button type="button" class="btn-back" id="btn-logout">Sign out</button>
+            <button type="button" class="btn-print" id="btn-print">Print report</button>
+        </div>
+        <div class="report-preview-container" id="reportContent">
+            <p class="loading-msg">Loading…</p>
+        </div>
+    </div>
+
+    <script src="portal.js"></script>
+</body>
+</html>

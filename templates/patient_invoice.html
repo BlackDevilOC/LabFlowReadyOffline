@@ -1,0 +1,518 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    :root {
+        --invoice-width: 3in;
+    }
+
+    /* Zero margin = Chrome/Edge skip default header/footer (date, URL) */
+    @page {
+        margin: 0mm;
+        size: 3in auto;
+    }
+
+    .invoice-page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        gap: 12px;
+    }
+
+    .invoice-page-header h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #111827;
+        margin: 0;
+    }
+
+    .btn-back-register {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        color: #374151;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-back-register:hover {
+        background: #f9fafb;
+        border-color: #d1d5db;
+    }
+
+    .invoice-preview-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 24px 16px 40px;
+        background-color: #f3f4f6;
+        border-radius: 12px;
+        min-height: 480px;
+    }
+
+    .invoice-paper {
+        width: var(--invoice-width);
+        background: white;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-left: 10px;
+        font-family: 'Inter', 'Arial', sans-serif;
+        color: black;
+        line-height: 1.4;
+        position: relative;
+    }
+
+    .btn-print-invoice {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #111827;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        z-index: 10;
+    }
+
+    .btn-print-invoice:hover {
+        background: #374151;
+    }
+
+    .btn-print-invoice svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .invoice-header {
+        text-align: center;
+        margin-bottom: 5px;
+        padding-top: 15px;
+    }
+
+    .invoice-logo {
+        width: 100px;
+        height: auto;
+        margin-bottom: 8px;
+    }
+
+    .hospital-name-text {
+        font-weight: 700;
+        font-size: 13px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 4px 6px;
+    }
+
+    .title-banner {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 6px 0;
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+
+    .invoice-info {
+        margin-bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .info-row-centered {
+        display: flex;
+        justify-content: flex-start;
+        align-items: baseline;
+        font-size: 10px;
+    }
+
+    .info-label-text {
+        font-weight: 700;
+        text-transform: capitalize;
+        width: 95px;
+        flex-shrink: 0;
+    }
+
+    .info-value-text {
+        font-weight: 400;
+        flex: 1;
+        word-break: break-word;
+    }
+
+    .online-report-box {
+        border-top: 1px dashed #999;
+        border-bottom: 1px dashed #999;
+        padding: 8px 0;
+        margin-bottom: 12px;
+        font-size: 9px;
+    }
+
+    .online-report-box .report-url {
+        font-weight: 600;
+        word-break: break-all;
+    }
+
+    .qr-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .qr-row img {
+        width: 72px;
+        height: 72px;
+        border: 1px solid #ddd;
+    }
+
+    .qr-scan-text {
+        font-weight: 700;
+        font-size: 10px;
+        text-transform: uppercase;
+        line-height: 1.3;
+    }
+
+    .desc-box {
+        border: 2px solid black;
+        margin-bottom: 16px;
+    }
+
+    .desc-title {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 5px;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .item-row {
+        padding: 8px;
+        border-bottom: 1px dashed black;
+        font-size: 11px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .item-row:last-child {
+        border-bottom: none;
+    }
+
+    .invoice-footer {
+        text-align: center;
+        margin-top: 10px;
+        border-top: 1px solid #000;
+        padding-top: 8px;
+    }
+
+    .wish-text {
+        font-weight: 700;
+        font-size: 12px;
+        margin-bottom: 5px;
+        text-decoration: underline;
+    }
+
+    .dev-credit {
+        font-size: 9px;
+        color: #666;
+    }
+
+    .dev-credit a {
+        color: #666;
+        text-decoration: none;
+    }
+
+    @media print {
+
+        html,
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: var(--invoice-width, 3in) !important;
+            background: #fff !important;
+        }
+
+        header.top-bar,
+        nav.sidebar,
+        .user-section,
+        .invoice-page-header,
+        .btn-print-invoice {
+            display: none !important;
+        }
+
+        .invoice-preview-wrapper {
+            padding: 0 !important;
+            margin: 0 !important;
+            background: #fff !important;
+            min-height: 0 !important;
+        }
+
+        .main-content,
+        .app-container {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .invoice-paper {
+            width: var(--invoice-width, 3in) !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+            padding: 10px !important;
+        }
+
+        .title-banner,
+        .desc-title {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    }
+
+    .loading-msg {
+        text-align: center;
+        padding: 40px;
+        font-style: italic;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="invoice-page-header">
+    <h1>Patient Receipt</h1>
+    <a href="{{ url_prefix }}/register" class="btn-back-register" title="Back to registration">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Register
+    </a>
+</div>
+<div class="invoice-preview-wrapper">
+    <div id="invoice-placeholder" class="invoice-paper">
+        <button type="button" class="btn-print-invoice"
+            onclick="printThermalReceipt(document.getElementById('invoice-placeholder'))">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            Print
+        </button>
+        <p class="loading-msg">Loading receipt...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/thermal-print.js') }}"></script>
+<script>
+    const patientId = {{ patient_id }};
+    const invoiceTestsFromServer = {{ invoice_tests | tojson }};
+    const invoicePinFromServer = {{ invoice_pin | tojson }};
+
+    function parseTestsParam(raw) {
+        if (!raw) return [];
+        try {
+            if (raw.startsWith('[')) return JSON.parse(raw);
+        } catch (_) { /* pipe-separated fallback */ }
+        return raw.split('|').map(s => s.trim()).filter(Boolean);
+    }
+
+    function getTestsFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return parseTestsParam(params.get('tests') || '');
+    }
+
+    function getPinFromUrl() {
+        return new URLSearchParams(window.location.search).get('pin') || '';
+    }
+
+    async function loadCachedSettings() {
+        try {
+            const res = await fetch('/fetcheddata/invoice_settings.json', { cache: 'no-store' });
+            if (res.ok) return await res.json();
+        } catch (e) {
+            console.warn('Cached invoice settings not found', e);
+        }
+        return {
+            hospital_name: 'GMMMC Teaching Hospital Sukkur',
+            developed_by: 'Rehan Ahmed',
+            developed_by_url: '',
+            online_report_url: 'www.gmc.syberclient.com/Account/PatientLogin',
+            printer_width: '3in',
+            logo_url: '/static/images/hospital_logo.png',
+            qr_url: '/fetcheddata/qr_placeholder.svg',
+        };
+    }
+
+    async function loadInvoiceData() {
+        const settings = await loadCachedSettings();
+        if (settings.printer_width) {
+            document.documentElement.style.setProperty('--invoice-width', settings.printer_width);
+            /* @page does not support CSS variables — set explicit size for Ctrl+P fallback */
+            const pageRule = `@page { margin: 0mm; size: ${settings.printer_width} auto; }`;
+            let el = document.getElementById('invoice-page-size');
+            if (!el) {
+                el = document.createElement('style');
+                el.id = 'invoice-page-size';
+                document.head.appendChild(el);
+            }
+            el.textContent = pageRule;
+        }
+
+        const testItems = getTestsFromUrl().length
+            ? getTestsFromUrl()
+            : parseTestsParam(invoiceTestsFromServer || '');
+
+        let pin = getPinFromUrl() || invoicePinFromServer || '';
+        let patient = null;
+
+        try {
+            const pRes = await fetch(`/api/patient/allinfo/${patientId}`);
+            const body = await pRes.json();
+            patient = body.Response;
+            if (!pin && patient && patient.pwd) pin = patient.pwd;
+        } catch (e) {
+            console.error(e);
+        }
+
+        if (!patient) {
+            document.getElementById('invoice-placeholder').innerHTML = '<p>Patient not found</p>';
+            return;
+        }
+
+        renderInvoice(patient, testItems, pin, settings);
+    }
+
+    function renderInvoice(p, items, pin, settings) {
+        const dateObj = new Date(p.created_at || new Date());
+        const dateStr = `${String(dateObj.getDate()).padStart(2, '0')}/${String(dateObj.getMonth() + 1).padStart(2, '0')}/${String(dateObj.getFullYear()).slice(-2)}`;
+
+        const relationMap = { S: 'S/O', D: 'D/O', W: 'W/O' };
+        const relLabel = relationMap[p.relation] || p.relation || '';
+        const fullRelation = [relLabel, p.relation_name].filter(x => x && x !== '0' && x !== 'None').join(' ');
+
+        const ageVal = (p.age && p.age !== 0 && p.age !== '0') ? p.age : '';
+        const genderVal = (p.gender && p.gender !== 'None' && p.gender !== 'OTHER') ? p.gender : '';
+        const ageGender = [ageVal, genderVal].filter(x => x).join(' / ');
+
+        const hospitalName = settings.hospital_name || 'GMMMC Teaching Hospital Sukkur';
+        const logoUrl = settings.logo_url || settings.logo_path || '/static/images/hospital_logo.png';
+        const qrUrl = settings.qr_url || '/fetcheddata/qr_placeholder.svg';
+        const onlineUrl = settings.online_report_url || '';
+        const devBy = settings.developed_by || 'Rehan Ahmed';
+        const devUrl = settings.developed_by_url || '';
+        const loginId = p.mr_no || 'N/A';
+        const password = pin || p.pwd || '—';
+
+        const devCredit = devUrl
+            ? `<a href="${devUrl}" target="_blank" rel="noopener">${devBy}</a>`
+            : devBy;
+
+        const testRows = (items.length ? items : ['—'])
+            .map(i => `<div class="item-row">${i}</div>`)
+            .join('');
+
+        const html = `
+            <button type="button" class="btn-print-invoice" onclick="printThermalReceipt(document.getElementById('invoice-placeholder'))">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                Print
+            </button>
+            <div class="invoice-header">
+                <img src="${logoUrl}" alt="Logo" class="invoice-logo" onerror="this.style.display='none'">
+                <div class="hospital-name-text">${hospitalName}</div>
+            </div>
+
+            <div class="title-banner">Receipt</div>
+
+            <div class="invoice-info">
+                <div class="info-row-centered">
+                    <span class="info-label-text">M.R No.</span>
+                    <span class="info-value-text">${loginId}</span>
+                </div>
+                <div class="info-row-centered">
+                    <span class="info-label-text">Patient Name</span>
+                    <span class="info-value-text">${p.patient_name || ''}</span>
+                </div>
+                ${p.mobile && p.mobile !== '0' && p.mobile !== 'None' ? `
+                <div class="info-row-centered">
+                    <span class="info-label-text">Contact No.</span>
+                    <span class="info-value-text">${p.mobile}</span>
+                </div>` : ''}
+                <div class="info-row-centered">
+                    <span class="info-label-text">Date</span>
+                    <span class="info-value-text">${dateStr}</span>
+                </div>
+                <div class="info-row-centered">
+                    <span class="info-label-text">Login ID</span>
+                    <span class="info-value-text">${loginId}</span>
+                </div>
+                <div class="info-row-centered">
+                    <span class="info-label-text">Password</span>
+                    <span class="info-value-text">${password}</span>
+                </div>
+                ${ageGender ? `
+                <div class="info-row-centered">
+                    <span class="info-label-text">Age / Gender</span>
+                    <span class="info-value-text">${ageGender}</span>
+                </div>` : ''}
+                ${fullRelation ? `
+                <div class="info-row-centered">
+                    <span class="info-label-text">Relation</span>
+                    <span class="info-value-text">${fullRelation}</span>
+                </div>` : ''}
+                <div class="info-row-centered">
+                    <span class="info-label-text">Shift</span>
+                    <span class="info-value-text">${p.shift || ''}</span>
+                </div>
+            </div>
+
+            <div class="online-report-box">
+                <div>For Online Report:</div>
+                <div class="report-url">${onlineUrl}</div>
+                <div class="qr-row">
+                    <img src="${qrUrl}" alt="QR Code">
+                    <div class="qr-scan-text">Scan for<br>Online Report</div>
+                </div>
+            </div>
+
+            <div class="desc-box">
+                <div class="desc-title">Description</div>
+                ${testRows}
+            </div>
+
+            <footer class="invoice-footer">
+                <div class="wish-text">We Wish You Good Health!</div>
+                <div class="dev-credit">Software Developed By: ${devCredit}</div>
+            </footer>
+        `;
+
+        document.getElementById('invoice-placeholder').innerHTML = html;
+    }
+
+    loadInvoiceData();
+</script>
+{% endblock %}

@@ -1,0 +1,1721 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    :root {
+        --ink: #111;
+        --muted: #333;
+        --line: #1f1f1f;
+        --bg: #f3f4f6;
+    }
+
+    .print-shell {
+        padding: 18px 22px;
+        max-width: 1100px;
+    }
+
+    /* Top actions (screen only) */
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .topbar h1 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .topbar p {
+        margin: 4px 0 0;
+        font-size: 12px;
+        color: #64748b;
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .btn {
+        border: 1px solid #cbd5e1;
+        background: #fff;
+        color: #0f172a;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .btn.primary {
+        background: #111827;
+        border-color: #111827;
+        color: #fff;
+    }
+
+    .preview-wrap {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, .06);
+        overflow: hidden;
+    }
+
+    .preview-layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 520px;
+    }
+
+    .tests-sidebar {
+        border-right: 1px solid #e5e7eb;
+        background: #f8fafc;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .tests-sidebar h3 {
+        margin: 0 0 8px;
+        font-size: 13px;
+        font-weight: 800;
+        color: #0f172a;
+        text-transform: uppercase;
+        letter-spacing: .02em;
+    }
+
+    .tests-actions {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 6px;
+        flex-wrap: wrap;
+    }
+
+    .tests-actions button {
+        border: 1px solid #cbd5e1;
+        background: #fff;
+        color: #0f172a;
+        border-radius: 6px;
+        padding: 4px 8px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background .15s, border-color .15s;
+    }
+
+    .tests-actions button:hover {
+        background: #f1f5f9;
+    }
+
+    .tests-actions button.danger {
+        border-color: #fca5a5;
+        color: #b91c1c;
+        background: #fff1f2;
+    }
+
+    .tests-actions button.danger:hover {
+        background: #fee2e2;
+    }
+
+    .tests-actions button.success {
+        border-color: #6ee7b7;
+        color: #065f46;
+        background: #f0fdf4;
+    }
+
+    .tests-actions button.success:hover {
+        background: #dcfce7;
+    }
+
+    .tests-actions button.primary-dark {
+        border-color: #1e40af;
+        color: #fff;
+        background: #1d4ed8;
+    }
+
+    .tests-actions button.primary-dark:hover {
+        background: #1e40af;
+    }
+
+    /* Saved layout indicator banner */
+    .layout-saved-banner {
+        display: none;
+        align-items: center;
+        gap: 6px;
+        background: #f0fdf4;
+        border: 1px solid #86efac;
+        border-radius: 6px;
+        padding: 5px 8px;
+        margin-bottom: 6px;
+        font-size: 11px;
+        color: #166534;
+        font-weight: 600;
+    }
+
+    .layout-saved-banner.active {
+        display: flex;
+    }
+
+    .layout-saved-banner .lsb-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #22c55e;
+        flex-shrink: 0;
+    }
+
+    /* Page groups in the sidebar */
+    .page-group {
+        margin-bottom: 8px;
+    }
+
+    .page-group-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        color: #64748b;
+        margin-bottom: 4px;
+        padding: 3px 4px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        user-select: none;
+    }
+
+    .page-group-header .pg-badge {
+        background: #0f172a;
+        color: #fff;
+        border-radius: 3px;
+        padding: 1px 5px;
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    /* Drop target highlight */
+    .page-group.drag-over .page-group-header {
+        background: #bfdbfe;
+        color: #1e3a8a;
+    }
+
+    .page-group.drag-over {
+        outline: 2px dashed #3b82f6;
+        outline-offset: -2px;
+        border-radius: 6px;
+    }
+
+    .tests-list {
+        max-height: calc(100vh - 320px);
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding-right: 2px;
+    }
+
+    .test-option {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        font-size: 11.5px;
+        color: #111827;
+        line-height: 1.3;
+        padding: 3px 4px;
+        border-radius: 4px;
+        cursor: grab;
+        user-select: none;
+        transition: background .12s;
+    }
+
+    .test-option:hover {
+        background: #e0e7ff;
+    }
+
+    .test-option.dragging {
+        opacity: 0.4;
+        background: #e0e7ff;
+    }
+
+    .test-option.drag-over-above {
+        border-top: 2px solid #2563eb !important;
+        background: #e0e7ff;
+    }
+
+    .test-option.drag-over-below {
+        border-bottom: 2px solid #2563eb !important;
+        background: #e0e7ff;
+    }
+
+    .test-option.normal-item {
+        cursor: pointer;
+        padding: 4px 6px;
+    }
+
+    .test-option.normal-item:hover {
+        background: #f1f5f9;
+    }
+
+    .test-option .drag-handle {
+        font-size: 13px;
+        color: #94a3b8;
+        flex-shrink: 0;
+        cursor: grab;
+    }
+
+    .test-option input[type=checkbox] {
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+
+    .test-option .test-label {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .tests-note {
+        margin-top: 8px;
+        font-size: 10.5px;
+        color: #64748b;
+        line-height: 1.4;
+    }
+
+    .preview {
+        padding: 18px 18px 66px;
+    }
+
+    .hr-thick {
+        border: none;
+        height: 2px;
+        background: #000;
+        margin: 8px 0 10px;
+    }
+
+    .report-page {
+        box-sizing: border-box;
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        max-height: 297mm;
+        margin: 0 auto 16px;
+        padding: 25mm 15mm;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        page-break-after: always;
+    }
+
+    .report-page.last-page {
+        page-break-after: auto;
+    }
+
+    .page-header {
+        flex: 0 0 auto;
+        overflow: hidden;
+    }
+
+    .page-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .page-footer {
+        flex: 0 0 auto;
+        overflow: hidden;
+        margin-top: auto;
+        border-top: 1px solid #000;
+        padding-top: 8px;
+        box-sizing: border-box;
+    }
+
+    .test-block {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .info-card {
+        border: 1px solid #111;
+        border-left: none;
+        border-right: none;
+        padding: 6px 0 8px;
+        margin-bottom: 6px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 24px;
+        font-size: 14px;
+        line-height: 1.3;
+    }
+
+    .row {
+        display: grid;
+        grid-template-columns: 145px 1fr;
+        align-items: baseline;
+    }
+
+    .label {
+        font-weight: 700;
+    }
+
+    .value {
+        font-weight: 600;
+    }
+
+    .category {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .category-title {
+        font-weight: bold;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        color: #111;
+        border: none;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13.5px;
+    }
+
+    thead th {
+        text-align: left;
+        font-weight: bold;
+        padding: 8px 6px;
+        border-top: 1.5px solid #000;
+        border-bottom: 1.5px solid #000;
+        border-left: none;
+        border-right: none;
+        background: #fff;
+        color: #000;
+        font-size: 13px;
+    }
+
+    tbody td {
+        padding: 4px 12px;
+        vertical-align: top;
+        border: none;
+        line-height: 1.25;
+        font-size: 14px;
+    }
+
+    .test-group {
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #111;
+        padding-top: 8px;
+        padding-bottom: 2px;
+        font-size: 15px;
+    }
+
+    .result-col {
+        width: 150px;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    thead th.result-col {
+        text-align: left;
+        padding-left: 0px;
+    }
+
+    tbody td.result-col {
+        padding-left: 8px;
+    }
+
+    .range-col {
+        width: 200px;
+    }
+
+    .test-remarks {
+        padding: 2px 8px 4px;
+        color: #b91c1c;
+        font-weight: 600;
+        font-size: 9px;
+        line-height: 1.3;
+        border-top: 1px dashed #d1d5db;
+    }
+
+    .test-remarks-label {
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 10px;
+        margin-right: 4px;
+    }
+
+    .footer {
+        font-size: 10px;
+        color: #111;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .footer-left {
+        margin-top: 4px;
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    /* Print rules */
+    @media print {
+
+        header.top-bar,
+        nav.sidebar {
+            display: none !important;
+        }
+
+        .app-container,
+        main.main-content {
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+        }
+
+        .print-shell {
+            padding: 0 !important;
+            max-width: none !important;
+        }
+
+        .topbar,
+        .tests-sidebar {
+            display: none !important;
+        }
+
+        .preview-layout {
+            display: block !important;
+        }
+
+        .preview-wrap {
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+
+        .preview {
+            padding: 0 !important;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .report-page {
+            border: none;
+            margin: 0;
+            page-break-after: always;
+            height: 297mm;
+            min-height: 297mm;
+        }
+
+        .report-page.last-page {
+            page-break-after: auto;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="print-shell">
+    <div class="topbar">
+        <div>
+            <h1>Lab Test Print Preview</h1>
+            <p>Preview the report before printing (grouped by category).</p>
+        </div>
+        <div class="actions">
+            <button class="btn" onclick="window.location.href='/page/lab-print-records'">Back</button>
+            <button class="btn" onclick="window.location.reload()">Refresh</button>
+            <button class="btn primary" id="print-btn" onclick="triggerLabPrintWithCheck()">Print</button>
+        </div>
+
+        <!-- Zero-value warning dialog -->
+        <div id="zero-warn-overlay"
+            style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:none;align-items:center;justify-content:center;">
+            <div
+                style="background:#fff;border-radius:16px;padding:28px 32px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:Arial,sans-serif;">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                    <span style="font-size:28px;">⚠️</span>
+                    <div>
+                        <div style="font-size:16px;font-weight:800;color:#92400e;">All Values Are Zero</div>
+                        <div style="font-size:12px;color:#78350f;margin-top:2px;">Some test results have not been
+                            entered</div>
+                    </div>
+                </div>
+                <div
+                    style="background:#fef3c7;border:1px solid #fbbf24;border-radius:10px;padding:12px 14px;margin-bottom:18px;">
+                    <div style="font-size:12px;font-weight:700;color:#78350f;margin-bottom:6px;">Tests with all zero
+                        values:</div>
+                    <div id="zero-warn-list" style="font-size:12px;color:#92400e;line-height:1.7;"></div>
+                </div>
+                <div style="font-size:13px;color:#374151;margin-bottom:20px;">Zero values will be printed as
+                    <strong>blank</strong>. Do you still want to print?
+                </div>
+                <div style="display:flex;gap:10px;justify-content:flex-end;">
+                    <button id="zero-warn-cancel"
+                        style="padding:9px 20px;border:1px solid #d1d5db;background:#fff;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:#374151;">Cancel</button>
+                    <button id="zero-warn-proceed"
+                        style="padding:9px 20px;border:none;background:#dc2626;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;color:#fff;">Print
+                        Anyway</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-wrap">
+        <div class="preview-layout">
+            <aside class="tests-sidebar">
+                <h3>Tests in Print</h3>
+
+                <!-- Saved layout indicator -->
+                <div class="layout-saved-banner" id="layout-saved-banner">
+                    <span class="lsb-dot"></span>
+                    <span id="layout-saved-text">Saved layout applied</span>
+                </div>
+
+                <!-- Admin Mode Dropdown container -->
+                <div id="admin-mode-container" style="display:none; margin-bottom: 8px;">
+                    <label for="admin-layout-dropdown"
+                        style="font-size: 11px; font-weight: 700; color: #475569; display: block; margin-bottom: 3px;">
+                        ⚙ Layout Mode:
+                    </label>
+                    <select id="admin-layout-dropdown"
+                        style="width: 100%; padding: 5px 8px; font-size: 12px; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; color: #0f172a; cursor: pointer;">
+                        <option value="normal">Normal View (Standard Checkboxes)</option>
+                        <option value="editor">Edit Page Layout & Order</option>
+                    </select>
+                </div>
+
+                <!-- Admin Display Toggles (admin-only) -->
+                <div id="admin-display-toggles" style="display:none; margin-bottom: 8px; background:#f1f5f9; border:1px solid #e2e8f0; border-radius:6px; padding:7px 9px;">
+                    <div style="font-size:10px; font-weight:800; color:#475569; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px;">🖨 Print Visibility</div>
+                    <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;margin-bottom:4px;">
+                        <input type="checkbox" id="toggle-category-title" style="cursor:pointer;">
+                        Show category heading (e.g. HEMATOLOGY)
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;margin-bottom:4px;">
+                        <input type="checkbox" id="toggle-group-test-title" style="cursor:pointer;">
+                        Show combined suffix (e.g. HEP B, C <span style="color:#2563eb;">(SEROLOGY)</span>)
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;">
+                        <input type="checkbox" id="toggle-single-test-title" style="cursor:pointer;">
+                        Show single test names (1-param)
+                    </label>
+                </div>
+
+                <!-- Action buttons row 1: Select / Clear -->
+                <div class="tests-actions" id="standard-actions">
+                    <button type="button" id="select-all-tests">Select All</button>
+                    <button type="button" id="clear-all-tests">Clear All</button>
+                </div>
+
+                <!-- Action buttons row 2: Admin-only save/clear/auto layout -->
+                <div class="tests-actions" id="admin-layout-actions" style="display:none;">
+                    <button type="button" id="save-layout-btn" class="success"
+                        title="Save this page arrangement as the default for this test set">💾 Save Layout</button>
+                    <button type="button" id="add-page-btn" class="primary-dark"
+                        title="Create a new empty page slot to move tests into">+ Add Page</button>
+                    <button type="button" id="clear-layout-btn" class="danger"
+                        title="Delete saved layout and use automatic pagination">✕ Clear Saved</button>
+                    <button type="button" id="auto-optimize-btn"
+                        title="Auto-fit all tests onto as few pages as possible">⚡ Auto</button>
+                </div>
+
+                <!-- Drag-to-page / Checkbox list -->
+                <div class="tests-list" id="tests-list">
+                    <div style="font-size:12px;color:#64748b;">Loading tests…</div>
+                </div>
+
+                <div class="tests-note" id="tests-note">Check or uncheck tests to include in print. Records are never
+                    modified.</div>
+            </aside>
+            <div class="preview" id="preview">
+                <div style="display:flex;justify-content:center;align-items:center;min-height:240px;">
+                    <div style="font-size:13px;color:#475569;font-weight:700;">Loading preview…</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/lab-print.js') }}"></script>
+<script>
+    const MR_NO = {{ mr_no }};
+    const DATE_FILTER = "{{ date }}".trim();
+    let allRows = [];
+    let selectedTestNames = new Set();
+    let currentPatient = {};
+    let currentSettings = null;
+
+    // ── Layout state ────────────────────────────────────────────────────────
+    // pageMap: { testName (original case) -> pageIndex (0-based) }
+    // null = use automatic pagination
+    let currentPageMap = null;
+    let currentTestOrder = [];
+    let savedFingerprint = null;      // fingerprint of the currently loaded saved layout
+    let currentFingerprint = null;    // fingerprint of current test selection
+    let adminViewMode = localStorage.getItem('labPrintAdminViewMode') || 'normal';
+    let draggedTestName = null;
+    let extraPageSlots = 0;
+
+    // ── Display toggle state (admin-controlled, persisted in localStorage) ───
+    let showCategoryTitle    = localStorage.getItem('labPrintShowCategoryTitle')    !== 'false';  // default ON
+    let showGroupTestTitle   = localStorage.getItem('labPrintShowGroupTestTitle')   !== 'false';  // default ON
+    let showSingleTestTitle  = localStorage.getItem('labPrintShowSingleTestTitle')  !== 'false';  // default ON
+
+    // ── Admin detection ─────────────────────────────────────────────────────
+    function isAdmin() {
+        try {
+            const email = localStorage.getItem('userEmail') || '';
+            const name = localStorage.getItem('userName') || '';
+            if (email.toLowerCase() === 'admin@admin.com' || name.toLowerCase() === 'admin') return true;
+
+            const raw = localStorage.getItem('userPermissions');
+            if (!raw) return false; // Default to non-admin access if permissions object is not populated
+            const perms = JSON.parse(raw);
+            if (!perms) return false;
+            return !!(perms.admin || perms.manage_tests || perms.manage_users);
+        } catch { return false; }
+    }
+    function getUserEmail() {
+        return localStorage.getItem('userEmail') || localStorage.getItem('userName') || 'Admin';
+    }
+
+    // F5 refresh support inside desktop window
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'F5') {
+            e.preventDefault();
+            window.location.reload();
+        }
+    });
+
+    function escapeHtml(text) {
+        if (text === null || text === undefined) return '';
+        const div = document.createElement('div');
+        div.textContent = String(text);
+        return div.innerHTML;
+    }
+
+    function fmtRange(minV, maxV) {
+        const min = (minV === null || minV === undefined || minV === '') ? null : String(minV);
+        const max = (maxV === null || maxV === undefined || maxV === '') ? null : String(maxV);
+        if (min && max) return `${escapeHtml(min)} - ${escapeHtml(max)}`;
+        if (min && !max) return `>= ${escapeHtml(min)}`;
+        if (!min && max) return `<= ${escapeHtml(max)}`;
+        return '';
+    }
+
+    function toParamList(testValues) {
+        // test_values is jsonb map: key -> {name,value,unit,normal_min,normal_max}
+        const values = testValues && typeof testValues === 'object' ? Object.values(testValues) : [];
+        return values.filter(v => v && typeof v === 'object');
+    }
+
+    function groupByCategoryAndTest(rows) {
+        const out = {};
+        for (const r of rows) {
+            const cat = (r.category || 'General').trim() || 'General';
+            if (!out[cat]) out[cat] = {};
+            const tname = (r.test_name || 'Test').trim() || 'Test';
+            if (!out[cat][tname]) out[cat][tname] = { params: [], remarks: '' };
+            out[cat][tname].params.push(...toParamList(r.test_values));
+            const rm = (r.remarks || '').trim();
+            if (rm) {
+                const existing = out[cat][tname].remarks;
+                out[cat][tname].remarks = existing ? `${existing}; ${rm}` : rm;
+            }
+        }
+        return out;
+    }
+
+    // ── paginateReport: uses manual page map & test order if set, else auto ───
+    function paginateReport(categories, settings) {
+        if (currentPageMap && Object.keys(currentPageMap).length) {
+            const fn = window.LabPrintLayout?.applyManualPageOverrides;
+            if (fn) return fn(categories, settings, currentPageMap, currentTestOrder);
+        }
+        const combined = Boolean(settings?.combine_categories_on_same_page ?? 1);
+        if (combined) {
+            const fn = window.LabPrintLayout?.paginateCombinedCategories;
+            if (fn) return fn(categories, settings);
+        }
+        const fn = window.LabPrintLayout?.paginateByCategory;
+        if (!fn) { console.error('LabPrintLayout not loaded'); return []; }
+        return fn(categories, settings);
+    }
+
+    function uniqueSortedTests(rows) {
+        const set = new Set();
+        for (const r of rows || []) {
+            const name = (r.test_name || '').trim();
+            if (name) set.add(name);
+        }
+        return Array.from(set).sort((a, b) => a.localeCompare(b));
+    }
+
+    // ── Compute fingerprint from current test rows ────────────────────────────
+    function computeFingerprint(rows) {
+        const names = [...new Set((rows || []).map(r => (r.test_name || '').trim()).filter(Boolean))];
+        return window.LabPrintLayout?.buildFingerprint(names) || names.sort().join('|');
+    }
+
+    // ── Derive page map from rendered pages (used after drag or auto) ─────────
+    function derivePageMapFromPages(pages) {
+        const map = {};
+        (pages || []).forEach((page, pageIdx) => {
+            (page.blocks || []).forEach(b => { map[b.name] = pageIdx; });
+        });
+        return map;
+    }
+
+    function ensureTestOrder(rows, pages) {
+        if (!currentTestOrder || !currentTestOrder.length) {
+            const order = [];
+            (pages || []).forEach(page => {
+                (page.blocks || []).forEach(b => {
+                    if (b.name && !order.includes(b.name)) order.push(b.name);
+                });
+            });
+            for (const r of rows || []) {
+                const name = (r.test_name || '').trim();
+                if (name && !order.includes(name)) order.push(name);
+            }
+            currentTestOrder = order;
+        }
+    }
+
+    function removePageSlot(targetPageIdx) {
+        if (!currentPageMap) currentPageMap = {};
+
+        const newMap = {};
+        for (const [tName, pIdx] of Object.entries(currentPageMap)) {
+            const pageNum = Number(pIdx);
+            if (pageNum === targetPageIdx) {
+                selectedTestNames.delete(tName);
+            } else if (pageNum > targetPageIdx) {
+                newMap[tName] = pageNum - 1;
+            } else {
+                newMap[tName] = pageNum;
+            }
+        }
+        currentPageMap = newMap;
+        if (extraPageSlots > 0) extraPageSlots--;
+        rebuildFromCurrentMap();
+    }
+
+    function clearDragHighlights() {
+        document.querySelectorAll('.drag-over-above, .drag-over-below, .drag-over').forEach(el => {
+            el.classList.remove('drag-over-above', 'drag-over-below', 'drag-over');
+        });
+    }
+
+    function moveTestInOrder(testName, targetTestName, dropAfter, targetPageIdx) {
+        if (!currentPageMap) currentPageMap = {};
+
+        if (targetPageIdx === 'off') {
+            selectedTestNames.delete(testName);
+        } else {
+            selectedTestNames.add(testName);
+            currentPageMap[testName] = Number(targetPageIdx);
+        }
+
+        // Reorder in currentTestOrder
+        const oldIdx = currentTestOrder.indexOf(testName);
+        if (oldIdx !== -1) currentTestOrder.splice(oldIdx, 1);
+
+        if (targetTestName) {
+            const targetIdx = currentTestOrder.indexOf(targetTestName);
+            if (targetIdx !== -1) {
+                const insertIdx = dropAfter ? targetIdx + 1 : targetIdx;
+                currentTestOrder.splice(insertIdx, 0, testName);
+            } else {
+                currentTestOrder.push(testName);
+            }
+        } else {
+            // Find last test on targetPageIdx in currentTestOrder
+            let lastIdx = -1;
+            currentTestOrder.forEach((t, idx) => {
+                if (currentPageMap[t] === Number(targetPageIdx)) lastIdx = idx;
+            });
+            if (lastIdx !== -1) {
+                currentTestOrder.splice(lastIdx + 1, 0, testName);
+            } else {
+                currentTestOrder.push(testName);
+            }
+        }
+        rebuildFromCurrentMap();
+    }
+
+    function attachItemDragEvents(item) {
+        item.addEventListener('dragstart', e => {
+            draggedTestName = item.dataset.testName;
+            e.dataTransfer.setData('text/plain', item.dataset.testName);
+            item.classList.add('dragging');
+        });
+
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            draggedTestName = null;
+            clearDragHighlights();
+        });
+
+        item.addEventListener('dragover', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            clearDragHighlights();
+            const rect = item.getBoundingClientRect();
+            const dropAfter = e.clientY > (rect.top + rect.height / 2);
+            if (dropAfter) item.classList.add('drag-over-below');
+            else item.classList.add('drag-over-above');
+        });
+
+        item.addEventListener('dragleave', e => {
+            e.stopPropagation();
+            item.classList.remove('drag-over-above', 'drag-over-below');
+        });
+
+        item.addEventListener('drop', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            clearDragHighlights();
+            const testName = e.dataTransfer.getData('text/plain') || draggedTestName;
+            if (!testName) return;
+            const targetTestName = item.dataset.testName;
+            const targetPageIdx = item.dataset.pageIdx;
+            const rect = item.getBoundingClientRect();
+            const dropAfter = e.clientY > (rect.top + rect.height / 2);
+
+            moveTestInOrder(testName, targetTestName, dropAfter, targetPageIdx);
+        });
+    }
+
+    function attachGroupDropEvents(groupEl) {
+        groupEl.addEventListener('dragover', e => {
+            e.preventDefault();
+            if (!e.target.closest('.test-option')) {
+                clearDragHighlights();
+                groupEl.classList.add('drag-over');
+            }
+        });
+
+        groupEl.addEventListener('dragleave', e => {
+            if (!groupEl.contains(e.relatedTarget)) {
+                groupEl.classList.remove('drag-over');
+            }
+        });
+
+        groupEl.addEventListener('drop', e => {
+            e.preventDefault();
+            groupEl.classList.remove('drag-over');
+            clearDragHighlights();
+            const testName = e.dataTransfer.getData('text/plain') || draggedTestName;
+            if (!testName) return;
+            const targetPage = groupEl.dataset.page;
+            moveTestInOrder(testName, null, false, targetPage);
+        });
+    }
+
+    // ── Build sidebar ─────────────────────────────────────────────────────────
+    function buildSidebar(rows, pages) {
+        const list = document.getElementById('tests-list');
+        const allTestNames = uniqueSortedTests(rows);
+        if (!allTestNames.length) {
+            list.innerHTML = `<div style="font-size:12px;color:#64748b;">No tests available.</div>`;
+            return;
+        }
+
+        ensureTestOrder(rows, pages);
+
+        const admin = isAdmin();
+        const adminContainer = document.getElementById('admin-mode-container');
+        const adminActions = document.getElementById('admin-layout-actions');
+        const dropdown = document.getElementById('admin-layout-dropdown');
+        const noteEl = document.getElementById('tests-note');
+
+        if (!admin) {
+            adminContainer.style.display = 'none';
+            adminActions.style.display = 'none';
+            document.getElementById('admin-display-toggles').style.display = 'none';
+            adminViewMode = 'normal';
+        } else {
+            adminContainer.style.display = 'block';
+            dropdown.value = adminViewMode;
+            if (adminViewMode === 'editor') {
+                adminActions.style.display = 'flex';
+                if (noteEl) noteEl.textContent = 'Drag tests between pages or drop above/below each other to reorder.';
+                // Show display toggles in editor mode only
+                const togglesPanel = document.getElementById('admin-display-toggles');
+                togglesPanel.style.display = 'block';
+                document.getElementById('toggle-category-title').checked   = showCategoryTitle;
+                document.getElementById('toggle-group-test-title').checked  = showGroupTestTitle;
+                document.getElementById('toggle-single-test-title').checked = showSingleTestTitle;
+            } else {
+                adminActions.style.display = 'none';
+                document.getElementById('admin-display-toggles').style.display = 'none';
+                if (noteEl) noteEl.textContent = 'Check or uncheck tests to include in print.';
+            }
+        }
+
+        list.innerHTML = '';
+
+        // Standard Checkbox View (for non-admins or admin in Normal View)
+        if (adminViewMode === 'normal' || !admin) {
+            allTestNames.forEach(name => {
+                const isChecked = selectedTestNames.has(name);
+                const item = document.createElement('label');
+                item.className = 'test-option normal-item';
+                item.innerHTML = `<input type="checkbox" class="test-checkbox" value="${escapeHtml(name)}" ${isChecked ? 'checked' : ''}><span class="test-label" title="${escapeHtml(name)}">${escapeHtml(name)}</span>`;
+                list.appendChild(item);
+            });
+
+            list.querySelectorAll('.test-checkbox').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    if (cb.checked) selectedTestNames.add(cb.value);
+                    else selectedTestNames.delete(cb.value);
+                    rebuildFromCurrentMap();
+                });
+            });
+            return;
+        }
+
+        // Editor View (Admin only): Page groups with drag handles & reordering
+        const pageGroups = {}; // pageIdx -> [testName]
+        const assignedTests = new Set();
+        (pages || []).forEach((page, pgIdx) => {
+            (page.blocks || []).forEach(b => {
+                if (!pageGroups[pgIdx]) pageGroups[pgIdx] = [];
+                pageGroups[pgIdx].push(b.name);
+                assignedTests.add(b.name);
+            });
+        });
+        const unprinted = allTestNames.filter(n => !assignedTests.has(n) && !selectedTestNames.has(n));
+
+        const renderedPageCount = (pages || []).length;
+        const mapPageCount = currentPageMap ? (Math.max(-1, ...Object.values(currentPageMap).map(Number).filter(n => !isNaN(n))) + 1) : 0;
+        const totalPageCount = Math.max(renderedPageCount, mapPageCount, extraPageSlots, 1);
+
+        for (let i = 0; i < totalPageCount; i++) {
+            if (!pageGroups[i]) pageGroups[i] = [];
+        }
+
+        Object.keys(pageGroups).map(Number).sort((a, b) => a - b).forEach(pgIdx => {
+            const groupEl = document.createElement('div');
+            groupEl.className = 'page-group';
+            groupEl.dataset.page = pgIdx;
+
+            const removeBtnHtml = (totalPageCount > 1) 
+                ? `<button type="button" class="remove-page-btn" data-page="${pgIdx}" title="Remove Page ${pgIdx + 1} and move its tests to Excluded" style="border:none;background:none;color:#ef4444;font-weight:bold;cursor:pointer;font-size:12px;padding:0 4px;">✕</button>`
+                : '';
+            
+            groupEl.innerHTML = `<div class="page-group-header" style="display:flex;justify-content:space-between;align-items:center;"><div><span class="pg-badge">P${pgIdx + 1}</span> Page ${pgIdx + 1}</div>${removeBtnHtml}</div>`;
+
+            const testsInPage = pageGroups[pgIdx] || [];
+            if (!testsInPage.length) {
+                const emptySlot = document.createElement('div');
+                emptySlot.style.cssText = 'font-size:11px;color:#94a3b8;padding:6px 8px;font-style:italic;text-align:center;border:1px dashed #cbd5e1;border-radius:4px;margin:2px 0;';
+                emptySlot.textContent = 'Empty page (drag tests here)';
+                groupEl.appendChild(emptySlot);
+            } else {
+                testsInPage.forEach(name => {
+                    const isChecked = selectedTestNames.has(name);
+                    const item = document.createElement('label');
+                    item.className = 'test-option';
+                    item.draggable = true;
+                    item.dataset.testName = name;
+                    item.dataset.pageIdx = pgIdx;
+                    item.innerHTML = `<span class="drag-handle" title="Drag to move page or order">⠿</span><input type="checkbox" class="test-checkbox" value="${escapeHtml(name)}" ${isChecked ? 'checked' : ''}><span class="test-label" title="${escapeHtml(name)}">${escapeHtml(name)}</span>`;
+                    groupEl.appendChild(item);
+                    attachItemDragEvents(item);
+                });
+            }
+
+            list.appendChild(groupEl);
+            attachGroupDropEvents(groupEl);
+        });
+
+        // Attach listeners for remove page buttons
+        list.querySelectorAll('.remove-page-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                const pageToRemove = Number(btn.dataset.page);
+                removePageSlot(pageToRemove);
+            });
+        });
+
+        // Unprinted section
+        if (unprinted.length) {
+            const groupEl = document.createElement('div');
+            groupEl.className = 'page-group';
+            groupEl.dataset.page = 'off';
+            groupEl.innerHTML = `<div class="page-group-header" style="background:#fef9c3;color:#92400e;">Excluded from Print</div>`;
+            unprinted.forEach(name => {
+                const item = document.createElement('label');
+                item.className = 'test-option';
+                item.draggable = true;
+                item.dataset.testName = name;
+                item.dataset.pageIdx = 'off';
+                item.innerHTML = `<span class="drag-handle">⠿</span><input type="checkbox" class="test-checkbox" value="${escapeHtml(name)}"><span class="test-label" title="${escapeHtml(name)}">${escapeHtml(name)}</span>`;
+                groupEl.appendChild(item);
+                attachItemDragEvents(item);
+            });
+            list.appendChild(groupEl);
+            attachGroupDropEvents(groupEl);
+        }
+
+        list.querySelectorAll('.test-checkbox').forEach(cb => {
+            cb.addEventListener('change', () => {
+                if (cb.checked) selectedTestNames.add(cb.value);
+                else selectedTestNames.delete(cb.value);
+                rebuildFromCurrentMap();
+            });
+        });
+    }
+
+    // Re-render preview using current pageMap & testOrder, then rebuild sidebar
+    function rebuildFromCurrentMap() {
+        const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+        const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+        if (pages) {
+            currentPageMap = derivePageMapFromPages(pages);
+            buildSidebar(allRows, pages);
+        }
+    }
+
+    function renderCurrent() {
+        const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+        const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+        if (pages) buildSidebar(allRows, pages);
+    }
+
+    // ── Selector actions ──────────────────────────────────────────────────────
+    function hookSelectorActions() {
+        document.getElementById('select-all-tests').addEventListener('click', () => {
+            allRows.forEach(r => {
+                const n = (r.test_name || '').trim();
+                if (n) selectedTestNames.add(n);
+            });
+            document.querySelectorAll('.test-checkbox').forEach(cb => cb.checked = true);
+            rebuildFromCurrentMap();
+        });
+
+        document.getElementById('clear-all-tests').addEventListener('click', () => {
+            selectedTestNames.clear();
+            document.querySelectorAll('.test-checkbox').forEach(cb => cb.checked = false);
+            rebuildFromCurrentMap();
+        });
+
+        document.getElementById('auto-optimize-btn').addEventListener('click', () => {
+            currentPageMap = null; // reset to auto
+            currentTestOrder = [];
+            extraPageSlots = 0;
+            updateSavedBanner(false);
+            rebuildFromCurrentMap();
+        });
+
+        document.getElementById('add-page-btn').addEventListener('click', () => {
+            const renderedPageCount = document.querySelectorAll('#preview .report-page').length;
+            const mapPageCount = currentPageMap ? (Math.max(-1, ...Object.values(currentPageMap).map(Number).filter(n => !isNaN(n))) + 1) : 0;
+            extraPageSlots = Math.max(renderedPageCount, mapPageCount, extraPageSlots) + 1;
+            rebuildFromCurrentMap();
+        });
+
+        // Admin-only dropdown toggle & save/clear
+        if (isAdmin()) {
+            const dropdown = document.getElementById('admin-layout-dropdown');
+            if (dropdown) {
+                dropdown.addEventListener('change', (e) => {
+                    adminViewMode = e.target.value;
+                    localStorage.setItem('labPrintAdminViewMode', adminViewMode);
+                    renderCurrent();
+                });
+            }
+
+            // Display toggle checkboxes
+            document.getElementById('toggle-category-title').addEventListener('change', (e) => {
+                showCategoryTitle = e.target.checked;
+                localStorage.setItem('labPrintShowCategoryTitle', showCategoryTitle);
+                renderCurrent();
+            });
+            document.getElementById('toggle-group-test-title').addEventListener('change', (e) => {
+                showGroupTestTitle = e.target.checked;
+                localStorage.setItem('labPrintShowGroupTestTitle', showGroupTestTitle);
+                renderCurrent();
+            });
+            document.getElementById('toggle-single-test-title').addEventListener('change', (e) => {
+                showSingleTestTitle = e.target.checked;
+                localStorage.setItem('labPrintShowSingleTestTitle', showSingleTestTitle);
+                renderCurrent();
+            });
+
+            document.getElementById('save-layout-btn').addEventListener('click', async () => {
+                const fp = currentFingerprint;
+                if (!fp) return alert('No tests loaded.');
+                const btn = document.getElementById('save-layout-btn');
+                btn.disabled = true; btn.textContent = '⏳ Saving…';
+                try {
+                    const res = await fetch('/api/lab/print-layout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-User-Email': getUserEmail(),
+                            'X-User-Role': 'admin',
+                        },
+                        body: JSON.stringify({
+                            fingerprint: fp,
+                            layout: {
+                                page_map: currentPageMap || {},
+                                test_order: currentTestOrder || [],
+                                test_count: selectedTestNames.size,
+                                display_options: {
+                                    show_category_title:   showCategoryTitle,
+                                    show_group_test_title: showGroupTestTitle,
+                                    show_single_test_title: showSingleTestTitle
+                                }
+                            }
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.status === 'ok') {
+                        savedFingerprint = fp;
+                        updateSavedBanner(true, `Saved by ${getUserEmail()}`);
+                        btn.textContent = '✓ Saved!';
+                        setTimeout(() => { btn.textContent = '💾 Save Layout'; btn.disabled = false; }, 1800);
+                    } else {
+                        alert('Save failed: ' + (data.detail || data.message || 'Unknown error'));
+                        btn.textContent = '💾 Save Layout'; btn.disabled = false;
+                    }
+                } catch (err) {
+                    alert('Network error: ' + err.message);
+                    btn.textContent = '💾 Save Layout'; btn.disabled = false;
+                }
+            });
+
+            document.getElementById('clear-layout-btn').addEventListener('click', async () => {
+                const fp = savedFingerprint || currentFingerprint;
+                if (!fp) return;
+                if (!confirm('Delete the saved layout for this test set?')) return;
+                const btn = document.getElementById('clear-layout-btn');
+                btn.disabled = true; btn.textContent = '⏳…';
+                try {
+                    const res = await fetch(`/api/lab/print-layout?fingerprint=${encodeURIComponent(fp)}`, {
+                        method: 'DELETE',
+                        headers: { 'X-User-Role': 'admin', 'X-User-Email': getUserEmail() }
+                    });
+                    const data = await res.json();
+                    if (data.status === 'ok') {
+                        savedFingerprint = null;
+                        currentPageMap = null;
+                        currentTestOrder = [];
+                        updateSavedBanner(false);
+                        rebuildFromCurrentMap();
+                    }
+                } catch (err) { alert('Error: ' + err.message); }
+                btn.textContent = '✕ Clear Saved'; btn.disabled = false;
+            });
+        }
+    }
+
+    function updateSavedBanner(show, label) {
+        const banner = document.getElementById('layout-saved-banner');
+        const txt = document.getElementById('layout-saved-text');
+        if (show) {
+            banner.classList.add('active');
+            txt.textContent = label || 'Saved layout applied';
+        } else {
+            banner.classList.remove('active');
+        }
+    }
+
+    // ── Load ──────────────────────────────────────────────────────────────────
+    async function load() {
+        const [payloadRes, settingsRes] = await Promise.all([
+            fetch(`/api/lab/print/${MR_NO}`),
+            fetch('/api/setting/loadprintsetting')
+        ]);
+
+        const payload = await payloadRes.json();
+        const settingsArr = await settingsRes.json();
+        const settings = Array.isArray(settingsArr) && settingsArr.length ? settingsArr[0] : null;
+
+        if (settings) applyPrintSettings(settings);
+
+        if (!payload || payload.status !== 'ok') {
+            document.getElementById('preview').innerHTML = `<div style="padding:30px;text-align:center;color:#b91c1c;font-weight:800;">Failed to load print data.</div>`;
+            return;
+        }
+
+        currentPatient = payload.patient || {};
+        allRows = payload.tests || [];
+        currentSettings = settings;
+
+        // Compute fingerprint and try to load saved layout
+        currentFingerprint = computeFingerprint(allRows);
+
+        // Initialise selectedTestNames before fetching layout
+        selectedTestNames = new Set();
+        for (const r of allRows) {
+            const name = (r.test_name || '').trim();
+            if (!name) continue;
+            const rowDate = r.created_at ? r.created_at.split('T')[0] : '';
+            if (!DATE_FILTER || rowDate === DATE_FILTER) selectedTestNames.add(name);
+        }
+
+        // Try saved layout
+        if (currentFingerprint) {
+            try {
+                const lr = await fetch(`/api/lab/print-layout?fingerprint=${encodeURIComponent(currentFingerprint)}`);
+                const ld = await lr.json();
+                if (ld.status === 'ok' && ld.layout?.page_map && Object.keys(ld.layout.page_map).length) {
+                    currentPageMap = ld.layout.page_map;
+                    if (Array.isArray(ld.layout.test_order) && ld.layout.test_order.length) {
+                        currentTestOrder = ld.layout.test_order;
+                    }
+                    // Restore saved display options
+                    const opts = ld.layout.display_options;
+                    if (opts) {
+                        if (opts.show_category_title !== undefined) {
+                            showCategoryTitle = Boolean(opts.show_category_title);
+                            localStorage.setItem('labPrintShowCategoryTitle', showCategoryTitle);
+                        }
+                        if (opts.show_group_test_title !== undefined) {
+                            showGroupTestTitle = Boolean(opts.show_group_test_title);
+                            localStorage.setItem('labPrintShowGroupTestTitle', showGroupTestTitle);
+                        }
+                        if (opts.show_single_test_title !== undefined) {
+                            showSingleTestTitle = Boolean(opts.show_single_test_title);
+                            localStorage.setItem('labPrintShowSingleTestTitle', showSingleTestTitle);
+                        }
+                    }
+                    savedFingerprint = currentFingerprint;
+                    const savedBy = ld.layout.saved_by || '';
+                    updateSavedBanner(true, savedBy ? `Saved layout by ${savedBy}` : 'Saved layout applied');
+                }
+            } catch (e) { /* no saved layout, use auto */ }
+        }
+
+        hookSelectorActions();
+        renderCurrent();
+    }
+
+    function triggerLabPrint() {
+        printLabReport({ contentEl: document.getElementById('preview'), settings: currentSettings });
+    }
+
+    /** Check if a test block has ALL parameter values equal to 0 */
+    function testBlockIsAllZero(rows, testName) {
+        const testRows = rows.filter(r => (r.test_name || '').trim() === testName);
+        if (!testRows.length) return false;
+        let hasParams = false;
+        for (const row of testRows) {
+            const vals = Object.values((row.test_values && typeof row.test_values === 'object') ? row.test_values : {});
+            for (const v of vals) {
+                if (v && typeof v === 'object' && 'value' in v) {
+                    hasParams = true;
+                    const val = v.value;
+                    if (val !== 0 && val !== '0' && val !== null && val !== undefined && val !== '') return false;
+                }
+            }
+        }
+        return hasParams; // true only if had params and ALL were zero/null/empty
+    }
+
+    function triggerLabPrintWithCheck() {
+        // Find selected test names where ALL values are zero
+        const zeroTests = [];
+        for (const name of selectedTestNames) {
+            if (testBlockIsAllZero(allRows, name)) {
+                zeroTests.push(name);
+            }
+        }
+
+        if (zeroTests.length === 0) {
+            triggerLabPrint();
+            return;
+        }
+
+        // Show warning dialog
+        const overlay = document.getElementById('zero-warn-overlay');
+        const list = document.getElementById('zero-warn-list');
+        list.innerHTML = zeroTests.map(n => `• ${n}`).join('<br>');
+        overlay.style.display = 'flex';
+
+        document.getElementById('zero-warn-cancel').onclick = () => {
+            overlay.style.display = 'none';
+        };
+        document.getElementById('zero-warn-proceed').onclick = () => {
+            overlay.style.display = 'none';
+            triggerLabPrint();
+        };
+        // Close on overlay backdrop click
+        overlay.onclick = (e) => {
+            if (e.target === overlay) overlay.style.display = 'none';
+        };
+    }
+
+    function applyPrintSettings(s) {
+        const layout = window.LabPrintLayout?.getPageLayout
+            ? window.LabPrintLayout.getPageLayout(s)
+            : { headerPx: s.header_height ?? 140, footerPx: 72, bodyBudgetPx: 600 };
+        let style = document.getElementById('lab-print-settings-style');
+        if (!style) {
+            style = document.createElement('style');
+            style.id = 'lab-print-settings-style';
+            document.head.appendChild(style);
+        }
+        style.innerHTML = `
+                body { color: ${s.primary_color || '#111'}; }
+                .report-page {
+                    width: 210mm;
+                    height: 297mm;
+                    min-height: 297mm;
+                    max-height: 297mm;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    padding: ${s.page_top_margin ?? 25}mm ${s.page_right_margin ?? 15}mm ${s.page_bottom_margin ?? 25}mm ${s.page_left_margin ?? 15}mm;
+                }
+                .page-header {
+                    flex: 0 0 auto;
+                    min-height: 0;
+                    max-height: ${layout.headerPx}px;
+                    overflow: hidden;
+                }
+                .patient-header-grid {
+                    margin-bottom: ${s.patient_info_bottom_margin ?? 6}px !important;
+                }
+                .page-body {
+                    flex: 1 1 auto;
+                    min-height: 0;
+                    max-height: ${layout.bodyBudgetPx}px;
+                    overflow: hidden;
+                }
+                .page-footer {
+                    flex: 0 0 ${layout.footerPx}px;
+                    height: ${layout.footerPx}px;
+                    min-height: ${layout.footerPx}px;
+                    max-height: ${layout.footerPx}px;
+                    overflow: hidden;
+                    box-sizing: border-box;
+                }
+                .info-grid { font-size: ${s.patient_info_font_size ?? 14}px; }
+                .label { font-size: ${s.patient_info_label_font_size ?? 14}px; }
+                .category {
+                    padding-top: ${s.category_padding_top ?? 6}px;
+                    border-top: ${s.category_border_width ?? 2}px solid #111;
+                }
+                .category-title {
+                    font-size: ${s.category_font_size ?? 18}px;
+                    font-weight: 800;
+                    margin-bottom: ${s.category_padding_bottom ?? 4}px;
+                    margin-top: 0px;
+                    border: none;
+                    padding-top: 0px;
+                }
+                .cat-sep-row td {
+                    font-weight: 800;
+                    font-size: ${s.category_font_size ?? 18}px;
+                    text-transform: uppercase;
+                    letter-spacing: .08em;
+                    padding-top: ${s.category_padding_top ?? 6}px;
+                    padding-bottom: ${s.category_padding_bottom ?? 4}px;
+                    padding-left: 0;
+                    border-top: ${s.category_border_width ?? 2}px solid #111;
+                    color: #111;
+                }
+                .test-group {
+                    font-size: ${s.group_font_size ?? 15}px;
+                    padding-top: ${s.group_padding_top ?? 8}px;
+                    padding-bottom: ${s.group_padding_bottom ?? 2}px;
+                    padding-left: 4px;
+                }
+                table, thead th { font-size: ${s.test_name_font_size ?? 14}px; }
+                thead th {
+                    padding: ${s.table_header_padding_vertical ?? 8}px 4px;
+                }
+                thead th.result-col { text-align: left; padding-left: 0px; }
+                tbody td.result-col { padding-left: 8px; }
+                thead th:first-child { padding-left: 4px; }
+                tbody td {
+                    padding: ${s.table_cell_padding_vertical ?? 4}px 4px;
+                    font-size: ${s.result_font_size ?? 14}px;
+                }
+                tbody td:first-child { padding-left: 4px; }
+                tbody.test-block + tbody.test-block {
+                    border-top: 1px solid #e5e7eb;
+                }
+                .test-remarks { font-size: ${Math.max(10, (s.result_font_size ?? 14) - 2)}px; }
+                .footer, .footer-left { font-size: ${s.footer_font_size ?? 11}px; }
+                .page-footer { padding-top: ${s.footer_padding_top ?? 20}px; }
+                @media print {
+                    @page { size: A4 portrait !important; margin: 0 !important; }
+                    html, body { width: 210mm !important; }
+                .report-page {
+                    width: 210mm !important;
+                    height: 297mm !important;
+                    min-height: 297mm !important;
+                    max-height: 297mm !important;
+                    page-break-after: always;
+                    overflow: hidden;
+                }
+                    .report-page.last-page { page-break-after: auto; }
+                }
+            `;
+    }
+
+    function renderAndReturnPages(patient, rows, settings) {
+        const now = new Date();
+        const createdAt = (rows && rows.length && rows[rows.length - 1].created_at) ? new Date(rows[rows.length - 1].created_at) : now;
+        const reportDate = DATE_FILTER || createdAt.toISOString().slice(0, 10);
+
+        const categories = groupByCategoryAndTest(rows);
+        const catNames = Object.keys(categories);
+        catNames.sort((a, b) => a.localeCompare(b));
+
+        const pName = `${patient.salutation || ''} ${patient.patient_name || ''}`.trim();
+        const rawRelation = `${patient.relation_type || patient.relation || ''}`.trim();
+        const relationName = `${patient.relation_name || ''}`.trim();
+        const ageSex = `${patient.age || ''}/${patient.gender || ''}`.replace(/^\/|\/$/g, '');
+        const relationMap = {
+            W: 'W/O',
+            S: 'S/O',
+            D: 'D/O',
+            C: 'C/O',
+            H: 'H/O',
+            F: 'F/O',
+            M: 'M/O'
+        };
+        const relationKey = rawRelation.replace(/\s+/g, '').toUpperCase();
+        const relation = relationMap[relationKey] || rawRelation || 'W/O';
+
+        const rawToken = patient.patient_token;
+        const pToken = (rawToken === 0 || rawToken === '0') ? ' ' : (rawToken ?? '—');
+
+        const footerHtml = `
+                <div class="page-footer">
+                    <div class="footer">${escapeHtml((settings?.footer_line1 || 'ELECTRONICALLY VERIFIED REPORT, SIGNATURE(S) NOT REQUIRED').toUpperCase())}</div>
+                    <div class="footer-left">${escapeHtml(settings?.footer_line3 || 'GMMMC SUKKUR')}</div>
+                </div>
+            `;
+
+        const headerHtml = `
+                <div class="page-header">
+                    <div class="patient-header-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 6px;">
+                        <div class="info-box" style="border: 1.5px solid #222; border-radius: 14px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; background: #fff;">
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Patient MR # :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(patient.mr_no || MR_NO)}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Patient Name :</span> <span style="font-weight: 700; color: #111;">${escapeHtml(pName || '—')}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Report Date :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(reportDate)}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">SHIFT :</span> <span style="font-weight: 500; color: #111;">${escapeHtml((patient.shift || '—').toUpperCase())}</span></div>
+                        </div>
+                        <div class="info-box" style="border: 1.5px solid #222; border-radius: 14px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; background: #fff;">
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Age/Gender :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(ageSex || '—')}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">${escapeHtml(relation)} :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(relationName || '—')}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Reported On :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(now.toLocaleString())}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">PATIENT TOKEN NO:</span> <span style="font-weight: 500; color: #111;">${escapeHtml(pToken)}</span></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        /**
+         * Per-category mode: one category per page, each with its own table and thead.
+         */
+        function renderPerCategoryPage(page) {
+            const hideSingle = Boolean(settings?.hide_single_param_title ?? 1);
+            const catTitleHtml = showCategoryTitle
+                ? `<div class="category-title">${escapeHtml(page.category)}</div>`
+                : '';
+            const categoryStyle = showCategoryTitle ? '' : 'border-top:none; padding-top:0;';
+            let body = `
+                    <div class="category" style="${categoryStyle}">
+                        ${catTitleHtml}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Test Name</th>
+                                    <th class="result-col result-col-header">Result</th>
+                                    <th class="range-col">Range</th>
+                                </tr>
+                            </thead>`;
+            for (const t of (page.blocks || [])) {
+                body += renderTestBlock(t, hideSingle);
+            }
+            body += `</table></div>`;
+            return body;
+        }
+
+        /**
+         * Combined mode: Primary category title at top (from the first/largest test block),
+         * ONE table with ONE thead, and test blocks ordered descending by parameter count.
+         * Secondary combined categories append category to test/param titles (e.g. HEP B, C (SEROLOGY)).
+         */
+        function renderCombinedPageBody(page) {
+            const hideSingle = Boolean(settings?.hide_single_param_title ?? 1);
+            const blocks = page.blocks || [];
+            const primaryCat = blocks.length ? blocks[0].category : '';
+            // showCategoryTitle only controls the heading on COMBINED pages (multiple categories forced together)
+            const isTrulyCombined = blocks.some(b => b.category !== primaryCat);
+            const hideCatTitle = isTrulyCombined && !showCategoryTitle;
+            const catTitleHtml = hideCatTitle
+                ? ''
+                : `<div class="category-title">${escapeHtml(primaryCat)}</div>`;
+            const categoryStyle = hideCatTitle ? 'border-top:none; padding-top:0;' : '';
+            let body = `
+                    <div class="category" style="${categoryStyle}">
+                        ${catTitleHtml}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Test Name</th>
+                                    <th class="result-col result-col-header">Result</th>
+                                    <th class="range-col">Range</th>
+                                </tr>
+                            </thead>`;
+            for (const t of blocks) {
+                const isPrimary = (t.category === primaryCat);
+                body += renderTestBlockCombined(t, hideSingle, isPrimary, t.category);
+            }
+            body += `</table></div>`;
+            return body;
+        }
+
+        /** Shared: render a single test block for combined mode. */
+        function renderTestBlockCombined(t, hideSingle, isPrimary, catName) {
+            const isSingleParam = (t.params || []).length === 1;
+            // showGroupTestTitle controls ONLY the (CATEGORY) suffix - not the group title row itself
+            const catSuffix = (!isPrimary && !isSingleParam && showGroupTestTitle) ? ` (${catName})` : '';
+            let html = `<tbody class="test-block">`;
+
+            const groupTitle = `${t.name}${catSuffix}`;
+            // Title row visibility follows settings (hideSingle) and the single-test toggle only
+            const settingsWouldShow = !hideSingle || !isSingleParam;
+            const adminAllows = isSingleParam ? showSingleTestTitle : true;  // group titles always shown unless settings say otherwise
+            const showTitle = settingsWouldShow && adminAllows;
+
+            if (showTitle) {
+                html += `<tr><td class="test-group" colspan="3" style="padding-left: 4px;">${escapeHtml(groupTitle)}</td></tr>`;
+            }
+
+            for (const p of (t.params || [])) {
+                let nm = p.name || '';
+                const rawVal = p.value;
+                const val = (rawVal === null || rawVal === undefined || rawVal === '') ? '-'
+                    : (rawVal === 0 || rawVal === '0') ? '' : String(rawVal);
+                const unit = p.unit ? String(p.unit) : '';
+                const res = `${escapeHtml(val)}${unit ? ' ' + escapeHtml(unit) : ''}`;
+                const rng = fmtRange(p.normal_min, p.normal_max);
+                const paramPaddingLeft = showTitle ? '18px' : '4px';
+                html += `<tr><td style="padding-left: ${paramPaddingLeft};">${escapeHtml(nm)}</td><td class="result-col">${res}</td><td class="range-col">${rng}</td></tr>`;
+            }
+            if (t.remarks) {
+                html += `<tr><td colspan="3" class="test-remarks"><span class="test-remarks-label">Remarks:</span>${escapeHtml(t.remarks)}</td></tr>`;
+            }
+            html += `</tbody>`;
+            return html;
+        }
+
+        /** Shared: render a single test block (title row + param rows + remarks). */
+        function renderTestBlock(t, hideSingle) {
+            const isSingleParam = (t.params || []).length === 1;
+            let html = `<tbody class="test-block">`;
+            // Respect admin display toggles: showGroupTestTitle for multi-param, showSingleTestTitle for single-param
+            const settingsWouldShow = !hideSingle || !isSingleParam;
+            const adminAllows = isSingleParam ? showSingleTestTitle : showGroupTestTitle;
+            const showTitle = settingsWouldShow && adminAllows;
+            if (showTitle) {
+                html += `<tr><td class="test-group" colspan="3" style="padding-left: 4px;">${escapeHtml(t.name)}</td></tr>`;
+            }
+            for (const p of (t.params || [])) {
+                const nm = p.name || '';
+                const rawVal = p.value;
+                const val = (rawVal === null || rawVal === undefined || rawVal === '') ? '-'
+                    : (rawVal === 0 || rawVal === '0') ? '' : String(rawVal);
+                const unit = p.unit ? String(p.unit) : '';
+                const res = `${escapeHtml(val)}${unit ? ' ' + escapeHtml(unit) : ''}`;
+                const rng = fmtRange(p.normal_min, p.normal_max);
+                const paramPaddingLeft = showTitle ? '18px' : '4px';
+                html += `<tr><td style="padding-left: ${paramPaddingLeft};">${escapeHtml(nm)}</td><td class="result-col">${res}</td><td class="range-col">${rng}</td></tr>`;
+            }
+            if (t.remarks) {
+                html += `<tr><td colspan="3" class="test-remarks"><span class="test-remarks-label">Remarks:</span>${escapeHtml(t.remarks)}</td></tr>`;
+            }
+            html += `</tbody>`;
+            return html;
+        }
+
+        let html = ``;
+
+        if (!catNames.length) {
+            html += `<div style="padding:24px;text-align:center;color:#475569;font-weight:800;">No lab tests found.</div>`;
+            document.getElementById('preview').innerHTML = html;
+            return [];
+        }
+
+        const pages = paginateReport(categories, settings);
+        const isCombined = (Boolean(settings?.combine_categories_on_same_page ?? 1)
+            && !!window.LabPrintLayout?.paginateCombinedCategories)
+            || (currentPageMap && Object.keys(currentPageMap).length > 0);
+
+        pages.forEach((page, pageIdx) => {
+            const isLast = pageIdx === pages.length - 1;
+            let bodyContent = '';
+
+            if (isCombined && page.blocks) {
+                bodyContent = renderCombinedPageBody(page);
+            } else {
+                bodyContent = renderPerCategoryPage({ category: page.category, blocks: page.blocks });
+            }
+
+            html += `
+                    <div class="report-page${isLast ? ' last-page' : ''}">
+                        ${headerHtml}
+                        <div class="page-body">
+                            ${bodyContent}
+                        </div>
+                        ${footerHtml}
+                    </div>
+                `;
+        });
+
+        document.getElementById('preview').innerHTML = html;
+        return pages;
+    }
+
+
+
+    load().catch(() => {
+        document.getElementById('preview').innerHTML = `<div style="padding:30px;text-align:center;color:#b91c1c;font-weight:800;">Failed to load preview.</div>`;
+    });
+</script>
+{% endblock %}

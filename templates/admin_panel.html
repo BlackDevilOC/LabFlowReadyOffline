@@ -1,0 +1,3531 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    /* Admin Layout Styles */
+    .admin-wrapper {
+        display: flex;
+        min-height: calc(100vh - 64px);
+        background: #f7fafc;
+    }
+
+    .admin-nav {
+        width: 260px;
+        background: #1a202c;
+        color: white;
+        padding: 1.5rem 0;
+        flex-shrink: 0;
+    }
+
+    .admin-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 24px;
+        color: #a0aec0;
+        text-decoration: none;
+        transition: all 0.2s;
+        border-right: 4px solid transparent;
+    }
+
+    .admin-nav-item:hover,
+    .admin-nav-item.active {
+        color: white;
+        background: #2d3748;
+        border-right-color: #4299e1;
+    }
+
+    .admin-nav-item svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .admin-main {
+        flex-grow: 1;
+        padding: 2rem;
+        overflow-y: auto;
+    }
+
+    /* Cards and Grids */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .admin-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+    }
+
+    .admin-card h3 {
+        color: #718096;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .admin-card .value {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: #2d3748;
+    }
+
+    /* Log Table Styles */
+    .log-table-container {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+    }
+
+    .log-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.875rem;
+    }
+
+    .log-table th {
+        background: #f1f5f9;
+        padding: 12px 16px;
+        color: #475569;
+        font-weight: 600;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .log-table td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #f1f5f9;
+        color: #334155;
+    }
+
+    .badge {
+        padding: 4px 8px;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .badge-error {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .badge-info {
+        background: #e0f2fe;
+        color: #075985;
+    }
+
+    .badge-warning {
+        background: #ffedd5;
+        color: #9a3412;
+    }
+
+    .pc-info-tag {
+        font-family: monospace;
+        color: #64748b;
+        font-size: 0.75rem;
+        background: #f8fafc;
+        padding: 2px 6px;
+        border-radius: 4px;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Access Denied View */
+    .full-screen-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 60vh;
+        text-align: center;
+    }
+
+    .log-msg-cell {
+        max-width: 400px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    #adminView {
+        display: none;
+    }
+
+    .config-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-title {
+        margin: 0 0 12px 0;
+        font-size: 1rem;
+        color: #1e293b;
+    }
+
+    .input-label {
+        font-size: 0.75rem;
+        color: #64748b;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .input-control {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 8px 10px;
+        font-size: 0.875rem;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .primary-btn {
+        background: #2563eb;
+        border: 1px solid #2563eb;
+        color: white;
+        border-radius: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    .list-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 10px;
+    }
+
+    .mini-list {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        max-height: 300px;
+        overflow: auto;
+        background: #fff;
+    }
+
+    .mini-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 10px;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 0.82rem;
+    }
+
+    .mini-row:last-child {
+        border-bottom: none;
+    }
+
+    .perm-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 8px;
+        margin: 10px 0 14px;
+    }
+
+    .perm-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #334155;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 10px;
+    }
+
+    .status-pill {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+    }
+
+    .status-pill.on {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .status-pill.off {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .group-order-panel {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: #f8fafc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .group-order-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-height: 220px;
+        overflow-y: auto;
+    }
+
+    .group-order-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        margin-bottom: 6px;
+        font-size: 0.82rem;
+    }
+
+    .group-order-num {
+        min-width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: #dbeafe;
+        color: #1d4ed8;
+        font-weight: 700;
+        font-size: 0.72rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .group-order-name {
+        flex: 1;
+        color: #334155;
+    }
+
+    .group-order-actions {
+        display: flex;
+        gap: 4px;
+        flex-shrink: 0;
+    }
+
+    .group-order-actions button {
+        border: 1px solid #cbd5e1;
+        background: #fff;
+        border-radius: 6px;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        font-size: 0.75rem;
+        color: #475569;
+    }
+
+    .group-order-actions button:hover {
+        background: #eff6ff;
+        border-color: #93c5fd;
+    }
+
+    .group-order-empty {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        padding: 12px 8px;
+        text-align: center;
+    }
+
+    .group-order-preview {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 4px;
+        line-height: 1.4;
+    }
+
+    .users-layout {
+        display: grid;
+        grid-template-columns: minmax(320px, 380px) 1fr;
+        gap: 1.25rem;
+        align-items: start;
+    }
+
+    @media (max-width: 960px) {
+        .users-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="adminView" class="admin-wrapper">
+    <!-- Admin Sidebar -->
+    <aside class="admin-nav">
+        <div style="padding: 0 24px 20px 24px; border-bottom: 1px solid #2d3748; margin-bottom: 20px;">
+            <p style="color: #4299e1; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Control Center
+            </p>
+        </div>
+        <a href="{{ url_prefix }}/page/admin?view=overview"
+            class="admin-nav-item {% if current_view == 'overview' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Overview
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=logs"
+            class="admin-nav-item {% if current_view == 'logs' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            System Logs
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=errors"
+            class="admin-nav-item {% if current_view == 'errors' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Error Tracking
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=system"
+            class="admin-nav-item {% if current_view == 'system' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            PC Health
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=tests"
+            class="admin-nav-item {% if current_view in ['tests','tests-edit'] %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19.428 15.428a4 4 0 00-5.656 0L6 23.2M6 10V6a2 2 0 012-2h8a2 2 0 012 2v4M8 10h8M8 14h8" />
+            </svg>
+            Tests Management
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=test-selection"
+            class="admin-nav-item {% if current_view == 'test-selection' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+            </svg>
+            Test Selection Layout
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=users"
+            class="admin-nav-item {% if current_view == 'users' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            Users & Permissions
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=shifts"
+            class="admin-nav-item {% if current_view == 'shifts' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Shifts
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=remarks"
+            class="admin-nav-item {% if current_view == 'remarks' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 8h10M7 12h6m-6 4h10M5 6a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6z" />
+            </svg>
+            Common Remarks
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=print-settings"
+            class="admin-nav-item {% if current_view == 'print-settings' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Print Settings
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=cloud-sync"
+            class="admin-nav-item {% if current_view == 'cloud-sync' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            Cloud Settings Sync
+        </a>
+        <a href="/page/analytics?view=overview" class="admin-nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Analytics &amp; Reporting
+        </a>
+
+        <div style="padding: 10px 24px 5px 24px; border-top: 1px solid #2d3748; margin-top: 10px;">
+            <p
+                style="color: #a0aec0; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">
+                Offline System</p>
+        </div>
+        <a href="/offline/page/admin?view=offline-tests"
+            class="admin-nav-item {% if current_view in ['offline-tests','offline-tests-edit'] %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
+                height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+            Offline Tests CRUD
+        </a>
+        <a href="/offline/page/admin?view=offline-sync"
+            class="admin-nav-item {% if current_view == 'offline-sync' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
+                height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.5" />
+            </svg>
+            Push Offline Patients
+        </a>
+        <a href="/offline/page/admin?view=offline-sync-log"
+            class="admin-nav-item {% if current_view == 'offline-sync-log' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
+                height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            MR Sync History
+        </a>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        <header style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <h1 style="font-size: 1.5rem; color: #1a202c;">Console Dashboard</h1>
+                <p style="color: #718096; font-size: 0.875rem;">Viewing information for: <strong>{{
+                        current_view.capitalize() }}</strong></p>
+            </div>
+            {% if current_view not in ['tests', 'tests-edit', 'test-selection', 'users', 'shifts', 'remarks',
+            'print-settings', 'cloud-sync', 'offline-tests', 'offline-tests-edit', 'offline-sync', 'offline-sync-log'] %}
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <label style="font-size: 0.75rem; color: #718096; font-weight: 600;">Filter by Date</label>
+                    <input type="date" id="logDateFilter" value="{{ current_date or '' }}"
+                        style="border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 6px; font-size: 0.875rem;">
+                </div>
+                <button onclick="location.reload()"
+                    style="background: white; border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.875rem; align-self: flex-end;">Sync
+                    Now</button>
+            </div>
+            {% endif %}
+        </header>
+
+        {% if current_view == 'tests' %}
+        <div class="config-grid">
+            <div class="admin-card">
+                <h3 class="form-title">Add New Test</h3>
+                <label class="input-label">Test Name</label>
+                <input id="new-test-name" class="input-control" placeholder="e.g. Serum Creatinine">
+                <label class="input-label">Category</label>
+                <select id="new-test-category" class="input-control"></select>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <label class="input-label">Normal Min</label>
+                        <input id="new-test-min" class="input-control" placeholder="optional">
+                    </div>
+                    <div>
+                        <label class="input-label">Normal Max</label>
+                        <input id="new-test-max" class="input-control" placeholder="optional">
+                    </div>
+                </div>
+                <label class="input-label">Unit</label>
+                <input id="new-test-unit" class="input-control" placeholder="e.g. mg/dL">
+                <button class="primary-btn" onclick="createTest()">Create Test</button>
+            </div>
+            <div class="admin-card">
+                <h3 class="form-title">Create Test Group</h3>
+                <label class="input-label">Group Name</label>
+                <input id="new-group-name" class="input-control" placeholder="e.g. Liver Function Test (LFT)">
+                <label class="input-label">Group Category</label>
+                <select id="new-group-category" class="input-control"></select>
+                <label class="input-label">Report display order</label>
+                <p style="font-size:12px;color:#64748b;margin:0 0 8px;">Tests appear on reports and result entry in the
+                    order listed below (top = first).</p>
+                <div class="group-order-panel">
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <select id="new-group-picker" class="input-control" style="margin-bottom:0;"></select>
+                        <button type="button" class="primary-btn" style="white-space:nowrap;"
+                            onclick="addGroupComponent('new')">Add test</button>
+                    </div>
+                    <ul id="new-group-order-list" class="group-order-list"></ul>
+                </div>
+                <button class="primary-btn" onclick="createTestGroup()">Create Group</button>
+            </div>
+        </div>
+        <div class="admin-card" style="background:#f8fafc; border:1px solid #e2e8f0; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <div>
+                    <h3 class="form-title"
+                        style="margin-bottom:4px; font-size:1rem; color:#1e293b; border-bottom:none;">Patient
+                        Registration & Update Test Selection Mode</h3>
+                    <p style="font-size:0.8rem; color:#64748b; margin:0;">Control whether single tests are selectable
+                        during patient registration & adding tests in update page.</p>
+                </div>
+                <div
+                    style="display:flex; align-items:center; gap:12px; background:#fff; padding:6px 12px; border-radius:8px; border:1px solid #cbd5e1;">
+                    <label
+                        style="font-size:0.85rem; font-weight:600; color:#334155; display:flex; align-items:center; gap:6px; cursor:pointer;">
+                        <input type="radio" name="online_test_sel_mode" value="group_only" checked
+                            onchange="saveOnlineTestSelectionMode('group_only')">
+                        Group Only (Default)
+                    </label>
+                    <label
+                        style="font-size:0.85rem; font-weight:600; color:#334155; display:flex; align-items:center; gap:6px; cursor:pointer;">
+                        <input type="radio" name="online_test_sel_mode" value="group_and_single"
+                            onchange="saveOnlineTestSelectionMode('group_and_single')">
+                        Group and Single Both
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="admin-card">
+            <div
+                style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px; border-bottom:1px solid #edf2f7; padding-bottom:8px;">
+                <h3 class="form-title" style="margin-bottom:0; border-bottom:none;">Configured Tests And Groups</h3>
+                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                    <input id="online-test-search-filter" class="input-control" placeholder="Search test name..."
+                        style="margin-bottom:0; width:180px; padding:6px 10px;" oninput="renderOnlineTestsLists()">
+                    <select id="online-test-view-filter" class="input-control"
+                        style="margin-bottom:0; width:150px; padding:6px 10px;" onchange="renderOnlineTestsLists()">
+                        <option value="all">All Items</option>
+                        <option value="single">Single Tests Only</option>
+                        <option value="group">Group Tests Only</option>
+                        <option value="active">Active Only</option>
+                        <option value="inactive">Inactive Only</option>
+                    </select>
+                </div>
+            </div>
+            <div class="list-wrap">
+                <div>
+                    <h4 style="margin:0 0 8px 0;color:#475569;display:flex;justify-content:space-between;">
+                        <span>Tests</span>
+                        <span id="online-tests-count" style="font-size:12px;color:#718096;">(0)</span>
+                    </h4>
+                    <div id="tests-list" class="mini-list" style="max-height:450px;"></div>
+                </div>
+                <div>
+                    <h4 style="margin:0 0 8px 0;color:#475569;display:flex;justify-content:space-between;">
+                        <span>Groups</span>
+                        <span id="online-groups-count" style="font-size:12px;color:#718096;">(0)</span>
+                    </h4>
+                    <div id="groups-list" class="mini-list" style="max-height:450px;"></div>
+                </div>
+            </div>
+        </div>
+        {% elif current_view == 'shifts' %}
+        <div class="config-grid">
+            <div class="admin-card">
+                <h3 class="form-title" id="shift-form-title">Add Shift</h3>
+                <input type="hidden" id="edit-shift-id" value="">
+                <label class="input-label">Shift Name</label>
+                <input id="shift-name" class="input-control" placeholder="e.g. MORNING">
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="primary-btn" type="button" onclick="saveShiftForm()">Save Shift</button>
+                    <button type="button" onclick="resetShiftForm()"
+                        style="border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:8px 12px;cursor:pointer;">Clear</button>
+                </div>
+            </div>
+            <div class="admin-card">
+                <h3 class="form-title">Configured Shifts</h3>
+                <p style="font-size:0.8rem;color:#64748b;margin:0 0 10px;">Used on registration and as each user's
+                    default shift.</p>
+                <div id="shifts-list" class="mini-list" style="max-height:400px;"></div>
+            </div>
+        </div>
+        {% elif current_view == 'print-settings' %}
+        <div class="admin-card" style="margin-bottom: 20px; border-left: 4px solid #2563eb;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <div>
+                    <h3 class="form-title"
+                        style="margin-bottom:4px; font-size:1.1rem; color:#1e293b; border-bottom:none;">Global Print
+                        &amp; Page Layout Settings</h3>
+                    <p style="font-size:0.85rem; color:#64748b; margin:0;">Configure global typography, margins,
+                        spacing, and header/footer elements for A4 Lab Reports. Saved settings apply across all
+                        workstations globally.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" onclick="loadAdminPrintSettings()"
+                        style="border:1px solid #cbd5e1; background:#fff; border-radius:8px; padding:8px 14px; cursor:pointer; font-weight:600; font-size:0.875rem;">Reload</button>
+                    <button type="button" class="primary-btn" onclick="saveAdminPrintSettings()"
+                        style="background:#2563eb; color:white; border-radius:8px; padding:8px 18px; cursor:pointer; font-weight:600; font-size:0.875rem;">Save
+                        Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="config-grid">
+            <!-- Typography & Font Sizes Card -->
+            <div class="admin-card">
+                <h3 class="form-title" style="display:flex; align-items:center; gap:8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                    Font Sizes (px)
+                </h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div>
+                        <label class="input-label">Category Title</label>
+                        <input type="number" id="ps_category_font_size" class="input-control" placeholder="18">
+                    </div>
+                    <div>
+                        <label class="input-label">Group Title</label>
+                        <input type="number" id="ps_group_font_size" class="input-control" placeholder="15">
+                    </div>
+                    <div>
+                        <label class="input-label">Test Name</label>
+                        <input type="number" id="ps_test_name_font_size" class="input-control" placeholder="14">
+                    </div>
+                    <div>
+                        <label class="input-label">Result / Value</label>
+                        <input type="number" id="ps_result_font_size" class="input-control" placeholder="14">
+                    </div>
+                    <div>
+                        <label class="input-label">Patient Info Value</label>
+                        <input type="number" id="ps_patient_info_font_size" class="input-control" placeholder="14">
+                    </div>
+                    <div>
+                        <label class="input-label">Patient Info Label</label>
+                        <input type="number" id="ps_patient_info_label_font_size" class="input-control"
+                            placeholder="14">
+                    </div>
+                </div>
+                <label class="input-label">Footer Font Size</label>
+                <input type="number" id="ps_footer_font_size" class="input-control" placeholder="11">
+            </div>
+
+            <!-- Page Margins & Header Card -->
+            <div class="admin-card">
+                <h3 class="form-title" style="display:flex; align-items:center; gap:8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+                    </svg>
+                    Page Margins (mm) &amp; Header (px)
+                </h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div>
+                        <label class="input-label">Top Margin (mm)</label>
+                        <input type="number" step="0.5" id="ps_page_top_margin" class="input-control" placeholder="25">
+                    </div>
+                    <div>
+                        <label class="input-label">Right Margin (mm)</label>
+                        <input type="number" step="0.5" id="ps_page_right_margin" class="input-control"
+                            placeholder="15">
+                    </div>
+                    <div>
+                        <label class="input-label">Bottom Margin (mm)</label>
+                        <input type="number" step="0.5" id="ps_page_bottom_margin" class="input-control"
+                            placeholder="25">
+                    </div>
+                    <div>
+                        <label class="input-label">Left Margin (mm)</label>
+                        <input type="number" step="0.5" id="ps_page_left_margin" class="input-control" placeholder="15">
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div>
+                        <label class="input-label">Header Height (px)</label>
+                        <input type="number" step="1" id="ps_header_height" class="input-control" placeholder="140">
+                    </div>
+                    <div>
+                        <label class="input-label">Footer Padding Top (px)</label>
+                        <input type="number" step="1" id="ps_footer_padding_top" class="input-control" placeholder="20">
+                    </div>
+                </div>
+                <label class="input-label">Space Below Patient Info Box (px)</label>
+                <input type="number" step="1" id="ps_patient_info_bottom_margin" class="input-control" placeholder="6">
+            </div>
+
+            <!-- Table & Spacing Card -->
+            <div class="admin-card">
+                <h3 class="form-title" style="display:flex; align-items:center; gap:8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Table &amp; Padding Spacing (px)
+                </h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div>
+                        <label class="input-label">Table Cell Padding V</label>
+                        <input type="number" step="0.5" id="ps_table_cell_padding_vertical" class="input-control"
+                            placeholder="4">
+                    </div>
+                    <div>
+                        <label class="input-label">Table Cell Padding H</label>
+                        <input type="number" step="0.5" id="ps_table_cell_padding_horizontal" class="input-control"
+                            placeholder="12">
+                    </div>
+                    <div>
+                        <label class="input-label">Category Padding Top</label>
+                        <input type="number" step="0.5" id="ps_category_padding_top" class="input-control"
+                            placeholder="6">
+                    </div>
+                    <div>
+                        <label class="input-label">Category Padding Bottom</label>
+                        <input type="number" step="0.5" id="ps_category_padding_bottom" class="input-control"
+                            placeholder="4">
+                    </div>
+                    <div>
+                        <label class="input-label">Group Padding Top</label>
+                        <input type="number" step="0.5" id="ps_group_padding_top" class="input-control" placeholder="8">
+                    </div>
+                    <div>
+                        <label class="input-label">Category Border Width</label>
+                        <input type="number" step="0.5" id="ps_category_border_width" class="input-control"
+                            placeholder="2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display Options & Colors Card -->
+            <div class="admin-card">
+                <h3 class="form-title" style="display:flex; align-items:center; gap:8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                    </svg>
+                    Display Options &amp; Colors
+                </h3>
+                <div style="margin-bottom:12px;">
+                    <label class="input-label">Primary Accent Color</label>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <input type="color" id="ps_primary_color_picker" value="#111111"
+                            style="width:40px; height:36px; border:1px solid #cbd5e1; border-radius:6px; cursor:pointer;"
+                            onchange="document.getElementById('ps_primary_color').value = this.value">
+                        <input type="text" id="ps_primary_color" class="input-control" style="margin-bottom:0;"
+                            placeholder="#111111"
+                            onchange="document.getElementById('ps_primary_color_picker').value = this.value">
+                    </div>
+                </div>
+                <div
+                    style="margin-bottom:14px; background:#f8fafc; padding:12px; border-radius:8px; border:1px solid #e2e8f0;">
+                    <label class="input-label" style="margin-bottom:8px; font-weight:700;">Signature &amp; Display
+                        Options</label>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <label
+                            style="font-size:0.85rem; color:#1e40af; display:flex; align-items:flex-start; gap:8px; cursor:pointer; background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:8px 10px;">
+                            <input type="checkbox" id="ps_combine_categories_on_same_page" checked
+                                style="width:auto; margin-top:2px; flex-shrink:0;">
+                            <span><strong>Combine multiple categories on same page if space permits</strong><br>
+                                <span style="color:#475569; font-size:0.8rem;">e.g. Biochemistry + Hep B/C + Lipid
+                                    Profile + LFT all on 1 page. When OFF, each category gets its own
+                                    page.</span></span>
+                        </label>
+                        <label
+                            style="font-size:0.85rem; color:#334155; display:flex; align-items:center; gap:8px; cursor:pointer;">
+                            <input type="checkbox" id="ps_hide_single_param_title" checked style="width:auto;">
+                            Hide test title header for single-parameter tests (e.g. Calcium, RBS)
+                        </label>
+                        <label
+                            style="font-size:0.85rem; color:#334155; display:flex; align-items:center; gap:8px; cursor:pointer;">
+                            <input type="checkbox" id="ps_display_verified_by" checked style="width:auto;">
+                            Show "Verified By" signature section
+                        </label>
+                        <label
+                            style="font-size:0.85rem; color:#334155; display:flex; align-items:center; gap:8px; cursor:pointer;">
+                            <input type="checkbox" id="ps_display_pathologist_signature" checked style="width:auto;">
+                            Show "Pathologist Signature" section
+                        </label>
+                    </div>
+                </div>
+                <div style="display:flex; justify-content:flex-end;">
+                    <button type="button" class="primary-btn" onclick="saveAdminPrintSettings()"
+                        style="width:100%;">Save Global Settings</button>
+                </div>
+            </div>
+        </div>
+        {% elif current_view == 'remarks' %}
+        <div id="remarks-schema-banner" class="admin-card"
+            style="display:none; border-color:#f59e0b; background:#fffbeb;">
+            <strong style="color:#b45309;">Database setup required</strong>
+            <p style="margin:8px 0 0;font-size:0.875rem;color:#92400e;">Run
+                <code>scripts/create_remarks_table.sql</code> in Supabase SQL Editor, then refresh.
+            </p>
+        </div>
+        <div class="config-grid">
+            <div class="admin-card">
+                <h3 class="form-title" id="remark-form-title">Add Common Remark</h3>
+                <input type="hidden" id="edit-remark-id" value="">
+                <label class="input-label">Remark text</label>
+                <textarea id="remark-text" class="input-control" rows="3"
+                    placeholder="e.g. Sample hemolyzed; interpret with caution."></textarea>
+                <label class="input-label">Test name (optional — suggestions for this test only)</label>
+                <input id="remark-test-name" class="input-control" placeholder="Leave empty for category/global">
+                <label class="input-label">Category (optional)</label>
+                <select id="remark-category" class="input-control">
+                    <option value="">— Global (all tests) —</option>
+                    {% for cat in lab_categories %}
+                    <option value="{{ cat }}">{{ cat }}</option>
+                    {% endfor %}
+                </select>
+                <label class="input-label">Sort order</label>
+                <input id="remark-sort-order" class="input-control" type="number" value="0">
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+                    <button class="primary-btn" type="button" onclick="saveRemarkForm()">Save Remark</button>
+                    <button type="button" onclick="resetRemarkForm()"
+                        style="border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:8px 12px;cursor:pointer;">Clear</button>
+                    <button type="button" onclick="syncRemarksCache()"
+                        style="border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:8px 12px;cursor:pointer;">Sync
+                        to workstations</button>
+                </div>
+                <p style="font-size:0.75rem;color:#64748b;margin-top:10px;">Cached to
+                    <code>fetcheddata/remarks.json</code> on login (same as shifts). Most-used remarks appear first when
+                    entering results.
+                </p>
+            </div>
+            <div class="admin-card">
+                <h3 class="form-title">Saved remarks</h3>
+                <div class="log-table-container" style="margin-top:8px;">
+                    <table class="log-table">
+                        <thead>
+                            <tr>
+                                <th>Text</th>
+                                <th>Test</th>
+                                <th>Category</th>
+                                <th>Uses</th>
+                                <th style="width:100px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="remarks-table-body">
+                            <tr>
+                                <td colspan="5" style="text-align:center;padding:24px;color:#94a3b8;">Loading…</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% elif current_view == 'users' %}
+        <div id="users-schema-banner" class="admin-card"
+            style="display:none; border-color:#f59e0b; background:#fffbeb;">
+            <strong style="color:#b45309;">Database setup required</strong>
+            <p style="margin:8px 0 0;font-size:0.875rem;color:#92400e;">Run
+                <code>scripts/add_users_permissions.sql</code> and <code>scripts/add_user_default_shift.sql</code> in
+                Supabase SQL Editor, then refresh this page.
+            </p>
+        </div>
+        <div class="users-layout">
+            <div class="admin-card">
+                <h3 class="form-title" id="user-form-title">Add New User</h3>
+                <input type="hidden" id="edit-user-id" value="">
+                <label class="input-label">Full Name</label>
+                <input id="user-name" class="input-control" placeholder="e.g. Rehan">
+                <label class="input-label">Email</label>
+                <input id="user-email" class="input-control" type="email" placeholder="user@lab.com">
+                <label class="input-label">Password <span id="pwd-hint" style="font-weight:400;color:#94a3b8;">(required
+                        for new user)</span></label>
+                <input id="user-password" class="input-control" type="password" placeholder="••••••••">
+                <label class="input-label">Default Shift (registration)</label>
+                <select id="user-default-shift" class="input-control">
+                    <option value="">— None —</option>
+                </select>
+                <label class="input-label" style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+                    <input type="checkbox" id="user-active" checked style="width:auto;"> Account enabled (can log in)
+                </label>
+                <h4 style="margin:16px 0 8px;font-size:0.9rem;color:#334155;">Permissions</h4>
+                <div id="permissions-editor" class="perm-grid"></div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="primary-btn" type="button" onclick="saveUserForm()">Save User</button>
+                    <button type="button" onclick="resetUserForm()"
+                        style="border:1px solid #cbd5e1;background:#fff;border-radius:8px;padding:8px 12px;cursor:pointer;">Clear</button>
+                </div>
+            </div>
+            <div class="admin-card">
+                <h3 class="form-title">System Users</h3>
+                <div class="log-table-container" style="margin-top:8px;">
+                    <table class="log-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Default Shift</th>
+                                <th>Status</th>
+                                <th style="width:120px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <tr>
+                                <td colspan="5" style="text-align:center;padding:24px;color:#94a3b8;">Loading users…
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% elif current_view == 'tests-edit' %}
+        <div class="admin-card" style="max-width: 900px;">
+            <h3 class="form-title">Edit Existing Test / Group</h3>
+            <div style="display:flex; gap:10px; margin-bottom:12px; align-items:center;">
+                <span id="edit-kind-badge" class="badge badge-info">Loading...</span>
+                <span id="edit-id-label" style="font-size:12px; color:#64748b;"></span>
+                <a href="/page/admin?view=tests"
+                    style="margin-left:auto; font-size:12px; color:#2563eb; text-decoration:none;">← Back to Tests
+                    Management</a>
+            </div>
+            <label class="input-label">Name</label>
+            <input id="edit-name" class="input-control">
+            <label class="input-label">Category</label>
+            <select id="edit-category" class="input-control"></select>
+            <div id="edit-test-fields">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <label class="input-label">Normal Min</label>
+                        <input id="edit-min" class="input-control">
+                    </div>
+                    <div>
+                        <label class="input-label">Normal Max</label>
+                        <input id="edit-max" class="input-control">
+                    </div>
+                </div>
+                <label class="input-label">Unit</label>
+                <input id="edit-unit" class="input-control">
+            </div>
+            <div id="edit-group-fields" style="display:none;">
+                <label class="input-label">Report display order</label>
+                <p style="font-size:12px;color:#64748b;margin:0 0 8px;">Use ↑ ↓ to control the order parameters appear
+                    on printed reports and result entry.</p>
+                <div class="group-order-panel">
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <select id="edit-group-picker" class="input-control" style="margin-bottom:0;"></select>
+                        <button type="button" class="primary-btn" style="white-space:nowrap;"
+                            onclick="addGroupComponent('edit')">Add test</button>
+                    </div>
+                    <ul id="edit-group-order-list" class="group-order-list"></ul>
+                </div>
+            </div>
+            <button class="primary-btn" onclick="saveEditedConfig()">Save Changes</button>
+        </div>
+        {% elif current_view == 'test-selection' %}
+        <div id="tslAdminRoot" style="display:flex; flex-direction:column; gap:20px; width:100%;">
+
+            <!-- Top Action Bar -->
+            <div
+                style="display:flex; justify-content:space-between; align-items:center; background:white; padding:16px 24px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.06); border:1px solid #e2e8f0;">
+                <div>
+                    <h2 style="font-size:1.2rem; font-weight:700; color:#1e293b; margin:0 0 4px 0;">🎨 Test Selection
+                        Layout Manager</h2>
+                    <p style="font-size:0.82rem; color:#64748b; margin:0;">Live preview of the registration page. Move
+                        tests between categories inline — changes reflect on /register immediately after saving.</p>
+                </div>
+                <button type="button" class="primary-btn"
+                    style="padding:10px 26px; font-size:0.95rem; background:linear-gradient(135deg,#16a34a,#15803d); white-space:nowrap;"
+                    onclick="saveTestSelectionLayoutConfig()">
+                    💾 Save Layout
+                </button>
+            </div>
+
+            <!-- Settings Bar -->
+            <div
+                style="display:flex; flex-wrap:wrap; gap:16px; background:white; padding:16px 20px; border-radius:12px; border:1px solid #e2e8f0; align-items:center;">
+                <div>
+                    <span
+                        style="font-weight:700; font-size:0.82rem; color:#334155; display:block; margin-bottom:6px; text-transform:uppercase; letter-spacing:.04em;">Display
+                        Mode</span>
+                    <div style="display:flex; gap:16px;">
+                        <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:0.88rem;">
+                            <input type="radio" name="online_test_sel_mode_page" value="group_only" checked
+                                onchange="if(window.layoutState){layoutState.mode='group_only'; renderAdminPreview();}">
+                            <strong>Group Only</strong>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:0.88rem;">
+                            <input type="radio" name="online_test_sel_mode_page" value="group_and_single"
+                                onchange="if(window.layoutState){layoutState.mode='group_and_single'; renderAdminPreview();}">
+                            <strong>Group &amp; Single Tests</strong>
+                        </label>
+                    </div>
+                </div>
+                <div style="height:40px; width:1px; background:#e2e8f0;"></div>
+                <div style="background:#f0fdf4; padding:10px 16px; border-radius:8px; border:1px solid #bbf7d0;">
+                    <label
+                        style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:600; color:#166534; font-size:0.85rem;">
+                        <input type="checkbox" id="auto_select_regular_chk_page"
+                            onchange="if(window.layoutState) layoutState.auto_select_regular=this.checked;">
+                        Auto-select Regular Package on page load
+                    </label>
+                </div>
+                <div style="flex:1; display:flex; gap:8px; justify-content:flex-end; align-items:center;">
+                    <input type="text" id="new_cat_name_input" class="input-control"
+                        placeholder="New category (e.g. Urgent)"
+                        style="margin-bottom:0; width:180px; font-size:0.85rem; padding:6px 12px;">
+                    <button type="button" class="primary-btn"
+                        style="padding:7px 14px; font-size:0.85rem; white-space:nowrap;"
+                        onclick="addNewCategoryOrder()">+ Add Category</button>
+                </div>
+            </div>
+
+            <!-- Multiple Quick Presets Manager -->
+            <div style="background:white; border:1px solid #e2e8f0; border-radius:12px; padding:18px 20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                    <div>
+                        <h3 style="font-size:1.05rem; font-weight:700; color:#0369a1; margin:0 0 2px 0;">⚡ Quick Presets
+                            Manager</h3>
+                        <p style="font-size:0.8rem; color:#64748b; margin:0;">Create multiple quick-select test bundles
+                            (e.g. Regular Package, Fever Profile). Clinic staff can select them with 1-click on
+                            registration.</p>
+                    </div>
+                    <button type="button" class="primary-btn"
+                        style="padding:8px 16px; font-size:0.85rem; background:#0284c7; white-space:nowrap;"
+                        onclick="createNewQuickPreset()">
+                        + New Quick Preset
+                    </button>
+                </div>
+
+                <div id="multi_quick_presets_container" style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="text-align:center; padding:20px; color:#94a3b8; font-size:0.85rem;">Loading quick
+                        presets…</div>
+                </div>
+            </div>
+
+            <!-- Live Preview Canvas: Registration-style categorized test grid -->
+            <div style="background:#f1f5f9; border:2px dashed #94a3b8; border-radius:12px; padding:20px;">
+                <div
+                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="font-weight:700; font-size:0.95rem; color:#0f172a;">📱 Registration Test Selection
+                            — Live Preview &amp; Category Manager</span>
+                        <span
+                            style="background:#e2e8f0; color:#475569; font-size:0.72rem; font-weight:700; padding:2px 10px; border-radius:12px; text-transform:uppercase; letter-spacing:.04em;">Admin
+                            Mode</span>
+                    </div>
+                    <div
+                        style="font-size:0.78rem; color:#64748b; background:white; padding:4px 12px; border-radius:6px; border:1px solid #cbd5e1;">
+                        💡 Click <strong>🎨 Fancy Box</strong> / <strong>📄 Simple Header</strong> on category titles
+                        below to switch view style
+                    </div>
+                </div>
+                <div id="admin_test_categorized_grid" style="display:flex; flex-direction:column; gap:16px;">
+                    <div style="text-align:center; padding:40px; color:#94a3b8;">
+                        <div style="font-size:1.5rem; margin-bottom:8px;">⏳</div>
+                        <div>Loading test catalog…</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% elif current_view == 'offline-tests' %}
+        <div class="config-grid">
+            <div class="admin-card">
+                <h3 class="form-title">Add New Offline Test</h3>
+                <label class="input-label">Test Name</label>
+                <input id="new-offline-test-name" class="input-control" placeholder="e.g. Serum Creatinine">
+                <label class="input-label">Category</label>
+                <select id="new-offline-test-category" class="input-control"></select>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <label class="input-label">Normal Min</label>
+                        <input id="new-offline-test-min" class="input-control" placeholder="optional">
+                    </div>
+                    <div>
+                        <label class="input-label">Normal Max</label>
+                        <input id="new-offline-test-max" class="input-control" placeholder="optional">
+                    </div>
+                </div>
+                <label class="input-label">Unit</label>
+                <input id="new-offline-test-unit" class="input-control" placeholder="e.g. mg/dL">
+                <button class="primary-btn" onclick="createOfflineTest()">Create Offline Test</button>
+            </div>
+            <div class="admin-card">
+                <h3 class="form-title">Create Offline Test Group</h3>
+                <label class="input-label">Group Name</label>
+                <input id="new-offline-group-name" class="input-control" placeholder="e.g. Liver Function Test (LFT)">
+                <label class="input-label">Group Category</label>
+                <select id="new-offline-group-category" class="input-control"></select>
+                <label class="input-label">Report display order</label>
+                <p style="font-size:12px;color:#64748b;margin:0 0 8px;">Tests appear on reports and result entry in the
+                    order listed below (top = first).</p>
+                <div class="group-order-panel">
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <select id="new-offline-group-picker" class="input-control" style="margin-bottom:0;"></select>
+                        <button type="button" class="primary-btn" style="white-space:nowrap;"
+                            onclick="addOfflineGroupComponent('new')">Add test</button>
+                    </div>
+                    <ul id="new-offline-group-order-list" class="group-order-list"></ul>
+                </div>
+                <button class="primary-btn" onclick="createOfflineTestGroup()">Create Group</button>
+            </div>
+        </div>
+        <div class="admin-card">
+            <h3 class="form-title">Configured Offline Tests And Groups</h3>
+            <div class="list-wrap">
+                <div>
+                    <h4 style="margin:0 0 8px 0;color:#475569;">Offline Tests</h4>
+                    <div id="offline-tests-list" class="mini-list"></div>
+                </div>
+                <div>
+                    <h4 style="margin:0 0 8px 0;color:#475569;">Offline Groups</h4>
+                    <div id="offline-groups-list" class="mini-list"></div>
+                </div>
+            </div>
+        </div>
+        {% elif current_view == 'offline-tests-edit' %}
+        <div class="admin-card" style="max-width: 900px;">
+            <h3 class="form-title">Edit Existing Offline Test / Group</h3>
+            <div style="display:flex; gap:10px; margin-bottom:12px; align-items:center;">
+                <span id="edit-offline-kind-badge" class="badge badge-info">Loading...</span>
+                <span id="edit-offline-id-label" style="font-size:12px; color:#64748b;"></span>
+                <a href="/offline/page/admin?view=offline-tests"
+                    style="margin-left:auto; font-size:12px; color:#2563eb; text-decoration:none;">← Back to Offline
+                    Tests</a>
+            </div>
+            <label class="input-label">Name</label>
+            <input id="edit-offline-name" class="input-control">
+            <label class="input-label">Category</label>
+            <select id="edit-offline-category" class="input-control"></select>
+            <div id="edit-offline-test-fields">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div>
+                        <label class="input-label">Normal Min</label>
+                        <input id="edit-offline-min" class="input-control">
+                    </div>
+                    <div>
+                        <label class="input-label">Normal Max</label>
+                        <input id="edit-offline-max" class="input-control">
+                    </div>
+                </div>
+                <label class="input-label">Unit</label>
+                <input id="edit-offline-unit" class="input-control">
+            </div>
+            <div id="edit-offline-group-fields" style="display:none;">
+                <label class="input-label">Report display order</label>
+                <p style="font-size:12px;color:#64748b;margin:0 0 8px;">Use ↑ ↓ to control the order parameters appear.
+                </p>
+                <div class="group-order-panel">
+                    <div style="display:flex;gap:8px;margin-bottom:8px;">
+                        <select id="edit-offline-group-picker" class="input-control" style="margin-bottom:0;"></select>
+                        <button type="button" class="primary-btn" style="white-space:nowrap;"
+                            onclick="addOfflineGroupComponent('edit')">Add test</button>
+                    </div>
+                    <ul id="edit-offline-group-order-list" class="group-order-list"></ul>
+                </div>
+            </div>
+            <button class="primary-btn" onclick="saveOfflineEditedConfig()">Save Changes</button>
+        </div>
+        {% elif current_view == 'offline-sync' %}
+        <div class="config-grid" style="grid-template-columns: 1fr;">
+            <div class="admin-card">
+                <h3 class="form-title">Push Offline Patients to Supabase</h3>
+                <p style="font-size: 0.875rem; color: #64748b; margin: 0 0 16px;">
+                    Filter local offline patients, select the records you want to push, then sync only those to the
+                    online database.
+                    Each push is recorded in the MR sync log.
+                </p>
+
+                <div style="display:flex; gap:20px; margin-bottom:20px; flex-wrap:wrap;">
+                    <div
+                        style="background:#edf2f7; padding:16px; border-radius:8px; flex:1; min-width:150px; border-left:4px solid #3182ce;">
+                        <div style="font-size:0.8rem; text-transform:uppercase; color:#718096; font-weight:bold;">
+                            Unsynced</div>
+                        <div id="sync-unsynced-count"
+                            style="font-size:1.8rem; font-weight:bold; color:#2b6cb0; margin-top:4px;">0</div>
+                    </div>
+                    <div
+                        style="background:#edf2f7; padding:16px; border-radius:8px; flex:1; min-width:150px; border-left:4px solid #38a169;">
+                        <div style="font-size:0.8rem; text-transform:uppercase; color:#718096; font-weight:bold;">Synced
+                        </div>
+                        <div id="sync-synced-count"
+                            style="font-size:1.8rem; font-weight:bold; color:#276749; margin-top:4px;">0</div>
+                    </div>
+                    <div
+                        style="background:#edf2f7; padding:16px; border-radius:8px; flex:1; min-width:150px; border-left:4px solid #805ad5;">
+                        <div style="font-size:0.8rem; text-transform:uppercase; color:#718096; font-weight:bold;">
+                            Selected</div>
+                        <div id="sync-selected-count"
+                            style="font-size:1.8rem; font-weight:bold; color:#553c9a; margin-top:4px;">0</div>
+                    </div>
+                </div>
+
+                <div
+                    style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin-bottom:16px;">
+                    <div>
+                        <label class="input-label">Search</label>
+                        <input id="offline-sync-search" class="input-control" placeholder="Name or MR no."
+                            style="margin-bottom:0;">
+                    </div>
+                    <div>
+                        <label class="input-label">Shift</label>
+                        <select id="offline-sync-shift" class="input-control" style="margin-bottom:0;">
+                            <option value="all">All shifts</option>
+                            <option value="MORNING">Morning</option>
+                            <option value="EVENING">Evening</option>
+                            <option value="NIGHT">Night</option>
+                            <option value="HOLIDAY">Holiday</option>
+                            <option value="OPD">OPD</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="input-label">Sync status</label>
+                        <select id="offline-sync-status" class="input-control" style="margin-bottom:0;">
+                            <option value="all">All</option>
+                            <option value="pending" selected>Pending</option>
+                            <option value="synced">Synced</option>
+                            <option value="error">Error</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="input-label">Date from</label>
+                        <input id="offline-sync-date-from" type="date" class="input-control" style="margin-bottom:0;">
+                    </div>
+                    <div>
+                        <label class="input-label">Date to</label>
+                        <input id="offline-sync-date-to" type="date" class="input-control" style="margin-bottom:0;">
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
+                    <button type="button" class="primary-btn" onclick="loadOfflinePatients()">Apply Filters</button>
+                    <button id="btnPushSelected" type="button" class="primary-btn" style="background:#3182ce;"
+                        onclick="pushSelectedOfflinePatients()">
+                        Push Selected to Supabase
+                    </button>
+                    <div id="sync-spinner" class="spinner"
+                        style="display:none; width:20px; height:20px; border-color:#3182ce; border-top-color:transparent;">
+                    </div>
+                    <span id="sync-status-text" style="font-size:0.875rem; color:#4a5568; font-weight:500;"></span>
+                </div>
+
+                <div id="sync-results-card" class="admin-card"
+                    style="display:none; background:#f7fafc; border:1px solid #e2e8f0; margin-bottom:16px; padding:16px;">
+                    <h4 style="margin:0 0 8px 0; font-size:0.95rem; color:#2d3748;">Sync Output</h4>
+                    <div id="sync-log-output"
+                        style="font-family:monospace; font-size:0.8rem; color:#2d3748; max-height:200px; overflow-y:auto; white-space:pre-wrap; background:white; padding:10px; border-radius:4px; border:1px solid #edf2f7;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card">
+                <h3 class="form-title">Offline Patients</h3>
+                <div class="log-table-container">
+                    <table class="log-table">
+                        <thead>
+                            <tr>
+                                <th style="width:42px;">
+                                    <input type="checkbox" id="offline-select-all" title="Select all visible unsynced">
+                                </th>
+                                <th>Name</th>
+                                <th>Offline MR</th>
+                                <th>Online MR</th>
+                                <th>Shift</th>
+                                <th>Created At</th>
+                                <th>Sync Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="offline-patients-table-body">
+                            <tr>
+                                <td colspan="7" style="text-align:center; padding:24px; color:#94a3b8;">Loading
+                                    patients…</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% elif current_view == 'offline-sync-log' %}
+        <div class="admin-card">
+            <h3 class="form-title">MR Sync History</h3>
+            <p style="font-size:0.875rem; color:#64748b; margin:0 0 16px;">
+                Every offline-to-online push is logged here with offline MR, new online MR, status, and error details.
+            </p>
+            <div style="display:flex; gap:10px; margin-bottom:16px; max-width:480px;">
+                <input id="offline-sync-log-search" class="input-control"
+                    placeholder="Search offline MR, online MR, or patient name" style="margin-bottom:0;">
+                <button type="button" class="primary-btn" onclick="loadOfflineSyncLog()">Search</button>
+            </div>
+            <div class="log-table-container">
+                <table class="log-table">
+                    <thead>
+                        <tr>
+                            <th>Synced At</th>
+                            <th>Patient</th>
+                            <th>Offline MR</th>
+                            <th>Online MR</th>
+                            <th>Tests</th>
+                            <th>Status</th>
+                            <th>Synced By</th>
+                            <th>Error</th>
+                        </tr>
+                    </thead>
+                    <tbody id="offline-sync-log-body">
+                        <tr>
+                            <td colspan="8" style="text-align:center; padding:24px; color:#94a3b8;">Loading sync log…
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% elif current_view == 'cloud-sync' %}
+        <div class="config-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="admin-card">
+                <h3 class="form-title" style="color: #2563eb; display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    Upload Settings to Cloud
+                </h3>
+                <p style="font-size: 0.875rem; color: #64748b; margin: 0 0 16px; line-height: 1.5;">
+                    Upload this PC's local layout settings, test selection presets, and print visibility options to Supabase Cloud. 
+                    Other PCs (such as secondary workstations) can then download and apply these settings.
+                </p>
+                <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 0.85rem; color: #1e40af;">
+                    <strong>Package Contents:</strong> Custom Print Layouts &amp; Order, Print Visibility Toggles, Test Selection Layouts &amp; Presets.
+                </div>
+                <button type="button" class="primary-btn" style="background: #2563eb; width: 100%; justify-content: center; font-size: 0.95rem; padding: 10px;" onclick="pushCloudSettings()">
+                    📤 Push Local Settings to Supabase Cloud
+                </button>
+            </div>
+
+            <div class="admin-card">
+                <h3 class="form-title" style="color: #059669; display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download Settings from Cloud
+                </h3>
+                <p style="font-size: 0.875rem; color: #64748b; margin: 0 0 16px; line-height: 1.5;">
+                    Fetch and apply the master configuration from Supabase Cloud on this PC. 
+                    This will replace this PC's local layout settings with the cloud version.
+                </p>
+                <div id="cloud-status-box" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 0.85rem; color: #166534;">
+                    Checking cloud status…
+                </div>
+                <button type="button" class="primary-btn" style="background: #059669; width: 100%; justify-content: center; font-size: 0.95rem; padding: 10px;" onclick="pullCloudSettings()">
+                    📥 Pull &amp; Apply Cloud Settings to This PC
+                </button>
+            </div>
+        </div>
+        {% else %}
+        <!-- Stats Overview Cards -->
+        <div class="dashboard-grid">
+            <div class="admin-card">
+                <h3>Total Events</h3>
+                <div class="value">{{ stats.total }}</div>
+            </div>
+            <div class="admin-card" style="border-top: 4px solid #ef4444;">
+                <h3>Critical Errors</h3>
+                <div class="value" style="color: #ef4444;">{{ stats.errors }}</div>
+            </div>
+            <div class="admin-card">
+                <h3>Warning Alerts</h3>
+                <div class="value" style="color: #f59e0b;">{{ stats.warnings }}</div>
+            </div>
+            <div class="admin-card">
+                <h3>Unique Devices</h3>
+                <div class="value">{{ stats.unique_pcs }}</div>
+            </div>
+        </div>
+
+        <!-- Section: Structured Log Table -->
+        <div class="log-table-container">
+            <div
+                style="padding: 16px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 1rem; font-weight: 600;">Activity Timeline</h2>
+                <div style="font-size: 0.75rem; color: #64748b;">Showing last {{ logs|length }} entries</div>
+            </div>
+            <table class="log-table">
+                <thead>
+                    <tr>
+                        <th style="width: 160px;">Timestamp</th>
+                        <th style="width: 100px;">Level</th>
+                        <th style="width: 140px;">User</th>
+                        <th style="width: 120px;">Category</th>
+                        <th style="width: 200px;">Origin Device</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td style="color: #64748b; font-size: 0.75rem;">{{ log.timestamp }}</td>
+                        <td>
+                            <span
+                                class="badge {% if log.level == 'ERROR' %}badge-error{% elif log.level == 'INFO' %}badge-info{% else %}badge-warning{% endif %}">
+                                {{ log.level }}
+                            </span>
+                        </td>
+                        <td><span style="font-weight: 600; color: #2d3748;">{{ log.user }}</span></td>
+                        <td><strong style="color: #475569;">{{ log.category }}</strong></td>
+                        <td><span class="pc-info-tag">{{ log.pc_info }}</span></td>
+                        <td class="log-msg-cell" title="{{ log.message }}">
+                            {{ log.message }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+                    {% if not logs %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 40px; color: #94a3b8;">No records found for
+                            this view.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if current_view == 'system' %}
+        <div style="margin-top: 24px;" class="admin-card">
+            <h3>Registered PC Categories</h3>
+            <div style="margin-top: 16px;">
+                {% for cat, count in stats.categories.items() %}
+                <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 4px;">
+                        <span>{{ cat }}</span>
+                        <span>{{ count }} hits</span>
+                    </div>
+                    <div style="background: #f1f5f9; height: 8px; border-radius: 4px; overflow: hidden;">
+                        {% if stats.total > 0 %}
+                        <div
+                            style="background: #4299e1; height: 100%; width: {{ (count / stats.total * 100)|round }}%;">
+                        </div>
+                        {% else %}
+                        <div style="background: #e2e8f0; height: 100%; width: 0%;"></div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </main>
+</div>
+
+<div id="accessDenied" class="full-screen-center" style="display: none;">
+    <h1 style="color: #e53e3e; font-size: 2.5rem; margin-bottom: 1rem;">Access denied</h1>
+    <p>Incorrect admin password.</p>
+    <a href="/"
+        style="margin-top: 1.5rem; background: #2d3748; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none;">Return
+        Home</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const OFFLINE_BASE = '/offline';
+
+    let adminCatalog = { tests: [], groups: [], categories: {{ lab_categories | tojson }} };
+    let editContext = { kind: null, id: null };
+    const groupOrderState = { new: [], edit: [] };
+    const PERMISSION_KEYS = {{ permission_keys| tojson }};
+    const PERMISSION_LABELS = {{ permission_labels| tojson }};
+    const DEFAULT_PERMISSIONS = {{ default_permissions| tojson }};
+    let adminUsers = [];
+    let adminShifts = [];
+    let adminRemarks = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const adminView = document.getElementById('adminView');
+        const accessDenied = document.getElementById('accessDenied');
+        const authed = sessionStorage.getItem('admin_authed') === 'true';
+        if (!authed) {
+            const pwd = prompt('Enter admin password:');
+            if (pwd === 'youcannotenter') {
+                sessionStorage.setItem('admin_authed', 'true');
+            }
+        }
+
+        if (sessionStorage.getItem('admin_authed') === 'true') {
+            if (adminView) adminView.style.display = 'flex';
+            if (accessDenied) accessDenied.style.display = 'none';
+        } else {
+            if (adminView) adminView.style.display = 'none';
+            if (accessDenied) accessDenied.style.display = 'flex';
+            return;
+        }
+
+        // Date Filter logic
+        const dateFilter = document.getElementById('logDateFilter');
+        if (dateFilter) {
+            dateFilter.addEventListener('change', (e) => {
+                const selectedDate = e.target.value;
+                const url = new URL(window.location.href);
+                if (selectedDate) {
+                    url.searchParams.set('date', selectedDate);
+                } else {
+                    url.searchParams.delete('date');
+                }
+                window.location.href = url.toString();
+            });
+        }
+
+        if ("{{ current_view }}" === "tests" || "{{ current_view }}" === "tests-edit") {
+            loadTestsCatalog("{{ current_view }}" === "tests-edit");
+        }
+        if ("{{ current_view }}" === "offline-tests" || "{{ current_view }}" === "offline-tests-edit") {
+            loadOfflineTestsCatalog("{{ current_view }}" === "offline-tests-edit");
+        }
+        if ("{{ current_view }}" === "offline-sync") {
+            loadOfflinePatients();
+            const selectAll = document.getElementById('offline-select-all');
+            if (selectAll) {
+                selectAll.addEventListener('change', (e) => toggleOfflineSelectAll(e.target.checked));
+            }
+        }
+        if ("{{ current_view }}" === "offline-sync-log") {
+            loadOfflineSyncLog();
+        }
+        if ("{{ current_view }}" === "users") {
+            buildPermissionsEditor(DEFAULT_PERMISSIONS);
+            loadAdminShifts().then(() => loadAdminUsers());
+        }
+        if ("{{ current_view }}" === "shifts") {
+            loadAdminShifts();
+        }
+        if ("{{ current_view }}" === "remarks") {
+            loadAdminRemarks();
+        }
+        if ("{{ current_view }}" === "cloud-sync") {
+            fetchCloudSettingsStatus();
+        }
+    });
+
+    async function fetchCloudSettingsStatus() {
+        const box = document.getElementById('cloud-status-box');
+        if (!box) return;
+        try {
+            const res = await fetch('/api/admin/cloud-settings/status');
+            const data = await res.json();
+            if (data.status === 'Success' && data.exists) {
+                const dateStr = data.pushed_at ? new Date(data.pushed_at).toLocaleString() : 'Recently';
+                box.innerHTML = `<strong>✓ Cloud Backup Active:</strong> Last pushed by <b>${data.pushed_by || 'Admin'}</b> on ${dateStr} (${data.layout_count || 0} custom layout(s)).`;
+            } else {
+                box.innerHTML = `<strong>No Cloud Backup Found:</strong> Settings haven't been pushed to Supabase yet. Click "Push Local Settings" above to create one.`;
+            }
+        } catch (e) {
+            box.innerHTML = `<strong>Cloud Check Failed:</strong> Unable to connect to Supabase.`;
+        }
+    }
+
+    async function pushCloudSettings() {
+        if (!confirm("Upload local layouts and test settings to Supabase cloud?")) return;
+        try {
+            const res = await fetch('/api/admin/cloud-settings/push', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            if (data.status === 'Success') {
+                alert("✓ " + data.message);
+                fetchCloudSettingsStatus();
+            } else {
+                alert("Upload failed: " + (data.detail || data.message));
+            }
+        } catch (e) {
+            alert("Error pushing to cloud: " + e.message);
+        }
+    }
+
+    async function pullCloudSettings() {
+        if (!confirm("Download cloud settings and overwrite local layout settings on this PC?")) return;
+        try {
+            const res = await fetch('/api/admin/cloud-settings/pull', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            if (data.status === 'Success') {
+                alert("✓ " + data.message);
+                fetchCloudSettingsStatus();
+            } else {
+                alert("Download failed: " + (data.detail || data.message));
+            }
+        } catch (e) {
+            alert("Error pulling from cloud: " + e.message);
+        }
+    }
+
+    function buildPermissionsEditor(perms) {
+        const wrap = document.getElementById('permissions-editor');
+        if (!wrap) return;
+        wrap.innerHTML = PERMISSION_KEYS.map(key => `
+            <label class="perm-item">
+                <input type="checkbox" data-perm="${key}" ${perms[key] ? 'checked' : ''}>
+                <span>${PERMISSION_LABELS[key] || key}</span>
+            </label>
+        `).join('');
+    }
+
+    function readPermissionsFromForm() {
+        const out = { ...DEFAULT_PERMISSIONS };
+        document.querySelectorAll('#permissions-editor input[data-perm]').forEach(cb => {
+            out[cb.dataset.perm] = cb.checked;
+        });
+        return out;
+    }
+
+    function resetUserForm() {
+        document.getElementById('edit-user-id').value = '';
+        document.getElementById('user-form-title').textContent = 'Add New User';
+        document.getElementById('pwd-hint').textContent = '(required for new user)';
+        document.getElementById('user-name').value = '';
+        document.getElementById('user-email').value = '';
+        document.getElementById('user-password').value = '';
+        document.getElementById('user-active').checked = true;
+        const shiftSel = document.getElementById('user-default-shift');
+        if (shiftSel) shiftSel.value = '';
+        buildPermissionsEditor(DEFAULT_PERMISSIONS);
+    }
+
+    function fillUserShiftSelect(selectedId = '') {
+        const sel = document.getElementById('user-default-shift');
+        if (!sel) return;
+        sel.innerHTML = '<option value="">— None —</option>' + adminShifts.map(s =>
+            `<option value="${s.id}" ${String(s.id) === String(selectedId) ? 'selected' : ''}>${escapeHtml(s.shift)}</option>`
+        ).join('');
+    }
+
+    function resetRemarkForm() {
+        document.getElementById('edit-remark-id').value = '';
+        document.getElementById('remark-form-title').textContent = 'Add Common Remark';
+        document.getElementById('remark-text').value = '';
+        document.getElementById('remark-test-name').value = '';
+        document.getElementById('remark-category').value = '';
+        document.getElementById('remark-sort-order').value = '0';
+    }
+
+    async function loadAdminRemarks() {
+        const tbody = document.getElementById('remarks-table-body');
+        const banner = document.getElementById('remarks-schema-banner');
+        if (!tbody) return;
+        try {
+            const res = await fetch('/api/admin/remarks');
+            const data = await res.json();
+            if (data.status !== 'Success') {
+                if (banner) banner.style.display = 'block';
+                tbody.innerHTML = '<tr><td colspan="5" style="color:#b45309;">Could not load remarks. Run create_remarks_table.sql.</td></tr>';
+                return;
+            }
+            if (banner) banner.style.display = 'none';
+            adminRemarks = data.remarks || [];
+            if (!adminRemarks.length) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#94a3b8;">No remarks yet.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = adminRemarks.filter(r => r.is_active !== false).map(r => `
+                <tr>
+                    <td class="log-msg-cell" title="${escapeAdmin(r.remark_text)}">${escapeAdmin(r.remark_text)}</td>
+                    <td>${escapeAdmin(r.test_name || '—')}</td>
+                    <td>${escapeAdmin(r.category || '—')}</td>
+                    <td>${r.usage_count || 0}</td>
+                    <td>
+                        <button type="button" onclick="editRemark(${r.id})" style="font-size:11px;">Edit</button>
+                        <button type="button" onclick="deleteRemark(${r.id})" style="font-size:11px;color:#b91c1c;">Del</button>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (e) {
+            tbody.innerHTML = '<tr><td colspan="5">Error loading remarks</td></tr>';
+        }
+    }
+
+    function escapeAdmin(s) {
+        return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+    }
+
+    function editRemark(id) {
+        const r = adminRemarks.find(x => x.id === id);
+        if (!r) return;
+        document.getElementById('edit-remark-id').value = r.id;
+        document.getElementById('remark-form-title').textContent = 'Edit Remark';
+        document.getElementById('remark-text').value = r.remark_text || '';
+        document.getElementById('remark-test-name').value = r.test_name || '';
+        document.getElementById('remark-category').value = r.category || '';
+        document.getElementById('remark-sort-order').value = String(r.sort_order || 0);
+    }
+
+    async function saveRemarkForm() {
+        const id = document.getElementById('edit-remark-id').value;
+        const payload = {
+            remark_text: document.getElementById('remark-text').value.trim(),
+            test_name: document.getElementById('remark-test-name').value.trim(),
+            category: document.getElementById('remark-category').value,
+            sort_order: parseInt(document.getElementById('remark-sort-order').value || '0', 10),
+        };
+        const url = id ? `/api/admin/remarks/${id}` : '/api/admin/remarks';
+        const method = id ? 'PUT' : 'POST';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        const data = await res.json();
+        if (data.status === 'Success') {
+            resetRemarkForm();
+            loadAdminRemarks();
+            alert('Remark saved.');
+        } else {
+            alert(data.message || 'Save failed');
+        }
+    }
+
+    async function deleteRemark(id) {
+        if (!confirm('Deactivate this remark?')) return;
+        const res = await fetch(`/api/admin/remarks/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.status === 'Success') loadAdminRemarks();
+        else alert(data.message || 'Delete failed');
+    }
+
+    async function syncRemarksCache() {
+        const res = await fetch('/api/admin/remarks/sync-cache', { method: 'POST' });
+        const data = await res.json();
+        alert(data.status === 'Success' ? 'Remarks cache updated.' : (data.detail || 'Sync failed'));
+    }
+
+    async function loadAdminShifts() {
+        const list = document.getElementById('shifts-list');
+        try {
+            const res = await fetch('/api/admin/shifts');
+            const data = await res.json();
+            adminShifts = data.shifts || [];
+            fillUserShiftSelect();
+            if (list) {
+                if (!adminShifts.length) {
+                    list.innerHTML = '<div class="mini-row"><span>No shifts configured.</span></div>';
+                } else {
+                    list.innerHTML = adminShifts.map(s => `
+                        <div class="mini-row">
+                            <span><strong>${escapeHtml(s.shift)}</strong> <span style="color:#94a3b8;">#${s.id}</span></span>
+                            <span>
+                                <button type="button" onclick="editShift(${s.id})" style="font-size:12px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:600;">Edit</button>
+                                <button type="button" onclick="deleteShift(${s.id})" style="font-size:12px;color:#dc2626;background:none;border:none;cursor:pointer;margin-left:8px;">Delete</button>
+                            </span>
+                        </div>
+                    `).join('');
+                }
+            }
+        } catch (e) {
+            if (list) list.innerHTML = '<div class="mini-row" style="color:#dc2626;">Failed to load shifts.</div>';
+        }
+    }
+
+    function resetShiftForm() {
+        document.getElementById('edit-shift-id').value = '';
+        document.getElementById('shift-form-title').textContent = 'Add Shift';
+        document.getElementById('shift-name').value = '';
+    }
+
+    function editShift(id) {
+        const s = adminShifts.find(x => x.id === id);
+        if (!s) return;
+        document.getElementById('edit-shift-id').value = String(s.id);
+        document.getElementById('shift-form-title').textContent = 'Edit Shift';
+        document.getElementById('shift-name').value = s.shift || '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function saveShiftForm() {
+        const id = document.getElementById('edit-shift-id').value;
+        const payload = { shift: document.getElementById('shift-name').value.trim() };
+        if (!payload.shift) {
+            alert('Shift name is required');
+            return;
+        }
+        const url = id ? `/api/admin/shifts/${id}` : '/api/admin/shifts';
+        const method = id ? 'PUT' : 'POST';
+        try {
+            const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const data = await res.json();
+            if (!res.ok) {
+                alert(data.detail || data.message || 'Save failed');
+                return;
+            }
+            alert(id ? 'Shift updated.' : 'Shift created.');
+            resetShiftForm();
+            loadAdminShifts();
+        } catch (e) {
+            alert('Error saving shift.');
+        }
+    }
+
+    async function deleteShift(id) {
+        const s = adminShifts.find(x => x.id === id);
+        if (!s || !confirm(`Delete shift "${s.shift}"?`)) return;
+        try {
+            const res = await fetch(`/api/admin/shifts/${id}`, { method: 'DELETE' });
+            const data = await res.json();
+            if (!res.ok) {
+                alert(data.detail || data.message || 'Delete failed');
+                return;
+            }
+            loadAdminShifts();
+        } catch (e) {
+            alert('Error deleting shift.');
+        }
+    }
+
+    async function loadAdminUsers() {
+        const tbody = document.getElementById('users-table-body');
+        const banner = document.getElementById('users-schema-banner');
+        if (!tbody) return;
+        try {
+            const res = await fetch('/api/admin/users');
+            const data = await res.json();
+            if (data.status === 'schema_required') {
+                if (banner) banner.style.display = 'block';
+                tbody.innerHTML = `<tr><td colspan="5" style="padding:20px;color:#b45309;">${data.message || 'Run SQL migration first.'}</td></tr>`;
+                return;
+            }
+            if (banner) banner.style.display = 'none';
+            adminUsers = data.users || [];
+            if (!adminUsers.length) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:24px;color:#94a3b8;">No users yet.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = adminUsers.map(u => `
+                <tr>
+                    <td><strong>${escapeHtml(u.name)}</strong></td>
+                    <td>${escapeHtml(u.email)}</td>
+                    <td>${escapeHtml(u.default_shift || '—')}</td>
+                    <td><span class="status-pill ${u.is_active ? 'on' : 'off'}">${u.is_active ? 'Active' : 'Disabled'}</span></td>
+                    <td>
+                        <button type="button" onclick="editUser(${u.id})" style="font-size:12px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:600;">Edit</button>
+                        <button type="button" onclick="toggleUserActive(${u.id}, ${u.is_active ? 'false' : 'true'})" style="font-size:12px;color:#64748b;background:none;border:none;cursor:pointer;margin-left:8px;">${u.is_active ? 'Disable' : 'Enable'}</button>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (e) {
+            tbody.innerHTML = '<tr><td colspan="5" style="color:#dc2626;padding:20px;">Failed to load users.</td></tr>';
+        }
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text == null ? '' : String(text);
+        return div.innerHTML;
+    }
+
+    function editUser(id) {
+        const u = adminUsers.find(x => x.id === id);
+        if (!u) return;
+        document.getElementById('edit-user-id').value = String(u.id);
+        document.getElementById('user-form-title').textContent = 'Edit User';
+        document.getElementById('pwd-hint').textContent = '(leave blank to keep current)';
+        document.getElementById('user-name').value = u.name || '';
+        document.getElementById('user-email').value = u.email || '';
+        document.getElementById('user-password').value = '';
+        document.getElementById('user-active').checked = !!u.is_active;
+        fillUserShiftSelect(u.default_shift_id || '');
+        buildPermissionsEditor(u.permissions || DEFAULT_PERMISSIONS);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function saveUserForm() {
+        const id = document.getElementById('edit-user-id').value;
+        const shiftSel = document.getElementById('user-default-shift');
+        const payload = {
+            name: document.getElementById('user-name').value.trim(),
+            email: document.getElementById('user-email').value.trim(),
+            password: document.getElementById('user-password').value,
+            is_active: document.getElementById('user-active').checked,
+            permissions: readPermissionsFromForm(),
+            default_shift_id: shiftSel && shiftSel.value ? parseInt(shiftSel.value, 10) : null,
+        };
+        const isEdit = !!id;
+        const url = isEdit ? `/api/admin/users/${id}` : '/api/admin/users';
+        const method = isEdit ? 'PUT' : 'POST';
+        try {
+            const res = await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                alert(data.detail || data.message || 'Save failed');
+                return;
+            }
+            alert(isEdit ? 'User updated.' : 'User created.');
+            resetUserForm();
+            loadAdminUsers();
+        } catch (e) {
+            alert('Error saving user.');
+        }
+    }
+
+    async function toggleUserActive(id, makeActive) {
+        const u = adminUsers.find(x => x.id === id);
+        if (!u) return;
+        if (!confirm(`${makeActive ? 'Enable' : 'Disable'} user ${u.email}?`)) return;
+        try {
+            const res = await fetch(`/api/admin/users/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: u.name,
+                    email: u.email,
+                    is_active: makeActive,
+                    permissions: u.permissions,
+                    default_shift_id: u.default_shift_id ?? null,
+                }),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                alert(data.detail || 'Update failed');
+                return;
+            }
+            loadAdminUsers();
+        } catch (e) {
+            alert('Error updating user status.');
+        }
+    }
+
+    function testNameById(id) {
+        const t = adminCatalog.tests.find(x => parseInt(x.id) === parseInt(id));
+        return t ? t.name : `Test #${id}`;
+    }
+
+    function testCategoryById(id) {
+        const t = adminCatalog.tests.find(x => parseInt(x.id) === parseInt(id));
+        return t ? (t.category || 'General') : '';
+    }
+
+    function fillGroupPicker(selectId) {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+        select.innerHTML = '<option value="">— Select a test to add —</option>' + adminCatalog.tests.map(t =>
+            `<option value="${t.id}">${t.name} (${t.category || 'General'})</option>`
+        ).join('');
+    }
+
+    function renderGroupOrderList(mode) {
+        const listEl = document.getElementById(`${mode}-group-order-list`);
+        if (!listEl) return;
+        const ids = groupOrderState[mode] || [];
+        if (!ids.length) {
+            listEl.innerHTML = '<li class="group-order-empty">No tests added yet. Pick a test above and click Add.</li>';
+            return;
+        }
+        listEl.innerHTML = ids.map((id, idx) => `
+            <li class="group-order-item" data-id="${id}">
+                <span class="group-order-num">${idx + 1}</span>
+                <span class="group-order-name">${testNameById(id)} <span style="color:#94a3b8;">(${testCategoryById(id)})</span></span>
+                <span class="group-order-actions">
+                    <button type="button" title="Move up" onclick="moveGroupComponent('${mode}', ${idx}, -1)">↑</button>
+                    <button type="button" title="Move down" onclick="moveGroupComponent('${mode}', ${idx}, 1)">↓</button>
+                    <button type="button" title="Remove" onclick="removeGroupComponent('${mode}', ${idx})">✕</button>
+                </span>
+            </li>
+        `).join('');
+    }
+
+    function setGroupComponentIds(mode, ids) {
+        groupOrderState[mode] = (ids || []).map(x => parseInt(x)).filter(x => !Number.isNaN(x));
+        renderGroupOrderList(mode);
+    }
+
+    function getGroupComponentIds(mode) {
+        return [...(groupOrderState[mode] || [])];
+    }
+
+    function addGroupComponent(mode) {
+        const picker = document.getElementById(`${mode}-group-picker`);
+        if (!picker || !picker.value) {
+            alert('Select a test to add.');
+            return;
+        }
+        const id = parseInt(picker.value);
+        if (groupOrderState[mode].includes(id)) {
+            alert('This test is already in the group.');
+            return;
+        }
+        groupOrderState[mode].push(id);
+        renderGroupOrderList(mode);
+        picker.value = '';
+    }
+
+    function moveGroupComponent(mode, index, direction) {
+        const ids = groupOrderState[mode];
+        const target = index + direction;
+        if (target < 0 || target >= ids.length) return;
+        [ids[index], ids[target]] = [ids[target], ids[index]];
+        renderGroupOrderList(mode);
+    }
+
+    function removeGroupComponent(mode, index) {
+        groupOrderState[mode].splice(index, 1);
+        renderGroupOrderList(mode);
+    }
+
+    function formatGroupOrderPreview(componentIds) {
+        if (!componentIds || !componentIds.length) return 'No tests';
+        return componentIds.map((id, i) => `${i + 1}. ${testNameById(id)}`).join(' · ');
+    }
+
+    function fillCategorySelect(selectId, selected = '') {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+        const categories = adminCatalog.categories || [];
+        select.innerHTML = categories.map(c =>
+            `<option value="${c}" ${selected === c ? 'selected' : ''}>${c}</option>`
+        ).join('');
+    }
+
+    function renderOnlineTestsLists() {
+        const testsList = document.getElementById('tests-list');
+        const groupsList = document.getElementById('groups-list');
+        const testsCount = document.getElementById('online-tests-count');
+        const groupsCount = document.getElementById('online-groups-count');
+        const searchQuery = (document.getElementById('online-test-search-filter')?.value || '').toLowerCase().trim();
+        const viewFilter = document.getElementById('online-test-view-filter')?.value || 'all';
+
+        let filteredTests = adminCatalog.tests || [];
+        let filteredGroups = adminCatalog.groups || [];
+
+        if (searchQuery) {
+            filteredTests = filteredTests.filter(t => t.name.toLowerCase().includes(searchQuery) || (t.category || '').toLowerCase().includes(searchQuery));
+            filteredGroups = filteredGroups.filter(g => g.group_name.toLowerCase().includes(searchQuery) || (g.category || '').toLowerCase().includes(searchQuery));
+        }
+
+        if (viewFilter === 'single') {
+            filteredGroups = [];
+        } else if (viewFilter === 'group') {
+            filteredTests = [];
+        } else if (viewFilter === 'active') {
+            filteredTests = filteredTests.filter(t => t.status === 1 || t.status === true || t.status === undefined);
+            filteredGroups = filteredGroups.filter(g => g.status === 1 || g.status === true || g.status === undefined);
+        } else if (viewFilter === 'inactive') {
+            filteredTests = filteredTests.filter(t => t.status === 0 || t.status === false);
+            filteredGroups = filteredGroups.filter(g => g.status === 0 || g.status === false);
+        }
+
+        if (testsCount) testsCount.textContent = `(${filteredTests.length})`;
+        if (groupsCount) groupsCount.textContent = `(${filteredGroups.length})`;
+
+        if (testsList) {
+            testsList.innerHTML = filteredTests.map(t => {
+                const isActive = (t.status === 1 || t.status === true || t.status === undefined);
+                const statusBadge = isActive
+                    ? '<span style="background:#def7ec;color:#03543f;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;">ACTIVE</span>'
+                    : '<span style="background:#fde8e8;color:#9b1c1c;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;">INACTIVE</span>';
+                const toggleBtn = isActive
+                    ? `<button type="button" onclick="toggleTestStatus(${t.id}, true)" style="font-size:11px;background:#fee2e2;color:#991b1b;border:none;padding:2px 8px;border-radius:4px;cursor:pointer;font-weight:600;">Turn Off</button>`
+                    : `<button type="button" onclick="toggleTestStatus(${t.id}, false)" style="font-size:11px;background:#dcfce7;color:#166534;border:none;padding:2px 8px;border-radius:4px;cursor:pointer;font-weight:600;">Turn On</button>`;
+
+                return `
+                <div class="mini-row" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;">
+                    <div>
+                        <strong style="color:#1e293b;font-size:0.875rem;">${escapeHtml(t.name)}</strong>
+                        <div style="font-size:11px;color:#64748b;margin-top:2px;">
+                            Category: ${escapeHtml(t.category || 'General')} | Range: ${t.normal_min || '—'} - ${t.normal_max || '—'} ${t.unit || ''}
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        ${statusBadge}
+                        ${toggleBtn}
+                        <a href="/page/admin?view=tests-edit&type=test&id=${t.id}" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:600;">Edit</a>
+                    </div>
+                </div>
+            `}).join('') || '<div class="mini-row"><span style="color:#94a3b8;">No matching tests found</span></div>';
+        }
+
+        if (groupsList) {
+            groupsList.innerHTML = filteredGroups.map(g => {
+                const isActive = (g.status === 1 || g.status === true || g.status === undefined);
+                const statusBadge = isActive
+                    ? '<span style="background:#def7ec;color:#03543f;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;">ACTIVE</span>'
+                    : '<span style="background:#fde8e8;color:#9b1c1c;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;">INACTIVE</span>';
+                const toggleBtn = isActive
+                    ? `<button type="button" onclick="toggleGroupStatus(${g.id}, true)" style="font-size:11px;background:#fee2e2;color:#991b1b;border:none;padding:2px 8px;border-radius:4px;cursor:pointer;font-weight:600;">Turn Off</button>`
+                    : `<button type="button" onclick="toggleGroupStatus(${g.id}, false)" style="font-size:11px;background:#dcfce7;color:#166534;border:none;padding:2px 8px;border-radius:4px;cursor:pointer;font-weight:600;">Turn On</button>`;
+
+                return `
+                <div class="mini-row" style="flex-direction:column;align-items:flex-start;gap:4px;padding:8px 0;border-bottom:1px solid #f1f5f9;">
+                    <div style="display:flex;width:100%;justify-content:space-between;gap:10px;align-items:center;">
+                        <div>
+                            <strong style="color:#0f172a;font-size:0.875rem;">${escapeHtml(g.group_name)}</strong>
+                            <span style="font-size:11px;color:#64748b;margin-left:6px;">(${escapeHtml(g.category || 'Group Test')})</span>
+                        </div>
+                        <div style="display:flex; gap:8px; align-items:center;">
+                            ${statusBadge}
+                            ${toggleBtn}
+                            <a href="/page/admin?view=tests-edit&type=group&id=${g.id}" style="font-size:11px;color:#2563eb;text-decoration:none;font-weight:600;">Edit</a>
+                        </div>
+                    </div>
+                    <div class="group-order-preview" style="font-size:11px;color:#475569;">${formatGroupOrderPreview(g.component_ids || [])}</div>
+                </div>
+            `}).join('') || '<div class="mini-row"><span style="color:#94a3b8;">No matching groups found</span></div>';
+        }
+    }
+
+    async function toggleTestStatus(id, currentActive) {
+        const test = adminCatalog.tests.find(t => t.id === id);
+        if (!test) return;
+        try {
+            const payload = {
+                name: test.name,
+                category: test.category || 'General',
+                unit: test.unit || '',
+                normal_min: test.normal_min || '',
+                normal_max: test.normal_max || '',
+                status: !currentActive
+            };
+            const res = await fetch(`/api/admin/tests/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.status === 'Success') {
+                test.status = !currentActive;
+                renderOnlineTestsLists();
+            } else {
+                alert('Failed to update status: ' + (data.detail || 'Error'));
+            }
+        } catch (e) {
+            console.error('toggleTestStatus error:', e);
+        }
+    }
+
+    async function toggleGroupStatus(id, currentActive) {
+        const group = adminCatalog.groups.find(g => g.id === id);
+        if (!group) return;
+        try {
+            const payload = {
+                group_name: group.group_name,
+                category: group.category || 'Group Test',
+                component_ids: group.component_ids || [],
+                status: !currentActive
+            };
+            const res = await fetch(`/api/admin/test-groups/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.status === 'Success') {
+                group.status = !currentActive;
+                renderOnlineTestsLists();
+            } else {
+                alert('Failed to update group status: ' + (data.detail || 'Error'));
+            }
+        } catch (e) {
+            console.error('toggleGroupStatus error:', e);
+        }
+    }
+
+    async function loadTestSelectionConfig() {
+        try {
+            const res = await fetch('/api/admin/test-selection-config');
+            const data = await res.json();
+            if (data.status === 'Success') {
+                const mode = data.mode || (data.allow_single_tests ? 'group_and_single' : 'group_only');
+                const radio = document.querySelector(`input[name="online_test_sel_mode"][value="${mode}"]`);
+                if (radio) radio.checked = true;
+            }
+        } catch (e) {
+            console.error('loadTestSelectionConfig error:', e);
+        }
+    }
+
+    async function saveOnlineTestSelectionMode(mode) {
+        try {
+            const res = await fetch('/api/admin/test-selection-config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mode })
+            });
+            const data = await res.json();
+            if (data.status === 'Success') {
+                const label = mode === 'group_and_single' ? 'Group and Single Both' : 'Group Only';
+                alert(`Test Selection Mode updated to: ${label}`);
+            } else {
+                alert('Failed to update setting: ' + (data.detail || 'Error'));
+            }
+        } catch (e) {
+            console.error('saveOnlineTestSelectionMode error:', e);
+        }
+    }
+
+    async function loadTestsCatalog(loadEdit = false) {
+        try {
+            loadTestSelectionConfig();
+            const res = await fetch('/api/admin/tests-catalog');
+            const data = await res.json();
+            if (data.status !== 'Success') return;
+
+            adminCatalog.tests = data.tests || [];
+            adminCatalog.groups = data.groups || [];
+            adminCatalog.categories = data.categories || [];
+
+            fillCategorySelect('new-test-category', 'Biochemistry');
+            fillCategorySelect('new-group-category', 'Group Test');
+            fillCategorySelect('edit-category');
+
+            renderOnlineTestsLists();
+
+            fillGroupPicker('new-group-picker');
+            fillGroupPicker('edit-group-picker');
+            if (!groupOrderState.new.length) renderGroupOrderList('new');
+            if (!groupOrderState.edit.length && document.getElementById('edit-group-order-list')) {
+                renderGroupOrderList('edit');
+            }
+
+            if (loadEdit) {
+                hydrateEditFormFromQuery();
+            }
+        } catch (e) {
+            console.error('Failed to load tests catalog', e);
+        }
+    }
+
+    async function createTest() {
+        const payload = {
+            name: document.getElementById('new-test-name').value.trim(),
+            category: document.getElementById('new-test-category').value.trim(),
+            normal_min: document.getElementById('new-test-min').value.trim(),
+            normal_max: document.getElementById('new-test-max').value.trim(),
+            unit: document.getElementById('new-test-unit').value.trim(),
+            status: true
+        };
+        if (!payload.name) {
+            alert('Test name is required');
+            return;
+        }
+        const res = await fetch('/api/admin/tests', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.status === 'Success') {
+            document.getElementById('new-test-name').value = '';
+            document.getElementById('new-test-min').value = '';
+            document.getElementById('new-test-max').value = '';
+            document.getElementById('new-test-unit').value = '';
+            loadTestsCatalog();
+        } else {
+            alert(result.detail || 'Failed to create test');
+        }
+    }
+
+    async function createTestGroup() {
+        const selected = getGroupComponentIds('new');
+        const payload = {
+            group_name: document.getElementById('new-group-name').value.trim(),
+            category: document.getElementById('new-group-category').value.trim(),
+            component_ids: selected,
+            status: true
+        };
+        if (!payload.group_name) {
+            alert('Group name is required');
+            return;
+        }
+        if (payload.component_ids.length === 0) {
+            alert('Add at least one test to the group');
+            return;
+        }
+        const res = await fetch('/api/admin/test-groups', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.status === 'Success') {
+            document.getElementById('new-group-name').value = '';
+            setGroupComponentIds('new', []);
+            loadTestsCatalog();
+        } else {
+            alert(result.detail || 'Failed to create test group');
+        }
+    }
+
+    function hydrateEditFormFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+        const id = parseInt(params.get('id'));
+        if (!type || !id) return;
+        editContext = { kind: type, id };
+
+        const badge = document.getElementById('edit-kind-badge');
+        const idLabel = document.getElementById('edit-id-label');
+        const editTestFields = document.getElementById('edit-test-fields');
+        const editGroupFields = document.getElementById('edit-group-fields');
+        if (idLabel) idLabel.textContent = `ID: ${id}`;
+
+        if (type === 'test') {
+            const item = adminCatalog.tests.find(t => t.id === id);
+            if (!item) return;
+            if (badge) badge.textContent = 'Editing Test';
+            if (editTestFields) editTestFields.style.display = '';
+            if (editGroupFields) editGroupFields.style.display = 'none';
+
+            document.getElementById('edit-name').value = item.name || '';
+            fillCategorySelect('edit-category', item.category || 'General');
+            document.getElementById('edit-min').value = item.normal_min ?? '';
+            document.getElementById('edit-max').value = item.normal_max ?? '';
+            document.getElementById('edit-unit').value = item.unit || '';
+        } else {
+            const item = adminCatalog.groups.find(g => g.id === id);
+            if (!item) return;
+            if (badge) badge.textContent = 'Editing Group';
+            if (editTestFields) editTestFields.style.display = 'none';
+            if (editGroupFields) editGroupFields.style.display = '';
+
+            document.getElementById('edit-name').value = item.group_name || '';
+            fillCategorySelect('edit-category', item.category || 'Group Test');
+            setGroupComponentIds('edit', item.component_ids || []);
+        }
+    }
+
+    async function saveEditedConfig() {
+        if (!editContext.kind || !editContext.id) return;
+        if (editContext.kind === 'test') {
+            const payload = {
+                name: document.getElementById('edit-name').value.trim(),
+                category: document.getElementById('edit-category').value,
+                normal_min: document.getElementById('edit-min').value.trim(),
+                normal_max: document.getElementById('edit-max').value.trim(),
+                unit: document.getElementById('edit-unit').value.trim(),
+                status: true
+            };
+            const res = await fetch(`/api/admin/tests/${editContext.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                alert('Test updated successfully');
+            } else {
+                alert(result.detail || 'Failed to update test');
+            }
+        } else {
+            const selected = getGroupComponentIds('edit');
+            if (selected.length === 0) {
+                alert('Add at least one test to the group');
+                return;
+            }
+            const payload = {
+                group_name: document.getElementById('edit-name').value.trim(),
+                category: document.getElementById('edit-category').value,
+                component_ids: selected,
+                status: true
+            };
+            const res = await fetch(`/api/admin/test-groups/${editContext.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                alert('Group updated successfully');
+            } else {
+                alert(result.detail || 'Failed to update group');
+            }
+        }
+    }
+    // ────────────────────────────────────────────────────────────────────────
+    // Offline Tests & Groups Management
+    // ────────────────────────────────────────────────────────────────────────
+    let offlineCatalog = { tests: [], groups: [], categories: [] };
+    let offlineEditContext = { kind: null, id: null };
+    const offlineGroupOrderState = { new: [], edit: [] };
+
+    function getOfflineGroupComponentIds(mode) {
+        return [...(offlineGroupOrderState[mode] || [])];
+    }
+
+    function setOfflineGroupComponentIds(mode, ids) {
+        offlineGroupOrderState[mode] = (ids || []).map(x => parseInt(x)).filter(x => !Number.isNaN(x));
+        renderOfflineGroupOrderList(mode);
+    }
+
+    function addOfflineGroupComponent(mode) {
+        const picker = document.getElementById(`${mode}-offline-group-picker`);
+        if (!picker || !picker.value) {
+            alert('Select a test to add.');
+            return;
+        }
+        const id = parseInt(picker.value);
+        if (offlineGroupOrderState[mode].includes(id)) {
+            alert('This test is already in the group.');
+            return;
+        }
+        offlineGroupOrderState[mode].push(id);
+        renderOfflineGroupOrderList(mode);
+        picker.value = '';
+    }
+
+    function moveOfflineGroupComponent(mode, index, direction) {
+        const ids = offlineGroupOrderState[mode];
+        const target = index + direction;
+        if (target < 0 || target >= ids.length) return;
+        [ids[index], ids[target]] = [ids[target], ids[index]];
+        renderOfflineGroupOrderList(mode);
+    }
+
+    function removeOfflineGroupComponent(mode, index) {
+        offlineGroupOrderState[mode].splice(index, 1);
+        renderOfflineGroupOrderList(mode);
+    }
+
+    function offlineTestNameById(id) {
+        const t = offlineCatalog.tests.find(x => parseInt(x.id) === parseInt(id));
+        return t ? t.name : `Test #${id}`;
+    }
+
+    function offlineTestCategoryById(id) {
+        const t = offlineCatalog.tests.find(x => parseInt(x.id) === parseInt(id));
+        return t ? (t.category || 'General') : '';
+    }
+
+    function formatOfflineGroupOrderPreview(componentIds) {
+        if (!componentIds || !componentIds.length) return 'No tests';
+        return componentIds.map((id, i) => `${i + 1}. ${offlineTestNameById(id)}`).join(' · ');
+    }
+
+    function renderOfflineGroupOrderList(mode) {
+        const listEl = document.getElementById(`${mode}-offline-group-order-list`);
+        if (!listEl) return;
+        const ids = offlineGroupOrderState[mode] || [];
+        if (!ids.length) {
+            listEl.innerHTML = '<li class="group-order-empty">No tests added yet. Pick a test above and click Add.</li>';
+            return;
+        }
+        listEl.innerHTML = ids.map((id, idx) => `
+            <li class="group-order-item" data-id="${id}">
+                <span class="group-order-num">${idx + 1}</span>
+                <span class="group-order-name">${offlineTestNameById(id)} <span style="color:#94a3b8;">(${offlineTestCategoryById(id)})</span></span>
+                <span class="group-order-actions">
+                    <button type="button" title="Move up" onclick="moveOfflineGroupComponent('${mode}', ${idx}, -1)">↑</button>
+                    <button type="button" title="Move down" onclick="moveOfflineGroupComponent('${mode}', ${idx}, 1)">↓</button>
+                    <button type="button" title="Remove" onclick="removeOfflineGroupComponent('${mode}', ${idx})">✕</button>
+                </span>
+            </li>
+        `).join('');
+    }
+
+    function fillOfflineCategorySelect(selectId, selected = '') {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+        const categories = offlineCatalog.categories || [];
+        select.innerHTML = categories.map(c =>
+            `<option value="${c}" ${selected === c ? 'selected' : ''}>${c}</option>`
+        ).join('');
+    }
+
+    function fillOfflineGroupPicker(selectId) {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+        select.innerHTML = '<option value="">— Select a test to add —</option>' + offlineCatalog.tests.map(t =>
+            `<option value="${t.id}">${t.name} (${t.category || 'General'})</option>`
+        ).join('');
+    }
+
+    async function loadOfflineTestsCatalog(loadEdit = false) {
+        try {
+            const res = await fetch(`${OFFLINE_BASE}/api/admin/offline-tests-catalog`);
+            const data = await res.json();
+            if (data.status !== 'Success') {
+                const testsList = document.getElementById('offline-tests-list');
+                const groupsList = document.getElementById('offline-groups-list');
+                const msg = '<div class="mini-row"><span style="color:#b45309;">Could not load offline tests catalog.</span></div>';
+                if (testsList) testsList.innerHTML = msg;
+                if (groupsList) groupsList.innerHTML = msg;
+                return;
+            }
+
+            offlineCatalog.tests = data.tests || [];
+            offlineCatalog.groups = data.groups || [];
+            offlineCatalog.categories = data.categories || [];
+
+            fillOfflineCategorySelect('new-offline-test-category', 'Biochemistry');
+            fillOfflineCategorySelect('new-offline-group-category', 'Group Test');
+            fillOfflineCategorySelect('edit-offline-category');
+
+            const testsList = document.getElementById('offline-tests-list');
+            const groupsList = document.getElementById('offline-groups-list');
+
+            if (testsList) testsList.innerHTML = offlineCatalog.tests.map(t => `
+                <div class="mini-row">
+                    <span>${t.name}</span>
+                    <span style="display:flex; gap:10px; align-items:center;">
+                        <span style="color:#64748b;">${t.category || 'General'}</span>
+                        <a href="${OFFLINE_BASE}/page/admin?view=offline-tests-edit&type=test&id=${t.id}" style="font-size:11px;color:#2563eb;text-decoration:none;">Edit</a>
+                    </span>
+                </div>
+            `).join('') || '<div class="mini-row"><span>No tests found</span></div>';
+
+            if (groupsList) groupsList.innerHTML = offlineCatalog.groups.map(g => `
+                <div class="mini-row" style="flex-direction:column;align-items:flex-start;gap:4px;">
+                    <div style="display:flex;width:100%;justify-content:space-between;gap:10px;">
+                        <span>${g.group_name}</span>
+                        <a href="${OFFLINE_BASE}/page/admin?view=offline-tests-edit&type=group&id=${g.id}" style="font-size:11px;color:#2563eb;text-decoration:none;">Edit</a>
+                    </div>
+                    <div class="group-order-preview">${formatOfflineGroupOrderPreview(g.component_ids || [])}</div>
+                </div>
+            `).join('') || '<div class="mini-row"><span>No groups found</span></div>';
+
+            fillOfflineGroupPicker('new-offline-group-picker');
+            fillOfflineGroupPicker('edit-offline-group-picker');
+            if (!offlineGroupOrderState.new.length) renderOfflineGroupOrderList('new');
+            if (!offlineGroupOrderState.edit.length && document.getElementById('edit-offline-group-order-list')) {
+                renderOfflineGroupOrderList('edit');
+            }
+
+            if (loadEdit) {
+                hydrateOfflineEditFormFromQuery();
+            }
+        } catch (e) {
+            console.error('Failed to load offline tests catalog', e);
+            const testsList = document.getElementById('offline-tests-list');
+            if (testsList) {
+                testsList.innerHTML = '<div class="mini-row"><span style="color:#dc2626;">Failed to load offline tests. Use /offline/page/admin.</span></div>';
+            }
+        }
+    }
+
+    async function createOfflineTest() {
+        const payload = {
+            name: document.getElementById('new-offline-test-name').value.trim(),
+            category: document.getElementById('new-offline-test-category').value.trim(),
+            normal_min: document.getElementById('new-offline-test-min').value.trim(),
+            normal_max: document.getElementById('new-offline-test-max').value.trim(),
+            unit: document.getElementById('new-offline-test-unit').value.trim(),
+            status: true
+        };
+        if (!payload.name) {
+            alert('Test name is required');
+            return;
+        }
+        const res = await fetch(`${OFFLINE_BASE}/api/admin/offline-tests`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.status === 'Success') {
+            document.getElementById('new-offline-test-name').value = '';
+            document.getElementById('new-offline-test-min').value = '';
+            document.getElementById('new-offline-test-max').value = '';
+            document.getElementById('new-offline-test-unit').value = '';
+            loadOfflineTestsCatalog();
+        } else {
+            alert(result.detail || 'Failed to create test');
+        }
+    }
+
+    async function createOfflineTestGroup() {
+        const selected = getOfflineGroupComponentIds('new');
+        const payload = {
+            group_name: document.getElementById('new-offline-group-name').value.trim(),
+            category: document.getElementById('new-offline-group-category').value.trim(),
+            component_ids: selected,
+            status: true
+        };
+        if (!payload.group_name) {
+            alert('Group name is required');
+            return;
+        }
+        if (payload.component_ids.length === 0) {
+            alert('Add at least one test to the group');
+            return;
+        }
+        const res = await fetch(`${OFFLINE_BASE}/api/admin/offline-test-groups`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.status === 'Success') {
+            document.getElementById('new-offline-group-name').value = '';
+            setOfflineGroupComponentIds('new', []);
+            loadOfflineTestsCatalog();
+        } else {
+            alert(result.detail || 'Failed to create test group');
+        }
+    }
+
+    function hydrateOfflineEditFormFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type');
+        const id = parseInt(params.get('id'));
+        if (!type || !id) return;
+        offlineEditContext = { kind: type, id };
+
+        const badge = document.getElementById('edit-offline-kind-badge');
+        const idLabel = document.getElementById('edit-offline-id-label');
+        const editTestFields = document.getElementById('edit-offline-test-fields');
+        const editGroupFields = document.getElementById('edit-offline-group-fields');
+        if (idLabel) idLabel.textContent = `ID: ${id}`;
+
+        if (type === 'test') {
+            const item = offlineCatalog.tests.find(t => t.id === id);
+            if (!item) return;
+            if (badge) badge.textContent = 'Editing Test';
+            if (editTestFields) editTestFields.style.display = '';
+            if (editGroupFields) editGroupFields.style.display = 'none';
+
+            document.getElementById('edit-offline-name').value = item.name || '';
+            fillOfflineCategorySelect('edit-offline-category', item.category || 'General');
+            document.getElementById('edit-offline-min').value = item.normal_min ?? '';
+            document.getElementById('edit-offline-max').value = item.normal_max ?? '';
+            document.getElementById('edit-offline-unit').value = item.unit || '';
+        } else {
+            const item = offlineCatalog.groups.find(g => g.id === id);
+            if (!item) return;
+            if (badge) badge.textContent = 'Editing Group';
+            if (editTestFields) editTestFields.style.display = 'none';
+            if (editGroupFields) editGroupFields.style.display = '';
+
+            document.getElementById('edit-offline-name').value = item.group_name || '';
+            fillOfflineCategorySelect('edit-offline-category', item.category || 'Group Test');
+            setOfflineGroupComponentIds('edit', item.component_ids || []);
+        }
+    }
+
+    async function saveOfflineEditedConfig() {
+        if (!offlineEditContext.kind || !offlineEditContext.id) return;
+        if (offlineEditContext.kind === 'test') {
+            const payload = {
+                name: document.getElementById('edit-offline-name').value.trim(),
+                category: document.getElementById('edit-offline-category').value,
+                normal_min: document.getElementById('edit-offline-min').value.trim(),
+                normal_max: document.getElementById('edit-offline-max').value.trim(),
+                unit: document.getElementById('edit-offline-unit').value.trim(),
+                status: true
+            };
+            const res = await fetch(`${OFFLINE_BASE}/api/admin/offline-tests/${offlineEditContext.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                alert('Test updated successfully');
+            } else {
+                alert(result.detail || 'Failed to update test');
+            }
+        } else {
+            const selected = getOfflineGroupComponentIds('edit');
+            if (selected.length === 0) {
+                alert('Add at least one test to the group');
+                return;
+            }
+            const payload = {
+                group_name: document.getElementById('edit-offline-name').value.trim(),
+                category: document.getElementById('edit-offline-category').value,
+                component_ids: selected,
+                status: true
+            };
+            const res = await fetch(`${OFFLINE_BASE}/api/admin/offline-test-groups/${offlineEditContext.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                alert('Group updated successfully');
+            } else {
+                alert(result.detail || 'Failed to update group');
+            }
+        }
+    }
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Offline Patients Sync Management
+    // ────────────────────────────────────────────────────────────────────────
+    let offlinePatientsCache = [];
+
+    function getOfflineSyncFilters() {
+        return {
+            search: (document.getElementById('offline-sync-search')?.value || '').trim(),
+            shift: document.getElementById('offline-sync-shift')?.value || 'all',
+            sync_status: document.getElementById('offline-sync-status')?.value || 'all',
+            date_from: document.getElementById('offline-sync-date-from')?.value || '',
+            date_to: document.getElementById('offline-sync-date-to')?.value || '',
+        };
+    }
+
+    function buildOfflinePatientsQuery() {
+        const f = getOfflineSyncFilters();
+        const params = new URLSearchParams();
+        if (f.search) params.set('search', f.search);
+        if (f.shift && f.shift !== 'all') params.set('shift', f.shift);
+        if (f.sync_status && f.sync_status !== 'all') params.set('sync_status', f.sync_status);
+        if (f.date_from) params.set('date_from', f.date_from);
+        if (f.date_to) params.set('date_to', f.date_to);
+        const qs = params.toString();
+        return qs ? `?${qs}` : '';
+    }
+
+    function getSelectedOfflinePatientIds() {
+        return Array.from(document.querySelectorAll('.offline-patient-check:checked'))
+            .map(cb => parseInt(cb.value, 10))
+            .filter(id => !Number.isNaN(id));
+    }
+
+    function updateOfflineSelectedCount() {
+        const el = document.getElementById('sync-selected-count');
+        if (el) el.textContent = String(getSelectedOfflinePatientIds().length);
+    }
+
+    function toggleOfflineSelectAll(checked) {
+        document.querySelectorAll('.offline-patient-check').forEach(cb => {
+            if (!cb.disabled) cb.checked = checked;
+        });
+        updateOfflineSelectedCount();
+    }
+
+    async function loadOfflinePatients() {
+        try {
+            const res = await fetch(`${OFFLINE_BASE}/api/admin/offline-patients${buildOfflinePatientsQuery()}`);
+            const data = await res.json();
+            if (data.status !== 'Success') {
+                const tbody = document.getElementById('offline-patients-table-body');
+                if (tbody) {
+                    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#b45309;padding:24px;">${escapeHtml(data.message || 'Could not load offline patients.')}</td></tr>`;
+                }
+                return;
+            }
+
+            offlinePatientsCache = data.patients || [];
+            const counts = data.counts || {};
+            document.getElementById('sync-unsynced-count').textContent = counts.unsynced ?? 0;
+            document.getElementById('sync-synced-count').textContent = counts.synced ?? 0;
+            updateOfflineSelectedCount();
+
+            const tbody = document.getElementById('offline-patients-table-body');
+            if (!tbody) return;
+
+            if (offlinePatientsCache.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:24px;">No patients match the current filters.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = offlinePatientsCache.map(p => {
+                const hasError = !!(p.sync_error && !p.synced);
+                const statusLabel = p.synced ? 'Synced' : (hasError ? 'Error' : 'Pending');
+                const statusClass = p.synced ? 'on' : 'off';
+                const canSelect = !p.synced;
+                return `
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="offline-patient-check" value="${p.id}"
+                                ${canSelect ? '' : 'disabled'}
+                                onchange="updateOfflineSelectedCount()">
+                        </td>
+                        <td><strong>${escapeHtml(p.patient_name)}</strong></td>
+                        <td><span style="font-family:monospace; color:#4a5568;">${escapeHtml(p.mr_no)}</span></td>
+                        <td><span style="font-family:monospace; color:#2b6cb0; font-weight:bold;">${p.online_mr || '—'}</span></td>
+                        <td>${escapeHtml(p.shift || '—')}</td>
+                        <td><span style="font-size:0.75rem; color:#718096;">${escapeHtml(p.created_at || '—')}</span></td>
+                        <td>
+                            <span class="status-pill ${statusClass}">${statusLabel}</span>
+                            ${hasError ? `<div style="font-size:10px; color:#e53e3e; margin-top:4px; max-width:220px; overflow-wrap:break-word;">${escapeHtml(p.sync_error)}</div>` : ''}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            const selectAll = document.getElementById('offline-select-all');
+            if (selectAll) selectAll.checked = false;
+        } catch (e) {
+            console.error('Failed to load offline patients status', e);
+            const tbody = document.getElementById('offline-patients-table-body');
+            if (tbody) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#dc2626;padding:24px;">Failed to load offline patients. Open admin via /offline/page/admin.</td></tr>';
+            }
+        }
+    }
+
+    async function pushSelectedOfflinePatients() {
+        const selectedIds = getSelectedOfflinePatientIds();
+        if (!selectedIds.length) {
+            alert('Select at least one unsynced patient to push.');
+            return;
+        }
+        if (!confirm(`Push ${selectedIds.length} selected patient(s) to Supabase?`)) return;
+
+        const btn = document.getElementById('btnPushSelected');
+        const spinner = document.getElementById('sync-spinner');
+        const statusText = document.getElementById('sync-status-text');
+        const resultsCard = document.getElementById('sync-results-card');
+        const logOutput = document.getElementById('sync-log-output');
+
+        btn.disabled = true;
+        spinner.style.display = 'inline-block';
+        statusText.textContent = 'Pushing selected patients to Supabase...';
+        logOutput.textContent = `Starting sync for ${selectedIds.length} patient(s)...\n`;
+        resultsCard.style.display = 'block';
+
+        try {
+            const res = await fetch(`${OFFLINE_BASE}/api/admin/offline-patients/sync-selected`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ patient_ids: selectedIds, synced_by: 'Admin' }),
+            });
+            const result = await res.json();
+
+            if (result.status === 'Success') {
+                logOutput.textContent += `Synced: ${result.synced_count}\n`;
+                logOutput.textContent += `Skipped: ${result.skipped_count || 0}\n`;
+                logOutput.textContent += `Errors: ${result.errors_count}\n`;
+                (result.results || []).forEach(r => {
+                    if (r.status === 'synced') {
+                        logOutput.textContent += `✓ ${r.offline_mr} → ${r.online_mr} (${r.tests_synced || 0} tests)\n`;
+                    } else if (r.status === 'error') {
+                        logOutput.textContent += `✗ Patient #${r.patient_id}: ${r.message || 'Error'}\n`;
+                    } else if (r.status === 'skipped') {
+                        logOutput.textContent += `- Patient #${r.patient_id}: skipped\n`;
+                    }
+                });
+                statusText.textContent = `Done — synced ${result.synced_count}, errors ${result.errors_count}.`;
+            } else {
+                logOutput.textContent += `Sync failed: ${result.message || 'Unknown error'}\n`;
+                statusText.textContent = 'Sync failed. Check connection and try again.';
+            }
+        } catch (err) {
+            logOutput.textContent += `Network error: ${err.message}\n`;
+            statusText.textContent = 'Network error during sync.';
+        } finally {
+            btn.disabled = false;
+            spinner.style.display = 'none';
+            loadOfflinePatients();
+        }
+    }
+
+    async function loadOfflineSyncLog() {
+        const tbody = document.getElementById('offline-sync-log-body');
+        if (!tbody) return;
+        const search = (document.getElementById('offline-sync-log-search')?.value || '').trim();
+        const params = search ? `?search=${encodeURIComponent(search)}` : '';
+        try {
+            const res = await fetch(`${OFFLINE_BASE}/api/admin/offline-sync-log${params}`);
+            const data = await res.json();
+            if (data.status !== 'Success') {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#b45309; padding:24px;">Could not load sync log.</td></tr>';
+                return;
+            }
+            const logs = data.logs || [];
+            if (!logs.length) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:24px;">No sync records yet.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = logs.map(row => `
+                <tr>
+                    <td style="font-size:0.75rem; color:#64748b;">${escapeHtml(row.synced_at || '—')}</td>
+                    <td><strong>${escapeHtml(row.patient_name || '—')}</strong></td>
+                    <td><span style="font-family:monospace;">${escapeHtml(row.offline_mr || '—')}</span></td>
+                    <td><span style="font-family:monospace; color:#2b6cb0; font-weight:600;">${escapeHtml(row.online_mr || '—')}</span></td>
+                    <td>${row.tests_synced ?? 0}</td>
+                    <td><span class="status-pill ${row.status === 'synced' ? 'on' : 'off'}">${escapeHtml(row.status || '—')}</span></td>
+                    <td>${escapeHtml(row.synced_by || '—')}</td>
+                    <td style="max-width:220px; overflow-wrap:break-word; font-size:0.75rem; color:#b45309;">${escapeHtml(row.error_message || '')}</td>
+                </tr>
+            `).join('');
+        } catch (e) {
+            console.error('Failed to load offline sync log', e);
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#b45309; padding:24px;">Failed to load sync log.</td></tr>';
+        }
+    }
+
+    // ── Test Selection Layout & Presets Management ──────────────────────
+    window.layoutState = {
+        mode: 'group_only',
+        allow_single_tests: false,
+        categories_order: ['Popular'],
+        custom_categories: {},   // key: test_id or group_name → category string
+        quick_presets: [],        // [{ id, name, tests: [], auto_select: boolean }]
+        category_styles: {},     // category → 'fancy' | 'simple'
+        regular_preset: [],
+        auto_select_regular: false,
+        tests: [],
+        groups: []
+    };
+
+    // ── Helpers ─────────────────────────────────────────────────────────
+
+    function tslEscHtml(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function getEffectiveCategory(item) {
+        const key = item.isGroup ? item.name : String(item.id);
+        const custom = layoutState.custom_categories[key];
+        if (custom) return custom;
+        return item.isGroup ? 'Group Test' : 'General';
+    }
+
+    function buildAllItems() {
+        const showSingle = layoutState.mode === 'group_and_single';
+        const groups = (layoutState.groups || []).map(g => ({
+            id: g.id,
+            name: g.group_name,
+            isGroup: true,
+            status: g.status
+        }));
+        const singles = showSingle
+            ? (layoutState.tests || []).filter(t => t.status !== false).map(t => ({
+                id: t.id,
+                name: t.name,
+                isGroup: false,
+                status: t.status
+            }))
+            : [];
+        return [...groups, ...singles];
+    }
+
+    function getAllCategoryOptions() {
+        const opts = [...layoutState.categories_order];
+        if (!opts.includes('Group Test')) opts.push('Group Test');
+        if (!opts.includes('General')) opts.push('General');
+        return opts;
+    }
+
+    // ── Init ─────────────────────────────────────────────────────────────
+
+    async function initTestSelectionPage() {
+        if (!document.getElementById('admin_test_categorized_grid')) return;
+
+        try {
+            const [cfgRes, catRes] = await Promise.all([
+                fetch('/api/admin/test-selection-config'),
+                fetch('/api/admin/tests-catalog')
+            ]);
+            const cfg = await cfgRes.json();
+            const cat = await catRes.json();
+
+            if (cfg.status === 'Success') {
+                layoutState.mode = cfg.mode || 'group_only';
+                layoutState.allow_single_tests = cfg.allow_single_tests || false;
+                const saved = (cfg.categories_order || []).filter(c => c !== 'General' && c !== 'Group Test');
+                layoutState.categories_order = saved.length ? saved : ['Popular'];
+                layoutState.custom_categories = cfg.custom_categories || {};
+                layoutState.quick_presets = cfg.quick_presets || [];
+                layoutState.category_styles = cfg.category_styles || {};
+                layoutState.regular_preset = cfg.regular_preset || [];
+                layoutState.auto_select_regular = Boolean(cfg.auto_select_regular);
+
+                // Migration helper: If no quick_presets exist, build from regular_preset
+                if (!layoutState.quick_presets.length && layoutState.regular_preset.length) {
+                    layoutState.quick_presets.push({
+                        id: 'preset_regular',
+                        name: 'Regular Package',
+                        tests: [...layoutState.regular_preset],
+                        auto_select: layoutState.auto_select_regular
+                    });
+                }
+            }
+
+            if (cat.status === 'Success') {
+                layoutState.tests = cat.tests || [];
+                layoutState.groups = cat.groups || [];
+            }
+
+            const radio = document.querySelector(`input[name="online_test_sel_mode_page"][value="${layoutState.mode}"]`);
+            if (radio) radio.checked = true;
+            const chk = document.getElementById('auto_select_regular_chk_page');
+            if (chk) chk.checked = layoutState.auto_select_regular;
+
+            renderMultiQuickPresets();
+            renderAdminPreview();
+
+        } catch (e) {
+            console.error('initTestSelectionPage error:', e);
+            const grid = document.getElementById('admin_test_categorized_grid');
+            if (grid) grid.innerHTML = '<div style="color:#ef4444;padding:20px;">Failed to load test catalog. Please refresh.</div>';
+        }
+    }
+
+    // ── Multi Quick Presets UI ──────────────────────────────────────────
+
+    function renderMultiQuickPresets() {
+        const container = document.getElementById('multi_quick_presets_container');
+        if (!container) return;
+
+        if (!layoutState.quick_presets.length) {
+            container.innerHTML = `
+                <div style="text-align:center; padding:16px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; color:#64748b; font-size:0.85rem;">
+                    No quick presets configured yet. Click <strong>"+ New Quick Preset"</strong> above to create your first shortcut bundle.
+                </div>`;
+            return;
+        }
+
+        const buildOptions = () => {
+            let opts = '<option value="">-- Choose test or group to add --</option>';
+            if (layoutState.groups.length) {
+                opts += '<optgroup label="Group Tests">' +
+                    layoutState.groups.map(g => `<option value="${tslEscHtml(g.group_name)}">📦 ${tslEscHtml(g.group_name)}</option>`).join('') +
+                    '</optgroup>';
+            }
+            if (layoutState.tests.length) {
+                opts += '<optgroup label="Single Tests">' +
+                    layoutState.tests.filter(t => t.status !== false).map(t => `<option value="${t.id}">🧪 ${tslEscHtml(t.name)}</option>`).join('') +
+                    '</optgroup>';
+            }
+            return opts;
+        };
+
+        const optionsHtml = buildOptions();
+
+        container.innerHTML = layoutState.quick_presets.map((preset, pIdx) => {
+            const isAuto = Boolean(preset.auto_select);
+
+            const testChips = (preset.tests || []).map((val, tIdx) => {
+                let label = val;
+                const test = layoutState.tests.find(t => String(t.id) === String(val));
+                const group = layoutState.groups.find(g => g.group_name === val || String(g.id) === String(val));
+                if (test) label = test.name;
+                else if (group) label = group.group_name;
+
+                return `
+                    <span style="display:inline-flex; align-items:center; gap:5px; background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:3px 10px; border-radius:16px; font-size:0.8rem; font-weight:600;">
+                        ${tslEscHtml(label)}
+                        <span onclick="removeTestFromQuickPreset(${pIdx}, ${tIdx})" style="cursor:pointer; color:#0284c7; font-weight:bold; font-size:0.95rem;">×</span>
+                    </span>`;
+            }).join('');
+
+            return `
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-weight:700; color:#0f172a; font-size:0.95rem;">⚡ ${tslEscHtml(preset.name)}</span>
+                            <button type="button" onclick="renameQuickPreset(${pIdx})" style="border:none; background:none; color:#2563eb; font-size:0.75rem; font-weight:600; cursor:pointer; text-decoration:underline;">✏️ Rename</button>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:14px;">
+                            <label style="display:flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:600; color:#166534; background:#f0fdf4; padding:3px 10px; border-radius:6px; border:1px solid #bbf7d0; cursor:pointer;">
+                                <input type="radio" name="auto_select_preset_radio" value="${pIdx}" ${isAuto ? 'checked' : ''} onchange="setAutoSelectPreset(${pIdx})">
+                                Auto-select on page load
+                            </label>
+                            <button type="button" onclick="deleteQuickPreset(${pIdx})" style="background:#fef2f2; border:1px solid #fca5a5; color:#dc2626; padding:3px 10px; border-radius:6px; font-size:0.78rem; font-weight:600; cursor:pointer;">
+                                🗑️ Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; min-height:36px; padding:8px; background:white; border:1px solid #cbd5e1; border-radius:6px; align-items:center;">
+                        ${testChips || '<span style="color:#94a3b8; font-size:0.8rem; font-style:italic;">No tests in preset. Select tests below to add.</span>'}
+                    </div>
+
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <select id="preset_test_picker_${pIdx}" class="input-control" style="margin-bottom:0; flex:1; font-size:0.82rem; padding:4px 8px;">
+                            ${optionsHtml}
+                        </select>
+                        <button type="button" class="primary-btn" style="padding:5px 14px; font-size:0.8rem; white-space:nowrap;" onclick="addTestToQuickPreset(${pIdx})">
+                            + Add to Preset
+                        </button>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+
+    function createNewQuickPreset() {
+        const name = prompt('Enter a name for the new Quick Preset (e.g. Fever Profile, Routine Package):');
+        if (!name || !name.trim()) return;
+        const newPreset = {
+            id: 'preset_' + Date.now(),
+            name: name.trim(),
+            tests: [],
+            auto_select: layoutState.quick_presets.length === 0
+        };
+        layoutState.quick_presets.push(newPreset);
+        renderMultiQuickPresets();
+    }
+
+    function renameQuickPreset(pIdx) {
+        const p = layoutState.quick_presets[pIdx];
+        if (!p) return;
+        const newName = prompt('Enter new name for preset:', p.name);
+        if (newName && newName.trim()) {
+            p.name = newName.trim();
+            renderMultiQuickPresets();
+        }
+    }
+
+    function deleteQuickPreset(pIdx) {
+        const p = layoutState.quick_presets[pIdx];
+        if (!p) return;
+        if (!confirm(`Delete quick preset "${p.name}"?`)) return;
+        layoutState.quick_presets.splice(pIdx, 1);
+        renderMultiQuickPresets();
+    }
+
+    function addTestToQuickPreset(pIdx) {
+        const picker = document.getElementById(`preset_test_picker_${pIdx}`);
+        if (!picker || !picker.value) return;
+        const val = picker.value;
+        const p = layoutState.quick_presets[pIdx];
+        if (p && !p.tests.includes(val)) {
+            p.tests.push(val);
+            renderMultiQuickPresets();
+        }
+    }
+
+    function removeTestFromQuickPreset(pIdx, tIdx) {
+        const p = layoutState.quick_presets[pIdx];
+        if (p && p.tests) {
+            p.tests.splice(tIdx, 1);
+            renderMultiQuickPresets();
+        }
+    }
+
+    function setAutoSelectPreset(pIdx) {
+        layoutState.quick_presets.forEach((p, idx) => {
+            p.auto_select = (idx === pIdx);
+        });
+        renderMultiQuickPresets();
+    }
+
+    // ── Category Style Toggle ('fancy' vs 'simple') ──────────────────────
+
+    function toggleCategoryStyle(cat) {
+        const current = layoutState.category_styles[cat] || (cat === 'General' ? 'simple' : 'fancy');
+        const next = (current === 'fancy') ? 'simple' : 'fancy';
+        layoutState.category_styles[cat] = next;
+        renderAdminPreview();
+    }
+
+    // ── Main Preview Renderer ────────────────────────────────────────────
+
+    function renderAdminPreview() {
+        const grid = document.getElementById('admin_test_categorized_grid');
+        if (!grid) return;
+
+        const items = buildAllItems();
+        if (!items.length) {
+            grid.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8;">No tests found in catalog.</div>';
+            return;
+        }
+
+        const catOrder = [...layoutState.categories_order, 'Group Test', 'General'];
+        const catMap = {};
+        catOrder.forEach(c => { catMap[c] = []; });
+
+        items.forEach(item => {
+            const cat = getEffectiveCategory(item);
+            if (!catMap[cat]) catMap[cat] = [];
+            catMap[cat].push(item);
+        });
+
+        const allCatOpts = getAllCategoryOptions();
+
+        grid.innerHTML = catOrder.map((cat, catIdx) => {
+            const catItems = catMap[cat] || [];
+            const isCore = cat === 'General' || cat === 'Group Test';
+            const isCustom = !isCore;
+            const totalCustomCats = layoutState.categories_order.length;
+            const customIdx = layoutState.categories_order.indexOf(cat);
+
+            // Effective display style for category (default General to 'simple', others to 'fancy')
+            const styleMode = layoutState.category_styles[cat] || (cat === 'General' ? 'simple' : 'fancy');
+            const isSimple = styleMode === 'simple';
+
+            // Category reorder/remove controls
+            let headerControls = '';
+            if (isCustom) {
+                headerControls = `
+                    <div style="display:flex;gap:4px;align-items:center;">
+                        <button type="button" onclick="tslMoveCat(${customIdx},-1)" ${customIdx === 0 ? 'disabled' : ''}
+                            style="padding:2px 6px;border:1px solid #cbd5e1;border-radius:4px;font-size:0.75rem;cursor:pointer;background:white;">▲</button>
+                        <button type="button" onclick="tslMoveCat(${customIdx},1)" ${customIdx === totalCustomCats - 1 ? 'disabled' : ''}
+                            style="padding:2px 6px;border:1px solid #cbd5e1;border-radius:4px;font-size:0.75rem;cursor:pointer;background:white;">▼</button>
+                        <button type="button" onclick="tslRemoveCat(${customIdx})"
+                            style="padding:2px 6px;border:1px solid #fca5a5;color:#dc2626;border-radius:4px;font-size:0.75rem;cursor:pointer;background:#fef2f2;">✕ Remove</button>
+                    </div>`;
+            }
+
+            // Style toggle button
+            const styleBtn = `
+                <button type="button" onclick="toggleCategoryStyle('${tslEscHtml(cat)}')"
+                    style="font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:6px; border:1px solid #cbd5e1; cursor:pointer; background:${isSimple ? '#f1f5f9' : '#e0f2fe'}; color:${isSimple ? '#475569' : '#0369a1'};">
+                    ${isSimple ? '📄 Simple Header' : '🎨 Fancy Box'}
+                </button>`;
+
+            // Test cards grid
+            const testCards = catItems.length === 0
+                ? `<div style="color:#94a3b8;font-size:0.82rem;padding:10px 4px;font-style:italic;">${isCore ? 'No tests here.' : 'No tests assigned. Use dropdowns on other tests to move them here.'}</div>`
+                : `<div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:8px;">` +
+                catItems.map(item => {
+                    const keyJs = item.isGroup ? item.name.replace(/'/g, "\\'") : String(item.id);
+                    const opts = allCatOpts.map(opt =>
+                        `<option value="${tslEscHtml(opt)}" ${opt === cat ? 'selected' : ''}>${tslEscHtml(opt)}</option>`
+                    ).join('');
+                    const groupBadge = item.isGroup ? `<span style="background:#dbeafe;color:#1d4ed8;font-size:0.62rem;font-weight:700;padding:1px 5px;border-radius:8px;margin-left:4px;">Group</span>` : '';
+
+                    return `
+                        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e2e8f0;border-radius:8px;padding:6px 10px;gap:6px;box-shadow:0 1px 2px rgba(0,0,0,0.02);">
+                            <div style="display:flex;align-items:center;gap:4px;flex:1;min-width:0;">
+                                <span style="font-size:0.82rem;font-weight:600;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${tslEscHtml(item.name)}">${tslEscHtml(item.name)}</span>
+                                ${groupBadge}
+                            </div>
+                            <select onchange="tslSetCategory('${keyJs}', ${item.isGroup ? 'true' : 'false'}, this.value)"
+                                style="font-size:0.75rem;padding:2px 4px;border:1px solid #cbd5e1;border-radius:4px;background:white;color:#334155;cursor:pointer;max-width:110px;">
+                                ${opts}
+                            </select>
+                        </div>`;
+                }).join('') + `</div>`;
+
+            // If Simple Header mode (like user image screenshot)
+            if (isSimple) {
+                return `
+                    <div style="margin-top:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; padding-bottom:4px; border-bottom:2px solid #e2e8f0;">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="font-weight:800; font-size:0.82rem; color:#475569; letter-spacing:0.06em; text-transform:uppercase;">${tslEscHtml(cat)}</span>
+                                <span style="background:#e2e8f0; color:#475569; font-size:0.68rem; font-weight:700; padding:1px 6px; border-radius:10px;">${catItems.length}</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                ${styleBtn}
+                                ${headerControls}
+                            </div>
+                        </div>
+                        ${testCards}
+                    </div>`;
+            }
+
+            // Fancy Box mode
+            const catColors = {
+                'Popular': { bg: '#fef9c3', border: '#fde047', label: '#713f12', badge: '#eab308' },
+                'General': { bg: '#f8fafc', border: '#e2e8f0', label: '#475569', badge: '#94a3b8' },
+                'Group Test': { bg: '#eff6ff', border: '#bfdbfe', label: '#1e40af', badge: '#3b82f6' },
+            };
+            const color = catColors[cat] || { bg: '#f0fdf4', border: '#bbf7d0', label: '#166534', badge: '#16a34a' };
+
+            return `
+                <div style="background:${color.bg};border:1px solid ${color.border};border-radius:10px;padding:14px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <span style="font-weight:700;font-size:0.9rem;color:${color.label};">${tslEscHtml(cat)}</span>
+                            <span style="background:${color.badge};color:white;font-size:0.7rem;font-weight:700;padding:1px 8px;border-radius:12px;">${catItems.length}</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            ${styleBtn}
+                            ${headerControls}
+                        </div>
+                    </div>
+                    ${testCards}
+                </div>`;
+        }).join('');
+    }
+
+    // ── Category CRUD ────────────────────────────────────────────────────
+
+    function addNewCategoryOrder() {
+        const inp = document.getElementById('new_cat_name_input');
+        if (!inp) return;
+        const name = inp.value.trim();
+        if (!name) { alert('Please enter a category name.'); return; }
+        if (name === 'General' || name === 'Group Test') {
+            alert('"General" and "Group Test" are built-in categories.');
+            return;
+        }
+        if (layoutState.categories_order.includes(name)) {
+            alert(`Category "${name}" already exists.`);
+            return;
+        }
+        layoutState.categories_order.push(name);
+        inp.value = '';
+        renderAdminPreview();
+        renderMultiQuickPresets();
+    }
+
+    function tslMoveCat(idx, dir) {
+        const target = idx + dir;
+        if (target < 0 || target >= layoutState.categories_order.length) return;
+        const temp = layoutState.categories_order[idx];
+        layoutState.categories_order[idx] = layoutState.categories_order[target];
+        layoutState.categories_order[target] = temp;
+        renderAdminPreview();
+    }
+
+    function tslRemoveCat(idx) {
+        const catName = layoutState.categories_order[idx];
+        if (!catName) return;
+        if (!confirm(`Remove category "${catName}"? Tests in this category will move back to General / Group Test.`)) return;
+        Object.keys(layoutState.custom_categories).forEach(k => {
+            if (layoutState.custom_categories[k] === catName) {
+                delete layoutState.custom_categories[k];
+            }
+        });
+        layoutState.categories_order.splice(idx, 1);
+        renderAdminPreview();
+        renderMultiQuickPresets();
+    }
+
+    function tslSetCategory(key, isGroup, newCat) {
+        const defaultCat = isGroup ? 'Group Test' : 'General';
+        if (newCat === defaultCat) {
+            delete layoutState.custom_categories[key];
+        } else {
+            layoutState.custom_categories[key] = newCat;
+        }
+        renderAdminPreview();
+    }
+
+    // ── Save ─────────────────────────────────────────────────────────────
+
+    async function saveTestSelectionLayoutConfig() {
+        const autoPreset = layoutState.quick_presets.find(p => p.auto_select);
+        const legacyPresetTests = autoPreset ? autoPreset.tests : (layoutState.quick_presets[0]?.tests || []);
+
+        const payload = {
+            mode: layoutState.mode,
+            allow_single_tests: layoutState.mode === 'group_and_single',
+            categories_order: layoutState.categories_order,
+            custom_categories: layoutState.custom_categories,
+            quick_presets: layoutState.quick_presets,
+            category_styles: layoutState.category_styles,
+            regular_preset: legacyPresetTests,
+            auto_select_regular: Boolean(autoPreset)
+        };
+
+        try {
+            const res = await fetch('/api/admin/test-selection-config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.status === 'Success') {
+                alert('✅ Test Selection Layout & Quick Presets saved successfully! Changes are live on /register.');
+            } else {
+                alert('❌ Failed to save: ' + (data.detail || 'Unknown error'));
+            }
+        } catch (e) {
+            console.error('saveTestSelectionLayoutConfig error:', e);
+            alert('❌ Network error while saving configuration.');
+        }
+    }
+
+    // ── Print Settings Handlers ──────────────────────────────────────────────
+
+    async function loadAdminPrintSettings() {
+        try {
+            const res = await fetch('/api/admin/print-settings');
+            if (!res.ok) throw new Error('Failed to fetch print settings from server');
+            const s = await res.json();
+            if (!s) return;
+
+            const setVal = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.value = (val !== undefined && val !== null) ? val : '';
+            };
+
+            setVal('ps_category_font_size', s.category_font_size ?? 18);
+            setVal('ps_group_font_size', s.group_font_size ?? 15);
+            setVal('ps_test_name_font_size', s.test_name_font_size ?? 14);
+            setVal('ps_result_font_size', s.result_font_size ?? 14);
+            setVal('ps_patient_info_font_size', s.patient_info_font_size ?? 14);
+            setVal('ps_patient_info_label_font_size', s.patient_info_label_font_size ?? 14);
+            setVal('ps_footer_font_size', s.footer_font_size ?? 11);
+
+            setVal('ps_page_top_margin', s.page_top_margin ?? 25);
+            setVal('ps_page_right_margin', s.page_right_margin ?? 15);
+            setVal('ps_page_bottom_margin', s.page_bottom_margin ?? 25);
+            setVal('ps_page_left_margin', s.page_left_margin ?? 15);
+            setVal('ps_header_height', s.header_height ?? 140);
+            setVal('ps_footer_padding_top', s.footer_padding_top ?? 20);
+            setVal('ps_patient_info_bottom_margin', s.patient_info_bottom_margin ?? 6);
+
+            setVal('ps_table_cell_padding_vertical', s.table_cell_padding_vertical ?? 4);
+            setVal('ps_table_cell_padding_horizontal', s.table_cell_padding_horizontal ?? 12);
+            setVal('ps_category_padding_top', s.category_padding_top ?? 6);
+            setVal('ps_category_padding_bottom', s.category_padding_bottom ?? 4);
+            setVal('ps_group_padding_top', s.group_padding_top ?? 8);
+            setVal('ps_category_border_width', s.category_border_width ?? 2);
+
+            const color = s.primary_color || '#111111';
+            setVal('ps_primary_color', color);
+            const colorPicker = document.getElementById('ps_primary_color_picker');
+            if (colorPicker) colorPicker.value = color.startsWith('#') ? color : '#111111';
+
+            const chkSingle = document.getElementById('ps_hide_single_param_title');
+            if (chkSingle) chkSingle.checked = Boolean(s.hide_single_param_title ?? 1);
+
+            const chkCombine = document.getElementById('ps_combine_categories_on_same_page');
+            if (chkCombine) chkCombine.checked = Boolean(s.combine_categories_on_same_page ?? 1);
+
+            const chkVer = document.getElementById('ps_display_verified_by');
+            if (chkVer) chkVer.checked = Boolean(s.display_verified_by ?? 1);
+
+            const chkPath = document.getElementById('ps_display_pathologist_signature');
+            if (chkPath) chkPath.checked = Boolean(s.display_pathologist_signature ?? 1);
+        } catch (e) {
+            console.error("Error loading print settings:", e);
+        }
+    }
+
+    async function saveAdminPrintSettings() {
+        try {
+            const getNum = (id) => {
+                const el = document.getElementById(id);
+                if (!el || el.value === "" || el.value === null || el.value === undefined) return null;
+                return Number(el.value);
+            };
+
+            const payload = {
+                category_font_size: getNum('ps_category_font_size'),
+                group_font_size: getNum('ps_group_font_size'),
+                test_name_font_size: getNum('ps_test_name_font_size'),
+                result_font_size: getNum('ps_result_font_size'),
+                patient_info_font_size: getNum('ps_patient_info_font_size'),
+                patient_info_label_font_size: getNum('ps_patient_info_label_font_size'),
+                footer_font_size: getNum('ps_footer_font_size'),
+
+                page_top_margin: getNum('ps_page_top_margin'),
+                page_right_margin: getNum('ps_page_right_margin'),
+                page_bottom_margin: getNum('ps_page_bottom_margin'),
+                page_left_margin: getNum('ps_page_left_margin'),
+                header_height: getNum('ps_header_height'),
+                footer_padding_top: getNum('ps_footer_padding_top'),
+                patient_info_bottom_margin: getNum('ps_patient_info_bottom_margin'),
+
+                table_cell_padding_vertical: getNum('ps_table_cell_padding_vertical'),
+                table_cell_padding_horizontal: getNum('ps_table_cell_padding_horizontal'),
+                category_padding_top: getNum('ps_category_padding_top'),
+                category_padding_bottom: getNum('ps_category_padding_bottom'),
+                group_padding_top: getNum('ps_group_padding_top'),
+                category_border_width: getNum('ps_category_border_width'),
+
+                primary_color: document.getElementById('ps_primary_color')?.value || '#111111',
+                combine_categories_on_same_page: document.getElementById('ps_combine_categories_on_same_page')?.checked ? 1 : 0,
+                hide_single_param_title: document.getElementById('ps_hide_single_param_title')?.checked ? 1 : 0,
+                display_verified_by: document.getElementById('ps_display_verified_by')?.checked ? 1 : 0,
+                display_pathologist_signature: document.getElementById('ps_display_pathologist_signature')?.checked ? 1 : 0,
+            };
+
+            const res = await fetch('/api/admin/print-settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            if (!res.ok || data.status !== 'Success') {
+                throw new Error(data.message || 'Failed to update print settings');
+            }
+
+            alert("✅ Global print settings saved successfully to Supabase and cache updated!");
+            loadAdminPrintSettings();
+        } catch (e) {
+            console.error("Error saving print settings:", e);
+            alert("❌ Error saving settings: " + e.message);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initTestSelectionPage();
+        if ("{{ current_view }}" === "print-settings") {
+            loadAdminPrintSettings();
+        }
+    });
+
+</script>
+{% endblock %}

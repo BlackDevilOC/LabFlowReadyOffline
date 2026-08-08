@@ -1,0 +1,494 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    /* ---- Premium Glassmorphic Theme ---- */
+    .enter-results-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Back header */
+    .back-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+        background: var(--border);
+        transform: translateX(-2px);
+    }
+
+    .back-header h1 {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0;
+    }
+
+    /* Patient Summary Bar */
+    .patient-glass-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 24px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 24px;
+        align-items: center;
+    }
+
+    .patient-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--accent), #3b82f6);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .patient-details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+    }
+
+    .patient-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .patient-meta-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .patient-meta-value {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    /* Test Results Header/Title */
+    .test-title-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .test-title-strip h2 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .test-category-badge {
+        font-size: 11px;
+        font-weight: 700;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--accent);
+        padding: 4px 10px;
+        border-radius: 30px;
+        text-transform: uppercase;
+    }
+
+    /* Cards for parameters entry */
+    .params-grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 30px;
+    }
+
+    .param-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        display: grid;
+        grid-template-columns: 2fr 1.5fr 1.5fr;
+        align-items: center;
+        gap: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .param-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        border-color: var(--accent);
+    }
+
+    .param-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .param-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    .param-range {
+        font-size: 12px;
+        color: var(--text-muted);
+    }
+
+    .param-input-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .param-input {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: bold;
+        color: var(--text);
+        background: var(--surface-2);
+        outline: none;
+        transition: all 0.15s ease;
+        text-align: center;
+    }
+
+    .param-input:focus {
+        border-color: var(--accent);
+        background: var(--surface);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .param-unit {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        min-width: 45px;
+    }
+
+    .param-reference-strip {
+        font-size: 13px;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-align: right;
+    }
+
+    /* Action bar */
+    .action-bar {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        border-top: 1px solid var(--border);
+        padding-top: 20px;
+    }
+
+    .btn-cancel {
+        padding: 10px 20px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+
+    .btn-cancel:hover {
+        background: var(--border);
+        color: var(--text);
+    }
+
+    .btn-save-report {
+        padding: 10px 24px;
+        border: none;
+        background: var(--accent);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-save-report:hover {
+        background: var(--accent-hover);
+        box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-save-report:active {
+        transform: scale(0.98);
+    }
+
+    .loading-container {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="enter-results-container">
+    
+    <!-- Header -->
+    <div class="back-header">
+        <button class="back-btn" onclick="window.location.href='/update-results'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h1 id="page-header-title">Enter Lab Results</h1>
+    </div>
+
+    <!-- Patient Glass Summary -->
+    <div class="patient-glass-card">
+        <div class="patient-avatar" id="patient-avatar-letter">P</div>
+        <div class="patient-details-grid">
+            <div class="patient-meta-item">
+                <span class="patient-meta-label">Patient Name</span>
+                <span class="patient-meta-value" id="patient-name">—</span>
+            </div>
+            <div class="patient-meta-item">
+                <span class="patient-meta-label">MR Number</span>
+                <span class="patient-meta-value" id="patient-mr">—</span>
+            </div>
+            <div class="patient-meta-item">
+                <span class="patient-meta-label">Age & Gender</span>
+                <span class="patient-meta-value" id="patient-age-gender">—</span>
+            </div>
+            <div class="patient-meta-item">
+                <span class="patient-meta-label">Token No</span>
+                <span class="patient-meta-value" id="patient-token">—</span>
+            </div>
+            <div class="patient-meta-item">
+                <span class="patient-meta-label">Shift</span>
+                <span class="patient-meta-value" id="patient-shift">—</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test title info -->
+    <div class="test-title-strip">
+        <h2 id="test-name-label">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            Loading Test Data…
+        </h2>
+        <span class="test-category-badge" id="test-category">—</span>
+    </div>
+
+    <!-- Input fields grid -->
+    <div class="params-grid-container" id="params-container">
+        <div class="loading-container">
+            <p>Loading parameters details from server…</p>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-bar">
+        <button class="btn-cancel" onclick="window.location.href='/update-results'">Cancel</button>
+        <button class="btn-save-report" id="btn-save-results" onclick="saveTestResults()">Save & Complete Results</button>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const RECORD_ID = "{{ record_id }}";
+    let testValuesJSON = {};
+
+    async function loadTestData() {
+        try {
+            const res = await fetch(`/api/test-results/record/${RECORD_ID}`);
+            const payload = await res.json();
+            if (payload.status === 'Success' && payload.data) {
+                const item = payload.data;
+                
+                // Set patient details
+                document.getElementById('patient-name').textContent = item.patient_name || 'Unknown';
+                document.getElementById('patient-mr').textContent = item.mr_no || '—';
+                document.getElementById('patient-age-gender').textContent = `${item.age || '—'} / ${item.gender || '—'}`;
+                document.getElementById('patient-token').textContent = item.patient_token || '—';
+                document.getElementById('patient-shift').textContent = item.shift || '—';
+                
+                // Avatar Letter
+                const firstLetter = (item.patient_name || 'P').trim()[0].toUpperCase();
+                document.getElementById('patient-avatar-letter').textContent = firstLetter;
+                
+                // Test headers
+                document.getElementById('test-name-label').innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 6px;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    ${item.test_name || 'Lab Report'}
+                `;
+                document.getElementById('test-category').textContent = item.category || 'General';
+                
+                // Load parameter cards
+                testValuesJSON = item.test_values || {};
+                renderParamsForm();
+            } else {
+                document.getElementById('params-container').innerHTML = `
+                    <div style="text-align:center;padding:40px;color:red;font-weight:bold;">
+                        Failed to retrieve test record. Please check if ID exists.
+                    </div>
+                `;
+            }
+        } catch (e) {
+            console.error(e);
+            document.getElementById('params-container').innerHTML = `
+                <div style="text-align:center;padding:40px;color:red;font-weight:bold;">
+                    Error loading test data: ${e.message}
+                </div>
+            `;
+        }
+    }
+
+    function renderParamsForm() {
+        const container = document.getElementById('params-container');
+        const keys = Object.keys(testValuesJSON);
+        
+        if (keys.length === 0) {
+            container.innerHTML = `
+                <div style="text-align:center;padding:40px;color:var(--text-muted);">
+                    No components found in this test record.
+                </div>
+            `;
+            return;
+        }
+
+        let html = '';
+        keys.forEach(key => {
+            const param = testValuesJSON[key];
+            const name = param.name || 'Component';
+            const val = param.value !== undefined ? param.value : '0';
+            const unit = param.unit || '';
+            
+            // Build range representation
+            let rangeStr = '—';
+            if (param.normal_min !== undefined && param.normal_min !== null && param.normal_max !== undefined && param.normal_max !== null) {
+                rangeStr = `${param.normal_min} - ${param.normal_max}`;
+            } else if (param.normal_range) {
+                rangeStr = param.normal_range;
+            }
+
+            html += `
+                <div class="param-card">
+                    <div class="param-info">
+                        <span class="param-name">${name}</span>
+                        <span class="param-range">Normal: ${rangeStr}</span>
+                    </div>
+                    <div class="param-input-wrap">
+                        <input type="text" class="param-input" data-key="${key}" value="${val}" placeholder="0" onfocus="this.select();">
+                        <span class="param-unit">${unit}</span>
+                    </div>
+                    <div class="param-reference-strip">
+                        <span>Range: ${rangeStr} ${unit}</span>
+                    </div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+    }
+
+    async function saveTestResults(options = {}) {
+        const inputs = document.querySelectorAll('.param-input');
+        const updatedPayload = { ...testValuesJSON };
+        
+        inputs.forEach(input => {
+            const key = input.dataset.key;
+            if (key && updatedPayload[key]) {
+                updatedPayload[key].value = input.value;
+            }
+        });
+
+        const btn = document.getElementById('btn-save-results');
+        if (btn) {
+            btn.textContent = options.redirectToPrint ? 'Saving & Opening Print…' : 'Saving results…';
+            btn.disabled = true;
+        }
+
+        try {
+            const res = await fetch(`/api/test-results/update/${RECORD_ID}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedPayload)
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                const mrNo = currentRecord?.mr_no;
+                if (options.redirectToPrint && mrNo) {
+                    window.location.href = `/page/lab-test-print/${mrNo}`;
+                } else {
+                    window.location.href = '/update-results';
+                }
+            } else {
+                alert("Failed to save results. Check logs for details.");
+                if (btn) {
+                    btn.textContent = 'Save & Complete Results';
+                    btn.disabled = false;
+                }
+            }
+        } catch (e) {
+            alert("Error saving results: " + e.message);
+            if (btn) {
+                btn.textContent = 'Save & Complete Results';
+                btn.disabled = false;
+            }
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+            e.preventDefault();
+            saveTestResults({ redirectToPrint: true });
+        } else if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            saveTestResults({ redirectToPrint: false });
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', loadTestData);
+</script>
+{% endblock %}

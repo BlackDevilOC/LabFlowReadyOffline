@@ -1,0 +1,651 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    :root {
+        --m-top: 30mm;
+        --m-right: 15mm;
+        --m-bottom: 20mm;
+        --m-left: 15mm;
+        --primary-color: #111827;
+        --secondary-color: #4b5563;
+        --border-color: #e5e7eb;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* --- No-print controls --- */
+    #print-btn {
+        position: fixed;
+        top: 75px;
+        right: 80px;
+        z-index: 1000;
+        padding: 10px 20px;
+        cursor: pointer;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #admin-btn {
+        position: fixed;
+        top: 75px;
+        right: 20px;
+        z-index: 1000;
+        padding: 10px;
+        cursor: pointer;
+        background: #333;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+    }
+
+    #admin-panel {
+        display: none;
+        position: fixed;
+        top: 130px;
+        right: 20px;
+        width: 220px;
+        background: #222;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        z-index: 1001;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .admin-group {
+        margin-bottom: 12px;
+    }
+
+    .admin-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 11px;
+        color: #888;
+        text-transform: uppercase;
+    }
+
+    .admin-group input {
+        width: 100%;
+        background: #444;
+        color: #fff;
+        border: 1px solid #666;
+        padding: 8px;
+        border-radius: 4px;
+    }
+
+    /* --- Report page wrapper --- */
+    .report-page {
+        width: 210mm;
+        min-height: 270mm;
+        margin: 20px auto;
+        background: white;
+        padding: var(--m-top) var(--m-right) var(--m-bottom) var(--m-left);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: padding 0.1s ease;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #000;
+        overflow: hidden;
+    }
+
+    /* --- Patient info boxes: exact match to patient_report.html --- */
+    .patient-info-boxes {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+
+    .patient-info-box {
+        flex: 1 1 0;
+        /* equal width for both boxes */
+        min-width: 0;
+        border: 1.5px solid black;
+        border-radius: 20px;
+        padding: 14px 16px;
+        background: white;
+    }
+
+    .info-row {
+        font-size: 13px;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: var(--secondary-color);
+        flex-shrink: 0;
+    }
+
+    /* Left box labels (Lab No, Name, Age, Ref By) */
+    .patient-info-box:nth-child(1) .info-label {
+        width: 60px;
+        min-width: 60px;
+    }
+
+    /* Right box labels (Branch, Ward/Unit, Collection Time) */
+    .patient-info-box:nth-child(2) .info-label {
+        width: 115px;
+        min-width: 115px;
+    }
+
+    .info-value {
+        font-weight: 500;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 0;
+        /* gap controlled per-element */
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    /* Editable fields inside info-value */
+    input.iv-field,
+    select.iv-field {
+        border: none;
+        outline: none;
+        font-size: 13px;
+        font-family: inherit;
+        font-weight: 500;
+        color: var(--primary-color);
+        background: transparent;
+        padding: 0;
+        flex-shrink: 1;
+        min-width: 0;
+    }
+
+    /* Salutation dropdown sits tight against the name field */
+    select.iv-salutation {
+        width: auto;
+        max-width: 46px;
+        margin-right: 6px;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    /* Name text field grows to fill remaining space */
+    input.iv-name {
+        flex: 1;
+        min-width: 60px;
+    }
+
+    /* --- Section / category title --- */
+    .category-title-block {
+        margin-bottom: 10px;
+    }
+
+    .category-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--border-color);
+        display: block;
+        padding-bottom: 5px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    /* --- Main results table --- */
+    table.category-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    /* Column widths */
+    .col-test-name {
+        width: 38%;
+        text-align: left;
+    }
+
+    .col-result {
+        width: 20%;
+        text-align: left;
+    }
+
+    .col-unit {
+        width: 17%;
+        text-align: left;
+    }
+
+    .col-range {
+        width: 25%;
+        text-align: left;
+    }
+
+    .column-headers-row th {
+        border: 1px solid #000;
+        padding: 8px 10px;
+        font-size: 14px;
+        font-weight: bold;
+        background: #fff;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* Body rows */
+    .test-row td {
+        padding: 7px 10px;
+        font-size: 14px;
+        vertical-align: middle;
+        border: none;
+        overflow: hidden;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+
+    /* Leader-dot effect: test name fills space with dots up to result */
+    td.test-name-cell {
+        overflow: hidden;
+        white-space: nowrap;
+        /* keep dots on one line */
+        max-width: 0;
+        word-break: normal;
+        /* override parent word-break for this cell */
+        overflow-wrap: normal;
+    }
+
+    td.test-name-cell::after {
+        content: ' .................................................................................................................................................................................................';
+        color: #aaa;
+        letter-spacing: 0px;
+    }
+
+    /* Sub-group header rows (Physical / Chemical / Microscopic) */
+    .group-name td {
+        font-weight: bold;
+        font-style: italic;
+        font-size: 15px;
+        padding: 10px 10px 3px 10px;
+        border: none;
+        color: #000;
+    }
+
+    /* ASCITIC FLUID DR bold row */
+    .main-group-title td {
+        font-weight: bold;
+        font-size: 15px;
+        padding: 6px 10px;
+        border: none;
+    }
+
+    /* Editable result / unit fields inside table */
+    input.res-val {
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        color: #000;
+    }
+
+    /* Wrapping contenteditable div — used for long-text fields like Gram Stain */
+    div.res-editable {
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        width: 100%;
+        color: #000;
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        cursor: text;
+        min-height: 1em;
+    }
+
+    /* Subtle caret highlight when editing */
+    div.res-editable:focus {
+        background: rgba(0, 123, 255, 0.04);
+        border-radius: 2px;
+    }
+
+    input.unit-val {
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        width: 100%;
+        color: #1a0dab;
+    }
+
+    select.res-select {
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        cursor: pointer;
+        color: #000;
+        width: 100%;
+    }
+
+    /* --- Print styles --- */
+    @media print {
+
+        .no-print,
+        .sidebar,
+        .top-bar {
+            display: none !important;
+        }
+
+        .main-content {
+            padding: 0 !important;
+        }
+
+        body {
+            background: none;
+        }
+
+        .report-page {
+            margin: 0;
+            box-shadow: none;
+            border: none;
+            width: 100%;
+            padding: var(--m-top) var(--m-right) var(--m-bottom) var(--m-left);
+        }
+
+        input,
+        select {
+            border: none !important;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<button id="print-btn" class="no-print" onclick="window.print()">Print Report</button>
+<button id="admin-btn" class="no-print" onclick="toggleAdmin(event)">⚙</button>
+
+<div id="admin-panel" class="no-print">
+    <h4 style="margin-top:0">Margin Control (mm)</h4>
+    <div class="admin-group"><label>Top</label><input type="number" id="m-t" oninput="applyMargins()" value="30"></div>
+    <div class="admin-group"><label>Bottom</label><input type="number" id="m-b" oninput="applyMargins()" value="20">
+    </div>
+    <div class="admin-group"><label>Left</label><input type="number" id="m-l" oninput="applyMargins()" value="15"></div>
+    <div class="admin-group"><label>Right</label><input type="number" id="m-r" oninput="applyMargins()" value="15">
+    </div>
+</div>
+
+<div class="report-page">
+
+    <!-- Patient info boxes matching patient_report.html exactly -->
+    <div class="patient-info-boxes">
+        <!-- Left box -->
+        <div class="patient-info-box">
+            <div class="info-row">
+                <span class="info-label">Lab No:</span>
+                <span class="info-value"><input type="text" class="iv-field" value="103"></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Name:</span>
+                <span class="info-value">
+                    <select class="iv-field iv-salutation" title="Salutation">
+                        <option>Mr.</option>
+                        <option>Mrs.</option>
+                        <option>Miss</option>
+                        <option>Ms.</option>
+                    </select>
+                    <input type="text" class="iv-field iv-name" value="Muhammad paryal">
+                </span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Age:</span>
+                <span class="info-value"><input type="text" class="iv-field" value=""></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Ref By:</span>
+                <span class="info-value"><input type="text" class="iv-field" value="GMMMC"></span>
+            </div>
+        </div>
+
+        <!-- Right box -->
+        <div class="patient-info-box">
+            <div class="info-row">
+                <span class="info-label">Branch:</span>
+                <span class="info-value"><input type="text" class="iv-field" value="GMMMC"></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Ward/Unit:</span>
+                <span class="info-value"><input type="text" class="iv-field" value="MU 1"></span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Collection Time:</span>
+                <span class="info-value"><input type="text" id="report-date" class="iv-field" value=""></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category title block -->
+    <div class="category-title-block">
+        <span class="category-title">Clinical Pathology</span>
+    </div>
+
+    <!-- Main table -->
+    <table class="category-table">
+        <thead>
+            <tr class="column-headers-row">
+                <th class="col-test-name">Test Name</th>
+                <th class="col-result">Result</th>
+                <th class="col-unit">Unit</th>
+                <th class="col-range">Normal Ranges</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <!-- CSF DR title row -->
+            <tr class="main-group-title">
+                <td colspan="4">CSF DR</td>
+            </tr>
+
+            <!-- Physical -->
+            <tr class="group-name">
+                <td colspan="4">Physical</td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">Volume</td>
+                <td><input type="text" class="res-val" value="03" data-result-field></td>
+                <td><input type="text" class="unit-val" value="Ml"></td>
+                <td></td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell" style="color:#c00;">Colour</td>
+                <td><input type="text" class="res-val" value="Colour less" data-result-field></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">Appearance</td>
+                <td><input type="text" class="res-val" value="Clear" data-result-field></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">Coagulum</td>
+                <td>
+                    <select class="res-select" data-result-field>
+                        <option>Negative</option>
+                        <option>Positive</option>
+                        <option>Trace</option>
+                    </select>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <!-- Chemical -->
+            <tr class="group-name">
+                <td colspan="4">Chemical</td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">Glucose</td>
+                <td><input type="text" class="res-val" value="71" data-result-field></td>
+                <td><input type="text" class="unit-val" value="mg/dl"></td>
+                <td>50-75</td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">Protein</td>
+                <td><input type="text" class="res-val" value="15.0" data-result-field></td>
+                <td><input type="text" class="unit-val" value="mg/dl"></td>
+                <td>15 - 45 &gt;01 Month<br>20 - 80 &lt;01 Month</td>
+            </tr>
+
+            <!-- Microscopic -->
+            <tr class="group-name">
+                <td colspan="4">Microscopic</td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">W.B.C</td>
+                <td><input type="text" class="res-val" value="10" data-result-field></td>
+                <td><input type="text" class="unit-val" value="/cmm"></td>
+                <td></td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">Polymorph</td>
+                <td><input type="text" class="res-val" value="20" data-result-field></td>
+                <td><input type="text" class="unit-val" value="%"></td>
+                <td></td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">Lymphocytes</td>
+                <td><input type="text" class="res-val" value="80" data-result-field></td>
+                <td><input type="text" class="unit-val" value="%"></td>
+                <td></td>
+            </tr>
+            <tr class="test-row">
+                <td class="test-name-cell">R.B.C</td>
+                <td><input type="text" class="res-val" value="100" data-result-field></td>
+                <td><input type="text" class="unit-val" value="/cmm"></td>
+                <td></td>
+            </tr>
+
+            <!-- Spacer -->
+            <tr>
+                <td colspan="4" style="height:8px;"></td>
+            </tr>
+
+            <!-- Gram Stain —— uses contenteditable div so text wraps freely -->
+            <tr class="test-row">
+                <td class="test-name-cell">Gram Stain</td>
+                <td>
+                    <div class="res-editable" contenteditable="true" data-result-field spellcheck="false" role="textbox"
+                        aria-multiline="true">No Microorganism<br>seen</div>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const panel = document.getElementById('admin-panel');
+    const btn = document.getElementById('admin-btn');
+
+    function toggleAdmin(e) {
+        e.stopPropagation();
+        if (panel.style.display === 'block') closePanel();
+        else {
+            if (prompt("Admin Password:") === "admin") panel.style.display = 'block';
+        }
+    }
+
+    function applyMargins() {
+        const r = document.documentElement;
+        r.style.setProperty('--m-top', document.getElementById('m-t').value + 'mm');
+        r.style.setProperty('--m-bottom', document.getElementById('m-b').value + 'mm');
+        r.style.setProperty('--m-left', document.getElementById('m-l').value + 'mm');
+        r.style.setProperty('--m-right', document.getElementById('m-r').value + 'mm');
+    }
+
+    function closePanel() {
+        const cfg = {
+            t: document.getElementById('m-t').value,
+            b: document.getElementById('m-b').value,
+            l: document.getElementById('m-l').value,
+            r: document.getElementById('m-r').value
+        };
+        localStorage.setItem('csfFluidReportConfig', JSON.stringify(cfg));
+        panel.style.display = 'none';
+    }
+
+    document.addEventListener('click', (e) => {
+        if (panel.style.display === 'block' && !panel.contains(e.target) && e.target !== btn) closePanel();
+    });
+
+    window.onload = () => {
+        // Restore saved margins
+        const s = JSON.parse(localStorage.getItem('csfFluidReportConfig'));
+        if (s) {
+            document.getElementById('m-t').value = s.t;
+            document.getElementById('m-b').value = s.b;
+            document.getElementById('m-l').value = s.l;
+            document.getElementById('m-r').value = s.r;
+            applyMargins();
+        }
+
+        // Auto-set today's date
+        const dateInput = document.getElementById('report-date');
+        if (dateInput) {
+            const now = new Date();
+            const dd = String(now.getDate()).padStart(2, '0');
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const yyyy = now.getFullYear();
+            dateInput.value = dd + '/' + mm + '/' + yyyy;
+        }
+
+        // ---- Tab key navigation: result fields only ----
+        // Collect all elements marked as result fields in DOM order
+        const resultFields = Array.from(
+            document.querySelectorAll('[data-result-field]')
+        );
+
+        resultFields.forEach((field, idx) => {
+            // Prevent default Tab and move to next result field
+            field.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const next = resultFields[idx + 1];
+                    if (next) {
+                        next.focus();
+                        // If it's a text input, select its content for quick overwrite
+                        if (next.tagName === 'INPUT') next.select();
+                    }
+                }
+            });
+        });
+    };
+</script>
+{% endblock %}

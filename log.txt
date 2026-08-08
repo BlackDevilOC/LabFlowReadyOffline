@@ -1,0 +1,29 @@
+2026-05-31 14:02:21,713 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62339 - "GET /api/patient/basic/120 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62333 - "GET /api/metadata/filters HTTP/1.1" 200 OK
+2026-05-31 14:02:22,828 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62333 - "GET /api/metadata/registrar-users HTTP/1.1" 200 OK
+2026-05-31 14:02:23,687 - INFO - [LabFlow] - Accessing Print Records hub page
+INFO:     127.0.0.1:62333 - "GET /page/print-records HTTP/1.1" 200 OK
+2026-05-31 14:02:25,015 - INFO - [LabFlow] - Accessing Lab Print Records page
+INFO:     127.0.0.1:62333 - "GET /page/lab-print-records HTTP/1.1" 200 OK
+2026-05-31 14:02:25,051 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62333 - "GET /api/metadata/filters HTTP/1.1" 200 OK
+2026-05-31 14:02:26,145 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62333 - "GET /api/metadata/registrar-users HTTP/1.1" 200 OK
+2026-05-31 14:02:26,949 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62333 - "GET /api/print-records?record_type=lab HTTP/1.1" 200 OK
+2026-05-31 14:02:47,621 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62349 - "GET /api/print-records?record_type=lab&search=184057 HTTP/1.1" 200 OK
+2026-05-31 14:02:49,705 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184057, date=2026-05-31
+INFO:     127.0.0.1:62349 - "GET /page/lab-test-print/184057?date=2026-05-31 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62349 - "GET /static/js/lab-print.js HTTP/1.1" 200 OK
+2026-05-31 14:02:49,748 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62352 - "GET /api/setting/loadprintsetting HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62349 - "GET /api/lab/print/184057?date=2026-05-31 HTTP/1.1" 200 OK
+2026-05-31 14:02:52,713 - INFO - [LabFlow] - Accessing Lab Print Records page
+INFO:     127.0.0.1:62349 - "GET /page/lab-print-records HTTP/1.1" 200 OK
+2026-05-31 14:02:52,739 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62349 - "GET /api/metadata/filters HTTP/1.1" 200 OK
+2026-05-31 14:02:53,820 - DEBUG - [LabFlow] - Loaded .env from D:\rehan\LABFLOW2.0\LabFlowReady\.env
+INFO:     127.0.0.1:62349 - "GET /api/metadata/registrar-users HTTP/1.1" 200 OK

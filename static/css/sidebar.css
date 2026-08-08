@@ -1,0 +1,127 @@
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+    background-color: #1a202c;
+    /* Dark Navy/Charcoal */
+    color: #e2e8f0;
+    /* Light Gray Text */
+    height: calc(100vh - 60px);
+    /* Full height minus header */
+    position: sticky;
+    top: 60px;
+    /* Below header */
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+}
+
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #2d3748;
+    margin-bottom: 10px;
+}
+
+.sidebar-header h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #a0aec0;
+    font-weight: 600;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: #cbd5e0;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+    background-color: #2d3748;
+    color: #ffffff;
+}
+
+.nav-item.active {
+    background-color: #2d3748;
+    color: #ffffff;
+    border-left-color: #4299e1;
+    /* Active indicator color */
+}
+
+.nav-item svg {
+    opacity: 0.8;
+}
+
+.nav-item:hover svg,
+.nav-item.active svg {
+    opacity: 1;
+}
+
+/* ---- Sidebar Dropdown & Submenu ---- */
+.sidebar-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-toggle .chevron {
+    margin-left: auto;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-dropdown.open .dropdown-toggle .chevron {
+    transform: rotate(180deg);
+}
+
+.sidebar-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #121824; /* Darker navy accent background for nested menu */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.sidebar-dropdown.open .sidebar-submenu {
+    max-height: 200px; /* Safe expanded limit for 3 items */
+}
+
+.submenu-item {
+    padding: 10px 20px 10px 48px !important; /* Indent nested links */
+    font-size: 13px !important;
+    color: #a0aec0 !important;
+    border-left: 3px solid transparent;
+}
+
+.submenu-item:hover {
+    color: #ffffff !important;
+    background-color: #2d3748 !important;
+}
+
+.submenu-item.active {
+    color: #ffffff !important;
+    background-color: #2d3748 !important;
+    border-left-color: #4299e1 !important;
+}

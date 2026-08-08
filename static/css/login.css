@@ -1,0 +1,385 @@
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-start: #f1f5f9;
+    --bg-end: #e2e8f0;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('/static/images/login_bg.png') center center / cover no-repeat fixed;
+    overflow: hidden;
+}
+
+/* Subtle overlay so the login card stays readable */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.35);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Abstract Background Shapes */
+.bg-decor {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    background: #3b82f6;
+    top: -100px;
+    right: -50px;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    background: #8b5cf6;
+    bottom: -50px;
+    left: -50px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    perspective: 1000px;
+    position: relative;
+    z-index: 1;
+}
+
+.login-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.logo {
+    width: 88px;
+    height: 88px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: #ffffff;
+    padding: 4px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+}
+
+.brand h1 {
+    font-size: 1.75rem;
+    color: var(--text-main);
+    letter-spacing: -0.025em;
+}
+
+.brand p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper svg {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-muted);
+}
+
+.form-group input,
+.form-group select.login-select {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    color: var(--text-main);
+}
+
+.form-group select.login-select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.5rem;
+}
+
+.form-group input:focus,
+.form-group select.login-select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    font-size: 0.813rem;
+    color: var(--primary);
+    text-decoration: none;
+    margin-top: 0.5rem;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.login-btn:hover {
+    background: var(--primary-hover);
+    transform: scale(1.02);
+}
+
+.login-btn:active {
+    transform: scale(0.98);
+}
+
+.login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Error Message */
+.error-msg {
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: #dc2626;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+footer {
+    position: absolute;
+    bottom: 2rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.75rem;
+    z-index: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Connection Mode Selection UI */
+.mode-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.mode-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-card:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(37, 99, 235, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.08);
+}
+
+.mode-card:active {
+    transform: translateY(0);
+}
+
+.mode-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.font-blue {
+    color: #2563eb;
+}
+
+.font-green {
+    color: #16a34a;
+}
+
+.mode-info h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.mode-info p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.35;
+}
+
+.mode-footer {
+    display: flex;
+    justify-content: center;
+    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    padding-top: 1.25rem;
+}
+
+.admin-gear-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.admin-gear-btn:hover {
+    color: #475569;
+}
+
+.admin-gear-btn svg {
+    transition: transform 0.4s ease;
+}
+
+.admin-gear-btn:hover svg {
+    transform: rotate(45deg);
+}
+
+.back-to-mode {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s ease;
+}
+
+.back-to-mode:hover {
+    color: var(--primary);
+}
