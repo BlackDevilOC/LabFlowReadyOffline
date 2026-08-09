@@ -53,22 +53,46 @@
         }
 
         @keyframes drPulse {
-            0% { transform: scale(0.9); opacity: 0.8; }
-            50% { transform: scale(1.4); opacity: 0.4; }
-            100% { transform: scale(0.9); opacity: 0.8; }
+            0% {
+                transform: scale(0.9);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.4);
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: scale(0.9);
+                opacity: 0.8;
+            }
         }
 
         @keyframes shake {
-            0%,100% { transform: translateX(0); }
-            20%,60% { transform: translateX(-8px); }
-            40%,80% { transform: translateX(8px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-8px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(8px);
+            }
         }
     </style>
 </head>
 
 <body>
     <!-- Top-Right Discreet Emergency DR Console Button -->
-    <a href="javascript:void(0)" onclick="openEmergencyConsole()" class="floating-dr-badge" title="Disaster Recovery & Provider Failover Console">
+    <a href="javascript:void(0)" onclick="openEmergencyConsole()" class="floating-dr-badge"
+        title="Disaster Recovery & Provider Failover Console">
         <span class="dr-pulse-dot"></span>
         <span>⚡ DR Console</span>
     </a>
@@ -118,23 +142,43 @@
 
             <!-- Mode Selection Footer -->
             <div class="mode-footer">
-                <button type="button" class="admin-gear-btn" id="adminAccessBtn" title="Admin Panel" onclick="openAdminPanel()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <button type="button" class="admin-gear-btn" id="adminAccessBtn" title="Admin Panel"
+                    onclick="openAdminPanel()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                        </path>
+                    </svg>
                     <span>Admin Panel</span>
                 </button>
             </div>
 
             <!-- Admin Password Modal -->
-            <div id="adminModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">
-                <div style="background:#fff; border-radius:16px; padding:32px; max-width:380px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+            <div id="adminModal"
+                style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">
+                <div
+                    style="background:#fff; border-radius:16px; padding:32px; max-width:380px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
                     <div style="text-align:center; margin-bottom:20px;">
-                        <div style="width:48px; height:48px; background:linear-gradient(135deg,#1a202c,#2d3748); border-radius:12px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        <div
+                            style="width:48px; height:48px; background:linear-gradient(135deg,#1a202c,#2d3748); border-radius:12px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                fill="none" stroke="white" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                </path>
+                            </svg>
                         </div>
-                        <h2 style="margin:0; font-size:1.25rem; color:#1a202c; font-family:'Inter',sans-serif;">Admin Access</h2>
-                        <p style="margin:6px 0 0; font-size:0.85rem; color:#718096;">Enter admin password to continue</p>
+                        <h2 style="margin:0; font-size:1.25rem; color:#1a202c; font-family:'Inter',sans-serif;">Admin
+                            Access</h2>
+                        <p style="margin:6px 0 0; font-size:0.85rem; color:#718096;">Enter admin password to continue
+                        </p>
                     </div>
-                    <div id="adminModalError" style="display:none; background:#FEE2E2; color:#991B1B; padding:8px 12px; border-radius:8px; font-size:0.8rem; margin-bottom:12px; text-align:center;">Incorrect password. Try again.</div>
+                    <div id="adminModalError"
+                        style="display:none; background:#FEE2E2; color:#991B1B; padding:8px 12px; border-radius:8px; font-size:0.8rem; margin-bottom:12px; text-align:center;">
+                        Incorrect password. Try again.</div>
                     <input type="password" id="adminPwdInput" placeholder="••••••••••••••"
                         style="width:100%; box-sizing:border-box; border:1.5px solid #e2e8f0; border-radius:10px; padding:10px 14px; font-size:0.95rem; margin-bottom:14px; outline:none; font-family:'Inter',sans-serif;"
                         onkeydown="if(event.key==='Enter') submitAdminPwd()">
@@ -218,7 +262,9 @@
                     </div>
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
                         <a href="#" class="forgot-password">Forgot password?</a>
-                        <a href="/page/emergency-dr" style="font-size:0.75rem; color:#d97706; text-decoration:none; font-weight:600;">⚡ Emergency DR</a>
+                        <a href="/page/emergency-dr"
+                            style="font-size:0.75rem; color:#d97706; text-decoration:none; font-weight:600;">⚡ Emergency
+                            DR</a>
                     </div>
                 </div>
 
@@ -273,7 +319,7 @@
         }
 
         function openEmergencyConsole() {
-            const pwd = prompt("Enter master password (youcannotenter) to open DR Console:");
+            const pwd = prompt("Enter master password  to open DR Console:");
             if (pwd === ADMIN_PASSWORD) {
                 window.location.href = '/page/emergency-dr';
             } else if (pwd !== null) {
@@ -282,7 +328,7 @@
         }
 
         // Close modal on backdrop click
-        document.getElementById('adminModal').addEventListener('click', function(e) {
+        document.getElementById('adminModal').addEventListener('click', function (e) {
             if (e.target === this) closeAdminModal();
         });
     </script>

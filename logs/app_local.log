@@ -17390,3 +17390,45 @@ postgrest.exceptions.APIError: {'message': 'Cannot coerce the result to a single
 2026-08-09 17:38:09,193 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2012ms. Total updated: 0 rows across 12 tables.
 2026-08-09 17:38:31,228 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2020ms. Total updated: 0 rows across 12 tables.
 2026-08-09 17:38:45,585 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:38:53,264 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1959ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:39:15,205 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1929ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:39:37,129 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1909ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:39:59,061 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1919ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:40:14,668 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 17:40:17,754 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:40:17,799 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 17:40:17,839 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:40:17,841 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:40:17,847 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 17:40:17,848 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 17:40:17,851 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 17:40:18,103 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 17:40:18,122 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:40:18,185 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 17:40:23,050 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5197ms. Total updated: 623 rows across 12 tables.
+2026-08-09 17:40:39,653 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 17:40:41,826 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:40:41,866 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 17:40:41,893 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:40:41,895 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:40:41,897 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 17:40:41,897 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 17:40:41,907 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 17:40:42,024 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 17:40:42,042 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:40:42,193 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 17:40:47,220 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5314ms. Total updated: 623 rows across 12 tables.
+2026-08-09 17:41:09,229 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1987ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:41:23,156 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 17:41:25,334 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:41:25,377 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 17:41:25,400 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:41:25,403 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:41:25,436 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 17:41:25,437 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 17:41:25,442 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 17:41:25,533 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 17:41:25,551 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:41:25,690 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 17:41:30,713 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5269ms. Total updated: 623 rows across 12 tables.
+2026-08-09 17:41:45,195 - DEBUG - [LabFlow] - Accessing Login Page
