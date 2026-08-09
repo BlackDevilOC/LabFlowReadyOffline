@@ -407,13 +407,15 @@
         const dateObj = new Date(p.created_at || new Date());
         const dateStr = `${String(dateObj.getDate()).padStart(2, '0')}/${String(dateObj.getMonth() + 1).padStart(2, '0')}/${String(dateObj.getFullYear()).slice(-2)}`;
 
-        const relationMap = { S: 'S/O', D: 'D/O', W: 'W/O' };
-        const relLabel = relationMap[p.relation] || p.relation || '';
-        const fullRelation = [relLabel, p.relation_name].filter(x => x && x !== '0' && x !== 'None').join(' ');
+        const relationMap = { S: 'S/O', D: 'D/O', W: 'W/O', C: 'C/O', H: 'H/O', F: 'F/O', M: 'M/O' };
+        const rawRel = (p.relation_type || p.relation || '').trim();
+        const relLabel = (rawRel && rawRel !== '-' && rawRel !== '0' && rawRel !== 'None') ? (relationMap[rawRel.toUpperCase()] || rawRel) : '';
+        const relName = (p.relation_name && p.relation_name !== '-' && p.relation_name !== '0' && p.relation_name !== 'None') ? p.relation_name.trim() : '';
+        const fullRelation = [relLabel, relName].filter(Boolean).join(' ');
 
-        const ageVal = (p.age && p.age !== 0 && p.age !== '0') ? p.age : '';
-        const genderVal = (p.gender && p.gender !== 'None' && p.gender !== 'OTHER') ? p.gender : '';
-        const ageGender = [ageVal, genderVal].filter(x => x).join(' / ');
+        const ageVal = (p.age && p.age !== 0 && p.age !== '0' && p.age !== '-') ? `${p.age} Y` : '';
+        const genderVal = (p.gender && p.gender !== 'None' && p.gender !== 'OTHER' && p.gender !== '-') ? p.gender : '';
+        const ageGender = [ageVal, genderVal].filter(Boolean).join(' / ');
 
         const hospitalName = settings.hospital_name || 'GMMMC Teaching Hospital Sukkur';
         const logoUrl = settings.logo_url || settings.logo_path || '/static/images/hospital_logo.png';
@@ -421,8 +423,8 @@
         const onlineUrl = settings.online_report_url || '';
         const devBy = settings.developed_by || 'Rehan Ahmed';
         const devUrl = settings.developed_by_url || '';
-        const loginId = p.mr_no || 'N/A';
-        const password = pin || p.pwd || '—';
+        const loginId = p.mr_no || '';
+        const password = pin || p.pwd || '';
 
         const devCredit = devUrl
             ? `<a href="${devUrl}" target="_blank" rel="noopener">${devBy}</a>`

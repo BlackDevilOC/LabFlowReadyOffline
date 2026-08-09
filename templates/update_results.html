@@ -1169,9 +1169,10 @@
         tbody.innerHTML = page.map(r => {
             const date = r.created_at?.split('T')[0] || '—';
             const mrNo = r.mr_no || '—';
-            const name = r.patient_name || 'Unknown';
-            const rel = r.relation_type && r.relation_name
-                ? `${r.relation_type} ${r.relation_name}` : '';
+            const relType = (r.relation_type && r.relation_type !== '-' && r.relation_type !== '0') ? r.relation_type.trim() : '';
+            const relName = (r.relation_name && r.relation_name !== '-' && r.relation_name !== '0') ? r.relation_name.trim() : '';
+            const rel = [relType, relName].filter(Boolean).join(' ');
+            const tokenStr = (r.patient_token !== null && r.patient_token !== undefined && r.patient_token !== '0' && r.patient_token !== 0 && r.patient_token !== '-') ? r.patient_token : '—';
             const statusHtml = r.status === 'Completed'
                 ? `<span class="status-badge status-synced"><span class="status-dot"></span>Completed</span>`
                 : `<span class="status-badge status-pending"><span class="status-dot"></span>Pending</span>`;
@@ -1187,7 +1188,7 @@
                     <div class="patient-name">${name}</div>
                     <div class="patient-rel" style="display: flex; flex-direction: column; gap: 2px;">
                         ${rel ? `<span>${rel}</span>` : ''}
-                        <span style="font-size:10px; color:#2563eb; font-weight:600; text-transform: uppercase;">Shift: ${r.shift || '—'} | Token: ${r.patient_token || '—'}</span>
+                        <span style="font-size:10px; color:#2563eb; font-weight:600; text-transform: uppercase;">Shift: ${r.shift || '—'} | Token: ${tokenStr}</span>
                     </div>
                 </td>
                 <td class="col-type">${testBadges}</td>

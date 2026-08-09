@@ -1,5 +1,29 @@
 {
+  "allow_single_tests": true,
   "mode": "group_and_single",
+  "categories_order": [
+    "Popular",
+    "Regular"
+  ],
+  "custom_categories": {
+    "243": "Popular",
+    "UC": "Popular",
+    "UCE": "Popular",
+    "MP-ICT": "Popular",
+    "Albumin": "General",
+    "Amylase": "Popular",
+    "Calcium": "Popular",
+    "Hep B, C": "Popular",
+    "Uric Acid": "Popular",
+    "Serum Amylase": "Popular",
+    "VDRL SYPHILIS": "Popular",
+    "Thyroid Profile": "Popular",
+    "Dengue NS1 (ICT)": "Popular",
+    "Alpha Feto-Protein": "General",
+    "Liver Function Test": "Popular",
+    "COMPLETE BLOOD COUNT": "Popular",
+    "Glucose Random (RBS)": "Popular"
+  },
   "quick_presets": [
     {
       "id": "p1",
@@ -19,34 +43,11 @@
       "auto_select": true
     }
   ],
-  "regular_preset": [],
   "category_styles": {
     "General": "simple",
     "Popular": "fancy",
     "Group Test": "fancy"
   },
-  "categories_order": [
-    "Popular",
-    "Regular"
-  ],
-  "custom_categories": {
-    "UC": "Popular",
-    "UCE": "Popular",
-    "MP-ICT": "Popular",
-    "Albumin": "General",
-    "Amylase": "Popular",
-    "Calcium": "Popular",
-    "Hep B, C": "Popular",
-    "Uric Acid": "Popular",
-    "Serum Amylase": "Popular",
-    "VDRL SYPHILIS": "Popular",
-    "Thyroid Profile": "Popular",
-    "Dengue NS1 (ICT)": "Popular",
-    "Alpha Feto-Protein": "General",
-    "Liver Function Test": "Popular",
-    "COMPLETE BLOOD COUNT": "Popular",
-    "Glucose Random (RBS)": "Popular"
-  },
-  "allow_single_tests": true,
+  "regular_preset": [],
   "auto_select_regular": true
 }

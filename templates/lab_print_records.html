@@ -218,7 +218,10 @@ function render() {
         const mr = r.mr_no || '';
         const singleDate = document.getElementById('single-date').value;
         const href = mr ? `/page/lab-test-print/${mr}${singleDate ? `?date=${encodeURIComponent(singleDate)}` : ''}` : '#';
-        const rel = r.relation_type && r.relation_name ? `${r.relation_type} ${r.relation_name}` : '';
+        const relType = (r.relation_type && r.relation_type !== '-' && r.relation_type !== '0') ? r.relation_type.trim() : '';
+        const relName = (r.relation_name && r.relation_name !== '-' && r.relation_name !== '0') ? r.relation_name.trim() : '';
+        const rel = [relType, relName].filter(Boolean).join(' ');
+        const tokenDisplay = (r.patient_token !== null && r.patient_token !== undefined && r.patient_token !== '0' && r.patient_token !== 0 && r.patient_token !== '-') ? r.patient_token : '—';
         const statusHtml = r.status === 'Completed'
             ? '<span class="status-ok">Completed</span>'
             : '<span class="status-pending">Pending</span>';

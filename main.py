@@ -633,6 +633,9 @@ async def register_patient(request: Request, background_tasks: BackgroundTasks):
             except Exception:
                 pass
 
+        if not patient.get("user_id"):
+            patient["user_id"] = 1
+
         patient_pin = generate_patient_pin()
         patient["pwd"] = patient_pin
 

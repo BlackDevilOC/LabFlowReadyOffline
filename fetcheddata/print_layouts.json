@@ -161,5 +161,75 @@
       "show_group_test_title": false,
       "show_single_test_title": false
     }
+  },
+  "amylase|anti hiv (ict)|calcium|complete blood count|glucose random|h. pylori ab (ict)|hba1c|hep b, c elisa|lipid profile|liver function test|thyroid profile|uce|uric acid": {
+    "page_map": {
+      "COMPLETE BLOOD COUNT": 0,
+      "Hep B, C ELISA": 0,
+      "Amylase": 0,
+      "Anti HIV (ICT)": 0,
+      "Calcium": 0,
+      "Glucose Random": 0,
+      "H. Pylori Ab (ICT)": 0,
+      "HbA1c": 0,
+      "Uric Acid": 0,
+      "Liver Function Test": 1,
+      "UCE": 1,
+      "Lipid Profile": 1,
+      "Thyroid Profile": 1
+    },
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Hep B, C ELISA",
+      "Amylase",
+      "Anti HIV (ICT)",
+      "Calcium",
+      "Glucose Random",
+      "H. Pylori Ab (ICT)",
+      "HbA1c",
+      "Uric Acid",
+      "Liver Function Test",
+      "UCE",
+      "Lipid Profile",
+      "Thyroid Profile"
+    ],
+    "saved_by": "admin@admin.com",
+    "saved_at": "2026-08-09T13:15:26.650293Z",
+    "test_count": 13,
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "amylase|calcium|complete blood count|glucose random (rbs)|hep b, c|liver function test|uce|uric acid": {
+    "page_map": {
+      "COMPLETE BLOOD COUNT": 0,
+      "Amylase": 0,
+      "Calcium": 0,
+      "Uric Acid": 0,
+      "Liver Function Test": 1,
+      "UCE": 1,
+      "Hep B, C": 1,
+      "Glucose Random (RBS)": 1
+    },
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Amylase",
+      "Calcium",
+      "Uric Acid",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "Glucose Random (RBS)"
+    ],
+    "saved_by": "admin@admin.com",
+    "saved_at": "2026-08-09T13:25:02.334125Z",
+    "test_count": 8,
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
   }
 }

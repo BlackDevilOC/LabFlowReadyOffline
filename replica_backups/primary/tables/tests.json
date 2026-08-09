@@ -763,9 +763,9 @@
     "category": "Biochemistry",
     "created_at": "2026-06-04T08:06:12.36024+00:00",
     "id": 91,
-    "name": "Serum Amylase",
-    "normal_max": "Up to 89",
-    "normal_min": null,
+    "name": "Amylase",
+    "normal_max": null,
+    "normal_min": "Up to 89",
     "status": 1,
     "unit": "U/L"
   },

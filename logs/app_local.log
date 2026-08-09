@@ -17490,3 +17490,289 @@ postgrest.exceptions.APIError: {'message': 'Cannot coerce the result to a single
 2026-08-09 17:53:04,152 - INFO - [LabFlow] - Accessing Lab Print Records page
 2026-08-09 17:53:08,729 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
 2026-08-09 17:53:09,144 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 17:53:17,889 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2868ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:53:40,235 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2333ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:54:02,313 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2061ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:54:24,305 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1984ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:54:46,235 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1924ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:55:08,383 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2140ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:55:30,477 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2079ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:55:52,566 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2080ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:56:14,506 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1931ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:56:36,557 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2044ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:56:58,566 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1998ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:57:20,568 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1986ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:57:42,532 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1902ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:58:04,659 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2109ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:58:26,634 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1969ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:58:48,593 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1947ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:59:10,549 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1934ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:59:32,544 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1974ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:59:54,494 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1934ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:00:16,556 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2048ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:00:38,676 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2110ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:01:00,849 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2145ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:01:23,166 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2300ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:01:45,285 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2112ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:02:07,351 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2049ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:02:30,139 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2615ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:02:52,787 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2629ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:03:14,951 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2148ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:03:37,598 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2628ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:03:59,656 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2051ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:04:17,887 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:04:17,954 - INFO - [LabFlow] - [USER: Anonymous] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: Test Optional Fields Patient
+2026-08-09 18:04:17,955 - INFO - [LabFlow] - [USER: Anonymous] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'Test Optional Fields Patient', 'relation': '-', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'Morning', 'user': 'Anonymous', 'user_id': None, 'pwd': '7113'}
+2026-08-09 18:04:18,360 - ERROR - [LabFlow] - [USER: Anonymous] [REGISTER_NEW_PATIENT_FAILED] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'message': 'null value in column "user_id" of relation "patients" violates not-null constraint', 'code': '23502', 'hint': None, 'details': 'Failing row contains (100126, 2026-08-09 13:04:18.250633+00, 184142, Mr., Test Optional Fields Patient, -, -, -, MALE, 0, -, 0, Morning, Anonymous, null, 7113).'}
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 71, in register_new_patient
+    response = supabase.table("patients").insert(item).execute()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\site-packages\postgrest\_sync\request_builder.py", line 96, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': 'null value in column "user_id" of relation "patients" violates not-null constraint', 'code': '23502', 'hint': None, 'details': 'Failing row contains (100126, 2026-08-09 13:04:18.250633+00, 184142, Mr., Test Optional Fields Patient, -, -, -, MALE, 0, -, 0, Morning, Anonymous, null, 7113).'}
+2026-08-09 18:04:18,362 - ERROR - [LabFlow] - [USER: Anonymous] [API_REGISTER_PATIENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'message': 'null value in column "user_id" of relation "patients" violates not-null constraint', 'code': '23502', 'hint': None, 'details': 'Failing row contains (100126, 2026-08-09 13:04:18.250633+00, 184142, Mr., Test Optional Fields Patient, -, -, -, MALE, 0, -, 0, Morning, Anonymous, null, 7113).'}
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 639, in register_patient
+    patient_id, patient_mr_no = register_new_patient(patient, user=user)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 71, in register_new_patient
+    response = supabase.table("patients").insert(item).execute()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\site-packages\postgrest\_sync\request_builder.py", line 96, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': 'null value in column "user_id" of relation "patients" violates not-null constraint', 'code': '23502', 'hint': None, 'details': 'Failing row contains (100126, 2026-08-09 13:04:18.250633+00, 184142, Mr., Test Optional Fields Patient, -, -, -, MALE, 0, -, 0, Morning, Anonymous, null, 7113).'}
+2026-08-09 18:04:21,863 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2201ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:04:43,991 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2119ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:04:49,546 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:04:49,610 - INFO - [LabFlow] - [USER: Anonymous] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: Test Optional Fields Patient
+2026-08-09 18:04:49,611 - INFO - [LabFlow] - [USER: Anonymous] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'Test Optional Fields Patient', 'relation': '-', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'Morning', 'user': 'Anonymous', 'user_id': 1, 'pwd': '93058'}
+2026-08-09 18:04:49,957 - INFO - [LabFlow] - Successfully registered new patient. ID: 100127, MR No: 184143
+2026-08-09 18:04:49,958 - INFO - [LabFlow] - Patient registered. ID: 100127, MR: 184143. Queuing test creation in background...
+2026-08-09 18:04:50,380 - INFO - [LabFlow] - [USER: Anonymous] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184143
+2026-08-09 18:04:50,765 - INFO - [LabFlow] - Adding tests to patient MR: 184143, Name: Test Optional Fields Patient
+2026-08-09 18:04:50,961 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184143
+2026-08-09 18:04:50,967 - INFO - [LabFlow] - Generating Invoice for patient: 100127
+2026-08-09 18:04:59,517 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:04:59,905 - INFO - [LabFlow] - Fetched full info for patient ID: 100127
+2026-08-09 18:05:07,386 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3379ms. Total updated: 2 rows across 12 tables.
+2026-08-09 18:05:17,217 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:05:17,276 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184143, date=None
+2026-08-09 18:05:17,304 - INFO - [LabFlow] - Generating Invoice for patient: 100127
+2026-08-09 18:05:29,508 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2103ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:05:51,717 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2190ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:06:04,488 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 18:06:06,837 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:06:06,884 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 18:06:06,911 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 18:06:06,918 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 18:06:06,918 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 18:06:06,922 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 18:06:07,302 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 18:06:07,345 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 18:06:07,401 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 18:06:12,667 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5739ms. Total updated: 625 rows across 12 tables.
+2026-08-09 18:06:18,147 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 18:06:19,215 - INFO - [LabFlow] - Saved 6 users to fetcheddata/users.json
+2026-08-09 18:06:22,830 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-09 18:06:23,063 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-09 18:06:23,570 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-09 18:06:23,890 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-09 18:06:23,893 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-09 18:06:24,179 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-09 18:06:24,211 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 18:06:24,353 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-09 18:06:24,542 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-09 18:06:24,706 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-09 18:06:24,870 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-09 18:06:24,992 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-09 18:06:25,112 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-09 18:06:25,113 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-09 18:06:25,481 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 18:06:32,965 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: rehan
+2026-08-09 18:06:32,967 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'rehan', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Rehan Ahmed', 'user_id': 1, 'pwd': '53047362'}
+2026-08-09 18:06:33,243 - INFO - [LabFlow] - Successfully registered new patient. ID: 100128, MR No: 184144
+2026-08-09 18:06:33,244 - INFO - [LabFlow] - Patient registered. ID: 100128, MR: 184144. Queuing test creation in background...
+2026-08-09 18:06:33,678 - INFO - [LabFlow] - [USER: admin@admin.com] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184144
+2026-08-09 18:06:33,684 - INFO - [LabFlow] - Generating Invoice for patient: 100128
+2026-08-09 18:06:34,099 - INFO - [LabFlow] - Adding tests to patient MR: 184144, Name: rehan
+2026-08-09 18:06:34,351 - INFO - [LabFlow] - Fetched full info for patient ID: 100128
+2026-08-09 18:06:34,826 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2149ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:06:34,933 - INFO - [LabFlow] - Successfully added 4 test records in test_results_all for patient 184144
+2026-08-09 18:06:36,415 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:06:43,648 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184144
+2026-08-09 18:06:44,533 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 18:06:55,783 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184144
+2026-08-09 18:06:55,794 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:06:57,506 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2675ms. Total updated: 5 rows across 12 tables.
+2026-08-09 18:07:19,715 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2192ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:07:32,640 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184144
+2026-08-09 18:07:33,680 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 18:07:36,305 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184144
+2026-08-09 18:07:36,316 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184144, date=None
+2026-08-09 18:07:41,768 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2036ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:08:03,889 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2104ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:08:26,065 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2164ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:09:48,628 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:09:48,687 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184144, date=None
+2026-08-09 18:10:16,325 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:10:16,386 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184144, date=None
+2026-08-09 18:10:46,393 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 18:10:48,608 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:10:48,654 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 18:10:48,685 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 18:10:48,688 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 18:10:48,689 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 18:10:48,695 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 18:10:48,830 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 18:10:48,849 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 18:10:49,417 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 18:10:51,018 - INFO - [LabFlow] - Saved 6 users to fetcheddata/users.json
+2026-08-09 18:10:55,055 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 6357ms. Total updated: 630 rows across 12 tables.
+2026-08-09 18:11:17,084 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2013ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:11:39,104 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2005ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:12:01,068 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1949ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:12:23,088 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2014ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:12:45,079 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1981ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:13:07,084 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1992ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:13:12,415 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-09 18:13:12,656 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-09 18:13:13,097 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-09 18:13:13,321 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-09 18:13:13,322 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-09 18:13:13,564 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-09 18:13:13,637 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 18:13:13,730 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-09 18:13:13,894 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-09 18:13:14,046 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-09 18:13:14,205 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-09 18:13:14,451 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-09 18:13:14,452 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-09 18:13:14,851 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:13:16,565 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184144, date=None
+2026-08-09 18:13:29,265 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2175ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:13:51,488 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2206ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:14:14,080 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2583ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:14:21,652 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:14:27,763 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184114, date=None
+2026-08-09 18:14:36,043 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1950ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:14:58,136 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2077ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:15:20,142 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1987ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:15:26,651 - INFO - [LabFlow] - Print layout saved by admin@admin.com for fingerprint amylase|anti hiv (ict)|calcium|complete 
+2026-08-09 18:15:42,828 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2665ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:16:04,954 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2108ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:16:27,018 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2036ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:16:31,172 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:16:37,942 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-09 18:16:38,411 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 18:16:50,267 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3239ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:17:02,015 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: REHAN
+2026-08-09 18:17:02,016 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'REHAN', 'relation': 'S', 'relation_name': 'MEHAR', 'mobile': '-', 'gender': 'MALE', 'age': 17, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Rehan Ahmed', 'user_id': 1, 'pwd': '829050'}
+2026-08-09 18:17:02,353 - INFO - [LabFlow] - Successfully registered new patient. ID: 100129, MR No: 184145
+2026-08-09 18:17:02,355 - INFO - [LabFlow] - Patient registered. ID: 100129, MR: 184145. Queuing test creation in background...
+2026-08-09 18:17:02,714 - INFO - [LabFlow] - [USER: admin@admin.com] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184145
+2026-08-09 18:17:02,752 - INFO - [LabFlow] - Generating Invoice for patient: 100129
+2026-08-09 18:17:03,175 - INFO - [LabFlow] - Adding tests to patient MR: 184145, Name: REHAN
+2026-08-09 18:17:03,408 - INFO - [LabFlow] - Fetched full info for patient ID: 100129
+2026-08-09 18:17:04,076 - INFO - [LabFlow] - Successfully added 5 test records in test_results_all for patient 184145
+2026-08-09 18:17:13,244 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2966ms. Total updated: 6 rows across 12 tables.
+2026-08-09 18:17:35,313 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2053ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:17:46,637 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 18:17:47,188 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-09 18:17:47,635 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 18:17:57,420 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2089ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:18:19,656 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2228ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:18:41,720 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2057ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:19:03,723 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1988ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:19:18,399 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:19:19,686 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184145
+2026-08-09 18:19:20,603 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 18:19:25,680 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1945ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:19:48,381 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2686ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:20:10,332 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1935ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:20:33,227 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2872ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:20:37,532 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184145
+2026-08-09 18:20:37,542 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:20:41,287 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:20:43,159 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184145, date=None
+2026-08-09 18:20:55,288 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2046ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:21:17,250 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1945ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:21:31,240 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184145, date=None
+2026-08-09 18:21:39,346 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2071ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:22:01,339 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1980ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:22:21,800 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:22:22,576 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:22:23,760 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184145
+2026-08-09 18:22:24,036 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2679ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:22:24,655 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 18:22:33,994 - INFO - [LabFlow] - Adding tests to patient MR: 184145, Name: REHAN
+2026-08-09 18:22:34,202 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184145
+2026-08-09 18:22:34,203 - INFO - [LabFlow] - [USER: admin@admin.com] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Added test for patient MR: 184145 (selection: 1)
+2026-08-09 18:22:38,948 - INFO - [LabFlow] - Adding tests to patient MR: 184145, Name: REHAN
+2026-08-09 18:22:39,124 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184145
+2026-08-09 18:22:39,126 - INFO - [LabFlow] - [USER: admin@admin.com] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Added test for patient MR: 184145 (selection: 90)
+2026-08-09 18:22:46,357 - INFO - [LabFlow] - Adding tests to patient MR: 184145, Name: REHAN
+2026-08-09 18:22:46,521 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184145
+2026-08-09 18:22:46,522 - INFO - [LabFlow] - [USER: admin@admin.com] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Added test for patient MR: 184145 (selection: 91)
+2026-08-09 18:22:46,658 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2609ms. Total updated: 2 rows across 12 tables.
+2026-08-09 18:23:02,780 - INFO - [LabFlow] - [USER: System] [ADMIN_CONFIG] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated test group ID 76: Serum Amylase
+2026-08-09 18:23:04,067 - INFO - [LabFlow] - [USER: System] [ADMIN_CONFIG] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated test group ID 26: Amylase
+2026-08-09 18:23:08,969 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2294ms. Total updated: 1 rows across 12 tables.
+2026-08-09 18:23:14,950 - INFO - [LabFlow] - [USER: System] [ADMIN_CONFIG] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated test ID 91: Amylase
+2026-08-09 18:23:18,952 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 18:23:19,520 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:23:20,295 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184145
+2026-08-09 18:23:21,114 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-09 18:23:24,419 - INFO - [LabFlow] - [USER: System] [DATA_DELETION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Soft-deleted test record ID: 168963 by Rehan Ahmed
+2026-08-09 18:23:28,891 - INFO - [LabFlow] - Adding tests to patient MR: 184145, Name: REHAN
+2026-08-09 18:23:29,041 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184145
+2026-08-09 18:23:29,042 - INFO - [LabFlow] - [USER: admin@admin.com] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Added test for patient MR: 184145 (selection: 91)
+2026-08-09 18:23:31,335 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2349ms. Total updated: 1 rows across 12 tables.
+2026-08-09 18:23:43,727 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184145
+2026-08-09 18:23:43,738 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:23:44,688 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:23:46,441 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184145, date=None
+2026-08-09 18:23:53,399 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2054ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:24:11,236 - INFO - [LabFlow] - [USER: System] [ADMIN_CONFIG] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated test ID 91: Amylase
+2026-08-09 18:24:12,244 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 18:24:12,889 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:24:13,664 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184145
+2026-08-09 18:24:14,571 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-09 18:24:15,430 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2020ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:24:20,497 - INFO - [LabFlow] - [USER: System] [DATA_DELETION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Soft-deleted test record ID: 168964 by Rehan Ahmed
+2026-08-09 18:24:24,116 - INFO - [LabFlow] - Adding tests to patient MR: 184145, Name: REHAN
+2026-08-09 18:24:24,277 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184145
+2026-08-09 18:24:24,278 - INFO - [LabFlow] - [USER: admin@admin.com] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Added test for patient MR: 184145 (selection: 91)
+2026-08-09 18:24:30,465 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184145
+2026-08-09 18:24:30,475 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:24:31,961 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:24:33,465 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184145, date=None
+2026-08-09 18:24:37,840 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2398ms. Total updated: 1 rows across 12 tables.
+2026-08-09 18:24:59,891 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2030ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:25:02,335 - INFO - [LabFlow] - Print layout saved by admin@admin.com for fingerprint amylase|calcium|complete blood count|glu
+2026-08-09 18:25:21,971 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2052ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:25:22,689 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:25:25,673 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184144, date=None
+2026-08-09 18:25:33,258 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:25:34,866 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184145, date=None
+2026-08-09 18:25:44,029 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2039ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:25:45,840 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:25:47,506 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184145
+2026-08-09 18:25:48,333 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-09 18:25:50,001 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 18:25:50,944 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184144
+2026-08-09 18:25:51,855 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-09 18:26:09,208 - INFO - [LabFlow.Replica] - Replication cycle (periodic_full) complete in 5165ms. Total updated: 641 rows across 12 tables.
+2026-08-09 18:26:31,211 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1995ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:26:43,488 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184144
+2026-08-09 18:26:43,500 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184144, date=None
+2026-08-09 18:26:53,472 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2244ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:27:15,571 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2086ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:27:37,612 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2022ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:27:59,705 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2076ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:28:04,845 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:28:08,955 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184145, date=None
+2026-08-09 18:28:13,404 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 18:28:21,870 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2156ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:28:37,347 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 18:28:43,867 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1979ms. Total updated: 0 rows across 12 tables.

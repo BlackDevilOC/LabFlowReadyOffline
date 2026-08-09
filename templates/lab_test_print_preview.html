@@ -1529,10 +1529,34 @@
         const catNames = Object.keys(categories);
         catNames.sort((a, b) => a.localeCompare(b));
 
-        const pName = `${patient.salutation || ''} ${patient.patient_name || ''}`.trim();
-        const rawRelation = `${patient.relation_type || patient.relation || ''}`.trim();
-        const relationName = `${patient.relation_name || ''}`.trim();
-        const ageSex = `${patient.age || ''}/${patient.gender || ''}`.replace(/^\/|\/$/g, '');
+        const cleanVal = (val, emptyRepl = '') => {
+            if (val === null || val === undefined) return emptyRepl;
+            const s = String(val).trim();
+            if (s === '' || s === '-' || s === '0' || s === 'N/A' || s === 'None' || s === 'null' || s === '—' || s === '--') return emptyRepl;
+            return s;
+        };
+
+        const cleanAge = (ageVal) => {
+            if (ageVal === null || ageVal === undefined) return '';
+            const s = String(ageVal).trim();
+            if (s === '' || s === '-' || s === '0' || s === '0 Yrs' || s === '0 Y' || s === '—' || s === '--') return '';
+            return s.replace(/(\d+)\s*(Yrs|Y|Years)?/i, '$1 Yrs');
+        };
+
+        const pName = `${cleanVal(patient.salutation, '')} ${cleanVal(patient.patient_name, '')}`.trim();
+        const rawGender = cleanVal(patient.gender, '');
+        const ageStr = cleanAge(patient.age);
+        let ageSex = '';
+        if (ageStr && rawGender) {
+            ageSex = `${ageStr} / ${rawGender}`;
+        } else if (ageStr) {
+            ageSex = ageStr;
+        } else if (rawGender) {
+            ageSex = rawGender;
+        }
+
+        const rawRelation = cleanVal(patient.relation_type || patient.relation, '');
+        const rawRelationName = cleanVal(patient.relation_name, '');
         const relationMap = {
             W: 'W/O',
             S: 'S/O',
@@ -1543,10 +1567,10 @@
             M: 'M/O'
         };
         const relationKey = rawRelation.replace(/\s+/g, '').toUpperCase();
-        const relation = relationMap[relationKey] || rawRelation || 'W/O';
+        const relation = relationMap[relationKey] || rawRelation || 'Relation';
 
-        const rawToken = patient.patient_token;
-        const pToken = (rawToken === 0 || rawToken === '0') ? ' ' : (rawToken ?? '—');
+        const rawToken = cleanVal(patient.patient_token, '');
+        const pToken = rawToken || '';
 
         const footerHtml = `
                 <div class="page-footer">
@@ -1559,14 +1583,14 @@
                 <div class="page-header">
                     <div class="patient-header-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 6px;">
                         <div class="info-box" style="border: 1.5px solid #222; border-radius: 14px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; background: #fff;">
-                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Patient MR # :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(patient.mr_no || MR_NO)}</span></div>
-                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Patient Name :</span> <span style="font-weight: 700; color: #111;">${escapeHtml(pName || '—')}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Patient MR # :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(patient.mr_no || MR_NO || '')}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Patient Name :</span> <span style="font-weight: 700; color: #111;">${escapeHtml(pName)}</span></div>
                             <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Report Date :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(reportDate)}</span></div>
-                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">SHIFT :</span> <span style="font-weight: 500; color: #111;">${escapeHtml((patient.shift || '—').toUpperCase())}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">SHIFT :</span> <span style="font-weight: 500; color: #111;">${escapeHtml((cleanVal(patient.shift, '')).toUpperCase())}</span></div>
                         </div>
                         <div class="info-box" style="border: 1.5px solid #222; border-radius: 14px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; background: #fff;">
-                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Age/Gender :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(ageSex || '—')}</span></div>
-                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">${escapeHtml(relation)} :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(relationName || '—')}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Age/Gender :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(ageSex)}</span></div>
+                            <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">${escapeHtml(relation)} :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(rawRelationName)}</span></div>
                             <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Reported On :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(now.toLocaleString())}</span></div>
                             <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">PATIENT TOKEN NO:</span> <span style="font-weight: 500; color: #111;">${escapeHtml(pToken)}</span></div>
                         </div>

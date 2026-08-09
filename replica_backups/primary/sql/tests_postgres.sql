@@ -90,7 +90,7 @@ VALUES
 ('Biochemistry', '2026-06-04T07:32:16.825266+00:00', 78, 'Prolactin', 'Post-Menopausal: 1.55-19.41', 'Pre-Menopausal: 5.54-26.08', TRUE, 'ng/mL'),
 ('Biochemistry', '2026-06-04T07:42:07.336442+00:00', 89, 'RBS', '140.0', NULL, FALSE, 'mg/dl'),
 ('Biochemistry', '2026-06-04T08:01:25.74855+00:00', 90, 'Uric Acid', 'F: 2.4-5.7', 'M: 3.4-7.0', TRUE, 'mg/dl'),
-('Biochemistry', '2026-06-04T08:06:12.36024+00:00', 91, 'Serum Amylase', 'Up to 89', NULL, TRUE, 'U/L'),
+('Biochemistry', '2026-06-04T08:06:12.36024+00:00', 91, 'Amylase', NULL, 'Up to 89', TRUE, 'U/L'),
 ('Biochemistry', '2026-06-04T08:09:46.209734+00:00', 92, 'Albumin', '5.3', '3.4', TRUE, 'g/dl'),
 ('Biochemistry', '2026-06-04T08:11:04.561571+00:00', 93, 'NS 1', NULL, 'NEGATIVE', FALSE, NULL),
 ('Biochemistry', '2026-06-04T10:46:41.901136+00:00', 94, 'Anti HCV ELISA', 'Reactive >= 1.0', 'Non Reactive < 1.0', TRUE, NULL),

@@ -1,16 +1,16 @@
 from pydantic import BaseModel
 
 class GetAllDataFromRegPage(BaseModel):
-    salutation : str
+    salutation : str = "Mr."
     patient_name : str
-    relation : str
-    relation_name : str
-    mobile : str
-    gender : str
-    age : int
-    cnic : str
-    patient_token : str | None = "0"
-    shift : str
+    relation : str | None = "-"
+    relation_name : str | None = "-"
+    mobile : str | None = "-"
+    gender : str = "MALE"
+    age : int | str | None = 0
+    cnic : str | None = "-"
+    patient_token : str | int | None = "0"
+    shift : str = "Morning"
     user : str | None = None
     user_id : str | int | None = None
     user_email : str | None = None
@@ -25,16 +25,16 @@ class GetAllDataFromRegPage(BaseModel):
     
 
 class RegisterUser(BaseModel):
-    salutation : str
+    salutation : str = "Mr."
     patient_name : str
-    relation : str
-    relation_name : str
-    mobile : str
-    gender : str
-    age : int
-    cnic : str
-    patient_token : str | None = "0"
-    shift : str
+    relation : str | None = "-"
+    relation_name : str | None = "-"
+    mobile : str | None = "-"
+    gender : str = "MALE"
+    age : int | str | None = 0
+    cnic : str | None = "-"
+    patient_token : str | int | None = "0"
+    shift : str = "Morning"
     
 
 class ChangeVisiblity(BaseModel):
