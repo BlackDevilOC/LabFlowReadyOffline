@@ -46,7 +46,7 @@
       "Liver Function Test": 0,
       "COMPLETE BLOOD COUNT": 0
     },
-    "saved_at": "2026-08-07T09:50:13.137682Z",
+    "saved_at": "2026-08-09T08:08:34.379801Z",
     "saved_by": "admin@admin.com",
     "test_count": 4,
     "test_order": [
@@ -54,6 +54,30 @@
       "Liver Function Test",
       "UCE",
       "Hep B, C"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|glucose random (rbs)|hep b, c|liver function test|uce": {
+    "page_map": {
+      "UCE": 1,
+      "Hep B, C": 1,
+      "Liver Function Test": 1,
+      "COMPLETE BLOOD COUNT": 0,
+      "Glucose Random (RBS)": 1
+    },
+    "saved_at": "2026-08-09T08:20:55.519060Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 5,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "Glucose Random (RBS)"
     ],
     "display_options": {
       "show_category_title": false,
@@ -80,6 +104,57 @@
       "Hep B, C",
       "PT (Prothrombin Time)",
       "MP-ICT"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "amylase|complete blood count|dengue ns1 (ict)|hep b, c|liver function test|mp-ict|uc|uce": {
+    "page_map": {
+      "UC": 1,
+      "UCE": 1,
+      "MP-ICT": 0,
+      "Amylase": 0,
+      "Hep B, C": 1,
+      "Dengue NS1 (ICT)": 0,
+      "Liver Function Test": 1,
+      "COMPLETE BLOOD COUNT": 0
+    },
+    "saved_at": "2026-08-09T09:08:27.593806Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 8,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Amylase",
+      "MP-ICT",
+      "Dengue NS1 (ICT)",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "UC"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "calcium|complete blood count|hep b, c|lipid profile|liver function test|thyroid profile|uce|uric acid": {
+    "page_map": {},
+    "saved_at": "2026-08-09T08:06:10.071183Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 8,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "UCE",
+      "Lipid Profile",
+      "Calcium",
+      "Liver Function Test",
+      "Thyroid Profile",
+      "Hep B, C",
+      "Uric Acid"
     ],
     "display_options": {
       "show_category_title": false,

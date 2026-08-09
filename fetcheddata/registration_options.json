@@ -57,6 +57,6 @@
     }
   ],
   "default_values": {
-    "salutation": "Mrs."
+    "salutation": "Mr."
   }
 }

@@ -616,17 +616,23 @@
                 </div>
 
                 <!-- Admin Display Toggles (admin-only) -->
-                <div id="admin-display-toggles" style="display:none; margin-bottom: 8px; background:#f1f5f9; border:1px solid #e2e8f0; border-radius:6px; padding:7px 9px;">
-                    <div style="font-size:10px; font-weight:800; color:#475569; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px;">🖨 Print Visibility</div>
-                    <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;margin-bottom:4px;">
+                <div id="admin-display-toggles"
+                    style="display:none; margin-bottom: 8px; background:#f1f5f9; border:1px solid #e2e8f0; border-radius:6px; padding:7px 9px;">
+                    <div
+                        style="font-size:10px; font-weight:800; color:#475569; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px;">
+                        🖨 Print Visibility</div>
+                    <label
+                        style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;margin-bottom:4px;">
                         <input type="checkbox" id="toggle-category-title" style="cursor:pointer;">
                         Show category heading (e.g. HEMATOLOGY)
                     </label>
-                    <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;margin-bottom:4px;">
+                    <label
+                        style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;margin-bottom:4px;">
                         <input type="checkbox" id="toggle-group-test-title" style="cursor:pointer;">
                         Show combined suffix (e.g. HEP B, C <span style="color:#2563eb;">(SEROLOGY)</span>)
                     </label>
-                    <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;">
+                    <label
+                        style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;">
                         <input type="checkbox" id="toggle-single-test-title" style="cursor:pointer;">
                         Show single test names (1-param)
                     </label>
@@ -690,9 +696,9 @@
     let extraPageSlots = 0;
 
     // ── Display toggle state (admin-controlled, persisted in localStorage) ───
-    let showCategoryTitle    = localStorage.getItem('labPrintShowCategoryTitle')    !== 'false';  // default ON
-    let showGroupTestTitle   = localStorage.getItem('labPrintShowGroupTestTitle')   !== 'false';  // default ON
-    let showSingleTestTitle  = localStorage.getItem('labPrintShowSingleTestTitle')  !== 'false';  // default ON
+    let showCategoryTitle = localStorage.getItem('labPrintShowCategoryTitle') !== 'false';  // default ON
+    let showGroupTestTitle = localStorage.getItem('labPrintShowGroupTestTitle') !== 'false';  // default ON
+    let showSingleTestTitle = localStorage.getItem('labPrintShowSingleTestTitle') !== 'false';  // default ON
 
     // ── Admin detection ─────────────────────────────────────────────────────
     function isAdmin() {
@@ -742,7 +748,7 @@
         // test_values is jsonb map: key -> {name,value,unit,normal_min,normal_max}
         if (!testValues || typeof testValues !== 'object') return [];
         const values = Object.values(testValues).filter(v => v && typeof v === 'object');
-        
+
         const targetOrder = currentGroupOrders && (currentGroupOrders[testName] || currentGroupOrders[(testName || '').trim()]);
         if (targetOrder && Array.isArray(targetOrder) && targetOrder.length > 0) {
             const orderMap = {};
@@ -996,8 +1002,8 @@
                 // Show display toggles in editor mode only
                 const togglesPanel = document.getElementById('admin-display-toggles');
                 togglesPanel.style.display = 'block';
-                document.getElementById('toggle-category-title').checked   = showCategoryTitle;
-                document.getElementById('toggle-group-test-title').checked  = showGroupTestTitle;
+                document.getElementById('toggle-category-title').checked = showCategoryTitle;
+                document.getElementById('toggle-group-test-title').checked = showGroupTestTitle;
                 document.getElementById('toggle-single-test-title').checked = showSingleTestTitle;
             } else {
                 adminActions.style.display = 'none';
@@ -1053,10 +1059,10 @@
             groupEl.className = 'page-group';
             groupEl.dataset.page = pgIdx;
 
-            const removeBtnHtml = (totalPageCount > 1) 
+            const removeBtnHtml = (totalPageCount > 1)
                 ? `<button type="button" class="remove-page-btn" data-page="${pgIdx}" title="Remove Page ${pgIdx + 1} and move its tests to Excluded" style="border:none;background:none;color:#ef4444;font-weight:bold;cursor:pointer;font-size:12px;padding:0 4px;">✕</button>`
                 : '';
-            
+
             groupEl.innerHTML = `<div class="page-group-header" style="display:flex;justify-content:space-between;align-items:center;"><div><span class="pg-badge">P${pgIdx + 1}</span> Page ${pgIdx + 1}</div>${removeBtnHtml}</div>`;
 
             const testsInPage = pageGroups[pgIdx] || [];
@@ -1218,7 +1224,7 @@
                                 test_order: currentTestOrder || [],
                                 test_count: selectedTestNames.size,
                                 display_options: {
-                                    show_category_title:   showCategoryTitle,
+                                    show_category_title: showCategoryTitle,
                                     show_group_test_title: showGroupTestTitle,
                                     show_single_test_title: showSingleTestTitle
                                 }

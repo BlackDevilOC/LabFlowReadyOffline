@@ -1,24 +1,20 @@
 /**
- * LabFlow Simplified Authentication Logic
- * Note: This is for testing purposes with plain-text passwords.
+ * LabFlow Authentication Logic (Online & Offline Support)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Basic Protection Logic
-    const isLoginPage = window.location.pathname === '/login';
+    let currentLoginMode = localStorage.getItem('workspaceMode') || 'online';
+    const isLoginPage = window.location.pathname === '/login' || window.location.pathname === '/offline/login';
     const isOfflinePath = window.location.pathname.startsWith('/offline');
 
-    if (isOfflinePath) {
+    if (isOfflinePath && window.location.pathname !== '/offline/login') {
         localStorage.setItem('workspaceMode', 'offline');
-        return;
-    }
-
-    if (isLoginPage) {
-        if (!navigator.onLine) {
-            localStorage.setItem('workspaceMode', 'offline');
-            window.location.href = '/offline/';
+        const isAuthed = localStorage.getItem('isLoggedIn') === 'true';
+        if (!isAuthed) {
+            window.location.href = '/login';
             return;
         }
+        return;
     }
 
     const isAuthenticated = localStorage.getItem('isLoggedIn') === 'true';
@@ -35,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnText = loginBtn ? loginBtn.querySelector('.btn-text') : null;
     const errorBox = document.getElementById('errorBox');
     const errorMessage = document.getElementById('errorMessage');
+    const loginTitle = document.getElementById('loginTitle');
 
     const userSelect = document.getElementById('userSelect');
     const emailInput = document.getElementById('email');
@@ -48,31 +45,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnOnlineMode && btnOfflineMode) {
         btnOnlineMode.addEventListener('click', () => {
+            currentLoginMode = 'online';
             localStorage.setItem('workspaceMode', 'online');
-            // Clear any active offline session so they must authenticate online
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('userName');
             localStorage.removeItem('userId');
-            
-            modeSelectionSection.style.display = 'none';
-            loginFormSection.style.display = 'block';
-            loadLoginUsers();
+
+            if (loginTitle) loginTitle.textContent = 'Online Login';
+            if (modeSelectionSection) modeSelectionSection.style.display = 'none';
+            if (loginFormSection) loginFormSection.style.display = 'block';
+            loadLoginUsers('online');
         });
 
         btnOfflineMode.addEventListener('click', () => {
+            currentLoginMode = 'offline';
             localStorage.setItem('workspaceMode', 'offline');
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userEmail', 'offline@labflow.com');
-            localStorage.setItem('userName', 'Offline User');
-            window.location.href = '/offline/';
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userId');
+
+            if (loginTitle) loginTitle.textContent = 'Offline Login (Local Cache)';
+            if (modeSelectionSection) modeSelectionSection.style.display = 'none';
+            if (loginFormSection) loginFormSection.style.display = 'block';
+            loadLoginUsers('offline');
         });
     }
 
     if (btnBackToMode) {
         btnBackToMode.addEventListener('click', () => {
-            loginFormSection.style.display = 'none';
-            modeSelectionSection.style.display = 'block';
+            if (loginFormSection) loginFormSection.style.display = 'none';
+            if (modeSelectionSection) modeSelectionSection.style.display = 'block';
         });
     }
 
@@ -83,37 +87,55 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    async function loadLoginUsers() {
+    async function loadLoginUsers(mode = 'online') {
         if (!userSelect) return;
-        try {
-            const res = await fetch('/api/auth/login-users');
-            const data = await res.json();
-            const users = data.users || [];
-            if (!users.length) {
-                userSelect.innerHTML = '<option value="">No active users found</option>';
-                emailInput.removeAttribute('readonly');
-                emailInput.placeholder = 'name@labflow.com';
-                return;
+        userSelect.innerHTML = '<option value="">Loading users…</option>';
+        hideError();
+
+        let users = [];
+        const endpoints = mode === 'offline' 
+            ? ['/offline/api/auth/login-users', '/api/auth/login-users', '/fetcheddata/users.json']
+            : ['/api/auth/login-users', '/offline/api/auth/login-users', '/fetcheddata/users.json'];
+
+        for (const ep of endpoints) {
+            try {
+                const res = await fetch(ep, { cache: 'no-store' });
+                if (res.ok) {
+                    const data = await res.json();
+                    const list = data.users || (Array.isArray(data) ? data : []);
+                    if (list && list.length > 0) {
+                        users = list;
+                        break;
+                    }
+                }
+            } catch (e) {
+                console.warn(`Endpoint ${ep} not reached:`, e);
             }
-            userSelect.innerHTML = '<option value="">Select user…</option>' + users.map(u =>
-                `<option value="${u.id}" data-email="${u.email}">${escapeHtml(u.name)} (${u.email})</option>`
-            ).join('');
-            const lastId = localStorage.getItem('lastLoginUserId');
-            if (lastId) {
-                userSelect.value = lastId;
-                userSelect.dispatchEvent(new Event('change'));
-            }
-        } catch (err) {
-            console.error('Failed to load users (likely no internet):', err);
-            userSelect.innerHTML = '<option value="">Could not load users</option>';
+        }
+
+        if (!users.length) {
+            userSelect.innerHTML = '<option value="">No active users found</option>';
             emailInput.removeAttribute('readonly');
             emailInput.placeholder = 'name@labflow.com';
+            showError('Could not load user accounts from network or local cache.');
+            return;
+        }
 
-            showError('Unable to connect to online services. Redirecting to offline mode in 3 seconds...');
-            setTimeout(() => {
-                localStorage.setItem('workspaceMode', 'offline');
-                window.location.href = '/offline/';
-            }, 3000);
+        userSelect.innerHTML = '<option value="">Select user…</option>' + users.map(u => {
+            const email = (u.email || '').trim();
+            const name = (u.name || email).trim();
+            return `<option value="${u.id || email}" data-email="${email}">${escapeHtml(name)} (${email})</option>`;
+        }).join('');
+
+        const lastId = localStorage.getItem('lastLoginUserId') || localStorage.getItem('lastLoginEmail');
+        if (lastId) {
+            for (let i = 0; i < userSelect.options.length; i++) {
+                if (userSelect.options[i].value === lastId || userSelect.options[i].dataset.email === lastId) {
+                    userSelect.selectedIndex = i;
+                    userSelect.dispatchEvent(new Event('change'));
+                    break;
+                }
+            }
         }
     }
 
@@ -127,25 +149,44 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const emailInput = document.getElementById('email').value.trim();
-            const passwordInput = document.getElementById('password').value;
+            const emailVal = document.getElementById('email').value.trim();
+            const passwordVal = document.getElementById('password').value;
 
             setLoading(true);
             hideError();
 
+            const isOffline = currentLoginMode === 'offline';
+            const loginEndpoint = isOffline ? '/offline/api/auth/login' : '/api/auth/login';
+
             try {
-                const response = await fetch('/api/auth/login', {
+                let response = await fetch(loginEndpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: emailInput, password: passwordInput }),
+                    body: JSON.stringify({ email: emailVal, password: passwordVal }),
                 });
+
+                // If online endpoint failed to respond, try offline endpoint fallback
+                if (!response.ok && !isOffline) {
+                    try {
+                        response = await fetch('/offline/api/auth/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email: emailVal, password: passwordVal }),
+                        });
+                    } catch (fallbackErr) {
+                        console.warn('Fallback login failed:', fallbackErr);
+                    }
+                }
+
                 const result = await response.json();
 
                 if (result.status === 'Success' && result.user) {
-                    localStorage.setItem('workspaceMode', 'online');
+                    localStorage.setItem('workspaceMode', isOffline ? 'offline' : 'online');
                     if (result.user.id != null) {
                         localStorage.setItem('lastLoginUserId', String(result.user.id));
                     }
+                    localStorage.setItem('lastLoginEmail', result.user.email || emailVal);
+
                     if (window.LabFlowPermissions) {
                         LabFlowPermissions.storeUserSession(result.user);
                     } else {
@@ -156,7 +197,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (result.user.default_shift) localStorage.setItem('defaultShift', result.user.default_shift);
                         if (result.user.default_shift_id != null) localStorage.setItem('defaultShiftId', String(result.user.default_shift_id));
                     }
-                    setTimeout(() => { window.location.href = '/'; }, 500);
+
+                    const targetUrl = isOffline ? '/offline/' : '/';
+                    setTimeout(() => { window.location.href = targetUrl; }, 400);
                 } else {
                     showError(result.message || 'Access denied. Contact your administrator.');
                     setLoading(false);
@@ -164,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } catch (error) {
                 console.error('Login error:', error);
-                showError('Server error. Please try again later.');
+                showError('Could not authenticate. Please check your credentials or local server.');
                 setLoading(false);
             }
         });
@@ -186,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showError(message) {
         if (!errorMessage) return;
         errorMessage.textContent = message;
-        errorBox.style.display = 'flex';
+        if (errorBox) errorBox.style.display = 'flex';
     }
 
     function hideError() {

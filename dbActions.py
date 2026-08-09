@@ -821,16 +821,49 @@ def loginUsers():
         return []
 
 
+def _load_users_cache():
+    try:
+        path = os.path.join(os.path.dirname(__file__), "fetcheddata", "users.json")
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return data.get("users") or []
+    except Exception as e:
+        logger.warning(f"Failed to load users cache: {e}")
+    return []
+
+
+def _save_users_cache(users: list):
+    try:
+        fetched_dir = os.path.join(os.path.dirname(__file__), "fetcheddata")
+        os.makedirs(fetched_dir, exist_ok=True)
+        path = os.path.join(fetched_dir, "users.json")
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({"users": users}, f, indent=2, default=str)
+        logger.info(f"Saved {len(users)} users to fetcheddata/users.json")
+    except Exception as e:
+        logger.warning(f"Failed to save users cache: {e}")
+
+
 def list_login_users():
-    """Active users for login page dropdown (no passwords)."""
+    """Active users for login page dropdown (no passwords). Falls back to cache if offline."""
     try:
         supabase: Client = init_supabase()
-        query = supabase.table("users").select("id, name, email")
-        if _users_schema_ready(supabase):
-            query = query.eq("is_active", True)
+        query = supabase.table("users").select("id, name, email, is_active, pwd, default_shift_id, permissions")
         response = query.order("name").execute()
+        raw_users = response.data or []
+        if raw_users:
+            _save_users_cache(raw_users)
+            try:
+                from offline.database import upsert_users_from_supabase
+                upsert_users_from_supabase(raw_users)
+            except Exception:
+                pass
+
         users = []
-        for row in response.data or []:
+        for row in raw_users:
+            if row.get("is_active") is False:
+                continue
             email = (row.get("email") or "").strip().lower()
             if not email:
                 continue
@@ -841,6 +874,22 @@ def list_login_users():
             })
         return {"status": "Success", "users": users}
     except Exception as e:
+        logger.warning(f"Supabase list_login_users failed ({e}), falling back to local users cache.")
+        cached = _load_users_cache()
+        users = []
+        for row in cached:
+            if row.get("is_active") is False:
+                continue
+            email = (row.get("email") or "").strip().lower()
+            if not email:
+                continue
+            users.append({
+                "id": row.get("id"),
+                "name": (row.get("name") or email).strip(),
+                "email": email,
+            })
+        if users:
+            return {"status": "Success", "users": users, "cached": True}
         log_error(e, "LIST_LOGIN_USERS")
         return {"status": "Error", "users": [], "message": str(e)}
 
@@ -935,9 +984,9 @@ def update_user_admin(user_id: int, payload: dict, actor: str = "Admin"):
 
 def authenticate_user(email: str, password: str):
     from user_access import public_user_dict, user_is_active, permissions_from_user_row
+    email_norm = (email or "").strip().lower()
     try:
         supabase = init_supabase()
-        email_norm = (email or "").strip().lower()
         response = supabase.table("users").select("*").eq("email", email_norm).limit(1).execute()
         rows = response.data or []
         if not rows:
@@ -951,17 +1000,46 @@ def authenticate_user(email: str, password: str):
         user_out = public_user_dict(row)
         user_out["permissions"] = permissions_from_user_row(row) if schema_ready else None
         if row.get("default_shift_id"):
-            shift_resp = (
-                supabase.table("shift")
-                .select("shift")
-                .eq("id", row["default_shift_id"])
-                .limit(1)
-                .execute()
-            )
-            if shift_resp.data:
-                user_out["default_shift"] = shift_resp.data[0].get("shift")
+            try:
+                shift_resp = (
+                    supabase.table("shift")
+                    .select("shift")
+                    .eq("id", row["default_shift_id"])
+                    .limit(1)
+                    .execute()
+                )
+                if shift_resp.data:
+                    user_out["default_shift"] = shift_resp.data[0].get("shift")
+            except Exception:
+                pass
         return user_out
     except Exception as e:
+        logger.warning(f"Supabase authenticate_user failed ({e}), checking local users cache.")
+        cached_users = _load_users_cache()
+        for row in cached_users:
+            if (row.get("email") or "").strip().lower() == email_norm:
+                if (row.get("pwd") or "") != (password or ""):
+                    return None
+                if row.get("is_active") is False:
+                    return {"disabled": True}
+                user_out = public_user_dict(row)
+                user_out["permissions"] = permissions_from_user_row(row)
+                
+                # Try finding shift in shifts.json
+                shift_id = row.get("default_shift_id")
+                if shift_id:
+                    try:
+                        shifts_path = os.path.join(os.path.dirname(__file__), "fetcheddata", "shifts.json")
+                        if os.path.exists(shifts_path):
+                            with open(shifts_path, "r", encoding="utf-8") as sf:
+                                sdata = json.load(sf)
+                                for s in (sdata.get("shifts") or []):
+                                    if s.get("id") == shift_id:
+                                        user_out["default_shift"] = s.get("shift")
+                                        break
+                    except Exception:
+                        pass
+                return user_out
         log_error(e, "AUTHENTICATE_USER")
         return None
 

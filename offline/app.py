@@ -29,6 +29,7 @@ if _parent not in sys.path:
 
 # pyrefly: ignore [missing-import]
 try:
+    # pyrefly: ignore [missing-import]
     from database import (
         get_db_conn, init_db, get_next_table_id,
         insert_mr_sync_log, list_mr_sync_log,
@@ -270,16 +271,17 @@ def print_records_hub_page(request: Request):
 
 
 @app.get("/page/admin", include_in_schema=False)
-def admin_panel(request: Request, view: str = "offline-sync", date: str = None):
-    # Render dedicated offline admin panel
-    return templates.TemplateResponse('offline_admin.html', {
+def admin_panel(request: Request, view: str = "overview", date: str = None):
+    # Render complete admin panel with offline mode support
+    return templates.TemplateResponse('admin_panel.html', {
         "request": request,
-        "title": "Admin (Offline)",
+        "title": "Admin Panel (Offline)",
         "current_view": view,
         "current_date": date,
-        "admin_email": "offline@labflow.com",
+        "admin_email": "admin@labflow.com",
         "lab_categories": LAB_CATEGORIES,
-        "hide_sidebar": True
+        "is_offline": True,
+        "hide_sidebar": False
     })
 
 
@@ -447,11 +449,32 @@ def _write_json(path: str, data):
 
 @app.get("/api/auth/login-users")
 def api_auth_login_users():
-    with get_db_conn() as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, name, email FROM users WHERE is_active = 1 ORDER BY name")
-        users = [{"id": r["id"], "name": r["name"], "email": r["email"]} for r in cursor.fetchall()]
-        return {"status": "Success", "users": users}
+    users = []
+    try:
+        with get_db_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, name, email FROM users WHERE is_active = 1 ORDER BY name")
+            users = [{"id": r["id"], "name": r["name"], "email": r["email"]} for r in cursor.fetchall()]
+    except Exception as e:
+        logger.warning(f"Offline SQLite users load error: {e}")
+
+    if not users:
+        # Fallback to fetcheddata/users.json
+        path = os.path.join(fetcheddata_dir, "users.json")
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    for u in (data.get("users") or []):
+                        if u.get("is_active") is not False:
+                            users.append({
+                                "id": u.get("id"),
+                                "name": u.get("name") or u.get("email"),
+                                "email": u.get("email")
+                            })
+            except Exception as e:
+                logger.warning(f"Offline users.json load error: {e}")
+    return {"status": "Success", "users": users}
 
 def sync_shifts_cache():
     fetcheddata_dir = os.path.join(base_path, "fetcheddata")
@@ -591,52 +614,92 @@ async def api_auth_login(request: Request):
         email = (data.get("email") or "").strip().lower()
         password = data.get("password") or ""
         
-        with get_db_conn() as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM users WHERE LOWER(email) = ? LIMIT 1", (email,))
-            user_row = cursor.fetchone()
-            
-            if not user_row or user_row["pwd"] != password:
-                return {"status": "Error", "message": "Invalid email or password."}
-            
-            if not user_row["is_active"]:
-                return {"status": "Error", "message": "This account is disabled."}
-            
-            permissions = {}
-            if user_row["permissions"]:
+        user_row = None
+        try:
+            with get_db_conn() as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT * FROM users WHERE LOWER(email) = ? LIMIT 1", (email,))
+                r = cursor.fetchone()
+                if r:
+                    user_row = dict(r)
+        except Exception as e:
+            logger.warning(f"Offline SQLite login query error: {e}")
+
+        if not user_row:
+            # Check fetcheddata/users.json
+            path = os.path.join(fetcheddata_dir, "users.json")
+            if os.path.exists(path):
                 try:
-                    permissions = json.loads(user_row["permissions"])
+                    with open(path, "r", encoding="utf-8") as f:
+                        data_cached = json.load(f)
+                        for u in (data_cached.get("users") or []):
+                            if (u.get("email") or "").strip().lower() == email:
+                                user_row = u
+                                break
                 except Exception:
                     pass
-
-            user_payload = {
-                "id": user_row["id"],
-                "name": user_row["name"],
-                "email": user_row["email"],
-                "permissions": permissions,
-                "default_shift": "MORNING"
-            }
             
-            default_shift_id = user_row["default_shift_id"]
-            default_shift = "MORNING"
-            if default_shift_id:
-                cursor.execute("SELECT shift FROM shift WHERE id = ?", (default_shift_id,))
-                shift_row = cursor.fetchone()
-                if shift_row:
-                    user_payload["default_shift"] = shift_row["shift"]
-                    default_shift = shift_row["shift"]
-            
-            # Sync all offline caches synchronously to allow frontend lookup
+        if not user_row or user_row.get("pwd") != password:
+            return {"status": "Error", "message": "Invalid email or password."}
+        
+        if user_row.get("is_active") is False:
+            return {"status": "Error", "message": "This account is disabled."}
+        
+        permissions = user_row.get("permissions") or {}
+        if isinstance(permissions, str):
             try:
-                sync_shifts_cache()
-                sync_user_preferences_cache(user_row["id"], user_row["email"], default_shift_id, default_shift)
-                sync_remarks_cache()
-                sync_invoice_settings_cache()
-                sync_lab_print_settings_cache()
-            except Exception as e:
-                logger.error(f"Error generating offline cache files: {e}")
+                permissions = json.loads(permissions)
+            except Exception:
+                permissions = {}
+
+        user_payload = {
+            "id": user_row.get("id"),
+            "name": user_row.get("name"),
+            "email": user_row.get("email"),
+            "permissions": permissions,
+            "default_shift": "MORNING"
+        }
+        
+        default_shift_id = user_row.get("default_shift_id")
+        default_shift = "MORNING"
+        if default_shift_id:
+            try:
+                with get_db_conn() as conn:
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT shift FROM shift WHERE id = ?", (default_shift_id,))
+                    shift_row = cursor.fetchone()
+                    if shift_row:
+                        user_payload["default_shift"] = shift_row["shift"]
+                        default_shift = shift_row["shift"]
+            except Exception:
+                pass
                 
-            return {"status": "Success", "user": user_payload}
+            if default_shift == "MORNING":
+                # Check fetcheddata/shifts.json
+                shifts_path = os.path.join(fetcheddata_dir, "shifts.json")
+                if os.path.exists(shifts_path):
+                    try:
+                        with open(shifts_path, "r", encoding="utf-8") as sf:
+                            sdata = json.load(sf)
+                            for s in (sdata.get("shifts") or []):
+                                if s.get("id") == default_shift_id:
+                                    user_payload["default_shift"] = s.get("shift")
+                                    default_shift = s.get("shift")
+                                    break
+                    except Exception:
+                        pass
+        
+        # Sync all offline caches synchronously to allow frontend lookup
+        try:
+            sync_shifts_cache()
+            sync_user_preferences_cache(user_row.get("id"), user_row.get("email"), default_shift_id, default_shift)
+            sync_remarks_cache()
+            sync_invoice_settings_cache()
+            sync_lab_print_settings_cache()
+        except Exception as e:
+            logger.error(f"Error generating offline cache files: {e}")
+            
+        return {"status": "Success", "user": user_payload}
     except Exception as e:
         logger.error(f"Login failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -704,6 +767,137 @@ def api_save_test_selection_config(payload: dict):
     }
     save_test_selection_config(new_config)
     return {"status": "Success", "config": new_config}
+
+
+# ── Registration Options Management (Offline) ──────────────────────────────
+def _load_registration_options():
+    path = os.path.join(fetcheddata_dir, "registration_options.json")
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Error loading registration_options.json: {e}")
+    return None
+
+def _save_registration_options(data):
+    os.makedirs(fetcheddata_dir, exist_ok=True)
+    path = os.path.join(fetcheddata_dir, "registration_options.json")
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+    except Exception as e:
+        logger.error(f"Error saving registration_options.json: {e}")
+
+@app.get("/api/admin/registration-options")
+def api_get_registration_options():
+    opts = _load_registration_options()
+    if opts is None:
+        opts = {
+            "salutations": [
+                {"value": "Mr.", "label": "Mr.", "default_gender": "MALE", "default_relation": "S"},
+                {"value": "Mrs.", "label": "Mrs.", "default_gender": "FEMALE", "default_relation": "W"},
+                {"value": "Miss.", "label": "Miss.", "default_gender": "FEMALE", "default_relation": "D"},
+                {"value": "Baby", "label": "Baby", "default_gender": "MALE", "default_relation": "S"}
+            ],
+            "relations": [
+                {"value": "S", "label": "S/O", "description": "Son of"},
+                {"value": "D", "label": "D/O", "description": "Daughter of"},
+                {"value": "W", "label": "W/O", "description": "Wife of"}
+            ],
+            "genders": [
+                {"value": "MALE", "label": "MALE"},
+                {"value": "FEMALE", "label": "FEMALE"},
+                {"value": "OTHER", "label": "OTHER"}
+            ],
+            "default_values": {
+                "salutation": "Mr."
+            }
+        }
+        _save_registration_options(opts)
+    return {"status": "Success", "options": opts}
+
+@app.post("/api/admin/registration-options")
+async def api_save_registration_options(request: Request):
+    try:
+        data = await request.json()
+        if not isinstance(data, dict):
+            raise HTTPException(status_code=400, detail="Invalid payload")
+        _save_registration_options(data)
+        return {"status": "Success", "message": "Registration options saved successfully (Offline)"}
+    except Exception as e:
+        logger.error(f"Offline registration options save error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ── Print Layouts Management (Offline) ──────────────────────────────────────
+PRINT_LAYOUTS_PATH = os.path.join(fetcheddata_dir, "print_layouts.json")
+
+def _load_print_layouts() -> dict:
+    if os.path.exists(PRINT_LAYOUTS_PATH):
+        try:
+            with open(PRINT_LAYOUTS_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to load print_layouts.json: {e}")
+    return {}
+
+def _save_print_layouts(data: dict):
+    os.makedirs(fetcheddata_dir, exist_ok=True)
+    with open(PRINT_LAYOUTS_PATH, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+@app.get("/api/admin/print-layouts")
+def api_admin_get_print_layouts():
+    return {"status": "ok", "layouts": _load_print_layouts()}
+
+@app.post("/api/admin/print-layouts")
+async def api_admin_save_print_layouts(request: Request):
+    try:
+        data = await request.json()
+        category = (data.get("category") or "").strip()
+        items = data.get("items") or []
+        if not category:
+            raise HTTPException(status_code=400, detail="Category name is required.")
+        layouts = _load_print_layouts()
+        layouts[category] = items
+        _save_print_layouts(layouts)
+        return {"status": "ok", "message": f"Layout saved for '{category}' (Offline).", "category": category}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/api/admin/print-layouts/{category}")
+def api_admin_delete_print_layout(category: str):
+    layouts = _load_print_layouts()
+    if category in layouts:
+        del layouts[category]
+        _save_print_layouts(layouts)
+    return {"status": "ok", "message": "Layout deleted (Offline)."}
+
+
+# ── Print Settings (Offline) ────────────────────────────────────────────────
+@app.get("/api/admin/print-settings")
+def api_admin_get_print_settings():
+    path = os.path.join(fetcheddata_dir, "print_settings.json")
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {"status": "Success", "page_size": "A4", "is_active": 1}
+
+@app.post("/api/admin/print-settings")
+async def api_admin_update_print_settings(request: Request):
+    try:
+        data = await request.json()
+        path = os.path.join(fetcheddata_dir, "print_settings.json")
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+        return {"status": "Success", "message": "Print settings saved offline"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 
 @app.get("/tests")
