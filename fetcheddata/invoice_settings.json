@@ -1,5 +1,5 @@
 {
-  "id": 1,
+  "id": 102,
   "hospital_name": "GMMMC Teaching Hospital Sukkur",
   "developed_by": "REHAN AHMED",
   "developed_by_url": "https://example.com",
@@ -7,8 +7,8 @@
   "printer_width": "3in",
   "logo_path": "/static/images/hospital_logo.png",
   "qr_code_path": null,
-  "is_active": true,
-  "updated_at": "2026-05-30T07:47:53.878769+00:00",
-  "logo_url": "/fetcheddata/logo.png",
+  "is_active": 1,
+  "updated_at": "2026-08-09 16:44:33",
+  "logo_url": "/static/images/hospital_logo.png",
   "qr_url": "/fetcheddata/qr_placeholder.svg"
 }

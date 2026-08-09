@@ -3,6 +3,7 @@
 .env.local
 build/
 dist/
+fetcheddata/users.json
 *.pyc
 __pycache__/
 scripts/seed_output/*.csv
