@@ -85,6 +85,9 @@ def api_health():
     return {"ok": True}
 
 
+from db_switcher import get_current_db_status, switch_database_target, run_full_diagnostics
+
+
 @app.middleware("http")
 async def security_desktop_middleware(request: Request, call_next):
     path = request.url.path
@@ -97,6 +100,7 @@ async def security_desktop_middleware(request: Request, call_next):
         or path.startswith("/offline")
         or path.startswith("/api/emergency-dr")
         or path.startswith("/page/emergency-dr")
+        or path.startswith("/api/database")
     ):
         return await call_next(request)
 
@@ -110,6 +114,43 @@ async def security_desktop_middleware(request: Request, call_next):
             return RedirectResponse(url="/login", status_code=302)
 
     return await call_next(request)
+
+
+# ----------------- Database Switcher & Diagnostics APIs -----------------
+
+@app.get("/api/database/status")
+def api_database_status():
+    """Returns current active database target and connection configuration."""
+    return get_current_db_status()
+
+
+@app.post("/api/database/switch")
+async def api_database_switch(request: Request):
+    """Manually switches active database to primary, secondary, or offline with master password."""
+    try:
+        data = await request.json()
+        target = data.get("target", "")
+        password = data.get("password", "")
+        result = switch_database_target(target, password)
+        if result.get("status") == "error":
+            status_code = 403 if "password" in result.get("message", "").lower() or "denied" in result.get("message", "").lower() else 400
+            return JSONResponse(status_code=status_code, content=result)
+        return result
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+
+
+@app.post("/api/emergency-dr/diagnose")
+def api_emergency_dr_diagnose():
+    """Runs live health probes across primary cloud, secondary cloud, and local replica."""
+    return run_full_diagnostics()
+
+
+@app.post("/api/emergency-dr/switch")
+async def api_emergency_dr_switch(request: Request):
+    """Alias for /api/database/switch."""
+    return await api_database_switch(request)
+
 
 
 LAB_CATEGORIES = [

@@ -19,22 +19,19 @@ def init_supabase() -> Client:
         base_path = get_base_path()
         dotenv_path = os.path.join(base_path, ".env")
         
-        # Try loading from base_path (bundled or script dir)
+        # Always reload fresh with override=True to support dynamic manual switching
         if os.path.exists(dotenv_path):
-            load_dotenv(dotenv_path)
-            logger.debug(f"Loaded .env from {dotenv_path}")
+            load_dotenv(dotenv_path, override=True)
         else:
-            # Fallback to current working directory
-            load_dotenv()
-            logger.debug("Loaded .env from current working directory")
+            load_dotenv(override=True)
 
-        SUPABASE_URL = str(os.getenv("SUPABASE_URL"))
-        SUPABASE_KEY = str(os.getenv("SUPABASE_KEY"))
+        SUPABASE_URL = str(os.getenv("SUPABASE_URL", "")).strip()
+        SUPABASE_KEY = str(os.getenv("SUPABASE_KEY", "")).strip()
 
         if not SUPABASE_URL or not SUPABASE_KEY:
             logger.warning("Supabase credentials not found in environment variables!")
 
-        supabase : Client = create_client(supabase_key=SUPABASE_KEY,supabase_url=SUPABASE_URL) 
+        supabase: Client = create_client(supabase_key=SUPABASE_KEY, supabase_url=SUPABASE_URL) 
         return supabase
     except Exception as e:
         log_error(e, "DB_INIT_FAILED")
