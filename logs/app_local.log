@@ -17776,3 +17776,29 @@ postgrest.exceptions.APIError: {'message': 'null value in column "user_id" of re
 2026-08-09 18:28:21,870 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2156ms. Total updated: 0 rows across 12 tables.
 2026-08-09 18:28:37,347 - DEBUG - [LabFlow] - Accessing Home Page
 2026-08-09 18:28:43,867 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1979ms. Total updated: 0 rows across 12 tables.
+2026-08-09 18:29:35,286 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 18:29:37,519 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 18:29:37,561 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 18:29:37,655 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 18:29:37,838 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 18:29:37,838 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 18:29:38,036 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 18:29:38,136 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 18:29:38,209 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 18:29:38,547 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 18:29:39,944 - INFO - [LabFlow] - Saved 6 users to fetcheddata/users.json
+2026-08-09 18:29:43,121 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-09 18:29:43,353 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-09 18:29:43,761 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5744ms. Total updated: 641 rows across 12 tables.
+2026-08-09 18:29:43,842 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-09 18:29:44,071 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-09 18:29:44,073 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-09 18:29:44,334 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-09 18:29:44,390 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 18:29:44,524 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-09 18:29:44,858 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-09 18:29:45,025 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-09 18:29:45,206 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-09 18:29:45,462 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-09 18:29:45,462 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-09 18:29:51,388 - INFO - [LabFlow] - Cloud settings pushed to Supabase by Anonymous
