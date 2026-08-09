@@ -1,10 +1,11 @@
 import os
 import sys
 import json
+from datetime import datetime
 from typing import Optional
 from urllib.parse import urlencode
 from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, FileResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from schemas import ChangeVisiblity, GetAllDataFromRegPage, FitnessPatientSchema
@@ -16,6 +17,7 @@ from dbActions import init_supabase
 from search_utils import parse_advanced_filters, row_matches_advanced_filters
 from patient_list_query import fetch_test_result_list_rows, BROWSE_PATIENT_LIMIT
 from analytics_router import router as analytics_router
+from replica_engine import get_replica_engine
 def get_base_path():
     if getattr(sys, 'frozen', False):
         # Running as a bundled executable
@@ -53,6 +55,23 @@ templates = Jinja2Templates(directory=templates_dir)
 templates.env.globals["is_offline"] = False
 templates.env.globals["url_prefix"] = ""
 
+_orig_main_template_response = templates.TemplateResponse
+
+def _safe_main_template_response(*args, **kwargs):
+    if len(args) == 2 and isinstance(args[0], str) and isinstance(args[1], dict):
+        name = args[0]
+        context = args[1]
+        req = context.get("request") or kwargs.get("request")
+        return _orig_main_template_response(request=req, name=name, context=context)
+    elif len(args) == 1 and isinstance(args[0], str):
+        name = args[0]
+        context = kwargs.get("context", {})
+        req = kwargs.get("request") or context.get("request")
+        return _orig_main_template_response(request=req, name=name, context=context)
+    return _orig_main_template_response(*args, **kwargs)
+
+templates.TemplateResponse = _safe_main_template_response
+
 # Mount the offline app under /offline
 from offline.app import app as offline_app
 app.mount("/offline", offline_app)
@@ -76,6 +95,8 @@ async def security_desktop_middleware(request: Request, call_next):
         or path.startswith("/static")
         or path.startswith("/fetcheddata")
         or path.startswith("/offline")
+        or path.startswith("/api/emergency-dr")
+        or path.startswith("/page/emergency-dr")
     ):
         return await call_next(request)
 
@@ -529,6 +550,13 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
             "default_permissions": DEFAULT_PERMISSIONS,
             "hide_sidebar": True
         })
+
+
+@app.get("/page/emergency-dr")
+def page_emergency_dr(request: Request):
+    """Dedicated full-screen Disaster Recovery and Live Diagnostic Console."""
+    return templates.TemplateResponse(request=request, name="emergency_dr.html", context={"title": "Disaster Recovery Console"})
+
 
 
 
@@ -2007,9 +2035,25 @@ def _auto_pull_cloud_settings_sync():
 
 @app.on_event("startup")
 def on_app_startup():
-    """Auto-pull cloud settings from Supabase on app startup in background."""
+    """Auto-pull cloud settings and launch continuous Supabase replica background worker."""
     import threading
     threading.Thread(target=_auto_pull_cloud_settings_sync, daemon=True).start()
+    try:
+        engine = get_replica_engine()
+        engine.start_background_worker()
+        logger.info("Supabase continuous replica engine background worker started on app boot.")
+    except Exception as e:
+        logger.warning(f"Could not start replica engine on boot: {e}")
+
+
+@app.on_event("shutdown")
+def on_app_shutdown():
+    """Stop continuous replica background worker cleanly on app shutdown."""
+    try:
+        engine = get_replica_engine()
+        engine.stop_background_worker()
+    except Exception as e:
+        logger.debug(f"Replica worker shutdown error: {e}")
 
 
 @app.get("/api/admin/cloud-settings/status")
@@ -2031,5 +2075,298 @@ def api_cloud_settings_status():
         return {"status": "Success", "exists": False}
     except Exception as e:
         return {"status": "Error", "exists": False, "detail": str(e)}
+
+
+# ---------------------------------------------------------------------------
+# Supabase Continuous Replica & Disaster Recovery Endpoints
+# ---------------------------------------------------------------------------
+
+@app.get("/api/admin/replica/status")
+def api_replica_status():
+    """Get real-time status of the Supabase replica engine and storage locations."""
+    try:
+        engine = get_replica_engine()
+        return engine.get_status()
+    except Exception as e:
+        log_error(e, "API_REPLICA_STATUS")
+        return {"is_running": False, "error": str(e), "tables": {}, "locations": {}}
+
+
+@app.post("/api/admin/replica/sync-now")
+def api_replica_sync_now(request_data: Optional[dict] = None):
+    """Trigger an immediate replication cycle (delta or forced full)."""
+    try:
+        engine = get_replica_engine()
+        force_full = False
+        if request_data and isinstance(request_data, dict):
+            force_full = bool(request_data.get("force_full", False))
+        result = engine.perform_sync(force_full=force_full)
+        return result
+    except Exception as e:
+        log_error(e, "API_REPLICA_SYNC_NOW")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/admin/replica/config")
+def api_replica_update_config(config_data: dict):
+    """Update replica settings (polling interval, locations, auto-sync)."""
+    try:
+        engine = get_replica_engine()
+        if "poll_interval_seconds" in config_data:
+            engine.poll_interval = max(5, int(config_data["poll_interval_seconds"]))
+        if "location_1" in config_data and config_data["location_1"]:
+            engine.location_1 = str(config_data["location_1"])
+        if "location_2" in config_data and config_data["location_2"]:
+            engine.location_2 = str(config_data["location_2"])
+        engine._ensure_directories()
+        return {"status": "success", "config": engine.get_status()}
+    except Exception as e:
+        log_error(e, "API_REPLICA_CONFIG")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/admin/replica/download-sql")
+def api_replica_download_sql(format: str = "postgres_full"):
+    """Download PostgreSQL or SQLite migration SQL dumps."""
+    try:
+        engine = get_replica_engine()
+        loc = engine.location_1
+        
+        if format == "postgres_full":
+            file_path = os.path.join(loc, "sql", "migration_postgres_full.sql")
+            filename = f"labflow_postgres_full_{datetime.now().strftime('%Y%m%d_%H%M%S')}.sql"
+        elif format == "postgres_upsert":
+            file_path = os.path.join(loc, "sql", "migration_postgres_upsert.sql")
+            filename = f"labflow_postgres_upsert_{datetime.now().strftime('%Y%m%d_%H%M%S')}.sql"
+        elif format == "sqlite_dump":
+            file_path = os.path.join(loc, "sql", "migration_sqlite_full.sql")
+            filename = f"labflow_sqlite_{datetime.now().strftime('%Y%m%d_%H%M%S')}.sql"
+        elif format == "sqlite_db":
+            file_path = os.path.join(loc, "database", "labflow_replica.db")
+            filename = f"labflow_replica_{datetime.now().strftime('%Y%m%d_%H%M%S')}.db"
+        else:
+            raise HTTPException(status_code=400, detail="Invalid format requested")
+
+        if not os.path.exists(file_path):
+            # Run a sync to generate the files if not present
+            engine.perform_sync(force_full=True)
+
+        if not os.path.exists(file_path):
+            raise HTTPException(status_code=404, detail="Requested replica file not found.")
+
+        return FileResponse(file_path, filename=filename, media_type="application/octet-stream")
+    except Exception as e:
+        log_error(e, "API_REPLICA_DOWNLOAD")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/admin/replica/test-migration")
+def api_replica_test_migration(payload: dict):
+    """Test connection and perform dry-run verification against target PostgreSQL URL."""
+    try:
+        pg_url = payload.get("target_pg_url", "").strip()
+        if not pg_url:
+            raise HTTPException(status_code=400, detail="Target PostgreSQL URL is required.")
+        
+        engine = get_replica_engine()
+        from migrate_to_provider import load_master_sql, execute_pg_migration
+        sql_content = load_master_sql(engine.location_1, upsert_only=False)
+        result = execute_pg_migration(pg_url, sql_content, dry_run=True)
+        return result
+    except Exception as e:
+        log_error(e, "API_REPLICA_TEST_MIGRATION")
+        return {"status": "error", "error": str(e)}
+
+
+# ---------------------------------------------------------------------------
+# Emergency Disaster Recovery & Root-Cause Diagnostic Endpoints (Login/Splash)
+# ---------------------------------------------------------------------------
+
+@app.post("/api/emergency-dr/diagnose")
+def api_emergency_dr_diagnose():
+    """Performs comprehensive live connectivity and root-cause diagnostics on Primary, Secondary, and Local DBs."""
+    import time
+    import socket
+    import urllib.parse
+    import sqlite3
+    from dotenv import load_dotenv
+    from supabase import create_client
+    
+    base_dir = get_base_path()
+    env_path = os.path.join(base_dir, ".env")
+    if os.path.exists(env_path):
+        load_dotenv(env_path, override=True)
+    
+    report = {
+        "timestamp": datetime.now().isoformat(),
+        "primary": {},
+        "secondary": {},
+        "local_replica": {},
+        "root_cause_analysis": []
+    }
+    
+    # 1. Primary Supabase Diagnostics
+    primary_url = os.getenv("SUPABASE_URL", "")
+    primary_key = os.getenv("SUPABASE_KEY", "")
+    report["primary"]["url"] = primary_url
+    
+    if not primary_url or not primary_key:
+        report["primary"]["status"] = "UNCONFIGURED"
+        report["root_cause_analysis"].append("Primary Supabase credentials missing in .env")
+    else:
+        start = time.time()
+        try:
+            parsed = urllib.parse.urlparse(primary_url)
+            hostname = parsed.hostname or ""
+            ip = socket.gethostbyname(hostname)
+            report["primary"]["dns_ip"] = ip
+            
+            c = create_client(primary_url, primary_key)
+            res = c.table("patients").select("id", count="exact").limit(0).execute()
+            latency_ms = int((time.time() - start) * 1000)
+            report["primary"]["status"] = "ONLINE_HEALTHY"
+            report["primary"]["latency_ms"] = latency_ms
+            report["primary"]["error"] = None
+        except Exception as e:
+            latency_ms = int((time.time() - start) * 1000)
+            err_str = str(e)
+            report["primary"]["status"] = "FAILED"
+            report["primary"]["latency_ms"] = latency_ms
+            report["primary"]["error"] = err_str
+            
+            if "getaddrinfo" in err_str or "nodename" in err_str:
+                report["root_cause_analysis"].append("Primary Supabase DNS lookup failed (Check internet connection or DNS).")
+            elif "401" in err_str or "403" in err_str or "Invalid API key" in err_str:
+                report["root_cause_analysis"].append("Primary Supabase API authentication failed (Invalid SUPABASE_KEY).")
+            elif "500" in err_str or "502" in err_str or "503" in err_str or "504" in err_str:
+                report["root_cause_analysis"].append("Primary Supabase Cloud server error (Supabase region outage or 503 maintenance).")
+            elif "PGRST205" in err_str or "schema cache" in err_str:
+                report["root_cause_analysis"].append("Primary database table schema error (Table 'patients' missing or permissions not granted).")
+            else:
+                report["root_cause_analysis"].append(f"Primary Supabase connection error: {err_str[:120]}")
+
+    # 2. Secondary Supabase Diagnostics
+    sec_url = os.getenv("SECONDARY_SUPABASE_URL", "")
+    sec_key = os.getenv("SECONDARY_SUPABASE_KEY", "")
+    report["secondary"]["url"] = sec_url
+    
+    if not sec_url or not sec_key:
+        report["secondary"]["status"] = "UNCONFIGURED"
+    else:
+        start = time.time()
+        try:
+            parsed = urllib.parse.urlparse(sec_url)
+            hostname = parsed.hostname or ""
+            ip = socket.gethostbyname(hostname)
+            report["secondary"]["dns_ip"] = ip
+            
+            c_sec = create_client(sec_url, sec_key)
+            res_sec = c_sec.table("patients").select("id", count="exact").limit(0).execute()
+            latency_ms = int((time.time() - start) * 1000)
+            report["secondary"]["status"] = "ONLINE_READY"
+            report["secondary"]["latency_ms"] = latency_ms
+            report["secondary"]["error"] = None
+        except Exception as e:
+            latency_ms = int((time.time() - start) * 1000)
+            err_str = str(e)
+            if "PGRST205" in err_str or "schema cache" in err_str:
+                report["secondary"]["status"] = "ONLINE_NEEDS_SCHEMA"
+                report["secondary"]["error"] = "Project reachable, but tables not created yet (Run setup_secondary_schema.sql in Secondary Supabase SQL editor)."
+            else:
+                report["secondary"]["status"] = "FAILED"
+                report["secondary"]["error"] = err_str
+            report["secondary"]["latency_ms"] = latency_ms
+
+    # 3. Local SQLite Replica Diagnostics
+    try:
+        engine = get_replica_engine()
+        loc1 = engine.location_1
+        db_path = os.path.join(loc1, "database", "labflow_replica.db")
+        if os.path.exists(db_path):
+            conn = sqlite3.connect(db_path, timeout=5)
+            cur = conn.cursor()
+            cur.execute("SELECT COUNT(*) FROM patients")
+            patients_count = cur.fetchone()[0]
+            cur.execute("SELECT COUNT(*) FROM test_results_all")
+            tests_count = cur.fetchone()[0]
+            conn.close()
+            report["local_replica"]["status"] = "ONLINE_HEALTHY"
+            report["local_replica"]["patients_count"] = patients_count
+            report["local_replica"]["tests_count"] = tests_count
+            report["local_replica"]["db_size_bytes"] = os.path.getsize(db_path)
+            report["local_replica"]["last_sync_time"] = engine.last_sync_time
+        else:
+            report["local_replica"]["status"] = "NOT_FOUND"
+    except Exception as e:
+        report["local_replica"]["status"] = "ERROR"
+        report["local_replica"]["error"] = str(e)
+
+    return report
+
+
+@app.post("/api/emergency-dr/switch")
+def api_emergency_dr_switch(payload: dict):
+    """Manually switch active database provider between Primary and Secondary Supabase (Protected by youcannotenter)."""
+    pwd = payload.get("password", "")
+    if pwd != "youcannotenter":
+        raise HTTPException(status_code=403, detail="Invalid admin password. Master password is required.")
+        
+    target = payload.get("target") # "primary" | "secondary"
+    base_dir = get_base_path()
+    env_path = os.path.join(base_dir, ".env")
+    
+    # Read current .env
+    lines = []
+    if os.path.exists(env_path):
+        with open(env_path, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+            
+    # Extract keys
+    env_dict = {}
+    for line in lines:
+        if "=" in line and not line.strip().startswith("#"):
+            parts = line.strip().split("=", 1)
+            if len(parts) == 2:
+                env_dict[parts[0]] = parts[1]
+            
+    primary_url = env_dict.get("PRIMARY_BACKUP_URL") or env_dict.get("SUPABASE_URL")
+    primary_key = env_dict.get("PRIMARY_BACKUP_KEY") or env_dict.get("SUPABASE_KEY")
+    secondary_url = env_dict.get("SECONDARY_SUPABASE_URL")
+    secondary_key = env_dict.get("SECONDARY_SUPABASE_KEY")
+    
+    if target == "secondary":
+        if not secondary_url or not secondary_key:
+            raise HTTPException(status_code=400, detail="Secondary Supabase URL/Key is not configured in .env")
+        # Save primary as PRIMARY_BACKUP and set secondary as active SUPABASE_URL
+        env_dict["PRIMARY_BACKUP_URL"] = primary_url
+        env_dict["PRIMARY_BACKUP_KEY"] = primary_key
+        env_dict["SUPABASE_URL"] = secondary_url
+        env_dict["SUPABASE_KEY"] = secondary_key
+        active_name = "Secondary Supabase Project"
+    elif target == "primary":
+        if not primary_url or not primary_key:
+            raise HTTPException(status_code=400, detail="Primary Supabase URL/Key not found in backup")
+        env_dict["SUPABASE_URL"] = primary_url
+        env_dict["SUPABASE_KEY"] = primary_key
+        active_name = "Primary Supabase Project"
+    else:
+        raise HTTPException(status_code=400, detail="Invalid target specified")
+        
+    # Write back .env
+    with open(env_path, "w", encoding="utf-8") as f:
+        for k, v in env_dict.items():
+            f.write(f"{k}={v}\n")
+            
+    # Reload environment
+    os.environ["SUPABASE_URL"] = env_dict["SUPABASE_URL"]
+    os.environ["SUPABASE_KEY"] = env_dict["SUPABASE_KEY"]
+    
+    return {
+        "status": "success",
+        "active_target": target,
+        "active_url": env_dict["SUPABASE_URL"],
+        "message": f"Successfully switched active database to {active_name}!"
+    }
+
 
 

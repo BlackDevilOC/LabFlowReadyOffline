@@ -1,0 +1,291 @@
+[
+  {
+    "id": 1,
+    "payload": {
+      "pushed_at": "2026-08-09T09:09:09.828187Z",
+      "pushed_by": "Anonymous",
+      "print_layouts": {
+        "complete blood count|hba1c": {
+          "page_map": {
+            "HbA1c": 0,
+            "COMPLETE BLOOD COUNT": 0
+          },
+          "saved_at": "2026-08-07T15:38:50.244967Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 2,
+          "test_order": [
+            "COMPLETE BLOOD COUNT",
+            "HbA1c"
+          ],
+          "display_options": {
+            "show_category_title": false,
+            "show_group_test_title": false,
+            "show_single_test_title": false
+          }
+        },
+        "complete blood count|hep b, c|liver function test|uc": {
+          "page_map": {
+            "UC": 0,
+            "Hep B, C": 0,
+            "Liver Function Test": 0,
+            "COMPLETE BLOOD COUNT": 0
+          },
+          "saved_at": "2026-08-07T13:15:47.738204Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 4,
+          "test_order": [
+            "COMPLETE BLOOD COUNT",
+            "Liver Function Test",
+            "UC",
+            "Hep B, C"
+          ],
+          "display_options": {
+            "show_category_title": true,
+            "show_group_test_title": true,
+            "show_single_test_title": false
+          }
+        },
+        "complete blood count|hep b, c|liver function test|uce": {
+          "page_map": {
+            "UCE": 0,
+            "Hep B, C": 0,
+            "Liver Function Test": 0,
+            "COMPLETE BLOOD COUNT": 0
+          },
+          "saved_at": "2026-08-09T08:08:34.379801Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 4,
+          "test_order": [
+            "COMPLETE BLOOD COUNT",
+            "Liver Function Test",
+            "UCE",
+            "Hep B, C"
+          ],
+          "display_options": {
+            "show_category_title": false,
+            "show_group_test_title": false,
+            "show_single_test_title": false
+          }
+        },
+        "complete blood count|glucose random (rbs)|hep b, c|liver function test|uce": {
+          "page_map": {
+            "UCE": 1,
+            "Hep B, C": 1,
+            "Liver Function Test": 1,
+            "COMPLETE BLOOD COUNT": 0,
+            "Glucose Random (RBS)": 1
+          },
+          "saved_at": "2026-08-09T08:20:55.519060Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 5,
+          "test_order": [
+            "COMPLETE BLOOD COUNT",
+            "Liver Function Test",
+            "UCE",
+            "Hep B, C",
+            "Glucose Random (RBS)"
+          ],
+          "display_options": {
+            "show_category_title": false,
+            "show_group_test_title": false,
+            "show_single_test_title": false
+          }
+        },
+        "complete blood count|hep b, c|liver function test|mp-ict|pt (prothrombin time)|uce": {
+          "page_map": {
+            "UCE": 1,
+            "MP-ICT": 0,
+            "Hep B, C": 0,
+            "Liver Function Test": 1,
+            "COMPLETE BLOOD COUNT": 0,
+            "PT (Prothrombin Time)": 0
+          },
+          "saved_at": "2026-08-07T15:30:02.390264Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 6,
+          "test_order": [
+            "Liver Function Test",
+            "UCE",
+            "COMPLETE BLOOD COUNT",
+            "Hep B, C",
+            "PT (Prothrombin Time)",
+            "MP-ICT"
+          ],
+          "display_options": {
+            "show_category_title": false,
+            "show_group_test_title": false,
+            "show_single_test_title": false
+          }
+        },
+        "amylase|complete blood count|dengue ns1 (ict)|hep b, c|liver function test|mp-ict|uc|uce": {
+          "page_map": {
+            "UC": 1,
+            "UCE": 1,
+            "MP-ICT": 0,
+            "Amylase": 0,
+            "Hep B, C": 1,
+            "Dengue NS1 (ICT)": 0,
+            "Liver Function Test": 1,
+            "COMPLETE BLOOD COUNT": 0
+          },
+          "saved_at": "2026-08-09T09:08:27.593806Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 8,
+          "test_order": [
+            "COMPLETE BLOOD COUNT",
+            "Amylase",
+            "MP-ICT",
+            "Dengue NS1 (ICT)",
+            "Liver Function Test",
+            "UCE",
+            "Hep B, C",
+            "UC"
+          ],
+          "display_options": {
+            "show_category_title": false,
+            "show_group_test_title": false,
+            "show_single_test_title": false
+          }
+        },
+        "calcium|complete blood count|hep b, c|lipid profile|liver function test|thyroid profile|uce|uric acid": {
+          "page_map": {},
+          "saved_at": "2026-08-09T08:06:10.071183Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 8,
+          "test_order": [
+            "COMPLETE BLOOD COUNT",
+            "UCE",
+            "Lipid Profile",
+            "Calcium",
+            "Liver Function Test",
+            "Thyroid Profile",
+            "Hep B, C",
+            "Uric Acid"
+          ],
+          "display_options": {
+            "show_category_title": false,
+            "show_group_test_title": false,
+            "show_single_test_title": false
+          }
+        }
+      },
+      "registration_options": {
+        "genders": [
+          {
+            "label": "MALE",
+            "value": "MALE"
+          },
+          {
+            "label": "FEMALE",
+            "value": "FEMALE"
+          },
+          {
+            "label": "OTHER",
+            "value": "OTHER"
+          }
+        ],
+        "relations": [
+          {
+            "label": "S/O",
+            "value": "S",
+            "description": "Son of"
+          },
+          {
+            "label": "D/O",
+            "value": "D",
+            "description": "Daughter of"
+          },
+          {
+            "label": "W/O",
+            "value": "W",
+            "description": "Wife of"
+          }
+        ],
+        "salutations": [
+          {
+            "label": "Mr.",
+            "value": "Mr.",
+            "default_gender": "MALE",
+            "default_relation": "S"
+          },
+          {
+            "label": "Mrs.",
+            "value": "Mrs.",
+            "default_gender": "FEMALE",
+            "default_relation": "W"
+          },
+          {
+            "label": "Miss.",
+            "value": "Miss.",
+            "default_gender": "FEMALE",
+            "default_relation": "D"
+          },
+          {
+            "label": "Baby",
+            "value": "Baby",
+            "default_gender": "",
+            "default_relation": "S"
+          }
+        ],
+        "default_values": {
+          "salutation": "Mr."
+        }
+      },
+      "test_selection_config": {
+        "mode": "group_and_single",
+        "quick_presets": [
+          {
+            "id": "p1",
+            "name": "Routine Package",
+            "tests": [
+              "COMPLETE BLOOD COUNT",
+              "Liver Function Test",
+              "UCE",
+              "Hep B, C"
+            ],
+            "auto_select": false
+          },
+          {
+            "id": "preset_1786202026938",
+            "name": ".",
+            "tests": [],
+            "auto_select": true
+          }
+        ],
+        "regular_preset": [],
+        "category_styles": {
+          "General": "simple",
+          "Popular": "fancy",
+          "Group Test": "fancy"
+        },
+        "categories_order": [
+          "Popular",
+          "Regular"
+        ],
+        "custom_categories": {
+          "UC": "Popular",
+          "UCE": "Popular",
+          "MP-ICT": "Popular",
+          "Albumin": "General",
+          "Amylase": "Popular",
+          "Calcium": "Popular",
+          "Hep B, C": "Popular",
+          "Uric Acid": "Popular",
+          "Serum Amylase": "Popular",
+          "VDRL SYPHILIS": "Popular",
+          "Thyroid Profile": "Popular",
+          "Dengue NS1 (ICT)": "Popular",
+          "Alpha Feto-Protein": "General",
+          "Liver Function Test": "Popular",
+          "COMPLETE BLOOD COUNT": "Popular",
+          "Glucose Random (RBS)": "Popular"
+        },
+        "allow_single_tests": true,
+        "auto_select_regular": true
+      }
+    },
+    "setting_type": "all_app_settings",
+    "updated_at": "2026-08-09T09:09:09.828187+00:00",
+    "updated_by": "Anonymous"
+  }
+]

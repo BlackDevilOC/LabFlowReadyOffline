@@ -71,6 +71,23 @@ templates = Jinja2Templates(directory=templates_dir)
 templates.env.globals["is_offline"] = True
 templates.env.globals["url_prefix"] = "/offline"
 
+_orig_offline_template_response = templates.TemplateResponse
+
+def _safe_offline_template_response(*args, **kwargs):
+    if len(args) == 2 and isinstance(args[0], str) and isinstance(args[1], dict):
+        name = args[0]
+        context = args[1]
+        req = context.get("request") or kwargs.get("request")
+        return _orig_offline_template_response(request=req, name=name, context=context)
+    elif len(args) == 1 and isinstance(args[0], str):
+        name = args[0]
+        context = kwargs.get("context", {})
+        req = kwargs.get("request") or context.get("request")
+        return _orig_offline_template_response(request=req, name=name, context=context)
+    return _orig_offline_template_response(*args, **kwargs)
+
+templates.TemplateResponse = _safe_offline_template_response
+
 logger.info(f"Offline App Started. Parent path: {base_path}")
 
 # Pydantic schemas for request validation
@@ -282,6 +299,14 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
         "lab_categories": LAB_CATEGORIES,
         "is_offline": True,
         "hide_sidebar": False
+    })
+
+
+@app.get("/page/emergency-dr", include_in_schema=False)
+def offline_emergency_dr_page(request: Request):
+    return templates.TemplateResponse(request=request, name='emergency_dr.html', context={
+        "title": "Disaster Recovery Console (Offline)",
+        "is_offline": True
     })
 
 

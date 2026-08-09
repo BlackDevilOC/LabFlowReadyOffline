@@ -1,0 +1,104 @@
+{
+  "version": "1.0.0",
+  "last_sync_time": "2026-08-09T12:38:53.200835+00:00",
+  "last_sync_type": "delta",
+  "total_sync_cycles": 6,
+  "tables": {
+    "patients": {
+      "last_updated_at": null,
+      "last_created_at": "2026-08-09T09:05:41+00:00",
+      "max_id": 100125,
+      "row_count": 37,
+      "last_sync_time": "2026-08-09T12:38:51.460339+00:00",
+      "status": "healthy"
+    },
+    "test_results_all": {
+      "last_updated_at": null,
+      "last_created_at": "2026-08-09T09:05:41+00:00",
+      "max_id": 168950,
+      "row_count": 188,
+      "last_sync_time": "2026-08-09T12:38:51.611737+00:00",
+      "status": "healthy"
+    },
+    "tests": {
+      "last_updated_at": null,
+      "last_created_at": "2026-08-07T06:54:25.966168+00:00",
+      "max_id": 252,
+      "row_count": 211,
+      "last_sync_time": "2026-08-09T12:38:51.759650+00:00",
+      "status": "healthy"
+    },
+    "test_groups": {
+      "last_updated_at": null,
+      "last_created_at": "2026-08-07T06:54:53.926534+00:00",
+      "max_id": 112,
+      "row_count": 97,
+      "last_sync_time": "2026-08-09T12:38:51.907508+00:00",
+      "status": "healthy"
+    },
+    "shift": {
+      "last_updated_at": null,
+      "last_created_at": "2026-05-30T08:06:55.197257+00:00",
+      "max_id": 5,
+      "row_count": 5,
+      "last_sync_time": "2026-08-09T12:38:52.073067+00:00",
+      "status": "healthy"
+    },
+    "users": {
+      "last_updated_at": null,
+      "last_created_at": "2026-08-07T06:58:42.794748+00:00",
+      "max_id": 6,
+      "row_count": 6,
+      "last_sync_time": "2026-08-09T12:38:52.233639+00:00",
+      "status": "healthy"
+    },
+    "remarks": {
+      "last_updated_at": "2026-06-01T09:07:50.136776+00:00",
+      "last_created_at": "2026-06-01T09:07:50.136776+00:00",
+      "max_id": 54,
+      "row_count": 54,
+      "last_sync_time": "2026-08-09T12:38:52.394211+00:00",
+      "status": "healthy"
+    },
+    "invoice_settings": {
+      "last_updated_at": "2026-05-30T07:47:53.878769+00:00",
+      "last_created_at": null,
+      "max_id": 1,
+      "row_count": 1,
+      "last_sync_time": "2026-08-09T12:38:52.545053+00:00",
+      "status": "healthy"
+    },
+    "print_settings": {
+      "last_updated_at": "2026-08-09T08:23:54.552654",
+      "last_created_at": "2026-02-11T20:23:29.470976",
+      "max_id": 1,
+      "row_count": 1,
+      "last_sync_time": "2026-08-09T12:38:52.717594+00:00",
+      "status": "healthy"
+    },
+    "app_settings": {
+      "last_updated_at": "2026-08-09T09:09:09.828187+00:00",
+      "last_created_at": null,
+      "max_id": 1,
+      "row_count": 1,
+      "last_sync_time": "2026-08-09T12:38:52.866264+00:00",
+      "status": "healthy"
+    },
+    "lab_metadata": {
+      "last_updated_at": null,
+      "last_created_at": null,
+      "max_id": 0,
+      "row_count": 0,
+      "last_sync_time": null,
+      "status": "not_found_on_remote"
+    },
+    "analytics_snapshots": {
+      "last_updated_at": null,
+      "last_created_at": null,
+      "max_id": 50,
+      "row_count": 22,
+      "last_sync_time": "2026-08-09T12:38:53.167923+00:00",
+      "status": "healthy"
+    }
+  }
+}

@@ -17051,3 +17051,342 @@ postgrest.exceptions.APIError: {'message': 'Cannot coerce the result to a single
 2026-08-09 16:45:22,583 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
 2026-08-09 16:45:39,145 - INFO - [LabFlow] - User requested logout
 2026-08-09 16:45:39,149 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 16:45:57,275 - INFO - [LabFlow] - Generating Invoice for patient: 17
+2026-08-09 16:48:55,114 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 16:48:58,593 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 16:48:58,639 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 16:48:58,680 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:48:58,882 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 16:48:58,909 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 16:48:59,215 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 16:49:01,934 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:02,169 - INFO - [LabFlow] - Saved 6 users to fetcheddata/users.json
+2026-08-09 16:49:07,888 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:08,431 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:09,022 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-09 16:49:09,024 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:09,232 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-09 16:49:09,234 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:09,436 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:09,655 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-09 16:49:09,656 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:09,880 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-09 16:49:09,881 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-09 16:49:09,885 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:10,108 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-09 16:49:10,271 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-09 16:49:10,297 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 16:49:10,529 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-09 16:49:10,684 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-09 16:49:10,841 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-09 16:49:10,842 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:11,064 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-09 16:49:11,065 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-09 16:49:11,243 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 16:49:11,278 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:11,849 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:12,240 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:13,203 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184141, date=None
+2026-08-09 16:49:13,248 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:21,103 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 16:49:21,134 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:21,135 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:21,687 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:22,210 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184141
+2026-08-09 16:49:22,268 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:22,746 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:23,132 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 16:49:23,146 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:24,673 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 16:49:24,696 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:24,697 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:25,263 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:25,441 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-09 16:49:25,521 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:49:25,948 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 16:55:16,710 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 16:55:16,755 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:18,256 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:18,685 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:20,542 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184139, date=None
+2026-08-09 16:55:20,584 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:37,767 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 16:55:37,797 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:38,488 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:39,605 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184141, date=None
+2026-08-09 16:55:39,624 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:50,262 - INFO - [LabFlow] - Print layout saved by admin@admin.com for fingerprint amylase|complete blood count|dengue ns1 
+2026-08-09 16:55:56,740 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 16:55:56,766 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:56,772 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:57,333 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:57,901 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184141
+2026-08-09 16:55:57,948 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:58,367 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:55:58,784 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 16:55:58,797 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:56:00,918 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:56:02,632 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184141
+2026-08-09 16:56:02,645 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184141, date=None
+2026-08-09 16:56:02,664 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:56:09,836 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-09 16:56:09,905 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:56:10,294 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 16:56:41,927 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:56:58,306 - INFO - [LabFlow] - Registration options updated by Anonymous
+2026-08-09 16:56:59,478 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 16:56:59,987 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-09 16:57:00,045 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 16:57:00,428 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 17:00:26,206 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:00:26,284 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:00:29,403 - INFO - [LabFlow.Replica] - Replication cycle (periodic_full) complete in 3084ms. Total updated: 622 rows across 12 tables.
+2026-08-09 17:01:17,245 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 17:01:21,410 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:01:21,454 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 17:01:21,496 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:21,498 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:01:21,501 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 17:01:21,501 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 17:01:21,504 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 17:01:21,862 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 17:01:21,889 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:01:22,021 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 17:01:23,252 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:23,514 - INFO - [LabFlow] - Saved 6 users to fetcheddata/users.json
+2026-08-09 17:01:24,350 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 2844ms. Total updated: 622 rows across 12 tables.
+2026-08-09 17:01:26,141 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:26,724 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:26,989 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-09 17:01:26,990 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:27,194 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-09 17:01:27,195 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:27,408 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:27,628 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-09 17:01:27,629 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:27,882 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-09 17:01:27,884 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-09 17:01:27,887 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:28,115 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-09 17:01:28,292 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-09 17:01:28,296 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 17:01:28,461 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-09 17:01:28,613 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-09 17:01:28,767 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-09 17:01:28,768 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:28,991 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-09 17:01:28,992 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-09 17:01:35,003 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:01:42,978 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 2403ms. Total updated: 622 rows across 12 tables.
+2026-08-09 17:01:46,408 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2045ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:02:08,344 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1931ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:02:13,072 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:02:13,280 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:02:13,533 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:02:13,767 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:02:14,116 - INFO - [LabFlow] - [USER: admin@admin.com] [ANALYTICS_VIEW] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Analytics overview 2026-08-09..2026-08-09
+2026-08-09 17:02:30,905 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2543ms. Total updated: 1 rows across 12 tables.
+2026-08-09 17:02:52,829 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1912ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:03:14,886 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2023ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:03:38,299 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3393ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:04:01,516 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3195ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:04:24,758 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3221ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:04:46,721 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1947ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:05:08,633 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1895ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:05:30,605 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1965ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:05:52,516 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1905ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:06:14,498 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1976ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:06:36,493 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1978ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:06:58,443 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1945ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:07:20,345 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1891ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:07:42,264 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1904ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:08:04,651 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2371ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:08:26,653 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1997ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:08:48,632 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1961ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:09:10,652 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2000ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:09:32,611 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1942ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:09:54,598 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1975ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:10:16,598 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1980ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:10:38,767 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2146ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:11:00,817 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2032ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:11:22,858 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2027ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:11:44,936 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2061ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:12:07,846 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2906ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:12:29,819 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1965ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:12:51,724 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1894ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:13:13,616 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1877ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:13:35,504 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1883ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:13:57,479 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1969ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:14:19,468 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1968ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:14:41,381 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1896ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:15:03,349 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1958ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:15:25,673 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2311ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:15:47,661 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1979ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:16:09,625 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1952ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:16:31,536 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1899ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:16:54,096 - INFO - [LabFlow.Replica] - Replication cycle (periodic_full) complete in 2550ms. Total updated: 623 rows across 12 tables.
+2026-08-09 17:17:16,056 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1952ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:17:38,129 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2067ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:18:00,047 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1902ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:18:06,494 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:18:06,620 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:18:21,931 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1878ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:18:30,773 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:18:31,652 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:18:43,906 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1960ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:25:57,205 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 17:26:00,441 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:26:00,483 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 17:26:00,532 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:00,535 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:26:00,538 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 17:26:00,538 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 17:26:00,542 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 17:26:00,622 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 17:26:00,642 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:26:01,165 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 17:26:05,952 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5408ms. Total updated: 623 rows across 12 tables.
+2026-08-09 17:26:09,403 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:09,645 - INFO - [LabFlow] - Saved 6 users to fetcheddata/users.json
+2026-08-09 17:26:13,523 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:14,039 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:14,254 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-09 17:26:14,256 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:14,471 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-09 17:26:14,472 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:14,691 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:14,910 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-09 17:26:14,912 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:15,136 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-09 17:26:15,139 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-09 17:26:15,143 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:15,369 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-09 17:26:15,454 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 17:26:15,523 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-09 17:26:15,706 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-09 17:26:15,867 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-09 17:26:16,021 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-09 17:26:16,022 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:16,259 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-09 17:26:16,260 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-09 17:26:16,515 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 17:26:16,549 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:17,092 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:17,448 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:18,109 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184141, date=None
+2026-08-09 17:26:18,155 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:26:19,786 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 17:26:21,019 - INFO - [LabFlow] - User requested logout
+2026-08-09 17:26:21,025 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:26:27,892 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1931ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:26:49,849 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1937ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:27:11,897 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2027ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:27:33,821 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1914ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:27:56,028 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2171ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:28:18,066 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2006ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:28:40,221 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2149ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:29:02,224 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1996ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:29:24,393 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2146ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:29:31,027 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:31,258 - INFO - [LabFlow] - Saved 6 users to fetcheddata/users.json
+2026-08-09 17:29:33,291 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:33,827 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:34,054 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-09 17:29:34,056 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:34,287 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-09 17:29:34,288 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:34,491 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:34,717 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-09 17:29:34,719 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:35,222 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-09 17:29:35,222 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-09 17:29:35,227 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:35,474 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-09 17:29:35,535 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-09 17:29:35,640 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-09 17:29:35,860 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-09 17:29:36,018 - INFO - [LabFlow] - Offline DB: Synced 6 users from Supabase
+2026-08-09 17:29:36,185 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-09 17:29:36,187 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:36,263 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 17:29:36,305 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:36,321 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:36,475 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-09 17:29:36,476 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-09 17:29:36,862 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:37,406 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184141
+2026-08-09 17:29:37,470 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:37,862 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:38,240 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 17:29:38,253 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:43,065 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:44,518 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184141
+2026-08-09 17:29:44,529 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 17:29:44,560 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:44,581 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:45,102 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:45,437 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 17:29:45,467 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:46,005 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:29:46,403 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1972ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:29:46,419 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:08,596 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2175ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:30:30,814 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2209ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:30:35,478 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184139, date=None
+2026-08-09 17:30:35,504 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:39,447 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 17:30:39,468 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:40,066 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:40,435 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:41,278 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-09 17:30:41,304 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:41,305 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:41,883 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:42,973 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184132
+2026-08-09 17:30:43,011 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:43,440 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:43,807 - INFO - [LabFlow] - Loaded 117 individual tests and 69 test groups (active_only=True)
+2026-08-09 17:30:43,836 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:45,473 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-09 17:30:45,677 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:46,304 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:30:52,788 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1955ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:31:14,851 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2051ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:31:36,754 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1893ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:31:58,647 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1889ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:32:20,703 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2043ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:32:40,814 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:32:42,792 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2073ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:33:01,895 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:33:04,756 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1953ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:33:26,882 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2111ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:33:32,269 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:33:48,885 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1996ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:34:11,449 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2546ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:34:13,333 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:34:31,395 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:34:31,449 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:34:33,521 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2055ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:34:55,525 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1965ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:35:17,406 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1872ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:35:39,442 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2024ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:35:44,870 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:35:44,926 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:36:01,472 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2014ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:36:51,960 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-09 17:36:56,677 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-09 17:36:56,720 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-09 17:36:56,759 - DEBUG - [LabFlow] - Loaded .env from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.env
+2026-08-09 17:36:56,760 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-09 17:36:56,762 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-09 17:36:56,763 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-09 17:36:56,765 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-09 17:36:57,134 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-09 17:36:57,164 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-09 17:36:57,314 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-09 17:37:02,426 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5659ms. Total updated: 623 rows across 12 tables.
+2026-08-09 17:37:24,849 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2410ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:37:47,166 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2297ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:38:09,193 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2012ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:38:31,228 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2020ms. Total updated: 0 rows across 12 tables.
+2026-08-09 17:38:45,585 - DEBUG - [LabFlow] - Accessing Login Page

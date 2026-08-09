@@ -1,0 +1,1362 @@
+[
+  {
+    "id": 171,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#COMPLETE BLOOD COUNT",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 172,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Haemoglobin",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 173,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Total WBC Count",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 174,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "RBC Count",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 175,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Haematocrit (PCV)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 176,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "MCV",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 177,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "MCH",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 178,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "MCHC",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 179,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Platelet Count",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 180,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#DIFFERENTIAL LEUCOCYTE COUNT",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 181,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Neutrophils %",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 182,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Lymphocytes %",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 183,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Monocytes %",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 184,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Eosinophils %",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 185,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Basophils %",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 186,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Peripheral Blood Film",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 187,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "ESR (1 Hour)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 188,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#COAGULATION PROFILE",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 189,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Bleeding Time (BT)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 190,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Clotting Time (CT)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 191,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Prothrombin Time (PT)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 192,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "INR",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 193,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "APTT",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 194,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#KIDNEY FUNCTION TEST",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 195,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Urea",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 196,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Creatinine",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 197,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Uric Acid",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 198,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#LIVER FUNCTION TEST",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 199,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Total Bilirubin",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 200,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Direct Bilirubin",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 201,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Indirect Bilirubin",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 202,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "SGPT (ALT)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 203,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "SGOT (AST)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 204,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Alkaline Phosphatase (ALP)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 205,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Total Protein",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 206,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Albumin",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 207,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Globulin",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 208,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "A/G Ratio",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 209,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#LIPID PROFILE",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 210,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Total Cholesterol",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 211,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Triglycerides",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 212,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "HDL Cholesterol",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 213,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "LDL Cholesterol",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 214,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "VLDL",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 215,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#BLOOD SUGAR",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 216,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Fasting Blood Sugar (FBS)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 217,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Random Blood Sugar (RBS)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 218,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "HbA1c",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 219,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Glucose Tolerance Test (GTT)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 220,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#THYROID FUNCTION TEST",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 221,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "TSH",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 222,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "T3 (Triiodothyronine)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 223,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "T4 (Thyroxine)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 224,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Free T3 (fT3)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 225,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Free T4 (fT4)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 226,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#ELECTROLYTES",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 227,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Sodium (Na+)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 228,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Potassium (K+)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 229,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Chloride (Cl-)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 230,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Calcium",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 231,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Phosphorus",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 232,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Magnesium",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 233,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#IRON STUDIES",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 234,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Iron",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 235,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "TIBC",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 236,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Serum Ferritin",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 237,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#VITAMINS",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 238,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Vitamin B12",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 239,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Vitamin D (25-OH)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 240,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#CARDIAC MARKERS",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 241,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Troponin I (Qualitative)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 242,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "CPK-MB",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 243,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "LDH",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 244,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "CRP (C-Reactive Protein)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 245,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "PSA (Total)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 246,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "AFP (Alpha-Fetoprotein)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 247,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Beta HCG",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 248,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#SEROLOGY / IMMUNOLOGY",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 249,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "HBsAg (Hepatitis B)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 250,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Anti-HCV (Hepatitis C)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 251,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "HIV (1 & 2)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 252,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "VDRL / RPR (Syphilis)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 253,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Widal Test",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 254,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Dengue NS1 Antigen",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 255,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Dengue IgG / IgM",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 256,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Malaria Antigen (RDT)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 257,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "RF (Rheumatoid Factor)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 258,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "ASO Titre",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 259,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "ANA",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 260,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Typhidot (IgM / IgG)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 261,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Brucella Antibody",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 262,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#URINE COMPLETE EXAMINATION",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 263,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#PHYSICAL",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 264,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Colour",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 265,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Appearance",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 266,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Reaction (pH)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 267,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Specific Gravity",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 268,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#CHEMICAL",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 269,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Protein",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 270,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Sugar (Glucose)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 271,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Ketones",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 272,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Bilirubin",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 273,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Blood",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 274,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Nitrites",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 275,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#MICROSCOPIC",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 276,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Pus Cells",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 277,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "RBCs",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 278,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Epithelial Cells",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 279,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Casts",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 280,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Crystals",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 281,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Bacteria",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 282,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#STOOL EXAMINATION",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 283,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Colour",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 284,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Consistency",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 285,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Pus Cells",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 286,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "RBCs",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 287,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Parasites / Ova",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 288,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Occult Blood",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 289,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Urine Culture & Sensitivity",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 290,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Blood Culture & Sensitivity",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 291,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Sputum Culture & Sensitivity",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 292,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Wound Swab C & S",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 293,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Throat Swab C & S",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 294,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#SEMEN ANALYSIS",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 295,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#PHYSICAL",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 296,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Volume",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 297,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Colour",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 298,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Viscosity",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 299,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Reaction (pH)",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 300,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "#MICROSCOPIC",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": false,
+    "category": "Test"
+  },
+  {
+    "id": 301,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Total Count",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 302,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Active Motility",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 303,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Sluggish Motility",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 304,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Non-Motile",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 305,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Normal Morphology",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  },
+  {
+    "id": 306,
+    "created_at": "2026-05-25T01:06:28.337475+00:00",
+    "name": "Abnormal Morphology",
+    "unit": null,
+    "normal_min": null,
+    "normal_max": null,
+    "status": true,
+    "category": "Test"
+  }
+]

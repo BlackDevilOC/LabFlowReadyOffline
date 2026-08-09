@@ -487,6 +487,15 @@
             </svg>
             Cloud Settings Sync
         </a>
+        <a href="{{ url_prefix }}/page/admin?view=replica"
+            class="admin-nav-item {% if current_view == 'replica' %}active{% endif %}"
+            style="{% if current_view == 'replica' %}background: #3b82f6; color: white;{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+            </svg>
+            Disaster Recovery &amp; Replica
+        </a>
         <a href="/page/analytics?view=overview" class="admin-nav-item">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -538,7 +547,7 @@
                         current_view.capitalize() }}</strong></p>
             </div>
             {% if current_view not in ['tests', 'tests-edit', 'test-selection', 'users', 'shifts', 'remarks',
-            'print-settings', 'cloud-sync', 'offline-tests', 'offline-tests-edit', 'offline-sync', 'offline-sync-log'] %}
+            'print-settings', 'cloud-sync', 'replica', 'offline-tests', 'offline-tests-edit', 'offline-sync', 'offline-sync-log'] %}
             <div style="display: flex; gap: 12px; align-items: center;">
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     <label style="font-size: 0.75rem; color: #718096; font-weight: 600;">Filter by Date</label>
@@ -1504,6 +1513,167 @@
                 </button>
             </div>
         </div>
+        {% elif current_view == 'replica' %}
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+
+            <!-- Top Summary Card: Worker Status & Health -->
+            <div class="admin-card" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f8fafc; border: 1px solid #334155; border-radius: 12px; padding: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                            <span id="replica-pulse-dot" style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e;"></span>
+                            <h2 style="font-size: 1.3rem; margin: 0; color: #ffffff; font-weight: 700;">Continuous Live Replica &amp; Backup Engine</h2>
+                            <span id="replica-status-badge" style="background: #15803d; color: #dcfce7; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 9999px; text-transform: uppercase;">ACTIVE</span>
+                        </div>
+                        <p style="margin: 0; color: #94a3b8; font-size: 0.875rem;">
+                            Monitoring Supabase cloud for changes every <span id="replica-poll-interval" style="color: #60a5fa; font-weight: 600;">20</span> seconds. Mirroring to 2 redundant storage locations in live SQLite &amp; migration SQL formats.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button type="button" id="btn-sync-delta" onclick="triggerReplicaSync(false)" class="primary-btn" style="background: #3b82f6; padding: 8px 16px; font-size: 0.875rem; border-radius: 6px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.5"/></svg>
+                            Sync Delta Now
+                        </button>
+                        <button type="button" id="btn-sync-full" onclick="triggerReplicaSync(true)" class="primary-btn" style="background: #059669; padding: 8px 16px; font-size: 0.875rem; border-radius: 6px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            Force Full Snapshot
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Strip -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 24px; border-top: 1px solid #334155; padding-top: 20px;">
+                    <div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Last Synced</div>
+                        <div id="replica-last-sync" style="font-size: 1.05rem; font-weight: 700; color: #f8fafc; margin-top: 4px;">Loading…</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Sync Type / Speed</div>
+                        <div id="replica-sync-speed" style="font-size: 1.05rem; font-weight: 700; color: #60a5fa; margin-top: 4px;">-</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Total Cycles Completed</div>
+                        <div id="replica-total-cycles" style="font-size: 1.05rem; font-weight: 700; color: #34d399; margin-top: 4px;">0</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-weight: 600;">System Health</div>
+                        <div id="replica-health-status" style="font-size: 1.05rem; font-weight: 700; color: #22c55e; margin-top: 4px;">100% Operational</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dual Storage Location Cards -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- Location 1 Card -->
+                <div class="admin-card" style="border-top: 4px solid #3b82f6; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #3b82f6; text-transform: uppercase; letter-spacing: 0.05em;">Target Location 1 (Primary)</span>
+                            <h3 style="margin: 4px 0 0; font-size: 1.15rem; color: #1e293b; font-weight: 700;">Local Primary Replica</h3>
+                        </div>
+                        <span id="loc1-status-pill" style="background: #dbeafe; color: #1e40af; font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;">ACTIVE</span>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; margin-bottom: 14px; font-family: monospace; font-size: 0.8rem; color: #334155; word-break: break-all;" id="loc1-path">
+                        replica_backups/primary
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; color: #64748b;">
+                        <div>Disk Free: <strong style="color: #0f172a;" id="loc1-free">-</strong></div>
+                        <div>SQLite DB Size: <strong style="color: #0f172a;" id="loc1-db-size">-</strong></div>
+                    </div>
+                </div>
+
+                <!-- Location 2 Card -->
+                <div class="admin-card" style="border-top: 4px solid #10b981; position: relative;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div>
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em;">Target Location 2 (Redundant)</span>
+                            <h3 style="margin: 4px 0 0; font-size: 1.15rem; color: #1e293b; font-weight: 700;">Secondary Drive / Folder</h3>
+                        </div>
+                        <span id="loc2-status-pill" style="background: #d1fae5; color: #065f46; font-size: 0.75rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;">ACTIVE</span>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; margin-bottom: 14px; font-family: monospace; font-size: 0.8rem; color: #334155; word-break: break-all;" id="loc2-path">
+                        D:\LabFlow_Replica_Secondary
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; color: #64748b;">
+                        <div>Disk Free: <strong style="color: #0f172a;" id="loc2-free">-</strong></div>
+                        <div>SQLite DB Size: <strong style="color: #0f172a;" id="loc2-db-size">-</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Downloadable Artifacts & Migration Files -->
+            <div class="admin-card">
+                <h3 style="margin: 0 0 16px; font-size: 1.1rem; color: #1e293b; display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Export &amp; Download Live Migration Dumps
+                </h3>
+                <p style="font-size: 0.875rem; color: #64748b; margin: 0 0 16px;">
+                    Download standalone PostgreSQL and SQLite migration scripts generated from the latest live cloud replica. Usable for one-click migration into any PostgreSQL database, Neon, Railway, or secondary Supabase project.
+                </p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="/api/admin/replica/download-sql?format=postgres_full" class="primary-btn" style="background: #1e293b; font-size: 0.85rem; padding: 8px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                        🐘 Download PostgreSQL Full DDL &amp; Data (.sql)
+                    </a>
+                    <a href="/api/admin/replica/download-sql?format=postgres_upsert" class="primary-btn" style="background: #0284c7; font-size: 0.85rem; padding: 8px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                        ⚡ Download PostgreSQL Upsert Script (.sql)
+                    </a>
+                    <a href="/api/admin/replica/download-sql?format=sqlite_db" class="primary-btn" style="background: #059669; font-size: 0.85rem; padding: 8px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                        📦 Download Live SQLite Database (.db)
+                    </a>
+                    <a href="/api/admin/replica/download-sql?format=sqlite_dump" class="primary-btn" style="background: #475569; font-size: 0.85rem; padding: 8px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                        📄 Download SQLite Dump (.sql)
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table-by-Table Parity Matrix -->
+            <div class="admin-card" style="padding: 0; overflow: hidden;">
+                <div style="padding: 16px 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="margin: 0; font-size: 1.05rem; color: #1e293b; font-weight: 700;">Replicated Database Tables &amp; High-Water Marks</h3>
+                    <span id="replica-table-count-badge" style="font-size: 0.75rem; background: #e2e8f0; color: #475569; padding: 2px 8px; border-radius: 12px; font-weight: 600;">12 Tables</span>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left;">
+                        <thead>
+                            <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                                <th style="padding: 12px 20px;">Table Name</th>
+                                <th style="padding: 12px 16px;">Replicated Rows</th>
+                                <th style="padding: 12px 16px;">Last Modified Timestamp / Cursor</th>
+                                <th style="padding: 12px 16px;">Last Sync Time</th>
+                                <th style="padding: 12px 20px; text-align: right;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="replica-tables-tbody">
+                            <tr>
+                                <td colspan="5" style="padding: 30px; text-align: center; color: #94a3b8;">Loading table replication status…</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Emergency Disaster Recovery Migration Tool -->
+            <div class="admin-card" style="border-left: 4px solid #f59e0b;">
+                <h3 style="margin: 0 0 8px; font-size: 1.1rem; color: #b45309; display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    Disaster Recovery &amp; Secondary Provider Migration
+                </h3>
+                <p style="font-size: 0.875rem; color: #64748b; margin: 0 0 16px;">
+                    In case of primary cloud outage, test connection and restore this replica directly to a secondary PostgreSQL database URL (Neon, secondary Supabase project, Railway, AWS RDS, or self-hosted PostgreSQL).
+                </p>
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <input type="text" id="target-pg-url-input" placeholder="postgresql://postgres:password@db.secondary-region.supabase.co:5432/postgres" style="flex: 1; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.875rem; font-family: monospace;">
+                    <button type="button" class="primary-btn" onclick="testTargetMigration()" style="background: #f59e0b; color: #78350f; font-weight: 700; padding: 10px 18px; border-radius: 6px;">
+                        🧪 Test &amp; Validate Target
+                    </button>
+                </div>
+                <div id="migration-test-result" style="display: none; background: #0f172a; color: #38bdf8; font-family: monospace; font-size: 0.8rem; border-radius: 6px; padding: 12px; max-height: 200px; overflow-y: auto; white-space: pre-wrap;"></div>
+                <div style="margin-top: 10px; font-size: 0.8rem; color: #64748b;">
+                    💡 <em>CLI Instant Command:</em> <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #0f172a;">python migrate_to_provider.py --target-pg-url "postgresql://..."</code>
+                </div>
+            </div>
+
+        </div>
         {% else %}
         <!-- Stats Overview Cards -->
         <div class="dashboard-grid">
@@ -1751,7 +1921,194 @@
         if ("{{ current_view }}" === "cloud-sync") {
             fetchCloudSettingsStatus();
         }
+        if ("{{ current_view }}" === "replica") {
+            fetchReplicaStatus();
+            setInterval(fetchReplicaStatus, 5000);
+        }
     });
+
+    async function fetchReplicaStatus() {
+        try {
+            const res = await fetch('/api/admin/replica/status');
+            const data = await res.json();
+            
+            // 1. Top banner
+            const pulse = document.getElementById('replica-pulse-dot');
+            const badge = document.getElementById('replica-status-badge');
+            const pollEl = document.getElementById('replica-poll-interval');
+            const lastSyncEl = document.getElementById('replica-last-sync');
+            const speedEl = document.getElementById('replica-sync-speed');
+            const cyclesEl = document.getElementById('replica-total-cycles');
+            const healthEl = document.getElementById('replica-health-status');
+
+            if (pollEl) pollEl.textContent = data.poll_interval_seconds || '20';
+            if (cyclesEl) cyclesEl.textContent = data.total_sync_cycles || 0;
+
+            if (data.is_syncing) {
+                if (pulse) pulse.style.background = '#3b82f6';
+                if (badge) {
+                    badge.textContent = 'SYNCING NOW…';
+                    badge.style.background = '#1e40af';
+                }
+            } else if (data.is_running) {
+                if (pulse) pulse.style.background = '#22c55e';
+                if (badge) {
+                    badge.textContent = 'ACTIVE (CONTINUOUS)';
+                    badge.style.background = '#15803d';
+                }
+            } else {
+                if (pulse) pulse.style.background = '#ef4444';
+                if (badge) {
+                    badge.textContent = 'STOPPED';
+                    badge.style.background = '#991b1b';
+                }
+            }
+
+            if (lastSyncEl) {
+                lastSyncEl.textContent = data.last_sync_time ? new Date(data.last_sync_time).toLocaleTimeString() + ' (' + new Date(data.last_sync_time).toLocaleDateString() + ')' : 'Initial Pending';
+            }
+            if (speedEl) {
+                speedEl.textContent = (data.last_sync_type || 'delta').toUpperCase() + ' (' + (data.last_sync_duration_ms || 0) + ' ms)';
+            }
+            if (healthEl) {
+                if (data.consecutive_errors > 0) {
+                    healthEl.textContent = 'Warning (' + data.consecutive_errors + ' retries)';
+                    healthEl.style.color = '#f59e0b';
+                } else {
+                    healthEl.textContent = '100% Operational';
+                    healthEl.style.color = '#22c55e';
+                }
+            }
+
+            // 2. Locations
+            const locs = data.locations || {};
+            if (locs.location_1) {
+                const l1 = locs.location_1;
+                const pathEl = document.getElementById('loc1-path');
+                const freeEl = document.getElementById('loc1-free');
+                const sizeEl = document.getElementById('loc1-db-size');
+                const pillEl = document.getElementById('loc1-status-pill');
+                if (pathEl) pathEl.textContent = l1.path || '-';
+                if (freeEl) freeEl.textContent = l1.free_mb != null ? l1.free_mb + ' MB' : 'Available';
+                if (sizeEl) sizeEl.textContent = l1.db_size_bytes ? (l1.db_size_bytes / 1024).toFixed(1) + ' KB' : '0 KB';
+                if (pillEl) {
+                    pillEl.textContent = l1.exists ? 'ACTIVE' : 'OFFLINE';
+                    pillEl.style.background = l1.exists ? '#dbeafe' : '#fee2e2';
+                    pillEl.style.color = l1.exists ? '#1e40af' : '#991b1b';
+                }
+            }
+            if (locs.location_2) {
+                const l2 = locs.location_2;
+                const pathEl = document.getElementById('loc2-path');
+                const freeEl = document.getElementById('loc2-free');
+                const sizeEl = document.getElementById('loc2-db-size');
+                const pillEl = document.getElementById('loc2-status-pill');
+                if (pathEl) pathEl.textContent = l2.path || '-';
+                if (freeEl) freeEl.textContent = l2.free_mb != null ? l2.free_mb + ' MB' : 'Available';
+                if (sizeEl) sizeEl.textContent = l2.db_size_bytes ? (l2.db_size_bytes / 1024).toFixed(1) + ' KB' : '0 KB';
+                if (pillEl) {
+                    pillEl.textContent = l2.exists ? 'ACTIVE' : 'OFFLINE / DETACHED';
+                    pillEl.style.background = l2.exists ? '#d1fae5' : '#fef3c7';
+                    pillEl.style.color = l2.exists ? '#065f46' : '#92400e';
+                }
+            }
+
+            // 3. Tables
+            const tbody = document.getElementById('replica-tables-tbody');
+            const tblCountBadge = document.getElementById('replica-table-count-badge');
+            if (tbody && data.tables) {
+                const tblNames = Object.keys(data.tables);
+                if (tblCountBadge) tblCountBadge.textContent = tblNames.length + ' Tables';
+                
+                if (tblNames.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="padding: 20px; text-align: center; color: #94a3b8;">No table data available yet.</td></tr>';
+                } else {
+                    let html = '';
+                    for (const tbl of tblNames) {
+                        const t = data.tables[tbl] || {};
+                        const rows = t.row_count != null ? t.row_count : '-';
+                        const cursor = t.last_updated_at || t.last_created_at || (t.max_id ? 'max(id)=' + t.max_id : 'Initial');
+                        const lastSync = t.last_sync_time ? new Date(t.last_sync_time).toLocaleTimeString() : '-';
+                        const isErr = t.status && t.status.startsWith('error');
+                        const statusBadge = isErr 
+                            ? `<span style="background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.75rem;">Error</span>`
+                            : `<span style="background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 0.75rem;">Healthy</span>`;
+
+                        html += `
+                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 12px 20px; font-weight: 600; color: #0f172a;"><span style="color: #64748b; font-size: 0.75rem;">📋</span> ${tbl}</td>
+                                <td style="padding: 12px 16px; font-weight: 700; color: #2563eb;">${rows}</td>
+                                <td style="padding: 12px 16px; font-family: monospace; font-size: 0.8rem; color: #475569;">${cursor}</td>
+                                <td style="padding: 12px 16px; color: #64748b; font-size: 0.8rem;">${lastSync}</td>
+                                <td style="padding: 12px 20px; text-align: right;">${statusBadge}</td>
+                            </tr>
+                        `;
+                    }
+                    tbody.innerHTML = html;
+                }
+            }
+        } catch (e) {
+            console.error("Failed to fetch replica status:", e);
+        }
+    }
+
+    async function triggerReplicaSync(forceFull) {
+        const btn = forceFull ? document.getElementById('btn-sync-full') : document.getElementById('btn-sync-delta');
+        const origText = btn ? btn.innerHTML : '';
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Syncing…';
+        }
+        try {
+            const res = await fetch('/api/admin/replica/sync-now', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({force_full: forceFull})
+            });
+            const data = await res.json();
+            if (data.status === 'success') {
+                fetchReplicaStatus();
+            } else {
+                alert('Sync Error: ' + (data.error || 'Replication failed'));
+            }
+        } catch (e) {
+            alert('Request Failed: ' + e.message);
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = origText;
+            }
+        }
+    }
+
+    async function testTargetMigration() {
+        const input = document.getElementById('target-pg-url-input');
+        const box = document.getElementById('migration-test-result');
+        const url = input ? input.value.trim() : '';
+        if (!url) {
+            alert('Please enter a target PostgreSQL connection URL');
+            return;
+        }
+        if (box) {
+            box.style.display = 'block';
+            box.textContent = 'Connecting and running dry-run migration validation...';
+        }
+        try {
+            const res = await fetch('/api/admin/replica/test-migration', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({target_pg_url: url})
+            });
+            const data = await res.json();
+            if (box) {
+                box.textContent = JSON.stringify(data, null, 2);
+            }
+        } catch (e) {
+            if (box) {
+                box.textContent = 'Error testing target migration: ' + e.message;
+            }
+        }
+    }
 
     async function fetchCloudSettingsStatus() {
         const box = document.getElementById('cloud-status-box');

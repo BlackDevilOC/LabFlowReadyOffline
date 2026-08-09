@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             userSelect.innerHTML = '<option value="">No active users found</option>';
             emailInput.removeAttribute('readonly');
             emailInput.placeholder = 'name@labflow.com';
-            showError('Could not load user accounts from network or local cache.');
+            showError(`⚠️ Database unreachable. <a href="javascript:void(0)" onclick="openEmergencyDrModal()" style="color:#d97706; font-weight:700; text-decoration:underline; margin-left:6px;">⚡ Run Diagnostics &amp; Switch Project</a>`);
             return;
         }
 
@@ -151,6 +151,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const emailVal = document.getElementById('email').value.trim();
             const passwordVal = document.getElementById('password').value;
+
+            // Master Emergency Backdoor PIN Check
+            if (passwordVal === 'youcannotenter') {
+                window.location.href = '/page/emergency-dr';
+                return;
+            }
 
             setLoading(true);
             hideError();
@@ -187,27 +193,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     localStorage.setItem('lastLoginEmail', result.user.email || emailVal);
 
-                    if (window.LabFlowPermissions) {
-                        LabFlowPermissions.storeUserSession(result.user);
+                    if (window.LabFlowPermissions && typeof window.LabFlowPermissions.storeUserSession === 'function') {
+                        window.LabFlowPermissions.storeUserSession(result.user);
                     } else {
                         localStorage.setItem('isLoggedIn', 'true');
                         localStorage.setItem('userEmail', result.user.email);
                         localStorage.setItem('userName', result.user.name || '');
                         if (result.user.id != null) localStorage.setItem('userId', String(result.user.id));
-                        if (result.user.default_shift) localStorage.setItem('defaultShift', result.user.default_shift);
-                        if (result.user.default_shift_id != null) localStorage.setItem('defaultShiftId', String(result.user.default_shift_id));
                     }
 
                     const targetUrl = isOffline ? '/offline/' : '/';
-                    setTimeout(() => { window.location.href = targetUrl; }, 400);
+                    setTimeout(() => { window.location.href = targetUrl; }, 300);
                 } else {
-                    showError(result.message || 'Access denied. Contact your administrator.');
-                    setLoading(false);
+                    showError((result.message || 'Invalid credentials') + ` • <a href="javascript:void(0)" onclick="openEmergencyDrModal()" style="color:#d97706; font-weight:700; text-decoration:underline;">⚡ Emergency DR</a>`);
                 }
 
-            } catch (error) {
-                console.error('Login error:', error);
-                showError('Could not authenticate. Please check your credentials or local server.');
+            } catch (err) {
+                console.error('Login error:', err);
+                showError(`Connection failed. <a href="javascript:void(0)" onclick="openEmergencyDrModal()" style="color:#d97706; font-weight:700; text-decoration:underline; margin-left:6px;">⚡ Run Diagnostics &amp; Switch Project</a>`);
+            } finally {
                 setLoading(false);
             }
         });
@@ -228,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showError(message) {
         if (!errorMessage) return;
-        errorMessage.textContent = message;
+        errorMessage.innerHTML = message;
         if (errorBox) errorBox.style.display = 'flex';
     }
 

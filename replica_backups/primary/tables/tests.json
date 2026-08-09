@@ -1,0 +1,2112 @@
+[
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:40:44.245989+00:00",
+    "id": 1,
+    "name": "Calcium",
+    "normal_max": "10.4",
+    "normal_min": "8.1",
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:43:59.291603+00:00",
+    "id": 2,
+    "name": "CPK",
+    "normal_max": "F: 20-180",
+    "normal_min": "M: 20-200",
+    "status": 0,
+    "unit": "U/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:44:22.936012+00:00",
+    "id": 3,
+    "name": "C-Reactive Protein",
+    "normal_max": null,
+    "normal_min": "< 10.0",
+    "status": 1,
+    "unit": "mg/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:44:39.947331+00:00",
+    "id": 4,
+    "name": "LDH",
+    "normal_max": "450",
+    "normal_min": "150",
+    "status": 1,
+    "unit": "U/L"
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-06-02T07:45:19.6448+00:00",
+    "id": 5,
+    "name": "Dengue Antigen NS-1",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-06-02T07:45:28.66519+00:00",
+    "id": 6,
+    "name": "Dengue IgM",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-06-02T07:45:36.492266+00:00",
+    "id": 7,
+    "name": "Dengue IgG",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:47:00.852953+00:00",
+    "id": 8,
+    "name": "HbA1c",
+    "normal_max": "Diabetes > 6.4",
+    "normal_min": "Normal < 5.7, Pre-diabetes 5.7-6.4",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:47:20.250559+00:00",
+    "id": 9,
+    "name": "T3",
+    "normal_max": "2.0",
+    "normal_min": "0.8",
+    "status": 1,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:47:51.460042+00:00",
+    "id": 10,
+    "name": "T4",
+    "normal_max": "12.5",
+    "normal_min": "4.7",
+    "status": 1,
+    "unit": "ug/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:48:45.007493+00:00",
+    "id": 11,
+    "name": "W.B.C",
+    "normal_max": "11.00",
+    "normal_min": "4.50",
+    "status": 1,
+    "unit": "x10E9/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:49:03.615488+00:00",
+    "id": 12,
+    "name": "Neutrophils",
+    "normal_max": "80",
+    "normal_min": "40",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:49:18.439879+00:00",
+    "id": 13,
+    "name": "Lymphocytes",
+    "normal_max": "40.0",
+    "normal_min": "20.0",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:49:32.795566+00:00",
+    "id": 14,
+    "name": "Monocytes",
+    "normal_max": "10.0",
+    "normal_min": "2.0",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:49:45.572122+00:00",
+    "id": 15,
+    "name": "Eosinophils",
+    "normal_max": "0.6",
+    "normal_min": "0.0",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-02T07:50:01.437826+00:00",
+    "id": 16,
+    "name": "Basophils",
+    "normal_max": "1.0",
+    "normal_min": "0.5",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:51:48.853254+00:00",
+    "id": 17,
+    "name": "COLOR",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:51:52.275958+00:00",
+    "id": 18,
+    "name": "CONSISTENCY",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:51:55.908769+00:00",
+    "id": 19,
+    "name": "BLOOD",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:51:58.922421+00:00",
+    "id": 20,
+    "name": "PUS",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:52:05.737375+00:00",
+    "id": 21,
+    "name": "MUCUS",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:52:09.16488+00:00",
+    "id": 22,
+    "name": "WORMS",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:53:21.938134+00:00",
+    "id": 23,
+    "name": "PUS CELLS",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:53:27.740277+00:00",
+    "id": 24,
+    "name": "RBCs",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:53:34.532359+00:00",
+    "id": 25,
+    "name": "EPITHELIAL CELLS",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:53:39.33558+00:00",
+    "id": 26,
+    "name": "MACROPHAGES",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:53:43.680897+00:00",
+    "id": 27,
+    "name": "TROPHOZOITES",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:53:52.84966+00:00",
+    "id": 28,
+    "name": "CYST",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:54:00.383409+00:00",
+    "id": 29,
+    "name": "VEGETATIVE FORMS",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:54:05.868231+00:00",
+    "id": 30,
+    "name": "FAT GLOBULES",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Microbiology",
+    "created_at": "2026-06-02T07:54:12.836094+00:00",
+    "id": 31,
+    "name": "OTHERS",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 32,
+    "name": "Bilirubin Total",
+    "normal_max": "F: 0-0.9",
+    "normal_min": "M: 0-1.4",
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 33,
+    "name": "Bilirubin Direct",
+    "normal_max": "0.3",
+    "normal_min": "0.0",
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 34,
+    "name": "ALT (SGPT)",
+    "normal_max": "F: 0-33",
+    "normal_min": "M: 0-41",
+    "status": 1,
+    "unit": "U/L"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 35,
+    "name": "AST",
+    "normal_max": "36",
+    "normal_min": "10",
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 36,
+    "name": "Alkaline Phosphatase",
+    "normal_max": "Child: Upto 644",
+    "normal_min": "Adult: 80 - 306",
+    "status": 1,
+    "unit": "IU/L"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 37,
+    "name": "HAEMOGLOBIN",
+    "normal_max": "F: 12.0 - 15.0",
+    "normal_min": "M: 13.0 - 16.5",
+    "status": 1,
+    "unit": "g/dl"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 38,
+    "name": "R.B.Cs",
+    "normal_max": "F: 3.90 - 5.20",
+    "normal_min": "M: 4.50 - 5.80",
+    "status": 1,
+    "unit": "x10E12/L"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 39,
+    "name": "HEAMATOCRIT",
+    "normal_max": "F: 34.8 - 45.0",
+    "normal_min": "M: 38.9 - 50.9",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 40,
+    "name": "M.C.V",
+    "normal_max": "F: 78.0 - 96.0",
+    "normal_min": "M: 81.0 - 94.0",
+    "status": 1,
+    "unit": "fL"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 41,
+    "name": "M.C.H",
+    "normal_max": "F: 26.0 - 33.0",
+    "normal_min": "M: 27.0 - 32.0",
+    "status": 1,
+    "unit": "pg"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 42,
+    "name": "M.C.H.C",
+    "normal_max": "F: 31.0 - 35.0",
+    "normal_min": "M: 32.0 - 36.0",
+    "status": 1,
+    "unit": "g/dl"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 43,
+    "name": "W.B.C",
+    "normal_max": "11.00",
+    "normal_min": "4.50",
+    "status": 1,
+    "unit": "x10E9/L"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 44,
+    "name": "NEUTROPHILS",
+    "normal_max": "80.0",
+    "normal_min": "40.0",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 45,
+    "name": "LYMPHOCYTES",
+    "normal_max": "40.0",
+    "normal_min": "20.0",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 46,
+    "name": "MONOCYTES",
+    "normal_max": "10.0",
+    "normal_min": "2.0",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 47,
+    "name": "EOSINOPHILS",
+    "normal_max": "6.0",
+    "normal_min": "0.0",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 48,
+    "name": "BASOPHILS",
+    "normal_max": "1.0",
+    "normal_min": "0.5",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 49,
+    "name": "PLATELETS",
+    "normal_max": "450",
+    "normal_min": "150",
+    "status": 1,
+    "unit": "x10E9/L"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 50,
+    "name": "HbsAg ( ICT )",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 51,
+    "name": "Anti HCV ( ICT )",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 52,
+    "name": "Urea",
+    "normal_max": "48.5",
+    "normal_min": "16.6",
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 53,
+    "name": "Creatinine",
+    "normal_max": "1.3",
+    "normal_min": "0.1",
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 54,
+    "name": "ELECTROLYTES -",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 55,
+    "name": "Sodium",
+    "normal_max": "149",
+    "normal_min": "136",
+    "status": 0,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 56,
+    "name": "Potassium",
+    "normal_max": "5.2",
+    "normal_min": "3.8",
+    "status": 0,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "Test",
+    "created_at": "2026-06-04T06:11:19.822731+00:00",
+    "id": 57,
+    "name": "Chloride",
+    "normal_max": "108",
+    "normal_min": "98",
+    "status": 0,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T07:08:29.766258+00:00",
+    "id": 58,
+    "name": "MP-ICT",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T07:09:11.186907+00:00",
+    "id": 59,
+    "name": "ESR",
+    "normal_max": "20.0",
+    "normal_min": "0.0",
+    "status": 1,
+    "unit": "mm/1st hr"
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-06-04T07:09:46.300248+00:00",
+    "id": 60,
+    "name": "VDRL SYPHILIS",
+    "normal_max": null,
+    "normal_min": "Negative",
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:21:49.788524+00:00",
+    "id": 61,
+    "name": "Calcium",
+    "normal_max": "10.4",
+    "normal_min": "8.1",
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:21:49.788524+00:00",
+    "id": 62,
+    "name": "CPK",
+    "normal_max": "F: 20-180",
+    "normal_min": "M: 20-200",
+    "status": 0,
+    "unit": "U/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:21:49.788524+00:00",
+    "id": 63,
+    "name": "C-Reactive Protein",
+    "normal_max": "< 10.0",
+    "normal_min": null,
+    "status": 1,
+    "unit": "mg/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:21:49.788524+00:00",
+    "id": 64,
+    "name": "LDH",
+    "normal_max": "450",
+    "normal_min": "150",
+    "status": 1,
+    "unit": "U/L"
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 69,
+    "name": "RA Factor",
+    "normal_max": "< 8.0",
+    "normal_min": null,
+    "status": 1,
+    "unit": "IU/mL"
+  },
+  {
+    "category": "PARASITOLOGY",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 70,
+    "name": "Alpha Feto-Protein",
+    "normal_max": "8.78",
+    "normal_min": "0.10",
+    "status": 1,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 71,
+    "name": "Sodium",
+    "normal_max": "146",
+    "normal_min": "136",
+    "status": 1,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 72,
+    "name": "Potassium",
+    "normal_max": "5.0",
+    "normal_min": "3.5",
+    "status": 1,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 73,
+    "name": "Chloride",
+    "normal_max": "107",
+    "normal_min": "98",
+    "status": 1,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 74,
+    "name": "Ferritin",
+    "normal_max": "274.66",
+    "normal_min": "21.81",
+    "status": 1,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 75,
+    "name": "FSH (Follicle Stimulating Hormone)",
+    "normal_max": "Luteal: 1.1-7.2, Post-Menopausal: 30.0-110.0",
+    "normal_min": "Follicular: 1.5-9.7, Midcycle: 8.0-20.0",
+    "status": 1,
+    "unit": "IU/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 76,
+    "name": "HbsAg ELISA",
+    "normal_max": "Reactive >= 1.0",
+    "normal_min": "Non Reactive < 1.0",
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 77,
+    "name": "LH (Leuteinizing Hormone)",
+    "normal_max": "Luteal: 1.0-14.0, Menopause: 8.1-44",
+    "normal_min": "Follicular: 1.0-11.0, Mid Cycle: 10.0-80.0",
+    "status": 1,
+    "unit": "IU/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:32:16.825266+00:00",
+    "id": 78,
+    "name": "Prolactin",
+    "normal_max": "Post-Menopausal: 1.55-19.41",
+    "normal_min": "Pre-Menopausal: 5.54-26.08",
+    "status": 1,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T07:42:07.336442+00:00",
+    "id": 89,
+    "name": "RBS",
+    "normal_max": "140.0",
+    "normal_min": null,
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T08:01:25.74855+00:00",
+    "id": 90,
+    "name": "Uric Acid",
+    "normal_max": "F: 2.4-5.7",
+    "normal_min": "M: 3.4-7.0",
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T08:06:12.36024+00:00",
+    "id": 91,
+    "name": "Serum Amylase",
+    "normal_max": "Up to 89",
+    "normal_min": null,
+    "status": 1,
+    "unit": "U/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T08:09:46.209734+00:00",
+    "id": 92,
+    "name": "Albumin",
+    "normal_max": "5.3",
+    "normal_min": "3.4",
+    "status": 1,
+    "unit": "g/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T08:11:04.561571+00:00",
+    "id": 93,
+    "name": "NS 1",
+    "normal_max": null,
+    "normal_min": "NEGATIVE",
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 94,
+    "name": "Anti HCV ELISA",
+    "normal_max": "Reactive >= 1.0",
+    "normal_min": "Non Reactive < 1.0",
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 95,
+    "name": "Calprotectin",
+    "normal_max": "> 100 Positive",
+    "normal_min": "< 50 Negative",
+    "status": 0,
+    "unit": "mg/kg"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 96,
+    "name": "H. Pylori Ab (ICT)",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 97,
+    "name": "Serum Beta hCG",
+    "normal_max": "Pregnant Ranges: 3.3-23 weeks (16 to 2,91,000)",
+    "normal_min": "Non-Pregnant: < 5.3",
+    "status": 1,
+    "unit": "mIU/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 98,
+    "name": "Testosterone",
+    "normal_max": "0.40",
+    "normal_min": "0.02",
+    "status": 1,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 99,
+    "name": "Total IgE Immunoglobulin",
+    "normal_max": "Adults: < 100",
+    "normal_min": "Neonating-Child: <1.5 to <200",
+    "status": 0,
+    "unit": "IU/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 100,
+    "name": "Toxo IgG",
+    "normal_max": "> 8 Positive",
+    "normal_min": "< 4 Negative",
+    "status": 0,
+    "unit": "ug/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 101,
+    "name": "Toxo IgM",
+    "normal_max": "> 1.1 Positive",
+    "normal_min": "< 0.9 Negative",
+    "status": 0,
+    "unit": "ug/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:46:41.901136+00:00",
+    "id": 102,
+    "name": "Zika IgG/IgM",
+    "normal_max": "> 1.1 Positive",
+    "normal_min": "< 0.9 Negative",
+    "status": 0,
+    "unit": "ug/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 103,
+    "name": "Anti CCP Plus",
+    "normal_max": "> 5 Positive",
+    "normal_min": null,
+    "status": 0,
+    "unit": "U/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 104,
+    "name": "Ck-MB",
+    "normal_max": "100",
+    "normal_min": null,
+    "status": 0,
+    "unit": "pg/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 105,
+    "name": "BNP",
+    "normal_max": "100",
+    "normal_min": null,
+    "status": 0,
+    "unit": "pg/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 106,
+    "name": "Cortisol",
+    "normal_max": "700 Mor / 350 Mid",
+    "normal_min": "140 Mor / 80 Mid",
+    "status": 0,
+    "unit": "nmol/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 107,
+    "name": "CRP (C Reactive Protein)",
+    "normal_max": "10",
+    "normal_min": null,
+    "status": 0,
+    "unit": "mg/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 108,
+    "name": "D-Dimer",
+    "normal_max": "500",
+    "normal_min": null,
+    "status": 0,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 109,
+    "name": "Procalcitonin",
+    "normal_max": "0.5-2.0 Infection",
+    "normal_min": "<0.5 Local Bac",
+    "status": 0,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 110,
+    "name": "Progesterone",
+    "normal_max": "0.29 - 29.73 Female",
+    "normal_min": "0.84 Male",
+    "status": 1,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:48:39.130897+00:00",
+    "id": 111,
+    "name": "Troponin T",
+    "normal_max": "100 pg/mL (0.1 ug/L)",
+    "normal_min": null,
+    "status": 1,
+    "unit": "pg/mL"
+  },
+  {
+    "category": "PARASITOLOGY",
+    "created_at": "2026-06-04T10:49:15.72564+00:00",
+    "id": 112,
+    "name": "Urine PT",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "MICROBIOLOGY",
+    "created_at": "2026-06-04T10:49:15.72564+00:00",
+    "id": 113,
+    "name": "Blood Culture and Sensitivity (Blood C/S)",
+    "normal_max": "No Growth",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "MICROBIOLOGY",
+    "created_at": "2026-06-04T10:49:15.72564+00:00",
+    "id": 114,
+    "name": "Urine C/S",
+    "normal_max": "No Growth",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:15.72564+00:00",
+    "id": 115,
+    "name": "Anti HCV (ICT)",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-06-04T10:49:15.72564+00:00",
+    "id": 116,
+    "name": "Anti HIV (ICT)",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:15.72564+00:00",
+    "id": 117,
+    "name": "HbsAg (ICT)",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:15.72564+00:00",
+    "id": 118,
+    "name": "Myoglobin",
+    "normal_max": "<70.00",
+    "normal_min": null,
+    "status": 1,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:15.72564+00:00",
+    "id": 119,
+    "name": "Serum Insulin",
+    "normal_max": "24.9",
+    "normal_min": "2.6",
+    "status": 0,
+    "unit": "uIU/mL"
+  },
+  {
+    "category": "MICROBIOLOGY",
+    "created_at": "2026-06-04T10:49:44.268053+00:00",
+    "id": 120,
+    "name": "Stool Culture and Sensitivity (Stool C/S)",
+    "normal_max": "No Growth",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:44.268053+00:00",
+    "id": 121,
+    "name": "Folic Acid (Folate)",
+    "normal_max": "17.5",
+    "normal_min": "3.1",
+    "status": 0,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:44.268053+00:00",
+    "id": 122,
+    "name": "FT3",
+    "normal_max": "3.9",
+    "normal_min": "2.5",
+    "status": 0,
+    "unit": "pg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:44.268053+00:00",
+    "id": 123,
+    "name": "FT4",
+    "normal_max": "1.70",
+    "normal_min": "0.92",
+    "status": 0,
+    "unit": "ng/dL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:44.268053+00:00",
+    "id": 124,
+    "name": "H.Pylori Ag(Stool)",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:44.268053+00:00",
+    "id": 125,
+    "name": "Serum Iron",
+    "normal_max": "Male: 60-160",
+    "normal_min": "Female: 37-145",
+    "status": 0,
+    "unit": "ug/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:44.268053+00:00",
+    "id": 126,
+    "name": "Troponin I",
+    "normal_max": "0.4",
+    "normal_min": "0",
+    "status": 1,
+    "unit": "ng/ml"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:49:44.268053+00:00",
+    "id": 127,
+    "name": "Vitamin B12",
+    "normal_max": "930",
+    "normal_min": "196",
+    "status": 0,
+    "unit": "pg/mL"
+  },
+  {
+    "category": "HEMATOLOGY",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 128,
+    "name": "Reticulocyte Count",
+    "normal_max": "2.0",
+    "normal_min": "0.5",
+    "status": 0,
+    "unit": "%"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 129,
+    "name": "Cholestrol",
+    "normal_max": "<200",
+    "normal_min": null,
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 130,
+    "name": "FT3 (Free Thyroid Profile)",
+    "normal_max": "3.9",
+    "normal_min": "2.5",
+    "status": 0,
+    "unit": "pg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 131,
+    "name": "FT4 (Free Thyroid Profile)",
+    "normal_max": "1.70",
+    "normal_min": "0.92",
+    "status": 0,
+    "unit": "ng/dL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 132,
+    "name": "TSH",
+    "normal_max": "5.60",
+    "normal_min": "0.34",
+    "status": 1,
+    "unit": "mIU/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 135,
+    "name": "Serum Iron (Iron Profile)",
+    "normal_max": "M: 60-160",
+    "normal_min": "F: 37-145",
+    "status": 0,
+    "unit": "ug/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 136,
+    "name": "Serum Ferritin (Iron Profile)",
+    "normal_max": "120",
+    "normal_min": "10",
+    "status": 0,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 137,
+    "name": "TIBC (Iron Profile)",
+    "normal_max": "Female: 274-385",
+    "normal_min": null,
+    "status": 0,
+    "unit": "ug/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 138,
+    "name": "LDL",
+    "normal_max": "< 130",
+    "normal_min": null,
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 139,
+    "name": "T3 (Thyroid Profile)",
+    "normal_max": "1.78",
+    "normal_min": "0.87",
+    "status": 0,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 140,
+    "name": "T4 (Thyroid Profile)",
+    "normal_max": "12.23",
+    "normal_min": "6.09",
+    "status": 0,
+    "unit": "ug/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 141,
+    "name": "Typhi dot IgG",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:12.060319+00:00",
+    "id": 142,
+    "name": "Typhi dot IgM",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PARASITOLOGY",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 143,
+    "name": "Stool For Occult Blood (Fob)",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "COAGULATION",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 144,
+    "name": "APTT",
+    "normal_max": "APTT result greater than 7 sec the value of APTT control is consider abnormal.",
+    "normal_min": null,
+    "status": 1,
+    "unit": "seconds"
+  },
+  {
+    "category": "COAGULATION",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 145,
+    "name": "PT (Prothrombin Time)",
+    "normal_max": "14",
+    "normal_min": "11",
+    "status": 0,
+    "unit": "seconds"
+  },
+  {
+    "category": "COAGULATION",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 146,
+    "name": "I.N.R",
+    "normal_max": "1.1",
+    "normal_min": "0.8",
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 147,
+    "name": "Serum Amylase",
+    "normal_max": "Up to 89",
+    "normal_min": null,
+    "status": 0,
+    "unit": "U/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 148,
+    "name": "Globulin Serum",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 149,
+    "name": "Glucose Fasting FBS",
+    "normal_max": "Normal <110",
+    "normal_min": null,
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 150,
+    "name": "Total Protein",
+    "normal_max": "8.7",
+    "normal_min": "6.6",
+    "status": 1,
+    "unit": "g/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 151,
+    "name": "Albumin (A/G Ratio Panel)",
+    "normal_max": "5.0",
+    "normal_min": "3.4",
+    "status": 0,
+    "unit": "g/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 152,
+    "name": "Globulin (A/G Ratio Panel)",
+    "normal_max": "3.6",
+    "normal_min": "1.8",
+    "status": 0,
+    "unit": "g/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:50:38.309162+00:00",
+    "id": 153,
+    "name": "AG Ratio (A/G Ratio Panel)",
+    "normal_max": "2.2",
+    "normal_min": "1.1",
+    "status": 1,
+    "unit": "%"
+  },
+  {
+    "category": "SEROLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 154,
+    "name": "ANA",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "SEROLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 155,
+    "name": "AMA",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "SEROLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 156,
+    "name": "ASMA",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 157,
+    "name": "Days of Abstinence",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 158,
+    "name": "Volume",
+    "normal_max": "5",
+    "normal_min": "2",
+    "status": 1,
+    "unit": "ml"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 159,
+    "name": "Viscosity",
+    "normal_max": "Viscous",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 160,
+    "name": "Color",
+    "normal_max": "Turbid White",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 161,
+    "name": "PH",
+    "normal_max": "8.0",
+    "normal_min": "7.2",
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 162,
+    "name": "Total Sperm Count",
+    "normal_max": "200 x 10^6",
+    "normal_min": "5",
+    "status": 0,
+    "unit": "/ml"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 163,
+    "name": "Total Motility",
+    "normal_max": "> 40%",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 164,
+    "name": "Non Motile",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 165,
+    "name": "RBCs",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 166,
+    "name": "Pus Cells",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 167,
+    "name": "Normal form",
+    "normal_max": "> 4%",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 168,
+    "name": "Abnormal form",
+    "normal_max": "< 4%",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 169,
+    "name": "Others",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "HEMATOLOGY",
+    "created_at": "2026-06-04T10:51:02.927046+00:00",
+    "id": 170,
+    "name": "Malaria Parasite",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 196,
+    "name": "ANA (Anti Nuclear Antibody)",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 197,
+    "name": "Prostate Specific Antigen (PSA)",
+    "normal_max": "< 41 Y: <1.4, 41-50 Y: <2.0, 51-60 Y: <3.1, 61-70 Y: <4.1, >70 Y: <4.4",
+    "normal_min": null,
+    "status": 1,
+    "unit": "ng/mL"
+  },
+  {
+    "category": "HEMATOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 198,
+    "name": "Platelets",
+    "normal_max": "450",
+    "normal_min": "150",
+    "status": 1,
+    "unit": "x10E9/L"
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 199,
+    "name": "ASOT",
+    "normal_max": "< 200",
+    "normal_min": null,
+    "status": 0,
+    "unit": "IU/mL"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 200,
+    "name": "H. Pylori IgG (ELISA)",
+    "normal_max": "Negative: < 5, Equivocal: 5-10, Positive: > 10",
+    "normal_min": null,
+    "status": 0,
+    "unit": "IU/ml"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 201,
+    "name": "IgE (Immunoglobulin E)",
+    "normal_max": "1-11 M: 5-10, 1-5 Y: 27-68, 6-15 Y: 32-115, Adult: < 160",
+    "normal_min": null,
+    "status": 0,
+    "unit": "IU/mL"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 202,
+    "name": "Urinalysis: Volume",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 203,
+    "name": "Urinalysis: Color",
+    "normal_max": "Yellowish",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 204,
+    "name": "Urinalysis: Appearance",
+    "normal_max": "Clear",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 205,
+    "name": "Urinalysis: Specific Gravity",
+    "normal_max": "1.025",
+    "normal_min": "1.005",
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 206,
+    "name": "Urinalysis: PH",
+    "normal_max": "8",
+    "normal_min": "5",
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 207,
+    "name": "Urinalysis: Nitrite",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 208,
+    "name": "Urinalysis: Protein",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 209,
+    "name": "Urinalysis: Sugar",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 210,
+    "name": "Urinalysis: Ketone",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 211,
+    "name": "Urinalysis: Urobilinogen",
+    "normal_max": "Normal",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 212,
+    "name": "Urinalysis: Bilirubin",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 213,
+    "name": "Urinalysis: Blood",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 214,
+    "name": "Urinalysis: Pus Cells",
+    "normal_max": "5",
+    "normal_min": "0",
+    "status": 1,
+    "unit": "/HPF"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 215,
+    "name": "Urinalysis: R.B.Cs",
+    "normal_max": "3",
+    "normal_min": "0",
+    "status": 1,
+    "unit": "/HPF"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 216,
+    "name": "Urinalysis: Epithelial Cells",
+    "normal_max": "Few/HPF",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 217,
+    "name": "Urinalysis: Cast",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 218,
+    "name": "Urinalysis: Crystals",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 219,
+    "name": "Urinalysis: Mucus",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:31.950136+00:00",
+    "id": 220,
+    "name": "Urinalysis: Bacteria",
+    "normal_max": "Absent",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 221,
+    "name": "Chikungunya IgG",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 222,
+    "name": "Chikungunya IgM",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 223,
+    "name": "Congo Virus IgG",
+    "normal_max": "10",
+    "normal_min": "1",
+    "status": 0,
+    "unit": "ml/min"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 224,
+    "name": "Congo Virus IgM",
+    "normal_max": "30",
+    "normal_min": "20",
+    "status": 1,
+    "unit": "ml/min"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 225,
+    "name": "Magnesium",
+    "normal_max": "2.5",
+    "normal_min": "1.6",
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 226,
+    "name": "Serum Phosphorous",
+    "normal_max": "5.0",
+    "normal_min": "2.5",
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 227,
+    "name": "OGTT: Blood Glucose Fasting",
+    "normal_max": "Less Than 92",
+    "normal_min": null,
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 228,
+    "name": "OGTT: Blood Glucose 1 Hour",
+    "normal_max": "Less Than 180",
+    "normal_min": null,
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 229,
+    "name": "OGTT: Blood Glucose 2 Hour",
+    "normal_max": "Less Than 153",
+    "normal_min": null,
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 230,
+    "name": "CA-125",
+    "normal_max": "Upto 35",
+    "normal_min": null,
+    "status": 0,
+    "unit": "U/mL"
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 231,
+    "name": "Dengue Serology: IgG",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "PATHOLOGY",
+    "created_at": "2026-06-04T10:52:58.301397+00:00",
+    "id": 232,
+    "name": "Dengue Serology: IgM",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:53:04.096176+00:00",
+    "id": 233,
+    "name": "Renal Profile: Urea",
+    "normal_max": "48.5",
+    "normal_min": "16.6",
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:53:04.096176+00:00",
+    "id": 234,
+    "name": "Renal Profile: Creatinine",
+    "normal_max": "1.3",
+    "normal_min": "0.1",
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:53:04.096176+00:00",
+    "id": 235,
+    "name": "Electrolytes: Sodium",
+    "normal_max": "149",
+    "normal_min": "136",
+    "status": 0,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:53:04.096176+00:00",
+    "id": 236,
+    "name": "Electrolytes: Potassium",
+    "normal_max": "5.2",
+    "normal_min": "3.8",
+    "status": 0,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:53:04.096176+00:00",
+    "id": 237,
+    "name": "Electrolytes: Chloride",
+    "normal_max": "108",
+    "normal_min": "98",
+    "status": 0,
+    "unit": "mmol/L"
+  },
+  {
+    "category": "SEROLOGY",
+    "created_at": "2026-06-04T10:53:04.096176+00:00",
+    "id": 238,
+    "name": "VDRL Syphilis Screen",
+    "normal_max": "Non-Reactive",
+    "normal_min": null,
+    "status": 0,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 239,
+    "name": "VLDL-Cholesterol",
+    "normal_max": "< 30",
+    "normal_min": null,
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 240,
+    "name": "Dengue NS1",
+    "normal_max": "Negative",
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 241,
+    "name": "Non-HDL Cholesterol",
+    "normal_max": "< 160",
+    "normal_min": null,
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 242,
+    "name": "Albumin",
+    "normal_max": "5.3",
+    "normal_min": "3.4",
+    "status": 0,
+    "unit": "g/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 243,
+    "name": "Glucose Random (RBS)",
+    "normal_max": "Normal < 140",
+    "normal_min": null,
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 244,
+    "name": "HDL",
+    "normal_max": "60",
+    "normal_min": "40",
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 245,
+    "name": "Cholesterol",
+    "normal_max": "< 200",
+    "normal_min": null,
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 246,
+    "name": "Uric Acid",
+    "normal_max": "M: 7.0, F: 5.7",
+    "normal_min": "M: 3.4, F: 2.4",
+    "status": 0,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 247,
+    "name": "LDL",
+    "normal_max": "< 130",
+    "normal_min": null,
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 248,
+    "name": "Blood Grouping",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-06-04T10:57:11.707082+00:00",
+    "id": 249,
+    "name": "Triglyceride",
+    "normal_max": "< 150",
+    "normal_min": null,
+    "status": 1,
+    "unit": "mg/dl"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-07T06:53:57.340415+00:00",
+    "id": 250,
+    "name": "Patient Value",
+    "normal_max": "14",
+    "normal_min": "11",
+    "status": 1,
+    "unit": "seconds"
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-07T06:54:17.880437+00:00",
+    "id": 251,
+    "name": "I.N.R",
+    "normal_max": "1.1",
+    "normal_min": "0.8",
+    "status": 1,
+    "unit": null
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-07T06:54:25.966168+00:00",
+    "id": 252,
+    "name": "Control",
+    "normal_max": null,
+    "normal_min": null,
+    "status": 1,
+    "unit": "seconds"
+  }
+]
