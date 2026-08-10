@@ -10,6 +10,25 @@
       "permissions": {}
     },
     {
+      "id": 9,
+      "name": "BILAL",
+      "email": "bilal@lab.com",
+      "is_active": true,
+      "pwd": "privateaccount",
+      "default_shift_id": 2,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
       "id": 4,
       "name": "daniyal",
       "email": "evening@lab.com",

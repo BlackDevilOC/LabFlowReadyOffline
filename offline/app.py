@@ -121,16 +121,16 @@ logger.info(f"Offline App Started. Parent path: {base_path}")
 
 # Pydantic schemas for request validation
 class GetAllDataFromRegPage(BaseModel):
-    salutation: str
+    salutation: str = "Mr."
     patient_name: str
-    relation: str
-    relation_name: str
-    mobile: str
-    gender: str
-    age: int
-    cnic: str
-    patient_token: str | None = "0"
-    shift: str
+    relation: str | None = "-"
+    relation_name: str | None = "-"
+    mobile: str | None = "-"
+    gender: str = "MALE"
+    age: int | str | None = 0
+    cnic: str | None = "-"
+    patient_token: str | int | None = "0"
+    shift: str = "Morning"
     user: str | None = None
     user_id: str | int | None = None
     user_email: str | None = None
@@ -142,6 +142,24 @@ class GetAllDataFromRegPage(BaseModel):
     test_6: str | int | list | None = None  
     test_7: str | int | list | None = None  
     test_8: str | int | list | None = None
+
+def clean_str(val, default="-"):
+    if val is None:
+        return default
+    s = str(val).strip()
+    return s if s else default
+
+def clean_age(val):
+    if val is None:
+        return 0
+    s = str(val).strip()
+    if not s or s == "-":
+        return 0
+    try:
+        return int(float(s))
+    except Exception:
+        return 0
+
 
 # Static list of lab categories matching online app
 LAB_CATEGORIES = [
@@ -341,12 +359,73 @@ def admin_panel(request: Request, view: str = "offline-tests", date: str = None)
     })
 
 
+try:
+    from db_switcher import get_current_db_status, switch_database_target, run_full_diagnostics
+except ImportError:
+    try:
+        from ..db_switcher import get_current_db_status, switch_database_target, run_full_diagnostics
+    except Exception:
+        def get_current_db_status(): return {"status": "offline", "active_target": "offline"}
+        def switch_database_target(t, p): return {"status": "error", "message": "DB Switcher not available in standalone mode"}
+        def run_full_diagnostics(): return {"status": "offline"}
+
+try:
+    from replica_engine import get_replica_engine
+except ImportError:
+    try:
+        from ..replica_engine import get_replica_engine
+    except Exception:
+        def get_replica_engine(): return None
+
+
 @app.get("/page/emergency-dr", include_in_schema=False)
+@app.get("/offline/page/emergency-dr", include_in_schema=False)
 def offline_emergency_dr_page(request: Request):
     return templates.TemplateResponse(request=request, name='emergency_dr.html', context={
         "title": "Disaster Recovery Console (Offline)",
         "is_offline": True
     })
+
+
+@app.get("/api/database/status")
+def offline_api_database_status():
+    return get_current_db_status()
+
+
+@app.post("/api/database/switch")
+async def offline_api_database_switch(request: Request):
+    try:
+        data = await request.json()
+        target = data.get("target", "")
+        password = data.get("password", "")
+        result = switch_database_target(target, password)
+        if result.get("status") == "error":
+            status_code = 403 if "password" in result.get("message", "").lower() else 400
+            return JSONResponse(status_code=status_code, content=result)
+        return result
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+
+
+@app.post("/api/emergency-dr/diagnose")
+def offline_api_emergency_dr_diagnose():
+    return run_full_diagnostics()
+
+
+@app.post("/api/emergency-dr/switch")
+async def offline_api_emergency_dr_switch(request: Request):
+    return await offline_api_database_switch(request)
+
+
+@app.get("/api/admin/replica/status")
+def offline_api_replica_status():
+    try:
+        engine = get_replica_engine()
+        if engine:
+            return engine.get_status()
+        return {"is_running": False, "tables": {}, "locations": {}}
+    except Exception as e:
+        return {"is_running": False, "error": str(e), "tables": {}, "locations": {}}
 
 
 # ----------------- APIs -----------------
@@ -1233,10 +1312,19 @@ async def register_patient(request: Request, background_tasks: BackgroundTasks):
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
                 """,
                 (
-                    mr_no, item.salutation, item.patient_name, item.relation, item.relation_name,
-                    item.mobile, item.gender.upper(), item.age, item.cnic, 
-                    item.patient_token if item.patient_token else "0",
-                    item.shift, user_name, pin
+                    mr_no,
+                    clean_str(item.salutation, "Mr."),
+                    str(item.patient_name or "").strip(),
+                    clean_str(item.relation, "-"),
+                    clean_str(item.relation_name, "-"),
+                    clean_str(item.mobile, "-"),
+                    clean_str(item.gender, "MALE").upper(),
+                    clean_age(item.age),
+                    clean_str(item.cnic, "-"), 
+                    str(item.patient_token).strip() if item.patient_token and str(item.patient_token).strip() != "" else "0",
+                    clean_str(item.shift, "Morning"),
+                    user_name,
+                    pin
                 )
             )
             patient_id = cursor.lastrowid

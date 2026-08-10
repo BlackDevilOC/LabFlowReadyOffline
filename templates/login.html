@@ -91,7 +91,7 @@
 
 <body>
     <!-- Top-Right Discreet Emergency DR Console Button -->
-    <a href="javascript:void(0)" onclick="openEmergencyConsole()" class="floating-dr-badge"
+    <a href="/page/emergency-dr" id="btnFloatingDrConsole" onclick="openEmergencyConsole(event)" class="floating-dr-badge"
         title="Disaster Recovery & Provider Failover Console">
         <span class="dr-pulse-dot"></span>
         <span>⚡ DR Console</span>
@@ -225,6 +225,16 @@
     <script src="{{ url_for('static', path='/js/auth.js') }}"></script>
     <script>
         const IS_OFFLINE = {{ 'true' if is_offline else 'false' }};
+        function openEmergencyConsole(event) {
+            if (event && event.preventDefault) event.preventDefault();
+            const isOffline = window.location.pathname.startsWith('/offline') || (typeof IS_OFFLINE !== 'undefined' && IS_OFFLINE);
+            window.location.href = isOffline ? '/offline/page/emergency-dr' : '/page/emergency-dr';
+        }
+        function openEmergencyDrModal() {
+            openEmergencyConsole();
+        }
+        window.openEmergencyConsole = openEmergencyConsole;
+        window.openEmergencyDrModal = openEmergencyDrModal;
     </script>
 </body>
 

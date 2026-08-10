@@ -1,23 +1,23 @@
 {
   "version": "1.0.0",
-  "last_sync_time": "2026-08-10T09:52:28.896169+00:00",
+  "last_sync_time": "2026-08-10T15:56:23.494750+00:00",
   "last_sync_type": "delta",
-  "total_sync_cycles": 4,
+  "total_sync_cycles": 41,
   "tables": {
     "patients": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-10T09:06:11.629978+00:00",
-      "max_id": 100134,
-      "row_count": 45,
-      "last_sync_time": "2026-08-10T09:52:26.207150+00:00",
+      "last_created_at": "2026-08-10T15:11:34.862156+00:00",
+      "max_id": 100241,
+      "row_count": 152,
+      "last_sync_time": "2026-08-10T15:56:21.840172+00:00",
       "status": "healthy"
     },
     "test_results_all": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-10T09:06:13.24558+00:00",
-      "max_id": 168982,
-      "row_count": 220,
-      "last_sync_time": "2026-08-10T09:52:26.496379+00:00",
+      "last_created_at": "2026-08-10T15:36:29.330457+00:00",
+      "max_id": 169303,
+      "row_count": 541,
+      "last_sync_time": "2026-08-10T15:56:21.994760+00:00",
       "status": "healthy"
     },
     "tests": {
@@ -25,7 +25,7 @@
       "last_created_at": "2026-08-07T06:54:25.966168+00:00",
       "max_id": 252,
       "row_count": 211,
-      "last_sync_time": "2026-08-10T09:52:26.800848+00:00",
+      "last_sync_time": "2026-08-10T15:56:22.158324+00:00",
       "status": "healthy"
     },
     "test_groups": {
@@ -33,7 +33,7 @@
       "last_created_at": "2026-08-07T06:54:53.926534+00:00",
       "max_id": 112,
       "row_count": 97,
-      "last_sync_time": "2026-08-10T09:52:27.063704+00:00",
+      "last_sync_time": "2026-08-10T15:56:22.318896+00:00",
       "status": "healthy"
     },
     "shift": {
@@ -41,15 +41,15 @@
       "last_created_at": "2026-05-30T08:06:55.197257+00:00",
       "max_id": 5,
       "row_count": 5,
-      "last_sync_time": "2026-08-10T09:52:27.309041+00:00",
+      "last_sync_time": "2026-08-10T15:56:22.482356+00:00",
       "status": "healthy"
     },
     "users": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-10T07:25:48.236333+00:00",
-      "max_id": 8,
-      "row_count": 8,
-      "last_sync_time": "2026-08-10T09:52:27.491556+00:00",
+      "last_created_at": "2026-08-10T14:09:39.650211+00:00",
+      "max_id": 9,
+      "row_count": 9,
+      "last_sync_time": "2026-08-10T15:56:22.665007+00:00",
       "status": "healthy"
     },
     "remarks": {
@@ -57,7 +57,7 @@
       "last_created_at": "2026-06-01T09:07:50.136776+00:00",
       "max_id": 54,
       "row_count": 54,
-      "last_sync_time": "2026-08-10T09:52:27.682192+00:00",
+      "last_sync_time": "2026-08-10T15:56:22.821951+00:00",
       "status": "healthy"
     },
     "invoice_settings": {
@@ -65,7 +65,7 @@
       "last_created_at": null,
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-10T09:52:27.844683+00:00",
+      "last_sync_time": "2026-08-10T15:56:22.978534+00:00",
       "status": "healthy"
     },
     "print_settings": {
@@ -73,15 +73,15 @@
       "last_created_at": "2026-02-11T20:23:29.470976",
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-10T09:52:28.019048+00:00",
+      "last_sync_time": "2026-08-10T15:56:23.144093+00:00",
       "status": "healthy"
     },
     "app_settings": {
-      "last_updated_at": "2026-08-10T09:52:26.466459+00:00",
+      "last_updated_at": "2026-08-10T15:09:04.947729+00:00",
       "last_created_at": null,
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-10T09:52:28.232360+00:00",
+      "last_sync_time": "2026-08-10T15:56:23.289741+00:00",
       "status": "healthy"
     },
     "lab_metadata": {
@@ -97,7 +97,7 @@
       "last_created_at": null,
       "max_id": 50,
       "row_count": 22,
-      "last_sync_time": "2026-08-10T09:52:28.865336+00:00",
+      "last_sync_time": "2026-08-10T15:56:23.440894+00:00",
       "status": "healthy"
     }
   }

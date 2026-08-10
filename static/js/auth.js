@@ -2,6 +2,15 @@
  * LabFlow Authentication Logic (Online & Offline Support)
  */
 
+window.openEmergencyConsole = function(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    const isOffline = window.location.pathname.startsWith('/offline') || (typeof IS_OFFLINE !== 'undefined' && IS_OFFLINE);
+    window.location.href = isOffline ? '/offline/page/emergency-dr' : '/page/emergency-dr';
+};
+window.openEmergencyDrModal = function() {
+    window.openEmergencyConsole();
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     let currentLoginMode = localStorage.getItem('workspaceMode') || 'online';
     const isLoginPage = window.location.pathname === '/login' || window.location.pathname === '/offline/login';

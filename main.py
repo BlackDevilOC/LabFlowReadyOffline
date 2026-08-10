@@ -111,7 +111,9 @@ async def security_desktop_middleware(request: Request, call_next):
         or path.startswith("/offline")
         or path.startswith("/api/emergency-dr")
         or path.startswith("/page/emergency-dr")
+        or path.startswith("/offline/page/emergency-dr")
         or path.startswith("/api/database")
+        or path.startswith("/api/admin/replica")
     ):
         return await call_next(request)
 
@@ -633,6 +635,7 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
 
 
 @app.get("/page/emergency-dr")
+@app.get("/offline/page/emergency-dr")
 def page_emergency_dr(request: Request):
     """Dedicated full-screen Disaster Recovery and Live Diagnostic Console."""
     return templates.TemplateResponse(request=request, name="emergency_dr.html", context={"title": "Disaster Recovery Console"})

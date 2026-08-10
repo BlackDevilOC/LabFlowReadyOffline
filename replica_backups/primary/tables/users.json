@@ -138,5 +138,25 @@
       "update_results": true
     },
     "pwd": "Syedshah"
+  },
+  {
+    "created_at": "2026-08-10T14:09:39.650211+00:00",
+    "default_shift_id": 2,
+    "email": "bilal@lab.com",
+    "id": 9,
+    "is_active": 1,
+    "name": "BILAL",
+    "permissions": {
+      "admin": false,
+      "print": true,
+      "fitness": true,
+      "register": true,
+      "analytics": false,
+      "manage_tests": false,
+      "manage_users": false,
+      "fluid_reports": true,
+      "update_results": true
+    },
+    "pwd": "privateaccount"
   }
 ]
