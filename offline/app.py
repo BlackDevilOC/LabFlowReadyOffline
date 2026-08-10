@@ -47,6 +47,31 @@ except ImportError:
     )
 from dbActions import init_supabase
 
+try:
+    from user_access import PERMISSION_KEYS, PERMISSION_LABELS, DEFAULT_PERMISSIONS
+except Exception:
+    PERMISSION_KEYS = ["register", "update_results", "fitness", "print", "fluid_reports", "admin", "manage_users", "manage_tests"]
+    PERMISSION_LABELS = {
+        "register": "Patient Registration",
+        "update_results": "Enter / Update Results",
+        "fitness": "Fitness Certificate",
+        "print": "Lab Print & Preview",
+        "fluid_reports": "Fluid Reports Hub",
+        "admin": "Admin Console & Logs",
+        "manage_users": "Create & Edit Staff Users",
+        "manage_tests": "Tests & Prices Catalog",
+    }
+    DEFAULT_PERMISSIONS = {
+        "register": True,
+        "update_results": True,
+        "fitness": True,
+        "print": True,
+        "fluid_reports": True,
+        "admin": False,
+        "manage_users": False,
+        "manage_tests": False,
+    }
+
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("LabFlowOffline")
@@ -287,18 +312,28 @@ def print_records_hub_page(request: Request):
     return RedirectResponse(url="/page/lab-print-records", status_code=302)
 
 
-@app.get("/page/admin", include_in_schema=False)
-def admin_panel(request: Request, view: str = "overview", date: str = None):
-    # Render complete admin panel with offline mode support
-    return templates.TemplateResponse('admin_panel.html', {
+@app.get("/page/sync-history", include_in_schema=False)
+def offline_sync_history_page(request: Request):
+    return templates.TemplateResponse('mr_sync_history.html', {
         "request": request,
-        "title": "Admin Panel (Offline)",
+        "title": "MR Sync History (Offline)",
+        "name": "Offline User",
+        "is_offline": True,
+        "url_prefix": "/offline"
+    })
+
+
+@app.get("/page/admin", include_in_schema=False)
+def admin_panel(request: Request, view: str = "offline-tests", date: str = None):
+    return templates.TemplateResponse('offline_admin.html', {
+        "request": request,
+        "title": f"Offline Admin - {view.replace('-', ' ').title()}",
+        "name": "Admin",
         "current_view": view,
         "current_date": date,
-        "admin_email": "admin@labflow.com",
-        "lab_categories": LAB_CATEGORIES,
         "is_offline": True,
-        "hide_sidebar": False
+        "hide_sidebar": True,
+        "url_prefix": "/offline"
     })
 
 
@@ -723,6 +758,12 @@ async def api_auth_login(request: Request):
             sync_lab_print_settings_cache()
         except Exception as e:
             logger.error(f"Error generating offline cache files: {e}")
+
+        # Trigger background auto-sync of any pending offline records on login
+        try:
+            threading.Thread(target=sync_pending_offline_patients_background, daemon=True).start()
+        except Exception:
+            pass
             
         return {"status": "Success", "user": user_payload}
     except Exception as e:
@@ -907,18 +948,34 @@ def api_admin_get_print_settings():
     if os.path.exists(path):
         try:
             with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
+                if not data.get("hidden_group_titles"):
+                    data["hidden_group_titles"] = "UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV"
+                return data
         except Exception:
             pass
-    return {"status": "Success", "page_size": "A4", "is_active": 1}
+    return {
+        "status": "Success",
+        "page_size": "A4",
+        "is_active": 1,
+        "hidden_group_titles": "UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV"
+    }
 
 @app.post("/api/admin/print-settings")
 async def api_admin_update_print_settings(request: Request):
     try:
         data = await request.json()
         path = os.path.join(fetcheddata_dir, "print_settings.json")
+        existing = {}
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    existing = json.load(f)
+            except Exception:
+                existing = {}
+        existing.update(data)
         with open(path, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
+            json.dump(existing, f, indent=2)
         return {"status": "Success", "message": "Print settings saved offline"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -1187,6 +1244,12 @@ async def register_patient(request: Request, background_tasks: BackgroundTasks):
             
         logger.info(f"Registered patient ID: {patient_id}, MR No: {mr_no} (Offline)")
         
+        # Trigger background auto-sync to push to Supabase if internet is available
+        try:
+            threading.Thread(target=sync_pending_offline_patients_background, daemon=True).start()
+        except Exception:
+            pass
+
         query = urlencode({
             "tests": "|".join(test_display_names),
             "pin": pin,
@@ -2299,3 +2362,97 @@ def api_admin_offline_sync_log(search: str = None, limit: int = 200):
     except Exception as e:
         logger.error(f"offline-sync-log failed: {e}")
         return {"status": "Error", "message": str(e), "logs": []}
+
+
+# ── Automatic Background Sync Worker ─────────────────────────────────────────
+_auto_sync_lock = threading.Lock()
+_auto_sync_worker_started = False
+
+
+def sync_pending_offline_patients_background(synced_by: str = "Auto-Sync") -> dict:
+    """
+    Check SQLite for any unsynced patients (synced = 0) and push them to Supabase
+    automatically if internet / Supabase connectivity is available.
+    """
+    if not _auto_sync_lock.acquire(blocking=False):
+        return {"status": "busy", "message": "Auto-sync already in progress"}
+
+    try:
+        # Check SQLite for pending patients
+        with get_db_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM patients WHERE synced = 0 ORDER BY id ASC LIMIT 50")
+            pending_patients = [dict(r) for r in cursor.fetchall()]
+
+        if not pending_patients:
+            return {"status": "ok", "synced_count": 0, "message": "No pending offline records"}
+
+        # Attempt to initialize Supabase
+        try:
+            supabase = init_supabase()
+            if not supabase:
+                return {"status": "offline", "message": "Supabase client unavailable"}
+        except Exception as se:
+            logger.debug(f"[Auto-Sync] Supabase not reachable: {se}")
+            return {"status": "offline", "message": str(se)}
+
+        synced_count = 0
+        error_count = 0
+        logger.info(f"[Auto-Sync] Found {len(pending_patients)} pending patient(s). Pushing to Supabase...")
+
+        for patient in pending_patients:
+            try:
+                outcome = _sync_one_offline_patient(supabase, patient, synced_by=synced_by)
+                if outcome.get("status") == "synced":
+                    synced_count += 1
+                    logger.info(
+                        f"[Auto-Sync] Synced offline MR {outcome.get('offline_mr')} -> Online MR {outcome.get('online_mr')}"
+                    )
+                elif outcome.get("status") == "error":
+                    error_count += 1
+            except Exception as pe:
+                error_count += 1
+                logger.error(f"[Auto-Sync] Failed to sync patient {patient.get('id')}: {pe}")
+
+        logger.info(f"[Auto-Sync] Sync finished: {synced_count} synced, {error_count} errors.")
+        return {"status": "Success", "synced_count": synced_count, "errors_count": error_count}
+    except Exception as e:
+        logger.error(f"[Auto-Sync] Worker error: {e}")
+        return {"status": "Error", "message": str(e)}
+    finally:
+        _auto_sync_lock.release()
+
+
+def _auto_sync_daemon_loop():
+    """Periodically check and push pending offline records every 25 seconds."""
+    time.sleep(3)  # Short pause on startup
+    while True:
+        try:
+            sync_pending_offline_patients_background(synced_by="Auto-Sync")
+        except Exception as e:
+            logger.debug(f"[Auto-Sync Loop] error: {e}")
+        time.sleep(25)
+
+
+def start_offline_auto_sync_worker():
+    global _auto_sync_worker_started
+    if not _auto_sync_worker_started:
+        _auto_sync_worker_started = True
+        worker_thread = threading.Thread(
+            target=_auto_sync_daemon_loop,
+            daemon=True,
+            name="OfflineAutoSyncWorker"
+        )
+        worker_thread.start()
+        logger.info("Offline background auto-sync worker started (interval: 25s).")
+
+
+@app.post("/api/offline/auto-sync-now")
+def api_offline_auto_sync_now(background_tasks: BackgroundTasks):
+    background_tasks.add_task(sync_pending_offline_patients_background, synced_by="User-Triggered")
+    return {"status": "Success", "message": "Auto-sync triggered in background"}
+
+
+# Start background worker on module load
+start_offline_auto_sync_worker()
+

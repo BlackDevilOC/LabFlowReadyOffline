@@ -1,0 +1,22 @@
+{
+    "patient_name": "LAILBA",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "DIN MUHAMMAD",
+    "report_date": "10/08/2026",
+    "mr_no": "9871",
+    "hb": "14.1",
+    "wbc": "7.4",
+    "neut": "62",
+    "lymph": "33",
+    "mono": "03",
+    "eosino": "02",
+    "plt": "250",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Positive",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-10 13:20:50"
+}

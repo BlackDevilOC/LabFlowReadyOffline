@@ -1660,18 +1660,33 @@
             return body;
         }
 
+        function shouldHideGroupTitle(name, settings) {
+            if (!name) return false;
+            const configured = settings?.hidden_group_titles || 'UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV';
+            const list = configured.split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
+            const cleanName = String(name).trim().toUpperCase();
+            if (list.includes(cleanName)) return true;
+            const strippedName = cleanName.replace(/[\/&,]/g, ' ').replace(/\s+/g, ' ').trim();
+            for (const item of list) {
+                const strippedItem = item.replace(/[\/&,]/g, ' ').replace(/\s+/g, ' ').trim();
+                if (strippedName === strippedItem) return true;
+            }
+            return false;
+        }
+
         /** Shared: render a single test block for combined mode. */
         function renderTestBlockCombined(t, hideSingle, isPrimary, catName) {
             const isSingleParam = (t.params || []).length === 1;
+            const isHiddenGroup = shouldHideGroupTitle(t.name, settings);
             // showGroupTestTitle controls ONLY the (CATEGORY) suffix - not the group title row itself
-            const catSuffix = (!isPrimary && !isSingleParam && showGroupTestTitle) ? ` (${catName})` : '';
+            const catSuffix = (!isPrimary && !isSingleParam && showGroupTestTitle && !isHiddenGroup) ? ` (${catName})` : '';
             let html = `<tbody class="test-block">`;
 
             const groupTitle = `${t.name}${catSuffix}`;
             // Title row visibility follows settings (hideSingle) and the single-test toggle only
             const settingsWouldShow = !hideSingle || !isSingleParam;
             const adminAllows = isSingleParam ? showSingleTestTitle : true;  // group titles always shown unless settings say otherwise
-            const showTitle = settingsWouldShow && adminAllows;
+            const showTitle = settingsWouldShow && adminAllows && !isHiddenGroup;
 
             if (showTitle) {
                 html += `<tr><td class="test-group" colspan="3" style="padding-left: 4px;">${escapeHtml(groupTitle)}</td></tr>`;
@@ -1698,11 +1713,12 @@
         /** Shared: render a single test block (title row + param rows + remarks). */
         function renderTestBlock(t, hideSingle) {
             const isSingleParam = (t.params || []).length === 1;
+            const isHiddenGroup = shouldHideGroupTitle(t.name, settings);
             let html = `<tbody class="test-block">`;
             // Respect admin display toggles: showGroupTestTitle for multi-param, showSingleTestTitle for single-param
             const settingsWouldShow = !hideSingle || !isSingleParam;
             const adminAllows = isSingleParam ? showSingleTestTitle : showGroupTestTitle;
-            const showTitle = settingsWouldShow && adminAllows;
+            const showTitle = settingsWouldShow && adminAllows && !isHiddenGroup;
             if (showTitle) {
                 html += `<tr><td class="test-group" colspan="3" style="padding-left: 4px;">${escapeHtml(t.name)}</td></tr>`;
             }

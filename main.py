@@ -305,6 +305,28 @@ def lab_test_print_preview_page(request: Request, mr_no: int, date: str = None):
 def print_records_hub_page(request: Request):
     return RedirectResponse(url="/page/lab-print-records", status_code=302)
 
+
+@app.get("/page/sync-history", include_in_schema=False)
+def sync_history_page(request: Request):
+    return templates.TemplateResponse('mr_sync_history.html', {
+        "request": request,
+        "title": "MR Sync History",
+        "name": "User",
+        "is_offline": False,
+        "url_prefix": ""
+    })
+
+
+@app.get("/api/admin/offline-sync-log")
+def api_admin_offline_sync_log(search: str = None, limit: int = 200):
+    try:
+        from offline.database import list_mr_sync_log
+        logs = list_mr_sync_log(limit=min(limit, 500), search=search)
+        return {"status": "Success", "logs": logs}
+    except Exception as e:
+        logger.error(f"offline-sync-log failed: {e}")
+        return {"status": "Error", "message": str(e), "logs": []}
+
 @app.get("/api/fitness/records")
 def get_fitness_records_api(
     request: Request,
@@ -542,6 +564,8 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
                 "permission_keys": PERMISSION_KEYS,
                 "permission_labels": PERMISSION_LABELS,
                 "default_permissions": DEFAULT_PERMISSIONS,
+                "is_offline": False,
+                "url_prefix": "",
                 "hide_sidebar": True
             })
         
@@ -567,6 +591,8 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
             "permission_keys": PERMISSION_KEYS,
             "permission_labels": PERMISSION_LABELS,
             "default_permissions": DEFAULT_PERMISSIONS,
+            "is_offline": False,
+            "url_prefix": "",
             "hide_sidebar": True
         })
     except Exception as e:
@@ -589,6 +615,8 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
             "permission_keys": PERMISSION_KEYS,
             "permission_labels": PERMISSION_LABELS,
             "default_permissions": DEFAULT_PERMISSIONS,
+            "is_offline": False,
+            "url_prefix": "",
             "hide_sidebar": True
         })
 
@@ -2082,6 +2110,12 @@ def on_app_startup():
     """Auto-pull cloud settings and launch continuous Supabase replica background worker."""
     import threading
     threading.Thread(target=_auto_pull_cloud_settings_sync, daemon=True).start()
+    try:
+        from offline.app import sync_pending_offline_patients_background
+        threading.Thread(target=sync_pending_offline_patients_background, daemon=True).start()
+        logger.info("Triggered auto-push of pending offline patients on app boot.")
+    except Exception as e:
+        logger.debug(f"Offline auto-push trigger on startup error: {e}")
     try:
         engine = get_replica_engine()
         engine.start_background_worker()

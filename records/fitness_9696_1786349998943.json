@@ -1,0 +1,22 @@
+{
+    "patient_name": "RABIA",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "NASRULLAH",
+    "report_date": "10/08/2026",
+    "mr_no": "9696",
+    "hb": "14.8",
+    "wbc": "8.7",
+    "neut": "65",
+    "lymph": "24",
+    "mono": "06",
+    "eosino": "05",
+    "plt": "346",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-10 13:19:58"
+}

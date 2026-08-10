@@ -337,6 +337,20 @@
                         <tbody>
                 `;
 
+                function shouldHideGroupTitle(name, s) {
+                    if (!name) return false;
+                    const configured = s?.hidden_group_titles || 'UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV';
+                    const list = configured.split(',').map(item => item.trim().toUpperCase()).filter(Boolean);
+                    const cleanName = String(name).trim().toUpperCase();
+                    if (list.includes(cleanName)) return true;
+                    const strippedName = cleanName.replace(/[\/&,]/g, ' ').replace(/\s+/g, ' ').trim();
+                    for (const item of list) {
+                        const strippedItem = item.replace(/[\/&,]/g, ' ').replace(/\s+/g, ' ').trim();
+                        if (strippedName === strippedItem) return true;
+                    }
+                    return false;
+                }
+
                 // Render Groups
                 // Order and subheadings are driven entirely by component_ids in the DB.
                 // Any test whose name starts with '#' is treated as a sub-heading row:
@@ -345,12 +359,15 @@
                 // To add or reorder subheadings, just insert/move '#'-prefixed rows in
                 // the tests table and update component_ids accordingly — no code changes needed.
                 data.groups.forEach(group => {
-                    html += `
-                        <tbody class="group-body">
+                    const isHiddenGroup = shouldHideGroupTitle(group.groupName, settings);
+                    html += `<tbody class="group-body">`;
+                    if (!isHiddenGroup) {
+                        html += `
                             <tr class="group-title-row">
                                 <td colspan="4" class="group-name">${escapeHtml(group.groupName)}</td>
                             </tr>
-                    `;
+                        `;
+                    }
 
                     group.tests.forEach(testResult => {
                         const testName = testResult.tests?.name || '';

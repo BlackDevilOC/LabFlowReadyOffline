@@ -1,0 +1,22 @@
+{
+    "patient_name": "ARISHA",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "ABID ALI",
+    "report_date": "10/08/2026",
+    "mr_no": "9891",
+    "hb": "15.1",
+    "wbc": "8.9",
+    "neut": "56",
+    "lymph": "32",
+    "mono": "06",
+    "eosino": "06",
+    "plt": "367",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-10 13:20:19"
+}

@@ -1,0 +1,22 @@
+{
+    "patient_name": "ANMOL",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "GH SHABIR",
+    "report_date": "10/08/2026",
+    "mr_no": "9936",
+    "hb": "13.6",
+    "wbc": "8.5",
+    "neut": "68",
+    "lymph": "25",
+    "mono": "02",
+    "eosino": "05",
+    "plt": "243",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-10 13:16:42"
+}

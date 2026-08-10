@@ -102,11 +102,26 @@ function estimateRemarksRowPx(s) {
     return 6 + linePx(font, 1.35) + 4;
 }
 
+function shouldHideGroupTitle(name, s) {
+    if (!name) return false;
+    const configured = s?.hidden_group_titles || 'UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV';
+    const list = configured.split(',').map(item => item.trim().toUpperCase()).filter(Boolean);
+    const cleanName = String(name).trim().toUpperCase();
+    if (list.includes(cleanName)) return true;
+    const strippedName = cleanName.replace(/[\/&,]/g, ' ').replace(/\s+/g, ' ').trim();
+    for (const item of list) {
+        const strippedItem = item.replace(/[\/&,]/g, ' ').replace(/\s+/g, ' ').trim();
+        if (strippedName === strippedItem) return true;
+    }
+    return false;
+}
+
 function estimateTestBlockPx(block, s) {
     const hideSingle = Boolean(s?.hide_single_param_title ?? 1);
     const isSingleParam = (block.params || []).length === 1;
+    const isHiddenGroup = shouldHideGroupTitle(block.name, s);
     let h = 0;
-    if (!hideSingle || !isSingleParam) {
+    if ((!hideSingle || !isSingleParam) && !isHiddenGroup) {
         h += estimateTestTitleRowPx(s);
     }
     h += (block.params?.length || 0) * estimateParamRowPx(s);

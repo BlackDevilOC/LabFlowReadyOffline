@@ -93,6 +93,44 @@
         "fluid_reports": true,
         "update_results": true
       }
+    },
+    {
+      "id": 8,
+      "name": "Sakhar",
+      "email": "sakhar@lab.com",
+      "is_active": true,
+      "pwd": "Syedshah",
+      "default_shift_id": 5,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 7,
+      "name": "Uzair",
+      "email": "uzair@lab.com",
+      "is_active": true,
+      "pwd": "2002",
+      "default_shift_id": null,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
     }
   ]
 }

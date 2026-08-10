@@ -30,7 +30,7 @@
     function applySidebarPermissions() {
         document.querySelectorAll('.nav-item[href]').forEach(link => {
             const href = link.getAttribute('href') || '';
-            if (href === '#' || href.startsWith('/page/admin')) return;
+            if (href === '#' || href.includes('/page/admin') || href.includes('sync-history')) return;
             const perm = ROUTE_PERMISSION[href];
             if (!perm) return;
             const li = link.closest('li');

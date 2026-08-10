@@ -1,0 +1,22 @@
+{
+    "patient_name": "KASAK",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "BAIBU RAM",
+    "report_date": "10/08/2026",
+    "mr_no": "9937",
+    "hb": "12.7",
+    "wbc": "8.6",
+    "neut": "58",
+    "lymph": "35",
+    "mono": "02",
+    "eosino": "05",
+    "plt": "389",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-10 13:17:08"
+}

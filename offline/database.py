@@ -219,10 +219,17 @@ def init_db():
             col_unit_width REAL,
             col_unit_align TEXT,
             col_range_width REAL,
-            col_range_align TEXT
+            col_range_align TEXT,
+            hidden_group_titles TEXT
         )
         """)
         
+        # Ensure hidden_group_titles column exists on existing DBs
+        try:
+            cursor.execute("ALTER TABLE print_settings ADD COLUMN hidden_group_titles TEXT")
+        except Exception:
+            pass
+
         # Create indexes for performance
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_patients_mr_no ON patients(mr_no)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_test_results_mr_no ON test_results_all(mr_no)")

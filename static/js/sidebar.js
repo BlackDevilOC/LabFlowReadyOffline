@@ -3,12 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname;
 
     // 1. Highlight active menu items based on URL
+    const currentFullUrl = currentPath + window.location.search;
     navItems.forEach(item => {
         const href = item.getAttribute('href');
         let isActive = false;
 
         if (href && href !== '#') {
-            if (currentPath === href) {
+            if (currentPath === href || currentFullUrl === href) {
                 isActive = true;
             } else if (href === '/page/fluid-reports') {
                 // Highlight 'Fluid Reports' for any individual fluid pages
@@ -16,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (fluidPaths.includes(currentPath)) {
                     isActive = true;
                 }
+            } else if (href.includes('sync-history') && currentPath.includes('sync-history')) {
+                isActive = true;
             }
         }
 
@@ -65,10 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (pwd === null) return;
             if (pwd === 'youcannotenter') {
                 sessionStorage.setItem('admin_authed', 'true');
-                const prefix = window.APP_PREFIX || '';
-                const workspaceMode = localStorage.getItem('workspaceMode') || 'online';
-                const adminPath = (prefix || workspaceMode === 'offline') ? '/offline/page/admin' : '/page/admin';
-                window.location.href = adminPath.startsWith('/') ? adminPath : prefix + adminPath;
+                const isOfflinePage = window.location.pathname.startsWith('/offline');
+                const adminPath = isOfflinePage ? '/offline/page/admin' : '/page/admin';
+                window.location.href = adminPath;
             } else {
                 alert('Incorrect password.');
             }

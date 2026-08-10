@@ -491,11 +491,17 @@ def read_cached_lab_print_settings() -> dict | None:
 
 def sync_lab_print_settings_cache() -> dict | None:
     """Fetch lab print_settings from DB on login; cache under fetcheddata/."""
+    existing_cached = read_cached_lab_print_settings() or {}
     row = load_lab_print_settings_row()
     if not row:
-        return None
+        return existing_cached or None
     cached = dict(row)
     cached["page_size"] = "A4"
+    if "hidden_group_titles" not in cached or not cached["hidden_group_titles"]:
+        cached["hidden_group_titles"] = existing_cached.get(
+            "hidden_group_titles",
+            "UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV"
+        )
     path = get_fetched_data_dir() / "print_settings.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(cached, f, indent=2, default=str)
@@ -505,9 +511,18 @@ def sync_lab_print_settings_cache() -> dict | None:
 
 def get_lab_print_settings_admin() -> dict:
     """Fetch global print settings for admin UI with standard fallback defaults."""
+    cached = read_cached_lab_print_settings() or {}
     row = load_lab_print_settings_row()
     if row:
-        return row
+        merged = dict(row)
+        if not merged.get("hidden_group_titles"):
+            merged["hidden_group_titles"] = cached.get(
+                "hidden_group_titles",
+                "UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV"
+            )
+        return merged
+    if cached:
+        return cached
     return {
         "category_font_size": 18,
         "group_font_size": 15,
@@ -516,41 +531,43 @@ def get_lab_print_settings_admin() -> dict:
         "patient_info_font_size": 14,
         "patient_info_label_font_size": 14,
         "footer_font_size": 11,
-        "page_top_margin": 25.0,
-        "page_right_margin": 15.0,
-        "page_bottom_margin": 25.0,
-        "page_left_margin": 15.0,
-        "header_height": 140.0,
-        "header_bottom_margin": 10.0,
-        "patient_info_padding_vertical": 6.0,
-        "patient_info_padding_horizontal": 10.0,
-        "patient_info_min_height": 60.0,
-        "patient_info_row_gap": 4.0,
-        "patient_info_label_width": 100.0,
-        "patient_info_bottom_margin": 10.0,
-        "table_header_padding_vertical": 8.0,
-        "table_header_padding_horizontal": 12.0,
-        "table_cell_padding_vertical": 4.0,
-        "table_cell_padding_horizontal": 12.0,
-        "category_padding_top": 10.0,
-        "category_padding_bottom": 4.0,
-        "category_border_width": 2.0,
-        "group_padding_top": 8.0,
-        "group_padding_bottom": 2.0,
-        "group_padding_left": 4.0,
-        "footer_margin_top": 40.0,
-        "footer_padding_top": 20.0,
-        "signature_block_min_width": 150.0,
+        "page_top_margin": 15,
+        "page_right_margin": 15,
+        "page_bottom_margin": 15,
+        "page_left_margin": 15,
+        "header_height": 0,
+        "header_bottom_margin": 0,
+        "patient_info_padding_vertical": 2,
+        "patient_info_padding_horizontal": 4,
+        "patient_info_min_height": 0,
+        "patient_info_row_gap": 2,
+        "patient_info_label_width": 110,
+        "patient_info_bottom_margin": 8,
+        "table_header_padding_vertical": 4,
+        "table_header_padding_horizontal": 4,
+        "table_cell_padding_vertical": 4,
+        "table_cell_padding_horizontal": 4,
+        "category_padding_top": 8,
+        "category_padding_bottom": 4,
+        "category_border_width": 2,
+        "group_padding_top": 6,
+        "group_padding_bottom": 2,
+        "group_padding_left": 4,
+        "footer_margin_top": 12,
+        "footer_padding_top": 8,
+        "signature_block_min_width": 140,
         "primary_color": "#111111",
         "secondary_color": "#475569",
-        "border_color": "#cbd5e1",
+        "border_color": "#0f172a",
         "bg_light": "#f8fafc",
-        "text_main": "#1e293b",
+        "text_main": "#0f172a",
         "text_muted": "#64748b",
         "display_verified_by": 1,
         "display_pathologist_signature": 1,
-        "hide_single_param_title": 1,
         "combine_categories_on_same_page": 1,
+        "hide_single_param_title": 1,
+        "hidden_group_titles": "UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV",
+        "page_size": "A4",
         "is_active": True,
     }
 
@@ -577,7 +594,7 @@ def update_lab_print_settings_admin(payload: dict, actor: str = "Admin") -> dict
             "footer_margin_top", "footer_padding_top", "signature_block_min_width"
         ]
         str_fields = [
-            "primary_color", "secondary_color", "border_color", "bg_light", "text_main", "text_muted"
+            "primary_color", "secondary_color", "border_color", "bg_light", "text_main", "text_muted", "hidden_group_titles"
         ]
 
         update_data = {}
@@ -586,7 +603,6 @@ def update_lab_print_settings_admin(payload: dict, actor: str = "Admin") -> dict
                 try:
                     fval = float(payload[key])
                     existing_val = existing.get(key)
-                    # If column in Supabase is integer (or value has no decimal fraction), cast to int
                     if (isinstance(existing_val, int) and not isinstance(existing_val, bool)) or fval.is_integer():
                         update_data[key] = int(round(fval))
                     else:
@@ -608,22 +624,48 @@ def update_lab_print_settings_admin(payload: dict, actor: str = "Admin") -> dict
 
         update_data["updated_by"] = actor
 
-        if existing and existing.get("id"):
-            row_id = existing["id"]
-            resp = supabase.table("print_settings").update(update_data).eq("id", row_id).execute()
-            result_row = resp.data[0] if resp.data else None
-        else:
-            update_data["created_by"] = actor
-            resp = supabase.table("print_settings").insert(update_data).execute()
-            result_row = resp.data[0] if resp.data else None
+        # Save to local fetcheddata cache immediately
+        cached_path = get_fetched_data_dir() / "print_settings.json"
+        cdata = read_cached_lab_print_settings() or {}
+        cdata.update(update_data)
+        if "hidden_group_titles" in payload:
+            cdata["hidden_group_titles"] = str(payload["hidden_group_titles"]).strip()
+        with open(cached_path, "w", encoding="utf-8") as f:
+            json.dump(cdata, f, indent=2, default=str)
+
+        # Attempt Supabase update (gracefully retry if remote schema lacks hidden_group_titles)
+        result_row = None
+        try:
+            if existing and existing.get("id"):
+                row_id = existing["id"]
+                resp = supabase.table("print_settings").update(update_data).eq("id", row_id).execute()
+                result_row = resp.data[0] if resp.data else None
+            else:
+                update_data["created_by"] = actor
+                resp = supabase.table("print_settings").insert(update_data).execute()
+                result_row = resp.data[0] if resp.data else None
+        except Exception as se:
+            err_str = str(se)
+            if "hidden_group_titles" in err_str or "PGRST204" in err_str:
+                update_data_clean = dict(update_data)
+                update_data_clean.pop("hidden_group_titles", None)
+                if existing and existing.get("id"):
+                    row_id = existing["id"]
+                    resp = supabase.table("print_settings").update(update_data_clean).eq("id", row_id).execute()
+                    result_row = resp.data[0] if resp.data else None
+                else:
+                    update_data_clean["created_by"] = actor
+                    resp = supabase.table("print_settings").insert(update_data_clean).execute()
+                    result_row = resp.data[0] if resp.data else None
+            else:
+                raise se
 
         sync_lab_print_settings_cache()
-        save_log("Lab print settings updated globally in Supabase", category="ADMIN", user=actor)
-        return {"status": "Success", "message": "Print settings saved globally successfully.", "data": result_row}
+        save_log("Lab print settings updated globally", category="ADMIN", user=actor)
+        return {"status": "Success", "message": "Print settings saved successfully.", "data": result_row or cdata}
     except Exception as e:
         log_error(e, "UPDATE_LAB_PRINT_SETTINGS_ADMIN", user=actor)
         return {"status": "Error", "message": str(e)}
-
 
 
 def list_remarks_all(active_only: bool = True) -> list[dict]:

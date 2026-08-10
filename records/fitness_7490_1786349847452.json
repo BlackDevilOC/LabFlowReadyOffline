@@ -1,0 +1,22 @@
+{
+    "patient_name": "UZMA",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "HADI BAKSH",
+    "report_date": "10/08/2026",
+    "mr_no": "7490",
+    "hb": "13.7",
+    "wbc": "5.5",
+    "neut": "69",
+    "lymph": "28",
+    "mono": "02",
+    "eosino": "01",
+    "plt": "224",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-10 13:17:27"
+}

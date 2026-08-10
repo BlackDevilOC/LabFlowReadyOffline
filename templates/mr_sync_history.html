@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+    :root {
+        --accent: #2563eb;
+        --surface: #fff;
+        --surface-2: #f8fafc;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --radius: 10px;
+    }
+    .sync-history-page {
+        padding: 28px 32px;
+        max-width: 1300px;
+    }
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+    .page-header h1 {
+        margin: 0;
+        font-size: 22px;
+        color: var(--text);
+        font-weight: 700;
+    }
+    .page-header p {
+        margin: 5px 0 0;
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+    .hdr-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    .refresh-btn {
+        background: #0f172a;
+        color: #fff;
+        padding: 9px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .refresh-btn:hover {
+        background: #1e293b;
+    }
+    .filter-bar {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 12px 16px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+    .search-wrap {
+        flex: 1;
+        position: relative;
+    }
+    .search-wrap input {
+        width: 100%;
+        padding: 9px 12px 9px 36px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface-2);
+        font-size: 13px;
+        box-sizing: border-box;
+        outline: none;
+    }
+    .search-wrap input:focus {
+        border-color: var(--accent);
+        background: #fff;
+    }
+    .search-wrap svg {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+    }
+    .table-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .sync-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .sync-table thead {
+        background: var(--surface-2);
+    }
+    .sync-table th {
+        text-align: left;
+        padding: 12px 16px;
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: .04em;
+        font-weight: 700;
+    }
+    .sync-table td {
+        padding: 13px 16px;
+        border-top: 1px solid var(--border);
+        font-size: 13px;
+        color: var(--text);
+        vertical-align: middle;
+    }
+    .status-pill {
+        display: inline-block;
+        padding: 3px 9px;
+        border-radius: 9999px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+    .status-pill.on {
+        background: #dcfce7;
+        color: #166534;
+    }
+    .status-pill.off {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+    .mr-badge {
+        font-family: monospace;
+        font-weight: 700;
+        color: #1d4ed8;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="sync-history-page">
+    <div class="page-header">
+        <div>
+            <h1>MR Sync History</h1>
+            <p>Complete record of offline-to-online patient synchronization and MR mappings.</p>
+        </div>
+        <div class="hdr-actions">
+            <button class="refresh-btn" onclick="loadSyncHistory()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+                Refresh Log
+            </button>
+        </div>
+    </div>
+
+    <div class="filter-bar">
+        <div class="search-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="syncSearchInput" placeholder="Search by Offline MR, Online MR, or Patient Name..." oninput="handleSearch(this.value)">
+        </div>
+    </div>
+
+    <div class="table-card">
+        <table class="sync-table">
+            <thead>
+                <tr>
+                    <th>Synced At</th>
+                    <th>Patient Name</th>
+                    <th>Offline MR</th>
+                    <th>Online MR</th>
+                    <th>Tests</th>
+                    <th>Status</th>
+                    <th>Synced By</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody id="syncHistoryBody">
+                <tr>
+                    <td colspan="8" style="text-align:center; padding:32px; color:#94a3b8;">
+                        Loading sync log...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    let syncData = [];
+    let searchDebounce = null;
+
+    function escapeHtml(s) {
+        return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    async function loadSyncHistory() {
+        const tbody = document.getElementById('syncHistoryBody');
+        if (!tbody) return;
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:32px; color:#94a3b8;">Loading sync records…</td></tr>';
+        
+        try {
+            const prefix = window.APP_PREFIX || (window.location.pathname.startsWith('/offline') ? '/offline' : '');
+            const res = await fetch(`${prefix}/api/admin/offline-sync-log`);
+            const data = await res.json();
+            
+            if (data.status !== 'Success' && !data.logs) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#b45309; padding:28px;">No sync log records found or server unavailable.</td></tr>';
+                return;
+            }
+            syncData = data.logs || [];
+            renderTable(syncData);
+        } catch (e) {
+            console.error('Failed to load sync history:', e);
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#dc2626; padding:28px;">Error loading sync records.</td></tr>';
+        }
+    }
+
+    function renderTable(logs) {
+        const tbody = document.getElementById('syncHistoryBody');
+        if (!tbody) return;
+        if (!logs.length) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:32px;">No synchronization records found.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = logs.map(row => {
+            const isOk = (row.status || '').toLowerCase() === 'synced';
+            return `
+                <tr>
+                    <td style="font-size:0.8rem; color:#64748b;">${escapeHtml(row.synced_at || '—')}</td>
+                    <td><strong style="color:#0f172a;">${escapeHtml(row.patient_name || '—')}</strong></td>
+                    <td><span style="font-family:monospace; color:#475569;">${escapeHtml(row.offline_mr || '—')}</span></td>
+                    <td><span class="mr-badge">${escapeHtml(row.online_mr || '—')}</span></td>
+                    <td style="font-weight:600;">${row.tests_synced ?? 0}</td>
+                    <td><span class="status-pill ${isOk ? 'on' : 'off'}">${escapeHtml(row.status || '—')}</span></td>
+                    <td style="color:#64748b;">${escapeHtml(row.synced_by || 'Admin')}</td>
+                    <td style="max-width:240px; overflow-wrap:break-word; font-size:0.8rem; color:${row.error_message ? '#dc2626' : '#64748b'};">
+                        ${escapeHtml(row.error_message || 'OK')}
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function handleSearch(q) {
+        clearTimeout(searchDebounce);
+        searchDebounce = setTimeout(() => {
+            const query = (q || '').trim().toLowerCase();
+            if (!query) {
+                renderTable(syncData);
+                return;
+            }
+            const filtered = syncData.filter(row => {
+                const pat = (row.patient_name || '').toLowerCase();
+                const off = String(row.offline_mr || '').toLowerCase();
+                const on = String(row.online_mr || '').toLowerCase();
+                return pat.includes(query) || off.includes(query) || on.includes(query);
+            });
+            renderTable(filtered);
+        }, 150);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSyncHistory);
+</script>
+{% endblock %}

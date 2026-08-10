@@ -1,0 +1,22 @@
+{
+    "patient_name": "MEHAK",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "NOOR MUHAMMAD",
+    "report_date": "10/08/2026",
+    "mr_no": "9580",
+    "hb": "13.7",
+    "wbc": "6.0",
+    "neut": "55",
+    "lymph": "34",
+    "mono": "05",
+    "eosino": "06",
+    "plt": "245",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-10 13:17:44"
+}

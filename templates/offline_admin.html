@@ -328,28 +328,10 @@
     <aside class="admin-nav">
         <div style="padding: 0 24px 20px 24px; border-bottom: 1px solid #2d3748; margin-bottom: 20px;">
             <p
-                style="color: #319795; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;">
-                Offline Admin Panel</p>
+                style="color: #319795; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; margin:0;">
+                Offline Admin Console</p>
         </div>
 
-        <a href="{{ url_prefix }}/page/admin?view=offline-sync"
-            class="admin-nav-item {% if current_view == 'offline-sync' %}active{% endif %}">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
-                height="20">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.5" />
-            </svg>
-            Push Offline Patients
-        </a>
-        <a href="{{ url_prefix }}/page/admin?view=offline-sync-log"
-            class="admin-nav-item {% if current_view == 'offline-sync-log' %}active{% endif %}">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
-                height="20">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            MR Sync History
-        </a>
         <a href="{{ url_prefix }}/page/admin?view=offline-tests"
             class="admin-nav-item {% if current_view in ['offline-tests', 'offline-tests-edit'] %}active{% endif %}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
@@ -358,6 +340,15 @@
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
             </svg>
             Offline Tests CRUD
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=offline-sync"
+            class="admin-nav-item {% if current_view == 'offline-sync' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
+                height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.5" />
+            </svg>
+            Push Offline Patients
         </a>
         <a href="{{ url_prefix }}/page/admin?view=offline-mr-config"
             class="admin-nav-item {% if current_view == 'offline-mr-config' %}active{% endif %}">
@@ -368,16 +359,38 @@
             </svg>
             MR Number Settings
         </a>
+        <a href="{{ url_prefix }}/page/sync-history" class="admin-nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
+                height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            MR Sync History
+        </a>
+        <a href="{{ url_prefix }}/page/emergency-dr" class="admin-nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+            </svg>
+            Disaster Recovery & Replica
+        </a>
     </aside>
 
     <!-- Main Content Area -->
     <main class="admin-main">
-        <header style="margin-bottom: 24px;">
-            <h1 style="font-size: 1.5rem; color: #1a202c; font-weight:700;">Offline System Dashboard</h1>
-            <p style="color: #718096; font-size: 0.875rem;">Viewing panel for: <strong>{% if current_view ==
-                    'offline-sync' %}Push Offline Patients{% elif current_view == 'offline-sync-log' %}Sync History{%
-                    elif current_view == 'offline-mr-config' %}MR Generator Settings{% else %}Tests Management{% endif
-                    %}</strong></p>
+        <header style="margin-bottom: 24px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <h1 style="font-size: 1.5rem; color: #1a202c; font-weight:700; margin:0;">Offline Admin Console</h1>
+                <p style="color: #718096; font-size: 0.875rem; margin:4px 0 0;">Viewing panel for: <strong>{% if current_view ==
+                        'offline-sync' %}Push Offline Patients{% elif current_view == 'offline-sync-log' %}Sync History{%
+                        elif current_view == 'offline-mr-config' %}MR Sequence &amp; Generator Settings{% else %}Offline Tests Management{% endif
+                        %}</strong></p>
+            </div>
+            <div>
+                <a href="{{ url_prefix }}/register" style="background:#2b6cb0; color:white; padding:8px 16px; border-radius:8px; text-decoration:none; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
+                    ← Back to App
+                </a>
+            </div>
         </header>
 
         {% if current_view == 'offline-sync' %}

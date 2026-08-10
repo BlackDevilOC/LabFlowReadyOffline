@@ -397,9 +397,12 @@
     <!-- Admin Sidebar -->
     <aside class="admin-nav">
         <div style="padding: 0 24px 20px 24px; border-bottom: 1px solid #2d3748; margin-bottom: 20px;">
-            <p style="color: #4299e1; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Control Center
+            <p style="color: #4299e1; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">
+                {% if is_offline %}Offline Admin Console{% else %}Control Center{% endif %}
             </p>
         </div>
+
+        {% if not is_offline %}
         <a href="{{ url_prefix }}/page/admin?view=overview"
             class="admin-nav-item {% if current_view == 'overview' %}active{% endif %}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -503,13 +506,14 @@
             </svg>
             Analytics &amp; Reporting
         </a>
+        {% endif %}
 
-        <div style="padding: 10px 24px 5px 24px; border-top: 1px solid #2d3748; margin-top: 10px;">
+        <div style="padding: 10px 24px 5px 24px; {% if not is_offline %}border-top: 1px solid #2d3748; margin-top: 10px;{% endif %}">
             <p
                 style="color: #a0aec0; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">
-                Offline System</p>
+                Offline Controls</p>
         </div>
-        <a href="/offline/page/admin?view=offline-tests"
+        <a href="{{ url_prefix }}/page/admin?view=offline-tests"
             class="admin-nav-item {% if current_view in ['offline-tests','offline-tests-edit'] %}active{% endif %}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
                 height="20">
@@ -518,7 +522,7 @@
             </svg>
             Offline Tests CRUD
         </a>
-        <a href="/offline/page/admin?view=offline-sync"
+        <a href="{{ url_prefix }}/page/admin?view=offline-sync"
             class="admin-nav-item {% if current_view == 'offline-sync' %}active{% endif %}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
                 height="20">
@@ -527,15 +531,23 @@
             </svg>
             Push Offline Patients
         </a>
-        <a href="/offline/page/admin?view=offline-sync-log"
-            class="admin-nav-item {% if current_view == 'offline-sync-log' %}active{% endif %}">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20"
-                height="20">
+        {% if is_offline %}
+        <a href="{{ url_prefix }}/page/emergency-dr" class="admin-nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
             </svg>
-            MR Sync History
+            Disaster Recovery &amp; Replica
         </a>
+        <a href="{{ url_prefix }}/page/admin?view=system"
+            class="admin-nav-item {% if current_view == 'system' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            PC Health &amp; System
+        </a>
+        {% endif %}
     </aside>
 
     <!-- Main Content Area -->
@@ -884,6 +896,12 @@
                             Show "Pathologist Signature" section
                         </label>
                     </div>
+                </div>
+                <div style="margin-bottom:14px; background:#f8fafc; padding:12px; border-radius:8px; border:1px solid #e2e8f0;">
+                    <label class="input-label" style="margin-bottom:4px; font-weight:700;">Hide Group Headers (Print Only)</label>
+                    <input type="text" id="ps_hidden_group_titles" class="input-control" style="margin-bottom:4px;"
+                        placeholder="e.g. UCE, HEP B, C, UC, HEP B C">
+                    <p style="font-size:0.75rem; color:#64748b; margin:0;">Comma-separated test/group names whose header title row should NOT be printed (e.g. UCE, Hep B, C). Parameters will be aligned cleanly without a redundant header.</p>
                 </div>
                 <div style="display:flex; justify-content:flex-end;">
                     <button type="button" class="primary-btn" onclick="saveAdminPrintSettings()"
@@ -4136,6 +4154,9 @@
 
             const chkPath = document.getElementById('ps_display_pathologist_signature');
             if (chkPath) chkPath.checked = Boolean(s.display_pathologist_signature ?? 1);
+
+            const hiddenTitles = s.hidden_group_titles ?? 'UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV';
+            setVal('ps_hidden_group_titles', hiddenTitles);
         } catch (e) {
             console.error("Error loading print settings:", e);
         }
@@ -4178,6 +4199,7 @@
                 hide_single_param_title: document.getElementById('ps_hide_single_param_title')?.checked ? 1 : 0,
                 display_verified_by: document.getElementById('ps_display_verified_by')?.checked ? 1 : 0,
                 display_pathologist_signature: document.getElementById('ps_display_pathologist_signature')?.checked ? 1 : 0,
+                hidden_group_titles: document.getElementById('ps_hidden_group_titles')?.value.trim() || 'UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV',
             };
 
             const res = await fetch('/api/admin/print-settings', {

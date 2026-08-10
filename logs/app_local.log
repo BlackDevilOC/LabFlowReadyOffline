@@ -17802,3 +17802,529 @@ postgrest.exceptions.APIError: {'message': 'null value in column "user_id" of re
 2026-08-09 18:29:45,462 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
 2026-08-09 18:29:45,462 - INFO - [LabFlow] - Background metadata sync to offline database complete.
 2026-08-09 18:29:51,388 - INFO - [LabFlow] - Cloud settings pushed to Supabase by Anonymous
+2026-08-10 12:48:09,979 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-10 12:48:14,123 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 12:48:14,168 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-10 12:48:14,212 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 12:48:14,218 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-10 12:48:14,218 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 12:48:14,223 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-10 12:48:14,583 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-10 12:48:14,660 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 12:48:15,028 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-10 12:48:21,176 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 6952ms. Total updated: 655 rows across 12 tables.
+2026-08-10 12:48:22,502 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 12:48:27,447 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 12:48:27,699 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 12:48:28,158 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 12:48:28,439 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 12:48:28,440 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 12:48:28,690 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 12:48:28,762 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 12:48:28,876 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 12:48:29,069 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 12:48:29,230 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 12:48:29,400 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 12:48:29,626 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 12:48:29,635 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 12:48:30,421 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-10 12:48:30,956 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-10 12:48:31,437 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-10 12:48:32,670 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 12:48:37,494 - INFO - [LabFlow] - User requested logout
+2026-08-10 12:48:37,498 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 12:48:43,815 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2623ms. Total updated: 0 rows across 12 tables.
+2026-08-10 12:48:49,768 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 12:49:02,365 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-10 12:49:04,819 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 12:49:04,866 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-10 12:49:04,896 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 12:49:04,910 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-10 12:49:04,910 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 12:49:04,926 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-10 12:49:05,229 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-10 12:49:05,233 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-10 12:49:05,304 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 12:49:08,201 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 12:49:10,083 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5155ms. Total updated: 655 rows across 12 tables.
+2026-08-10 12:49:12,972 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 12:49:13,195 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 12:49:13,643 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 12:49:13,869 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 12:49:13,871 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 12:49:14,111 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 12:49:14,184 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 12:49:14,285 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 12:49:14,470 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 12:49:14,626 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 12:49:14,781 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 12:49:15,007 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 12:49:15,032 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 12:49:32,297 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2208ms. Total updated: 0 rows across 12 tables.
+2026-08-10 12:49:54,297 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1992ms. Total updated: 0 rows across 12 tables.
+2026-08-10 12:50:16,268 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1966ms. Total updated: 0 rows across 12 tables.
+2026-08-10 12:58:53,273 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-10 12:58:55,642 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 12:58:55,696 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-10 12:58:55,729 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 12:58:55,734 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-10 12:58:55,735 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 12:58:55,741 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-10 12:58:56,101 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-10 12:58:56,129 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 12:58:56,643 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-10 12:58:57,472 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 12:59:01,316 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 12:59:01,556 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 12:59:01,792 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 6049ms. Total updated: 655 rows across 12 tables.
+2026-08-10 12:59:02,119 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 12:59:02,372 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 12:59:02,374 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 12:59:02,626 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 12:59:02,688 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 12:59:02,795 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 12:59:02,998 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 12:59:03,151 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 12:59:03,315 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 12:59:03,568 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 12:59:03,571 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 12:59:15,925 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 12:59:16,833 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 12:59:19,831 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 12:59:20,041 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 12:59:20,467 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 12:59:20,691 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 12:59:20,694 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 12:59:20,963 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 12:59:21,009 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 12:59:21,123 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 12:59:21,292 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 12:59:21,452 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 12:59:21,610 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 12:59:21,856 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 12:59:21,857 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 12:59:23,856 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2046ms. Total updated: 0 rows across 12 tables.
+2026-08-10 12:59:45,873 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2009ms. Total updated: 0 rows across 12 tables.
+2026-08-10 12:59:50,038 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 12:59:51,310 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 12:59:55,247 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 12:59:55,463 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 12:59:55,980 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 12:59:56,221 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 12:59:56,222 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 12:59:56,458 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 12:59:56,537 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 12:59:56,619 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 12:59:56,805 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 12:59:56,966 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 12:59:57,146 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 12:59:57,409 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 12:59:57,411 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:00:08,064 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2169ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:00:30,258 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2182ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:00:52,680 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2416ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:01:14,704 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2017ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:01:34,421 - INFO - [LabFlow] - User requested logout
+2026-08-10 13:01:34,425 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:01:36,738 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2022ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:01:45,936 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:01:46,851 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:01:49,791 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:01:50,032 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:01:50,547 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:01:50,772 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:01:50,774 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:01:51,042 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:01:51,087 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:01:51,210 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:01:51,388 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:01:51,570 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:01:51,758 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:01:52,019 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:01:52,020 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:01:58,807 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2053ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:02:18,639 - ERROR - [LabFlow] - [USER: Anonymous] [UPDATE_LAB_PRINT_SETTINGS_ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'message': "Could not find the 'hidden_group_titles' column of 'print_settings' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 616, in update_lab_print_settings_admin
+    resp = supabase.table("print_settings").update(update_data).eq("id", row_id).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\postgrest\_sync\request_builder.py", line 53, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': "Could not find the 'hidden_group_titles' column of 'print_settings' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2026-08-10 13:02:21,075 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2261ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:02:21,249 - ERROR - [LabFlow] - [USER: Anonymous] [UPDATE_LAB_PRINT_SETTINGS_ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'message': "Could not find the 'hidden_group_titles' column of 'print_settings' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 616, in update_lab_print_settings_admin
+    resp = supabase.table("print_settings").update(update_data).eq("id", row_id).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\postgrest\_sync\request_builder.py", line 53, in execute
+    raise APIError(dict(json_obj))
+postgrest.exceptions.APIError: {'message': "Could not find the 'hidden_group_titles' column of 'print_settings' in the schema cache", 'code': 'PGRST204', 'hint': None, 'details': None}
+2026-08-10 13:02:34,661 - INFO - [LabFlow] - User requested logout
+2026-08-10 13:02:34,667 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:02:43,092 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1998ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:02:48,693 - INFO - [LabFlow] - User requested logout
+2026-08-10 13:02:48,699 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:03:06,051 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2940ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:03:29,007 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2947ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:03:32,418 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:03:51,560 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2535ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:04:13,590 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2012ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:04:18,974 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:04:30,487 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:04:31,455 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:04:35,225 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:04:35,454 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:04:35,803 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2201ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:04:35,892 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:04:36,178 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:04:36,181 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:04:36,439 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:04:36,502 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:04:36,602 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:04:36,780 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:04:36,934 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:04:37,101 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:04:37,351 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:04:37,352 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:04:57,853 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2043ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:05:19,926 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2052ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:05:42,209 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2267ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:06:04,337 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2118ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:06:26,439 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2093ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:06:43,750 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:06:44,566 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:06:47,890 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:06:48,142 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:06:48,495 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2040ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:06:48,612 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:06:48,849 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:06:48,850 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:06:49,130 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:06:49,164 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:06:49,314 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:06:49,498 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:06:49,667 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:06:49,836 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:06:50,088 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:06:50,089 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:06:54,829 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:06:55,750 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:07:10,475 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1970ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:07:17,849 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:07:18,084 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:07:18,533 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:07:18,743 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:07:18,745 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:07:18,987 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:07:19,097 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:07:19,152 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:07:19,335 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:07:19,486 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:07:19,638 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:07:19,894 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:07:19,896 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:07:21,643 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-10 13:07:22,052 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 13:07:22,965 - INFO - [LabFlow] - Accessing Fluid Reports Hub
+2026-08-10 13:07:23,490 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:07:32,604 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2112ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:07:44,344 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:07:45,589 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:07:48,857 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:07:49,120 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:07:49,713 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:07:49,933 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:07:49,936 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:07:50,215 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:07:50,256 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:07:50,418 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:07:50,664 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:07:50,844 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:07:51,004 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:07:51,230 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:07:51,231 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:07:51,283 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:07:54,686 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2067ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:08:16,701 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1995ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:08:38,793 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2049ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:08:51,765 - INFO - [LabFlow] - Accessing Fluid Reports Hub
+2026-08-10 13:08:52,993 - INFO - [LabFlow] - Generating Ascitic Fluid DR report page
+2026-08-10 13:08:54,422 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-10 13:08:54,872 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-10 13:09:00,977 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2164ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:09:23,149 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2155ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:09:45,207 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2039ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:10:07,403 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2181ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:10:29,712 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2291ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:10:52,530 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2806ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:10:57,784 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-10 13:10:58,583 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-10 13:11:15,135 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2587ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:11:37,302 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2154ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:11:41,585 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 13:11:44,417 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184148, date=None
+2026-08-10 13:11:50,680 - INFO - [LabFlow] - Print layout saved by admin@admin.com for fingerprint complete blood count|hep b, c|liver func
+2026-08-10 13:11:59,323 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2016ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:11:59,705 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184148, date=None
+2026-08-10 13:12:05,278 - INFO - [LabFlow] - Print layout saved by admin@admin.com for fingerprint complete blood count|hep b, c|liver func
+2026-08-10 13:12:15,251 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184148, date=None
+2026-08-10 13:12:21,631 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2289ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:12:43,657 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2007ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:13:05,956 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2291ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:13:27,967 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1984ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:13:50,001 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2015ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:15:55,934 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-10 13:15:58,258 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 13:15:58,301 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-10 13:15:58,330 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 13:15:58,333 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-10 13:15:58,333 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 13:15:58,367 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-10 13:15:58,746 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-10 13:15:58,779 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:15:59,040 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-10 13:16:00,692 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:16:04,120 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5753ms. Total updated: 655 rows across 12 tables.
+2026-08-10 13:16:04,503 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:16:04,722 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:16:05,163 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:16:05,378 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:16:05,379 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:16:05,609 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:16:05,692 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:16:05,773 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:16:05,950 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:16:06,109 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:16:06,274 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:16:06,490 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:16:06,491 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:16:18,448 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 13:16:19,821 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:16:26,163 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2026ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:16:42,248 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9936_1786349802248.json
+2026-08-10 13:16:42,250 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9936_1786349802248.json
+2026-08-10 13:16:42,251 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'ANMOL', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'GH SHABIR', 'report_date': '10/08/2026', 'mr_no': '9936', 'hb': '13.6', 'wbc': '8.5', 'neut': '68', 'lymph': '25', 'mono': '02', 'eosino': '05', 'plt': '243', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:16:42,528 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100126
+2026-08-10 13:16:42,531 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9936_1786349802248.json
+2026-08-10 13:16:45,590 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:16:46,926 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:16:48,094 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1921ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:17:08,349 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9937_1786349828348.json
+2026-08-10 13:17:08,351 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9937_1786349828348.json
+2026-08-10 13:17:08,352 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'KASAK', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'BAIBU RAM', 'report_date': '10/08/2026', 'mr_no': '9937', 'hb': '12.7', 'wbc': '8.6', 'neut': '58', 'lymph': '35', 'mono': '02', 'eosino': '05', 'plt': '389', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:17:08,590 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100127
+2026-08-10 13:17:08,592 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9937_1786349828348.json
+2026-08-10 13:17:10,058 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1934ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:17:14,887 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:17:27,453 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_7490_1786349847452.json
+2026-08-10 13:17:27,454 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_7490_1786349847452.json
+2026-08-10 13:17:27,456 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'UZMA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'HADI BAKSH', 'report_date': '10/08/2026', 'mr_no': '7490', 'hb': '13.7', 'wbc': '5.5', 'neut': '69', 'lymph': '28', 'mono': '02', 'eosino': '01', 'plt': '224', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:17:27,692 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100128
+2026-08-10 13:17:27,693 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_7490_1786349847452.json
+2026-08-10 13:17:30,121 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:17:32,478 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2415ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:17:44,446 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9580_1786349864445.json
+2026-08-10 13:17:44,447 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9580_1786349864445.json
+2026-08-10 13:17:44,449 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'MEHAK', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'NOOR MUHAMMAD', 'report_date': '10/08/2026', 'mr_no': '9580', 'hb': '13.7', 'wbc': '6.0', 'neut': '55', 'lymph': '34', 'mono': '05', 'eosino': '06', 'plt': '245', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:17:44,705 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100129
+2026-08-10 13:17:44,706 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9580_1786349864445.json
+2026-08-10 13:17:47,600 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:17:54,541 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2052ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:18:02,534 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9839_1786349882533.json
+2026-08-10 13:18:02,536 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9839_1786349882533.json
+2026-08-10 13:18:02,538 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'ASIA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'ABDUL HAQ', 'report_date': '10/08/2026', 'mr_no': '9839', 'hb': '12.7', 'wbc': '7.0', 'neut': '56', 'lymph': '34', 'mono': '05', 'eosino': '05', 'plt': '282', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:18:02,817 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100130
+2026-08-10 13:18:02,818 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9839_1786349882533.json
+2026-08-10 13:18:05,080 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:18:16,578 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2019ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:18:26,854 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9802_1786349906853.json
+2026-08-10 13:18:26,857 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9802_1786349906853.json
+2026-08-10 13:18:26,858 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'HORAIN', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'M.SHAHID', 'report_date': '10/08/2026', 'mr_no': '9802', 'hb': '14.6', 'wbc': '6.5', 'neut': '67', 'lymph': '23', 'mono': '05', 'eosino': '05', 'plt': '335', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:18:27,143 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100131
+2026-08-10 13:18:27,145 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9802_1786349906853.json
+2026-08-10 13:18:28,936 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:18:38,758 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2171ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:18:48,510 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9659_1786349928509.json
+2026-08-10 13:18:48,512 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9659_1786349928509.json
+2026-08-10 13:18:48,513 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'SINDHIYA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'SHABIR AHMED', 'report_date': '10/08/2026', 'mr_no': '9659', 'hb': '15.3', 'wbc': '7.6', 'neut': '63', 'lymph': '26', 'mono': '05', 'eosino': '06', 'plt': '395', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:18:48,873 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100132
+2026-08-10 13:18:48,890 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9659_1786349928509.json
+2026-08-10 13:18:50,896 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:19:01,000 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2230ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:19:05,112 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9798_1786349945112.json
+2026-08-10 13:19:05,114 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9798_1786349945112.json
+2026-08-10 13:19:05,116 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'SAVERA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'BHAI KHAN', 'report_date': '10/08/2026', 'mr_no': '9798', 'hb': '13.4', 'wbc': '5.2', 'neut': '64', 'lymph': '28', 'mono': '03', 'eosino': '05', 'plt': '245', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:19:05,368 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100133
+2026-08-10 13:19:05,369 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9798_1786349945112.json
+2026-08-10 13:19:08,714 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:19:23,247 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2226ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:19:31,255 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9662_1786349971255.json
+2026-08-10 13:19:31,257 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9662_1786349971255.json
+2026-08-10 13:19:31,259 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'MAHEEN', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'ILIMUDDIN', 'report_date': '10/08/2026', 'mr_no': '9662', 'hb': '12.8', 'wbc': '8.8', 'neut': '69', 'lymph': '24', 'mono': '06', 'eosino': '01', 'plt': '213', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:19:31,504 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100134
+2026-08-10 13:19:31,505 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9662_1786349971255.json
+2026-08-10 13:19:33,290 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:19:45,261 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1998ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:19:58,943 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9696_1786349998943.json
+2026-08-10 13:19:58,945 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9696_1786349998943.json
+2026-08-10 13:19:58,947 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'RABIA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'NASRULLAH', 'report_date': '10/08/2026', 'mr_no': '9696', 'hb': '14.8', 'wbc': '8.7', 'neut': '65', 'lymph': '24', 'mono': '06', 'eosino': '05', 'plt': '346', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:19:59,289 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100135
+2026-08-10 13:19:59,291 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9696_1786349998943.json
+2026-08-10 13:20:01,563 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:20:07,371 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2090ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:20:19,279 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9891_1786350019279.json
+2026-08-10 13:20:19,281 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9891_1786350019279.json
+2026-08-10 13:20:19,282 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'ARISHA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'ABID ALI', 'report_date': '10/08/2026', 'mr_no': '9891', 'hb': '15.1', 'wbc': '8.9', 'neut': '56', 'lymph': '32', 'mono': '06', 'eosino': '06', 'plt': '367', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:20:19,532 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100136
+2026-08-10 13:20:19,534 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9891_1786350019279.json
+2026-08-10 13:20:21,755 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:20:29,382 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2004ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:20:50,878 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9871_1786350050877.json
+2026-08-10 13:20:50,879 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9871_1786350050877.json
+2026-08-10 13:20:50,880 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'LAILBA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'DIN MUHAMMAD', 'report_date': '10/08/2026', 'mr_no': '9871', 'hb': '14.1', 'wbc': '7.4', 'neut': '62', 'lymph': '33', 'mono': '03', 'eosino': '02', 'plt': '250', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Positive', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-10 13:20:51,097 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100137
+2026-08-10 13:20:51,102 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9871_1786350050877.json
+2026-08-10 13:20:51,729 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2335ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:20:53,595 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:21:06,165 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-10 13:21:08,358 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 13:21:08,403 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-10 13:21:08,431 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 13:21:08,435 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-10 13:21:08,436 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 13:21:08,443 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-10 13:21:08,532 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-10 13:21:08,550 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:21:08,790 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-10 13:21:10,608 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:21:14,183 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 5742ms. Total updated: 655 rows across 12 tables.
+2026-08-10 13:21:14,211 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:21:14,419 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:21:14,893 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:21:15,107 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:21:15,109 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:21:15,397 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:21:15,430 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:21:15,568 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:21:15,749 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:21:15,919 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:21:16,099 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:21:16,325 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:21:16,326 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:21:16,796 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-10 13:21:17,715 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-10 13:21:18,014 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 13:21:23,189 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:21:24,484 - INFO - [LabFlow] - Accessing Fluid Reports Hub
+2026-08-10 13:21:25,340 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:21:36,295 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2101ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:21:40,177 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:21:40,178 - INFO - [LabFlow] - [USER: Anonymous] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-10 13:21:43,648 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:21:43,649 - INFO - [LabFlow] - [USER: Anonymous] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-10 13:21:56,968 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:21:58,875 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2565ms. Total updated: 1 rows across 12 tables.
+2026-08-10 13:22:21,196 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2301ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:22:43,864 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2653ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:23:06,143 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2273ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:28:51,099 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-10 13:28:53,359 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 13:28:53,405 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-10 13:28:53,427 - INFO - [LabFlow] - Triggered auto-push of pending offline patients on app boot.
+2026-08-10 13:28:53,440 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 13:28:53,443 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-10 13:28:53,443 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 13:28:53,459 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-10 13:28:53,538 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-10 13:28:53,556 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:28:54,175 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-10 13:29:02,856 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 9394ms. Total updated: 656 rows across 12 tables.
+2026-08-10 13:29:10,645 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:29:12,927 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:29:17,483 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:29:17,694 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:29:18,117 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:29:18,338 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:29:18,340 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:29:18,605 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:29:18,660 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:29:18,768 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:29:18,948 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:29:19,109 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:29:19,270 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:29:19,507 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:29:19,508 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:29:24,877 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2011ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:29:26,693 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:29:46,980 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2085ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:30:09,121 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2130ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:30:31,106 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1968ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:30:53,216 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2097ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:31:02,027 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:31:04,029 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:31:07,546 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:31:07,800 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:31:08,235 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:31:08,492 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:31:08,493 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:31:08,728 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:31:08,810 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:31:08,892 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:31:09,061 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:31:09,229 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:31:09,395 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:31:09,520 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-10 13:31:09,633 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:31:09,635 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:31:10,121 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 13:31:15,248 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2008ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:31:19,896 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-10 13:31:37,169 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1907ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:31:59,707 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2528ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:32:10,433 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 13:32:12,355 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184148, date=None
+2026-08-10 13:32:20,018 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-10 13:32:22,018 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2298ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:32:23,201 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 13:32:25,386 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184145, date=None
+2026-08-10 13:32:33,001 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 13:32:36,930 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184144, date=None
+2026-08-10 13:32:44,424 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2388ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:33:06,492 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2050ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:36:04,447 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-10 13:36:06,616 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 13:36:06,665 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-10 13:36:06,688 - INFO - [LabFlow] - Triggered auto-push of pending offline patients on app boot.
+2026-08-10 13:36:06,696 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 13:36:06,700 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-10 13:36:06,700 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 13:36:06,705 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-10 13:36:06,834 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-10 13:36:06,853 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:36:08,100 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-10 13:36:13,330 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 6623ms. Total updated: 660 rows across 12 tables.
+2026-08-10 13:36:15,352 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 13:36:20,884 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 13:36:21,098 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 13:36:22,271 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 13:36:22,575 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 13:36:22,577 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 13:36:22,892 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 13:36:23,069 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 13:36:23,231 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 13:36:23,414 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 13:36:23,606 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 13:36:23,995 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 13:36:24,899 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 13:36:24,900 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 13:36:36,406 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3058ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:36:58,449 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2028ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:37:20,531 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2074ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:37:23,879 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:37:42,611 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2040ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:37:46,419 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 13:38:04,780 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2159ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:38:26,728 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1928ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:38:48,669 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1929ms. Total updated: 0 rows across 12 tables.
+2026-08-10 13:39:10,706 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2017ms. Total updated: 0 rows across 12 tables.
