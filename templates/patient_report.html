@@ -18,7 +18,7 @@
             </svg>
             Back
         </button>
-        <button class="btn-print" onclick="window.print()">
+        <button class="btn-print" onclick="triggerAuditPrint()">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 6 2 18 2 18 9"></polyline>
@@ -38,6 +38,30 @@
     <script>
         // Use Patient ID passed from backend
         const patientId = {{ patient_id }};
+        let currentPatientData = null;
+
+        function triggerAuditPrint() {
+            try {
+                const loggedInUser = localStorage.getItem('userName') || localStorage.getItem('userEmail') || 'Staff';
+                const userId = localStorage.getItem('userId') || '';
+                const p = currentPatientData || {};
+                const mrNo = p.mr_no || '';
+                const ptName = p.patient_name || '';
+                const prefix = window.location.pathname.startsWith('/offline') ? '/offline' : '';
+                fetch(`${prefix}/api/audit/log-print`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        mr_no: mrNo,
+                        patient_name: ptName,
+                        user_name: loggedInUser,
+                        user_id: userId,
+                        details: 'Printed patient lab report'
+                    })
+                }).catch(() => {});
+            } catch(e) {}
+            window.print();
+        }
 
         async function initReport() {
             try {
@@ -49,6 +73,7 @@
                 ]);
 
                 const patientData = (await patientResponse.json()).Response;
+                currentPatientData = patientData;
                 const testGroups = await groupsResponse.json();
                 const settingsArray = await settingsResponse.json();
                 const printSettings = settingsArray && settingsArray.length > 0 ? settingsArray[0] : null;

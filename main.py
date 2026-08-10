@@ -18,6 +18,17 @@ from search_utils import parse_advanced_filters, row_matches_advanced_filters
 from patient_list_query import fetch_test_result_list_rows, BROWSE_PATIENT_LIMIT
 from analytics_router import router as analytics_router
 from replica_engine import get_replica_engine
+
+try:
+    from offline.database import insert_audit_log, list_audit_trail
+except Exception:
+    try:
+        # pyrefly: ignore [missing-import]
+        from database import insert_audit_log, list_audit_trail
+    except Exception:
+        insert_audit_log = None
+        list_audit_trail = None
+
 def get_base_path():
     if getattr(sys, 'frozen', False):
         # Running as a bundled executable
@@ -548,7 +559,7 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
         stats = get_system_stats()
         
         admin_config_views = (
-            "tests", "tests-edit", "test-selection", "users", "shifts", "remarks", "print-settings", "cloud-sync",
+            "tests", "tests-edit", "test-selection", "users", "shifts", "remarks", "print-settings", "cloud-sync", "audit-trail",
         )
         if view in admin_config_views:
             return templates.TemplateResponse('admin_panel.html', {
@@ -693,6 +704,20 @@ async def register_patient(request: Request, background_tasks: BackgroundTasks):
             )
 
             save_log(f"New patient registered: {patient_mr_no}", category="AUTH_SUCCESS", user=user)
+
+            # Record local audit trail entry
+            try:
+                if insert_audit_log:
+                    insert_audit_log(
+                        mr_no=str(patient_mr_no),
+                        patient_name=patient.get("patient_name"),
+                        action="REGISTER",
+                        user_name=str(user).split("@")[0] if user else "Staff",
+                        details=f"Registered patient with {len(test_display_names)} test(s): {', '.join(test_display_names[:6])}{'...' if len(test_display_names) > 6 else ''} (Shift: {item.shift})",
+                    )
+            except Exception as a_err:
+                logger.debug(f"Audit log on register error: {a_err}")
+
             query = urlencode(
                 {
                     "tests": "|".join(test_display_names),
@@ -1046,6 +1071,25 @@ def _parse_test_result_update_body(data):
     return _sanitize_test_values(data), None
 
 
+def _format_audit_test_values(test_values) -> str:
+    """Format test values dict into a clean string for audit logging."""
+    if not isinstance(test_values, dict):
+        return str(test_values) if test_values else ""
+    parts = []
+    for k, v in test_values.items():
+        if k in ("remarks", "test_values"):
+            continue
+        if isinstance(v, dict):
+            val = v.get("value")
+            unit = v.get("unit", "")
+            unit_str = f" {unit}" if unit else ""
+            if val not in (None, ""):
+                parts.append(f"{k}: {val}{unit_str}")
+        elif v not in (None, ""):
+            parts.append(f"{k}: {v}")
+    return ", ".join(parts)
+
+
 @app.post("/api/test-results/update/{record_id}")
 async def update_test_record_results(record_id: int, request: Request):
     try:
@@ -1069,6 +1113,33 @@ async def update_test_record_results(record_id: int, request: Request):
             if meta.data:
                 m = meta.data[0]
                 record_remark_usage(str(remarks).strip(), m.get("test_name"), m.get("category"))
+
+        # Local audit log for single record result update
+        try:
+            if insert_audit_log:
+                meta = (
+                    supabase.table("test_results_all")
+                    .select("mr_no, patient_name, test_name")
+                    .eq("id", record_id)
+                    .limit(1)
+                    .execute()
+                )
+                if meta.data:
+                    m = meta.data[0]
+                    actor = data.get("user_name") or data.get("logged_in_user") or "Staff"
+                    val_summary = _format_audit_test_values(test_values)
+                    rem_str = f" [Remark: {remarks}]" if remarks else ""
+                    details_msg = f"{m.get('test_name')}: {val_summary}{rem_str}" if val_summary else f"Updated {m.get('test_name')}{rem_str}"
+                    insert_audit_log(
+                        mr_no=str(m.get("mr_no")),
+                        patient_name=m.get("patient_name"),
+                        action="UPDATE_RESULT",
+                        user_name=actor,
+                        details=details_msg,
+                    )
+        except Exception as a_err:
+            logger.debug(f"Audit log on update error: {a_err}")
+
         save_log(f"Updated results for test_results_all ID: {record_id}", category="DATA_MODIFICATION")
         return {"status": "Success", "data": response.data}
     except Exception as e:
@@ -1150,6 +1221,40 @@ async def update_patient_test_records(mr_no: int, request: Request):
             if remarks and str(remarks).strip():
                 m = meta_rows.get(record_id, {})
                 record_remark_usage(str(remarks).strip(), m.get("test_name"), m.get("category"))
+
+        # Local audit log for bulk results update
+        try:
+            if insert_audit_log:
+                actor = data.get("user_name") or data.get("logged_in_user") or "Staff"
+                p_name = None
+                p_resp = supabase.table("patients").select("patient_name").eq("mr_no", mr_no).limit(1).execute()
+                if p_resp.data:
+                    p_name = p_resp.data[0].get("patient_name")
+
+                breakdown = []
+                for record_id_str, item in data.items():
+                    record_id = int(record_id_str)
+                    tv, rem = _parse_test_result_update_body(item)
+                    m = meta_rows.get(record_id, {})
+                    tname = m.get("test_name") or f"Test #{record_id}"
+                    val_str = _format_audit_test_values(tv)
+                    rem_str = f" [Remark: {rem}]" if rem else ""
+                    if val_str:
+                        breakdown.append(f"• {tname}: {val_str}{rem_str}")
+                    elif rem:
+                        breakdown.append(f"• {tname}:{rem_str}")
+
+                details_msg = "\n".join(breakdown) if breakdown else f"Bulk updated {len(data)} test record(s)"
+                insert_audit_log(
+                    mr_no=str(mr_no),
+                    patient_name=p_name,
+                    action="UPDATE_RESULT",
+                    user_name=actor,
+                    details=details_msg,
+                )
+        except Exception as a_err:
+            logger.debug(f"Audit log on bulk update error: {a_err}")
+
         save_log(f"Updated all results for patient MR: {mr_no}", category="DATA_MODIFICATION")
         return {"status": "Success"}
     except Exception as e:
@@ -1168,6 +1273,20 @@ async def soft_delete_test_record(record_id: int, request: Request):
             "delete_status": True,
             "person_deleting": person_deleting
         }).eq("id", record_id).execute()
+
+        try:
+            if insert_audit_log and response.data:
+                r = response.data[0]
+                insert_audit_log(
+                    mr_no=str(r.get("mr_no")),
+                    patient_name=r.get("patient_name"),
+                    action="DELETE_TEST",
+                    user_name=person_deleting,
+                    details=f"Deleted test ID: {record_id}",
+                )
+        except Exception as a_err:
+            logger.debug(f"Audit log on delete error: {a_err}")
+
         save_log(f"Soft-deleted test record ID: {record_id} by {person_deleting}", category="DATA_DELETION")
         return {"status": "Success", "data": response.data}
     except Exception as e:
@@ -1506,6 +1625,20 @@ async def update_patient_info(mr_no: int, request: Request):
             supabase.table("test_results_all").update({
                 "patient_name": allowed_payload["patient_name"]
             }).eq("mr_no", mr_no).execute()
+
+        # Local audit log for patient demographic edit
+        try:
+            if insert_audit_log:
+                actor = data.get("user_name") or data.get("logged_in_user") or "Staff"
+                insert_audit_log(
+                    mr_no=str(mr_no),
+                    patient_name=allowed_payload.get("patient_name"),
+                    action="EDIT_PATIENT",
+                    user_name=actor,
+                    details=f"Updated demographics: {', '.join(allowed_payload.keys())}",
+                )
+        except Exception as a_err:
+            logger.debug(f"Audit log on patient edit error: {a_err}")
             
         save_log(f"Updated patient info for MR: {mr_no}", category="DATA_MODIFICATION")
         return {"status": "Success", "data": response.data}
@@ -2445,6 +2578,67 @@ def api_emergency_dr_switch(payload: dict):
         "active_url": env_dict["SUPABASE_URL"],
         "message": f"Successfully switched active database to {active_name}!"
     }
+
+
+# ── Local SQLite Audit Trail & Print Tracking ─────────────────────────────────
+@app.post("/api/audit/log-print")
+async def api_audit_log_print_online(request: Request):
+    try:
+        data = await request.json()
+        mr_no = str(data.get("mr_no") or "").strip()
+        if not mr_no:
+            return {"status": "Ignored", "message": "Missing MR number"}
+
+        patient_name = data.get("patient_name")
+        user_name = data.get("user_name") or "Staff"
+        user_id = str(data.get("user_id") or "")
+        details = data.get("details") or "Printed lab test report"
+        pc_name = data.get("pc_name")
+
+        print_count = 1
+        if insert_audit_log:
+            print_count = insert_audit_log(
+                mr_no=mr_no,
+                patient_name=patient_name,
+                action="PRINT",
+                user_name=user_name,
+                user_id=user_id,
+                details=details,
+                pc_name=pc_name,
+            ) or 1
+        save_log(f"Print report for MR#{mr_no} by {user_name} (Copy #{print_count})", category="PRINT_EVENT", user=user_name)
+        return {"status": "Success", "print_count": print_count}
+    except Exception as e:
+        logger.error(f"Online audit log print error: {e}")
+        return {"status": "Error", "message": str(e)}
+
+
+@app.get("/api/audit/list")
+def api_audit_list_online(
+    search: str = None,
+    mr_no: str = None,
+    user_name: str = None,
+    action: str = None,
+    date_from: str = None,
+    date_to: str = None,
+    limit: int = 200,
+):
+    try:
+        if list_audit_trail:
+            logs = list_audit_trail(
+                search=search,
+                mr_no=mr_no,
+                user_name=user_name,
+                action=action,
+                date_from=date_from,
+                date_to=date_to,
+                limit=limit,
+            )
+            return {"status": "Success", "logs": logs, "count": len(logs)}
+        return {"status": "Success", "logs": [], "count": 0}
+    except Exception as e:
+        logger.error(f"Online audit list error: {e}")
+        return {"status": "Error", "message": str(e), "logs": []}
 
 
 

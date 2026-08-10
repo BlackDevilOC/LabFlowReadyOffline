@@ -33,6 +33,7 @@ try:
     from database import (
         get_db_conn, init_db, get_next_table_id,
         insert_mr_sync_log, list_mr_sync_log,
+        insert_audit_log, list_audit_trail,
         upsert_tests_from_supabase, upsert_test_groups_from_supabase,
         upsert_shifts_from_supabase, upsert_users_from_supabase,
         upsert_remarks_from_supabase, upsert_invoice_settings_from_supabase,
@@ -41,6 +42,7 @@ except ImportError:
     from offline.database import (
         get_db_conn, init_db, get_next_table_id,
         insert_mr_sync_log, list_mr_sync_log,
+        insert_audit_log, list_audit_trail,
         upsert_tests_from_supabase, upsert_test_groups_from_supabase,
         upsert_shifts_from_supabase, upsert_users_from_supabase,
         upsert_remarks_from_supabase, upsert_invoice_settings_from_supabase,
@@ -1243,7 +1245,19 @@ async def register_patient(request: Request, background_tasks: BackgroundTasks):
             test_display_names = resolve_selected_test_display_names(cursor, selected_tests)
             
         logger.info(f"Registered patient ID: {patient_id}, MR No: {mr_no} (Offline)")
-        
+
+        # Record local audit log for patient registration
+        try:
+            insert_audit_log(
+                mr_no=mr_no,
+                patient_name=item.patient_name,
+                action="REGISTER",
+                user_name=item.user or "Staff",
+                details=f"Registered patient with {len(test_display_names)} test(s): {', '.join(test_display_names[:6])}{'...' if len(test_display_names) > 6 else ''} (Shift: {item.shift})",
+            )
+        except Exception as audit_err:
+            logger.debug(f"Audit log error on register: {audit_err}")
+
         # Trigger background auto-sync to push to Supabase if internet is available
         try:
             threading.Thread(target=sync_pending_offline_patients_background, daemon=True).start()
@@ -1317,6 +1331,15 @@ async def update_patient_info(mr_no: str, request: Request):
                     "UPDATE test_results_all SET patient_name = ? WHERE mr_no = ?",
                     (allowed_payload["patient_name"], mr_no)
                 )
+
+        if allowed_payload:
+            insert_audit_log(
+                mr_no=mr_no,
+                patient_name=allowed_payload.get("patient_name"),
+                action="EDIT_PATIENT",
+                user_name=data.get("user_name") or data.get("logged_in_user") or "Staff",
+                details=f"Updated demographics: {', '.join(allowed_payload.keys())}",
+            )
                 
         return {"status": "Success"}
     except Exception as e:
@@ -1409,6 +1432,24 @@ def _parse_test_result_update_body(data):
             remarks = tv.get("remarks")
         return _sanitize_test_values(tv), remarks
     return _sanitize_test_values(data), None
+
+def _format_audit_test_values(test_values) -> str:
+    """Format test values dict into a clean string for audit logging."""
+    if not isinstance(test_values, dict):
+        return str(test_values) if test_values else ""
+    parts = []
+    for k, v in test_values.items():
+        if k in ("remarks", "test_values"):
+            continue
+        if isinstance(v, dict):
+            val = v.get("value")
+            unit = v.get("unit", "")
+            unit_str = f" {unit}" if unit else ""
+            if val not in (None, ""):
+                parts.append(f"{k}: {val}{unit_str}")
+        elif v not in (None, ""):
+            parts.append(f"{k}: {v}")
+    return ", ".join(parts)
 
 @app.get("/api/patient/basic/all")
 def get_patient_basic_info_all(
@@ -1526,9 +1567,24 @@ async def update_test_record_results(record_id: int, request: Request):
         
         with get_db_conn() as conn:
             cursor = conn.cursor()
+            cursor.execute("SELECT mr_no, patient_name, test_name FROM test_results_all WHERE id = ?", (record_id,))
+            r_meta = cursor.fetchone()
+            
             cursor.execute(
                 "UPDATE test_results_all SET test_values = ?, status = ?, remarks = ? WHERE id = ?",
                 (json.dumps(test_values), "Completed", remarks or "", record_id)
+            )
+
+        if r_meta:
+            val_summary = _format_audit_test_values(test_values)
+            rem_str = f" [Remark: {remarks}]" if remarks else ""
+            details_msg = f"{r_meta['test_name']}: {val_summary}{rem_str}" if val_summary else f"Updated {r_meta['test_name']}{rem_str}"
+            insert_audit_log(
+                mr_no=str(r_meta["mr_no"]),
+                patient_name=r_meta["patient_name"],
+                action="UPDATE_RESULT",
+                user_name=data.get("user_name") or data.get("logged_in_user") or "Staff",
+                details=details_msg,
             )
             
         return {"status": "Success"}
@@ -1575,17 +1631,48 @@ async def update_patient_test_records(mr_no: str, request: Request):
     try:
         data = await request.json()
         
+        p_name = None
+        breakdown = []
         with get_db_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT patient_name FROM patients WHERE mr_no = ? LIMIT 1", (mr_no,))
+            p_row = cursor.fetchone()
+            if p_row:
+                p_name = p_row["patient_name"]
+
             for record_id_str, item in data.items():
-                record_id = int(record_id_str)
+                try:
+                    record_id = int(record_id_str)
+                except (ValueError, TypeError):
+                    continue
                 test_values, remarks = _parse_test_result_update_body(item)
                 
-                cursor = conn.cursor()
+                cursor.execute("SELECT test_name FROM test_results_all WHERE id = ? LIMIT 1", (record_id,))
+                t_row = cursor.fetchone()
+                tname = t_row["test_name"] if t_row else f"Test #{record_id}"
+
                 cursor.execute(
                     "UPDATE test_results_all SET test_values = ?, status = ?, remarks = ? WHERE id = ? AND mr_no = ?",
                     (json.dumps(test_values), "Completed", remarks or "", record_id, mr_no)
                 )
                 
+                val_str = _format_audit_test_values(test_values)
+                rem_str = f" [Remark: {remarks}]" if remarks else ""
+                if val_str:
+                    breakdown.append(f"• {tname}: {val_str}{rem_str}")
+                elif remarks:
+                    breakdown.append(f"• {tname}:{rem_str}")
+                
+        if breakdown or data:
+            details_msg = "\n".join(breakdown) if breakdown else f"Bulk updated {len(data)} test record(s)"
+            insert_audit_log(
+                mr_no=mr_no,
+                patient_name=p_name,
+                action="UPDATE_RESULT",
+                user_name=data.get("user_name") or data.get("logged_in_user") or "Staff",
+                details=details_msg,
+            )
+            
         return {"status": "Success"}
     except Exception as e:
         logger.error(f"Failed to bulk update patient test records: {e}")
@@ -1597,11 +1684,23 @@ async def soft_delete_test_record(record_id: int, request: Request):
         data = await request.json()
         person_deleting = data.get("person_deleting", "Offline User")
         
+        r_meta = None
         with get_db_conn() as conn:
             cursor = conn.cursor()
+            cursor.execute("SELECT mr_no, patient_name, test_name FROM test_results_all WHERE id = ?", (record_id,))
+            r_meta = cursor.fetchone()
             cursor.execute(
                 "UPDATE test_results_all SET delete_status = 1, person_deleting = ? WHERE id = ?",
                 (person_deleting, record_id)
+            )
+            
+        if r_meta:
+            insert_audit_log(
+                mr_no=str(r_meta["mr_no"]),
+                patient_name=r_meta["patient_name"],
+                action="DELETE_TEST",
+                user_name=person_deleting,
+                details=f"Deleted test: {r_meta['test_name']}",
             )
             
         return {"status": "Success"}
@@ -2361,6 +2460,62 @@ def api_admin_offline_sync_log(search: str = None, limit: int = 200):
         return {"status": "Success", "logs": logs}
     except Exception as e:
         logger.error(f"offline-sync-log failed: {e}")
+        return {"status": "Error", "message": str(e), "logs": []}
+
+
+# ── Local SQLite Audit Trail & Print Tracking ─────────────────────────────────
+@app.post("/api/audit/log-print")
+async def api_audit_log_print(request: Request):
+    try:
+        data = await request.json()
+        mr_no = str(data.get("mr_no") or "").strip()
+        if not mr_no:
+            return {"status": "Ignored", "message": "Missing MR number"}
+
+        patient_name = data.get("patient_name")
+        user_name = data.get("user_name") or "Staff"
+        user_id = str(data.get("user_id") or "")
+        details = data.get("details") or "Printed lab test report"
+        pc_name = data.get("pc_name")
+
+        print_count = insert_audit_log(
+            mr_no=mr_no,
+            patient_name=patient_name,
+            action="PRINT",
+            user_name=user_name,
+            user_id=user_id,
+            details=details,
+            pc_name=pc_name,
+        )
+        return {"status": "Success", "print_count": print_count}
+    except Exception as e:
+        logger.error(f"Audit log print error: {e}")
+        return {"status": "Error", "message": str(e)}
+
+
+@app.get("/api/audit/list")
+def api_audit_list(
+    search: str = None,
+    mr_no: str = None,
+    user_name: str = None,
+    action: str = None,
+    date_from: str = None,
+    date_to: str = None,
+    limit: int = 200,
+):
+    try:
+        logs = list_audit_trail(
+            search=search,
+            mr_no=mr_no,
+            user_name=user_name,
+            action=action,
+            date_from=date_from,
+            date_to=date_to,
+            limit=limit,
+        )
+        return {"status": "Success", "logs": logs, "count": len(logs)}
+    except Exception as e:
+        logger.error(f"Audit list error: {e}")
         return {"status": "Error", "message": str(e), "logs": []}
 
 

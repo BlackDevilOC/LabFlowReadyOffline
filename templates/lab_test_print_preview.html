@@ -1356,6 +1356,25 @@
     }
 
     function triggerLabPrint() {
+        try {
+            const loggedInUser = localStorage.getItem('userName') || localStorage.getItem('userEmail') || 'Staff';
+            const userId = localStorage.getItem('userId') || '';
+            const ptName = (allRows && allRows.length) ? (allRows[0].patient_name || '') : '';
+            const testList = Array.from(selectedTestNames).join(', ');
+            const prefix = window.location.pathname.startsWith('/offline') ? '/offline' : '';
+            fetch(`${prefix}/api/audit/log-print`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    mr_no: MR_NO,
+                    patient_name: ptName,
+                    user_name: loggedInUser,
+                    user_id: userId,
+                    details: `Printed test(s): ${testList || 'Selected tests'}`
+                })
+            }).catch(() => {});
+        } catch (e) { /* non-blocking */ }
+
         printLabReport({ contentEl: document.getElementById('preview'), settings: currentSettings });
     }
 

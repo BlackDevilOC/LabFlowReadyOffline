@@ -20,6 +20,12 @@ def get_pc_info():
         "architecture": platform.machine()
     }
 
+def get_terminal_name():
+    try:
+        return f"{platform.node()} ({getpass.getuser()})"
+    except Exception:
+        return "Lab-Terminal"
+
 # Define log paths
 app_dir = get_app_dir()
 local_logs_dir = os.path.join(app_dir, "logs")

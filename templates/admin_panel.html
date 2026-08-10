@@ -427,6 +427,14 @@
             </svg>
             Error Tracking
         </a>
+        <a href="{{ url_prefix }}/page/admin?view=audit-trail"
+            class="admin-nav-item {% if current_view == 'audit-trail' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Audit Trail &amp; History
+        </a>
         <a href="{{ url_prefix }}/page/admin?view=system"
             class="admin-nav-item {% if current_view == 'system' %}active{% endif %}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1531,6 +1539,130 @@
                 </button>
             </div>
         </div>
+
+        {% elif current_view == 'audit-trail' %}
+        <div class="admin-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+                <div>
+                    <h3 class="form-title" style="margin:0 0 4px 0;">Local PC Audit Trail &amp; Activity History</h3>
+                    <p style="font-size:0.875rem; color:#64748b; margin:0;">
+                        Track who updated records, who printed reports, when, and from which computer terminal.
+                    </p>
+                </div>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn btn-secondary" onclick="loadAuditTrailLogs()" style="font-size:0.85rem; padding:8px 14px; background:#edf2f7; border:1px solid #cbd5e1; border-radius:6px; cursor:pointer;">
+                        🔄 Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:20px; background:#f8fafc; padding:14px; border-radius:8px; border:1px solid #e2e8f0;">
+                <div>
+                    <label class="input-label" style="font-size:0.75rem; margin-bottom:4px; font-weight:600; color:#475569;">Search MR / Patient / Detail</label>
+                    <input type="text" id="audit-search-input" class="input-control" placeholder="Search MR# or name..." oninput="debounceAuditSearch()">
+                </div>
+                <div>
+                    <label class="input-label" style="font-size:0.75rem; margin-bottom:4px; font-weight:600; color:#475569;">Filter by Action</label>
+                    <select id="audit-action-filter" class="input-control" onchange="loadAuditTrailLogs()">
+                        <option value="all">All Actions</option>
+                        <option value="UPDATE_RESULT">Result Updates (UPDATE_RESULT)</option>
+                        <option value="PRINT">Report Prints (PRINT)</option>
+                        <option value="REGISTER">Registrations (REGISTER)</option>
+                        <option value="EDIT_PATIENT">Patient Edits (EDIT_PATIENT)</option>
+                        <option value="DELETE_TEST">Test Deletes (DELETE_TEST)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="input-label" style="font-size:0.75rem; margin-bottom:4px; font-weight:600; color:#475569;">Date From</label>
+                    <input type="date" id="audit-date-from" class="input-control" onchange="loadAuditTrailLogs()">
+                </div>
+                <div>
+                    <label class="input-label" style="font-size:0.75rem; margin-bottom:4px; font-weight:600; color:#475569;">Date To</label>
+                    <input type="date" id="audit-date-to" class="input-control" onchange="loadAuditTrailLogs()">
+                </div>
+            </div>
+
+            <!-- Audit Table -->
+            <div style="overflow-x:auto; background:white; border-radius:8px; border:1px solid #e2e8f0;">
+                <table class="data-table" style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                    <thead>
+                        <tr style="background:#f1f5f9; text-align:left; border-bottom:2px solid #cbd5e1;">
+                            <th style="padding:10px 12px; color:#334155;">Timestamp</th>
+                            <th style="padding:10px 12px; color:#334155;">Action</th>
+                            <th style="padding:10px 12px; color:#334155;">MR Number</th>
+                            <th style="padding:10px 12px; color:#334155;">Patient Name</th>
+                            <th style="padding:10px 12px; color:#334155;">Performed By</th>
+                            <th style="padding:10px 12px; color:#334155;">Terminal / PC</th>
+                            <th style="padding:10px 12px; color:#334155;">Action Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="audit-logs-tbody">
+                        <tr><td colspan="7" style="text-align:center; padding:24px; color:#64748b;">Loading audit records...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Audit Details Modal Popup -->
+        <div id="audit-details-modal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.65); backdrop-filter:blur(4px); z-index:9999; justify-content:center; align-items:center; padding:16px;" onclick="if(event.target===this)closeAuditDetailModal()">
+            <div style="background:#ffffff; border-radius:12px; max-width:680px; width:100%; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); overflow:hidden; border:1px solid #e2e8f0;">
+                <!-- Header -->
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; background:#f8fafc; border-bottom:1px solid #e2e8f0;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span id="audit-modal-badge" style="padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:700;">ACTION</span>
+                        <h3 style="margin:0; font-size:1.1rem; color:#0f172a; font-weight:700;">Audit Activity Details</h3>
+                    </div>
+                    <button type="button" onclick="closeAuditDetailModal()" style="background:none; border:none; font-size:20px; color:#94a3b8; cursor:pointer; padding:4px 8px; line-height:1;">✕</button>
+                </div>
+
+                <!-- Body -->
+                <div style="padding:20px; max-height:75vh; overflow-y:auto; font-size:0.9rem;">
+                    <!-- Key Meta Grid -->
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:12px; margin-bottom:18px; background:#f1f5f9; padding:14px; border-radius:8px; border:1px solid #e2e8f0;">
+                        <div>
+                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">MR Number</span>
+                            <div id="audit-modal-mr" style="font-weight:700; font-family:monospace; color:#2b6cb0; font-size:1.05rem; margin-top:2px;">—</div>
+                        </div>
+                        <div>
+                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">Patient Name</span>
+                            <div id="audit-modal-patient" style="font-weight:600; color:#1e293b; margin-top:2px;">—</div>
+                        </div>
+                        <div>
+                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">Performed By</span>
+                            <div id="audit-modal-user" style="font-weight:600; color:#0f766e; margin-top:2px;">—</div>
+                        </div>
+                        <div>
+                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">Date &amp; Time</span>
+                            <div id="audit-modal-time" style="font-size:0.85rem; color:#475569; margin-top:2px;">—</div>
+                        </div>
+                        <div style="grid-column: 1 / -1;">
+                            <span style="font-size:0.75rem; color:#64748b; font-weight:600; text-transform:uppercase;">Computer / Terminal</span>
+                            <div id="audit-modal-pc" style="font-size:0.85rem; color:#334155; font-family:monospace; margin-top:2px;">—</div>
+                        </div>
+                    </div>
+
+                    <!-- Granular Changes / Action Details Breakdown -->
+                    <div>
+                        <h4 style="font-size:0.85rem; text-transform:uppercase; color:#475569; font-weight:700; margin:0 0 8px 0; letter-spacing:0.025em;">
+                            Detailed Breakdown &amp; Recorded Values
+                        </h4>
+                        <div id="audit-modal-details" style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:14px; font-family:inherit; white-space:pre-wrap; line-height:1.6; color:#1e293b; max-height:280px; overflow-y:auto;">
+                            —
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div style="padding:12px 20px; background:#f8fafc; border-top:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+                    <div id="audit-modal-quicklinks"></div>
+                    <button type="button" class="btn btn-secondary" onclick="closeAuditDetailModal()" style="padding:8px 18px; font-size:0.875rem; background:#e2e8f0; color:#334155; border:none; border-radius:6px; font-weight:600; cursor:pointer;">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
         {% elif current_view == 'replica' %}
         <div style="display: flex; flex-direction: column; gap: 24px;">
 
@@ -4391,7 +4523,193 @@
         if ("{{ current_view }}" === "test-selection") {
             loadRegistrationOptionsAdmin();
         }
+        if ("{{ current_view }}" === "audit-trail" || "{{ current_view }}" === "offline-audit-trail") {
+            loadAuditTrailLogs();
+        }
     });
+
+    // ────────────────────────────────────────────────────────────────────────
+    // Local SQLite Audit Trail & Print Tracking
+    // ────────────────────────────────────────────────────────────────────────
+    let auditSearchDebounceTimer = null;
+    function debounceAuditSearch() {
+        clearTimeout(auditSearchDebounceTimer);
+        auditSearchDebounceTimer = setTimeout(() => {
+            loadAuditTrailLogs();
+        }, 300);
+    }
+
+    window.currentAuditLogs = [];
+
+    async function loadAuditTrailLogs() {
+        const tbody = document.getElementById('audit-logs-tbody');
+        if (!tbody) return;
+
+        const search = document.getElementById('audit-search-input')?.value.trim() || '';
+        const action = document.getElementById('audit-action-filter')?.value || 'all';
+        const dateFrom = document.getElementById('audit-date-from')?.value || '';
+        const dateTo = document.getElementById('audit-date-to')?.value || '';
+
+        const params = new URLSearchParams();
+        if (search) params.append('search', search);
+        if (action !== 'all') params.append('action', action);
+        if (dateFrom) params.append('date_from', dateFrom);
+        if (dateTo) params.append('date_to', dateTo);
+        params.append('limit', '250');
+
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px; color:#64748b;">Loading audit entries...</td></tr>';
+
+        try {
+            const prefix = window.location.pathname.startsWith('/offline') ? '/offline' : '';
+            const res = await fetch(`${prefix}/api/audit/list?${params.toString()}`);
+            const data = await res.json();
+            window.currentAuditLogs = data.logs || [];
+
+            if (!data.logs || data.logs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:24px; color:#94a3b8;">No audit records found matching your filters.</td></tr>';
+                return;
+            }
+
+            const rows = data.logs.map((log, idx) => {
+                let badgeStyle = 'background:#e2e8f0; color:#334155;';
+                if (log.action === 'UPDATE_RESULT') badgeStyle = 'background:#dbeafe; color:#1e40af; font-weight:700;';
+                else if (log.action === 'PRINT') badgeStyle = 'background:#f3e8ff; color:#6b21a8; font-weight:700;';
+                else if (log.action === 'REGISTER') badgeStyle = 'background:#dcfce7; color:#166534; font-weight:700;';
+                else if (log.action === 'EDIT_PATIENT') badgeStyle = 'background:#fef3c7; color:#92400e; font-weight:700;';
+                else if (log.action === 'DELETE_TEST') badgeStyle = 'background:#fee2e2; color:#991b1b; font-weight:700;';
+
+                const esc = (t) => {
+                    if (t == null) return '';
+                    const d = document.createElement('div');
+                    d.textContent = String(t);
+                    return d.innerHTML;
+                };
+
+                let formattedDetails = esc(log.details || '—');
+                if (log.action === 'PRINT') {
+                    if (log.details && log.details.includes('Copy #1')) {
+                        formattedDetails = `<span style="display:inline-block; padding:2px 7px; border-radius:4px; font-weight:700; font-size:0.75rem; background:#dbeafe; color:#1e40af; margin-right:6px;">🖨️ Original Print (Copy #1)</span> ` + esc(log.details.replace(/\[.*?\]\s*/, ''));
+                    } else if (log.details && log.details.includes('Copy #')) {
+                        const match = log.details.match(/Copy #\d+/);
+                        const copyNum = match ? match[0] : 'Re-print';
+                        formattedDetails = `<span style="display:inline-block; padding:2px 7px; border-radius:4px; font-weight:700; font-size:0.75rem; background:#fef3c7; color:#92400e; border:1px solid #fde68a; margin-right:6px;">⚠️ ${copyNum} (Re-print)</span> ` + esc(log.details.replace(/\[.*?\]\s*/, ''));
+                    }
+                }
+
+                // If details has multiple lines, take first line for preview
+                let previewSnippet = formattedDetails;
+                if (previewSnippet.includes('\n')) {
+                    previewSnippet = previewSnippet.split('\n')[0] + '...';
+                }
+
+                return `
+                    <tr style="border-bottom:1px solid #e2e8f0; cursor:pointer;" onclick="showAuditDetailModal(${idx})" title="Click to view full detail" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                        <td style="padding:10px 12px; font-size:0.8rem; color:#475569; white-space:nowrap;">${esc(log.created_at || '')}</td>
+                        <td style="padding:10px 12px;"><span style="display:inline-block; padding:3px 8px; border-radius:12px; font-size:0.75rem; ${badgeStyle}">${esc(log.action || '')}</span></td>
+                        <td style="padding:10px 12px; font-weight:700; font-family:monospace; color:#2b6cb0;">${esc(log.mr_no || '')}</td>
+                        <td style="padding:10px 12px; font-weight:600; color:#1e293b;">${esc(log.patient_name || '—')}</td>
+                        <td style="padding:10px 12px; font-weight:600; color:#0f766e;">👤 ${esc(log.user_name || 'Staff')}</td>
+                        <td style="padding:10px 12px; font-size:0.8rem; color:#64748b;">💻 ${esc(log.pc_name || 'Local PC')}</td>
+                        <td style="padding:10px 12px; font-size:0.825rem; color:#334155;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                                <span style="overflow:hidden; text-overflow:ellipsis; max-width:320px; white-space:nowrap;">${previewSnippet}</span>
+                                <button type="button" onclick="event.stopPropagation(); showAuditDetailModal(${idx})" style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; padding:3px 8px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer; white-space:nowrap; display:inline-flex; align-items:center; gap:4px;">
+                                    👁️ Details
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            tbody.innerHTML = rows;
+        } catch (err) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:20px; color:#dc2626;">Failed to load audit logs: ${err.message}</td></tr>`;
+        }
+    }
+
+    function showAuditDetailModal(idx) {
+        const log = (window.currentAuditLogs && window.currentAuditLogs[idx]) || null;
+        if (!log) return;
+
+        const modal = document.getElementById('audit-details-modal');
+        if (!modal) return;
+
+        const esc = (t) => {
+            if (t == null) return '';
+            const d = document.createElement('div');
+            d.textContent = String(t);
+            return d.innerHTML;
+        };
+
+        // Action Badge
+        let badgeText = log.action || 'ACTION';
+        let badgeStyle = 'background:#e2e8f0; color:#334155;';
+        if (log.action === 'UPDATE_RESULT') badgeStyle = 'background:#dbeafe; color:#1e40af;';
+        else if (log.action === 'PRINT') badgeStyle = 'background:#f3e8ff; color:#6b21a8;';
+        else if (log.action === 'REGISTER') badgeStyle = 'background:#dcfce7; color:#166534;';
+        else if (log.action === 'EDIT_PATIENT') badgeStyle = 'background:#fef3c7; color:#92400e;';
+        else if (log.action === 'DELETE_TEST') badgeStyle = 'background:#fee2e2; color:#991b1b;';
+
+        const badgeEl = document.getElementById('audit-modal-badge');
+        if (badgeEl) {
+            badgeEl.textContent = badgeText;
+            badgeEl.style.cssText = `padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:700; ${badgeStyle}`;
+        }
+
+        document.getElementById('audit-modal-mr').textContent = log.mr_no || '—';
+        document.getElementById('audit-modal-patient').textContent = log.patient_name || '—';
+        document.getElementById('audit-modal-user').textContent = `👤 ${log.user_name || 'Staff'}`;
+        document.getElementById('audit-modal-time').textContent = log.created_at || '—';
+        document.getElementById('audit-modal-pc').textContent = `💻 ${log.pc_name || 'Local PC Terminal'}`;
+
+        const detailsEl = document.getElementById('audit-modal-details');
+        const rawDetails = log.details || 'No additional details recorded.';
+
+        // Format multi-line / bullet breakdown nicely
+        if (rawDetails.includes('•')) {
+            const lines = rawDetails.split('\n');
+            const formattedHtml = lines.map(line => {
+                const trimmed = line.trim();
+                if (trimmed.startsWith('•')) {
+                    const colonIdx = trimmed.indexOf(':');
+                    if (colonIdx > -1) {
+                        const testTitle = trimmed.substring(0, colonIdx);
+                        const testVals = trimmed.substring(colonIdx + 1);
+                        return `
+                            <div style="padding:8px 12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; margin-bottom:8px;">
+                                <div style="font-weight:700; color:#2563eb; font-size:0.9rem; margin-bottom:3px;">${esc(testTitle)}</div>
+                                <div style="color:#334155; font-size:0.85rem; font-family:monospace;">${esc(testVals)}</div>
+                            </div>
+                        `;
+                    }
+                }
+                return `<div style="margin-bottom:6px; font-size:0.875rem;">${esc(line)}</div>`;
+            }).join('');
+            detailsEl.innerHTML = formattedHtml;
+        } else {
+            detailsEl.innerHTML = `<div style="padding:6px 0; font-size:0.9rem; color:#1e293b;">${esc(rawDetails)}</div>`;
+        }
+
+        // Quick action button
+        const ql = document.getElementById('audit-modal-quicklinks');
+        if (ql && log.mr_no) {
+            ql.innerHTML = `
+                <a href="/page/lab-test-print/${encodeURIComponent(log.mr_no)}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:#eff6ff; border:1px solid #bfdbfe; padding:6px 14px; border-radius:6px; font-size:0.825rem; font-weight:600; color:#1e40af; text-decoration:none;">
+                    🖨️ Open Print Preview
+                </a>
+            `;
+        } else if (ql) {
+            ql.innerHTML = '';
+        }
+
+        modal.style.display = 'flex';
+    }
+
+    function closeAuditDetailModal() {
+        const modal = document.getElementById('audit-details-modal');
+        if (modal) modal.style.display = 'none';
+    }
 
 </script>
 {% endblock %}
