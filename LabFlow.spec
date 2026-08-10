@@ -15,8 +15,18 @@ a = Analysis(
         ('hospital_logo.png', '.'),
     ],
     hiddenimports=[
-        'database',    # offline/database.py
-        'dbActions',   # offline/dbActions.py (used by offline/app.py)
+        'database',
+        'dbActions',
+        'offline',
+        'offline.database',
+        'offline.app',
+        'offline.dbActions',
+        'replica_engine',
+        'analytics_router',
+        'patient_list_query',
+        'search_utils',
+        'user_access',
+        'logdata',
     ],
     hookspath=[],
     hooksconfig={},

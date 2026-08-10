@@ -54,7 +54,6 @@ DEFAULT_TABLES = [
     "invoice_settings",
     "print_settings",
     "app_settings",
-    "lab_metadata",
     "analytics_snapshots"
 ]
 
@@ -70,7 +69,6 @@ TABLE_PRIMARY_KEYS: Dict[str, List[str]] = {
     "invoice_settings": ["id"],
     "print_settings": ["id"],
     "app_settings": ["id"],
-    "lab_metadata": ["id"],
     "analytics_snapshots": ["id"]
 }
 
@@ -668,7 +666,7 @@ CREATE TABLE IF NOT EXISTS "{table_name}" (
                         self.tables_state[table_name] = state
 
                         # Automatically push delta records directly to Secondary Supabase Cloud
-                        if self.secondary_supabase_url and self.secondary_supabase_key and records:
+                        if self.secondary_supabase_url and self.secondary_supabase_key and records and not getattr(self, '_secondary_push_paused', False):
                             try:
                                 sec_client = self.get_secondary_client()
                                 if sec_client:
@@ -689,7 +687,11 @@ CREATE TABLE IF NOT EXISTS "{table_name}" (
                                     self.secondary_sync_status = "active_synced"
                             except Exception as sec_err:
                                 sec_err_str = str(sec_err)
-                                if "PGRST205" in sec_err_str or "schema cache" in sec_err_str:
+                                if "401" in sec_err_str or "Unauthorized" in sec_err_str or "JWT" in sec_err_str:
+                                    self.secondary_sync_status = "needs_service_role_key"
+                                    self._secondary_push_paused = True
+                                    logger.warning("Secondary Supabase Cloud push paused: SECONDARY_SUPABASE_KEY is an 'anon' key or lacks service_role write permissions.")
+                                elif "PGRST205" in sec_err_str or "schema cache" in sec_err_str or "400" in sec_err_str:
                                     self.secondary_sync_status = "needs_schema_setup"
                                 else:
                                     self.secondary_sync_status = f"notice: {sec_err_str[:60]}"

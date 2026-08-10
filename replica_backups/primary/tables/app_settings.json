@@ -2,7 +2,7 @@
   {
     "id": 1,
     "payload": {
-      "pushed_at": "2026-08-09T13:29:51.133630Z",
+      "pushed_at": "2026-08-10T09:52:26.466459Z",
       "pushed_by": "Anonymous",
       "print_layouts": {
         "complete blood count|hba1c": {
@@ -128,14 +128,14 @@
             "Liver Function Test": 1,
             "COMPLETE BLOOD COUNT": 0
           },
-          "saved_at": "2026-08-09T09:08:27.593806Z",
+          "saved_at": "2026-08-10T09:52:05.574686Z",
           "saved_by": "admin@admin.com",
           "test_count": 8,
           "test_order": [
             "COMPLETE BLOOD COUNT",
             "Amylase",
-            "MP-ICT",
             "Dengue NS1 (ICT)",
+            "MP-ICT",
             "Liver Function Test",
             "UCE",
             "Hep B, C",
@@ -285,7 +285,7 @@
       }
     },
     "setting_type": "all_app_settings",
-    "updated_at": "2026-08-09T13:29:51.13363+00:00",
+    "updated_at": "2026-08-10T09:52:26.466459+00:00",
     "updated_by": "Anonymous"
   }
 ]

@@ -18542,3 +18542,45 @@ postgrest.exceptions.APIError: {'message': "Could not find the 'hidden_group_tit
 2026-08-10 14:28:12,215 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2076ms. Total updated: 0 rows across 12 tables.
 2026-08-10 14:28:12,842 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated results for test_results_all ID: 168971
 2026-08-10 14:28:34,202 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1967ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:51:08,194 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-10 14:51:12,800 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 14:51:12,896 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-10 14:51:13,340 - INFO - [LabFlow] - Triggered auto-push of pending offline patients on app boot.
+2026-08-10 14:51:13,386 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 14:51:13,390 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-10 14:51:13,390 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 14:51:13,416 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-10 14:51:13,626 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-10 14:51:14,289 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-10 14:51:14,712 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-10 14:51:15,943 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-10 14:51:19,958 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-10 14:51:20,270 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-10 14:51:20,770 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-10 14:51:21,014 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-10 14:51:21,016 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-10 14:51:21,247 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 7852ms. Total updated: 665 rows across 11 tables.
+2026-08-10 14:51:21,261 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-10 14:51:21,333 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-10 14:51:21,471 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-10 14:51:22,039 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-10 14:51:22,199 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-10 14:51:22,367 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-10 14:51:22,569 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-10 14:51:22,705 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-10 14:51:22,720 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-10 14:51:23,115 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-10 14:51:24,016 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 14:51:26,456 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184148, date=None
+2026-08-10 14:51:30,081 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 14:51:31,288 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184150, date=None
+2026-08-10 14:51:34,192 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-10 14:51:36,904 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184141, date=None
+2026-08-10 14:51:43,131 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1874ms. Total updated: 0 rows across 11 tables.
+2026-08-10 14:52:05,575 - INFO - [LabFlow] - Print layout saved by admin@admin.com for fingerprint amylase|complete blood count|dengue ns1 
+2026-08-10 14:52:05,835 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2691ms. Total updated: 0 rows across 11 tables.
+2026-08-10 14:52:08,161 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184141, date=None
+2026-08-10 14:52:13,584 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-10 14:52:14,166 - INFO - [LabFlow] - Loaded 117 individual tests and 67 test groups (active_only=True)
+2026-08-10 14:52:26,871 - INFO - [LabFlow] - Cloud settings pushed to Supabase by Anonymous
+2026-08-10 14:52:28,899 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3045ms. Total updated: 1 rows across 11 tables.

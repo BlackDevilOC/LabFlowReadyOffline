@@ -1,17 +1,473 @@
 
 pyinstaller --noconfirm LabFlow.spec
 
+r=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:24:41,407 - [REPLICA] - INFO - Replication cycle (delta) complete in 1964ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:24:41,407 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1964ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 1964ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:24:59,727 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9940_1786353899727.json
+INFO:LabFlow:Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9940_1786353899727.json
+2026-08-10 14:24:59,729 - INFO - [LabFlow] - Background Sync: Single attempt 
+for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9940_1786353899727.json
+INFO:LabFlow:Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9940_1786353899727.json
+2026-08-10 14:24:59,731 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'MEHAR UL NISA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'NISAR ALI', 'report_date': '10/08/2026', 'mr_no': '9940', 'hb': '12.6', 'wbc': '7.9', 'neut': '55', 'lymph': '35', 'mono': '05', 'eosino': '05', 'plt': '386', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+INFO:LabFlow:[USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'MEHAR UL NISA', 'gender': 'Female', 'relation_type': 'D/O:', 'relation_name': 'NISAR ALI', 'report_date': '10/08/2026', 'mr_no': '9940', 'hb': '12.6', 'wbc': '7.9', 'neut': '55', 'lymph': '35', 'mono': '05', 'eosino': '05', 'plt': '386', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+INFO:httpx:HTTP Request: POST https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/fitness_patients "HTTP/2 201 Created"
+2026-08-10 14:25:00,140 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100139
+INFO:LabFlow:Successfully saved fitness record to Supabase. ID: 100139       
+2026-08-10 14:25:00,155 - INFO - [LabFlow] - Background Sync: Single success 
+for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9940_1786353899727.json
+INFO:LabFlow:Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_9940_1786353899727.json
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:25:03,770 - [REPLICA] - INFO - Replication cycle (delta) complete in 2356ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:25:03,770 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2356ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 2356ms. Total updated: 0 rows across 12 tables.
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:25:25,821 - [REPLICA] - INFO - Replication cycle (delta) complete in 2043ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:25:25,821 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2043ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 2043ms. Total updated: 0 rows across 12 tables.
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:25:47,929 - [REPLICA] - INFO - Replication cycle (delta) complete in 2099ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:25:47,929 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2099ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 2099ms. Total updated: 0 rows across 12 tables.
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:26:10,074 - [REPLICA] - INFO - Replication cycle (delta) complete in 2128ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:26:10,074 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2128ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 2128ms. Total updated: 0 rows across 12 tables.
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+Fatal Python error: _enter_buffered_busy: could not acquire lock for <_io.BufferedWriter name='<stderr>'> at interpreter shutdown, possibly due to daemon 
+threads
+Python runtime state: finalizing (tstate=0x00007ff9feb05960)
 
-Exception in thread Thread-1 (_run_server):
-Traceback (most recent call last):
-  File "threading.py", line 1038, in _bootstrap_inner
-  File "threading.py", line 975, in run
-  File "build.py", line 127, in _run_server
-  File "pyimod02_importers.py", line 457, in exec_module
-  File "main.py", line 56, in <module>
-  File "pyimod02_importers.py", line 457, in exec_module
-  File "offline\app.py", line 22, in <module>
-ModuleNotFoundError: No module named 'database'
+Current thread 0x00004f58 (most recent call first):
+  <no Python frame>
+
+Extension modules: _cffi_backend, markupsafe._speedups, multidict._multidict, yarl._quoting_c, propcache._helpers_c, websockets.speedups, mmh3, charset_normalizer.md, requests.packages.charset_normalizer.md, requests.packages.chardet.md, PIL._imaging, httptools.parser.parser, httptools.parser.url_parser (total: 13)
+
+(labflow) D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main>uv run python build.py --reload
+2026-08-10 14:26:57,181 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+INFO:LabFlowOffline:Offline App Started. Parent path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+INFO:LabFlowOffline:Offline background auto-sync worker started (interval: 25s).
+2026-08-10 14:26:59,434 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+INFO:LabFlow:App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-10 14:26:59,488 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+INFO:LabFlow:Starting Uvicorn server for desktop window...
+2026-08-10 14:26:59,518 - INFO - [LabFlow] - Triggered auto-push of pending offline patients on app boot.
+INFO:LabFlow:Triggered auto-push of pending offline patients on app boot.
+2026-08-10 14:26:59,527 - [REPLICA] - INFO - Loaded existing sync state from 
+D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 14:26:59,527 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+INFO:LabFlow.Replica:Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-10 14:26:59,530 - [REPLICA] - INFO - Running initial full snapshot replication...
+2026-08-10 14:26:59,530 - [REPLICA] - INFO - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 14:26:59,530 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+INFO:LabFlow.Replica:Running initial full snapshot replication...
+2026-08-10 14:26:59,530 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+INFO:LabFlow.Replica:Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-10 14:26:59,534 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+INFO:LabFlow:Supabase continuous replica engine background worker started on 
+app boot.
+2026-08-10 14:26:59,580 - INFO - [LabFlow] - Server ready — loading login page
+INFO:LabFlow:Server ready — loading login page
+2026-08-10 14:26:59,610 - DEBUG - [LabFlow] - Accessing Login Page
+DEBUG:LabFlow:Accessing Login Page
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&setting_type=eq.all_app_settings "HTTP/2 200 OK"    
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+2026-08-10 14:26:59,929 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+INFO:LabFlow:Cloud sync auto-pull completed successfully from Supabase.      
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/patients?columns=%22mobile%22%2C%22cnic%22%2C%22patient_name%22%2C%22relation%22%2C%22age%22%2C%22shift%22%2C%22patient_token%22%2C%22relation_name%22%2C%22user%22%2C%22mr_no%22%2C%22salutation%22%2C%22user_id%22%2C%22pwd%22%2C%22created_at%22%2C%22gender%22%2C%22id%22 "HTTP/2 401 Unauthorized"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/test_results_all?columns=%22patient_name%22%2C%22category%22%2C%22test_name%22%2C%22status%22%2C%22delete_status%22%2C%22remarks%22%2C%22mr_no%22%2C%22person_deleting%22%2C%22created_at%22%2C%22test_values%22%2C%22id%22 "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/tests?columns=%22category%22%2C%22status%22%2C%22normal_max%22%2C%22name%22%2C%22created_at%22%2C%22unit%22%2C%22normal_min%22%2C%22id%22 "HTTP/2 401 Unauthorized"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/test_groups?columns=%22category%22%2C%22status%22%2C%22group_name%22%2C%22created_at%22%2C%22id%22%2C%22component_ids%22 "HTTP/2 401 Unauthorized"      
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=id%2Cname%2Cemail%2Cis_active%2Cpwd%2Cdefault_shift_id%2Cpermissions&order=name.asc "HTTP/2 200 OK"
+2026-08-10 14:27:02,659 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+INFO:LabFlow:Saved 8 users to fetcheddata/users.json
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/shift?columns=%22shift%22%2C%22id%22%2C%22created_at%22 "HTTP/2 401 Unauthorized"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/users?columns=%22is_active%22%2C%22permissions%22%2C%22name%22%2C%22default_shift_id%22%2C%22pwd%22%2C%22created_at%22%2C%22email%22%2C%22id%22 "HTTP/2 
+401 Unauthorized"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/remarks?columns=%22usage_count%22%2C%22is_active%22%2C%22remark_text%22%2C%22category%22%2C%22test_name%22%2C%22updated_at%22%2C%22created_at%22%2C%22sort_order%22%2C%22id%22 "HTTP/2 401 Unauthorized"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/invoice_settings?columns=%22is_active%22%2C%22hospital_name%22%2C%22developed_by_url%22%2C%22qr_code_path%22%2C%22printer_width%22%2C%22online_report_url%22%2C%22updated_at%22%2C%22developed_by%22%2C%22logo_path%22%2C%22id%22 "HTTP/2 401 Unauthorized"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/print_settings?columns=%22border_color%22%2C%22col_result_align%22%2C%22secondary_color%22%2C%22page_right_margin%22%2C%22footer_line2%22%2C%22text_main%22%2C%22group_padding_top%22%2C%22patient_info_min_height%22%2C%22signature_block_min_width%22%2C%22category_padding_bottom%22%2C%22id%22%2C%22footer_line3%22%2C%22patient_info_border_radius%22%2C%22footer_margin_top%22%2C%22patient_info_label_font_size%22%2C%22page_top_margin%22%2C%22col_test_name_width%22%2C%22group_padding_bottom%22%2C%22col_unit_align%22%2C%22col_unit_width%22%2C%22col_test_name_align%22%2C%22updated_at%22%2C%22bg_light%22%2C%22col_result_width%22%2C%22hide_single_param_title%22%2C%22group_padding_left%22%2C%22col_range_width%22%2C%22page_left_margin%22%2C%22is_active%22%2C%22updated_by%22%2C%22patient_info_bottom_margin%22%2C%22combine_categories_on_same_page%22%2C%22header_height%22%2C%22footer_padding_top%22%2C%22patient_info_padding_horizontal%22%2C%22test_name_font_size%22%2C%22category_font_size%22%2C%22category_border_width%22%2C%22footer_font_size%22%2C%22primary_color%22%2C%22created_by%22%2C%22table_cell_padding_vertical%22%2C%22patient_info_font_size%22%2C%22result_font_size%22%2C%22patient_info_row_gap%22%2C%22table_header_padding_vertical%22%2C%22display_verified_by%22%2C%22col_range_align%22%2C%22table_cell_padding_horizontal%22%2C%22page_bottom_margin%22%2C%22patient_info_label_width%22%2C%22patient_info_padding_vertical%22%2C%22display_pathologist_signature%22%2C%22category_padding_top%22%2C%22table_header_padding_horizontal%22%2C%22header_bottom_margin%22%2C%22footer_line1%22%2C%22group_font_size%22%2C%22text_muted%22%2C%22created_at%22 "HTTP/2 400 Bad Request"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/app_settings?columns=%22updated_by%22%2C%22updated_at%22%2C%22setting_type%22%2C%22payload%22%2C%22id%22 "HTTP/2 401 Unauthorized"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&offset=0&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: POST https://ndftkhufsgaugfcgxubd.supabase.co/rest/v1/analytics_snapshots?columns=%22computed_at%22%2C%22date_from%22%2C%22date_to%22%2C%22snapshot_type%22%2C%22payload%22%2C%22id%22 "HTTP/2 401 Unauthorized"
+2026-08-10 14:27:05,652 - [REPLICA] - INFO - Replication cycle (full) complete in 6116ms. Total updated: 665 rows across 12 tables.
+2026-08-10 14:27:05,652 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 6116ms. Total updated: 665 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (full) complete in 6116ms. Total updated: 665 rows across 12 tables.
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&email=eq.admin%40admin.com&limit=1 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=is_active%2Cpermissions&limit=1 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=shift&id=eq.2&limit=1 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&is_active=eq.True&order=id.desc&limit=1 "HTTP/2 
+200 OK"
+2026-08-10 14:27:07,127 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+INFO:LabFlow:Invoice settings cached to fetcheddata/
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&is_active=eq.True&order=id.desc&limit=1 "HTTP/2 200 OK"
+2026-08-10 14:27:07,478 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+INFO:LabFlow:Lab print settings cached to fetcheddata/print_settings.json    
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=id%2Cshift%2Ccreated_at&order=id.asc "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=id%2Cemail%2Cdefault_shift_id&id=eq.1&limit=1 "HTTP/2 200 OK"  
+2026-08-10 14:27:08,063 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+INFO:LabFlow:User preferences cached to fetcheddata/
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=id%2Cremark_text%2Ctest_name%2Ccategory%2Cusage_count%2Csort_order%2Cis_active%2Ccreated_at%2Cupdated_at&is_active=eq.True&order=sort_order.asc%2Cusage_count.desc "HTTP/2 200 OK"
+2026-08-10 14:27:08,370 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+INFO:LabFlow:Remarks cached to fetcheddata/remarks.json
+2026-08-10 14:27:08,374 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+INFO:LabFlow:Starting background metadata sync from online to offline database...
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A "HTTP/2 200 OK"
+2026-08-10 14:27:08,597 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+INFO:LabFlow:Offline DB: Synced 211 tests from Supabase
+2026-08-10 14:27:08,695 - DEBUG - [LabFlow] - Accessing Home Page
+DEBUG:LabFlow:Accessing Home Page
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A "HTTP/2 200 OK"
+2026-08-10 14:27:08,764 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+INFO:LabFlow:Offline DB: Synced 97 test groups from Supabase
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A "HTTP/2 200 OK"
+2026-08-10 14:27:08,965 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+INFO:LabFlow:Offline DB: Synced 5 shifts from Supabase
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A "HTTP/2 200 OK"
+2026-08-10 14:27:09,136 - INFO - [LabFlow] - Offline DB: Synced 8 users from 
+Supabase
+INFO:LabFlow:Offline DB: Synced 8 users from Supabase
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A "HTTP/2 200 OK"
+2026-08-10 14:27:09,297 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+INFO:LabFlow:Offline DB: Synced 54 remarks from Supabase
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&is_active=eq.True&order=id.desc&limit=1 "HTTP/2 
+200 OK"
+2026-08-10 14:27:09,871 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+INFO:LabFlow:Offline DB: Synced invoice settings from Supabase
+2026-08-10 14:27:09,873 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+INFO:LabFlow:Background metadata sync to offline database complete.
+2026-08-10 14:27:09,997 - DEBUG - [LabFlow] - Accessing Update Results Page
+DEBUG:LabFlow:Accessing Update Results Page
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=id%2Cmr_no%2Cpatient_name%2Ctest_name%2Ccategory%2Cstatus%2Ccreated_at%2Cremarks%2Cpatients%28relation%2Crelation_name%2Cage%2Cgender%2Cshift%2Cmobile%2Cpatient_token%2Cuser%2Cuser_id%29&delete_status=eq.False&order=created_at.desc&limit=500 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=shift "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=category "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=id%2Cname%2Cemail "HTTP/2 200 OK"
+2026-08-10 14:27:11,117 - INFO - [LabFlow] - Accessing Enter Patient Results 
+Page for MR No: 184150
+INFO:LabFlow:Accessing Enter Patient Results Page for MR No: 184150
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=user%2Cuser_id "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=id%2Cname%2Ccategory%2Cunit%2Cnormal_min%2Cnormal_max%2Cstatus&order=name.asc "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=id%2Cgroup_name%2Ccategory%2Ccomponent_ids%2Cstatus&order=group_name.asc "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=id%2Cname%2Cstatus&status=eq.True "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=id%2Cgroup_name%2Cstatus%2Ccomponent_ids&status=eq.True "HTTP/2 200 OK"
+2026-08-10 14:27:12,111 - INFO - [LabFlow] - Loaded 117 individual tests and 
+67 test groups (active_only=True)
+INFO:LabFlow:Loaded 117 individual tests and 67 test groups (active_only=True)
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A%2Cpatients%28%2A%29&mr_no=eq.184150&delete_status=eq.False "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=patient_name%2Cmr_no%2Crelation%2Crelation_name%2Cage%2Cgender%2Cmobile%2Cshift%2Cpatient_token&mr_no=eq.184150&limit=1 "HTTP/2 200 OK"  
+INFO:httpx:HTTP Request: PATCH https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?mr_no=eq.184150 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: PATCH https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?mr_no=eq.184150 "HTTP/2 200 OK"
+2026-08-10 14:27:25,030 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated patient info for MR: 184150
+INFO:LabFlow:[USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated patient info for MR: 184150
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A%2Cpatients%28%2A%29&mr_no=eq.184150&delete_status=eq.False "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:27:27,712 - [REPLICA] - INFO - Replication cycle (delta) complete in 2048ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:27:27,712 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2048ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 2048ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:27:43,480 - DEBUG - [LabFlow] - Accessing Login Page
+DEBUG:LabFlow:Accessing Login Page
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:27:50,123 - [REPLICA] - INFO - Replication cycle (delta) complete in 2403ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:27:50,123 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2403ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 2403ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:28:00,110 - DEBUG - [LabFlow] - Accessing Home Page
+DEBUG:LabFlow:Accessing Home Page
+2026-08-10 14:28:00,845 - DEBUG - [LabFlow] - Accessing Update Results Page
+DEBUG:LabFlow:Accessing Update Results Page
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=id%2Cmr_no%2Cpatient_name%2Ctest_name%2Ccategory%2Cstatus%2Ccreated_at%2Cremarks%2Cpatients%28relation%2Crelation_name%2Cage%2Cgender%2Cshift%2Cmobile%2Cpatient_token%2Cuser%2Cuser_id%29&delete_status=eq.False&order=created_at.desc&limit=500 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=shift "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=category "HTTP/2 200 OK"
+2026-08-10 14:28:01,685 - INFO - [LabFlow] - Accessing Enter Patient Results 
+Page for MR No: 184148
+INFO:LabFlow:Accessing Enter Patient Results Page for MR No: 184148
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=id%2Cname%2Cemail "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=user%2Cuser_id "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=id%2Cname%2Ccategory%2Cunit%2Cnormal_min%2Cnormal_max%2Cstatus&order=name.asc "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=id%2Cgroup_name%2Ccategory%2Ccomponent_ids%2Cstatus&order=group_name.asc "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=id%2Cname%2Cstatus&status=eq.True "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=id%2Cgroup_name%2Cstatus%2Ccomponent_ids&status=eq.True "HTTP/2 200 OK"
+2026-08-10 14:28:02,569 - INFO - [LabFlow] - Loaded 117 individual tests and 
+67 test groups (active_only=True)
+INFO:LabFlow:Loaded 117 individual tests and 67 test groups (active_only=True)
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A%2Cpatients%28%2A%29&mr_no=eq.184148&delete_status=eq.False "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:28:12,215 - [REPLICA] - INFO - Replication cycle (delta) complete in 2076ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:28:12,215 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2076ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 2076ms. Total updated: 0 rows across 12 tables.
+INFO:httpx:HTTP Request: PATCH https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?id=eq.168971 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=mr_no%2Cpatient_name%2Ctest_name&id=eq.168971&limit=1 "HTTP/2 200 OK"
+2026-08-10 14:28:12,842 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated results for test_results_all ID: 168971
+INFO:LabFlow:[USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated results for test_results_all ID: 168971   
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/patients?select=%2A&created_at=gt.2026-08-10T09%3A06%3A11.629978%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_results_all?select=%2A&created_at=gt.2026-08-10T09%3A06%3A13.24558%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/tests?select=%2A&created_at=gt.2026-08-07T06%3A54%3A25.966168%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/test_groups?select=%2A&created_at=gt.2026-08-07T06%3A54%3A53.926534%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/shift?select=%2A&created_at=gt.2026-05-30T08%3A06%3A55.197257%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/users?select=%2A&created_at=gt.2026-08-10T07%3A25%3A48.236333%2B00%3A00&order=created_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/remarks?select=%2A&updated_at=gt.2026-06-01T09%3A07%3A50.136776%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/invoice_settings?select=%2A&updated_at=gt.2026-05-30T07%3A47%3A53.878769%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/print_settings?select=%2A&updated_at=gt.2026-08-10T08%3A21%3A43.148316&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/app_settings?select=%2A&updated_at=gt.2026-08-09T13%3A29%3A51.13363%2B00%3A00&order=updated_at.asc&limit=1000 "HTTP/2 200 OK"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/lab_metadata?select=%2A&offset=0&limit=1000 "HTTP/2 404 Not Found"
+INFO:httpx:HTTP Request: GET https://zndiehpmrxpfskwygkhv.supabase.co/rest/v1/analytics_snapshots?select=%2A&id=gt.50&order=id.asc&limit=1000 "HTTP/2 200 
+OK"
+2026-08-10 14:28:34,202 - [REPLICA] - INFO - Replication cycle (delta) complete in 1967ms. Total updated: 0 rows across 12 tables.
+2026-08-10 14:28:34,202 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1967ms. Total updated: 0 rows across 12 tables.
+INFO:LabFlow.Replica:Replication cycle (delta) complete in 1967ms. Total updated: 0 rows across 12 tables.
+[pywebview] Failed to delete user data folder: [WinError 5] Access is denied: 'C:\\Users\\lal\\AppData\\Local\\Temp\\tmpfdyxnd3v\\EBWebView\\CrashpadMetrics-active.pma'
+WARNING:pywebview:Failed to delete user data folder: [WinError 5] Access is denied: 'C:\\Users\\lal\\AppData\\Local\\Temp\\tmpfdyxnd3v\\EBWebView\\CrashpadMetrics-active.pma'
+
+(labflow) D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main>pyinstaller --noconfirm LabFlow.spec
+178 INFO: PyInstaller: 6.18.0, contrib hooks: 2026.0
+178 INFO: Python: 3.11.0
+186 INFO: Platform: Windows-10-10.0.19045-SP0
+186 INFO: Python environment: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv
+192 INFO: Module search paths (PYTHONPATH):
+['D:\\rehan d DRIVE\\production\\LabFlowReady-main '
+ '(1)\\LabFlowReady-main\\.venv\\Scripts\\pyinstaller.exe',
+ 'C:\\Users\\lal\\AppData\\Local\\Programs\\Python\\Python311\\python311.zip',
+ 'C:\\Users\\lal\\AppData\\Local\\Programs\\Python\\Python311\\DLLs',
+ 'C:\\Users\\lal\\AppData\\Local\\Programs\\Python\\Python311\\Lib',
+ 'C:\\Users\\lal\\AppData\\Local\\Programs\\Python\\Python311',
+ 'D:\\rehan d DRIVE\\production\\LabFlowReady-main '
+ '(1)\\LabFlowReady-main\\.venv',
+ 'D:\\rehan d DRIVE\\production\\LabFlowReady-main '
+ '(1)\\LabFlowReady-main\\.venv\\Lib\\site-packages',
+ 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main',
+ 'D:\\rehan d DRIVE\\production\\LabFlowReady-main '
+ '(1)\\LabFlowReady-main\\offline']
+496 INFO: Appending 'datas' from .spec
+500 INFO: checking Analysis
+535 INFO: Building because _input_datas changed
+535 INFO: Looking for Python shared library...
+536 INFO: Using Python shared library: C:\Users\lal\AppData\Local\Programs\Python\Python311\python311.dll
+536 INFO: Running Analysis Analysis-00.toc
+537 INFO: Target bytecode optimization level: 0
+537 INFO: Initializing module dependency graph...
+539 INFO: Initializing module graph hook caches...
+560 INFO: Analyzing modules for base_library.zip ...
+1504 INFO: Processing standard module hook 'hook-heapq.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+1651 INFO: Processing standard module hook 'hook-encodings.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+3450 INFO: Processing standard module hook 'hook-pickle.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+5085 INFO: Caching module dependency graph...
+5133 INFO: Analyzing D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\build.py
+5150 INFO: Processing standard module hook 'hook-webview.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\webview\\__pyinstaller'
+5225 INFO: Processing standard module hook 'hook-platform.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+5991 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'   
+6106 INFO: Processing standard module hook 'hook-xml.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+6356 INFO: Processing standard module hook 'hook-_ctypes.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+6798 INFO: Processing standard module hook 'hook-jinja2.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+6808 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+6812 INFO: SetuptoolsInfo: initializing cached setuptools info...
+8129 INFO: Processing pre-safe-import-module hook 'hook-gi.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+8278 INFO: Processing standard module hook 'hook-clr.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\pythonnet\\_pyinstaller'
+8333 INFO: Processing standard module hook 'hook-clr_loader.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+8463 INFO: Processing standard module hook 'hook-pycparser.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+8622 INFO: Processing standard module hook 'hook-setuptools.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+8637 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+8639 INFO: Processing pre-find-module-path hook 'hook-distutils.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path'
+8927 INFO: Processing standard module hook 'hook-distutils.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+8954 INFO: Processing standard module hook 'hook-distutils.util.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+9000 INFO: Processing standard module hook 'hook-sysconfig.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+9027 INFO: Processing standard module hook 'hook-_osx_support.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+9056 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+9237 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+9238 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+9250 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+9252 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+9452 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+9453 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 
+'setuptools._vendor.backports'!
+9582 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+9582 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 
+'setuptools._vendor.more_itertools'!
+9790 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+9791 INFO: Setuptools: 'importlib_metadata' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.importlib_metadata'!
+9818 INFO: Processing standard module hook 'hook-setuptools._vendor.importlib_metadata.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+9847 INFO: Processing pre-safe-import-module hook 'hook-zipp.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+9847 INFO: Setuptools: 'zipp' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.zipp'!
+10138 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10139 INFO: Setuptools: 'tomli' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.tomli'!
+10706 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+10707 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+11293 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'11376 INFO: Processing standard module hook 'hook-cryptography.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+12290 INFO: hook-cryptography: cryptography does not seem to be using dynamically linked OpenSSL.
+12766 INFO: Processing standard module hook 'hook-uvicorn.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+13461 INFO: Processing standard module hook 'hook-difflib.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+14032 INFO: Processing standard module hook 'hook-websockets.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+14821 INFO: Processing standard module hook 'hook-anyio.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+16160 INFO: Processing standard module hook 'hook-pydantic.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+17201 INFO: Processing standard module hook 'hook-pygments.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+19095 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+19668 INFO: Processing standard module hook 'hook-certifi.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+20800 INFO: Processing standard module hook 'hook-dns.rdata.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+25518 INFO: Processing standard module hook 'hook-dateutil.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+25777 INFO: Processing pre-safe-import-module hook 'hook-six.moves.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+26351 INFO: Processing standard module hook 'hook-urllib3.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+26805 INFO: Processing standard module hook 'hook-charset_normalizer.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+32685 INFO: Processing standard module hook 'hook-sqlite3.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+33146 INFO: Processing standard module hook 'hook-reportlab.lib.utils.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+33194 INFO: Processing standard module hook 'hook-PIL.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+33320 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'
+33842 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'       
+34143 INFO: Processing standard module hook 'hook-reportlab.pdfbase._fontdata.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+37404 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks'        
+37742 INFO: Processing module hooks (post-graph stage)...
+38123 WARNING: Hidden import "pycparser.lextab" not found!
+38123 WARNING: Hidden import "pycparser.yacctab" not found!
+38425 WARNING: Hidden import "tzdata" not found!
+38795 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks' 
+41945 INFO: Performing binary vs. data reclassification (190 entries)
+42127 INFO: Looking for ctypes DLLs
+42256 INFO: Analyzing run-time hooks ...
+42265 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+42272 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'
+42277 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'   
+42286 INFO: Including run-time hook 'pyi_rth_setuptools.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks'        
+42289 INFO: Including run-time hook 'pyi_rth_cryptography_openssl.py' from 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks'
+42335 INFO: Creating base_library.zip...
+42362 INFO: Looking for dynamic libraries
+44427 INFO: Extra DLL search directories (AddDllDirectory): []
+44427 INFO: Extra DLL search directories (PATH): []
+45418 INFO: Warnings written to D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\build\LabFlow\warn-LabFlow.txt
+45698 INFO: Graph cross-reference written to D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\build\LabFlow\xref-LabFlow.html
+45790 INFO: checking PYZ
+45831 INFO: Building because D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\offline\database.py changed
+45832 INFO: Building PYZ (ZlibArchive) D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\build\LabFlow\PYZ-00.pyz
+47843 INFO: Building PYZ (ZlibArchive) D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\build\LabFlow\PYZ-00.pyz completed successfully.
+47909 INFO: checking PKG
+47910 INFO: Building because D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\buil47939 INFO: Building PKG (CArchive) LabFlow.pkg completed successfully.      
+47940 INFO: Bootloader D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\PyInstaller\bootloader\Windows-64bit-intel\runw.exe                                                                 lowReady-main\.venv\Lib\
+47940 INFO: checking EXE
+47941 INFO: Rebuilding EXE-00.toc because pkg is more recent
+47942 INFO: Building EXE from EXE-00.toc
+47943 INFO: Copying bootloader EXE to D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\build\LabFlow\LabFlow.exe                       y-main (1)\LabFlowReady-
+47951 INFO: Copying icon to EXE
+47955 INFO: Copying 0 resources to EXE
+47955 INFO: Embedding manifest in EXE
+47958 INFO: Appending PKG archive to EXE
+47970 INFO: Fixing EXE headers
+48103 INFO: Building EXE from EXE-00.toc completed successfully.
+48107 INFO: checking COLLECT
+48111 INFO: Removing dir D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dist\LabFlow                                                 bFlowReady-main\dist\Lab
+48151 INFO: Building COLLECT COLLECT-00.toc
+48616 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+48626 INFO: Build complete! The results are available in: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dist                        oduction\LabFlowReady-ma
 
 
 

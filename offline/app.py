@@ -14,23 +14,25 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-# Add current directory and parent directory to path so imports work from anywhere
+# Add directories to sys.path so sibling and packaged imports always work
+_current_dir = os.path.dirname(os.path.abspath(__file__))
+if _current_dir not in sys.path:
+    sys.path.insert(0, _current_dir)
+
 if getattr(sys, 'frozen', False):
-    # Running inside a PyInstaller bundle — modules are extracted to sys._MEIPASS
-    _base = sys._MEIPASS
+    _base = getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
+    _offline_dir = os.path.join(_base, "offline")
+    if _offline_dir not in sys.path:
+        sys.path.insert(0, _offline_dir)
+    if _base not in sys.path:
+        sys.path.insert(0, _base)
 else:
-    _base = os.path.dirname(os.path.abspath(__file__))
+    _parent = os.path.dirname(_current_dir)
+    if _parent not in sys.path:
+        sys.path.insert(0, _parent)
 
-_parent = os.path.dirname(_base)
-if _base not in sys.path:
-    sys.path.insert(0, _base)
-if _parent not in sys.path:
-    sys.path.insert(0, _parent)
-
-# pyrefly: ignore [missing-import]
 try:
-    # pyrefly: ignore [missing-import]
-    from database import (
+    from offline.database import (
         get_db_conn, init_db, get_next_table_id,
         insert_mr_sync_log, list_mr_sync_log,
         insert_audit_log, list_audit_trail,
@@ -38,8 +40,8 @@ try:
         upsert_shifts_from_supabase, upsert_users_from_supabase,
         upsert_remarks_from_supabase, upsert_invoice_settings_from_supabase,
     )
-except ImportError:
-    from offline.database import (
+except (ImportError, ModuleNotFoundError):
+    from database import (
         get_db_conn, init_db, get_next_table_id,
         insert_mr_sync_log, list_mr_sync_log,
         insert_audit_log, list_audit_trail,

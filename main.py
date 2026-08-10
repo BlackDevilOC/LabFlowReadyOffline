@@ -1382,20 +1382,29 @@ def get_registrar_users():
 def get_filter_metadata():
     try:
         supabase = init_supabase()
+        
+        # Query shifts directly from shift table
+        shifts = []
         try:
-            metadata_resp = supabase.table("lab_metadata").select("*").execute()
-            if metadata_resp.data:
-                shifts = sorted(list(set([r["value"] for r in metadata_resp.data if r.get("type") == "shift"])))
-                categories = sorted(list(set([r["value"] for r in metadata_resp.data if r.get("type") == "category"])))
-                return {"status": "Success", "shifts": shifts, "categories": categories}
+            shift_resp = supabase.table("shift").select("shift").execute()
+            shifts = sorted(list(set([r["shift"] for r in (shift_resp.data or []) if r.get("shift")])))
         except Exception:
             pass
-            
-        patients_resp = supabase.table("patients").select("shift").execute()
-        shifts = sorted(list(set([r["shift"] for r in (patients_resp.data or []) if r.get("shift")])))
-        
-        tests_resp = supabase.table("tests").select("category").execute()
-        categories = sorted(list(set([r["category"] for r in (tests_resp.data or []) if r.get("category")])))
+
+        if not shifts:
+            try:
+                patients_resp = supabase.table("patients").select("shift").execute()
+                shifts = sorted(list(set([r["shift"] for r in (patients_resp.data or []) if r.get("shift")])))
+            except Exception:
+                pass
+
+        # Query categories from tests table
+        categories = []
+        try:
+            tests_resp = supabase.table("tests").select("category").execute()
+            categories = sorted(list(set([r["category"] for r in (tests_resp.data or []) if r.get("category")])))
+        except Exception:
+            pass
         
         if not shifts:
             shifts = ["MORNING", "EVENING", "NIGHT", "HOLIDAY", "OPD"]

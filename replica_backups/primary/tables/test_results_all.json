@@ -9316,35 +9316,35 @@
     "mr_no": 184148,
     "patient_name": "ytfu",
     "person_deleting": "not yet",
-    "remarks": null,
-    "status": "Pending",
+    "remarks": "",
+    "status": "Completed",
     "test_name": "Liver Function Test",
     "test_values": {
       "param_32": {
         "name": "Bilirubin Total",
         "unit": "mg/dl",
-        "value": "0",
+        "value": "0.8",
         "normal_max": "F: 0-0.9",
         "normal_min": "M: 0-1.4"
       },
       "param_33": {
         "name": "Bilirubin Direct",
         "unit": "mg/dl",
-        "value": "0",
+        "value": "0.4",
         "normal_max": "0.3",
         "normal_min": "0.0"
       },
       "param_34": {
         "name": "ALT (SGPT)",
         "unit": "U/L",
-        "value": "0",
+        "value": "28",
         "normal_max": "F: 0-33",
         "normal_min": "M: 0-41"
       },
       "param_36": {
         "name": "Alkaline Phosphatase",
         "unit": "IU/L",
-        "value": "0",
+        "value": "151",
         "normal_max": "Child: Upto 644",
         "normal_min": "Adult: 80 - 306"
       }
