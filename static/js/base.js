@@ -71,6 +71,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ── Dark / Light Theme Toggle ───────────────────────────────────────────
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            try {
+                localStorage.setItem('theme', nextTheme);
+            } catch (e) {
+                console.warn('Could not persist theme preference:', e);
+            }
+        });
+    }
+
+    // Listen for theme change across tabs
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'theme' && e.newValue) {
+            document.documentElement.setAttribute('data-theme', e.newValue);
+        }
+    });
+
     // ── Global Keyboard Shortcut: Ctrl + S (Focus Search Box) ────────────────
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {

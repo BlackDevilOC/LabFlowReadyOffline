@@ -1,6 +1,6 @@
 /* Top Bar Styling */
 .top-bar {
-    background-color: #ffffff;
+    background-color: var(--header-bg);
     height: 60px;
     display: flex;
     align-items: center;
@@ -9,10 +9,11 @@
     padding: 0 20px;
     /* Responsive padding */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    /* Soft shadow */
+    border-bottom: 1px solid var(--header-border);
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 /* Left Side: Logo and App Name */
@@ -28,18 +29,71 @@
     object-fit: contain;
     border-radius: 6px;
     background: #ffffff;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
 }
 
 .app-name {
     font-size: 1.25rem;
     /* 20px */
     font-weight: 600;
-    color: #212529;
+    color: var(--text-primary);
     letter-spacing: -0.02em;
 }
 
-/* Right Side: User Profile and Dropdown */
+/* Right Side: Theme Toggle & User Profile */
+.header-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ── Theme Toggle Button ───────────────────────────────────────────────── */
+.theme-toggle-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-surface-subtle);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--border-color);
+    transform: scale(1.05);
+}
+
+.theme-toggle-btn .theme-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+}
+
+/* In Light Mode: Show Moon icon (click to switch to dark), hide Sun icon */
+:root:not([data-theme="dark"]) .theme-toggle-btn .sun-icon {
+    display: none;
+}
+:root:not([data-theme="dark"]) .theme-toggle-btn .moon-icon {
+    display: flex;
+    color: #475569;
+}
+
+/* In Dark Mode: Show Sun icon (click to switch to light), hide Moon icon */
+[data-theme="dark"] .theme-toggle-btn .moon-icon {
+    display: none;
+}
+[data-theme="dark"] .theme-toggle-btn .sun-icon {
+    display: flex;
+    color: #fbbf24; /* Warm Gold Sun */
+}
+
+/* User Section */
 .user-section {
     position: relative;
     /* For absolute positioning of dropdown */
@@ -58,15 +112,15 @@
 }
 
 .user-menu-toggle:hover {
-    background-color: #f1f3f5;
+    background-color: var(--bg-surface-subtle);
 }
 
 .profile-icon {
     width: 36px;
     height: 36px;
-    background-color: #e3f2fd;
+    background-color: #e0f2fe;
     /* Light blue background */
-    color: #0d47a1;
+    color: #0369a1;
     /* Dark blue text/icon */
     border-radius: 50%;
     display: flex;
@@ -74,9 +128,14 @@
     justify-content: center;
 }
 
+[data-theme="dark"] .profile-icon {
+    background-color: #1e3a8a;
+    color: #93c5fd;
+}
+
 .user-name {
     font-weight: 500;
-    color: #495057;
+    color: var(--text-primary);
     font-size: 0.95rem;
 }
 
@@ -88,9 +147,9 @@
     top: 100%;
     right: 0;
     margin-top: 8px;
-    background-color: #ffffff;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
     border-radius: 8px;
     padding: 8px;
     min-width: 160px;
@@ -118,8 +177,13 @@
 }
 
 .logout-btn:hover {
-    background-color: #ffe3e3;
-    color: #c92a2a;
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+[data-theme="dark"] .logout-btn:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
 }
 
 /* Utility for responsive padding if needed explicitly on smaller screens */

@@ -950,6 +950,85 @@
         background: #2563eb;
         color: #fff;
     }
+
+    /* Dark Mode Support for Result Entry */
+    [data-theme="dark"] .patient-summary {
+        background: var(--bg-surface);
+        border-color: var(--border-color);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    [data-theme="dark"] .summary-value {
+        color: var(--text-primary);
+    }
+    [data-theme="dark"] .summary-label {
+        color: var(--text-muted);
+    }
+    [data-theme="dark"] .test-section {
+        background: var(--bg-surface);
+        border-color: var(--border-color);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    [data-theme="dark"] .param-table th {
+        background: var(--bg-surface-subtle);
+        color: var(--text-secondary);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .param-table td {
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .param-name {
+        color: var(--text-primary);
+    }
+    [data-theme="dark"] .param-unit, [data-theme="dark"] .param-range {
+        color: var(--text-muted);
+    }
+    [data-theme="dark"] .param-input-cell input {
+        background: var(--input-bg);
+        color: var(--input-text);
+        border-color: var(--input-border);
+    }
+    [data-theme="dark"] .param-input-cell input:focus {
+        background: var(--bg-surface-elevated);
+        border-color: var(--primary-color);
+    }
+    [data-theme="dark"] .btn-quick-sug {
+        background: var(--bg-surface-elevated);
+        border-color: var(--border-color);
+        color: #93c5fd;
+    }
+    [data-theme="dark"] .btn-quick-sug:hover {
+        background: var(--primary-color);
+        color: #ffffff;
+    }
+    [data-theme="dark"] .test-remarks-input {
+        background: var(--bg-surface-subtle);
+        color: var(--text-primary);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .actions-bar {
+        background: var(--bg-body);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .modal-card {
+        background: var(--bg-surface);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .modal-header, [data-theme="dark"] .modal-footer {
+        background: var(--bg-surface-subtle);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .modal-header h3 {
+        color: var(--text-primary);
+    }
+    [data-theme="dark"] .btn-cancel, [data-theme="dark"] .btn-edit-info, [data-theme="dark"] .modal-btn-cancel {
+        background: var(--bg-surface-subtle);
+        color: var(--text-primary);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .add-test-section {
+        background: var(--bg-surface-subtle);
+        border-color: var(--border-color);
+    }
 </style>
 {% endblock %}
 

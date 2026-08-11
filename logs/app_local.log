@@ -19233,3 +19233,45 @@ postgrest.exceptions.APIError: {'message': 'Cannot coerce the result to a single
 2026-08-11 13:04:57,326 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2292ms. Total updated: 0 rows across 11 tables.
 2026-08-11 13:05:07,154 - INFO - [LabFlow] - Cloud settings pushed to Supabase by Anonymous
 2026-08-11 13:05:08,596 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-11 13:15:03,703 - INFO - [LabFlow] - Server is already running on 127.0.0.1:8000 — attaching desktop window.
+2026-08-11 13:15:03,704 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-11 13:15:04,419 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-11 13:15:33,855 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-11 13:15:36,264 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-11 13:15:36,312 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-11 13:15:36,349 - INFO - [LabFlow] - Triggered auto-push of pending offline patients on app boot.
+2026-08-11 13:15:36,355 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-11 13:15:36,359 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-11 13:15:36,359 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-11 13:15:36,371 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-11 13:15:36,722 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-11 13:15:36,827 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-11 13:15:37,334 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-11 13:15:40,174 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-11 13:15:43,425 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-11 13:15:43,672 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-11 13:15:44,202 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-11 13:15:44,416 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-11 13:15:44,418 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-11 13:15:44,666 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-11 13:15:44,756 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-11 13:15:44,904 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-11 13:15:45,266 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-11 13:15:45,452 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-11 13:15:45,656 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-11 13:15:46,144 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-11 13:15:46,145 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-11 13:15:46,517 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 10153ms. Total updated: 2140 rows across 11 tables.
+2026-08-11 13:15:48,817 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-11 13:15:49,313 - INFO - [LabFlow] - Loaded 116 individual tests and 65 test groups (active_only=True)
+2026-08-11 13:15:51,107 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-11 13:15:53,570 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-11 13:15:54,466 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-11 13:15:56,426 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-11 13:15:56,845 - INFO - [LabFlow] - Loaded 116 individual tests and 65 test groups (active_only=True)
+2026-08-11 13:16:07,691 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-11 13:16:08,244 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-11 13:16:08,656 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2121ms. Total updated: 0 rows across 11 tables.
+2026-08-11 13:16:09,955 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-11 13:16:10,389 - INFO - [LabFlow] - Loaded 116 individual tests and 65 test groups (active_only=True)
+2026-08-11 13:16:31,439 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2723ms. Total updated: 8 rows across 11 tables.

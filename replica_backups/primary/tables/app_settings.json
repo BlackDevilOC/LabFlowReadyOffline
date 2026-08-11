@@ -2,7 +2,7 @@
   {
     "id": 1,
     "payload": {
-      "pushed_at": "2026-08-11T07:45:20.114069Z",
+      "pushed_at": "2026-08-11T08:05:06.845353Z",
       "pushed_by": "Anonymous",
       "print_layouts": {
         "liver function test|uce": {
@@ -407,8 +407,12 @@
           "Regular"
         ],
         "custom_categories": {
+          "T3": "Regular",
+          "T4": "Regular",
           "UC": "Popular",
+          "TSH": "Regular",
           "UCE": "Popular",
+          "Urea": "Regular",
           "HbA1c": "Popular",
           "MP-ICT": "Popular",
           "Albumin": "Popular",
@@ -416,18 +420,28 @@
           "Calcium": "Popular",
           "Hep B, C": "Popular",
           "Uric Acid": "Popular",
+          "ALT (SGPT)": "Regular",
+          "Creatinine": "Popular",
+          "Cholesterol": "Regular",
           "HbsAg (ICT)": "Popular",
+          "HbsAg ELISA": "Regular",
           "Electrolytes": "Popular",
+          "HbsAg ( ICT )": "Regular",
           "Lipid Profile": "Popular",
+          "Total Protein": "Regular",
           "VDRL SYPHILIS": "Popular",
           "Anti HCV (ICT)": "Popular",
           "Anti HCV ELISA": "Popular",
           "Anti HIV (ICT)": "Popular",
+          "Blood Grouping": "Regular",
           "Hep B, C ELISA": "Popular",
+          "Bilirubin Total": "Regular",
           "Thyroid Profile": "Popular",
+          "Bilirubin Direct": "Regular",
           "Dengue NS1 (ICT)": "Popular",
           "H. Pylori Ab (ICT)": "Popular",
           "Liver Function Test": "Popular",
+          "Alkaline Phosphatase": "Regular",
           "COMPLETE BLOOD COUNT": "Popular",
           "Glucose Random (RBS)": "Popular",
           "PT (Prothrombin Time)": "Popular"
@@ -460,6 +474,22 @@
             "Anti HCV ELISA",
             "H. Pylori Ab (ICT)",
             "Uric Acid"
+          ],
+          "Regular": [
+            "T3",
+            "T4",
+            "TSH",
+            "Urea",
+            "Cholesterol",
+            "Bilirubin Total",
+            "Bilirubin Direct",
+            "Creatinine",
+            "Alkaline Phosphatase",
+            "ALT (SGPT)",
+            "Blood Grouping",
+            "HbsAg ( ICT )",
+            "HbsAg ELISA",
+            "Total Protein"
           ]
         }
       },
@@ -682,7 +712,7 @@
       }
     },
     "setting_type": "all_app_settings",
-    "updated_at": "2026-08-11T07:45:20.114069+00:00",
+    "updated_at": "2026-08-11T08:05:06.845353+00:00",
     "updated_by": "Anonymous"
   }
 ]

@@ -1,3 +1,44 @@
+/* Global CSS Variables / Design Tokens */
+:root {
+    --bg-body: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #ffffff;
+    --bg-surface-subtle: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --border-subtle: #cbd5e1;
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --input-text: #0f172a;
+    --header-bg: #ffffff;
+    --header-border: #e2e8f0;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+}
+
+[data-theme="dark"] {
+    --bg-body: #0b1120;
+    --bg-surface: #1e293b;
+    --bg-surface-elevated: #283449;
+    --bg-surface-subtle: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --border-subtle: #475569;
+    --input-bg: #0f172a;
+    --input-border: #475569;
+    --input-text: #f8fafc;
+    --header-bg: #0f172a;
+    --header-border: #1e293b;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --primary-color: #3b82f6;
+    --primary-hover: #60a5fa;
+}
+
 /* Reset and Base Styles */
 * {
     box-sizing: border-box;
@@ -36,12 +77,12 @@ textarea,
 
 body {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #f8f9fa;
-    /* Light gray background for the page */
-    color: #333;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Main Content Area */

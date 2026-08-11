@@ -434,6 +434,58 @@
             grid-template-columns: 1fr;
         }
     }
+
+    /* ============================================================
+       Dark Mode Support for Admin Panel
+       ============================================================ */
+    [data-theme="dark"] .admin-card {
+        background: var(--bg-surface);
+        border-color: var(--border-color);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+    [data-theme="dark"] .admin-card .value {
+        color: var(--text-primary);
+    }
+    [data-theme="dark"] .admin-card h3 {
+        color: var(--text-muted);
+    }
+    [data-theme="dark"] .log-table-container {
+        background: var(--bg-surface);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .log-table th {
+        background: var(--bg-surface-subtle);
+        color: var(--text-secondary);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .log-table td {
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+    [data-theme="dark"] .log-table tr:hover {
+        background: rgba(255, 255, 255, 0.03);
+    }
+    [data-theme="dark"] .input-control, [data-theme="dark"] .form-input, [data-theme="dark"] select.input-control {
+        background-color: var(--input-bg);
+        color: var(--input-text);
+        border-color: var(--input-border);
+    }
+    [data-theme="dark"] .modal-card {
+        background: var(--bg-surface);
+        border-color: var(--border-color);
+    }
+    [data-theme="dark"] .tsl-test-card {
+        background: var(--bg-surface-elevated) !important;
+        border-color: var(--border-color) !important;
+    }
+    [data-theme="dark"] .tsl-test-card span {
+        color: var(--text-primary) !important;
+    }
+    [data-theme="dark"] .perm-item {
+        background: var(--bg-surface-subtle);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
 </style>
 {% endblock %}
 

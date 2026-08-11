@@ -61240,5 +61240,3736 @@
         "normal_min": "Adult: 80 - 306"
       }
     }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:05:20.237063+00:00",
+    "delete_status": 0,
+    "id": 170007,
+    "mr_no": 447,
+    "patient_name": "RAZIA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:05:20.402216+00:00",
+    "delete_status": 0,
+    "id": 170008,
+    "mr_no": 447,
+    "patient_name": "RAZIA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:20.571071+00:00",
+    "delete_status": 0,
+    "id": 170009,
+    "mr_no": 447,
+    "patient_name": "RAZIA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:20.725762+00:00",
+    "delete_status": 0,
+    "id": 170010,
+    "mr_no": 447,
+    "patient_name": "RAZIA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:05:20.878161+00:00",
+    "delete_status": 0,
+    "id": 170011,
+    "mr_no": 447,
+    "patient_name": "RAZIA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Anti HIV (ICT)",
+    "test_values": {
+      "param_116": {
+        "name": "Anti HIV (ICT)",
+        "unit": null,
+        "value": "0",
+        "normal_max": "Negative",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:05:23.783176+00:00",
+    "delete_status": 0,
+    "id": 170012,
+    "mr_no": 448,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:23.945035+00:00",
+    "delete_status": 0,
+    "id": 170013,
+    "mr_no": 448,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:24.114101+00:00",
+    "delete_status": 0,
+    "id": 170014,
+    "mr_no": 448,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:05:24.265289+00:00",
+    "delete_status": 0,
+    "id": 170015,
+    "mr_no": 448,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:24.422699+00:00",
+    "delete_status": 0,
+    "id": 170016,
+    "mr_no": 448,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Coagulation",
+    "created_at": "2026-08-11T08:05:24.584995+00:00",
+    "delete_status": 0,
+    "id": 170017,
+    "mr_no": 448,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "PT (Prothrombin Time)",
+    "test_values": {
+      "param_250": {
+        "name": "Patient Value",
+        "unit": "seconds",
+        "value": "0",
+        "normal_max": "14",
+        "normal_min": "11"
+      },
+      "param_251": {
+        "name": "I.N.R",
+        "unit": null,
+        "value": "0",
+        "normal_max": "1.1",
+        "normal_min": "0.8"
+      },
+      "param_252": {
+        "name": "Control",
+        "unit": "seconds",
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:05:24.667498+00:00",
+    "delete_status": 0,
+    "id": 170018,
+    "mr_no": 449,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:24.837787+00:00",
+    "delete_status": 0,
+    "id": 170019,
+    "mr_no": 449,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:25.006681+00:00",
+    "delete_status": 0,
+    "id": 170020,
+    "mr_no": 449,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:05:25.177652+00:00",
+    "delete_status": 0,
+    "id": 170021,
+    "mr_no": 449,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:25.334237+00:00",
+    "delete_status": 0,
+    "id": 170022,
+    "mr_no": 449,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Coagulation",
+    "created_at": "2026-08-11T08:05:25.489127+00:00",
+    "delete_status": 0,
+    "id": 170023,
+    "mr_no": 449,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "PT (Prothrombin Time)",
+    "test_values": {
+      "param_250": {
+        "name": "Patient Value",
+        "unit": "seconds",
+        "value": "0",
+        "normal_max": "14",
+        "normal_min": "11"
+      },
+      "param_251": {
+        "name": "I.N.R",
+        "unit": null,
+        "value": "0",
+        "normal_max": "1.1",
+        "normal_min": "0.8"
+      },
+      "param_252": {
+        "name": "Control",
+        "unit": "seconds",
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:05:57.557684+00:00",
+    "delete_status": 0,
+    "id": 170024,
+    "mr_no": 450,
+    "patient_name": "SHAISTA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:57.826112+00:00",
+    "delete_status": 0,
+    "id": 170025,
+    "mr_no": 450,
+    "patient_name": "SHAISTA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:05:57.985117+00:00",
+    "delete_status": 0,
+    "id": 170026,
+    "mr_no": 450,
+    "patient_name": "SHAISTA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:58.138147+00:00",
+    "delete_status": 0,
+    "id": 170027,
+    "mr_no": 450,
+    "patient_name": "SHAISTA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:05:58.328311+00:00",
+    "delete_status": 0,
+    "id": 170028,
+    "mr_no": 450,
+    "patient_name": "SHAISTA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:06:19.575857+00:00",
+    "delete_status": 0,
+    "id": 170029,
+    "mr_no": 451,
+    "patient_name": "HAMEEDA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "ESR",
+    "test_values": {
+      "param_59": {
+        "name": "ESR",
+        "unit": "mm/1st hr",
+        "value": "0",
+        "normal_max": "20.0",
+        "normal_min": "0.0"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:06:19.759873+00:00",
+    "delete_status": 0,
+    "id": 170030,
+    "mr_no": 451,
+    "patient_name": "HAMEEDA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UC",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:06:19.954265+00:00",
+    "delete_status": 0,
+    "id": 170031,
+    "mr_no": 451,
+    "patient_name": "HAMEEDA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "HbA1c",
+    "test_values": {
+      "param_8": {
+        "name": "HbA1c",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "Diabetes > 6.4",
+        "normal_min": "Normal < 5.7, Pre-diabetes 5.7-6.4"
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:06:44.413169+00:00",
+    "delete_status": 0,
+    "id": 170032,
+    "mr_no": 452,
+    "patient_name": "ALEENA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:06:44.614979+00:00",
+    "delete_status": 0,
+    "id": 170033,
+    "mr_no": 452,
+    "patient_name": "ALEENA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:06:44.815164+00:00",
+    "delete_status": 0,
+    "id": 170034,
+    "mr_no": 452,
+    "patient_name": "ALEENA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:06:44.976131+00:00",
+    "delete_status": 0,
+    "id": 170035,
+    "mr_no": 452,
+    "patient_name": "ALEENA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:08:00.213827+00:00",
+    "delete_status": 0,
+    "id": 170036,
+    "mr_no": 453,
+    "patient_name": "M QASIM",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:08:00.374238+00:00",
+    "delete_status": 0,
+    "id": 170037,
+    "mr_no": 453,
+    "patient_name": "M QASIM",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:08:00.518433+00:00",
+    "delete_status": 0,
+    "id": 170038,
+    "mr_no": 453,
+    "patient_name": "M QASIM",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:08:00.667046+00:00",
+    "delete_status": 0,
+    "id": 170039,
+    "mr_no": 453,
+    "patient_name": "M QASIM",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Uric Acid",
+    "test_values": {
+      "param_90": {
+        "name": "Uric Acid",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 2.4-5.7",
+        "normal_min": "M: 3.4-7.0"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:08:01.131652+00:00",
+    "delete_status": 0,
+    "id": 170040,
+    "mr_no": 453,
+    "patient_name": "M QASIM",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Calcium",
+    "test_values": {
+      "param_1": {
+        "name": "Calcium",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "10.4",
+        "normal_min": "8.1"
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:08:42.911041+00:00",
+    "delete_status": 0,
+    "id": 170041,
+    "mr_no": 454,
+    "patient_name": "IZZATULLAH",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:08:43.057557+00:00",
+    "delete_status": 0,
+    "id": 170042,
+    "mr_no": 454,
+    "patient_name": "IZZATULLAH",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:08:43.244112+00:00",
+    "delete_status": 0,
+    "id": 170043,
+    "mr_no": 454,
+    "patient_name": "IZZATULLAH",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:08:43.393671+00:00",
+    "delete_status": 0,
+    "id": 170044,
+    "mr_no": 454,
+    "patient_name": "IZZATULLAH",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:08:43.546341+00:00",
+    "delete_status": 0,
+    "id": 170045,
+    "mr_no": 454,
+    "patient_name": "IZZATULLAH",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Anti HIV (ICT)",
+    "test_values": {
+      "param_116": {
+        "name": "Anti HIV (ICT)",
+        "unit": null,
+        "value": "0",
+        "normal_max": "Negative",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:09:39.143743+00:00",
+    "delete_status": 0,
+    "id": 170046,
+    "mr_no": 455,
+    "patient_name": "SAHIBZADI",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:09:39.329814+00:00",
+    "delete_status": 0,
+    "id": 170047,
+    "mr_no": 455,
+    "patient_name": "SAHIBZADI",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:09:39.502969+00:00",
+    "delete_status": 0,
+    "id": 170048,
+    "mr_no": 455,
+    "patient_name": "SAHIBZADI",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:09:39.664965+00:00",
+    "delete_status": 0,
+    "id": 170049,
+    "mr_no": 455,
+    "patient_name": "SAHIBZADI",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:09:39.824398+00:00",
+    "delete_status": 0,
+    "id": 170050,
+    "mr_no": 455,
+    "patient_name": "SAHIBZADI",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Anti HIV (ICT)",
+    "test_values": {
+      "param_116": {
+        "name": "Anti HIV (ICT)",
+        "unit": null,
+        "value": "0",
+        "normal_max": "Negative",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:10:32.184569+00:00",
+    "delete_status": 0,
+    "id": 170051,
+    "mr_no": 456,
+    "patient_name": "ANEESA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:10:32.344112+00:00",
+    "delete_status": 0,
+    "id": 170052,
+    "mr_no": 456,
+    "patient_name": "ANEESA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:10:32.504202+00:00",
+    "delete_status": 0,
+    "id": 170053,
+    "mr_no": 456,
+    "patient_name": "ANEESA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:10:32.668799+00:00",
+    "delete_status": 0,
+    "id": 170054,
+    "mr_no": 456,
+    "patient_name": "ANEESA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:10:32.842267+00:00",
+    "delete_status": 0,
+    "id": 170055,
+    "mr_no": 456,
+    "patient_name": "ANEESA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Coagulation",
+    "created_at": "2026-08-11T08:10:33.016852+00:00",
+    "delete_status": 0,
+    "id": 170056,
+    "mr_no": 456,
+    "patient_name": "ANEESA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "PT (Prothrombin Time)",
+    "test_values": {
+      "param_250": {
+        "name": "Patient Value",
+        "unit": "seconds",
+        "value": "0",
+        "normal_max": "14",
+        "normal_min": "11"
+      },
+      "param_251": {
+        "name": "I.N.R",
+        "unit": null,
+        "value": "0",
+        "normal_max": "1.1",
+        "normal_min": "0.8"
+      },
+      "param_252": {
+        "name": "Control",
+        "unit": "seconds",
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:10:39.935647+00:00",
+    "delete_status": 0,
+    "id": 170057,
+    "mr_no": 457,
+    "patient_name": "M SHAREEF",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:10:40.122347+00:00",
+    "delete_status": 0,
+    "id": 170058,
+    "mr_no": 457,
+    "patient_name": "M SHAREEF",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:10:40.291762+00:00",
+    "delete_status": 0,
+    "id": 170059,
+    "mr_no": 457,
+    "patient_name": "M SHAREEF",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:10:40.448162+00:00",
+    "delete_status": 0,
+    "id": 170060,
+    "mr_no": 457,
+    "patient_name": "M SHAREEF",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:10:40.617568+00:00",
+    "delete_status": 0,
+    "id": 170061,
+    "mr_no": 457,
+    "patient_name": "M SHAREEF",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Anti HIV (ICT)",
+    "test_values": {
+      "param_116": {
+        "name": "Anti HIV (ICT)",
+        "unit": null,
+        "value": "0",
+        "normal_max": "Negative",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:11:10.859175+00:00",
+    "delete_status": 0,
+    "id": 170062,
+    "mr_no": 458,
+    "patient_name": "SHER",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:11:11.009297+00:00",
+    "delete_status": 0,
+    "id": 170063,
+    "mr_no": 458,
+    "patient_name": "SHER",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:11:11.158152+00:00",
+    "delete_status": 0,
+    "id": 170064,
+    "mr_no": 458,
+    "patient_name": "SHER",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:11:11.31311+00:00",
+    "delete_status": 0,
+    "id": 170065,
+    "mr_no": 458,
+    "patient_name": "SHER",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:11:11.460379+00:00",
+    "delete_status": 0,
+    "id": 170066,
+    "mr_no": 458,
+    "patient_name": "SHER",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:11:11.618368+00:00",
+    "delete_status": 0,
+    "id": 170067,
+    "mr_no": 458,
+    "patient_name": "SHER",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Anti HIV (ICT)",
+    "test_values": {
+      "param_116": {
+        "name": "Anti HIV (ICT)",
+        "unit": null,
+        "value": "0",
+        "normal_max": "Negative",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:11:23.95477+00:00",
+    "delete_status": 0,
+    "id": 170068,
+    "mr_no": 459,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:11:24.126879+00:00",
+    "delete_status": 0,
+    "id": 170069,
+    "mr_no": 459,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:11:24.303259+00:00",
+    "delete_status": 0,
+    "id": 170070,
+    "mr_no": 459,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:11:24.48833+00:00",
+    "delete_status": 0,
+    "id": 170071,
+    "mr_no": 459,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:11:24.660441+00:00",
+    "delete_status": 0,
+    "id": 170072,
+    "mr_no": 459,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Coagulation",
+    "created_at": "2026-08-11T08:11:24.842491+00:00",
+    "delete_status": 0,
+    "id": 170073,
+    "mr_no": 459,
+    "patient_name": "HUMAIRA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "PT (Prothrombin Time)",
+    "test_values": {
+      "param_250": {
+        "name": "Patient Value",
+        "unit": "seconds",
+        "value": "0",
+        "normal_max": "14",
+        "normal_min": "11"
+      },
+      "param_251": {
+        "name": "I.N.R",
+        "unit": null,
+        "value": "0",
+        "normal_max": "1.1",
+        "normal_min": "0.8"
+      },
+      "param_252": {
+        "name": "Control",
+        "unit": "seconds",
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:12:31.461481+00:00",
+    "delete_status": 0,
+    "id": 170074,
+    "mr_no": 460,
+    "patient_name": "MUBEEN JATOI",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:12:31.655237+00:00",
+    "delete_status": 0,
+    "id": 170075,
+    "mr_no": 460,
+    "patient_name": "MUBEEN JATOI",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:12:31.844263+00:00",
+    "delete_status": 0,
+    "id": 170076,
+    "mr_no": 460,
+    "patient_name": "MUBEEN JATOI",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:13:27.212407+00:00",
+    "delete_status": 0,
+    "id": 170077,
+    "mr_no": 461,
+    "patient_name": "ZAKIR",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:13:27.448985+00:00",
+    "delete_status": 0,
+    "id": 170078,
+    "mr_no": 461,
+    "patient_name": "ZAKIR",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:14:29.100548+00:00",
+    "delete_status": 0,
+    "id": 170079,
+    "mr_no": 462,
+    "patient_name": "MIAN DAD",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:14:29.274304+00:00",
+    "delete_status": 0,
+    "id": 170080,
+    "mr_no": 462,
+    "patient_name": "MIAN DAD",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:14:29.455474+00:00",
+    "delete_status": 0,
+    "id": 170081,
+    "mr_no": 462,
+    "patient_name": "MIAN DAD",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "MP-ICT",
+    "test_values": {
+      "param_58": {
+        "name": "MP-ICT",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:15:21.243328+00:00",
+    "delete_status": 0,
+    "id": 170082,
+    "mr_no": 464,
+    "patient_name": "MUMTAZ",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:15:21.407353+00:00",
+    "delete_status": 0,
+    "id": 170083,
+    "mr_no": 464,
+    "patient_name": "MUMTAZ",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:15:21.415606+00:00",
+    "delete_status": 0,
+    "id": 170084,
+    "mr_no": 463,
+    "patient_name": "RIZWANA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:15:21.566915+00:00",
+    "delete_status": 0,
+    "id": 170085,
+    "mr_no": 464,
+    "patient_name": "MUMTAZ",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "UCE",
+    "test_values": {
+      "param_52": {
+        "name": "Urea",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "48.5",
+        "normal_min": "16.6"
+      },
+      "param_53": {
+        "name": "Creatinine",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "1.3",
+        "normal_min": "0.1"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:15:21.619448+00:00",
+    "delete_status": 0,
+    "id": 170086,
+    "mr_no": 463,
+    "patient_name": "RIZWANA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:15:21.716259+00:00",
+    "delete_status": 0,
+    "id": 170087,
+    "mr_no": 464,
+    "patient_name": "MUMTAZ",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Anti HIV (ICT)",
+    "test_values": {
+      "param_116": {
+        "name": "Anti HIV (ICT)",
+        "unit": null,
+        "value": "0",
+        "normal_max": "Negative",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:15:21.876863+00:00",
+    "delete_status": 0,
+    "id": 170088,
+    "mr_no": 464,
+    "patient_name": "MUMTAZ",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Hematology",
+    "created_at": "2026-08-11T08:16:19.520817+00:00",
+    "delete_status": 0,
+    "id": 170089,
+    "mr_no": 465,
+    "patient_name": "SAMEENA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "COMPLETE BLOOD COUNT",
+    "test_values": {
+      "param_37": {
+        "name": "HAEMOGLOBIN",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 12.0 - 15.0",
+        "normal_min": "M: 13.0 - 16.5"
+      },
+      "param_38": {
+        "name": "R.B.Cs",
+        "unit": "x10E12/L",
+        "value": "0",
+        "normal_max": "F: 3.90 - 5.20",
+        "normal_min": "M: 4.50 - 5.80"
+      },
+      "param_39": {
+        "name": "HEAMATOCRIT",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "F: 34.8 - 45.0",
+        "normal_min": "M: 38.9 - 50.9"
+      },
+      "param_40": {
+        "name": "M.C.V",
+        "unit": "fL",
+        "value": "0",
+        "normal_max": "F: 78.0 - 96.0",
+        "normal_min": "M: 81.0 - 94.0"
+      },
+      "param_41": {
+        "name": "M.C.H",
+        "unit": "pg",
+        "value": "0",
+        "normal_max": "F: 26.0 - 33.0",
+        "normal_min": "M: 27.0 - 32.0"
+      },
+      "param_42": {
+        "name": "M.C.H.C",
+        "unit": "g/dl",
+        "value": "0",
+        "normal_max": "F: 31.0 - 35.0",
+        "normal_min": "M: 32.0 - 36.0"
+      },
+      "param_43": {
+        "name": "W.B.C",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "11.00",
+        "normal_min": "4.50"
+      },
+      "param_44": {
+        "name": "NEUTROPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "80.0",
+        "normal_min": "40.0"
+      },
+      "param_45": {
+        "name": "LYMPHOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "40.0",
+        "normal_min": "20.0"
+      },
+      "param_46": {
+        "name": "MONOCYTES",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "10.0",
+        "normal_min": "2.0"
+      },
+      "param_47": {
+        "name": "EOSINOPHILS",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "6.0",
+        "normal_min": "0.0"
+      },
+      "param_49": {
+        "name": "PLATELETS",
+        "unit": "x10E9/L",
+        "value": "0",
+        "normal_max": "450",
+        "normal_min": "150"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:16:19.747901+00:00",
+    "delete_status": 0,
+    "id": 170090,
+    "mr_no": 465,
+    "patient_name": "SAMEENA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Liver Function Test",
+    "test_values": {
+      "param_32": {
+        "name": "Bilirubin Total",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "F: 0-0.9",
+        "normal_min": "M: 0-1.4"
+      },
+      "param_33": {
+        "name": "Bilirubin Direct",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "0.3",
+        "normal_min": "0.0"
+      },
+      "param_34": {
+        "name": "ALT (SGPT)",
+        "unit": "U/L",
+        "value": "0",
+        "normal_max": "F: 0-33",
+        "normal_min": "M: 0-41"
+      },
+      "param_36": {
+        "name": "Alkaline Phosphatase",
+        "unit": "IU/L",
+        "value": "0",
+        "normal_max": "Child: Upto 644",
+        "normal_min": "Adult: 80 - 306"
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:16:19.989574+00:00",
+    "delete_status": 0,
+    "id": 170091,
+    "mr_no": 465,
+    "patient_name": "SAMEENA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Glucose Random (RBS)",
+    "test_values": {
+      "param_243": {
+        "name": "Glucose Random (RBS)",
+        "unit": "mg/dl",
+        "value": "0",
+        "normal_max": "Normal < 140",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:16:20.187541+00:00",
+    "delete_status": 0,
+    "id": 170092,
+    "mr_no": 465,
+    "patient_name": "SAMEENA",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Anti HCV (ICT)",
+    "test_values": {
+      "param_115": {
+        "name": "Anti HCV (ICT)",
+        "unit": null,
+        "value": "0",
+        "normal_max": "Negative",
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Serology",
+    "created_at": "2026-08-11T08:16:27.66181+00:00",
+    "delete_status": 0,
+    "id": 170093,
+    "mr_no": 466,
+    "patient_name": "AIJAZ",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "Hep B, C",
+    "test_values": {
+      "param_50": {
+        "name": "HbsAg ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      },
+      "param_51": {
+        "name": "Anti HCV ( ICT )",
+        "unit": null,
+        "value": "0",
+        "normal_max": null,
+        "normal_min": null
+      }
+    }
+  },
+  {
+    "category": "Biochemistry",
+    "created_at": "2026-08-11T08:16:27.808599+00:00",
+    "delete_status": 0,
+    "id": 170094,
+    "mr_no": 466,
+    "patient_name": "AIJAZ",
+    "person_deleting": "not yet",
+    "remarks": null,
+    "status": "Pending",
+    "test_name": "HbA1c",
+    "test_values": {
+      "param_8": {
+        "name": "HbA1c",
+        "unit": "%",
+        "value": "0",
+        "normal_max": "Diabetes > 6.4",
+        "normal_min": "Normal < 5.7, Pre-diabetes 5.7-6.4"
+      }
+    }
   }
 ]
