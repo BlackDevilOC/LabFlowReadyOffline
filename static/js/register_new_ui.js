@@ -228,11 +228,27 @@ document.addEventListener("DOMContentLoaded", async () => {
                 data.allow_single_tests || data.test_selection_mode === "group_and_single"
             );
 
+            const groupTests = (data.group_test || [])
+                .filter((t) => isStatusActive(t.status) && !(t.group_name || '').startsWith('#'))
+                .map((t) => {
+                    const customCat = customCategories[t.group_name] || customCategories[`group_${t.id}`];
+                    return {
+                        id: t.id,
+                        name: t.group_name,
+                        status: t.status,
+                        value: JSON.stringify(t.component_ids),
+                        category: customCat || "Group Test",
+                        isGroup: true,
+                    };
+                });
+
+            const activeGroupNames = new Set(groupTests.map((g) => (g.name || '').trim().toLowerCase()));
+
             const individualTests = showIndividualTests
                 ? (data.tests || [])
-                      .filter((t) => !t.name.startsWith("#") && isStatusActive(t.status))
+                      .filter((t) => !t.name.startsWith("#") && isStatusActive(t.status) && !activeGroupNames.has((t.name || '').trim().toLowerCase()))
                       .map((t) => {
-                          const customCat = customCategories[String(t.id)];
+                          const customCat = customCategories[t.name] || customCategories[String(t.id)];
                           return {
                               id: t.id,
                               name: t.name,
@@ -243,20 +259,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                           };
                       })
                 : [];
-
-            const groupTests = (data.group_test || [])
-                .filter((t) => isStatusActive(t.status))
-                .map((t) => {
-                    const customCat = customCategories[t.group_name] || customCategories[String(t.id)];
-                    return {
-                        id: t.id,
-                        name: t.group_name,
-                        status: t.status,
-                        value: JSON.stringify(t.component_ids),
-                        category: customCat || "Group Test",
-                        isGroup: true,
-                    };
-                });
 
             return [...groupTests, ...individualTests];
         } catch (error) {

@@ -2,7 +2,7 @@
   {
     "id": 1,
     "payload": {
-      "pushed_at": "2026-08-11T07:22:22.573624Z",
+      "pushed_at": "2026-08-11T07:45:20.114069Z",
       "pushed_by": "Anonymous",
       "print_layouts": {
         "liver function test|uce": {
@@ -339,28 +339,29 @@
         "mode": "group_and_single",
         "popular_order": [
           "COMPLETE BLOOD COUNT",
-          "Albumin",
-          "Lipid Profile",
           "Hep B, C",
-          "Electrolytes",
-          "Thyroid Profile",
           "Liver Function Test",
-          "UC",
-          "Calcium",
           "UCE",
-          "VDRL SYPHILIS",
-          "Amylase",
           "Glucose Random (RBS)",
-          "PT (Prothrombin Time)",
-          "Hep B, C ELISA",
           "Anti HIV (ICT)",
+          "HbA1c",
+          "MP-ICT",
+          "Albumin",
+          "Electrolytes",
+          "UC",
+          "VDRL SYPHILIS",
+          "PT (Prothrombin Time)",
           "Anti HCV (ICT)",
-          "Anti HCV ELISA",
           "Dengue NS1 (ICT)",
-          "H. Pylori Ab (ICT)",
           "HbsAg (ICT)",
-          "Uric Acid",
-          "Urea"
+          "Lipid Profile",
+          "Thyroid Profile",
+          "Calcium",
+          "Amylase",
+          "Hep B, C ELISA",
+          "Anti HCV ELISA",
+          "H. Pylori Ab (ICT)",
+          "Uric Acid"
         ],
         "quick_presets": [
           {
@@ -406,14 +407,9 @@
           "Regular"
         ],
         "custom_categories": {
-          "1": "Popular",
-          "52": "Popular",
-          "90": "Popular",
-          "91": "Popular",
           "UC": "Popular",
-          "116": "Popular",
-          "243": "Popular",
           "UCE": "Popular",
+          "HbA1c": "Popular",
           "MP-ICT": "Popular",
           "Albumin": "Popular",
           "Amylase": "Popular",
@@ -423,7 +419,6 @@
           "HbsAg (ICT)": "Popular",
           "Electrolytes": "Popular",
           "Lipid Profile": "Popular",
-          "Serum Amylase": "Popular",
           "VDRL SYPHILIS": "Popular",
           "Anti HCV (ICT)": "Popular",
           "Anti HCV ELISA": "Popular",
@@ -431,7 +426,6 @@
           "Hep B, C ELISA": "Popular",
           "Thyroid Profile": "Popular",
           "Dengue NS1 (ICT)": "Popular",
-          "Alpha Feto-Protein": "General",
           "H. Pylori Ab (ICT)": "Popular",
           "Liver Function Test": "Popular",
           "COMPLETE BLOOD COUNT": "Popular",
@@ -443,28 +437,29 @@
         "category_items_order": {
           "Popular": [
             "COMPLETE BLOOD COUNT",
-            "Albumin",
-            "Lipid Profile",
             "Hep B, C",
-            "Electrolytes",
-            "Thyroid Profile",
             "Liver Function Test",
-            "UC",
-            "Calcium",
             "UCE",
-            "VDRL SYPHILIS",
-            "Amylase",
             "Glucose Random (RBS)",
-            "PT (Prothrombin Time)",
-            "Hep B, C ELISA",
             "Anti HIV (ICT)",
+            "HbA1c",
+            "MP-ICT",
+            "Albumin",
+            "Electrolytes",
+            "UC",
+            "VDRL SYPHILIS",
+            "PT (Prothrombin Time)",
             "Anti HCV (ICT)",
-            "Anti HCV ELISA",
             "Dengue NS1 (ICT)",
-            "H. Pylori Ab (ICT)",
             "HbsAg (ICT)",
-            "Uric Acid",
-            "Urea"
+            "Lipid Profile",
+            "Thyroid Profile",
+            "Calcium",
+            "Amylase",
+            "Hep B, C ELISA",
+            "Anti HCV ELISA",
+            "H. Pylori Ab (ICT)",
+            "Uric Acid"
           ]
         }
       },
@@ -687,7 +682,7 @@
       }
     },
     "setting_type": "all_app_settings",
-    "updated_at": "2026-08-11T07:22:22.573624+00:00",
+    "updated_at": "2026-08-11T07:45:20.114069+00:00",
     "updated_by": "Anonymous"
   }
 ]

@@ -141,7 +141,7 @@ VALUES
 ('Biochemistry', '2026-06-04T10:50:12.060319+00:00', 141, 'Typhi dot IgG', 'Negative', NULL, FALSE, NULL),
 ('Biochemistry', '2026-06-04T10:50:12.060319+00:00', 142, 'Typhi dot IgM', 'Negative', NULL, FALSE, NULL),
 ('PARASITOLOGY', '2026-06-04T10:50:38.309162+00:00', 143, 'Stool For Occult Blood (Fob)', 'Negative', NULL, FALSE, NULL),
-('COAGULATION', '2026-06-04T10:50:38.309162+00:00', 144, 'APTT', 'APTT result greater than 7 sec the value of APTT control is consider abnormal.', NULL, TRUE, 'seconds'),
+('COAGULATION', '2026-06-04T10:50:38.309162+00:00', 144, 'APTT', 'APTT result greater than 7 sec the value of APTT control is consider abnormal.', NULL, FALSE, 'seconds'),
 ('COAGULATION', '2026-06-04T10:50:38.309162+00:00', 145, 'PT (Prothrombin Time)', '14', '11', FALSE, 'seconds'),
 ('COAGULATION', '2026-06-04T10:50:38.309162+00:00', 146, 'I.N.R', '1.1', '0.8', FALSE, NULL),
 ('Biochemistry', '2026-06-04T10:50:38.309162+00:00', 147, 'Serum Amylase', 'Up to 89', NULL, FALSE, 'U/L'),

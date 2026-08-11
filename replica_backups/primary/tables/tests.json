@@ -1276,7 +1276,7 @@
     "name": "APTT",
     "normal_max": "APTT result greater than 7 sec the value of APTT control is consider abnormal.",
     "normal_min": null,
-    "status": 1,
+    "status": 0,
     "unit": "seconds"
   },
   {
