@@ -101,7 +101,7 @@
   },
   {
     "created_at": "2026-08-10T07:14:54.800894+00:00",
-    "default_shift_id": null,
+    "default_shift_id": 1,
     "email": "uzair@lab.com",
     "id": 7,
     "is_active": 1,
@@ -198,5 +198,25 @@
       "update_results": true
     },
     "pwd": "moosa0012"
+  },
+  {
+    "created_at": "2026-08-11T09:20:12.176337+00:00",
+    "default_shift_id": 1,
+    "email": "aman@lab.com",
+    "id": 12,
+    "is_active": 1,
+    "name": "Aman",
+    "permissions": {
+      "admin": false,
+      "print": true,
+      "fitness": true,
+      "register": true,
+      "analytics": false,
+      "manage_tests": false,
+      "manage_users": false,
+      "fluid_reports": true,
+      "update_results": true
+    },
+    "pwd": "aman100888"
   }
 ]

@@ -19275,3 +19275,64 @@ postgrest.exceptions.APIError: {'message': 'Cannot coerce the result to a single
 2026-08-11 13:16:09,955 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
 2026-08-11 13:16:10,389 - INFO - [LabFlow] - Loaded 116 individual tests and 65 test groups (active_only=True)
 2026-08-11 13:16:31,439 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2723ms. Total updated: 8 rows across 11 tables.
+2026-08-11 16:11:13,315 - INFO - [LabFlow] - Server is already running on 127.0.0.1:8000 — attaching desktop window.
+2026-08-11 16:11:13,332 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-11 16:11:16,421 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-11 16:11:53,124 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-11 16:12:03,057 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-11 16:12:03,107 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-11 16:12:03,301 - INFO - [LabFlow] - Triggered auto-push of pending offline patients on app boot.
+2026-08-11 16:12:03,322 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-11 16:12:03,325 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-11 16:12:03,326 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-11 16:12:03,329 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-11 16:12:03,745 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-11 16:12:03,763 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-11 16:12:05,234 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-11 16:12:05,510 - INFO - [LabFlow] - Saved 8 users to fetcheddata/users.json
+2026-08-11 16:12:09,970 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-11 16:12:10,241 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-11 16:12:11,208 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-11 16:12:11,578 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-11 16:12:11,580 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-11 16:12:11,869 - INFO - [LabFlow] - Offline DB: Synced 211 tests from Supabase
+2026-08-11 16:12:11,894 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-11 16:12:12,145 - INFO - [LabFlow] - Offline DB: Synced 97 test groups from Supabase
+2026-08-11 16:12:12,429 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-11 16:12:12,583 - INFO - [LabFlow] - Offline DB: Synced 8 users from Supabase
+2026-08-11 16:12:12,753 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-11 16:12:13,002 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-11 16:12:13,003 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-11 16:12:25,779 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 22447ms. Total updated: 2574 rows across 11 tables.
+2026-08-11 16:12:47,745 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1956ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:13:09,739 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1982ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:13:23,738 - INFO - [LabFlow] - [USER: Admin] [DATABASE_CLEANUP] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Manual Junk Cleanup executed by 'Admin': Total 116 records purged (0 soft-deleted tests, 0 orphan patients, 0 ghost tests, 0 abandoned drafts, 0 duplicates, 21 snapshots, 0 remarks, 95 inactive tests).
+2026-08-11 16:13:31,676 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1916ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:13:54,330 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2636ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:14:16,341 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1997ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:14:39,869 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3522ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:15:02,346 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2459ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:15:24,513 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2154ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:15:46,999 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2471ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:16:09,754 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2749ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:16:31,948 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2184ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:16:53,808 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1851ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:17:15,763 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1938ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:17:37,978 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2203ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:18:00,131 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2142ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:18:12,864 - INFO - [LabFlow] - [USER: Admin] [DATABASE_CLEANUP] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Manual Junk Cleanup executed by 'Admin': Total 85 records purged (85 soft-deleted tests, 0 orphan patients, 0 ghost tests, 0 abandoned drafts, 0 duplicates, 0 snapshots, 0 remarks, 0 inactive tests).
+2026-08-11 16:18:24,080 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3935ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:18:27,367 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-11 16:18:46,136 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2042ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:19:08,048 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1900ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:19:29,973 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1910ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:19:52,094 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2104ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:20:02,748 - INFO - [LabFlow] - [USER: Admin] [DATABASE_CLEANUP] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Manual Junk Cleanup executed by 'Admin': Total 24 records purged (0 soft-deleted tests, 24 orphan patients, 0 ghost tests, 0 abandoned drafts, 0 duplicates, 0 snapshots, 0 remarks, 0 inactive tests).
+2026-08-11 16:20:14,345 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2237ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:20:36,423 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2058ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:20:58,593 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2162ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:21:20,567 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1954ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:21:43,076 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2491ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:22:05,162 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2067ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:22:27,170 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 1985ms. Total updated: 0 rows across 11 tables.
+2026-08-11 16:22:49,199 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2012ms. Total updated: 0 rows across 11 tables.

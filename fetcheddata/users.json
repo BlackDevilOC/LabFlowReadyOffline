@@ -1,13 +1,23 @@
 {
   "users": [
     {
-      "id": 2,
+      "id": 12,
       "name": "Aman",
-      "email": "aman@aman.com",
+      "email": "aman@lab.com",
       "is_active": true,
-      "pwd": "aman",
-      "default_shift_id": null,
-      "permissions": {}
+      "pwd": "aman100888",
+      "default_shift_id": 1,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
     },
     {
       "id": 9,
@@ -29,25 +39,6 @@
       }
     },
     {
-      "id": 4,
-      "name": "daniyal",
-      "email": "evening@lab.com",
-      "is_active": false,
-      "pwd": "Keeper@1",
-      "default_shift_id": 2,
-      "permissions": {
-        "admin": false,
-        "print": true,
-        "fitness": false,
-        "register": true,
-        "analytics": false,
-        "manage_tests": false,
-        "manage_users": false,
-        "fluid_reports": false,
-        "update_results": true
-      }
-    },
-    {
       "id": 11,
       "name": "Daniyal",
       "email": "daniyal@lab.com",
@@ -65,15 +56,6 @@
         "fluid_reports": true,
         "update_results": true
       }
-    },
-    {
-      "id": 3,
-      "name": "iba",
-      "email": "iba@iba.com",
-      "is_active": true,
-      "pwd": "iba",
-      "default_shift_id": null,
-      "permissions": {}
     },
     {
       "id": 5,
@@ -114,25 +96,6 @@
       }
     },
     {
-      "id": 6,
-      "name": "rehan-guest",
-      "email": "rehan@guest.com",
-      "is_active": true,
-      "pwd": "031579",
-      "default_shift_id": 1,
-      "permissions": {
-        "admin": false,
-        "print": true,
-        "fitness": true,
-        "register": true,
-        "analytics": false,
-        "manage_tests": false,
-        "manage_users": false,
-        "fluid_reports": true,
-        "update_results": true
-      }
-    },
-    {
       "id": 8,
       "name": "Sakhar",
       "email": "sakhar@lab.com",
@@ -157,7 +120,7 @@
       "email": "uzair@lab.com",
       "is_active": true,
       "pwd": "2002",
-      "default_shift_id": null,
+      "default_shift_id": 1,
       "permissions": {
         "admin": false,
         "print": true,

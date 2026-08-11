@@ -2057,5 +2057,309 @@
       ]
     },
     "snapshot_type": "overview"
+  },
+  {
+    "computed_at": "2026-08-11T10:26:27.199405+00:00",
+    "date_from": "2026-08-11",
+    "date_to": "2026-08-11",
+    "id": 51,
+    "payload": {
+      "kpis": {
+        "total_tests": 867,
+        "pending_tests": 608,
+        "total_patients": 301,
+        "completed_tests": 259,
+        "unique_operators": 4,
+        "completion_rate_pct": 29.9,
+        "avg_tests_per_patient": 2.88
+      },
+      "date_to": "2026-08-11",
+      "has_data": true,
+      "date_from": "2026-08-11",
+      "from_cache": false,
+      "peak_hours": [
+        {
+          "hour": "02:00",
+          "count": 7
+        },
+        {
+          "hour": "03:00",
+          "count": 18
+        },
+        {
+          "hour": "05:00",
+          "count": 15
+        },
+        {
+          "hour": "06:00",
+          "count": 83
+        },
+        {
+          "hour": "07:00",
+          "count": 50
+        },
+        {
+          "hour": "08:00",
+          "count": 92
+        },
+        {
+          "hour": "09:00",
+          "count": 35
+        },
+        {
+          "hour": "10:00",
+          "count": 1
+        }
+      ],
+      "computed_at": "2026-08-11T10:26:27.177464+00:00",
+      "result_ratio": {
+        "normal": 676,
+        "abnormal": 1139,
+        "unclassified": 2279
+      },
+      "category_volume": [
+        {
+          "count": 407,
+          "category": "Biochemistry"
+        },
+        {
+          "count": 250,
+          "category": "Hematology"
+        },
+        {
+          "count": 179,
+          "category": "Serology"
+        },
+        {
+          "count": 27,
+          "category": "Coagulation"
+        },
+        {
+          "count": 2,
+          "category": "COAGULATION"
+        },
+        {
+          "count": 2,
+          "category": "SEROLOGY"
+        }
+      ],
+      "registration_series": [
+        {
+          "date": "2026-08-11",
+          "count": 301
+        }
+      ]
+    },
+    "snapshot_type": "overview"
+  },
+  {
+    "computed_at": "2026-08-11T10:26:58.545921+00:00",
+    "date_from": "2026-08-11",
+    "date_to": "2026-08-11",
+    "id": 52,
+    "payload": {
+      "kpis": {
+        "peak_hour": "08:00",
+        "peak_hour_count": 92,
+        "active_operators": 4,
+        "total_registrations": 301,
+        "avg_daily_registrations": 301.0
+      },
+      "date_to": "2026-08-11",
+      "has_data": true,
+      "date_from": "2026-08-11",
+      "from_cache": false,
+      "computed_at": "2026-08-11T10:26:58.524002+00:00",
+      "hourly_series": [
+        {
+          "hour": "02:00",
+          "count": 7
+        },
+        {
+          "hour": "03:00",
+          "count": 18
+        },
+        {
+          "hour": "05:00",
+          "count": 15
+        },
+        {
+          "hour": "06:00",
+          "count": 83
+        },
+        {
+          "hour": "07:00",
+          "count": 50
+        },
+        {
+          "hour": "08:00",
+          "count": 92
+        },
+        {
+          "hour": "09:00",
+          "count": 35
+        },
+        {
+          "hour": "10:00",
+          "count": 1
+        }
+      ],
+      "shift_breakdown": [
+        {
+          "count": 183,
+          "shift": "OPD"
+        },
+        {
+          "count": 90,
+          "shift": "MORNING"
+        },
+        {
+          "count": 25,
+          "shift": "NIGHT"
+        },
+        {
+          "count": 3,
+          "shift": "EVENING"
+        }
+      ],
+      "operator_throughput": [
+        {
+          "user_id": 8,
+          "operator": "Sakhar",
+          "primary_shift": "OPD",
+          "registrations": 159
+        },
+        {
+          "user_id": 7,
+          "operator": "Uzair",
+          "primary_shift": "MORNING",
+          "registrations": 75
+        },
+        {
+          "user_id": 10,
+          "operator": "Waqar",
+          "primary_shift": "MORNING",
+          "registrations": 60
+        },
+        {
+          "user_id": 1,
+          "operator": "Rehan Ahmed",
+          "primary_shift": "OPD",
+          "registrations": 7
+        }
+      ],
+      "registration_series": [
+        {
+          "date": "2026-08-11",
+          "count": 301
+        }
+      ]
+    },
+    "snapshot_type": "telemetry"
+  },
+  {
+    "computed_at": "2026-08-11T10:39:31.656969+00:00",
+    "date_from": "2026-08-11",
+    "date_to": "2026-08-11",
+    "id": 53,
+    "payload": {
+      "kpis": {
+        "total_tests": 867,
+        "pending_tests": 608,
+        "completed_tests": 259,
+        "abnormal_rate_pct": 62.8,
+        "normal_parameters": 676,
+        "abnormal_parameters": 1139
+      },
+      "date_to": "2026-08-11",
+      "has_data": true,
+      "date_from": "2026-08-11",
+      "top_tests": [
+        {
+          "count": 219,
+          "test_name": "COMPLETE BLOOD COUNT"
+        },
+        {
+          "count": 146,
+          "test_name": "Hep B, C"
+        },
+        {
+          "count": 143,
+          "test_name": "Liver Function Test"
+        },
+        {
+          "count": 82,
+          "test_name": "UCE"
+        },
+        {
+          "count": 64,
+          "test_name": "Glucose Random (RBS)"
+        },
+        {
+          "count": 40,
+          "test_name": "Anti HIV (ICT)"
+        },
+        {
+          "count": 31,
+          "test_name": "HbA1c"
+        },
+        {
+          "count": 27,
+          "test_name": "PT (Prothrombin Time)"
+        },
+        {
+          "count": 21,
+          "test_name": "MP-ICT"
+        },
+        {
+          "count": 18,
+          "test_name": "Uric Acid"
+        }
+      ],
+      "from_cache": false,
+      "computed_at": "2026-08-11T10:39:31.634547+00:00",
+      "result_ratio": {
+        "normal": 676,
+        "abnormal": 1139,
+        "unclassified": 2279
+      },
+      "category_volume": [
+        {
+          "count": 407,
+          "category": "Biochemistry"
+        },
+        {
+          "count": 250,
+          "category": "Hematology"
+        },
+        {
+          "count": 179,
+          "category": "Serology"
+        },
+        {
+          "count": 27,
+          "category": "Coagulation"
+        },
+        {
+          "count": 2,
+          "category": "COAGULATION"
+        },
+        {
+          "count": 2,
+          "category": "SEROLOGY"
+        }
+      ],
+      "status_breakdown": [
+        {
+          "count": 608,
+          "status": "Pending"
+        },
+        {
+          "count": 259,
+          "status": "Completed"
+        }
+      ]
+    },
+    "snapshot_type": "tests"
   }
 ]

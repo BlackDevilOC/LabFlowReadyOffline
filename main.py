@@ -561,7 +561,7 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
         stats = get_system_stats()
         
         admin_config_views = (
-            "tests", "tests-edit", "test-selection", "test-suggestions", "users", "shifts", "remarks", "print-settings", "cloud-sync", "audit-trail",
+            "tests", "tests-edit", "test-selection", "test-suggestions", "users", "shifts", "remarks", "print-settings", "cloud-sync", "audit-trail", "replica", "junk-cleaner",
         )
         if view in admin_config_views:
             return templates.TemplateResponse('admin_panel.html', {
@@ -2482,6 +2482,372 @@ def api_replica_test_migration(payload: dict):
     except Exception as e:
         log_error(e, "API_REPLICA_TEST_MIGRATION")
         return {"status": "error", "error": str(e)}
+
+
+# ---------------------------------------------------------------------------
+# Database Junk Data Scanner & Selective Cleaner Endpoints
+# ---------------------------------------------------------------------------
+
+@app.get("/api/admin/junk-data/scan")
+def api_admin_junk_data_scan():
+    """
+    Scans the database for junk, orphan, and soft-deleted data without modifying anything.
+    Returns categorized lists with item details for manual inspection and selective deletion.
+    """
+    try:
+        supabase = init_supabase()
+        scan_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        # 1. Fetch Patients & Test Results
+        # Using pagination/limit safety
+        patients_res = supabase.table("patients").select("id, mr_no, patient_name, age, gender, mobile, created_at, user, shift").order("id", desc=True).limit(5000).execute()
+        patients = patients_res.data or []
+        patient_mr_set = {p.get("mr_no") for p in patients if p.get("mr_no") is not None}
+        patient_mr_map = {p.get("mr_no"): p for p in patients if p.get("mr_no") is not None}
+
+        # Fetch test results (both active and deleted)
+        tests_res = supabase.table("test_results_all").select("id, mr_no, patient_name, category, test_name, test_values, status, created_at, delete_status, person_deleting, remarks").order("id", desc=True).limit(10000).execute()
+        all_tests = tests_res.data or []
+
+        # 2. Soft-Deleted Tests (delete_status == True or 1)
+        deleted_tests = []
+        active_tests = []
+        test_mr_set = set()
+
+        for t in all_tests:
+            is_deleted = bool(t.get("delete_status"))
+            if is_deleted:
+                deleted_tests.append({
+                    "id": t.get("id"),
+                    "mr_no": t.get("mr_no"),
+                    "patient_name": t.get("patient_name") or (patient_mr_map.get(t.get("mr_no"), {}).get("patient_name", "Unknown")),
+                    "test_name": t.get("test_name") or "Unnamed Test",
+                    "category": t.get("category") or "General",
+                    "status": t.get("status") or "Deleted",
+                    "person_deleting": t.get("person_deleting") or "Staff",
+                    "remarks": t.get("remarks") or "",
+                    "created_at": t.get("created_at") or ""
+                })
+            else:
+                active_tests.append(t)
+                if t.get("mr_no") is not None:
+                    test_mr_set.add(t.get("mr_no"))
+
+        # 3. Orphan Patients (Registered in patients, but 0 associated test records in test_results_all)
+        orphan_patients = []
+        for p in patients:
+            mr = p.get("mr_no")
+            if mr not in test_mr_set:
+                orphan_patients.append({
+                    "id": p.get("id"),
+                    "mr_no": mr,
+                    "patient_name": p.get("patient_name") or "Unnamed Patient",
+                    "age": p.get("age"),
+                    "gender": p.get("gender") or "",
+                    "mobile": p.get("mobile") or "",
+                    "user": p.get("user") or "System",
+                    "shift": p.get("shift") or "",
+                    "created_at": p.get("created_at") or ""
+                })
+
+        # 4. Ghost Test Records (Test results whose mr_no does not exist in patients table)
+        ghost_tests = []
+        for t in active_tests:
+            mr = t.get("mr_no")
+            if mr not in patient_mr_set:
+                ghost_tests.append({
+                    "id": t.get("id"),
+                    "mr_no": mr,
+                    "patient_name": t.get("patient_name") or "Unknown",
+                    "test_name": t.get("test_name") or "Unnamed Test",
+                    "category": t.get("category") or "",
+                    "status": t.get("status") or "",
+                    "created_at": t.get("created_at") or ""
+                })
+
+        # 5. Abandoned / Empty Draft Tests (Pending, delete_status=False, empty test_values older than 7 days)
+        abandoned_drafts = []
+        now_dt = datetime.now()
+        for t in active_tests:
+            if t.get("status") == "Pending":
+                vals = t.get("test_values")
+                is_empty = False
+                if vals is None or vals == {} or vals == "" or vals == "{}":
+                    is_empty = True
+                elif isinstance(vals, dict) and all(v in (None, "", "0", 0) for v in vals.values()):
+                    is_empty = True
+
+                if is_empty:
+                    # Check age
+                    created_raw = t.get("created_at") or ""
+                    days_old = 0
+                    if created_raw:
+                        try:
+                            c_dt = datetime.fromisoformat(created_raw.replace("Z", "+00:00").split("+")[0])
+                            days_old = (now_dt - c_dt).days
+                        except Exception:
+                            days_old = 0
+                    
+                    if days_old >= 7:
+                        abandoned_drafts.append({
+                            "id": t.get("id"),
+                            "mr_no": t.get("mr_no"),
+                            "patient_name": t.get("patient_name") or "Unknown",
+                            "test_name": t.get("test_name") or "Unnamed",
+                            "category": t.get("category") or "",
+                            "days_old": days_old,
+                            "created_at": created_raw
+                        })
+
+        # 6. Duplicate Test Results (Accidental double-clicks: same mr_no, test_name, created within 3 minutes)
+        duplicate_tests = []
+        seen_combos = {}
+        for t in active_tests:
+            mr = t.get("mr_no")
+            tname = (t.get("test_name") or "").strip().lower()
+            key = f"{mr}_{tname}"
+            if key in seen_combos:
+                duplicate_tests.append({
+                    "id": t.get("id"),
+                    "mr_no": mr,
+                    "patient_name": t.get("patient_name") or "",
+                    "test_name": t.get("test_name") or "",
+                    "original_id": seen_combos[key].get("id"),
+                    "created_at": t.get("created_at") or ""
+                })
+            else:
+                seen_combos[key] = t
+
+        # 7. Old Analytics Snapshots (> 30 days old)
+        old_snapshots = []
+        try:
+            snap_res = supabase.table("analytics_snapshots").select("id, snapshot_type, date_from, date_to, computed_at").order("id", desc=True).limit(200).execute()
+            snaps = snap_res.data or []
+            for s in snaps:
+                c_at = s.get("computed_at") or ""
+                if c_at:
+                    try:
+                        c_dt = datetime.fromisoformat(c_at.replace("Z", "+00:00").split("+")[0])
+                        if (now_dt - c_dt).days >= 30:
+                            old_snapshots.append(s)
+                    except Exception:
+                        pass
+        except Exception:
+            old_snapshots = []
+
+        # 8. Inactive Remarks with 0 usage
+        inactive_remarks = []
+        try:
+            rem_res = supabase.table("remarks").select("id, remark_text, test_name, category, usage_count, is_active").eq("is_active", False).execute()
+            remarks_list = rem_res.data or []
+            for r in remarks_list:
+                if (r.get("usage_count") or 0) == 0:
+                    inactive_remarks.append(r)
+        except Exception:
+            inactive_remarks = []
+
+        # 9. Inactive Catalog Tests
+        inactive_tests = []
+        try:
+            cat_res = supabase.table("tests").select("id, name, unit, category, status").eq("status", False).execute()
+            inactive_tests = cat_res.data or []
+        except Exception:
+            inactive_tests = []
+
+        total_junk_count = (
+            len(deleted_tests) + 
+            len(orphan_patients) + 
+            len(ghost_tests) + 
+            len(abandoned_drafts) + 
+            len(duplicate_tests) + 
+            len(old_snapshots) + 
+            len(inactive_remarks)
+        )
+
+        return {
+            "status": "success",
+            "scan_time": scan_time,
+            "summary": {
+                "total_patients": len(patients),
+                "total_tests": len(all_tests),
+                "active_tests": len(active_tests),
+                "total_junk_records": total_junk_count,
+                "deleted_tests_count": len(deleted_tests),
+                "orphan_patients_count": len(orphan_patients),
+                "ghost_tests_count": len(ghost_tests),
+                "abandoned_drafts_count": len(abandoned_drafts),
+                "duplicate_tests_count": len(duplicate_tests),
+                "old_snapshots_count": len(old_snapshots),
+                "inactive_remarks_count": len(inactive_remarks),
+                "inactive_tests_count": len(inactive_tests)
+            },
+            "data": {
+                "deleted_tests": deleted_tests,
+                "orphan_patients": orphan_patients,
+                "ghost_tests": ghost_tests,
+                "abandoned_drafts": abandoned_drafts,
+                "duplicate_tests": duplicate_tests,
+                "old_snapshots": old_snapshots,
+                "inactive_remarks": inactive_remarks,
+                "inactive_tests": inactive_tests
+            }
+        }
+    except Exception as e:
+        log_error(e, "API_JUNK_DATA_SCAN")
+        return {"status": "error", "error": str(e), "summary": {}, "data": {}}
+
+
+@app.post("/api/admin/junk-data/clean")
+def api_admin_junk_data_clean(payload: dict):
+    """
+    Permanently deletes only the explicitly selected items with administrator permission.
+    Never deletes anything automatically. Requires explicit ID/MR lists and audit logging.
+    """
+    try:
+        supabase = init_supabase()
+        admin_user = payload.get("admin_user", "Admin").strip()
+        confirmation = payload.get("confirmation", "").strip().upper()
+
+        if confirmation != "CONFIRM":
+            raise HTTPException(
+                status_code=400, 
+                detail="Confirmation code 'CONFIRM' required to perform permanent deletion."
+            )
+
+        selected_deleted_test_ids = payload.get("deleted_test_ids", [])
+        selected_orphan_mr_nos = payload.get("orphan_patient_mr_nos", [])
+        selected_ghost_test_ids = payload.get("ghost_test_ids", [])
+        selected_abandoned_draft_ids = payload.get("abandoned_draft_ids", [])
+        selected_duplicate_test_ids = payload.get("duplicate_test_ids", [])
+        selected_snapshot_ids = payload.get("snapshot_ids", [])
+        selected_inactive_remark_ids = payload.get("inactive_remark_ids", [])
+        selected_inactive_test_ids = payload.get("inactive_test_ids", [])
+
+        cleaned_report = {
+            "deleted_tests": 0,
+            "orphan_patients": 0,
+            "ghost_tests": 0,
+            "abandoned_drafts": 0,
+            "duplicate_tests": 0,
+            "snapshots": 0,
+            "inactive_remarks": 0,
+            "inactive_tests": 0,
+            "errors": []
+        }
+
+        # Helper to batch delete by column
+        def batch_delete(table_name, column_name, id_list, batch_size=40):
+            deleted_count = 0
+            for i in range(0, len(id_list), batch_size):
+                chunk = id_list[i:i + batch_size]
+                try:
+                    supabase.table(table_name).delete().in_(column_name, chunk).execute()
+                    deleted_count += len(chunk)
+                except Exception as ex:
+                    err_msg = f"Failed batch delete in {table_name}.{column_name}: {str(ex)}"
+                    cleaned_report["errors"].append(err_msg)
+                    logger.error(err_msg)
+            return deleted_count
+
+        # 1. Purge Selected Soft-Deleted Tests
+        if selected_deleted_test_ids:
+            cleaned_report["deleted_tests"] = batch_delete("test_results_all", "id", selected_deleted_test_ids)
+
+        # 2. Purge Selected Orphan Patients
+        if selected_orphan_mr_nos:
+            cleaned_report["orphan_patients"] = batch_delete("patients", "mr_no", selected_orphan_mr_nos)
+
+        # 3. Purge Selected Ghost Tests
+        if selected_ghost_test_ids:
+            cleaned_report["ghost_tests"] = batch_delete("test_results_all", "id", selected_ghost_test_ids)
+
+        # 4. Purge Selected Abandoned Drafts
+        if selected_abandoned_draft_ids:
+            cleaned_report["abandoned_drafts"] = batch_delete("test_results_all", "id", selected_abandoned_draft_ids)
+
+        # 5. Purge Selected Duplicate Tests
+        if selected_duplicate_test_ids:
+            cleaned_report["duplicate_tests"] = batch_delete("test_results_all", "id", selected_duplicate_test_ids)
+
+        # 6. Purge Selected Snapshots
+        if selected_snapshot_ids:
+            cleaned_report["snapshots"] = batch_delete("analytics_snapshots", "id", selected_snapshot_ids)
+
+        # 7. Purge Selected Inactive Remarks
+        if selected_inactive_remark_ids:
+            cleaned_report["inactive_remarks"] = batch_delete("remarks", "id", selected_inactive_remark_ids)
+
+        # 8. Purge Selected Inactive Catalog Tests
+        if selected_inactive_test_ids:
+            cleaned_report["inactive_tests"] = batch_delete("tests", "id", selected_inactive_test_ids)
+
+        total_cleaned = sum([
+            cleaned_report["deleted_tests"],
+            cleaned_report["orphan_patients"],
+            cleaned_report["ghost_tests"],
+            cleaned_report["abandoned_drafts"],
+            cleaned_report["duplicate_tests"],
+            cleaned_report["snapshots"],
+            cleaned_report["inactive_remarks"],
+            cleaned_report["inactive_tests"],
+        ])
+
+        # Audit Logging
+        summary_msg = (
+            f"Manual Junk Cleanup executed by '{admin_user}': Total {total_cleaned} records purged "
+            f"({cleaned_report['deleted_tests']} soft-deleted tests, {cleaned_report['orphan_patients']} orphan patients, "
+            f"{cleaned_report['ghost_tests']} ghost tests, {cleaned_report['abandoned_drafts']} abandoned drafts, "
+            f"{cleaned_report['duplicate_tests']} duplicates, {cleaned_report['snapshots']} snapshots, "
+            f"{cleaned_report['inactive_remarks']} remarks, {cleaned_report['inactive_tests']} inactive tests)."
+        )
+        save_log(summary_msg, category="DATABASE_CLEANUP", user=admin_user)
+        if insert_audit_log:
+            try:
+                insert_audit_log(
+                    action="DELETE_JUNK_DATA",
+                    mr_no=None,
+                    patient_name="System Database Maintenance",
+                    user_name=admin_user,
+                    details=summary_msg
+                )
+            except Exception:
+                pass
+
+        return {
+            "status": "success",
+            "total_cleaned": total_cleaned,
+            "cleaned_breakdown": cleaned_report,
+            "message": f"Successfully deleted {total_cleaned} selected junk records from database."
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        log_error(e, "API_JUNK_DATA_CLEAN")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/admin/junk-data/export-json")
+def api_admin_junk_data_export():
+    """
+    Exports a downloadable JSON backup snapshot of all currently detected junk data.
+    Provides safety before performing any permanent deletions.
+    """
+    try:
+        scan_result = api_admin_junk_data_scan()
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"labflow_junk_backup_{timestamp}.json"
+        
+        json_content = json.dumps(scan_result, indent=2, default=str)
+        return JSONResponse(
+            content=json.loads(json_content),
+            headers={
+                "Content-Disposition": f"attachment; filename={filename}",
+                "Content-Type": "application/json"
+            }
+        )
+    except Exception as e:
+        log_error(e, "API_JUNK_DATA_EXPORT")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ---------------------------------------------------------------------------

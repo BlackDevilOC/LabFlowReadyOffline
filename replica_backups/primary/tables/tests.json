@@ -536,7 +536,7 @@
     "name": "ELECTROLYTES -",
     "normal_max": null,
     "normal_min": null,
-    "status": 1,
+    "status": 0,
     "unit": null
   },
   {
@@ -1326,7 +1326,7 @@
     "name": "Glucose Fasting FBS",
     "normal_max": "Normal <110",
     "normal_min": null,
-    "status": 0,
+    "status": 1,
     "unit": "mg/dl"
   },
   {

@@ -72,7 +72,55 @@ TABLE_PRIMARY_KEYS: Dict[str, List[str]] = {
     "analytics_snapshots": ["id"]
 }
 
-KNOWN_BOOLEAN_COLS = {"status", "is_active", "is_doctor", "is_receptionist"}
+TABLE_BOOLEAN_COLS: Dict[str, set] = {
+    "test_results_all": {"delete_status"},
+    "tests": {"status"},
+    "test_groups": {"status"},
+    "users": {"is_active"},
+    "remarks": {"is_active"},
+    "invoice_settings": {"is_active"},
+    "print_settings": {"is_active", "display_pathologist_signature", "display_verified_by"},
+}
+
+TABLE_EXPLICIT_TYPES: Dict[str, Dict[str, str]] = {
+    "test_results_all": {
+        "status": "TEXT",
+        "delete_status": "BOOLEAN",
+        "test_values": "JSONB",
+        "mr_no": "BIGINT",
+        "id": "BIGINT"
+    },
+    "print_settings": {
+        "display_pathologist_signature": "BOOLEAN",
+        "display_verified_by": "BOOLEAN",
+        "is_active": "BOOLEAN"
+    },
+    "tests": {
+        "status": "BOOLEAN"
+    },
+    "test_groups": {
+        "status": "BOOLEAN",
+        "component_ids": "JSONB"
+    },
+    "users": {
+        "is_active": "BOOLEAN",
+        "permissions": "JSONB"
+    },
+    "remarks": {
+        "is_active": "BOOLEAN"
+    },
+    "invoice_settings": {
+        "is_active": "BOOLEAN"
+    },
+    "app_settings": {
+        "payload": "JSONB"
+    },
+    "analytics_snapshots": {
+        "payload": "JSONB"
+    }
+}
+
+KNOWN_BOOLEAN_COLS = {"is_active", "is_doctor", "is_receptionist"}
 
 
 def sanitize_sql_value(val: Any, col_name: str = "", col_type: str = "") -> str:
@@ -81,7 +129,7 @@ def sanitize_sql_value(val: Any, col_name: str = "", col_type: str = "") -> str:
         return "NULL"
     
     # Check if this column is boolean
-    if col_type == "BOOLEAN" or col_name in KNOWN_BOOLEAN_COLS:
+    if col_type == "BOOLEAN":
         if isinstance(val, bool):
             return "TRUE" if val else "FALSE"
         val_str = str(val).strip().lower()
@@ -379,7 +427,10 @@ class SupabaseReplicaEngine:
         col_defs = []
         col_type_map = {}
         for col in cols:
-            if col in KNOWN_BOOLEAN_COLS:
+            explicit_type = TABLE_EXPLICIT_TYPES.get(table_name, {}).get(col)
+            if explicit_type:
+                col_type = explicit_type
+            elif (table_name in TABLE_BOOLEAN_COLS and col in TABLE_BOOLEAN_COLS[table_name]) or col in {"is_active", "is_doctor", "is_receptionist"}:
                 col_type = "BOOLEAN"
             else:
                 sample_vals = [r.get(col) for r in records if r.get(col) is not None]
@@ -674,9 +725,21 @@ CREATE TABLE IF NOT EXISTS "{table_name}" (
                                     for r in records:
                                         rec_copy = dict(r)
                                         for k, v in rec_copy.items():
-                                            if k in KNOWN_BOOLEAN_COLS:
+                                            is_bool = (
+                                                (table_name in TABLE_BOOLEAN_COLS and k in TABLE_BOOLEAN_COLS[table_name])
+                                                or (k in ("is_active", "is_doctor", "is_receptionist"))
+                                            )
+                                            if is_bool:
                                                 if v is not None:
-                                                    rec_copy[k] = bool(v) if not isinstance(v, str) else v.lower() in ("1", "true", "t", "yes")
+                                                    if isinstance(v, bool):
+                                                        rec_copy[k] = v
+                                                    elif isinstance(v, (int, float)):
+                                                        rec_copy[k] = bool(v)
+                                                    elif isinstance(v, str):
+                                                        rec_copy[k] = v.strip().lower() in ("1", "true", "t", "yes")
+                                            elif table_name == "test_results_all" and k == "status":
+                                                if v is not None:
+                                                    rec_copy[k] = str(v)
                                         cleaned_records.append(rec_copy)
 
                                     for i in range(0, len(cleaned_records), 50):

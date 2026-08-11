@@ -2,7 +2,7 @@
   {
     "id": 1,
     "payload": {
-      "pushed_at": "2026-08-11T08:05:06.845353Z",
+      "pushed_at": "2026-08-11T08:56:02.085168Z",
       "pushed_by": "Anonymous",
       "print_layouts": {
         "liver function test|uce": {
@@ -339,29 +339,29 @@
         "mode": "group_and_single",
         "popular_order": [
           "COMPLETE BLOOD COUNT",
-          "Hep B, C",
-          "Liver Function Test",
-          "UCE",
-          "Glucose Random (RBS)",
-          "Anti HIV (ICT)",
-          "HbA1c",
-          "MP-ICT",
           "Albumin",
-          "Electrolytes",
-          "UC",
-          "VDRL SYPHILIS",
-          "PT (Prothrombin Time)",
-          "Anti HCV (ICT)",
-          "Dengue NS1 (ICT)",
-          "HbsAg (ICT)",
           "Lipid Profile",
+          "Hep B, C",
+          "Electrolytes",
           "Thyroid Profile",
+          "Liver Function Test",
+          "UC",
           "Calcium",
+          "UCE",
+          "VDRL SYPHILIS",
           "Amylase",
+          "Glucose Random (RBS)",
+          "PT (Prothrombin Time)",
           "Hep B, C ELISA",
+          "Anti HIV (ICT)",
+          "Uric Acid",
+          "Dengue NS1 (ICT)",
+          "MP-ICT",
+          "HbsAg (ICT)",
           "Anti HCV ELISA",
+          "HbA1c",
           "H. Pylori Ab (ICT)",
-          "Uric Acid"
+          "Creatinine"
         ],
         "quick_presets": [
           {
@@ -380,20 +380,6 @@
             "name": ".",
             "tests": [],
             "auto_select": true
-          },
-          {
-            "id": "preset_1786430105501",
-            "name": "regular all",
-            "tests": [
-              "COMPLETE BLOOD COUNT",
-              "Liver Function Test",
-              "UCE",
-              "Glucose Random (RBS)",
-              "Hep B, C",
-              "8",
-              "58"
-            ],
-            "auto_select": false
           }
         ],
         "regular_preset": [],
@@ -410,6 +396,7 @@
           "T3": "Regular",
           "T4": "Regular",
           "UC": "Popular",
+          "ESR": "Popular",
           "TSH": "Regular",
           "UCE": "Popular",
           "Urea": "Regular",
@@ -430,7 +417,7 @@
           "Lipid Profile": "Popular",
           "Total Protein": "Regular",
           "VDRL SYPHILIS": "Popular",
-          "Anti HCV (ICT)": "Popular",
+          "Anti HCV (ICT)": "Regular",
           "Anti HCV ELISA": "Popular",
           "Anti HIV (ICT)": "Popular",
           "Blood Grouping": "Regular",
@@ -451,29 +438,29 @@
         "category_items_order": {
           "Popular": [
             "COMPLETE BLOOD COUNT",
-            "Hep B, C",
-            "Liver Function Test",
-            "UCE",
-            "Glucose Random (RBS)",
-            "Anti HIV (ICT)",
-            "HbA1c",
-            "MP-ICT",
             "Albumin",
-            "Electrolytes",
-            "UC",
-            "VDRL SYPHILIS",
-            "PT (Prothrombin Time)",
-            "Anti HCV (ICT)",
-            "Dengue NS1 (ICT)",
-            "HbsAg (ICT)",
             "Lipid Profile",
+            "Hep B, C",
+            "Electrolytes",
             "Thyroid Profile",
+            "Liver Function Test",
+            "UC",
             "Calcium",
+            "UCE",
+            "VDRL SYPHILIS",
             "Amylase",
+            "Glucose Random (RBS)",
+            "PT (Prothrombin Time)",
             "Hep B, C ELISA",
+            "Anti HIV (ICT)",
+            "Uric Acid",
+            "Dengue NS1 (ICT)",
+            "MP-ICT",
+            "HbsAg (ICT)",
             "Anti HCV ELISA",
+            "HbA1c",
             "H. Pylori Ab (ICT)",
-            "Uric Acid"
+            "Creatinine"
           ],
           "Regular": [
             "T3",
@@ -614,8 +601,8 @@
             "Reactive"
           ],
           "Anti HIV (ICT)": [
-            "Non-Reactive",
-            "Reactive"
+            "Negative",
+            "Positive"
           ],
           "Dengue Profile": [
             "Negative",
@@ -712,7 +699,7 @@
       }
     },
     "setting_type": "all_app_settings",
-    "updated_at": "2026-08-11T08:05:06.845353+00:00",
+    "updated_at": "2026-08-11T08:56:02.085168+00:00",
     "updated_by": "Anonymous"
   }
 ]
