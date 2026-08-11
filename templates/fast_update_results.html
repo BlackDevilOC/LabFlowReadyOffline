@@ -1,0 +1,1842 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/advanced-search.css') }}">
+<style>
+    :root {
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --primary-light: #eff6ff;
+        --success: #16a34a;
+        --success-light: #f0fdf4;
+        --warning: #d97706;
+        --warning-light: #fffbeb;
+        --danger: #dc2626;
+        --danger-light: #fef2f2;
+        --surface: #ffffff;
+        --surface-subtle: #f8fafc;
+        --surface-card: #ffffff;
+        --border: #e2e8f0;
+        --border-dark: #cbd5e1;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --radius: 8px;
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] {
+        --surface: #0f172a;
+        --surface-subtle: #1e293b;
+        --surface-card: #1e293b;
+        --border: #334155;
+        --border-dark: #475569;
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --primary-light: #1e3a8a;
+        --success-light: #14532d;
+        --warning-light: #78350f;
+        --danger-light: #7f1d1d;
+    }
+
+    /* Full-screen rapid workspace container */
+    .fast-entry-layout {
+        display: grid;
+        grid-template-columns: 370px 1fr;
+        height: calc(100vh - 60px);
+        background: var(--surface-subtle);
+        overflow: hidden;
+    }
+
+    /* LEFT PANEL: Queue Sidebar */
+    .queue-panel {
+        display: flex;
+        flex-direction: column;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        height: 100%;
+        overflow: hidden;
+        z-index: 10;
+    }
+
+    .queue-header {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+
+    .queue-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .queue-title {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--text);
+        margin: 0;
+    }
+
+    .queue-title svg {
+        color: #eab308;
+        fill: #eab308;
+    }
+
+    .btn-nav-back {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: var(--surface-subtle);
+        border: 1px solid var(--border);
+        transition: all 0.15s;
+    }
+
+    .btn-nav-back:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    /* Queue Filters Grid */
+    .filter-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .filter-group.full {
+        grid-column: span 2;
+    }
+
+    .filter-label-sm {
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+    }
+
+    .queue-header input,
+    .queue-header select {
+        width: 100%;
+        padding: 5px 8px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        font-size: 12px;
+        color: var(--text);
+        background: var(--surface-subtle);
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .queue-header input:focus,
+    .queue-header select:focus {
+        border-color: var(--primary);
+    }
+
+    .token-range-wrap {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .token-range-wrap input {
+        width: 50%;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .token-range-wrap span {
+        font-size: 11px;
+        color: var(--text-muted);
+    }
+
+    /* Status Pills */
+    .status-tabs {
+        display: flex;
+        background: var(--surface-subtle);
+        padding: 2px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+    }
+
+    .status-tab {
+        flex: 1;
+        text-align: center;
+        padding: 4px 6px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-muted);
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        transition: all 0.12s;
+    }
+
+    .status-tab.active {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: var(--shadow-sm);
+    }
+
+    /* Search & Stats Strip */
+    .queue-search-row {
+        position: relative;
+    }
+
+    .queue-search-row input {
+        padding-left: 26px;
+    }
+
+    .queue-search-row svg {
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+    }
+
+    .queue-stepper-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 10px;
+        background: var(--surface-subtle);
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .stepper-btn {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 3px 8px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        color: var(--text);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.15s;
+    }
+
+    .stepper-btn:hover:not(:disabled) {
+        background: var(--primary-light);
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .stepper-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    /* Cards List */
+    .queue-cards-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 8px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .patient-card {
+        background: var(--surface-card);
+        border: 1.5px solid var(--border);
+        border-radius: 7px;
+        padding: 8px 10px;
+        cursor: pointer;
+        transition: all 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        user-select: none;
+    }
+
+    .patient-card:hover {
+        border-color: #93c5fd;
+        background: var(--surface-subtle);
+        transform: translateY(-1px);
+    }
+
+    .patient-card.active {
+        border-color: var(--primary);
+        background: var(--primary-light);
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+
+    .patient-card.saved-in-session::after {
+        content: '✓ Saved';
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--success);
+        background: var(--success-light);
+        padding: 1px 5px;
+        border-radius: 3px;
+        border: 1px solid #bbf7d0;
+    }
+
+    .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4px;
+    }
+
+    .token-badge {
+        font-size: 11px;
+        font-weight: 800;
+        color: #fff;
+        background: #1e293b;
+        padding: 2px 7px;
+        border-radius: 4px;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+    }
+
+    .token-badge.highlight {
+        background: var(--primary);
+    }
+
+    .mr-badge-sm {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary);
+        background: rgba(37, 99, 235, 0.1);
+        padding: 1px 6px;
+        border-radius: 4px;
+    }
+
+    .card-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 2px;
+    }
+
+    .card-meta {
+        font-size: 10.5px;
+        color: var(--text-muted);
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .card-test-badges {
+        display: flex;
+        gap: 3px;
+        flex-wrap: wrap;
+        max-width: 230px;
+    }
+
+    .test-pill-sm {
+        font-size: 9.5px;
+        font-weight: 700;
+        padding: 1px 5px;
+        border-radius: 3px;
+        background: var(--surface-subtle);
+        border: 1px solid var(--border);
+        color: var(--text);
+    }
+
+    .status-dot-sm {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .status-dot-sm.completed {
+        background: var(--success);
+    }
+
+    .status-dot-sm.pending {
+        background: var(--warning);
+        animation: pulseDot 1.5s infinite;
+    }
+
+    @keyframes pulseDot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* RIGHT PANEL: Workspace */
+    .workspace-panel {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        background: var(--surface-subtle);
+    }
+
+    /* Sticky Action Header */
+    .workspace-header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 10px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        box-shadow: var(--shadow-sm);
+        z-index: 5;
+    }
+
+    .patient-summary-box {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .ps-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ps-label {
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    .ps-val {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--text);
+    }
+
+    .btn-edit-info {
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--primary);
+        background: var(--primary-light);
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        padding: 3px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .ws-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-ws {
+        padding: 7px 14px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        border: 1px solid transparent;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s;
+    }
+
+    .btn-ws-primary {
+        background: var(--primary);
+        color: #fff;
+    }
+
+    .btn-ws-primary:hover {
+        background: var(--primary-hover);
+        transform: translateY(-1px);
+    }
+
+    .btn-ws-save-next {
+        background: #16a34a;
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+    }
+
+    .btn-ws-save-next:hover {
+        background: #15803d;
+        transform: translateY(-1px);
+    }
+
+    .btn-ws-sec {
+        background: var(--surface);
+        border-color: var(--border-dark);
+        color: var(--text);
+    }
+
+    .btn-ws-sec:hover {
+        background: var(--surface-subtle);
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+
+    /* Workspace Content (Scrollable tests form) */
+    .workspace-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 14px 18px;
+    }
+
+    #tests-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+        gap: 10px;
+    }
+
+    #tests-container.single-test {
+        grid-template-columns: minmax(380px, 520px);
+        justify-content: start;
+    }
+
+    .test-section {
+        background: var(--surface);
+        border: 1px solid var(--border-dark);
+        border-radius: 6px;
+        padding: 6px 8px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .test-section-title {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: #ffffff;
+        background: #1e293b;
+        margin: -6px -8px 6px -8px;
+        padding: 5px 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .test-title-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .test-title-left span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+    }
+
+    .test-title-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .save-test-btn {
+        background: #22c55e;
+        border: 1px solid #16a34a;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    .save-test-btn:hover {
+        background: #16a34a;
+    }
+
+    .delete-test-btn {
+        background: transparent;
+        border: none;
+        color: #ef4444;
+        cursor: pointer;
+        padding: 2px;
+        border-radius: 3px;
+    }
+
+    .delete-test-btn:hover {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .test-category-badge {
+        font-size: 8.5px;
+        background: #3b82f6;
+        color: #ffffff;
+        padding: 1px 5px;
+        border-radius: 3px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* Parameters Table */
+    .param-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2px;
+    }
+
+    .param-table th {
+        font-size: 10px;
+        font-weight: bold;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+        padding: 3px 4px;
+        text-align: left;
+    }
+
+    .param-table th.th-details { width: 35%; }
+    .param-table th.th-range { width: 28%; }
+    .param-table th.th-result { width: 37%; }
+
+    .param-table td {
+        padding: 3px 4px;
+        vertical-align: middle;
+        border-bottom: 1px solid var(--border);
+        font-size: 11px;
+    }
+
+    .param-label {
+        font-weight: 700;
+        color: var(--text);
+        font-size: 10.5px;
+        text-transform: uppercase;
+    }
+
+    .param-range-text {
+        font-size: 10.5px;
+        color: var(--text-muted);
+    }
+
+    .param-input-cell {
+        position: relative;
+    }
+
+    .param-input-field {
+        width: 100%;
+        height: 24px;
+        padding: 2px 6px;
+        border: 1px solid var(--border-dark);
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--text);
+        background: var(--surface);
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .param-input-field:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+        background: #f8fafc;
+    }
+
+    /* Quick Suggestion Pills */
+    .quick-sug-pills-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px;
+        margin-top: 3px;
+    }
+
+    .btn-quick-sug {
+        background: var(--surface-subtle);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 9px;
+        font-weight: 700;
+        padding: 1px 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.12s;
+    }
+
+    .btn-quick-sug:hover {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+    }
+
+    /* Remarks Wrap */
+    .test-remarks-wrap {
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px dashed var(--border);
+    }
+
+    .test-remarks-label {
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        display: block;
+        margin-bottom: 2px;
+    }
+
+    .remarks-input-row {
+        display: flex;
+        gap: 4px;
+    }
+
+    .remarks-field {
+        flex: 1;
+        border: 1px solid var(--border-dark);
+        border-radius: 4px;
+        padding: 4px 6px;
+        font-size: 11px;
+        color: var(--text);
+        background: var(--surface);
+        resize: vertical;
+        min-height: 28px;
+    }
+
+    .remarks-pick-btn {
+        width: 26px;
+        border: 1px solid var(--border-dark);
+        background: var(--surface-subtle);
+        border-radius: 4px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    /* Bottom Keyboard Hints Bar */
+    .workspace-footer {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 6px 18px;
+        font-size: 11px;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .kb-hints {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .kb-badge {
+        background: var(--surface-subtle);
+        border: 1px solid var(--border-dark);
+        padding: 1px 5px;
+        border-radius: 3px;
+        font-weight: 700;
+        font-size: 10px;
+        color: var(--text);
+    }
+
+    /* Toast notification */
+    .fast-toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #1e293b;
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        display: none;
+        z-index: 1000;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .fast-toast.show {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .fast-toast.success { background: #16a34a; }
+    .fast-toast.error { background: #dc2626; }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Modal */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-box {
+        background: var(--surface);
+        border-radius: 8px;
+        padding: 18px;
+        width: 100%;
+        max-width: 480px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .modal-header h3 { margin: 0; font-size: 15px; }
+
+    .modal-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .modal-body .full { grid-column: span 2; }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 14px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="fast-entry-layout">
+
+    <!-- LEFT PANEL: Patient Queue Sidebar -->
+    <div class="queue-panel">
+        <div class="queue-header">
+            <div class="queue-top-row">
+                <h2 class="queue-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    Rapid Entry Queue
+                </h2>
+                <a href="{{ url_prefix }}/update-results" class="btn-nav-back" title="Switch to Table View">Standard View</a>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label class="filter-label-sm">Date</label>
+                    <input type="date" id="filter-date" title="Select Date">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label-sm">Shift</label>
+                    <select id="filter-shift">
+                        <option value="all">All Shifts</option>
+                    </select>
+                </div>
+                <div class="filter-group full">
+                    <label class="filter-label-sm">Token Range</label>
+                    <div class="token-range-wrap">
+                        <input type="number" id="token-from" placeholder="From 1" min="1" step="1">
+                        <span>to</span>
+                        <input type="number" id="token-to" placeholder="To 100" min="1" step="1">
+                        <button type="button" class="stepper-btn" id="btn-apply-token-range" style="padding:4px 8px;">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Tabs -->
+            <div class="status-tabs">
+                <button type="button" class="status-tab active" data-status="all">All (<span id="count-all">0</span>)</button>
+                <button type="button" class="status-tab" data-status="pending">Pending (<span id="count-pending">0</span>)</button>
+                <button type="button" class="status-tab" data-status="completed">Done (<span id="count-done">0</span>)</button>
+            </div>
+
+            <!-- Search -->
+            <div class="queue-search-row">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="queue-search" placeholder="Search name, MR #, or Token…">
+            </div>
+
+            <!-- Queue Stepper -->
+            <div class="queue-stepper-bar">
+                <button type="button" class="stepper-btn" id="btn-prev-patient" title="Previous Patient (Alt+P)">
+                    ⏮ Prev
+                </button>
+                <span id="queue-stepper-label" style="font-size:10.5px;color:var(--text-muted);">0 / 0</span>
+                <button type="button" class="stepper-btn" id="btn-next-patient" title="Next Patient (Alt+N)">
+                    Next ⏭
+                </button>
+            </div>
+        </div>
+
+        <!-- Cards List -->
+        <div class="queue-cards-list" id="queue-cards-list">
+            <div style="padding:30px 10px;text-align:center;color:var(--text-muted);font-size:12px;">
+                Loading patient queue…
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL: Test Results Workspace -->
+    <div class="workspace-panel">
+        
+        <!-- Sticky Action Header -->
+        <div class="workspace-header">
+            <div class="patient-summary-box">
+                <div class="ps-item">
+                    <span class="ps-label">Token #</span>
+                    <span class="ps-val" id="ws-token" style="color:var(--primary);">—</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-label">MR #</span>
+                    <span class="ps-val" id="ws-mr">—</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-label">Patient Name</span>
+                    <span class="ps-val" id="ws-name">—</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-label">Age / Gender</span>
+                    <span class="ps-val" id="ws-age-gender" style="font-weight:600;">—</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-label">Shift</span>
+                    <span class="ps-val" id="ws-shift" style="font-weight:600;">—</span>
+                </div>
+                <button type="button" class="btn-edit-info" id="btn-open-edit-info">Edit Info</button>
+            </div>
+
+            <div class="ws-actions">
+                <button type="button" class="btn-ws btn-ws-save-next" id="btn-save-next" title="Save results and auto-advance to next token (Ctrl+Shift+Enter)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Save & Next ➔
+                </button>
+                <button type="button" class="btn-ws btn-ws-primary" id="btn-save-results" title="Save results for this patient (Ctrl+Enter)">
+                    Save Results
+                </button>
+                <button type="button" class="btn-ws btn-ws-sec" id="btn-save-print" title="Save results and open print preview (Ctrl+P)">
+                    🖨️ Save & Print
+                </button>
+                <button type="button" class="btn-ws btn-ws-sec" id="btn-skip-next" title="Skip to next patient without saving">
+                    Skip ⏭
+                </button>
+            </div>
+        </div>
+
+        <!-- Scrollable Workspace Form -->
+        <div class="workspace-content" id="workspace-content">
+            <div id="tests-container">
+                <div style="padding:50px;text-align:center;color:var(--text-muted);font-size:14px;">
+                    Select a patient from the queue to start entering results.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Hints -->
+        <div class="workspace-footer">
+            <div class="kb-hints">
+                <span><span class="kb-badge">Enter</span> / <span class="kb-badge">↓</span> Next field</span>
+                <span><span class="kb-badge">↑</span> Prev field</span>
+                <span><span class="kb-badge">Ctrl+Enter</span> Save</span>
+                <span><span class="kb-badge">Ctrl+Shift+Enter</span> Save & Next ➔</span>
+                <span><span class="kb-badge">Alt+N</span> / <span class="kb-badge">Alt+P</span> Next / Prev Token</span>
+            </div>
+            <div id="save-status-indicator" style="font-size:11px;font-weight:700;color:var(--text-muted);">
+                Ready
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Fast Toast Notification -->
+<div class="fast-toast" id="fast-toast"></div>
+
+<!-- Patient Info Edit Modal -->
+<div class="modal-overlay" id="edit-info-modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3>Update Patient Information</h3>
+            <button type="button" class="stepper-btn" onclick="closeEditInfoModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="filter-group full">
+                <label class="filter-label-sm">Patient Name</label>
+                <input type="text" id="modal-name">
+            </div>
+            <div class="filter-group">
+                <label class="filter-label-sm">Relation</label>
+                <select id="modal-relation">
+                    <option value="S/O">S/O</option>
+                    <option value="D/O">D/O</option>
+                    <option value="W/O">W/O</option>
+                    <option value="C/O">C/O</option>
+                    <option value="H/O">H/O</option>
+                    <option value="F/O">F/O</option>
+                    <option value="M/O">M/O</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label-sm">Relation Name</label>
+                <input type="text" id="modal-relation-name">
+            </div>
+            <div class="filter-group">
+                <label class="filter-label-sm">Age</label>
+                <input type="text" id="modal-age">
+            </div>
+            <div class="filter-group">
+                <label class="filter-label-sm">Gender</label>
+                <select id="modal-gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label-sm">Shift</label>
+                <select id="modal-shift"></select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label-sm">Token No</label>
+                <input type="text" id="modal-token">
+            </div>
+            <div class="filter-group full">
+                <label class="filter-label-sm">Mobile</label>
+                <input type="text" id="modal-mobile">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-ws btn-ws-sec" onclick="closeEditInfoModal()">Cancel</button>
+            <button type="button" class="btn-ws btn-ws-primary" onclick="savePatientInfoModal()">Save Info</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/list-pagination.js') }}"></script>
+<script>
+    // State management
+    let rawRecords = [];
+    let groupedPatients = [];
+    let visiblePatients = [];
+    let activePatientIndex = -1;
+    let activePatientMr = null;
+    let activePatientRecords = [];
+    let activeStatusFilter = 'all';
+    let savedInSessionSet = new Set();
+    let groupOrdersCatalog = {};
+    let testSuggestions = { by_test_name: {}, by_param_name: {} };
+    let availableTests = [];
+
+    const getShortTestName = (name) => (window.ListPagination?.getShortTestName ? window.ListPagination.getShortTestName(name) : (name || ''));
+
+    function escapeHtml(text) {
+        if (text == null) return '';
+        const div = document.createElement('div');
+        div.textContent = String(text);
+        return div.innerHTML;
+    }
+
+    function showToast(msg, type = 'success') {
+        const t = document.getElementById('fast-toast');
+        t.textContent = msg;
+        t.className = `fast-toast show ${type}`;
+        clearTimeout(window.__toastTimer);
+        window.__toastTimer = setTimeout(() => { t.className = 'fast-toast'; }, 2200);
+    }
+
+    // Set today's date as default
+    function initDate() {
+        const dateInput = document.getElementById('filter-date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.value = today;
+    }
+
+    // Load filter dropdowns
+    async function loadFilterMetadata() {
+        try {
+            const res = await fetch('/api/metadata/filters');
+            const data = await res.json();
+            if (data.status === 'Success') {
+                const shifts = data.shifts || ['morning', 'evening', 'night'];
+                const shiftSelect = document.getElementById('filter-shift');
+                shiftSelect.innerHTML = '<option value="all">All Shifts</option>' +
+                    shifts.map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('');
+                
+                const modalShift = document.getElementById('modal-shift');
+                modalShift.innerHTML = shifts.map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('');
+            }
+        } catch (e) {
+            console.error('Failed to load filter metadata:', e);
+        }
+    }
+
+    // Load Group Orders & Suggestions
+    async function loadCatalogs() {
+        try {
+            const [catRes, sugRes] = await Promise.all([
+                fetch('/api/admin/tests-catalog').catch(() => null),
+                fetch('/api/admin/test-suggestions').catch(() => null)
+            ]);
+            if (catRes && catRes.ok) {
+                const data = await catRes.json();
+                if (data.status === 'Success') {
+                    const testNamesById = {};
+                    (data.tests || []).forEach(t => { if (t.id && t.name) testNamesById[t.id] = t.name; });
+                    (data.groups || []).forEach(g => {
+                        const gName = (g.group_name || '').trim();
+                        const cIds = g.component_ids || [];
+                        if (gName && cIds.length) {
+                            groupOrdersCatalog[gName] = cIds.map(cid => testNamesById[cid]).filter(Boolean);
+                        }
+                    });
+                }
+            }
+            if (sugRes && sugRes.ok) {
+                const data = await sugRes.json();
+                if (data.status === 'Success' && data.suggestions) {
+                    testSuggestions = data.suggestions;
+                }
+            }
+        } catch (_) {}
+    }
+
+    async function fetchTestsCatalog() {
+        try {
+            const res = await fetch('/api/admin/tests-catalog');
+            const data = await res.json();
+            if (data.status === 'Success' && data.tests) {
+                return data.tests.map(t => ({
+                    id: t.id,
+                    name: t.name || '',
+                    category: t.category || 'General',
+                }));
+            }
+        } catch (_) {}
+        return [];
+    }
+
+    // Parse token as integer for sorting and range
+    function parseTokenNum(tok) {
+        if (tok === null || tok === undefined || tok === '') return 999999;
+        const n = parseInt(String(tok).replace(/[^0-9]/g, ''), 10);
+        return isNaN(n) ? 999999 : n;
+    }
+
+    // Load Patient Queue from API
+    async function loadQueue() {
+        const date = document.getElementById('filter-date').value;
+        const shift = document.getElementById('filter-shift').value;
+        const params = new URLSearchParams({ record_type: 'lab' });
+        if (date) { params.set('date_from', date); params.set('date_to', date); }
+        if (shift !== 'all') params.set('shift', shift);
+
+        const listContainer = document.getElementById('queue-cards-list');
+        listContainer.innerHTML = '<div style="padding:30px 10px;text-align:center;color:var(--text-muted);font-size:12px;">Loading queue…</div>';
+
+        try {
+            const res = await fetch(`/api/print-records?${params.toString()}`);
+            const data = await res.json();
+            rawRecords = data.records || [];
+
+            // Group by patient
+            groupedPatients = window.ListPagination?.groupLabRowsByPatient
+                ? window.ListPagination.groupLabRowsByPatient(rawRecords)
+                : [];
+
+            // Sort by Token ascending (Token 1, 2, 3...) so sequential flow is natural
+            groupedPatients.sort((a, b) => {
+                const ta = parseTokenNum(a.patient_token);
+                const tb = parseTokenNum(b.patient_token);
+                if (ta !== tb) return ta - tb;
+                return (a.mr_no || 0) - (b.mr_no || 0);
+            });
+
+            applyQueueFilters();
+        } catch (e) {
+            listContainer.innerHTML = `<div style="padding:30px 10px;text-align:center;color:var(--danger);font-size:12px;">Failed to load queue: ${e.message}</div>`;
+        }
+    }
+
+    function applyQueueFilters() {
+        const fromTok = parseInt(document.getElementById('token-from').value, 10);
+        const toTok = parseInt(document.getElementById('token-to').value, 10);
+        const search = document.getElementById('queue-search').value.trim().toLowerCase();
+
+        visiblePatients = groupedPatients.filter(p => {
+            // Token Range filter
+            const tokNum = parseTokenNum(p.patient_token);
+            if (!isNaN(fromTok) && tokNum < fromTok) return false;
+            if (!isNaN(toTok) && tokNum > toTok) return false;
+
+            // Status filter
+            if (activeStatusFilter === 'pending' && p.status === 'Completed') return false;
+            if (activeStatusFilter === 'completed' && p.status !== 'Completed') return false;
+
+            // Search filter
+            if (search) {
+                const name = (p.patient_name || '').toLowerCase();
+                const mr = String(p.mr_no || '');
+                const tok = String(p.patient_token || '');
+                if (!name.includes(search) && !mr.includes(search) && !tok.includes(search)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        // Update counts
+        const allCount = groupedPatients.length;
+        const doneCount = groupedPatients.filter(p => p.status === 'Completed').length;
+        const pendingCount = allCount - doneCount;
+
+        document.getElementById('count-all').textContent = allCount;
+        document.getElementById('count-done').textContent = doneCount;
+        document.getElementById('count-pending').textContent = pendingCount;
+
+        renderQueueCards();
+
+        // Auto-select first patient if active is invalid or not in visible
+        if (visiblePatients.length > 0) {
+            const curIdx = visiblePatients.findIndex(p => p.mr_no === activePatientMr);
+            if (curIdx >= 0) {
+                selectPatientByIndex(curIdx, false);
+            } else {
+                selectPatientByIndex(0, true);
+            }
+        } else {
+            activePatientIndex = -1;
+            activePatientMr = null;
+            document.getElementById('queue-stepper-label').textContent = '0 / 0';
+            document.getElementById('tests-container').innerHTML = `
+                <div style="padding:50px;text-align:center;color:var(--text-muted);font-size:13px;">
+                    No patients match the selected filters.
+                </div>
+            `;
+            clearPatientSummaryHeader();
+        }
+    }
+
+    function renderQueueCards() {
+        const container = document.getElementById('queue-cards-list');
+        if (!visiblePatients.length) {
+            container.innerHTML = '<div style="padding:30px 10px;text-align:center;color:var(--text-muted);font-size:12px;">No patients found in this range.</div>';
+            return;
+        }
+
+        container.innerHTML = visiblePatients.map((p, idx) => {
+            const isActive = idx === activePatientIndex;
+            const isSaved = savedInSessionSet.has(p.mr_no);
+            const tok = p.patient_token ? `Token #${escapeHtml(p.patient_token)}` : 'No Token';
+            const statusClass = p.status === 'Completed' ? 'completed' : 'pending';
+            const testPills = (p.tests || []).slice(0, 3).map(t => 
+                `<span class="test-pill-sm">${escapeHtml(getShortTestName(t.test_name))}</span>`
+            ).join('');
+            const extraTests = (p.tests || []).length > 3 ? `<span class="test-pill-sm">+${p.tests.length - 3}</span>` : '';
+
+            return `
+                <div class="patient-card ${isActive ? 'active' : ''} ${isSaved ? 'saved-in-session' : ''}"
+                     data-index="${idx}" data-mr="${p.mr_no}" onclick="selectPatientByIndex(${idx}, true)">
+                    <div class="card-top">
+                        <span class="token-badge ${isActive ? 'highlight' : ''}">${tok}</span>
+                        <span class="mr-badge-sm">MR ${escapeHtml(p.mr_no)}</span>
+                    </div>
+                    <div class="card-name">${escapeHtml(p.patient_name || 'Unknown')}</div>
+                    <div class="card-meta">
+                        <span>${escapeHtml(p.age || '—')} / ${escapeHtml(p.gender || '—')}</span>
+                        <span>•</span>
+                        <span>${escapeHtml(p.shift || '—')}</span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-test-badges">${testPills}${extraTests}</div>
+                        <span class="status-dot-sm ${statusClass}" title="${p.status || 'Pending'}"></span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function selectPatientByIndex(index, loadData = true) {
+        if (index < 0 || index >= visiblePatients.length) return;
+        activePatientIndex = index;
+        const patient = visiblePatients[index];
+        activePatientMr = patient.mr_no;
+
+        // Highlight active card
+        document.querySelectorAll('.patient-card').forEach((card, idx) => {
+            card.classList.toggle('active', idx === index);
+            const badge = card.querySelector('.token-badge');
+            if (badge) badge.classList.toggle('highlight', idx === index);
+        });
+
+        // Update Stepper
+        const stepperLabel = document.getElementById('queue-stepper-label');
+        stepperLabel.textContent = `Patient ${index + 1} of ${visiblePatients.length} (Tok #${patient.patient_token || '—'})`;
+        document.getElementById('btn-prev-patient').disabled = (index === 0);
+        document.getElementById('btn-next-patient').disabled = (index === visiblePatients.length - 1);
+
+        // Update Header
+        applyPatientSummaryHeader(patient);
+
+        if (loadData) {
+            loadActivePatientTestData(patient.mr_no);
+        }
+    }
+
+    function applyPatientSummaryHeader(p) {
+        document.getElementById('ws-token').textContent = p.patient_token ? `#${p.patient_token}` : '—';
+        document.getElementById('ws-mr').textContent = p.mr_no ?? '—';
+        document.getElementById('ws-name').textContent = p.patient_name || 'Unknown';
+        document.getElementById('ws-age-gender').textContent = `${p.age || '—'} / ${p.gender || '—'}`;
+        document.getElementById('ws-shift').textContent = (p.shift || '—').toUpperCase();
+    }
+
+    function clearPatientSummaryHeader() {
+        document.getElementById('ws-token').textContent = '—';
+        document.getElementById('ws-mr').textContent = '—';
+        document.getElementById('ws-name').textContent = '—';
+        document.getElementById('ws-age-gender').textContent = '—';
+        document.getElementById('ws-shift').textContent = '—';
+    }
+
+    // Load active patient test results from API
+    async function loadActivePatientTestData(mrNo) {
+        const container = document.getElementById('tests-container');
+        container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-muted);font-size:13px;">Loading test parameters…</div>';
+        document.getElementById('save-status-indicator').textContent = 'Loading…';
+
+        try {
+            const res = await fetch(`/api/test-results/patient/${mrNo}`);
+            const result = await res.json();
+            if (result.status === 'Success' && result.records) {
+                activePatientRecords = result.records.map(normalizeTestRecord);
+                renderWorkspaceForm();
+                document.getElementById('save-status-indicator').textContent = 'Ready';
+            } else {
+                container.innerHTML = '<div style="padding:40px;text-align:center;color:var(--danger);font-size:13px;">No tests found for this patient.</div>';
+                document.getElementById('save-status-indicator').textContent = 'No tests';
+            }
+        } catch (e) {
+            container.innerHTML = `<div style="padding:40px;text-align:center;color:var(--danger);font-size:13px;">Error loading tests: ${e.message}</div>`;
+            document.getElementById('save-status-indicator').textContent = 'Error';
+        }
+    }
+
+    function normalizeTestRecord(record) {
+        let testValues = record.test_values;
+        if (typeof testValues === 'string') {
+            try { testValues = JSON.parse(testValues); } catch (_) { testValues = {}; }
+        }
+        testValues = testValues || {};
+        return {
+            id: record.id,
+            test_name: record.test_name || 'Lab Report',
+            category: record.category || 'General',
+            status: record.status || 'Pending',
+            test_values: testValues,
+            remarks: record.remarks || ''
+        };
+    }
+
+    // Render test blocks & input parameters
+    function renderWorkspaceForm() {
+        const container = document.getElementById('tests-container');
+        let html = '';
+
+        activePatientRecords.forEach((record, recordIndex) => {
+            const testValues = record.test_values || {};
+            let keys = Object.keys(testValues);
+
+            // Group parameter ordering
+            const targetOrder = groupOrdersCatalog[(record.test_name || '').trim()];
+            if (targetOrder && Array.isArray(targetOrder) && targetOrder.length > 0) {
+                const orderMap = {};
+                targetOrder.forEach((n, idx) => { orderMap[(n || '').trim().toLowerCase()] = idx; });
+                keys.sort((ka, kb) => {
+                    const na = (testValues[ka]?.name || '').trim().toLowerCase();
+                    const nb = (testValues[kb]?.name || '').trim().toLowerCase();
+                    const ia = na in orderMap ? orderMap[na] : 999;
+                    const ib = nb in orderMap ? orderMap[nb] : 999;
+                    if (ia !== ib) return ia - ib;
+                    return na.localeCompare(nb);
+                });
+            }
+
+            html += `
+                <div class="test-section" data-record-id="${record.id}" data-record-index="${recordIndex}">
+                    <h3 class="test-section-title">
+                        <div class="test-title-left">
+                            <span>${escapeHtml(record.test_name || 'Lab Report')}</span>
+                        </div>
+                        <div class="test-title-actions">
+                            <span class="test-category-badge">${escapeHtml(record.category || 'General')}</span>
+                            <button class="save-test-btn" type="button" onclick="saveSingleTest(${record.id})">Save</button>
+                            <button class="delete-test-btn" title="Delete test" onclick="deleteTestRecord(${record.id})" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </h3>
+                    <table class="param-table">
+                        <thead>
+                            <tr>
+                                <th class="th-details">Parameter</th>
+                                <th class="th-range">Range</th>
+                                <th class="th-result">Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            if (keys.length === 0) {
+                html += `<tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:8px;">No parameters configured.</td></tr>`;
+            } else {
+                keys.forEach((key) => {
+                    const param = testValues[key] || {};
+                    const name = param.name || 'Component';
+                    const value = param.value !== undefined && param.value !== null ? param.value : '';
+                    const unit = param.unit || '';
+
+                    let rangeStr = '—';
+                    if (param.normal_min !== undefined && param.normal_min !== null && param.normal_max !== undefined && param.normal_max !== null) {
+                        rangeStr = `${param.normal_min} - ${param.normal_max}`;
+                    } else if (param.normal_range) {
+                        rangeStr = param.normal_range;
+                    }
+                    if (unit) rangeStr += ` ${unit}`;
+
+                    const sugs = getSuggestionsForParam(record.test_name, name);
+                    let sugsHtml = '';
+                    if (sugs && sugs.length > 0) {
+                        sugsHtml = `
+                            <div class="quick-sug-pills-wrap">
+                                ${sugs.map(s => `
+                                    <button type="button" class="btn-quick-sug" onclick="applyQuickSugValue(this, '${escapeHtml(s).replace(/'/g, "\\'")}', ${recordIndex}, '${key}')">
+                                        ${escapeHtml(s)}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+
+                    html += `
+                        <tr>
+                            <td class="param-label" title="${escapeHtml(name)}">${escapeHtml(name)}</td>
+                            <td class="param-range-text">${escapeHtml(rangeStr)}</td>
+                            <td class="param-input-cell">
+                                <input type="text"
+                                       class="param-input-field"
+                                       data-record-index="${recordIndex}"
+                                       data-param-key="${key}"
+                                       value="${escapeHtml(value)}"
+                                       placeholder="-"
+                                       onfocus="this.select();">
+                                ${sugsHtml}
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            const remarksVal = escapeHtml(record.remarks || '');
+            html += `
+                        </tbody>
+                    </table>
+                    <div class="test-remarks-wrap">
+                        <label class="test-remarks-label">Remarks</label>
+                        <div class="remarks-input-row">
+                            <textarea class="remarks-field" data-record-id="${record.id}" rows="1" placeholder="Optional notes…">${remarksVal}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        if (activePatientRecords.length === 0) {
+            html += '<div style="padding:40px;text-align:center;color:var(--text-muted);font-size:13px;">No tests assigned for this patient.</div>';
+        }
+
+        container.innerHTML = html;
+        container.classList.toggle('single-test', activePatientRecords.length === 1);
+
+        setupCompactNavigation();
+    }
+
+    function setupCompactNavigation() {
+        const fields = Array.from(document.querySelectorAll('.param-input-field'));
+        if (fields.length > 0) {
+            fields[0].focus();
+        }
+        fields.forEach((field, index) => {
+            field.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    const next = fields[index + 1];
+                    if (next) next.focus();
+                } else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    const prev = fields[index - 1];
+                    if (prev) prev.focus();
+                }
+            });
+        });
+    }
+
+    function getSuggestionsForParam(testName, paramName) {
+        if (!testSuggestions) return [];
+        const tMap = testSuggestions.by_test_name || {};
+        const pMap = testSuggestions.by_param_name || {};
+        const cleanT = (testName || '').trim().toLowerCase();
+        const cleanP = (paramName || '').trim().toLowerCase();
+        const normP = cleanP.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+
+        for (const [k, vals] of Object.entries(pMap)) {
+            const normK = k.trim().toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (cleanP === k.trim().toLowerCase() || normP === normK) return vals;
+        }
+        for (const [k, vals] of Object.entries(tMap)) {
+            if (cleanT === k.trim().toLowerCase()) return vals;
+        }
+        return [];
+    }
+
+    function applyQuickSugValue(btn, val, recordIndex, paramKey) {
+        const cell = btn.closest('.param-input-cell');
+        const inp = cell ? cell.querySelector('.param-input-field') : null;
+        if (inp) {
+            inp.value = val;
+            inp.focus();
+            if (activePatientRecords[recordIndex]?.test_values?.[paramKey]) {
+                activePatientRecords[recordIndex].test_values[paramKey].value = val;
+            }
+            inp.style.background = '#dcfce7';
+            setTimeout(() => { inp.style.background = ''; }, 350);
+        }
+    }
+
+    // Save All Results for Current Patient
+    async function saveCurrentPatientResults(advanceToNext = false, openPrint = false) {
+        if (!activePatientMr || !activePatientRecords.length) return;
+
+        const btnSaveNext = document.getElementById('btn-save-next');
+        const btnSave = document.getElementById('btn-save-results');
+        const statusIndicator = document.getElementById('save-status-indicator');
+
+        btnSaveNext.disabled = true;
+        btnSave.disabled = true;
+        statusIndicator.textContent = 'Saving…';
+
+        // Gather values from DOM
+        const inputs = document.querySelectorAll('.param-input-field');
+        inputs.forEach(input => {
+            const recordIndex = parseInt(input.dataset.recordIndex, 10);
+            const paramKey = input.dataset.paramKey;
+            if (!isNaN(recordIndex) && paramKey && activePatientRecords[recordIndex]?.test_values?.[paramKey]) {
+                activePatientRecords[recordIndex].test_values[paramKey].value = input.value;
+            }
+        });
+
+        // Build Payload
+        const payload = {};
+        activePatientRecords.forEach(record => {
+            const ta = document.querySelector(`.remarks-field[data-record-id="${record.id}"]`);
+            const remarks = ta ? ta.value.trim() : (record.remarks || '');
+            const cleanValues = Object.fromEntries(
+                Object.entries(record.test_values || {}).filter(([k]) => k !== 'remarks' && k !== 'test_values')
+            );
+            payload[record.id] = { test_values: cleanValues, remarks: remarks };
+        });
+
+        try {
+            const res = await fetch(`/api/test-results/patient/update/${activePatientMr}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                showToast(`Saved Token #${visiblePatients[activePatientIndex]?.patient_token || ''} (MR ${activePatientMr})`, 'success');
+                savedInSessionSet.add(activePatientMr);
+                statusIndicator.textContent = '✓ Saved';
+
+                // Update patient card visually
+                if (visiblePatients[activePatientIndex]) {
+                    visiblePatients[activePatientIndex].status = 'Completed';
+                }
+                renderQueueCards();
+
+                if (openPrint) {
+                    window.open(`/page/lab-test-print/${activePatientMr}`, '_blank');
+                } else if (advanceToNext) {
+                    // Advance to next patient!
+                    if (activePatientIndex < visiblePatients.length - 1) {
+                        selectPatientByIndex(activePatientIndex + 1, true);
+                    } else {
+                        showToast('🎉 End of queue reached! All filtered patients completed.', 'success');
+                    }
+                }
+            } else {
+                showToast('Failed to save results: ' + (result.message || 'Error'), 'error');
+                statusIndicator.textContent = 'Save Failed';
+            }
+        } catch (e) {
+            showToast('Error saving: ' + e.message, 'error');
+            statusIndicator.textContent = 'Error';
+        } finally {
+            btnSaveNext.disabled = false;
+            btnSave.disabled = false;
+        }
+    }
+
+    async function saveSingleTest(recordId) {
+        if (!recordId) return;
+        const section = document.querySelector(`.test-section[data-record-id="${recordId}"]`);
+        if (!section) return;
+
+        const recordIndex = parseInt(section.dataset.recordIndex, 10);
+        const inputs = section.querySelectorAll('.param-input-field');
+        inputs.forEach(inp => {
+            const key = inp.dataset.paramKey;
+            if (key && activePatientRecords[recordIndex]?.test_values?.[key]) {
+                activePatientRecords[recordIndex].test_values[key].value = inp.value;
+            }
+        });
+
+        const ta = section.querySelector('.remarks-field');
+        const remarks = ta ? ta.value.trim() : '';
+        const rec = activePatientRecords[recordIndex];
+        const testValues = Object.fromEntries(
+            Object.entries(rec?.test_values || {}).filter(([k]) => k !== 'remarks' && k !== 'test_values')
+        );
+
+        try {
+            const res = await fetch(`/api/test-results/update/${recordId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ test_values: testValues, remarks: remarks })
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                showToast('Saved test', 'success');
+            } else {
+                showToast('Failed to save test', 'error');
+            }
+        } catch (e) {
+            showToast('Error: ' + e.message, 'error');
+        }
+    }
+
+    async function deleteTestRecord(recordId) {
+        if (!recordId || !confirm('Delete this test?')) return;
+        try {
+            const res = await fetch(`/api/test-results/delete/${recordId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ person_deleting: localStorage.getItem('userName') || 'Staff' })
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                activePatientRecords = activePatientRecords.filter(r => r.id !== recordId);
+                renderWorkspaceForm();
+                showToast('Test deleted', 'success');
+            }
+        } catch (e) {
+            showToast('Error: ' + e.message, 'error');
+        }
+    }
+
+    // Modal Edit Patient Info
+    async function openEditInfoModal() {
+        if (!activePatientMr) return;
+        const modal = document.getElementById('edit-info-modal');
+        try {
+            const res = await fetch(`/api/patient/info/${activePatientMr}`);
+            const result = await res.json();
+            if (result.status === 'Success' && result.patient) {
+                const p = result.patient;
+                document.getElementById('modal-name').value = p.patient_name || '';
+                document.getElementById('modal-relation').value = p.relation || 'S/O';
+                document.getElementById('modal-relation-name').value = p.relation_name || '';
+                document.getElementById('modal-age').value = p.age || '';
+                document.getElementById('modal-gender').value = p.gender || 'Male';
+                document.getElementById('modal-shift').value = p.shift || 'morning';
+                document.getElementById('modal-token').value = p.patient_token || '';
+                document.getElementById('modal-mobile').value = p.mobile || '';
+                modal.classList.add('active');
+            }
+        } catch (e) {
+            showToast('Error: ' + e.message, 'error');
+        }
+    }
+
+    function closeEditInfoModal() {
+        document.getElementById('edit-info-modal').classList.remove('active');
+    }
+
+    async function savePatientInfoModal() {
+        if (!activePatientMr) return;
+        const payload = {
+            patient_name: document.getElementById('modal-name').value,
+            relation: document.getElementById('modal-relation').value,
+            relation_name: document.getElementById('modal-relation-name').value,
+            age: document.getElementById('modal-age').value,
+            gender: document.getElementById('modal-gender').value,
+            shift: document.getElementById('modal-shift').value,
+            patient_token: document.getElementById('modal-token').value,
+            mobile: document.getElementById('modal-mobile').value,
+        };
+
+        try {
+            const res = await fetch(`/api/patient/update-info/${activePatientMr}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                closeEditInfoModal();
+                showToast('Patient details updated', 'success');
+                if (visiblePatients[activePatientIndex]) {
+                    Object.assign(visiblePatients[activePatientIndex], payload);
+                    applyPatientSummaryHeader(visiblePatients[activePatientIndex]);
+                    renderQueueCards();
+                }
+            } else {
+                showToast('Failed to update patient info', 'error');
+            }
+        } catch (e) {
+            showToast('Error: ' + e.message, 'error');
+        }
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Ctrl + Shift + Enter => Save & Next
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'Enter') {
+            e.preventDefault();
+            saveCurrentPatientResults(true, false);
+        }
+        // Ctrl + Enter => Save Results
+        else if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key === 'Enter') {
+            e.preventDefault();
+            saveCurrentPatientResults(false, false);
+        }
+        // Ctrl + P => Save & Print
+        else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+            e.preventDefault();
+            saveCurrentPatientResults(false, true);
+        }
+        // Alt + N => Next Patient
+        else if (e.altKey && e.key.toLowerCase() === 'n') {
+            e.preventDefault();
+            if (activePatientIndex < visiblePatients.length - 1) {
+                selectPatientByIndex(activePatientIndex + 1, true);
+            }
+        }
+        // Alt + P => Prev Patient
+        else if (e.altKey && e.key.toLowerCase() === 'p') {
+            e.preventDefault();
+            if (activePatientIndex > 0) {
+                selectPatientByIndex(activePatientIndex - 1, true);
+            }
+        }
+    });
+
+    // Wire DOM Events
+    document.addEventListener('DOMContentLoaded', async () => {
+        initDate();
+        await loadFilterMetadata();
+        await loadCatalogs();
+        availableTests = await fetchTestsCatalog();
+        await loadQueue();
+
+        // Filter triggers
+        document.getElementById('filter-date').addEventListener('change', () => loadQueue());
+        document.getElementById('filter-shift').addEventListener('change', () => loadQueue());
+        document.getElementById('btn-apply-token-range').addEventListener('click', () => applyQueueFilters());
+        document.getElementById('token-from').addEventListener('input', () => applyQueueFilters());
+        document.getElementById('token-to').addEventListener('input', () => applyQueueFilters());
+        document.getElementById('queue-search').addEventListener('input', () => applyQueueFilters());
+
+        // Status Tabs
+        document.querySelectorAll('.status-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                activeStatusFilter = this.dataset.status;
+                applyQueueFilters();
+            });
+        });
+
+        // Stepper Buttons
+        document.getElementById('btn-prev-patient').addEventListener('click', () => {
+            if (activePatientIndex > 0) selectPatientByIndex(activePatientIndex - 1, true);
+        });
+        document.getElementById('btn-next-patient').addEventListener('click', () => {
+            if (activePatientIndex < visiblePatients.length - 1) selectPatientByIndex(activePatientIndex + 1, true);
+        });
+
+        // Action Buttons
+        document.getElementById('btn-save-next').addEventListener('click', () => saveCurrentPatientResults(true, false));
+        document.getElementById('btn-save-results').addEventListener('click', () => saveCurrentPatientResults(false, false));
+        document.getElementById('btn-save-print').addEventListener('click', () => saveCurrentPatientResults(false, true));
+        document.getElementById('btn-skip-next').addEventListener('click', () => {
+            if (activePatientIndex < visiblePatients.length - 1) {
+                selectPatientByIndex(activePatientIndex + 1, true);
+            }
+        });
+        document.getElementById('btn-open-edit-info').addEventListener('click', openEditInfoModal);
+    });
+</script>
+{% endblock %}

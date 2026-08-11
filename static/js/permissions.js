@@ -5,9 +5,11 @@
     const ROUTE_PERMISSION = {
         '/register': 'register',
         '/update-results': 'update_results',
+        '/page/fast-results': 'update_results',
         '/page/fitness': 'fitness',
         '/page/print-records': 'print',
         '/page/lab-print-records': 'print',
+        '/page/fast-print': 'print',
         '/page/fluid-reports': 'fluid_reports',
     };
 

@@ -2,7 +2,7 @@
   {
     "id": 1,
     "payload": {
-      "pushed_at": "2026-08-11T08:56:02.085168Z",
+      "pushed_at": "2026-08-11T13:41:14.227705Z",
       "pushed_by": "Anonymous",
       "print_layouts": {
         "liver function test|uce": {
@@ -329,6 +329,12 @@
             "value": "Baby",
             "default_gender": "",
             "default_relation": "S"
+          },
+          {
+            "label": "DR",
+            "value": "DR",
+            "default_gender": "FEMALE",
+            "default_relation": "D"
           }
         ],
         "default_values": {
@@ -699,7 +705,7 @@
       }
     },
     "setting_type": "all_app_settings",
-    "updated_at": "2026-08-11T08:56:02.085168+00:00",
+    "updated_at": "2026-08-11T13:41:14.227705+00:00",
     "updated_by": "Anonymous"
   }
 ]

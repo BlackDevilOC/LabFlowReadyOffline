@@ -54,6 +54,12 @@
       "value": "Baby",
       "default_gender": "",
       "default_relation": "S"
+    },
+    {
+      "label": "DR",
+      "value": "DR",
+      "default_gender": "FEMALE",
+      "default_relation": "D"
     }
   ],
   "default_values": {

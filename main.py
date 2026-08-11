@@ -314,6 +314,24 @@ def lab_test_print_preview_page(request: Request, mr_no: int, date: str = None):
     )
 
 
+@app.get("/page/fast-results", include_in_schema=False)
+def fast_update_results_page(request: Request):
+    logger.debug("Accessing Fast Update Results Page")
+    return templates.TemplateResponse(
+        'fast_update_results.html',
+        {"request": request, "title": "Fast Results Entry", "name": "Rehan", "hide_sidebar": True}
+    )
+
+
+@app.get("/page/fast-print", include_in_schema=False)
+def fast_print_records_page(request: Request):
+    logger.info("Accessing Fast Shift Print Records page")
+    return templates.TemplateResponse(
+        'fast_print_records.html',
+        {"request": request, "title": "Fast Shift Print", "name": "Rehan"}
+    )
+
+
 @app.get("/page/print-records", include_in_schema=False)
 def print_records_hub_page(request: Request):
     return RedirectResponse(url="/page/lab-print-records", status_code=302)
@@ -498,6 +516,73 @@ def api_lab_print_payload(mr_no: int, date: str = None):
     except Exception as e:
         log_error(e, "API_LAB_PRINT_PAYLOAD")
         return {"status": "error", "patient": None, "tests": [], "group_orders": {}}
+
+
+@app.post("/api/lab/print-batch")
+def api_lab_print_batch_payload(payload: dict):
+    """
+    Batch payload fetch for multiple MR numbers for ultra-fast bulk report printing.
+    """
+    try:
+        mr_nos = payload.get("mr_nos") or []
+        date = payload.get("date") or None
+        if not mr_nos:
+            return {"status": "ok", "reports": {}}
+
+        supabase = init_supabase()
+
+        # Fetch patients
+        p_resp = supabase.table("patients").select("*").in_("mr_no", [int(m) for m in mr_nos]).execute()
+        patients_map = {p["mr_no"]: p for p in (p_resp.data or []) if "mr_no" in p}
+
+        # Fetch tests
+        q = supabase.table("test_results_all").select("*").in_("mr_no", [int(m) for m in mr_nos]).eq("delete_status", False)
+        if date:
+            q = q.gte("created_at", f"{date}T00:00:00Z").lte("created_at", f"{date}T23:59:59Z")
+        t_resp = q.order("created_at", desc=False).execute()
+
+        tests_by_mr = {}
+        for r in (t_resp.data or []):
+            mr = r.get("mr_no")
+            if mr not in tests_by_mr:
+                tests_by_mr[mr] = []
+            row = _normalize_test_result_row(dict(r))
+            tests_by_mr[mr].append({
+                "id": row.get("id"),
+                "category": row.get("category") or "General",
+                "test_name": row.get("test_name") or "Test",
+                "test_values": row.get("test_values") or {},
+                "remarks": (row.get("remarks") or "").strip(),
+                "created_at": row.get("created_at"),
+                "status": row.get("status") or "Pending",
+            })
+
+        group_orders = {}
+        try:
+            tg_resp = supabase.table("test_groups").select("group_name, component_ids").execute()
+            t_resp = supabase.table("tests").select("id, name").execute()
+            test_names_by_id = {t["id"]: t["name"] for t in (t_resp.data or []) if t.get("id") and t.get("name")}
+            for g in (tg_resp.data or []):
+                g_name = (g.get("group_name") or "").strip()
+                c_ids = g.get("component_ids") or []
+                if g_name and c_ids:
+                    group_orders[g_name] = [test_names_by_id.get(cid) for cid in c_ids if test_names_by_id.get(cid)]
+        except Exception:
+            pass
+
+        reports = {}
+        for mr in mr_nos:
+            mr_int = int(mr)
+            reports[mr_int] = {
+                "patient": patients_map.get(mr_int, {}),
+                "tests": tests_by_mr.get(mr_int, []),
+                "group_orders": group_orders,
+            }
+
+        return {"status": "ok", "reports": reports}
+    except Exception as e:
+        log_error(e, "API_LAB_PRINT_BATCH_PAYLOAD")
+        return {"status": "error", "reports": {}, "message": str(e)}
 
 
 @app.get("/api/admin/lab-categories")
