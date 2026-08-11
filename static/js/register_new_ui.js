@@ -183,6 +183,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     let selectedTests = []; // array of { name, value }
     let categoriesOrder = [];
     let customCategories = {};
+    let categoryItemsOrder = {};
+    let popularOrder = [];
     let quickPresets = [];
     let categoryStyles = {};
     let regularPreset = [];
@@ -197,6 +199,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             categoriesOrder = data.categories_order || [];
             customCategories = data.custom_categories || {};
+            categoryItemsOrder = data.category_items_order || {};
+            popularOrder = data.popular_order || categoryItemsOrder["Popular"] || [];
             quickPresets = data.quick_presets || [];
             categoryStyles = data.category_styles || {};
             regularPreset = data.regular_preset || [];
@@ -350,9 +354,34 @@ document.addEventListener("DOMContentLoaded", async () => {
             return a.localeCompare(b);
         });
 
+        // Helper to sort tests within a category according to category_items_order / popular_order
+        const sortCatItems = (catName, itemsList) => {
+            const explicitOrder = categoryItemsOrder[catName] || (catName === "Popular" ? popularOrder : null);
+            if (!explicitOrder || !Array.isArray(explicitOrder) || !explicitOrder.length) {
+                return itemsList;
+            }
+            const orderMap = {};
+            explicitOrder.forEach((nameOrId, idx) => {
+                orderMap[String(nameOrId).trim().toLowerCase()] = idx;
+            });
+            return [...itemsList].sort((a, b) => {
+                const nameA = (a.name || '').trim().toLowerCase();
+                const nameB = (b.name || '').trim().toLowerCase();
+                const idA = String(a.id || '').trim().toLowerCase();
+                const idB = String(b.id || '').trim().toLowerCase();
+
+                const posA = (nameA in orderMap) ? orderMap[nameA] : ((idA in orderMap) ? orderMap[idA] : 9999);
+                const posB = (nameB in orderMap) ? orderMap[nameB] : ((idB in orderMap) ? orderMap[idB] : 9999);
+
+                if (posA !== posB) return posA - posB;
+                return (a.name || '').localeCompare(b.name || '');
+            });
+        };
+
         grid.innerHTML = orderedCats
             .map((cat) => {
-                const items = categories[cat]
+                const sortedItems = sortCatItems(cat, categories[cat]);
+                const items = sortedItems
                     .map((t) => buildCard(t))
                     .join("");
                 

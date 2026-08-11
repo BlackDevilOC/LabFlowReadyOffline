@@ -1,39 +1,18 @@
 {
+  "allow_single_tests": true,
   "mode": "group_and_single",
-  "quick_presets": [
-    {
-      "id": "p1",
-      "name": "Routine Package",
-      "tests": [
-        "COMPLETE BLOOD COUNT",
-        "Liver Function Test",
-        "UCE",
-        "Hep B, C"
-      ],
-      "auto_select": false
-    },
-    {
-      "id": "preset_1786202026938",
-      "name": ".",
-      "tests": [],
-      "auto_select": true
-    }
-  ],
-  "regular_preset": [],
-  "category_styles": {
-    "General": "simple",
-    "Popular": "fancy",
-    "Group Test": "fancy"
-  },
   "categories_order": [
     "Popular",
     "Regular"
   ],
   "custom_categories": {
     "1": "Popular",
+    "52": "Popular",
+    "90": "Popular",
     "91": "Popular",
-    "UC": "Popular",
+    "116": "Popular",
     "243": "Popular",
+    "UC": "Popular",
     "UCE": "Popular",
     "MP-ICT": "Popular",
     "Albumin": "Popular",
@@ -56,8 +35,99 @@
     "H. Pylori Ab (ICT)": "Popular",
     "Liver Function Test": "Popular",
     "COMPLETE BLOOD COUNT": "Popular",
-    "Glucose Random (RBS)": "Popular"
+    "Glucose Random (RBS)": "Popular",
+    "PT (Prothrombin Time)": "Popular"
   },
-  "allow_single_tests": true,
+  "category_items_order": {
+    "Popular": [
+      "COMPLETE BLOOD COUNT",
+      "Albumin",
+      "Lipid Profile",
+      "Hep B, C",
+      "Electrolytes",
+      "Thyroid Profile",
+      "Liver Function Test",
+      "UC",
+      "Calcium",
+      "UCE",
+      "VDRL SYPHILIS",
+      "Amylase",
+      "Glucose Random (RBS)",
+      "PT (Prothrombin Time)",
+      "Hep B, C ELISA",
+      "Anti HIV (ICT)",
+      "Anti HCV (ICT)",
+      "Anti HCV ELISA",
+      "Dengue NS1 (ICT)",
+      "H. Pylori Ab (ICT)",
+      "HbsAg (ICT)",
+      "Uric Acid",
+      "Urea"
+    ]
+  },
+  "popular_order": [
+    "COMPLETE BLOOD COUNT",
+    "Albumin",
+    "Lipid Profile",
+    "Hep B, C",
+    "Electrolytes",
+    "Thyroid Profile",
+    "Liver Function Test",
+    "UC",
+    "Calcium",
+    "UCE",
+    "VDRL SYPHILIS",
+    "Amylase",
+    "Glucose Random (RBS)",
+    "PT (Prothrombin Time)",
+    "Hep B, C ELISA",
+    "Anti HIV (ICT)",
+    "Anti HCV (ICT)",
+    "Anti HCV ELISA",
+    "Dengue NS1 (ICT)",
+    "H. Pylori Ab (ICT)",
+    "HbsAg (ICT)",
+    "Uric Acid",
+    "Urea"
+  ],
+  "quick_presets": [
+    {
+      "id": "p1",
+      "name": "Routine Package",
+      "tests": [
+        "COMPLETE BLOOD COUNT",
+        "Liver Function Test",
+        "UCE",
+        "Hep B, C"
+      ],
+      "auto_select": false
+    },
+    {
+      "id": "preset_1786202026938",
+      "name": ".",
+      "tests": [],
+      "auto_select": true
+    },
+    {
+      "id": "preset_1786430105501",
+      "name": "regular all",
+      "tests": [
+        "COMPLETE BLOOD COUNT",
+        "Liver Function Test",
+        "UCE",
+        "Glucose Random (RBS)",
+        "Hep B, C",
+        "8",
+        "58"
+      ],
+      "auto_select": false
+    }
+  ],
+  "category_styles": {
+    "General": "simple",
+    "Popular": "fancy",
+    "Group Test": "fancy"
+  },
+  "regular_preset": [],
   "auto_select_regular": true
 }

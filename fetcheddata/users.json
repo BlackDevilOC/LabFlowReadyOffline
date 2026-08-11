@@ -32,7 +32,7 @@
       "id": 4,
       "name": "daniyal",
       "email": "evening@lab.com",
-      "is_active": true,
+      "is_active": false,
       "pwd": "Keeper@1",
       "default_shift_id": 2,
       "permissions": {
@@ -44,6 +44,25 @@
         "manage_tests": false,
         "manage_users": false,
         "fluid_reports": false,
+        "update_results": true
+      }
+    },
+    {
+      "id": 11,
+      "name": "Daniyal",
+      "email": "daniyal@lab.com",
+      "is_active": true,
+      "pwd": "moosa0012",
+      "default_shift_id": 5,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
         "update_results": true
       }
     },
@@ -139,6 +158,25 @@
       "is_active": true,
       "pwd": "2002",
       "default_shift_id": null,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 10,
+      "name": "Waqar",
+      "email": "waqar@lab.com",
+      "is_active": true,
+      "pwd": "waqar",
+      "default_shift_id": 3,
       "permissions": {
         "admin": false,
         "print": true,

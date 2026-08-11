@@ -854,6 +854,7 @@ async def api_auth_login(request: Request):
         raise HTTPException(status_code=500, detail=str(e))
 
 TEST_SELECTION_CONFIG_PATH = os.path.join(fetcheddata_dir, "test_selection_config.json")
+TEST_SUGGESTIONS_CONFIG_PATH = os.path.join(fetcheddata_dir, "test_value_suggestions.json")
 
 def get_test_selection_config():
     if os.path.exists(TEST_SELECTION_CONFIG_PATH):
@@ -862,11 +863,38 @@ def get_test_selection_config():
                 return json.load(f)
         except Exception:
             pass
-    return {"allow_single_tests": False, "mode": "group_only"}
+    return {
+        "allow_single_tests": False,
+        "mode": "group_only",
+        "categories_order": ["Popular", "Regular", "Group Test"],
+        "custom_categories": {},
+        "category_items_order": {},
+        "popular_order": [],
+        "regular_preset": [],
+        "auto_select_regular": False
+    }
 
 def save_test_selection_config(config_data: dict):
     os.makedirs(fetcheddata_dir, exist_ok=True)
     with open(TEST_SELECTION_CONFIG_PATH, "w", encoding="utf-8") as f:
+        json.dump(config_data, f, indent=2)
+
+def get_test_suggestions_config() -> dict:
+    if os.path.exists(TEST_SUGGESTIONS_CONFIG_PATH):
+        try:
+            with open(TEST_SUGGESTIONS_CONFIG_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {
+        "by_test_name": {},
+        "by_param_name": {},
+        "presets": []
+    }
+
+def save_test_suggestions_config(config_data: dict) -> None:
+    os.makedirs(fetcheddata_dir, exist_ok=True)
+    with open(TEST_SUGGESTIONS_CONFIG_PATH, "w", encoding="utf-8") as f:
         json.dump(config_data, f, indent=2)
 
 @app.get("/api/admin/test-selection-config")
@@ -885,6 +913,10 @@ def api_get_test_selection_config():
         ] if old_preset else []
     if "category_styles" not in cfg:
         cfg["category_styles"] = {}
+    if "category_items_order" not in cfg:
+        cfg["category_items_order"] = {}
+    if "popular_order" not in cfg and "Popular" in cfg.get("category_items_order", {}):
+        cfg["popular_order"] = cfg["category_items_order"]["Popular"]
     return {"status": "Success", **cfg}
 
 @app.post("/api/admin/test-selection-config")
@@ -904,11 +936,18 @@ def api_save_test_selection_config(payload: dict):
             "auto_select": auto_sel
         }] if old_preset else []
 
+    category_items_order = payload.get("category_items_order", existing.get("category_items_order", {}))
+    popular_order = payload.get("popular_order", category_items_order.get("Popular", existing.get("popular_order", [])))
+    if popular_order and "Popular" not in category_items_order:
+        category_items_order["Popular"] = popular_order
+
     new_config = {
         "allow_single_tests": allow_single,
         "mode": "group_and_single" if allow_single else "group_only",
         "categories_order": payload.get("categories_order", existing.get("categories_order", ["Popular", "Regular", "Group Test"])),
         "custom_categories": payload.get("custom_categories", existing.get("custom_categories", {})),
+        "category_items_order": category_items_order,
+        "popular_order": popular_order,
         "quick_presets": quick_presets,
         "category_styles": payload.get("category_styles", existing.get("category_styles", {})),
         "regular_preset": payload.get("regular_preset", existing.get("regular_preset", [])),
@@ -916,6 +955,42 @@ def api_save_test_selection_config(payload: dict):
     }
     save_test_selection_config(new_config)
     return {"status": "Success", "config": new_config}
+
+
+# Quick result suggestions APIs
+@app.get("/api/admin/test-suggestions")
+def api_get_test_suggestions():
+    return {"status": "Success", "suggestions": get_test_suggestions_config()}
+
+
+@app.post("/api/admin/test-suggestions")
+async def api_save_test_suggestions(request: Request):
+    try:
+        data = await request.json()
+        if not isinstance(data, dict):
+            raise HTTPException(status_code=400, detail="Invalid payload")
+        save_test_suggestions_config(data)
+        return {"status": "Success", "message": "Test value suggestions saved successfully", "suggestions": data}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"API_SAVE_TEST_SUGGESTIONS failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/api/admin/test-suggestions/{target_type}/{target_key}")
+def api_delete_test_suggestion(target_type: str, target_key: str, request: Request):
+    try:
+        cfg = get_test_suggestions_config()
+        if target_type == "test":
+            cfg.get("by_test_name", {}).pop(target_key, None)
+        elif target_type == "param":
+            cfg.get("by_param_name", {}).pop(target_key, None)
+        save_test_suggestions_config(cfg)
+        return {"status": "Success", "message": f"Deleted suggestion for {target_key}", "suggestions": cfg}
+    except Exception as e:
+        logger.error(f"API_DELETE_TEST_SUGGESTION failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ── Registration Options Management (Offline) ──────────────────────────────
@@ -1104,6 +1179,8 @@ def load_test():
             "test_selection_mode": cfg.get("mode", "group_only"),
             "categories_order": cfg.get("categories_order", []),
             "custom_categories": cfg.get("custom_categories", {}),
+            "category_items_order": cfg.get("category_items_order", {}),
+            "popular_order": cfg.get("popular_order", cfg.get("category_items_order", {}).get("Popular", [])),
             "regular_preset": cfg.get("regular_preset", []),
             "auto_select_regular": cfg.get("auto_select_regular", False),
             "quick_presets": quick_presets or [],

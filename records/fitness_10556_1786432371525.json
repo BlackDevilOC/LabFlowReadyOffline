@@ -1,0 +1,22 @@
+{
+    "patient_name": "ANSHA",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "LUTUS ALI",
+    "report_date": "11/08/2026",
+    "mr_no": "10556",
+    "hb": "14.0",
+    "wbc": "5.1",
+    "neut": "70",
+    "lymph": "26",
+    "mono": "03",
+    "eosino": "01",
+    "plt": "374",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-11 12:12:51"
+}

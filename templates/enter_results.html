@@ -214,6 +214,33 @@
         text-align: right;
     }
 
+    .quick-sug-pills-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 6px;
+    }
+
+    .btn-quick-sug {
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
+        cursor: pointer;
+        line-height: 1.2;
+        transition: all 0.15s ease;
+    }
+
+    .btn-quick-sug:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: white;
+        transform: translateY(-1px);
+    }
+
     /* Action bar */
     .action-bar {
         display: flex;
@@ -338,13 +365,97 @@
 <script>
     const RECORD_ID = "{{ record_id }}";
     let testValuesJSON = {};
+    let currentTestName = '';
+    let testSuggestions = { by_test_name: {}, by_param_name: {} };
+
+    async function loadTestSuggestions() {
+        try {
+            const res = await fetch('/api/admin/test-suggestions');
+            if (res.ok) {
+                const data = await res.json();
+                if (data.status === 'Success' && data.suggestions) {
+                    testSuggestions = data.suggestions;
+                }
+            }
+        } catch (e) {
+            console.error('Failed to load test suggestions:', e);
+        }
+    }
+
+    function getSuggestionsForParam(testName, paramName) {
+        if (!testSuggestions) return [];
+        const tMap = testSuggestions.by_test_name || {};
+        const pMap = testSuggestions.by_param_name || {};
+
+        const cleanT = (testName || '').trim().toLowerCase();
+        const cleanP = (paramName || '').trim().toLowerCase();
+        const normT = cleanT.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+        const normP = cleanP.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+
+        // 1. Direct / Normalized Exact Param Match
+        for (const [k, vals] of Object.entries(pMap)) {
+            const cleanK = k.trim().toLowerCase();
+            const normK = cleanK.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (cleanP === cleanK || normP === normK) {
+                return vals;
+            }
+        }
+
+        // 2. Direct / Normalized Exact Test Match
+        for (const [k, vals] of Object.entries(tMap)) {
+            const cleanK = k.trim().toLowerCase();
+            const normK = cleanK.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (cleanT === cleanK || normT === normK) {
+                return vals;
+            }
+        }
+
+        // 3. Whole Word Token Match for Param
+        const wordsP = normP.split(' ').filter(Boolean);
+        for (const [k, vals] of Object.entries(pMap)) {
+            const normK = k.trim().toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (!normK) continue;
+            if (wordsP.includes(normK) || (normK.split(' ').length > 1 && normP.includes(normK))) {
+                return vals;
+            }
+        }
+
+        // 4. Whole Word Token Match for Test
+        const wordsT = normT.split(' ').filter(Boolean);
+        for (const [k, vals] of Object.entries(tMap)) {
+            const normK = k.trim().toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (!normK) continue;
+            if (wordsT.includes(normK) || (normK.split(' ').length > 1 && normT.includes(normK))) {
+                return vals;
+            }
+        }
+
+        return [];
+    }
+
+    function applyQuickSugValue(btn, val, key) {
+        const card = btn.closest('.param-card');
+        const inp = card ? card.querySelector(`.param-input[data-key="${key}"]`) : null;
+        if (inp) {
+            inp.value = val;
+            inp.focus();
+            if (testValuesJSON[key]) {
+                testValuesJSON[key].value = val;
+            }
+            inp.style.transition = 'background 0.2s';
+            inp.style.background = '#dcfce7';
+            setTimeout(() => { inp.style.background = ''; }, 400);
+        }
+    }
 
     async function loadTestData() {
         try {
+            await loadTestSuggestions();
             const res = await fetch(`/api/test-results/record/${RECORD_ID}`);
             const payload = await res.json();
             if (payload.status === 'Success' && payload.data) {
                 const item = payload.data;
+                currentTestName = item.test_name || '';
                 
                 // Set patient details
                 document.getElementById('patient-name').textContent = item.patient_name || 'Unknown';
@@ -412,6 +523,20 @@
                 rangeStr = param.normal_range;
             }
 
+            const sugs = getSuggestionsForParam(currentTestName, name);
+            let sugsHtml = '';
+            if (sugs && sugs.length > 0) {
+                sugsHtml = `
+                    <div class="quick-sug-pills-wrap">
+                        ${sugs.map(s => `
+                            <button type="button" class="btn-quick-sug" onclick="applyQuickSugValue(this, '${s.replace(/'/g, "\\'")}', '${key}')">
+                                ${s}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
             html += `
                 <div class="param-card">
                     <div class="param-info">
@@ -422,7 +547,8 @@
                         <input type="text" class="param-input" data-key="${key}" value="${val}" placeholder="0" onfocus="this.select();">
                         <span class="param-unit">${unit}</span>
                     </div>
-                    <div class="param-reference-strip">
+                    ${sugsHtml}
+                    <div class="param-reference-strip" style="margin-top:4px;">
                         <span>Range: ${rangeStr} ${unit}</span>
                     </div>
                 </div>

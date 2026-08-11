@@ -62,6 +62,43 @@
         border: 1px solid #e2e8f0;
     }
 
+    .tsl-test-card {
+        transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        user-select: none;
+    }
+
+    .tsl-test-card:hover {
+        border-color: #94a3b8 !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+    }
+
+    .tsl-test-card.tsl-dragging {
+        opacity: 0.45 !important;
+        border: 2px dashed #2563eb !important;
+        background: #eff6ff !important;
+        cursor: grabbing !important;
+    }
+
+    .tsl-test-card.tsl-drag-over {
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35) !important;
+        background: #f0fdf4 !important;
+        transform: scale(1.02);
+    }
+
+    .tsl-drag-handle {
+        cursor: grab;
+        color: #94a3b8;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: -1px;
+        padding-right: 2px;
+    }
+
+    .tsl-drag-handle:hover {
+        color: #2563eb;
+    }
+
     .admin-card h3 {
         color: #718096;
         font-size: 0.875rem;
@@ -457,6 +494,14 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
             </svg>
             Test Selection Layout
+        </a>
+        <a href="{{ url_prefix }}/page/admin?view=test-suggestions"
+            class="admin-nav-item {% if current_view == 'test-suggestions' %}active{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Quick Result Suggestions
         </a>
         <a href="{{ url_prefix }}/page/admin?view=users"
             class="admin-nav-item {% if current_view == 'users' %}active{% endif %}">
@@ -1236,14 +1281,121 @@
                     </div>
                     <div
                         style="font-size:0.78rem; color:#64748b; background:white; padding:4px 12px; border-radius:6px; border:1px solid #cbd5e1;">
-                        💡 Click <strong>🎨 Fancy Box</strong> / <strong>📄 Simple Header</strong> on category titles
-                        below to switch view style
+                        💡 <strong>Drag &amp; drop cards (⋮⋮)</strong> or use ◀ ▶ to reorder • Click <strong>🎨 Fancy Box / 📄 Simple Header</strong> to switch styles
                     </div>
                 </div>
                 <div id="admin_test_categorized_grid" style="display:flex; flex-direction:column; gap:16px;">
                     <div style="text-align:center; padding:40px; color:#94a3b8;">
                         <div style="font-size:1.5rem; margin-bottom:8px;">⏳</div>
                         <div>Loading test catalog…</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% elif current_view == 'test-suggestions' %}
+        <div id="testSuggestionsRoot" style="display:flex; flex-direction:column; gap:20px; width:100%;">
+            <!-- Top Action Bar -->
+            <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:16px 24px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.06); border:1px solid #e2e8f0; flex-wrap:wrap; gap:12px;">
+                <div>
+                    <h2 style="font-size:1.2rem; font-weight:700; color:#1e293b; margin:0 0 4px 0;">⚡ Quick Result Suggestions Manager</h2>
+                    <p style="font-size:0.82rem; color:#64748b; margin:0;">Configure 1-click quick-fill values (e.g. Negative, Positive, P.V, Non-Reactive, Reactive, etc.) for specific tests like Hep B, C, MP-ICT, VDRL, etc. These render as clickable buttons during result entry.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="btn" style="background:#f1f5f9; border:1px solid #cbd5e1; font-size:0.85rem; padding:8px 16px; font-weight:600; cursor:pointer;" onclick="initSuggestionsPage(true)">
+                        🔄 Refresh
+                    </button>
+                    <button type="button" class="primary-btn" style="padding:10px 24px; font-size:0.92rem; background:linear-gradient(135deg,#2563eb,#1d4ed8); white-space:nowrap;" onclick="saveAllSuggestionsToServer()">
+                        💾 Save &amp; Sync Suggestions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Layout: Rule Builder & Existing Suggestions Table -->
+            <div style="display:grid; grid-template-columns: minmax(320px, 420px) 1fr; gap:20px; align-items:start;">
+                
+                <!-- Left: Rule Builder Card -->
+                <div class="admin-card" style="background:white; border:1px solid #e2e8f0; border-radius:12px; padding:20px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                        <h3 id="sug_form_title" style="font-size:1.05rem; font-weight:700; color:#0f172a; margin:0;">➕ Add / Edit Suggestion Rule</h3>
+                        <button type="button" id="sug_cancel_edit_btn" style="display:none; background:none; border:none; color:#dc2626; font-size:0.8rem; font-weight:600; cursor:pointer;" onclick="resetSuggestionForm()">✕ Cancel Edit</button>
+                    </div>
+
+                    <!-- Target Type Selection -->
+                    <div style="margin-bottom:14px;">
+                        <label class="input-label" style="font-size:12px; margin-bottom:6px;">Rule Scope / Type</label>
+                        <div style="display:flex; gap:16px;">
+                            <label style="display:flex; align-items:center; gap:6px; font-size:0.85rem; cursor:pointer;">
+                                <input type="radio" name="sug_target_type" value="test" checked onchange="toggleSugTargetType()">
+                                <strong>Test / Group Name</strong>
+                            </label>
+                            <label style="display:flex; align-items:center; gap:6px; font-size:0.85rem; cursor:pointer;">
+                                <input type="radio" name="sug_target_type" value="param" onchange="toggleSugTargetType()">
+                                <strong>Parameter / Sub-test</strong>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Test / Parameter Picker -->
+                    <div style="margin-bottom:14px;">
+                        <label class="input-label" id="sug_target_label" style="font-size:12px; margin-bottom:4px;">Select Test from Database</label>
+                        <div style="display:flex; flex-direction:column; gap:6px;">
+                            <select id="sug_test_dropdown" class="input-control" style="margin-bottom:0;" onchange="onSugDropdownSelect()"></select>
+                            <input type="text" id="sug_custom_name" class="input-control" placeholder="Or type test / parameter name manually" style="margin-bottom:0; font-size:0.85rem;">
+                        </div>
+                    </div>
+
+                    <!-- Preset Quick Fill Packs -->
+                    <div style="margin-bottom:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
+                        <label class="input-label" style="font-size:11px; margin-bottom:6px; color:#475569;">⚡ Quick Preset Packs (Click to fill values):</label>
+                        <div id="sug_preset_chips_wrap" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+                    </div>
+
+                    <!-- Configured Tags in this Rule -->
+                    <div style="margin-bottom:14px;">
+                        <label class="input-label" style="font-size:12px; margin-bottom:6px;">Suggestion Values (Click × to remove):</label>
+                        <div id="sug_active_tags_container" style="display:flex; flex-wrap:wrap; gap:6px; min-height:42px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:8px; align-items:center;">
+                            <span style="color:#94a3b8; font-size:0.8rem;">No values added yet. Type below or pick a preset.</span>
+                        </div>
+                    </div>
+
+                    <!-- Add Custom Tag Input -->
+                    <div style="display:flex; gap:8px; margin-bottom:18px;">
+                        <input type="text" id="sug_new_tag_input" class="input-control" placeholder="Type value (e.g. Positive, P.V, Reactive)" style="margin-bottom:0; font-size:0.85rem;" onkeydown="if(event.key==='Enter'){event.preventDefault(); addCustomTagFromInput();}">
+                        <button type="button" class="primary-btn" style="padding:6px 14px; font-size:0.85rem; white-space:nowrap;" onclick="addCustomTagFromInput()">+ Add</button>
+                    </div>
+
+                    <!-- Save Rule Button -->
+                    <button type="button" class="primary-btn" style="width:100%; padding:10px; font-size:0.92rem; background:#16a34a;" onclick="saveCurrentSuggestionRule()">
+                        ✓ Apply Suggestion Rule
+                    </button>
+                </div>
+
+                <!-- Right: Active Suggestions Catalog -->
+                <div class="admin-card" style="background:white; border:1px solid #e2e8f0; border-radius:12px; padding:20px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+                        <div>
+                            <h3 style="font-size:1.05rem; font-weight:700; color:#0f172a; margin:0 0 2px 0;">📋 Active Configured Suggestions</h3>
+                            <p style="font-size:0.8rem; color:#64748b; margin:0;">When entering results for any of these tests, staff will see these instant fill buttons.</p>
+                        </div>
+                        <input type="text" id="sug_table_search" class="input-control" placeholder="🔍 Search test suggestions…" style="margin-bottom:0; width:220px; font-size:0.85rem; padding:6px 12px;" oninput="renderSuggestionsTable()">
+                    </div>
+
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                            <thead>
+                                <tr style="background:#f8fafc; border-bottom:2px solid #e2e8f0; text-align:left; color:#475569;">
+                                    <th style="padding:10px 12px; font-weight:700;">Type</th>
+                                    <th style="padding:10px 12px; font-weight:700;">Test / Parameter Name</th>
+                                    <th style="padding:10px 12px; font-weight:700;">Quick-Fill Suggestions (Pills)</th>
+                                    <th style="padding:10px 12px; font-weight:700; text-align:right; width:100px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sug_rules_tbody">
+                                <tr>
+                                    <td colspan="4" style="text-align:center; padding:30px; color:#94a3b8;">Loading suggestions…</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -2067,6 +2219,13 @@
         }
         if ("{{ current_view }}" === "remarks") {
             loadAdminRemarks();
+        }
+        if ("{{ current_view }}" === "test-selection") {
+            initTestSelectionPage();
+            if (typeof initRegistrationOptionsAdmin === 'function') initRegistrationOptionsAdmin();
+        }
+        if ("{{ current_view }}" === "test-suggestions") {
+            initSuggestionsPage();
         }
         if ("{{ current_view }}" === "cloud-sync") {
             fetchCloudSettingsStatus();
@@ -3771,6 +3930,8 @@
         allow_single_tests: false,
         categories_order: ['Popular'],
         custom_categories: {},   // key: test_id or group_name → category string
+        category_items_order: {}, // { "Popular": ["test1", "test2", ...] }
+        popular_order: [],
         quick_presets: [],        // [{ id, name, tests: [], auto_select: boolean }]
         category_styles: {},     // category → 'fancy' | 'simple'
         regular_preset: [],
@@ -3780,6 +3941,14 @@
     };
 
     // ── Helpers ─────────────────────────────────────────────────────────
+
+    function isStatusActive(st) {
+        if (st === undefined || st === null) return true;
+        if (typeof st === "boolean") return st;
+        if (typeof st === "number") return st === 1;
+        const s = String(st).trim().toLowerCase();
+        return s === "active" || s === "true" || s === "1";
+    }
 
     function tslEscHtml(s) {
         return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -3794,19 +3963,23 @@
 
     function buildAllItems() {
         const showSingle = layoutState.mode === 'group_and_single';
-        const groups = (layoutState.groups || []).map(g => ({
-            id: g.id,
-            name: g.group_name,
-            isGroup: true,
-            status: g.status
-        }));
+        const groups = (layoutState.groups || [])
+            .filter(g => isStatusActive(g.status) && !(g.group_name || '').startsWith('#'))
+            .map(g => ({
+                id: g.id,
+                name: g.group_name,
+                isGroup: true,
+                status: g.status
+            }));
         const singles = showSingle
-            ? (layoutState.tests || []).filter(t => t.status !== false).map(t => ({
-                id: t.id,
-                name: t.name,
-                isGroup: false,
-                status: t.status
-            }))
+            ? (layoutState.tests || [])
+                .filter(t => isStatusActive(t.status) && !(t.name || '').startsWith('#'))
+                .map(t => ({
+                    id: t.id,
+                    name: t.name,
+                    isGroup: false,
+                    status: t.status
+                }))
             : [];
         return [...groups, ...singles];
     }
@@ -3837,6 +4010,8 @@
                 const saved = (cfg.categories_order || []).filter(c => c !== 'General' && c !== 'Group Test');
                 layoutState.categories_order = saved.length ? saved : ['Popular'];
                 layoutState.custom_categories = cfg.custom_categories || {};
+                layoutState.category_items_order = cfg.category_items_order || {};
+                layoutState.popular_order = cfg.popular_order || layoutState.category_items_order['Popular'] || [];
                 layoutState.quick_presets = cfg.quick_presets || [];
                 layoutState.category_styles = cfg.category_styles || {};
                 layoutState.regular_preset = cfg.regular_preset || [];
@@ -3891,12 +4066,12 @@
             let opts = '<option value="">-- Choose test or group to add --</option>';
             if (layoutState.groups.length) {
                 opts += '<optgroup label="Group Tests">' +
-                    layoutState.groups.map(g => `<option value="${tslEscHtml(g.group_name)}">📦 ${tslEscHtml(g.group_name)}</option>`).join('') +
+                    layoutState.groups.filter(g => isStatusActive(g.status) && !g.group_name.startsWith('#')).map(g => `<option value="${tslEscHtml(g.group_name)}">📦 ${tslEscHtml(g.group_name)}</option>`).join('') +
                     '</optgroup>';
             }
             if (layoutState.tests.length) {
                 opts += '<optgroup label="Single Tests">' +
-                    layoutState.tests.filter(t => t.status !== false).map(t => `<option value="${t.id}">🧪 ${tslEscHtml(t.name)}</option>`).join('') +
+                    layoutState.tests.filter(t => isStatusActive(t.status) && !t.name.startsWith('#')).map(t => `<option value="${t.id}">🧪 ${tslEscHtml(t.name)}</option>`).join('') +
                     '</optgroup>';
             }
             return opts;
@@ -4021,6 +4196,165 @@
         renderAdminPreview();
     }
 
+    // ── Drag and Drop Reordering Handlers ───────────────────────────────
+    let tslDragState = {
+        fromCat: null,
+        fromIndex: -1,
+        fromKey: null
+    };
+
+    function tslOnDragStart(e, cat, index, key) {
+        tslDragState = { fromCat: cat, fromIndex: index, fromKey: key };
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', JSON.stringify({ cat, index, key }));
+        const card = e.currentTarget;
+        setTimeout(() => {
+            if (card) card.classList.add('tsl-dragging');
+        }, 0);
+    }
+
+    function tslOnDragOver(e, cat, index) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        const card = e.currentTarget;
+        if (card && !card.classList.contains('tsl-dragging')) {
+            card.classList.add('tsl-drag-over');
+        }
+    }
+
+    function tslOnDragLeave(e) {
+        const card = e.currentTarget;
+        if (card) {
+            card.classList.remove('tsl-drag-over');
+        }
+    }
+
+    function tslOnDrop(e, targetCat, targetIndex) {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = e.currentTarget;
+        if (card) card.classList.remove('tsl-drag-over');
+
+        const fromCat = tslDragState.fromCat;
+        const fromIndex = tslDragState.fromIndex;
+        const fromKey = tslDragState.fromKey;
+
+        if (fromCat === null || fromIndex < 0) return;
+
+        const items = buildAllItems();
+        const getSortedCatItems = (c) => {
+            const catItems = items.filter(it => getEffectiveCategory(it) === c);
+            const explicitOrder = layoutState.category_items_order[c] || (c === 'Popular' ? layoutState.popular_order : null);
+            if (explicitOrder && Array.isArray(explicitOrder) && explicitOrder.length) {
+                const orderMap = {};
+                explicitOrder.forEach((nameOrId, i) => {
+                    orderMap[String(nameOrId).trim().toLowerCase()] = i;
+                });
+                catItems.sort((a, b) => {
+                    const nameA = (a.name || '').trim().toLowerCase();
+                    const nameB = (b.name || '').trim().toLowerCase();
+                    const idA = String(a.id || '').trim().toLowerCase();
+                    const idB = String(b.id || '').trim().toLowerCase();
+                    const posA = (nameA in orderMap) ? orderMap[nameA] : ((idA in orderMap) ? orderMap[idA] : 9999);
+                    const posB = (nameB in orderMap) ? orderMap[nameB] : ((idB in orderMap) ? orderMap[idB] : 9999);
+                    if (posA !== posB) return posA - posB;
+                    return (a.name || '').localeCompare(b.name || '');
+                });
+            }
+            return catItems;
+        };
+
+        if (fromCat === targetCat) {
+            const catItems = getSortedCatItems(targetCat);
+            if (fromIndex >= catItems.length || targetIndex >= catItems.length) return;
+            const [movedItem] = catItems.splice(fromIndex, 1);
+            catItems.splice(targetIndex, 0, movedItem);
+
+            const newOrderNames = catItems.map(it => it.name);
+            if (!layoutState.category_items_order) layoutState.category_items_order = {};
+            layoutState.category_items_order[targetCat] = newOrderNames;
+            if (targetCat === 'Popular') {
+                layoutState.popular_order = newOrderNames;
+            }
+            renderAdminPreview();
+        } else {
+            const defaultCat = fromKey && isNaN(Number(fromKey)) ? 'Group Test' : 'General';
+            if (targetCat === defaultCat) {
+                delete layoutState.custom_categories[fromKey];
+            } else {
+                layoutState.custom_categories[fromKey] = targetCat;
+            }
+            renderAdminPreview();
+        }
+    }
+
+    function tslOnCatDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+    }
+
+    function tslOnCatDrop(e, targetCat) {
+        if (e.target.closest('.tsl-test-card')) return;
+        e.preventDefault();
+        const fromCat = tslDragState.fromCat;
+        const fromKey = tslDragState.fromKey;
+        if (fromCat === null || !fromKey) return;
+
+        if (fromCat !== targetCat) {
+            const defaultCat = fromKey && isNaN(Number(fromKey)) ? 'Group Test' : 'General';
+            if (targetCat === defaultCat) {
+                delete layoutState.custom_categories[fromKey];
+            } else {
+                layoutState.custom_categories[fromKey] = targetCat;
+            }
+            renderAdminPreview();
+        }
+    }
+
+    function tslOnDragEnd(e) {
+        tslDragState = { fromCat: null, fromIndex: -1, fromKey: null };
+        document.querySelectorAll('.tsl-test-card').forEach(el => {
+            el.classList.remove('tsl-dragging', 'tsl-drag-over');
+        });
+    }
+
+    // ── Move item inside category order ──────────────────────────────────
+    function tslMoveItem(cat, idx, dir) {
+        const items = buildAllItems();
+        const catItems = items.filter(it => getEffectiveCategory(it) === cat);
+        const explicitOrder = layoutState.category_items_order[cat] || (cat === 'Popular' ? layoutState.popular_order : null);
+        if (explicitOrder && Array.isArray(explicitOrder) && explicitOrder.length) {
+            const orderMap = {};
+            explicitOrder.forEach((nameOrId, i) => {
+                orderMap[String(nameOrId).trim().toLowerCase()] = i;
+            });
+            catItems.sort((a, b) => {
+                const nameA = (a.name || '').trim().toLowerCase();
+                const nameB = (b.name || '').trim().toLowerCase();
+                const idA = String(a.id || '').trim().toLowerCase();
+                const idB = String(b.id || '').trim().toLowerCase();
+                const posA = (nameA in orderMap) ? orderMap[nameA] : ((idA in orderMap) ? orderMap[idA] : 9999);
+                const posB = (nameB in orderMap) ? orderMap[nameB] : ((idB in orderMap) ? orderMap[idB] : 9999);
+                if (posA !== posB) return posA - posB;
+                return (a.name || '').localeCompare(b.name || '');
+            });
+        }
+        const targetIdx = idx + dir;
+        if (targetIdx < 0 || targetIdx >= catItems.length) return;
+        
+        const temp = catItems[idx];
+        catItems[idx] = catItems[targetIdx];
+        catItems[targetIdx] = temp;
+
+        const newOrderNames = catItems.map(it => it.name);
+        if (!layoutState.category_items_order) layoutState.category_items_order = {};
+        layoutState.category_items_order[cat] = newOrderNames;
+        if (cat === 'Popular') {
+            layoutState.popular_order = newOrderNames;
+        }
+        renderAdminPreview();
+    }
+
     // ── Main Preview Renderer ────────────────────────────────────────────
 
     function renderAdminPreview() {
@@ -4047,6 +4381,26 @@
 
         grid.innerHTML = catOrder.map((cat, catIdx) => {
             const catItems = catMap[cat] || [];
+            
+            // Sort catItems according to custom category_items_order / popular_order
+            const explicitOrder = layoutState.category_items_order[cat] || (cat === 'Popular' ? layoutState.popular_order : null);
+            if (explicitOrder && Array.isArray(explicitOrder) && explicitOrder.length) {
+                const orderMap = {};
+                explicitOrder.forEach((nameOrId, idx) => {
+                    orderMap[String(nameOrId).trim().toLowerCase()] = idx;
+                });
+                catItems.sort((a, b) => {
+                    const nameA = (a.name || '').trim().toLowerCase();
+                    const nameB = (b.name || '').trim().toLowerCase();
+                    const idA = String(a.id || '').trim().toLowerCase();
+                    const idB = String(b.id || '').trim().toLowerCase();
+                    const posA = (nameA in orderMap) ? orderMap[nameA] : ((idA in orderMap) ? orderMap[idA] : 9999);
+                    const posB = (nameB in orderMap) ? orderMap[nameB] : ((idB in orderMap) ? orderMap[idB] : 9999);
+                    if (posA !== posB) return posA - posB;
+                    return (a.name || '').localeCompare(b.name || '');
+                });
+            }
+
             const isCore = cat === 'General' || cat === 'Group Test';
             const isCustom = !isCore;
             const totalCustomCats = layoutState.categories_order.length;
@@ -4077,34 +4431,53 @@
                     ${isSimple ? '📄 Simple Header' : '🎨 Fancy Box'}
                 </button>`;
 
-            // Test cards grid
+            // Test cards grid matching exact 3 columns rule
             const testCards = catItems.length === 0
                 ? `<div style="color:#94a3b8;font-size:0.82rem;padding:10px 4px;font-style:italic;">${isCore ? 'No tests here.' : 'No tests assigned. Use dropdowns on other tests to move them here.'}</div>`
-                : `<div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:8px;">` +
-                catItems.map(item => {
+                : `<div style="display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:8px;">` +
+                catItems.map((item, itemIdx) => {
                     const keyJs = item.isGroup ? item.name.replace(/'/g, "\\'") : String(item.id);
                     const opts = allCatOpts.map(opt =>
                         `<option value="${tslEscHtml(opt)}" ${opt === cat ? 'selected' : ''}>${tslEscHtml(opt)}</option>`
                     ).join('');
                     const groupBadge = item.isGroup ? `<span style="background:#dbeafe;color:#1d4ed8;font-size:0.62rem;font-weight:700;padding:1px 5px;border-radius:8px;margin-left:4px;">Group</span>` : '';
+                    const isFirst = itemIdx === 0;
+                    const isLast = itemIdx === catItems.length - 1;
 
                     return `
-                        <div style="display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e2e8f0;border-radius:8px;padding:6px 10px;gap:6px;box-shadow:0 1px 2px rgba(0,0,0,0.02);">
+                        <div class="tsl-test-card" 
+                             draggable="true" 
+                             data-cat="${tslEscHtml(cat)}" 
+                             data-index="${itemIdx}" 
+                             data-key="${keyJs}"
+                             ondragstart="tslOnDragStart(event, '${tslEscHtml(cat)}', ${itemIdx}, '${keyJs}')"
+                             ondragover="tslOnDragOver(event, '${tslEscHtml(cat)}', ${itemIdx})"
+                             ondragleave="tslOnDragLeave(event)"
+                             ondrop="tslOnDrop(event, '${tslEscHtml(cat)}', ${itemIdx})"
+                             ondragend="tslOnDragEnd(event)"
+                             style="display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;gap:5px;box-shadow:0 1px 2px rgba(0,0,0,0.02);cursor:grab;">
+                            <span class="tsl-drag-handle" title="Drag to reorder">⋮⋮</span>
+                            <div style="display:flex;gap:2px;align-items:center;">
+                                <button type="button" title="Move earlier in order" onclick="tslMoveItem('${tslEscHtml(cat)}', ${itemIdx}, -1)" ${isFirst ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : 'style="cursor:pointer;"'}
+                                    style="padding:1px 4px;border:1px solid #cbd5e1;border-radius:3px;font-size:0.68rem;background:#f8fafc;color:#334155;line-height:1;">◀</button>
+                                <button type="button" title="Move later in order" onclick="tslMoveItem('${tslEscHtml(cat)}', ${itemIdx}, 1)" ${isLast ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : 'style="cursor:pointer;"'}
+                                    style="padding:1px 4px;border:1px solid #cbd5e1;border-radius:3px;font-size:0.68rem;background:#f8fafc;color:#334155;line-height:1;">▶</button>
+                            </div>
                             <div style="display:flex;align-items:center;gap:4px;flex:1;min-width:0;">
-                                <span style="font-size:0.82rem;font-weight:600;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${tslEscHtml(item.name)}">${tslEscHtml(item.name)}</span>
+                                <span style="font-size:0.8rem;font-weight:600;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${tslEscHtml(item.name)}">${tslEscHtml(item.name)}</span>
                                 ${groupBadge}
                             </div>
                             <select onchange="tslSetCategory('${keyJs}', ${item.isGroup ? 'true' : 'false'}, this.value)"
-                                style="font-size:0.75rem;padding:2px 4px;border:1px solid #cbd5e1;border-radius:4px;background:white;color:#334155;cursor:pointer;max-width:110px;">
+                                style="font-size:0.75rem;padding:2px 4px;border:1px solid #cbd5e1;border-radius:4px;background:white;color:#334155;cursor:pointer;max-width:90px;">
                                 ${opts}
                             </select>
                         </div>`;
                 }).join('') + `</div>`;
 
-            // If Simple Header mode (like user image screenshot)
+            // If Simple Header mode
             if (isSimple) {
                 return `
-                    <div style="margin-top:10px;">
+                    <div style="margin-top:10px;" ondragover="tslOnCatDragOver(event)" ondrop="tslOnCatDrop(event, '${tslEscHtml(cat)}')">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; padding-bottom:4px; border-bottom:2px solid #e2e8f0;">
                             <div style="display:flex; align-items:center; gap:8px;">
                                 <span style="font-weight:800; font-size:0.82rem; color:#475569; letter-spacing:0.06em; text-transform:uppercase;">${tslEscHtml(cat)}</span>
@@ -4128,7 +4501,7 @@
             const color = catColors[cat] || { bg: '#f0fdf4', border: '#bbf7d0', label: '#166534', badge: '#16a34a' };
 
             return `
-                <div style="background:${color.bg};border:1px solid ${color.border};border-radius:10px;padding:14px;">
+                <div style="background:${color.bg};border:1px solid ${color.border};border-radius:10px;padding:14px;" ondragover="tslOnCatDragOver(event)" ondrop="tslOnCatDrop(event, '${tslEscHtml(cat)}')">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                         <div style="display:flex;align-items:center;gap:8px;">
                             <span style="font-weight:700;font-size:0.9rem;color:${color.label};">${tslEscHtml(cat)}</span>
@@ -4209,6 +4582,8 @@
             allow_single_tests: layoutState.mode === 'group_and_single',
             categories_order: layoutState.categories_order,
             custom_categories: layoutState.custom_categories,
+            category_items_order: layoutState.category_items_order || {},
+            popular_order: layoutState.popular_order || (layoutState.category_items_order || {})['Popular'] || [],
             quick_presets: layoutState.quick_presets,
             category_styles: layoutState.category_styles,
             regular_preset: legacyPresetTests,
@@ -4230,6 +4605,335 @@
         } catch (e) {
             console.error('saveTestSelectionLayoutConfig error:', e);
             alert('❌ Network error while saving configuration.');
+        }
+    }
+
+    // ── Quick Result Suggestions Management ──────────────────────────────
+    window.sugState = {
+        by_test_name: {},
+        by_param_name: {},
+        presets: [],
+        allCatalogTests: [],
+        allCatalogGroups: [],
+        activeTags: [],
+        editingKey: null,
+        editingType: 'test'
+    };
+
+    async function initSuggestionsPage(forceRefresh = false) {
+        const root = document.getElementById('testSuggestionsRoot');
+        if (!root) return;
+
+        try {
+            const [sugRes, catRes] = await Promise.all([
+                fetch('/api/admin/test-suggestions'),
+                fetch('/api/admin/tests-catalog')
+            ]);
+            const sugData = await sugRes.json();
+            const catData = await catRes.json();
+
+            if (sugData.status === 'Success') {
+                const s = sugData.suggestions || {};
+                sugState.by_test_name = s.by_test_name || {};
+                sugState.by_param_name = s.by_param_name || {};
+                sugState.presets = s.presets || [];
+            }
+
+            if (catData.status === 'Success') {
+                sugState.allCatalogTests = catData.tests || [];
+                sugState.allCatalogGroups = catData.groups || [];
+            }
+
+            populateSugTestDropdown();
+            renderSuggestionPresetChips();
+            renderActiveSuggestionTags();
+            renderSuggestionsTable();
+
+            if (forceRefresh) {
+                alert('✅ Suggestions list refreshed!');
+            }
+        } catch (e) {
+            console.error('initSuggestionsPage error:', e);
+        }
+    }
+
+    function populateSugTestDropdown() {
+        const dd = document.getElementById('sug_test_dropdown');
+        if (!dd) return;
+
+        const isParam = document.querySelector('input[name="sug_target_type"]:checked')?.value === 'param';
+        let html = '<option value="">-- Select from Database or type custom below --</option>';
+
+        if (!isParam) {
+            if (sugState.allCatalogGroups.length) {
+                html += '<optgroup label="Test Groups">' +
+                    sugState.allCatalogGroups.filter(g => isStatusActive(g.status) && !(g.group_name || '').startsWith('#')).map(g => `<option value="${tslEscHtml(g.group_name)}">📦 ${tslEscHtml(g.group_name)}</option>`).join('') +
+                    '</optgroup>';
+            }
+            if (sugState.allCatalogTests.length) {
+                html += '<optgroup label="Individual Tests">' +
+                    sugState.allCatalogTests.filter(t => isStatusActive(t.status) && !(t.name || '').startsWith('#')).map(t => `<option value="${tslEscHtml(t.name)}">🧪 ${tslEscHtml(t.name)}</option>`).join('') +
+                    '</optgroup>';
+            }
+        } else {
+            if (sugState.allCatalogTests.length) {
+                html += '<optgroup label="All Parameters / Tests">' +
+                    sugState.allCatalogTests.filter(t => isStatusActive(t.status) && !(t.name || '').startsWith('#')).map(t => `<option value="${tslEscHtml(t.name)}">${tslEscHtml(t.name)}</option>`).join('') +
+                    '</optgroup>';
+            }
+        }
+
+        dd.innerHTML = html;
+    }
+
+    function toggleSugTargetType() {
+        populateSugTestDropdown();
+        const isParam = document.querySelector('input[name="sug_target_type"]:checked')?.value === 'param';
+        const lbl = document.getElementById('sug_target_label');
+        if (lbl) {
+            lbl.textContent = isParam ? 'Select Parameter from Database' : 'Select Test from Database';
+        }
+    }
+
+    function onSugDropdownSelect() {
+        const dd = document.getElementById('sug_test_dropdown');
+        const custom = document.getElementById('sug_custom_name');
+        if (dd && custom && dd.value) {
+            custom.value = dd.value;
+            const isParam = document.querySelector('input[name="sug_target_type"]:checked')?.value === 'param';
+            const map = isParam ? sugState.by_param_name : sugState.by_test_name;
+            if (map[dd.value]) {
+                sugState.activeTags = [...map[dd.value]];
+                renderActiveSuggestionTags();
+            }
+        }
+    }
+
+    function renderSuggestionPresetChips() {
+        const wrap = document.getElementById('sug_preset_chips_wrap');
+        if (!wrap) return;
+
+        const defaultPresets = [
+            { name: 'Negative / Positive', tags: ['Negative', 'Positive'] },
+            { name: 'Non-Reactive / Reactive', tags: ['Non-Reactive', 'Reactive'] },
+            { name: 'MP / Malaria', tags: ['Negative', 'Positive', 'P.V', 'P.F', 'Both (P.V & P.F)'] },
+            { name: 'Clear / Turbid', tags: ['Clear', 'Slightly Turbid', 'Turbid'] },
+            { name: 'Nil / Trace / Present', tags: ['Nil', 'Trace', 'Present', 'Absent'] },
+            { name: 'Normal / Abnormal', tags: ['Normal', 'Abnormal'] },
+            { name: 'Blood Groups', tags: ['A Positive', 'A Negative', 'B Positive', 'B Negative', 'O Positive', 'O Negative', 'AB Positive', 'AB Negative'] }
+        ];
+
+        const presets = (sugState.presets && sugState.presets.length) ? sugState.presets : defaultPresets;
+
+        wrap.innerHTML = presets.map((p, idx) => `
+            <button type="button" class="btn" style="background:white; border:1px solid #cbd5e1; font-size:0.75rem; padding:4px 8px; border-radius:6px; cursor:pointer; font-weight:600; color:#1e293b;" onclick="applyPresetToActiveTags(${idx})">
+                + ${tslEscHtml(p.name)}
+            </button>
+        `).join('');
+    }
+
+    function applyPresetToActiveTags(pIdx) {
+        const defaultPresets = [
+            { name: 'Negative / Positive', tags: ['Negative', 'Positive'] },
+            { name: 'Non-Reactive / Reactive', tags: ['Non-Reactive', 'Reactive'] },
+            { name: 'MP / Malaria', tags: ['Negative', 'Positive', 'P.V', 'P.F', 'Both (P.V & P.F)'] },
+            { name: 'Clear / Turbid', tags: ['Clear', 'Slightly Turbid', 'Turbid'] },
+            { name: 'Nil / Trace / Present', tags: ['Nil', 'Trace', 'Present', 'Absent'] },
+            { name: 'Normal / Abnormal', tags: ['Normal', 'Abnormal'] },
+            { name: 'Blood Groups', tags: ['A Positive', 'A Negative', 'B Positive', 'B Negative', 'O Positive', 'O Negative', 'AB Positive', 'AB Negative'] }
+        ];
+        const presets = (sugState.presets && sugState.presets.length) ? sugState.presets : defaultPresets;
+        const p = presets[pIdx];
+        if (p && p.tags) {
+            p.tags.forEach(t => {
+                if (!sugState.activeTags.includes(t)) {
+                    sugState.activeTags.push(t);
+                }
+            });
+            renderActiveSuggestionTags();
+        }
+    }
+
+    function renderActiveSuggestionTags() {
+        const container = document.getElementById('sug_active_tags_container');
+        if (!container) return;
+
+        if (!sugState.activeTags.length) {
+            container.innerHTML = '<span style="color:#94a3b8; font-size:0.8rem;">No values added yet. Type below or pick a preset.</span>';
+            return;
+        }
+
+        container.innerHTML = sugState.activeTags.map((tag, idx) => `
+            <span style="display:inline-flex; align-items:center; gap:6px; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; padding:4px 10px; border-radius:16px; font-size:0.82rem; font-weight:700;">
+                ${tslEscHtml(tag)}
+                <span onclick="removeSuggestionTag(${idx})" style="cursor:pointer; color:#ef4444; font-weight:bold; font-size:0.95rem; line-height:1;" title="Remove this value">×</span>
+            </span>
+        `).join('');
+    }
+
+    function addCustomTagFromInput() {
+        const inp = document.getElementById('sug_new_tag_input');
+        if (!inp) return;
+        const val = inp.value.trim();
+        if (!val) return;
+        if (!sugState.activeTags.includes(val)) {
+            sugState.activeTags.push(val);
+            renderActiveSuggestionTags();
+        }
+        inp.value = '';
+        inp.focus();
+    }
+
+    function removeSuggestionTag(idx) {
+        sugState.activeTags.splice(idx, 1);
+        renderActiveSuggestionTags();
+    }
+
+    function saveCurrentSuggestionRule() {
+        const customInp = document.getElementById('sug_custom_name');
+        const key = customInp ? customInp.value.trim() : '';
+        if (!key) {
+            alert('Please select or type a Test or Parameter name.');
+            return;
+        }
+        if (!sugState.activeTags.length) {
+            alert('Please add at least one suggestion value (e.g. Negative, Positive).');
+            return;
+        }
+
+        const isParam = document.querySelector('input[name="sug_target_type"]:checked')?.value === 'param';
+        if (isParam) {
+            sugState.by_param_name[key] = [...sugState.activeTags];
+        } else {
+            sugState.by_test_name[key] = [...sugState.activeTags];
+        }
+
+        renderSuggestionsTable();
+        resetSuggestionForm();
+        saveAllSuggestionsToServer(false);
+    }
+
+    function resetSuggestionForm() {
+        sugState.activeTags = [];
+        sugState.editingKey = null;
+        const customInp = document.getElementById('sug_custom_name');
+        const dd = document.getElementById('sug_test_dropdown');
+        const title = document.getElementById('sug_form_title');
+        const cancelBtn = document.getElementById('sug_cancel_edit_btn');
+        if (customInp) customInp.value = '';
+        if (dd) dd.value = '';
+        if (title) title.textContent = '➕ Add / Edit Suggestion Rule';
+        if (cancelBtn) cancelBtn.style.display = 'none';
+        renderActiveSuggestionTags();
+    }
+
+    function editSuggestionRule(type, key) {
+        const map = (type === 'param') ? sugState.by_param_name : sugState.by_test_name;
+        if (!map[key]) return;
+
+        sugState.editingKey = key;
+        sugState.editingType = type;
+        sugState.activeTags = [...map[key]];
+
+        const radio = document.querySelector(`input[name="sug_target_type"][value="${type}"]`);
+        if (radio) radio.checked = true;
+        toggleSugTargetType();
+
+        const customInp = document.getElementById('sug_custom_name');
+        const dd = document.getElementById('sug_test_dropdown');
+        const title = document.getElementById('sug_form_title');
+        const cancelBtn = document.getElementById('sug_cancel_edit_btn');
+
+        if (customInp) customInp.value = key;
+        if (dd) dd.value = key;
+        if (title) title.textContent = `✏️ Edit Rule: ${key}`;
+        if (cancelBtn) cancelBtn.style.display = 'inline-block';
+
+        renderActiveSuggestionTags();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteSuggestionRule(type, key) {
+        if (!confirm(`Delete suggestions for "${key}"?`)) return;
+        const map = (type === 'param') ? sugState.by_param_name : sugState.by_test_name;
+        delete map[key];
+        renderSuggestionsTable();
+        saveAllSuggestionsToServer(false);
+    }
+
+    function renderSuggestionsTable() {
+        const tbody = document.getElementById('sug_rules_tbody');
+        if (!tbody) return;
+
+        const search = (document.getElementById('sug_table_search')?.value || '').toLowerCase().trim();
+        const rows = [];
+
+        // Tests rules
+        Object.entries(sugState.by_test_name).forEach(([testName, tags]) => {
+            if (search && !testName.toLowerCase().includes(search) && !tags.some(t => t.toLowerCase().includes(search))) return;
+            rows.push({ type: 'test', key: testName, tags });
+        });
+
+        // Params rules
+        Object.entries(sugState.by_param_name).forEach(([paramName, tags]) => {
+            if (search && !paramName.toLowerCase().includes(search) && !tags.some(t => t.toLowerCase().includes(search))) return;
+            rows.push({ type: 'param', key: paramName, tags });
+        });
+
+        if (!rows.length) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:30px; color:#94a3b8;">${search ? 'No suggestions match your search.' : 'No suggestions configured yet.'}</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = rows.map(r => {
+            const typeBadge = (r.type === 'param')
+                ? '<span style="background:#fef3c7; color:#92400e; font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:10px;">Parameter</span>'
+                : '<span style="background:#dbeafe; color:#1e40af; font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:10px;">Test / Group</span>';
+
+            const pills = r.tags.map(t => `
+                <span style="display:inline-block; background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; padding:2px 8px; border-radius:12px; font-size:0.75rem; font-weight:600; margin:2px 3px 2px 0;">
+                    ${tslEscHtml(t)}
+                </span>
+            `).join('');
+
+            return `
+                <tr style="border-bottom:1px solid #e2e8f0;">
+                    <td style="padding:10px 12px;">${typeBadge}</td>
+                    <td style="padding:10px 12px; font-weight:700; color:#0f172a;">${tslEscHtml(r.key)}</td>
+                    <td style="padding:10px 12px;">${pills}</td>
+                    <td style="padding:10px 12px; text-align:right; white-space:nowrap;">
+                        <button type="button" style="background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600; cursor:pointer; margin-right:4px;" onclick="editSuggestionRule('${r.type}', '${r.key.replace(/'/g, "\\'")}')">✏️ Edit</button>
+                        <button type="button" style="background:#fef2f2; color:#dc2626; border:1px solid #fca5a5; padding:3px 8px; border-radius:4px; font-size:0.75rem; font-weight:600; cursor:pointer;" onclick="deleteSuggestionRule('${r.type}', '${r.key.replace(/'/g, "\\'")}')">🗑️ Delete</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    async function saveAllSuggestionsToServer(showAlert = true) {
+        const payload = {
+            by_test_name: sugState.by_test_name,
+            by_param_name: sugState.by_param_name,
+            presets: sugState.presets
+        };
+
+        try {
+            const res = await fetch('/api/admin/test-suggestions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.status === 'Success') {
+                if (showAlert) {
+                    alert('✅ Quick Result Suggestions saved successfully! They will now automatically appear in Update Test Results.');
+                }
+            } else {
+                alert('❌ Failed to save suggestions: ' + (data.detail || 'Unknown error'));
+            }
+        } catch (e) {
+            console.error('saveAllSuggestionsToServer error:', e);
+            alert('❌ Network error while saving suggestions.');
         }
     }
 

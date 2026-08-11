@@ -1311,6 +1311,8 @@ def add_tests_to_patient_all(patient_id, patient_mr_no, patient_name, selected_t
                         break
                 
                 if matched_group:
+                    if matched_group.get("status") is False or (matched_group.get("group_name") or "").startswith("#"):
+                        continue
                     test_name = matched_group.get("group_name")
                     category = matched_group.get("category") or "Group Test"
                 else:
@@ -1326,8 +1328,13 @@ def add_tests_to_patient_all(patient_id, patient_mr_no, patient_name, selected_t
                     
                     test_details = tests_by_id.get(actual_id)
                     if test_details:
+                        if test_details.get("status") is False or (test_details.get("name") or "").startswith("#"):
+                            continue
                         test_values[f"param_{comp_id}"] = build_test_parameter_json(test_details)
                 
+                if not test_values:
+                    continue
+
                 payload = {
                     "mr_no": patient_mr_no,
                     "patient_name": patient_name,
@@ -1353,6 +1360,8 @@ def add_tests_to_patient_all(patient_id, patient_mr_no, patient_name, selected_t
                 
                 test_details = tests_by_id.get(actual_id)
                 if test_details:
+                    if test_details.get("status") is False or (test_details.get("name") or "").startswith("#"):
+                        continue
                     test_name = test_details.get("name")
                     category = test_details.get("category") or "Test"
                     

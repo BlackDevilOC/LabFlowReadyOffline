@@ -1,0 +1,22 @@
+{
+    "patient_name": "M.ASIF NIAZ",
+    "gender": "Female",
+    "relation_type": "D/O:",
+    "relation_name": "NIAZ MUHAMMAD",
+    "report_date": "11/08/2026",
+    "mr_no": "10817",
+    "hb": "14.8",
+    "wbc": "7.2",
+    "neut": "61",
+    "lymph": "33",
+    "mono": "03",
+    "eosino": "03",
+    "plt": "386",
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-11 12:13:17"
+}

@@ -259,6 +259,33 @@
         box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.15);
     }
 
+    .quick-sug-pills-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px;
+        margin-top: 3px;
+    }
+
+    .btn-quick-sug {
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 1px 5px;
+        cursor: pointer;
+        line-height: 1.2;
+        transition: all 0.1s ease;
+    }
+
+    .btn-quick-sug:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: white;
+        transform: translateY(-1px);
+    }
+
     .test-remarks-wrap {
         margin-top: 6px;
         padding-top: 6px;
@@ -1368,6 +1395,88 @@
         } catch (_) {}
     }
 
+    let testSuggestions = { by_test_name: {}, by_param_name: {} };
+
+    async function loadTestSuggestions() {
+        try {
+            const res = await fetch('/api/admin/test-suggestions');
+            if (res.ok) {
+                const data = await res.json();
+                if (data.status === 'Success' && data.suggestions) {
+                    testSuggestions = data.suggestions;
+                }
+            }
+        } catch (e) {
+            console.error('Failed to load test suggestions:', e);
+        }
+    }
+
+    function getSuggestionsForParam(testName, paramName) {
+        if (!testSuggestions) return [];
+        const tMap = testSuggestions.by_test_name || {};
+        const pMap = testSuggestions.by_param_name || {};
+
+        const cleanT = (testName || '').trim().toLowerCase();
+        const cleanP = (paramName || '').trim().toLowerCase();
+        const normT = cleanT.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+        const normP = cleanP.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+
+        // 1. Direct / Normalized Exact Param Match
+        for (const [k, vals] of Object.entries(pMap)) {
+            const cleanK = k.trim().toLowerCase();
+            const normK = cleanK.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (cleanP === cleanK || normP === normK) {
+                return vals;
+            }
+        }
+
+        // 2. Direct / Normalized Exact Test Match
+        for (const [k, vals] of Object.entries(tMap)) {
+            const cleanK = k.trim().toLowerCase();
+            const normK = cleanK.replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (cleanT === cleanK || normT === normK) {
+                return vals;
+            }
+        }
+
+        // 3. Whole Word Token Match for Param (e.g. "mp ict" matches "mp")
+        const wordsP = normP.split(' ').filter(Boolean);
+        for (const [k, vals] of Object.entries(pMap)) {
+            const normK = k.trim().toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (!normK) continue;
+            if (wordsP.includes(normK) || (normK.split(' ').length > 1 && normP.includes(normK))) {
+                return vals;
+            }
+        }
+
+        // 4. Whole Word Token Match for Test (e.g. "mp ict" matches "mp")
+        const wordsT = normT.split(' ').filter(Boolean);
+        for (const [k, vals] of Object.entries(tMap)) {
+            const normK = k.trim().toLowerCase().replace(/[^a-z0-9]/g, ' ').replace(/\s+/g, ' ').trim();
+            if (!normK) continue;
+            if (wordsT.includes(normK) || (normK.split(' ').length > 1 && normT.includes(normK))) {
+                return vals;
+            }
+        }
+
+        return [];
+    }
+
+    function applyQuickSugValue(btn, val, recordIndex, paramKey) {
+        const cell = btn.closest('.param-input-cell');
+        const inp = cell ? cell.querySelector('.param-input-field') : null;
+        if (inp) {
+            inp.value = val;
+            inp.focus();
+            if (patientRecords[recordIndex] && patientRecords[recordIndex].test_values && patientRecords[recordIndex].test_values[paramKey]) {
+                patientRecords[recordIndex].test_values[paramKey].value = val;
+            }
+            inp.style.transition = 'background 0.2s';
+            inp.style.background = '#dcfce7';
+            setTimeout(() => { inp.style.background = ''; }, 400);
+        }
+    }
+
     function renderFormFields() {
         const container = document.getElementById('tests-container');
         let html = '';
@@ -1440,6 +1549,20 @@
                         rangeStr += ` ${unit}`;
                     }
 
+                    const sugs = getSuggestionsForParam(record.test_name, name);
+                    let sugsHtml = '';
+                    if (sugs && sugs.length > 0) {
+                        sugsHtml = `
+                            <div class="quick-sug-pills-wrap">
+                                ${sugs.map(s => `
+                                    <button type="button" class="btn-quick-sug" onclick="applyQuickSugValue(this, '${escapeHtml(s).replace(/'/g, "\\'")}', ${recordIndex}, '${key}')">
+                                        ${escapeHtml(s)}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+
                     html += `
                         <tr>
                             <td class="param-label" title="${name}">${name}</td>
@@ -1453,6 +1576,7 @@
                                        value="${value}" 
                                        placeholder="-"
                                        onfocus="this.select();">
+                                ${sugsHtml}
                             </td>
                         </tr>
                     `;
@@ -1825,6 +1949,7 @@
             await LabFlowRemarks.loadCache();
         }
         await loadGroupOrders();
+        await loadTestSuggestions();
         availableTests = await fetchTestsCatalog();
         await loadPatientTestData();
     });

@@ -55,7 +55,7 @@ VALUES
 ('MICROBIOLOGY', '[113]', '2026-06-04T10:49:15.72564+00:00', 'Blood Culture and Sensitivity (Blood C/S)', 48, FALSE),
 ('MICROBIOLOGY', '[114]', '2026-06-04T10:49:15.72564+00:00', 'Urine C/S', 49, TRUE),
 ('Biochemistry', '[115]', '2026-06-04T10:49:15.72564+00:00', 'Anti HCV (ICT)', 50, TRUE),
-('Biochemistry', '[116]', '2026-06-04T10:49:15.72564+00:00', 'Anti HIV (ICT)', 51, TRUE),
+('Biochemistry', '[116]', '2026-06-04T10:49:15.72564+00:00', 'Anti HIV (ICT)', 51, FALSE),
 ('Biochemistry', '[117]', '2026-06-04T10:49:15.72564+00:00', 'HbsAg (ICT)', 52, TRUE),
 ('Biochemistry', '[118]', '2026-06-04T10:49:15.72564+00:00', 'Myoglobin', 53, TRUE),
 ('Biochemistry', '[119]', '2026-06-04T10:49:15.72564+00:00', 'Serum Insulin', 54, TRUE),

@@ -1313,7 +1313,7 @@
         selectedTestNames = new Set();
         for (const r of allRows) {
             const name = (r.test_name || '').trim();
-            if (!name) continue;
+            if (!name || name.startsWith('#') || r.status === false) continue;
             const rowDate = r.created_at ? r.created_at.split('T')[0] : '';
             if (!DATE_FILTER || rowDate === DATE_FILTER) selectedTestNames.add(name);
         }

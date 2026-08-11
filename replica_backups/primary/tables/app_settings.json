@@ -2,7 +2,7 @@
   {
     "id": 1,
     "payload": {
-      "pushed_at": "2026-08-10T15:09:04.947729Z",
+      "pushed_at": "2026-08-11T07:22:22.573624Z",
       "pushed_by": "Anonymous",
       "print_layouts": {
         "liver function test|uce": {
@@ -337,6 +337,31 @@
       },
       "test_selection_config": {
         "mode": "group_and_single",
+        "popular_order": [
+          "COMPLETE BLOOD COUNT",
+          "Albumin",
+          "Lipid Profile",
+          "Hep B, C",
+          "Electrolytes",
+          "Thyroid Profile",
+          "Liver Function Test",
+          "UC",
+          "Calcium",
+          "UCE",
+          "VDRL SYPHILIS",
+          "Amylase",
+          "Glucose Random (RBS)",
+          "PT (Prothrombin Time)",
+          "Hep B, C ELISA",
+          "Anti HIV (ICT)",
+          "Anti HCV (ICT)",
+          "Anti HCV ELISA",
+          "Dengue NS1 (ICT)",
+          "H. Pylori Ab (ICT)",
+          "HbsAg (ICT)",
+          "Uric Acid",
+          "Urea"
+        ],
         "quick_presets": [
           {
             "id": "p1",
@@ -354,6 +379,20 @@
             "name": ".",
             "tests": [],
             "auto_select": true
+          },
+          {
+            "id": "preset_1786430105501",
+            "name": "regular all",
+            "tests": [
+              "COMPLETE BLOOD COUNT",
+              "Liver Function Test",
+              "UCE",
+              "Glucose Random (RBS)",
+              "Hep B, C",
+              "8",
+              "58"
+            ],
+            "auto_select": false
           }
         ],
         "regular_preset": [],
@@ -368,8 +407,11 @@
         ],
         "custom_categories": {
           "1": "Popular",
+          "52": "Popular",
+          "90": "Popular",
           "91": "Popular",
           "UC": "Popular",
+          "116": "Popular",
           "243": "Popular",
           "UCE": "Popular",
           "MP-ICT": "Popular",
@@ -393,14 +435,259 @@
           "H. Pylori Ab (ICT)": "Popular",
           "Liver Function Test": "Popular",
           "COMPLETE BLOOD COUNT": "Popular",
-          "Glucose Random (RBS)": "Popular"
+          "Glucose Random (RBS)": "Popular",
+          "PT (Prothrombin Time)": "Popular"
         },
         "allow_single_tests": true,
-        "auto_select_regular": true
+        "auto_select_regular": true,
+        "category_items_order": {
+          "Popular": [
+            "COMPLETE BLOOD COUNT",
+            "Albumin",
+            "Lipid Profile",
+            "Hep B, C",
+            "Electrolytes",
+            "Thyroid Profile",
+            "Liver Function Test",
+            "UC",
+            "Calcium",
+            "UCE",
+            "VDRL SYPHILIS",
+            "Amylase",
+            "Glucose Random (RBS)",
+            "PT (Prothrombin Time)",
+            "Hep B, C ELISA",
+            "Anti HIV (ICT)",
+            "Anti HCV (ICT)",
+            "Anti HCV ELISA",
+            "Dengue NS1 (ICT)",
+            "H. Pylori Ab (ICT)",
+            "HbsAg (ICT)",
+            "Uric Acid",
+            "Urea"
+          ]
+        }
+      },
+      "test_value_suggestions": {
+        "presets": [
+          {
+            "name": "Negative / Positive",
+            "tags": [
+              "Negative",
+              "Positive"
+            ]
+          },
+          {
+            "name": "Non-Reactive / Reactive",
+            "tags": [
+              "Non-Reactive",
+              "Reactive"
+            ]
+          },
+          {
+            "name": "Malaria (MP / P.V / P.F)",
+            "tags": [
+              "Negative",
+              "Positive",
+              "P.V",
+              "P.F",
+              "Both (P.V & P.F)"
+            ]
+          },
+          {
+            "name": "Clear / Turbid",
+            "tags": [
+              "Clear",
+              "Slightly Turbid",
+              "Turbid"
+            ]
+          },
+          {
+            "name": "Nil / Trace / Present",
+            "tags": [
+              "Nil",
+              "Trace",
+              "Present",
+              "Absent"
+            ]
+          },
+          {
+            "name": "Normal / Abnormal",
+            "tags": [
+              "Normal",
+              "Abnormal"
+            ]
+          },
+          {
+            "name": "Blood Groups",
+            "tags": [
+              "A Positive",
+              "A Negative",
+              "B Positive",
+              "B Negative",
+              "O Positive",
+              "O Negative",
+              "AB Positive",
+              "AB Negative"
+            ]
+          }
+        ],
+        "by_test_name": {
+          "MP-ICT": [
+            "Negative",
+            "Positive P.V",
+            "Positive P.F",
+            "Positive (P.V & P.F)"
+          ],
+          "Hep B, C": [
+            "Negative",
+            "Positive"
+          ],
+          "Stool DR": [
+            "Normal",
+            "Semisolid",
+            "Watery",
+            "Formed",
+            "Nil",
+            "Absent",
+            "Present"
+          ],
+          "Urine DR": [
+            "Clear",
+            "Slightly Turbid",
+            "Turbid",
+            "Nil",
+            "Trace",
+            "Present",
+            "Absent",
+            "Normal"
+          ],
+          "Widal Test": [
+            "Negative",
+            "Positive"
+          ],
+          "HbsAg (ICT)": [
+            "Non-Reactive",
+            "Reactive"
+          ],
+          "Typhoid (ICT)": [
+            "Negative",
+            "Positive",
+            "IgM Positive",
+            "IgG Positive"
+          ],
+          "VDRL SYPHILIS": [
+            "Non-Reactive",
+            "Reactive"
+          ],
+          "Anti HCV (ICT)": [
+            "Non-Reactive",
+            "Reactive"
+          ],
+          "Anti HCV ELISA": [
+            "Non-Reactive",
+            "Reactive"
+          ],
+          "Anti HIV (ICT)": [
+            "Non-Reactive",
+            "Reactive"
+          ],
+          "Dengue Profile": [
+            "Negative",
+            "Positive"
+          ],
+          "Hep B, C ELISA": [
+            "Non-Reactive",
+            "Reactive"
+          ],
+          "Dengue NS1 (ICT)": [
+            "Negative",
+            "Positive"
+          ],
+          "Pregnancy (Urine)": [
+            "Negative",
+            "Positive"
+          ],
+          "H. Pylori Ab (ICT)": [
+            "Negative",
+            "Positive"
+          ],
+          "H. Pylori IgG (ELISA)": [
+            "Negative",
+            "Positive"
+          ],
+          "Blood Grouping & Rh Type": [
+            "A Positive",
+            "A Negative",
+            "B Positive",
+            "B Negative",
+            "O Positive",
+            "O Negative",
+            "AB Positive",
+            "AB Negative"
+          ]
+        },
+        "by_param_name": {
+          "MP": [
+            "Negative",
+            "Positive",
+            "P.V",
+            "P.F",
+            "Both (P.V & P.F)"
+          ],
+          "VDRL": [
+            "Non-Reactive",
+            "Reactive"
+          ],
+          "HBsAg": [
+            "Non-Reactive",
+            "Reactive",
+            "Negative",
+            "Positive"
+          ],
+          "Anti HCV": [
+            "Non-Reactive",
+            "Reactive",
+            "Negative",
+            "Positive"
+          ],
+          "Anti HIV": [
+            "Non-Reactive",
+            "Reactive",
+            "Negative",
+            "Positive"
+          ],
+          "H. Pylori": [
+            "Negative",
+            "Positive"
+          ],
+          "Rh Factor": [
+            "Positive",
+            "Negative"
+          ],
+          "Dengue IgG": [
+            "Negative",
+            "Positive"
+          ],
+          "Dengue IgM": [
+            "Negative",
+            "Positive"
+          ],
+          "Dengue NS1": [
+            "Negative",
+            "Positive"
+          ],
+          "Blood Group": [
+            "A",
+            "B",
+            "AB",
+            "O"
+          ]
+        }
       }
     },
     "setting_type": "all_app_settings",
-    "updated_at": "2026-08-10T15:09:04.947729+00:00",
+    "updated_at": "2026-08-11T07:22:22.573624+00:00",
     "updated_by": "Anonymous"
   }
 ]
