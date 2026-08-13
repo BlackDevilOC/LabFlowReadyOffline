@@ -58,6 +58,25 @@
       }
     },
     {
+      "id": 13,
+      "name": "Hamid",
+      "email": "hamid@gmail.com",
+      "is_active": true,
+      "pwd": "1234",
+      "default_shift_id": null,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
       "id": 5,
       "name": "Nazeer",
       "email": "nazeer@gmail.com",

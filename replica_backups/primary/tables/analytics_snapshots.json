@@ -2361,5 +2361,839 @@
       ]
     },
     "snapshot_type": "tests"
+  },
+  {
+    "computed_at": "2026-08-12T13:02:26.483578+00:00",
+    "date_from": "2026-08-12",
+    "date_to": "2026-08-12",
+    "id": 55,
+    "payload": {
+      "kpis": {
+        "total_tests": 762,
+        "pending_tests": 336,
+        "total_patients": 286,
+        "completed_tests": 426,
+        "unique_operators": 5,
+        "completion_rate_pct": 55.9,
+        "avg_tests_per_patient": 2.66
+      },
+      "date_to": "2026-08-12",
+      "has_data": true,
+      "date_from": "2026-08-12",
+      "from_cache": false,
+      "peak_hours": [
+        {
+          "hour": "00:00",
+          "count": 1
+        },
+        {
+          "hour": "01:00",
+          "count": 11
+        },
+        {
+          "hour": "02:00",
+          "count": 2
+        },
+        {
+          "hour": "04:00",
+          "count": 1
+        },
+        {
+          "hour": "05:00",
+          "count": 37
+        },
+        {
+          "hour": "06:00",
+          "count": 59
+        },
+        {
+          "hour": "07:00",
+          "count": 79
+        },
+        {
+          "hour": "08:00",
+          "count": 34
+        },
+        {
+          "hour": "09:00",
+          "count": 4
+        },
+        {
+          "hour": "10:00",
+          "count": 1
+        },
+        {
+          "hour": "11:00",
+          "count": 23
+        },
+        {
+          "hour": "12:00",
+          "count": 34
+        }
+      ],
+      "computed_at": "2026-08-12T13:02:26.464661+00:00",
+      "result_ratio": {
+        "normal": 1013,
+        "abnormal": 997,
+        "unclassified": 2076
+      },
+      "category_volume": [
+        {
+          "count": 351,
+          "category": "Biochemistry"
+        },
+        {
+          "count": 236,
+          "category": "Hematology"
+        },
+        {
+          "count": 164,
+          "category": "Serology"
+        },
+        {
+          "count": 9,
+          "category": "Coagulation"
+        },
+        {
+          "count": 2,
+          "category": "SEROLOGY"
+        }
+      ],
+      "registration_series": [
+        {
+          "date": "2026-08-12",
+          "count": 286
+        }
+      ]
+    },
+    "snapshot_type": "overview"
+  },
+  {
+    "computed_at": "2026-08-12T13:02:40.060515+00:00",
+    "date_from": "2026-08-01",
+    "date_to": "2026-08-12",
+    "id": 56,
+    "payload": {
+      "kpis": {
+        "total_tests": 2471,
+        "pending_tests": 490,
+        "total_patients": 909,
+        "completed_tests": 1981,
+        "unique_operators": 9,
+        "completion_rate_pct": 80.2,
+        "avg_tests_per_patient": 2.72
+      },
+      "date_to": "2026-08-12",
+      "has_data": true,
+      "date_from": "2026-08-01",
+      "from_cache": false,
+      "peak_hours": [
+        {
+          "hour": "00:00",
+          "count": 1
+        },
+        {
+          "hour": "01:00",
+          "count": 11
+        },
+        {
+          "hour": "02:00",
+          "count": 9
+        },
+        {
+          "hour": "03:00",
+          "count": 18
+        },
+        {
+          "hour": "04:00",
+          "count": 1
+        },
+        {
+          "hour": "05:00",
+          "count": 52
+        },
+        {
+          "hour": "06:00",
+          "count": 142
+        },
+        {
+          "hour": "07:00",
+          "count": 133
+        },
+        {
+          "hour": "08:00",
+          "count": 127
+        },
+        {
+          "hour": "09:00",
+          "count": 41
+        },
+        {
+          "hour": "10:00",
+          "count": 6
+        },
+        {
+          "hour": "11:00",
+          "count": 27
+        },
+        {
+          "hour": "12:00",
+          "count": 62
+        },
+        {
+          "hour": "13:00",
+          "count": 72
+        },
+        {
+          "hour": "14:00",
+          "count": 99
+        },
+        {
+          "hour": "15:00",
+          "count": 5
+        },
+        {
+          "hour": "16:00",
+          "count": 5
+        },
+        {
+          "hour": "17:00",
+          "count": 8
+        },
+        {
+          "hour": "18:00",
+          "count": 10
+        },
+        {
+          "hour": "19:00",
+          "count": 30
+        },
+        {
+          "hour": "20:00",
+          "count": 19
+        },
+        {
+          "hour": "21:00",
+          "count": 14
+        },
+        {
+          "hour": "22:00",
+          "count": 17
+        }
+      ],
+      "computed_at": "2026-08-12T13:02:40.040569+00:00",
+      "result_ratio": {
+        "normal": 3942,
+        "abnormal": 2344,
+        "unclassified": 6790
+      },
+      "category_volume": [
+        {
+          "count": 1192,
+          "category": "Biochemistry"
+        },
+        {
+          "count": 721,
+          "category": "Hematology"
+        },
+        {
+          "count": 529,
+          "category": "Serology"
+        },
+        {
+          "count": 26,
+          "category": "Coagulation"
+        },
+        {
+          "count": 2,
+          "category": "SEROLOGY"
+        },
+        {
+          "count": 1,
+          "category": "COAGULATION"
+        }
+      ],
+      "registration_series": [
+        {
+          "date": "2026-08-06",
+          "count": 3
+        },
+        {
+          "date": "2026-08-07",
+          "count": 3
+        },
+        {
+          "date": "2026-08-08",
+          "count": 4
+        },
+        {
+          "date": "2026-08-09",
+          "count": 7
+        },
+        {
+          "date": "2026-08-10",
+          "count": 168
+        },
+        {
+          "date": "2026-08-11",
+          "count": 438
+        },
+        {
+          "date": "2026-08-12",
+          "count": 286
+        }
+      ]
+    },
+    "snapshot_type": "overview"
+  },
+  {
+    "computed_at": "2026-08-12T13:03:29.268171+00:00",
+    "date_from": "2026-08-12",
+    "date_to": "2026-08-12",
+    "id": 57,
+    "payload": {
+      "kpis": {
+        "peak_hour": "07:00",
+        "peak_hour_count": 79,
+        "active_operators": 5,
+        "total_registrations": 286,
+        "avg_daily_registrations": 286.0
+      },
+      "date_to": "2026-08-12",
+      "has_data": true,
+      "date_from": "2026-08-12",
+      "from_cache": false,
+      "computed_at": "2026-08-12T13:03:29.246230+00:00",
+      "hourly_series": [
+        {
+          "hour": "00:00",
+          "count": 1
+        },
+        {
+          "hour": "01:00",
+          "count": 11
+        },
+        {
+          "hour": "02:00",
+          "count": 2
+        },
+        {
+          "hour": "04:00",
+          "count": 1
+        },
+        {
+          "hour": "05:00",
+          "count": 37
+        },
+        {
+          "hour": "06:00",
+          "count": 59
+        },
+        {
+          "hour": "07:00",
+          "count": 79
+        },
+        {
+          "hour": "08:00",
+          "count": 34
+        },
+        {
+          "hour": "09:00",
+          "count": 4
+        },
+        {
+          "hour": "10:00",
+          "count": 1
+        },
+        {
+          "hour": "11:00",
+          "count": 23
+        },
+        {
+          "hour": "12:00",
+          "count": 34
+        }
+      ],
+      "shift_breakdown": [
+        {
+          "count": 132,
+          "shift": "OPD"
+        },
+        {
+          "count": 83,
+          "shift": "MORNING"
+        },
+        {
+          "count": 57,
+          "shift": "EVENING"
+        },
+        {
+          "count": 14,
+          "shift": "NIGHT"
+        }
+      ],
+      "operator_throughput": [
+        {
+          "user_id": 8,
+          "operator": "Sakhar",
+          "primary_shift": "OPD",
+          "registrations": 132
+        },
+        {
+          "user_id": 7,
+          "operator": "Uzair",
+          "primary_shift": "MORNING",
+          "registrations": 82
+        },
+        {
+          "user_id": 1,
+          "operator": "Rehan Ahmed",
+          "primary_shift": "EVENING",
+          "registrations": 57
+        },
+        {
+          "user_id": 10,
+          "operator": "Waqar",
+          "primary_shift": "NIGHT",
+          "registrations": 14
+        },
+        {
+          "user_id": 13,
+          "operator": "Hamid",
+          "primary_shift": "MORNING",
+          "registrations": 1
+        }
+      ],
+      "registration_series": [
+        {
+          "date": "2026-08-12",
+          "count": 286
+        }
+      ]
+    },
+    "snapshot_type": "telemetry"
+  },
+  {
+    "computed_at": "2026-08-12T13:07:08.367047+00:00",
+    "date_from": "2026-08-01",
+    "date_to": "2026-08-12",
+    "id": 58,
+    "payload": {
+      "kpis": {
+        "peak_hour": "06:00",
+        "peak_hour_count": 142,
+        "active_operators": 8,
+        "total_registrations": 909,
+        "avg_daily_registrations": 129.9
+      },
+      "date_to": "2026-08-12",
+      "has_data": true,
+      "date_from": "2026-08-01",
+      "from_cache": false,
+      "computed_at": "2026-08-12T13:07:08.347100+00:00",
+      "hourly_series": [
+        {
+          "hour": "00:00",
+          "count": 1
+        },
+        {
+          "hour": "01:00",
+          "count": 11
+        },
+        {
+          "hour": "02:00",
+          "count": 9
+        },
+        {
+          "hour": "03:00",
+          "count": 18
+        },
+        {
+          "hour": "04:00",
+          "count": 1
+        },
+        {
+          "hour": "05:00",
+          "count": 52
+        },
+        {
+          "hour": "06:00",
+          "count": 142
+        },
+        {
+          "hour": "07:00",
+          "count": 133
+        },
+        {
+          "hour": "08:00",
+          "count": 127
+        },
+        {
+          "hour": "09:00",
+          "count": 41
+        },
+        {
+          "hour": "10:00",
+          "count": 6
+        },
+        {
+          "hour": "11:00",
+          "count": 27
+        },
+        {
+          "hour": "12:00",
+          "count": 62
+        },
+        {
+          "hour": "13:00",
+          "count": 72
+        },
+        {
+          "hour": "14:00",
+          "count": 99
+        },
+        {
+          "hour": "15:00",
+          "count": 5
+        },
+        {
+          "hour": "16:00",
+          "count": 5
+        },
+        {
+          "hour": "17:00",
+          "count": 8
+        },
+        {
+          "hour": "18:00",
+          "count": 10
+        },
+        {
+          "hour": "19:00",
+          "count": 30
+        },
+        {
+          "hour": "20:00",
+          "count": 19
+        },
+        {
+          "hour": "21:00",
+          "count": 14
+        },
+        {
+          "hour": "22:00",
+          "count": 17
+        }
+      ],
+      "shift_breakdown": [
+        {
+          "count": 321,
+          "shift": "OPD"
+        },
+        {
+          "count": 269,
+          "shift": "EVENING"
+        },
+        {
+          "count": 180,
+          "shift": "MORNING"
+        },
+        {
+          "count": 138,
+          "shift": "NIGHT"
+        },
+        {
+          "count": 1,
+          "shift": "Morning"
+        }
+      ],
+      "operator_throughput": [
+        {
+          "user_id": 8,
+          "operator": "Sakhar",
+          "primary_shift": "OPD",
+          "registrations": 293
+        },
+        {
+          "user_id": 1,
+          "operator": "Rehan Ahmed",
+          "primary_shift": "EVENING",
+          "registrations": 278
+        },
+        {
+          "user_id": 10,
+          "operator": "Waqar",
+          "primary_shift": "NIGHT",
+          "registrations": 170
+        },
+        {
+          "user_id": 7,
+          "operator": "Uzair",
+          "primary_shift": "MORNING",
+          "registrations": 158
+        },
+        {
+          "user_id": 0,
+          "operator": "offline",
+          "primary_shift": "EVENING",
+          "registrations": 5
+        },
+        {
+          "user_id": 9,
+          "operator": "BILAL",
+          "primary_shift": "EVENING",
+          "registrations": 2
+        },
+        {
+          "user_id": 11,
+          "operator": "Daniyal",
+          "primary_shift": "OPD",
+          "registrations": 2
+        },
+        {
+          "user_id": 13,
+          "operator": "Hamid",
+          "primary_shift": "MORNING",
+          "registrations": 1
+        }
+      ],
+      "registration_series": [
+        {
+          "date": "2026-08-06",
+          "count": 3
+        },
+        {
+          "date": "2026-08-07",
+          "count": 3
+        },
+        {
+          "date": "2026-08-08",
+          "count": 4
+        },
+        {
+          "date": "2026-08-09",
+          "count": 7
+        },
+        {
+          "date": "2026-08-10",
+          "count": 168
+        },
+        {
+          "date": "2026-08-11",
+          "count": 438
+        },
+        {
+          "date": "2026-08-12",
+          "count": 286
+        }
+      ]
+    },
+    "snapshot_type": "telemetry"
+  },
+  {
+    "computed_at": "2026-08-12T13:04:17.540657+00:00",
+    "date_from": "2026-08-12",
+    "date_to": "2026-08-12",
+    "id": 59,
+    "payload": {
+      "kpis": {
+        "total_tests": 762,
+        "pending_tests": 336,
+        "completed_tests": 426,
+        "abnormal_rate_pct": 49.6,
+        "normal_parameters": 1013,
+        "abnormal_parameters": 997
+      },
+      "date_to": "2026-08-12",
+      "has_data": true,
+      "date_from": "2026-08-12",
+      "top_tests": [
+        {
+          "count": 215,
+          "test_name": "COMPLETE BLOOD COUNT"
+        },
+        {
+          "count": 129,
+          "test_name": "Hep B, C"
+        },
+        {
+          "count": 122,
+          "test_name": "Liver Function Test"
+        },
+        {
+          "count": 108,
+          "test_name": "UCE"
+        },
+        {
+          "count": 50,
+          "test_name": "Glucose Random (RBS)"
+        },
+        {
+          "count": 30,
+          "test_name": "Anti HIV (ICT)"
+        },
+        {
+          "count": 16,
+          "test_name": "HbA1c"
+        },
+        {
+          "count": 10,
+          "test_name": "Uric Acid"
+        },
+        {
+          "count": 10,
+          "test_name": "ESR"
+        },
+        {
+          "count": 9,
+          "test_name": "PT (Prothrombin Time)"
+        }
+      ],
+      "from_cache": false,
+      "computed_at": "2026-08-12T13:04:17.518727+00:00",
+      "result_ratio": {
+        "normal": 1013,
+        "abnormal": 997,
+        "unclassified": 2076
+      },
+      "category_volume": [
+        {
+          "count": 351,
+          "category": "Biochemistry"
+        },
+        {
+          "count": 236,
+          "category": "Hematology"
+        },
+        {
+          "count": 164,
+          "category": "Serology"
+        },
+        {
+          "count": 9,
+          "category": "Coagulation"
+        },
+        {
+          "count": 2,
+          "category": "SEROLOGY"
+        }
+      ],
+      "status_breakdown": [
+        {
+          "count": 426,
+          "status": "Completed"
+        },
+        {
+          "count": 336,
+          "status": "Pending"
+        }
+      ]
+    },
+    "snapshot_type": "tests"
+  },
+  {
+    "computed_at": "2026-08-12T13:04:21.961451+00:00",
+    "date_from": "2026-08-01",
+    "date_to": "2026-08-12",
+    "id": 60,
+    "payload": {
+      "kpis": {
+        "total_tests": 2471,
+        "pending_tests": 490,
+        "completed_tests": 1981,
+        "abnormal_rate_pct": 37.3,
+        "normal_parameters": 3942,
+        "abnormal_parameters": 2344
+      },
+      "date_to": "2026-08-12",
+      "has_data": true,
+      "date_from": "2026-08-01",
+      "top_tests": [
+        {
+          "count": 664,
+          "test_name": "COMPLETE BLOOD COUNT"
+        },
+        {
+          "count": 463,
+          "test_name": "Hep B, C"
+        },
+        {
+          "count": 441,
+          "test_name": "Liver Function Test"
+        },
+        {
+          "count": 372,
+          "test_name": "UCE"
+        },
+        {
+          "count": 154,
+          "test_name": "Glucose Random (RBS)"
+        },
+        {
+          "count": 72,
+          "test_name": "Anti HIV (ICT)"
+        },
+        {
+          "count": 50,
+          "test_name": "HbA1c"
+        },
+        {
+          "count": 32,
+          "test_name": "Uric Acid"
+        },
+        {
+          "count": 30,
+          "test_name": "MP-ICT"
+        },
+        {
+          "count": 26,
+          "test_name": "PT (Prothrombin Time)"
+        }
+      ],
+      "from_cache": false,
+      "computed_at": "2026-08-12T13:04:21.940520+00:00",
+      "result_ratio": {
+        "normal": 3942,
+        "abnormal": 2344,
+        "unclassified": 6790
+      },
+      "category_volume": [
+        {
+          "count": 1192,
+          "category": "Biochemistry"
+        },
+        {
+          "count": 721,
+          "category": "Hematology"
+        },
+        {
+          "count": 529,
+          "category": "Serology"
+        },
+        {
+          "count": 26,
+          "category": "Coagulation"
+        },
+        {
+          "count": 2,
+          "category": "SEROLOGY"
+        },
+        {
+          "count": 1,
+          "category": "COAGULATION"
+        }
+      ],
+      "status_breakdown": [
+        {
+          "count": 1981,
+          "status": "Completed"
+        },
+        {
+          "count": 490,
+          "status": "Pending"
+        }
+      ]
+    },
+    "snapshot_type": "tests"
   }
 ]

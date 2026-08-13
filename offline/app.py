@@ -336,14 +336,12 @@ def fast_update_results_page(request: Request):
         {"request": request, "title": "Fast Results Entry (Offline)", "name": "Offline", "hide_sidebar": True}
     )
 
-
 @app.get("/page/fast-print", include_in_schema=False)
 def fast_print_records_page(request: Request):
     return templates.TemplateResponse(
         'fast_print_records.html',
-        {"request": request, "title": "Fast Shift Print (Offline)", "name": "Offline"}
+        {"request": request, "title": "Fast Print Stream (Offline)", "name": "Offline", "hide_sidebar": True}
     )
-
 
 @app.get("/page/print-records", include_in_schema=False)
 def print_records_hub_page(request: Request):
@@ -1959,62 +1957,6 @@ def api_lab_print_payload(mr_no: str, date: str = None):
     except Exception as e:
         logger.error(f"Failed to get print payload: {e}")
         return {"status": "error", "patient": None, "tests": []}
-
-
-@app.post("/api/lab/print-batch")
-def api_lab_print_batch_payload(payload: dict):
-    try:
-        mr_nos = payload.get("mr_nos") or []
-        date = payload.get("date") or None
-        if not mr_nos:
-            return {"status": "ok", "reports": {}}
-
-        with get_db_conn() as conn:
-            cursor = conn.cursor()
-            placeholders = ",".join(["?"] * len(mr_nos))
-            cursor.execute(f"SELECT * FROM patients WHERE mr_no IN ({placeholders})", mr_nos)
-            patients_map = {str(r["mr_no"]): dict(r) for r in cursor.fetchall()}
-
-            q = f"SELECT * FROM test_results_all WHERE mr_no IN ({placeholders}) AND delete_status = 0"
-            params = list(mr_nos)
-            if date:
-                q += " AND created_at LIKE ?"
-                params.append(f"{date}%")
-            q += " ORDER BY created_at ASC"
-
-            cursor.execute(q, params)
-            tests_by_mr = {}
-            for r in cursor.fetchall():
-                td = dict(r)
-                mr = str(td.get("mr_no"))
-                if mr not in tests_by_mr:
-                    tests_by_mr[mr] = []
-                try:
-                    td["test_values"] = json.loads(td["test_values"] or "{}")
-                except Exception:
-                    td["test_values"] = {}
-                tests_by_mr[mr].append({
-                    "id": td["id"],
-                    "category": td["category"] or "General",
-                    "test_name": td["test_name"] or "Test",
-                    "test_values": td["test_values"],
-                    "remarks": td["remarks"] or "",
-                    "created_at": td["created_at"],
-                    "status": td["status"] or "Pending"
-                })
-
-            reports = {}
-            for mr in mr_nos:
-                mr_str = str(mr)
-                reports[mr] = {
-                    "patient": patients_map.get(mr_str, {}),
-                    "tests": tests_by_mr.get(mr_str, []),
-                    "group_orders": {}
-                }
-            return {"status": "ok", "reports": reports}
-    except Exception as e:
-        logger.error(f"Failed to get batch print payload: {e}")
-        return {"status": "error", "reports": {}, "message": str(e)}
 
 
 # ----------------- Print Records (Lab only in Offline) -----------------

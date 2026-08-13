@@ -1,37 +1,37 @@
 {
   "app_name": "LabFlow",
   "version": "1.0.0",
-  "manifest_generated_at": "2026-08-11T14:24:06.618405+00:00",
+  "manifest_generated_at": "2026-08-13T12:06:37.408972+00:00",
   "last_sync_type": "delta",
-  "last_sync_duration_ms": 2147,
+  "last_sync_duration_ms": 2133,
   "total_records_updated": 0,
   "locations": {
     "location_1": {
       "path": "D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary",
       "exists": true,
-      "free_mb": 123648
+      "free_mb": 123502
     },
     "location_2": {
       "path": "D:\\LabFlow_Replica_Secondary",
       "exists": true,
-      "free_mb": 123648
+      "free_mb": 123502
     }
   },
   "tables": {
     "patients": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-11T14:13:44.722048+00:00",
-      "max_id": 100652,
-      "row_count": 563,
-      "last_sync_time": "2026-08-11T14:24:04.723091+00:00",
+      "last_created_at": "2026-08-13T12:04:14.864637+00:00",
+      "max_id": 101333,
+      "row_count": 1244,
+      "last_sync_time": "2026-08-13T12:06:35.494889+00:00",
       "status": "healthy"
     },
     "test_results_all": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-11T14:13:46.049444+00:00",
-      "max_id": 170608,
-      "row_count": 1846,
-      "last_sync_time": "2026-08-11T14:24:04.936362+00:00",
+      "last_created_at": "2026-08-13T12:04:15.976179+00:00",
+      "max_id": 172542,
+      "row_count": 3779,
+      "last_sync_time": "2026-08-13T12:06:35.668878+00:00",
       "status": "healthy"
     },
     "tests": {
@@ -39,7 +39,7 @@
       "last_created_at": "2026-08-07T06:54:25.966168+00:00",
       "max_id": 252,
       "row_count": 211,
-      "last_sync_time": "2026-08-11T14:24:05.097932+00:00",
+      "last_sync_time": "2026-08-13T12:06:35.860801+00:00",
       "status": "healthy"
     },
     "test_groups": {
@@ -47,7 +47,7 @@
       "last_created_at": "2026-08-07T06:54:53.926534+00:00",
       "max_id": 112,
       "row_count": 97,
-      "last_sync_time": "2026-08-11T14:24:05.286297+00:00",
+      "last_sync_time": "2026-08-13T12:06:36.017043+00:00",
       "status": "healthy"
     },
     "shift": {
@@ -55,15 +55,15 @@
       "last_created_at": "2026-05-30T08:06:55.197257+00:00",
       "max_id": 5,
       "row_count": 5,
-      "last_sync_time": "2026-08-11T14:24:05.448612+00:00",
+      "last_sync_time": "2026-08-13T12:06:36.175638+00:00",
       "status": "healthy"
     },
     "users": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-11T09:20:12.176337+00:00",
-      "max_id": 12,
-      "row_count": 12,
-      "last_sync_time": "2026-08-11T14:24:05.625448+00:00",
+      "last_created_at": "2026-08-12T11:14:27.821478+00:00",
+      "max_id": 13,
+      "row_count": 13,
+      "last_sync_time": "2026-08-13T12:06:36.335173+00:00",
       "status": "healthy"
     },
     "remarks": {
@@ -71,7 +71,7 @@
       "last_created_at": "2026-06-01T09:07:50.136776+00:00",
       "max_id": 54,
       "row_count": 54,
-      "last_sync_time": "2026-08-11T14:24:05.806643+00:00",
+      "last_sync_time": "2026-08-13T12:06:36.503241+00:00",
       "status": "healthy"
     },
     "invoice_settings": {
@@ -79,7 +79,7 @@
       "last_created_at": null,
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-11T14:24:05.968212+00:00",
+      "last_sync_time": "2026-08-13T12:06:36.665885+00:00",
       "status": "healthy"
     },
     "print_settings": {
@@ -87,15 +87,15 @@
       "last_created_at": "2026-02-11T20:23:29.470976",
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-11T14:24:06.149293+00:00",
+      "last_sync_time": "2026-08-13T12:06:36.820102+00:00",
       "status": "healthy"
     },
     "app_settings": {
-      "last_updated_at": "2026-08-11T13:41:14.227705+00:00",
+      "last_updated_at": "2026-08-11T15:30:25.544252+00:00",
       "last_created_at": null,
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-11T14:24:06.309866+00:00",
+      "last_sync_time": "2026-08-13T12:06:36.982069+00:00",
       "status": "healthy"
     },
     "lab_metadata": {
@@ -109,9 +109,9 @@
     "analytics_snapshots": {
       "last_updated_at": null,
       "last_created_at": null,
-      "max_id": 53,
-      "row_count": 25,
-      "last_sync_time": "2026-08-11T14:24:06.483832+00:00",
+      "max_id": 60,
+      "row_count": 31,
+      "last_sync_time": "2026-08-13T12:06:37.147334+00:00",
       "status": "healthy"
     }
   },

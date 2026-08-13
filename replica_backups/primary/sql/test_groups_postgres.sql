@@ -69,7 +69,7 @@ VALUES
 ('Biochemistry', '[127]', '2026-06-04T10:49:44.268053+00:00', 'Vitamin B12', 62, TRUE),
 ('HEMATOLOGY', '[128]', '2026-06-04T10:50:12.060319+00:00', 'Reticulocyte Count', 63, TRUE),
 ('Biochemistry', '[141, 142]', '2026-06-04T10:50:12.060319+00:00', 'Typhi dot', 64, TRUE),
-('Biochemistry', '[139, 140, 132]', '2026-06-04T10:50:12.060319+00:00', 'Thyroid Profile', 65, TRUE),
+('Biochemistry', '[9, 10, 132]', '2026-06-04T10:50:12.060319+00:00', 'Thyroid Profile', 65, TRUE),
 ('Biochemistry', '[138]', '2026-06-04T10:50:12.060319+00:00', 'LDL', 66, TRUE),
 ('Biochemistry', '[135, 136, 137]', '2026-06-04T10:50:12.060319+00:00', 'Iron Profile', 67, TRUE),
 ('Biochemistry', '[130, 131, 132]', '2026-06-04T10:50:12.060319+00:00', 'Free Thyroid Profile', 69, FALSE),

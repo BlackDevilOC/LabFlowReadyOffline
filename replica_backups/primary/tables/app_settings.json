@@ -2,7 +2,7 @@
   {
     "id": 1,
     "payload": {
-      "pushed_at": "2026-08-11T13:41:14.227705Z",
+      "pushed_at": "2026-08-11T15:30:25.544252Z",
       "pushed_by": "Anonymous",
       "print_layouts": {
         "liver function test|uce": {
@@ -188,6 +188,58 @@
             "UCE",
             "Hep B, C",
             "Glucose Random (RBS)"
+          ],
+          "display_options": {
+            "show_category_title": false,
+            "show_group_test_title": false,
+            "show_single_test_title": false
+          }
+        },
+        "complete blood count|glucose random (rbs)|hep b, c|liver function test|tsh|uce": {
+          "page_map": {
+            "TSH": 0,
+            "UCE": 0,
+            "Hep B, C": 0,
+            "Liver Function Test": 0,
+            "COMPLETE BLOOD COUNT": 1,
+            "Glucose Random (RBS)": 0
+          },
+          "saved_at": "2026-08-11T15:14:23.227801Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 6,
+          "test_order": [
+            "Liver Function Test",
+            "UCE",
+            "Hep B, C",
+            "Glucose Random (RBS)",
+            "TSH",
+            "COMPLETE BLOOD COUNT"
+          ],
+          "display_options": {
+            "show_category_title": false,
+            "show_group_test_title": false,
+            "show_single_test_title": false
+          }
+        },
+        "complete blood count|glucose random (rbs)|hba1c|hep b, c|liver function test|uce": {
+          "page_map": {
+            "UCE": 0,
+            "HbA1c": 0,
+            "Hep B, C": 0,
+            "Liver Function Test": 0,
+            "COMPLETE BLOOD COUNT": 1,
+            "Glucose Random (RBS)": 0
+          },
+          "saved_at": "2026-08-11T15:20:48.959202Z",
+          "saved_by": "admin@admin.com",
+          "test_count": 6,
+          "test_order": [
+            "COMPLETE BLOOD COUNT",
+            "UCE",
+            "Liver Function Test",
+            "Hep B, C",
+            "Glucose Random (RBS)",
+            "HbA1c"
           ],
           "display_options": {
             "show_category_title": false,
@@ -705,7 +757,7 @@
       }
     },
     "setting_type": "all_app_settings",
-    "updated_at": "2026-08-11T13:41:14.227705+00:00",
+    "updated_at": "2026-08-11T15:30:25.544252+00:00",
     "updated_by": "Anonymous"
   }
 ]

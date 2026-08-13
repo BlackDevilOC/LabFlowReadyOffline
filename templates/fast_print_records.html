@@ -37,384 +37,212 @@
         --primary-light: #1e3a8a;
         --success-light: #14532d;
         --warning-light: #78350f;
+        --danger-light: #7f1d1d;
     }
 
-    .fast-print-page {
-        padding: 18px 24px;
-        max-width: 1560px;
-        margin: 0 auto;
+    /* 2-Column Stream Workspace Layout */
+    .fast-print-layout {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        height: calc(100vh - 60px);
+        background: var(--surface-subtle);
+        overflow: hidden;
     }
 
-    /* Page Header */
-    .page-header-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 16px;
-    }
-
-    .page-header-row h1 {
-        margin: 0;
-        font-size: 22px;
-        font-weight: 800;
-        color: var(--text);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .page-header-row h1 svg {
-        color: var(--primary);
-    }
-
-    .page-header-row p {
-        margin: 4px 0 0;
-        font-size: 13px;
-        color: var(--text-muted);
-    }
-
-    .hdr-buttons {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-    }
-
-    .btn-header {
-        font-size: 12px;
-        font-weight: 700;
-        padding: 7px 12px;
-        border-radius: 6px;
-        cursor: pointer;
-        text-decoration: none;
-        border: 1px solid var(--border);
-        background: var(--surface);
-        color: var(--text);
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        transition: all 0.15s;
-    }
-
-    .btn-header:hover {
-        border-color: var(--primary);
-        color: var(--primary);
-    }
-
-    /* Filter & Controls Bar */
-    .filter-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 12px 16px;
-        margin-bottom: 14px;
-        box-shadow: var(--shadow-sm);
+    /* LEFT PANEL: Queue Sidebar */
+    .queue-panel {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        height: 100%;
+        overflow: hidden;
+        z-index: 10;
     }
 
-    .filter-top-line {
+    .queue-header {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
         display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 7px;
+        flex-shrink: 0;
     }
 
-    .fl-item {
+    .queue-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .queue-title {
         display: flex;
         align-items: center;
         gap: 6px;
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--text);
+        margin: 0;
     }
 
-    .fl-label {
+    .queue-title svg {
+        color: var(--primary);
+    }
+
+    .btn-nav-back {
         font-size: 11px;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 3px 7px;
+        border-radius: 4px;
+        background: var(--surface-subtle);
+        border: 1px solid var(--border);
+        transition: all 0.15s;
+    }
+
+    .btn-nav-back:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .filter-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .filter-group.full {
+        grid-column: span 2;
+    }
+
+    .filter-label-sm {
+        font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
         color: var(--text-muted);
         letter-spacing: 0.04em;
     }
 
-    .filter-card input,
-    .filter-card select {
-        padding: 6px 10px;
+    .queue-header input,
+    .queue-header select {
+        width: 100%;
+        padding: 4px 7px;
         border: 1px solid var(--border);
-        border-radius: 6px;
-        font-size: 13px;
+        border-radius: 5px;
+        font-size: 11.5px;
         color: var(--text);
         background: var(--surface-subtle);
         outline: none;
-    }
-
-    .filter-card input:focus,
-    .filter-card select:focus {
-        border-color: var(--primary);
-    }
-
-    .search-input-wrap {
-        flex: 1;
-        min-width: 220px;
-        position: relative;
-    }
-
-    .search-input-wrap input {
-        width: 100%;
-        padding-left: 28px;
         box-sizing: border-box;
     }
 
-    .search-input-wrap svg {
+    .queue-header input:focus,
+    .queue-header select:focus {
+        border-color: var(--primary);
+    }
+
+    .token-range-wrap {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .token-range-wrap input {
+        width: 50%;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .token-range-wrap span {
+        font-size: 11px;
+        color: var(--text-muted);
+    }
+
+    .status-tabs {
+        display: flex;
+        background: var(--surface-subtle);
+        padding: 2px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+    }
+
+    .status-tab {
+        flex: 1;
+        text-align: center;
+        padding: 3px 5px;
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--text-muted);
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        transition: all 0.12s;
+    }
+
+    .status-tab.active {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .queue-search-row {
+        position: relative;
+    }
+
+    .queue-search-row input {
+        padding-left: 24px;
+    }
+
+    .queue-search-row svg {
         position: absolute;
-        left: 9px;
+        left: 7px;
         top: 50%;
         transform: translateY(-50%);
         color: var(--text-muted);
         pointer-events: none;
     }
 
-    /* Mode & Bulk Actions Toolbar */
-    .bulk-action-bar {
+    .queue-stepper-bar {
+        background: var(--surface-subtle);
+        border-bottom: 1px solid var(--border);
+        padding: 5px 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding-top: 10px;
-        border-top: 1px solid var(--border);
+        flex-shrink: 0;
     }
 
-    .selection-controls {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-    }
-
-    .btn-sel {
-        font-size: 11.5px;
+    .stepper-btn {
+        padding: 2px 7px;
+        font-size: 11px;
         font-weight: 700;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
+        border-radius: 4px;
         border: 1px solid var(--border);
-        background: var(--surface-subtle);
+        background: var(--surface);
         color: var(--text);
+        cursor: pointer;
         transition: all 0.12s;
     }
 
-    .btn-sel:hover {
-        background: var(--primary-light);
+    .stepper-btn:hover:not(:disabled) {
         border-color: var(--primary);
         color: var(--primary);
     }
 
-    .sel-count-badge {
-        font-size: 12px;
-        font-weight: 800;
-        color: var(--primary);
-        background: var(--primary-light);
-        padding: 4px 10px;
-        border-radius: 6px;
-        border: 1px solid rgba(37, 99, 235, 0.2);
-    }
-
-    .action-modes-wrap {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .mode-switch-group {
-        display: flex;
-        background: var(--surface-subtle);
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        padding: 2px;
-    }
-
-    .btn-mode {
-        padding: 5px 12px;
-        font-size: 12px;
-        font-weight: 700;
-        border: none;
-        border-radius: 4px;
-        background: transparent;
-        color: var(--text-muted);
-        cursor: pointer;
-        transition: all 0.12s;
-    }
-
-    .btn-mode.active {
-        background: var(--surface);
-        color: var(--text);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .btn-bulk-print-main {
-        background: #16a34a;
-        color: #fff;
-        border: none;
-        border-radius: 6px;
-        padding: 8px 18px;
-        font-size: 13px;
-        font-weight: 800;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
-        transition: all 0.15s;
-    }
-
-    .btn-bulk-print-main:hover:not(:disabled) {
-        background: #15803d;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
-    }
-
-    .btn-bulk-print-main:disabled {
-        opacity: 0.5;
+    .stepper-btn:disabled {
+        opacity: 0.4;
         cursor: not-allowed;
     }
 
-    /* TABLE / BATCH VIEW */
-    .table-view-container {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: var(--shadow-sm);
-    }
-
-    .table-view-container table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .table-view-container thead {
-        background: var(--surface-subtle);
-    }
-
-    .table-view-container th {
-        padding: 10px 12px;
-        font-size: 11px;
-        font-weight: 700;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        text-align: left;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .table-view-container td {
-        padding: 10px 12px;
-        font-size: 13px;
-        color: var(--text);
-        border-bottom: 1px solid var(--border);
-        vertical-align: middle;
-    }
-
-    .table-view-container tbody tr:hover {
-        background: var(--surface-subtle);
-    }
-
-    .table-view-container tbody tr.selected-row {
-        background: rgba(37, 99, 235, 0.04);
-    }
-
-    .token-pill {
-        font-size: 11.5px;
-        font-weight: 800;
-        color: #fff;
-        background: #1e293b;
-        padding: 2px 8px;
-        border-radius: 4px;
-        display: inline-block;
-    }
-
-    .mr-pill {
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--primary);
-        background: var(--primary-light);
-        padding: 2px 7px;
-        border-radius: 4px;
-    }
-
-    .status-badge-sm {
-        font-size: 11px;
-        font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 12px;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-    }
-
-    .status-badge-sm.completed {
-        background: var(--success-light);
-        color: var(--success);
-    }
-
-    .status-badge-sm.pending {
-        background: var(--warning-light);
-        color: var(--warning);
-    }
-
-    .printed-badge {
-        font-size: 10.5px;
-        font-weight: 800;
-        color: var(--success);
-        background: var(--success-light);
-        padding: 2px 6px;
-        border-radius: 4px;
-        border: 1px solid #bbf7d0;
-    }
-
-    .btn-row-print {
-        background: var(--primary);
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 11px;
-        font-size: 11.5px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.12s;
-    }
-
-    .btn-row-print:hover {
-        background: var(--primary-hover);
-    }
-
-    /* STREAM MODE (SPLIT PREVIEW) */
-    .stream-view-container {
-        display: none;
-        grid-template-columns: 360px 1fr;
-        gap: 16px;
-        height: calc(100vh - 210px);
-    }
-
-    .stream-queue-panel {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-
-    .stream-queue-header {
-        padding: 10px 12px;
-        background: var(--surface-subtle);
-        border-bottom: 1px solid var(--border);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .stream-cards-list {
+    .queue-cards-list {
         flex: 1;
         overflow-y: auto;
         padding: 8px;
@@ -423,289 +251,919 @@
         gap: 6px;
     }
 
-    .stream-card {
-        background: var(--surface-card);
-        border: 1.5px solid var(--border);
+    /* Live Patient Card */
+    .patient-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: 6px;
-        padding: 8px 10px;
+        padding: 9px 11px;
         cursor: pointer;
-        transition: all 0.12s;
+        transition: all 0.15s ease;
+        position: relative;
     }
 
-    .stream-card:hover {
-        border-color: #93c5fd;
-    }
-
-    .stream-card.active {
+    .patient-card:hover {
         border-color: var(--primary);
-        background: var(--primary-light);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .patient-card.active {
+        border-color: var(--primary);
+        background: rgba(37, 99, 235, 0.04);
         box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
     }
 
-    .stream-preview-panel {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
+    .patient-card.printed-in-session::after {
+        content: 'Printed ✓';
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 9.5px;
+        font-weight: 800;
+        background: var(--success-light);
+        color: var(--success);
+        border: 1px solid rgba(22, 163, 74, 0.3);
+        border-radius: 4px;
+        padding: 1px 5px;
     }
 
-    .stream-preview-toolbar {
-        padding: 10px 14px;
-        background: var(--surface-subtle);
-        border-bottom: 1px solid var(--border);
+    .card-top {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 3px;
     }
 
-    .stream-preview-scroll {
-        flex: 1;
-        overflow-y: auto;
-        padding: 20px;
-        background: #f1f5f9;
-        display: flex;
-        justify-content: center;
-    }
-
-    .preview-a4-sheet {
-        background: #ffffff;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-        width: 210mm;
-        min-height: 297mm;
-        padding: 20mm 15mm;
-        box-sizing: border-box;
-        color: #111;
-        font-family: Arial, sans-serif;
-    }
-
-    /* Modal / Overlay for Bulk Print Progress */
-    .print-progress-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.55);
-        z-index: 9999;
+    .token-badge {
+        font-size: 11px;
+        font-weight: 800;
+        color: #fff;
+        background: #1e293b;
+        padding: 2px 7px;
+        border-radius: 4px;
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
-        backdrop-filter: blur(2px);
+        gap: 3px;
     }
 
-    .print-progress-overlay.active {
+    .token-badge.highlight {
+        background: var(--primary);
+    }
+
+    .mr-badge-sm {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary);
+        background: rgba(37, 99, 235, 0.1);
+        padding: 1px 6px;
+        border-radius: 4px;
+    }
+
+    .card-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 2px;
+    }
+
+    .card-meta {
+        font-size: 10.5px;
+        color: var(--text-muted);
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .card-test-badges {
+        display: flex;
+        gap: 3px;
+        flex-wrap: wrap;
+        max-width: 230px;
+    }
+
+    .test-pill-sm {
+        font-size: 9.5px;
+        font-weight: 700;
+        padding: 1px 5px;
+        border-radius: 3px;
+        background: var(--surface-subtle);
+        border: 1px solid var(--border);
+        color: var(--text);
+    }
+
+    .status-dot-sm {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .status-dot-sm.completed {
+        background: var(--success);
+    }
+
+    .status-dot-sm.pending {
+        background: var(--warning);
+        animation: pulseDot 1.5s infinite;
+    }
+
+    @keyframes pulseDot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* RIGHT PANEL: Workspace & Print Preview */
+    .print-workspace-panel {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        background: var(--surface-subtle);
+    }
+
+    /* Top Action Bar */
+    .topbar {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 10px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        box-shadow: var(--shadow-sm);
+        z-index: 5;
+    }
+
+    .patient-summary-box {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .ps-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ps-label {
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    .ps-val {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--text);
+    }
+
+    .actions-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn {
+        border: 1px solid var(--border-dark);
+        background: var(--surface);
+        color: var(--text);
+        padding: 7px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.15s;
+    }
+
+    .btn:hover {
+        background: var(--surface-subtle);
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+
+    .btn.primary {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #fff;
+    }
+
+    .btn.primary:hover {
+        background: var(--primary-hover);
+        border-color: var(--primary-hover);
+        color: #fff;
+    }
+
+    .btn.success {
+        background: #16a34a;
+        border-color: #16a34a;
+        color: #fff;
+    }
+
+    .btn.success:hover {
+        background: #15803d;
+        border-color: #15803d;
+        color: #fff;
+    }
+
+    /* Print Preview Layout container */
+    .preview-wrap {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .preview-layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* Inner Tests Sidebar */
+    .tests-sidebar {
+        border-right: 1px solid var(--border);
+        background: var(--surface);
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        overflow-y: auto;
+    }
+
+    .tests-sidebar h3 {
+        margin: 0 0 8px;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text);
+        text-transform: uppercase;
+        letter-spacing: .02em;
+    }
+
+    .tests-actions {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 6px;
+        flex-wrap: wrap;
+    }
+
+    .tests-actions button {
+        border: 1px solid var(--border-dark);
+        background: var(--surface);
+        color: var(--text);
+        border-radius: 5px;
+        padding: 4px 8px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background .15s, border-color .15s;
+    }
+
+    .tests-actions button:hover {
+        background: var(--surface-subtle);
+    }
+
+    .tests-actions button.danger {
+        border-color: #fca5a5;
+        color: #b91c1c;
+        background: #fff1f2;
+    }
+
+    .tests-actions button.danger:hover {
+        background: #fee2e2;
+    }
+
+    .tests-actions button.success {
+        border-color: #86efac;
+        color: #166534;
+        background: #f0fdf4;
+    }
+
+    .tests-actions button.success:hover {
+        background: #dcfce7;
+    }
+
+    .tests-actions button.primary-dark {
+        border-color: #1e40af;
+        color: #fff;
+        background: #1d4ed8;
+    }
+
+    .tests-actions button.primary-dark:hover {
+        background: #1e40af;
+    }
+
+    /* Saved layout indicator banner */
+    .layout-saved-banner {
+        display: none;
+        align-items: center;
+        gap: 6px;
+        background: #f0fdf4;
+        border: 1px solid #86efac;
+        border-radius: 5px;
+        padding: 4px 7px;
+        margin-bottom: 6px;
+        font-size: 11px;
+        color: #166534;
+        font-weight: 700;
+    }
+
+    .layout-saved-banner.active {
         display: flex;
     }
 
-    .progress-card {
-        background: var(--surface);
-        border-radius: 10px;
-        padding: 24px;
-        width: 100%;
-        max-width: 420px;
-        text-align: center;
-        box-shadow: var(--shadow-lg);
-        border: 1px solid var(--border);
-    }
-
-    .progress-spinner {
-        width: 40px;
-        height: 40px;
-        border: 4px solid var(--border);
-        border-top-color: var(--primary);
+    .layout-saved-banner .lsb-dot {
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-        margin: 0 auto 16px;
+        background: #22c55e;
+        flex-shrink: 0;
     }
 
-    @keyframes spin {
-        to { transform: rotate(360deg); }
+    /* Page groups in the sidebar */
+    .page-group {
+        margin-bottom: 8px;
+    }
+
+    .page-group-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+        padding: 3px 4px;
+        background: var(--surface-subtle);
+        border-radius: 4px;
+        user-select: none;
+    }
+
+    .page-group-header .pg-badge {
+        background: #0f172a;
+        color: #fff;
+        border-radius: 3px;
+        padding: 1px 5px;
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    .tests-list {
+        max-height: calc(100vh - 350px);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding-right: 2px;
+    }
+
+    .test-option {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        font-size: 11.5px;
+        color: var(--text);
+        line-height: 1.3;
+        padding: 3px 4px;
+        border-radius: 4px;
+        cursor: grab;
+        user-select: none;
+        transition: background .12s;
+    }
+
+    .test-option:hover {
+        background: var(--primary-light);
+    }
+
+    .test-option.normal-item {
+        cursor: pointer;
+        padding: 4px 6px;
+    }
+
+    .test-option .drag-handle {
+        font-size: 13px;
+        color: #94a3b8;
+        flex-shrink: 0;
+        cursor: grab;
+    }
+
+    .test-option input[type=checkbox] {
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+
+    .test-option .test-label {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .tests-note {
+        margin-top: 8px;
+        font-size: 10.5px;
+        color: var(--text-muted);
+        line-height: 1.4;
+    }
+
+    /* Preview Canvas Area */
+    .preview {
+        padding: 16px;
+        overflow-y: auto;
+        background: #e2e8f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    [data-theme="dark"] .preview {
+        background: #0b0f19;
+    }
+
+    /* A4 Report Page Container */
+    .report-page {
+        box-sizing: border-box;
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        max-height: 297mm;
+        padding: 25mm 15mm;
+        background: #fff;
+        color: #111;
+        border: 1px solid #cbd5e1;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        page-break-after: always;
+        flex-shrink: 0;
+    }
+
+    .report-page.last-page {
+        page-break-after: auto;
+    }
+
+    .page-header {
+        flex: 0 0 auto;
+        overflow: hidden;
+    }
+
+    .page-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .page-footer {
+        flex: 0 0 auto;
+        overflow: hidden;
+        margin-top: auto;
+        border-top: 1px solid #000;
+        padding-top: 8px;
+        box-sizing: border-box;
+    }
+
+    .test-block {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .category-title {
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        color: #111;
+        border: none;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13.5px;
+    }
+
+    thead th {
+        text-align: left;
+        font-weight: bold;
+        padding: 8px 6px;
+        border-top: 1.5px solid #000;
+        border-bottom: 1.5px solid #000;
+        background: #fff;
+        color: #000;
+        font-size: 13px;
+    }
+
+    tbody td {
+        padding: 4px 12px;
+        vertical-align: top;
+        border: none;
+        line-height: 1.25;
+        font-size: 14px;
+    }
+
+    .test-group {
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #111;
+        padding-top: 8px;
+        padding-bottom: 2px;
+        font-size: 15px;
+    }
+
+    .result-col {
+        width: 150px;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    thead th.result-col {
+        text-align: left;
+        padding-left: 0px;
+    }
+
+    tbody td.result-col {
+        padding-left: 8px;
+    }
+
+    .range-col {
+        width: 200px;
+    }
+
+    .test-remarks {
+        padding: 2px 8px 4px;
+        color: #b91c1c;
+        font-weight: 600;
+        font-size: 9px;
+        line-height: 1.3;
+        border-top: 1px dashed #d1d5db;
+    }
+
+    .test-remarks-label {
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 10px;
+        margin-right: 4px;
+    }
+
+    .footer {
+        font-size: 10px;
+        color: #111;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .footer-left {
+        margin-top: 4px;
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    /* Print Rules */
+    @media print {
+        header.top-bar,
+        nav.sidebar,
+        .queue-panel,
+        .topbar,
+        .tests-sidebar,
+        #zero-warn-overlay {
+            display: none !important;
+        }
+
+        .app-container,
+        main.main-content,
+        .fast-print-layout,
+        .print-workspace-panel,
+        .preview-wrap,
+        .preview-layout,
+        .preview {
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            height: auto !important;
+            overflow: visible !important;
+            background: #fff !important;
+            display: block !important;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .report-page {
+            border: none !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+            page-break-after: always;
+            width: 210mm !important;
+            height: 297mm !important;
+            min-height: 297mm !important;
+            max-height: 297mm !important;
+            overflow: hidden !important;
+        }
+
+        .report-page.last-page {
+            page-break-after: auto;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="fast-print-page">
+<div class="fast-print-layout">
 
-    <!-- Header -->
-    <div class="page-header-row">
-        <div>
-            <h1>
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-                    <rect x="6" y="14" width="12" height="8"></rect>
-                </svg>
-                Fast Shift Bulk Print
-            </h1>
-            <p>One-click bulk printing & rapid sequential 1-by-1 report printing for entire shifts (80–100 patients).</p>
-        </div>
-        <div class="hdr-buttons">
-            <button type="button" class="btn-header" onclick="loadShiftRecords()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
-                </svg>
-                Refresh
-            </button>
-            <a href="{{ url_prefix }}/page/lab-print-records" class="btn-header">Standard Print Records</a>
-        </div>
-    </div>
-
-    <!-- Filter & Controls Card -->
-    <div class="filter-card">
-        <div class="filter-top-line">
-            <div class="fl-item">
-                <span class="fl-label">Date</span>
-                <input type="date" id="filter-date">
-            </div>
-
-            <div class="fl-item">
-                <span class="fl-label">Shift</span>
-                <select id="filter-shift">
-                    <option value="all">All Shifts</option>
-                </select>
-            </div>
-
-            <div class="fl-item">
-                <span class="fl-label">Token Range</span>
-                <div style="display:flex;align-items:center;gap:4px;">
-                    <input type="number" id="token-from" placeholder="From" style="width:65px;text-align:center;">
-                    <span style="font-size:11px;color:var(--text-muted);">–</span>
-                    <input type="number" id="token-to" placeholder="To" style="width:65px;text-align:center;">
-                </div>
-            </div>
-
-            <div class="fl-item">
-                <span class="fl-label">Status</span>
-                <select id="filter-status">
-                    <option value="completed">Completed Only (Ready to Print)</option>
-                    <option value="all">All Statuses</option>
-                    <option value="pending">Pending</option>
-                </select>
-            </div>
-
-            <div class="search-input-wrap">
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <input type="text" id="filter-search" placeholder="Search patient name, MR #, or Token…">
-            </div>
-        </div>
-
-        <!-- Bulk Action Toolbar -->
-        <div class="bulk-action-bar">
-            <div class="selection-controls">
-                <button type="button" class="btn-sel" id="btn-select-completed">✓ Select All Completed</button>
-                <button type="button" class="btn-sel" id="btn-select-all">Select All</button>
-                <button type="button" class="btn-sel" id="btn-clear-selection">Clear Selection</button>
-                <span class="sel-count-badge" id="sel-count-badge">Selected: 0 Patients</span>
-            </div>
-
-            <div class="action-modes-wrap">
-                <div class="mode-switch-group">
-                    <button type="button" class="btn-mode active" id="btn-mode-table">Table / Bulk Mode</button>
-                    <button type="button" class="btn-mode" id="btn-mode-stream">Stream 1-by-1 Mode</button>
-                </div>
-
-                <button type="button" class="btn-bulk-print-main" id="btn-trigger-bulk-print" disabled>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <!-- LEFT PANEL: Live Patient Queue -->
+    <aside class="queue-panel">
+        <div class="queue-header">
+            <div class="queue-top-row">
+                <h2 class="queue-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 6 2 18 2 18 9"></polyline>
                         <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
                         <rect x="6" y="14" width="12" height="8"></rect>
                     </svg>
-                    <span>ONE-CLICK BULK PRINT (0)</span>
+                    Print Stream
+                </h2>
+                <a href="{{ url_prefix }}/page/lab-print-records" class="btn-nav-back">Table View</a>
+            </div>
+
+            <!-- Filters Grid -->
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label class="filter-label-sm" for="filter-date">Date</label>
+                    <input type="date" id="filter-date">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label-sm" for="filter-shift">Shift</label>
+                    <select id="filter-shift">
+                        <option value="all">All Shifts</option>
+                    </select>
+                </div>
+                <div class="filter-group full">
+                    <label class="filter-label-sm" for="filter-category">Category</label>
+                    <select id="filter-category">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
+                <div class="filter-group full">
+                    <label class="filter-label-sm">Token Range</label>
+                    <div class="token-range-wrap">
+                        <input type="number" id="token-from" placeholder="From">
+                        <span>–</span>
+                        <input type="number" id="token-to" placeholder="To">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Tabs -->
+            <div class="status-tabs">
+                <button type="button" class="status-tab active" data-status="all">All (<span id="count-all">0</span>)</button>
+                <button type="button" class="status-tab" data-status="completed">Done (<span id="count-done">0</span>)</button>
+                <button type="button" class="status-tab" data-status="pending">Pending (<span id="count-pending">0</span>)</button>
+            </div>
+
+            <!-- Search -->
+            <div class="queue-search-row">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="queue-search" placeholder="Search name, MR, or token…">
+            </div>
+        </div>
+
+        <!-- Stepper Navigation -->
+        <div class="queue-stepper-bar">
+            <button type="button" class="stepper-btn" id="btn-prev-patient" title="Previous Patient (Alt+P)">⏮ Prev</button>
+            <span id="queue-stepper-label" style="font-size:10.5px;color:var(--text-muted);font-weight:700;">0 / 0</span>
+            <button type="button" class="stepper-btn" id="btn-next-patient" title="Next Patient (Alt+N)">Next ⏭</button>
+        </div>
+
+        <!-- Scrollable Patient Cards List -->
+        <div class="queue-cards-list" id="queue-cards-list">
+            <div style="padding:30px 10px;text-align:center;color:var(--text-muted);font-size:12px;">Loading queue…</div>
+        </div>
+    </aside>
+
+    <!-- RIGHT PANEL: Print Preview Workspace -->
+    <main class="print-workspace-panel">
+        <div class="topbar">
+            <div class="patient-summary-box">
+                <div class="ps-item">
+                    <span class="ps-label">Token</span>
+                    <span class="ps-val" id="ws-token" style="color:var(--primary);">—</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-label">MR No</span>
+                    <span class="ps-val" id="ws-mr">—</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-label">Patient Name</span>
+                    <span class="ps-val" id="ws-name">—</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-label">Age / Sex</span>
+                    <span class="ps-val" id="ws-age-gender">—</span>
+                </div>
+                <div class="ps-item">
+                    <span class="ps-label">Shift</span>
+                    <span class="ps-val" id="ws-shift">—</span>
+                </div>
+            </div>
+
+            <div class="actions-group">
+                <button class="btn" type="button" onclick="reloadActivePatientReport()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                    Refresh
+                </button>
+                <button class="btn primary" id="print-btn" type="button" onclick="triggerLabPrintWithCheck(false)" title="Print current report (Ctrl+P)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    Print
+                </button>
+                <button class="btn success" id="print-next-btn" type="button" onclick="triggerLabPrintWithCheck(true)" title="Print and automatically move to next patient (Ctrl+Shift+Enter)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+                    Print & Next
                 </button>
             </div>
-        </div>
-    </div>
 
-    <!-- MODE 1: Table / Batch View -->
-    <div class="table-view-container" id="table-view">
-        <table>
-            <thead>
-                <tr>
-                    <th style="width:40px;text-align:center;">
-                        <input type="checkbox" id="th-master-checkbox">
-                    </th>
-                    <th style="width:90px;">Token</th>
-                    <th style="width:90px;">MR No</th>
-                    <th>Patient Name</th>
-                    <th>Age / Gender</th>
-                    <th>Shift</th>
-                    <th>Tests</th>
-                    <th>Status</th>
-                    <th>Print Status</th>
-                    <th style="text-align:right;">Action</th>
-                </tr>
-            </thead>
-            <tbody id="tbody-patients">
-                <tr><td colspan="10" style="text-align:center;padding:30px;color:var(--text-muted);">Loading shift patient records…</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- MODE 2: Stream 1-by-1 View -->
-    <div class="stream-view-container" id="stream-view">
-        <div class="stream-queue-panel">
-            <div class="stream-queue-header">
-                <span>Shift Queue (<span id="stream-total-count">0</span>)</span>
-                <span style="font-size:11px;color:var(--text-muted);" id="stream-pos-label">—</span>
-            </div>
-            <div class="stream-cards-list" id="stream-cards-list"></div>
-        </div>
-
-        <div class="stream-preview-panel">
-            <div class="stream-preview-toolbar">
-                <div>
-                    <span style="font-weight:800;font-size:14px;" id="stream-active-name">—</span>
-                    <span style="font-size:12px;color:var(--text-muted);margin-left:8px;" id="stream-active-token">—</span>
-                </div>
-                <div style="display:flex;gap:8px;align-items:center;">
-                    <button type="button" class="btn-sel" id="btn-stream-prev">⏮ Prev</button>
-                    <button type="button" class="btn-bulk-print-main" id="btn-stream-print-next" style="padding:6px 14px;font-size:12px;">
-                        🖨️ Print & Next (Enter / Space)
-                    </button>
-                    <button type="button" class="btn-sel" id="btn-stream-next">Next ⏭</button>
-                </div>
-            </div>
-            <div class="stream-preview-scroll" id="stream-preview-scroll">
-                <div class="preview-a4-sheet" id="stream-a4-content">
-                    <div style="text-align:center;color:var(--text-muted);padding-top:100px;">
-                        Select a patient to preview report.
+            <!-- Zero-value warning dialog -->
+            <div id="zero-warn-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;">
+                <div style="background:#fff;border-radius:16px;padding:28px 32px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:Arial,sans-serif;">
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+                        <span style="font-size:28px;">⚠️</span>
+                        <div>
+                            <div style="font-size:16px;font-weight:800;color:#92400e;">All Values Are Zero</div>
+                            <div style="font-size:12px;color:#78350f;margin-top:2px;">Some test results have not been entered</div>
+                        </div>
+                    </div>
+                    <div style="background:#fef3c7;border:1px solid #fbbf24;border-radius:10px;padding:12px 14px;margin-bottom:18px;">
+                        <div style="font-size:12px;font-weight:700;color:#78350f;margin-bottom:6px;">Tests with all zero values:</div>
+                        <div id="zero-warn-list" style="font-size:12px;color:#92400e;line-height:1.7;"></div>
+                    </div>
+                    <div style="font-size:13px;color:#374151;margin-bottom:20px;">Zero values will be printed as <strong>blank</strong>. Do you still want to print?</div>
+                    <div style="display:flex;gap:10px;justify-content:flex-end;">
+                        <button id="zero-warn-cancel" type="button" style="padding:9px 20px;border:1px solid #d1d5db;background:#fff;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:#374151;">Cancel</button>
+                        <button id="zero-warn-proceed" type="button" style="padding:9px 20px;border:none;background:#dc2626;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;color:#fff;">Print Anyway</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="preview-wrap">
+            <div class="preview-layout">
+                <!-- Inner Tests in Print Sidebar -->
+                <aside class="tests-sidebar">
+                    <h3>Tests in Print</h3>
+
+                    <!-- Saved layout indicator banner -->
+                    <div class="layout-saved-banner" id="layout-saved-banner">
+                        <span class="lsb-dot"></span>
+                        <span id="layout-saved-text">Saved layout applied</span>
+                    </div>
+
+                    <!-- Admin Mode Dropdown container -->
+                    <div id="admin-mode-container" style="display:none; margin-bottom: 8px;">
+                        <label for="admin-layout-dropdown" style="font-size: 11px; font-weight: 700; color: #475569; display: block; margin-bottom: 3px;">
+                            ⚙ Layout Mode:
+                        </label>
+                        <select id="admin-layout-dropdown" style="width: 100%; padding: 5px 8px; font-size: 12px; font-weight: 600; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; color: #0f172a; cursor: pointer;">
+                            <option value="normal">Normal View (Standard Checkboxes)</option>
+                            <option value="editor">Edit Page Layout & Order</option>
+                        </select>
+                    </div>
+
+                    <!-- Admin Display Toggles (admin-only) -->
+                    <div id="admin-display-toggles" style="display:none; margin-bottom: 8px; background:#f1f5f9; border:1px solid #e2e8f0; border-radius:6px; padding:7px 9px;">
+                        <div style="font-size:10px; font-weight:800; color:#475569; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px;">
+                            🖨 Print Visibility
+                        </div>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;margin-bottom:4px;">
+                            <input type="checkbox" id="toggle-category-title" style="cursor:pointer;">
+                            Show category heading (e.g. HEMATOLOGY)
+                        </label>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;margin-bottom:4px;">
+                            <input type="checkbox" id="toggle-group-test-title" style="cursor:pointer;">
+                            Show combined suffix (e.g. HEP B, C <span style="color:#2563eb;">(SEROLOGY)</span>)
+                        </label>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#334155;cursor:pointer;">
+                            <input type="checkbox" id="toggle-single-test-title" style="cursor:pointer;">
+                            Show single test names (1-param)
+                        </label>
+                    </div>
+
+                    <!-- Action buttons row 1: Select / Clear -->
+                    <div class="tests-actions" id="standard-actions">
+                        <button type="button" id="select-all-tests">Select All</button>
+                        <button type="button" id="clear-all-tests">Clear All</button>
+                    </div>
+
+                    <!-- Action buttons row 2: Admin-only save/clear/auto layout -->
+                    <div class="tests-actions" id="admin-layout-actions" style="display:none;">
+                        <button type="button" id="save-layout-btn" class="success" title="Save this page arrangement as the default for this test set">💾 Save Layout</button>
+                        <button type="button" id="add-page-btn" class="primary-dark" title="Create a new empty page slot to move tests into">+ Add Page</button>
+                        <button type="button" id="clear-layout-btn" class="danger" title="Delete saved layout and use automatic pagination">✕ Clear Saved</button>
+                        <button type="button" id="auto-optimize-btn" title="Auto-fit all tests onto as few pages as possible">⚡ Auto</button>
+                    </div>
+
+                    <!-- Drag-to-page / Checkbox list -->
+                    <div class="tests-list" id="tests-list">
+                        <div style="font-size:12px;color:#64748b;">Loading tests…</div>
+                    </div>
+
+                    <div class="tests-note" id="tests-note">Check or uncheck tests to include in print. Records are never modified.</div>
+                </aside>
+
+                <!-- Live A4 Report Pages Canvas -->
+                <div class="preview" id="preview">
+                    <div style="display:flex;justify-content:center;align-items:center;min-height:240px;">
+                        <div style="font-size:13px;color:#475569;font-weight:700;">Loading preview…</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
-
-<!-- Bulk Print Progress Overlay -->
-<div class="print-progress-overlay" id="print-progress-overlay">
-    <div class="progress-card">
-        <div class="progress-spinner"></div>
-        <h3 style="margin:0 0 6px;" id="progress-title">Generating Bulk Print Job…</h3>
-        <p style="font-size:13px;color:var(--text-muted);margin:0;" id="progress-subtitle">Fetching and assembling patient reports...</p>
-    </div>
-</div>
-
-<!-- Hidden Offscreen Container for Print Engine -->
-<div id="bulk-print-hidden-slot" style="display:none;"></div>
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', path='/js/lab-print.js') }}"></script>
 <script src="{{ url_for('static', path='/js/list-pagination.js') }}"></script>
 <script>
+    // ── Global State ──────────────────────────────────────────────────────────
     let rawRecords = [];
     let groupedPatients = [];
     let visiblePatients = [];
-    let selectedMrSet = new Set();
-    let printedMrSet = new Set();
-    let activeStreamIndex = -1;
-    let activeMode = 'table';
-    let cachedPrintSettings = null;
+    let activePatientIndex = -1;
+    let activePatientMr = null;
+    let activeStatusFilter = 'all';
+    let printedInSessionSet = new Set();
+
+    let allRows = [];
+    let selectedTestNames = new Set();
+    let currentPatient = {};
+    let currentSettings = null;
+    let currentGroupOrders = {};
+    let currentPageMap = null;
+    let currentTestOrder = [];
+    let savedFingerprint = null;
+    let currentFingerprint = null;
+    let adminViewMode = localStorage.getItem('labPrintAdminViewMode') || 'normal';
+    let draggedTestName = null;
+    let extraPageSlots = 0;
+
+    let showCategoryTitle = localStorage.getItem('labPrintShowCategoryTitle') !== 'false';
+    let showGroupTestTitle = localStorage.getItem('labPrintShowGroupTestTitle') !== 'false';
+    let showSingleTestTitle = localStorage.getItem('labPrintShowSingleTestTitle') !== 'false';
 
     const getShortTestName = (name) => (window.ListPagination?.getShortTestName ? window.ListPagination.getShortTestName(name) : (name || ''));
+
+    function isAdmin() {
+        try {
+            const email = localStorage.getItem('userEmail') || '';
+            const name = localStorage.getItem('userName') || '';
+            if (email.toLowerCase() === 'admin@admin.com' || name.toLowerCase() === 'admin') return true;
+            const raw = localStorage.getItem('userPermissions');
+            if (!raw) return false;
+            const perms = JSON.parse(raw);
+            return !!(perms?.admin || perms?.manage_tests || perms?.manage_users);
+        } catch { return false; }
+    }
+
+    function getUserEmail() {
+        return localStorage.getItem('userEmail') || localStorage.getItem('userName') || 'Staff';
+    }
 
     function escapeHtml(text) {
         if (text == null) return '';
@@ -714,29 +1172,13 @@
         return div.innerHTML;
     }
 
-    function initDate() {
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('filter-date').value = today;
-    }
-
-    async function loadFilterMetadata() {
-        try {
-            const res = await fetch('/api/metadata/filters');
-            const data = await res.json();
-            if (data.status === 'Success') {
-                const shifts = data.shifts || ['morning', 'evening', 'night'];
-                document.getElementById('filter-shift').innerHTML = '<option value="all">All Shifts</option>' +
-                    shifts.map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('');
-            }
-        } catch (_) {}
-    }
-
-    async function loadPrintSettings() {
-        try {
-            const res = await fetch('/api/setting/loadprintsetting');
-            const arr = await res.json();
-            if (Array.isArray(arr) && arr.length) cachedPrintSettings = arr[0];
-        } catch (_) {}
+    function fmtRange(minV, maxV) {
+        const min = (minV === null || minV === undefined || minV === '') ? null : String(minV);
+        const max = (maxV === null || maxV === undefined || maxV === '') ? null : String(maxV);
+        if (min && max) return `${escapeHtml(min)} - ${escapeHtml(max)}`;
+        if (min && !max) return `>= ${escapeHtml(min)}`;
+        if (!min && max) return `<= ${escapeHtml(max)}`;
+        return '';
     }
 
     function parseTokenNum(tok) {
@@ -745,16 +1187,46 @@
         return isNaN(n) ? 999999 : n;
     }
 
-    // Fetch records
-    async function loadShiftRecords() {
+    // Set today's date as default
+    function initDate() {
+        const dateInput = document.getElementById('filter-date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.value = today;
+    }
+
+    // Load filter metadata
+    async function loadFilterMetadata() {
+        try {
+            const res = await fetch('/api/metadata/filters');
+            const data = await res.json();
+            if (data.status === 'Success') {
+                const shifts = data.shifts || ['morning', 'evening', 'night'];
+                const categories = data.categories || [];
+                const shiftSelect = document.getElementById('filter-shift');
+                shiftSelect.innerHTML = '<option value="all">All Shifts</option>' +
+                    shifts.map(s => `<option value="${s}">${s.toUpperCase()}</option>`).join('');
+                
+                const catSelect = document.getElementById('filter-category');
+                catSelect.innerHTML = '<option value="all">All Categories</option>' +
+                    categories.map(c => `<option value="${c}">${c}</option>`).join('');
+            }
+        } catch (e) {
+            console.error('Failed to load filter metadata:', e);
+        }
+    }
+
+    // Load Patient Queue
+    async function loadQueue() {
         const date = document.getElementById('filter-date').value;
         const shift = document.getElementById('filter-shift').value;
+        const category = document.getElementById('filter-category').value;
         const params = new URLSearchParams({ record_type: 'lab' });
         if (date) { params.set('date_from', date); params.set('date_to', date); }
         if (shift !== 'all') params.set('shift', shift);
+        if (category !== 'all') params.set('category', category);
 
-        const tbody = document.getElementById('tbody-patients');
-        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:30px;color:var(--text-muted);">Loading shift patient records…</td></tr>';
+        const listContainer = document.getElementById('queue-cards-list');
+        listContainer.innerHTML = '<div style="padding:30px 10px;text-align:center;color:var(--text-muted);font-size:12px;">Loading queue…</div>';
 
         try {
             const res = await fetch(`/api/print-records?${params.toString()}`);
@@ -765,7 +1237,7 @@
                 ? window.ListPagination.groupLabRowsByPatient(rawRecords)
                 : [];
 
-            // Sort by token ascending
+            // Sort by Token ascending
             groupedPatients.sort((a, b) => {
                 const ta = parseTokenNum(a.patient_token);
                 const tb = parseTokenNum(b.patient_token);
@@ -773,545 +1245,1185 @@
                 return (a.mr_no || 0) - (b.mr_no || 0);
             });
 
-            applyFilters();
+            applyQueueFilters();
         } catch (e) {
-            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:30px;color:var(--danger);">Error: ${e.message}</td></tr>`;
+            listContainer.innerHTML = `<div style="padding:30px 10px;text-align:center;color:var(--danger);font-size:12px;">Failed to load queue: ${e.message}</div>`;
         }
     }
 
-    function applyFilters() {
+    function applyQueueFilters() {
         const fromTok = parseInt(document.getElementById('token-from').value, 10);
         const toTok = parseInt(document.getElementById('token-to').value, 10);
-        const status = document.getElementById('filter-status').value;
-        const search = document.getElementById('filter-search').value.trim().toLowerCase();
+        const search = document.getElementById('queue-search').value.trim().toLowerCase();
 
         visiblePatients = groupedPatients.filter(p => {
             const tokNum = parseTokenNum(p.patient_token);
             if (!isNaN(fromTok) && tokNum < fromTok) return false;
             if (!isNaN(toTok) && tokNum > toTok) return false;
 
-            if (status === 'completed' && p.status !== 'Completed') return false;
-            if (status === 'pending' && p.status === 'Completed') return false;
+            if (activeStatusFilter === 'pending' && p.status === 'Completed') return false;
+            if (activeStatusFilter === 'completed' && p.status !== 'Completed') return false;
 
             if (search) {
                 const name = (p.patient_name || '').toLowerCase();
                 const mr = String(p.mr_no || '');
                 const tok = String(p.patient_token || '');
-                if (!name.includes(search) && !mr.includes(search) && !tok.includes(search)) return false;
+                if (!name.includes(search) && !mr.includes(search) && !tok.includes(search)) {
+                    return false;
+                }
             }
             return true;
         });
 
-        // Default: auto-select completed patients if none selected
-        if (selectedMrSet.size === 0) {
-            visiblePatients.filter(p => p.status === 'Completed').forEach(p => selectedMrSet.add(p.mr_no));
-        }
+        document.getElementById('count-all').textContent = groupedPatients.length;
+        document.getElementById('count-done').textContent = groupedPatients.filter(p => p.status === 'Completed').length;
+        document.getElementById('count-pending').textContent = groupedPatients.filter(p => p.status !== 'Completed').length;
 
-        renderTable();
-        renderStreamQueue();
-        updateSelectedUi();
-    }
+        renderQueueCards();
 
-    function renderTable() {
-        const tbody = document.getElementById('tbody-patients');
-        if (!visiblePatients.length) {
-            tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:30px;color:var(--text-muted);">No patients found for this shift/filter.</td></tr>';
-            return;
-        }
-
-        tbody.innerHTML = visiblePatients.map(p => {
-            const isChecked = selectedMrSet.has(p.mr_no);
-            const isPrinted = printedMrSet.has(p.mr_no);
-            const tokBadge = p.patient_token ? `<span class="token-pill">#${escapeHtml(p.patient_token)}</span>` : '—';
-            const statusBadge = p.status === 'Completed'
-                ? '<span class="status-badge-sm completed">● Completed</span>'
-                : '<span class="status-badge-sm pending">○ Pending</span>';
-            const printedBadge = isPrinted ? '<span class="printed-badge">✓ Printed</span>' : '<span style="color:var(--text-muted);font-size:11px;">Unprinted</span>';
-            const testBadges = (p.tests || []).map(t =>
-                `<span style="font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--surface-subtle);border:1px solid var(--border);">${escapeHtml(getShortTestName(t.test_name))}</span>`
-            ).join(' ');
-
-            return `
-                <tr class="${isChecked ? 'selected-row' : ''}" data-mr="${p.mr_no}">
-                    <td style="text-align:center;">
-                        <input type="checkbox" class="row-checkbox" data-mr="${p.mr_no}" ${isChecked ? 'checked' : ''}>
-                    </td>
-                    <td>${tokBadge}</td>
-                    <td><span class="mr-pill">MR ${escapeHtml(p.mr_no)}</span></td>
-                    <td style="font-weight:700;">${escapeHtml(p.patient_name || 'Unknown')}</td>
-                    <td>${escapeHtml(p.age || '—')} / ${escapeHtml(p.gender || '—')}</td>
-                    <td>${escapeHtml(p.shift || '—')}</td>
-                    <td>${testBadges || '—'}</td>
-                    <td>${statusBadge}</td>
-                    <td>${printedBadge}</td>
-                    <td style="text-align:right;">
-                        <button type="button" class="btn-row-print" onclick="printSinglePatient(${p.mr_no})">
-                            🖨️ Print
-                        </button>
-                    </td>
-                </tr>
+        if (visiblePatients.length > 0) {
+            const curIdx = visiblePatients.findIndex(p => p.mr_no === activePatientMr);
+            if (curIdx >= 0) {
+                selectPatientByIndex(curIdx, false);
+            } else {
+                selectPatientByIndex(0, true);
+            }
+        } else {
+            activePatientIndex = -1;
+            activePatientMr = null;
+            document.getElementById('queue-stepper-label').textContent = '0 / 0';
+            document.getElementById('preview').innerHTML = `
+                <div style="padding:50px;text-align:center;color:var(--text-muted);font-size:13px;">
+                    No patients match the selected filters.
+                </div>
             `;
-        }).join('');
-
-        // Wire row checkbox change
-        tbody.querySelectorAll('.row-checkbox').forEach(cb => {
-            cb.addEventListener('change', function () {
-                const mr = parseInt(this.dataset.mr, 10);
-                if (this.checked) selectedMrSet.add(mr);
-                else selectedMrSet.delete(mr);
-                this.closest('tr').classList.toggle('selected-row', this.checked);
-                updateSelectedUi();
-            });
-        });
+            clearPatientSummaryHeader();
+        }
     }
 
-    function renderStreamQueue() {
-        const container = document.getElementById('stream-cards-list');
-        document.getElementById('stream-total-count').textContent = visiblePatients.length;
+    function renderQueueCards() {
+        const container = document.getElementById('queue-cards-list');
         if (!visiblePatients.length) {
-            container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:12px;">No patients.</div>';
+            container.innerHTML = '<div style="padding:30px 10px;text-align:center;color:var(--text-muted);font-size:12px;">No patients found in this range.</div>';
             return;
         }
 
         container.innerHTML = visiblePatients.map((p, idx) => {
-            const isActive = idx === activeStreamIndex;
-            const isPrinted = printedMrSet.has(p.mr_no);
-            const tok = p.patient_token ? `Token #${p.patient_token}` : 'No Token';
+            const isActive = idx === activePatientIndex;
+            const isPrinted = printedInSessionSet.has(p.mr_no);
+            const tok = p.patient_token ? `Token #${escapeHtml(p.patient_token)}` : 'No Token';
+            const statusClass = p.status === 'Completed' ? 'completed' : 'pending';
+            const testPills = (p.tests || []).slice(0, 3).map(t => 
+                `<span class="test-pill-sm">${escapeHtml(getShortTestName(t.test_name))}</span>`
+            ).join('');
+            const extraTests = (p.tests || []).length > 3 ? `<span class="test-pill-sm">+${p.tests.length - 3}</span>` : '';
 
             return `
-                <div class="stream-card ${isActive ? 'active' : ''}" onclick="selectStreamPatient(${idx})">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
-                        <span style="font-size:11px;font-weight:800;color:var(--primary);">${tok}</span>
-                        <span style="font-size:10px;font-weight:700;color:var(--text-muted);">MR ${p.mr_no}</span>
+                <div class="patient-card ${isActive ? 'active' : ''} ${isPrinted ? 'printed-in-session' : ''}"
+                     data-index="${idx}" data-mr="${p.mr_no}" onclick="selectPatientByIndex(${idx}, true)">
+                    <div class="card-top">
+                        <span class="token-badge ${isActive ? 'highlight' : ''}">${tok}</span>
+                        <span class="mr-badge-sm">MR ${escapeHtml(p.mr_no)}</span>
                     </div>
-                    <div style="font-size:12.5px;font-weight:700;color:var(--text);">${escapeHtml(p.patient_name || 'Unknown')}</div>
-                    <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:10px;color:var(--text-muted);">
+                    <div class="card-name">${escapeHtml(p.patient_name || 'Unknown')}</div>
+                    <div class="card-meta">
+                        <span>${escapeHtml(p.age || '—')} / ${escapeHtml(p.gender || '—')}</span>
+                        <span>•</span>
                         <span>${escapeHtml(p.shift || '—')}</span>
-                        ${isPrinted ? '<span class="printed-badge">✓ Printed</span>' : ''}
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-test-badges">${testPills}${extraTests}</div>
+                        <span class="status-dot-sm ${statusClass}" title="${p.status || 'Pending'}"></span>
                     </div>
                 </div>
             `;
         }).join('');
-
-        if (activeStreamIndex >= 0 && activeStreamIndex < visiblePatients.length) {
-            selectStreamPatient(activeStreamIndex, false);
-        } else if (visiblePatients.length > 0) {
-            selectStreamPatient(0, true);
-        }
     }
 
-    async function selectStreamPatient(index, loadPreview = true) {
+    function selectPatientByIndex(index, loadData = true) {
         if (index < 0 || index >= visiblePatients.length) return;
-        activeStreamIndex = index;
-        const p = visiblePatients[index];
+        activePatientIndex = index;
+        const patient = visiblePatients[index];
+        activePatientMr = patient.mr_no;
 
-        document.querySelectorAll('.stream-card').forEach((c, idx) => {
-            c.classList.toggle('active', idx === index);
+        document.querySelectorAll('.patient-card').forEach((card, idx) => {
+            card.classList.toggle('active', idx === index);
+            const badge = card.querySelector('.token-badge');
+            if (badge) badge.classList.toggle('highlight', idx === index);
         });
 
-        document.getElementById('stream-pos-label').textContent = `${index + 1} of ${visiblePatients.length}`;
-        document.getElementById('stream-active-name').textContent = p.patient_name || 'Unknown';
-        document.getElementById('stream-active-token').textContent = p.patient_token ? `Token #${p.patient_token}` : '';
-        document.getElementById('btn-stream-prev').disabled = (index === 0);
-        document.getElementById('btn-stream-next').disabled = (index === visiblePatients.length - 1);
+        const stepperLabel = document.getElementById('queue-stepper-label');
+        stepperLabel.textContent = `Patient ${index + 1} of ${visiblePatients.length} (Tok #${patient.patient_token || '—'})`;
+        document.getElementById('btn-prev-patient').disabled = (index === 0);
+        document.getElementById('btn-next-patient').disabled = (index === visiblePatients.length - 1);
 
-        if (loadPreview) {
-            await renderStreamReportPreview(p.mr_no);
+        applyPatientSummaryHeader(patient);
+
+        if (loadData) {
+            loadPatientPrintReport(patient.mr_no);
         }
     }
 
-    async function renderStreamReportPreview(mrNo) {
-        const previewSlot = document.getElementById('stream-a4-content');
-        previewSlot.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding-top:100px;">Loading report preview…</div>';
-
-        try {
-            const date = document.getElementById('filter-date').value;
-            const url = `/api/lab/print/${mrNo}${date ? `?date=${encodeURIComponent(date)}` : ''}`;
-            const res = await fetch(url);
-            const data = await res.json();
-            if (data.status === 'ok' && data.patient) {
-                previewSlot.innerHTML = buildSinglePatientHtml(data.patient, data.tests || [], cachedPrintSettings);
-            } else {
-                previewSlot.innerHTML = '<div style="text-align:center;color:var(--danger);padding-top:100px;">No report data found.</div>';
-            }
-        } catch (e) {
-            previewSlot.innerHTML = `<div style="text-align:center;color:var(--danger);padding-top:100px;">Error: ${e.message}</div>`;
-        }
+    function applyPatientSummaryHeader(p) {
+        document.getElementById('ws-token').textContent = p.patient_token ? `#${p.patient_token}` : '—';
+        document.getElementById('ws-mr').textContent = p.mr_no ?? '—';
+        document.getElementById('ws-name').textContent = p.patient_name || 'Unknown';
+        document.getElementById('ws-age-gender').textContent = `${p.age || '—'} / ${p.gender || '—'}`;
+        document.getElementById('ws-shift').textContent = (p.shift || '—').toUpperCase();
     }
 
-    function updateSelectedUi() {
-        const count = selectedMrSet.size;
-        document.getElementById('sel-count-badge').textContent = `Selected: ${count} Patients`;
-        const btnBulk = document.getElementById('btn-trigger-bulk-print');
-        btnBulk.disabled = (count === 0);
-        btnBulk.querySelector('span').textContent = `ONE-CLICK BULK PRINT (${count})`;
-
-        const masterCb = document.getElementById('th-master-checkbox');
-        if (visiblePatients.length > 0 && count === visiblePatients.length) {
-            masterCb.checked = true;
-            masterCb.indeterminate = false;
-        } else if (count > 0) {
-            masterCb.checked = false;
-            masterCb.indeterminate = true;
-        } else {
-            masterCb.checked = false;
-            masterCb.indeterminate = false;
-        }
+    function clearPatientSummaryHeader() {
+        document.getElementById('ws-token').textContent = '—';
+        document.getElementById('ws-mr').textContent = '—';
+        document.getElementById('ws-name').textContent = '—';
+        document.getElementById('ws-age-gender').textContent = '—';
+        document.getElementById('ws-shift').textContent = '—';
     }
 
-    // HTML Generator for a single patient report in print format
-    function buildSinglePatientHtml(patient, tests, settings) {
-        const pName = `${patient.salutation ? patient.salutation + ' ' : ''}${patient.patient_name || 'Unknown'}`.trim();
-        const pToken = patient.patient_token || '—';
-        const pMr = patient.mr_no || '—';
-        const pShift = (patient.shift || '—').toUpperCase();
-        const pAgeSex = `${patient.age ? patient.age + ' Y / ' : ''}${patient.gender || '—'}`;
-        const pRel = `${patient.relation || 'Relation'}: ${patient.relation_name || '—'}`;
-        const reportDate = document.getElementById('filter-date').value || new Date().toISOString().split('T')[0];
+    function reloadActivePatientReport() {
+        if (activePatientMr) loadPatientPrintReport(activePatientMr);
+    }
 
-        // Group tests by category
-        const categories = {};
-        tests.forEach(t => {
-            const cat = t.category || 'General';
-            if (!categories[cat]) categories[cat] = [];
-            categories[cat].push(t);
-        });
-
-        let testTablesHtml = '';
-        for (const [catName, catTests] of Object.entries(categories)) {
-            testTablesHtml += `
-                <div style="margin-top: 14px; border-top: 2px solid #111; padding-top: 6px;">
-                    <div style="font-size: 15px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.05em;">
-                        ${escapeHtml(catName)}
-                    </div>
-                    <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
-                        <thead>
-                            <tr style="border-bottom: 1px solid #111;">
-                                <th style="text-align: left; padding: 4px 2px; font-size: 11.5px; text-transform: uppercase;">Test Parameter</th>
-                                <th style="text-align: left; padding: 4px 8px; font-size: 11.5px; text-transform: uppercase; width: 35%;">Result</th>
-                                <th style="text-align: left; padding: 4px 2px; font-size: 11.5px; text-transform: uppercase; width: 30%;">Normal Range</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-            `;
-
-            catTests.forEach(t => {
-                const isGroup = Object.keys(t.test_values || {}).length > 1;
-                if (isGroup) {
-                    testTablesHtml += `
-                        <tr>
-                            <td colspan="3" style="font-weight: 800; padding: 6px 2px 2px; font-size: 12px; text-transform: uppercase; color: #1e293b;">
-                                ${escapeHtml(t.test_name)}
-                            </td>
-                        </tr>
-                    `;
-                }
-
-                const tVals = t.test_values || {};
-                for (const [k, p] of Object.entries(tVals)) {
-                    const pName = p.name || k;
-                    const val = (p.value === 0 || p.value === '0') ? '0' : (p.value || '-');
-                    const unit = p.unit ? ` ${p.unit}` : '';
-                    let rng = '—';
-                    if (p.normal_min !== undefined && p.normal_min !== null && p.normal_max !== undefined && p.normal_max !== null) {
-                        rng = `${p.normal_min} - ${p.normal_max}`;
-                    } else if (p.normal_range) {
-                        rng = p.normal_range;
-                    }
-                    if (p.unit) rng += ` ${p.unit}`;
-
-                    testTablesHtml += `
-                        <tr style="border-bottom: 1px solid #e5e7eb;">
-                            <td style="padding: 3px 2px 3px ${isGroup ? '14px' : '2px'}; font-weight: ${isGroup ? '500' : '700'};">
-                                ${escapeHtml(pName)}
-                            </td>
-                            <td style="padding: 3px 8px; font-weight: 800; color: #000;">
-                                ${escapeHtml(val)}${escapeHtml(unit)}
-                            </td>
-                            <td style="padding: 3px 2px; color: #475569; font-size: 11.5px;">
-                                ${escapeHtml(rng)}
-                            </td>
-                        </tr>
-                    `;
-                }
-
-                if (t.remarks) {
-                    testTablesHtml += `
-                        <tr>
-                            <td colspan="3" style="padding: 3px 2px 6px; font-size: 11px; color: #334155; font-style: italic;">
-                                <strong>Remarks:</strong> ${escapeHtml(t.remarks)}
-                            </td>
-                        </tr>
-                    `;
-                }
-            });
-
-            testTablesHtml += `</tbody></table></div>`;
-        }
-
-        return `
-            <div class="report-a4-page" style="page-break-after: always; width: 210mm; min-height: 297mm; padding: 20mm 15mm; box-sizing: border-box; background: #fff; color: #111; font-family: Arial, sans-serif;">
-                <!-- Header Box -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
-                    <div style="border: 1.5px solid #222; border-radius: 10px; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; font-size: 12px;">
-                        <div><span style="width: 120px; display: inline-block; font-weight: 700; color: #475569;">Patient MR # :</span> <strong>${escapeHtml(pMr)}</strong></div>
-                        <div><span style="width: 120px; display: inline-block; font-weight: 700; color: #475569;">Patient Name :</span> <strong>${escapeHtml(pName)}</strong></div>
-                        <div><span style="width: 120px; display: inline-block; font-weight: 700; color: #475569;">Report Date :</span> ${escapeHtml(reportDate)}</div>
-                        <div><span style="width: 120px; display: inline-block; font-weight: 700; color: #475569;">SHIFT :</span> <strong>${escapeHtml(pShift)}</strong></div>
-                    </div>
-                    <div style="border: 1.5px solid #222; border-radius: 10px; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; font-size: 12px;">
-                        <div><span style="width: 120px; display: inline-block; font-weight: 700; color: #475569;">Age / Gender :</span> ${escapeHtml(pAgeSex)}</div>
-                        <div><span style="width: 120px; display: inline-block; font-weight: 700; color: #475569;">${escapeHtml(pRel)}</span></div>
-                        <div><span style="width: 120px; display: inline-block; font-weight: 700; color: #475569;">TOKEN NO :</span> <strong style="font-size: 13px; color: #2563eb;">${escapeHtml(pToken)}</strong></div>
-                        <div><span style="width: 120px; display: inline-block; font-weight: 700; color: #475569;">Printed At :</span> ${new Date().toLocaleTimeString()}</div>
-                    </div>
-                </div>
-
-                <!-- Test Tables -->
-                <div>${testTablesHtml}</div>
-
-                <!-- Footer -->
-                <div style="margin-top: 24px; padding-top: 8px; border-top: 1px solid #cbd5e1; display: flex; justify-content: space-between; font-size: 10px; color: #64748b; text-transform: uppercase;">
-                    <span>${escapeHtml(settings?.footer_line1 || 'ELECTRONICALLY VERIFIED REPORT, SIGNATURE(S) NOT REQUIRED')}</span>
-                    <span>${escapeHtml(settings?.footer_line3 || 'GMMMC PATHOLOGY LAB SUKKUR')}</span>
-                </div>
+    // ── Print Report Rendering Engine (Exact Copy of lab_test_print_preview) ───
+    async function loadPatientPrintReport(mrNo) {
+        document.getElementById('preview').innerHTML = `
+            <div style="display:flex;justify-content:center;align-items:center;min-height:240px;">
+                <div style="font-size:13px;color:#475569;font-weight:700;">Loading report preview…</div>
             </div>
         `;
-    }
-
-    // Trigger ONE-CLICK Bulk Print
-    async function triggerOneClickBulkPrint() {
-        const mrList = Array.from(selectedMrSet);
-        if (!mrList.length) return;
-
-        const overlay = document.getElementById('print-progress-overlay');
-        const progressTitle = document.getElementById('progress-title');
-        const progressSubtitle = document.getElementById('progress-subtitle');
-
-        overlay.classList.add('active');
-        progressTitle.textContent = `Preparing ${mrList.length} Patient Reports…`;
-        progressSubtitle.textContent = 'Fetching batch data from database...';
 
         try {
-            const date = document.getElementById('filter-date').value;
+            const [payloadRes, settingsRes] = await Promise.all([
+                fetch(`/api/lab/print/${mrNo}`),
+                fetch('/api/setting/loadprintsetting')
+            ]);
 
-            // Fetch batch payload
-            const res = await fetch('/api/lab/print-batch', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mr_nos: mrList, date: date })
-            });
-            const data = await res.json();
-            const reportsMap = data.reports || {};
+            const payload = await payloadRes.json();
+            const settingsArr = await settingsRes.json();
+            const settings = Array.isArray(settingsArr) && settingsArr.length ? settingsArr[0] : null;
 
-            progressSubtitle.textContent = 'Assembling continuous multi-page document...';
+            if (settings) applyPrintSettings(settings);
 
-            let combinedHtml = '';
-            mrList.forEach(mr => {
-                const rep = reportsMap[mr] || reportsMap[String(mr)];
-                if (rep && rep.patient) {
-                    combinedHtml += buildSinglePatientHtml(rep.patient, rep.tests || [], cachedPrintSettings);
-                    printedMrSet.add(mr);
-                }
-            });
-
-            if (!combinedHtml) {
-                alert('No printable report data found for selected patients.');
-                overlay.classList.remove('active');
+            if (!payload || payload.status !== 'ok') {
+                document.getElementById('preview').innerHTML = `<div style="padding:30px;text-align:center;color:#b91c1c;font-weight:800;">Failed to load report data.</div>`;
                 return;
             }
 
-            // Print via hidden iframe
-            printContinuousIframe(combinedHtml);
+            currentPatient = payload.patient || {};
+            allRows = payload.tests || [];
+            currentSettings = settings;
+            currentGroupOrders = payload.group_orders || {};
 
-            // Audit log
-            mrList.forEach(mr => {
-                logPrintAudit(mr);
-            });
+            currentFingerprint = computeFingerprint(allRows);
+            currentPageMap = null;
+            currentTestOrder = [];
+            savedFingerprint = null;
+            extraPageSlots = 0;
 
-            renderTable();
-            renderStreamQueue();
+            selectedTestNames = new Set();
+            for (const r of allRows) {
+                const name = (r.test_name || '').trim();
+                if (!name || name.startsWith('#') || r.status === false) continue;
+                selectedTestNames.add(name);
+            }
+
+            // Try loading saved layout for this fingerprint
+            if (currentFingerprint) {
+                try {
+                    const lr = await fetch(`/api/lab/print-layout?fingerprint=${encodeURIComponent(currentFingerprint)}`);
+                    const ld = await lr.json();
+                    if (ld.status === 'ok' && ld.layout?.page_map && Object.keys(ld.layout.page_map).length) {
+                        currentPageMap = ld.layout.page_map;
+                        if (Array.isArray(ld.layout.test_order) && ld.layout.test_order.length) {
+                            currentTestOrder = ld.layout.test_order;
+                        }
+                        const opts = ld.layout.display_options;
+                        if (opts) {
+                            if (opts.show_category_title !== undefined) {
+                                showCategoryTitle = Boolean(opts.show_category_title);
+                            }
+                            if (opts.show_group_test_title !== undefined) {
+                                showGroupTestTitle = Boolean(opts.show_group_test_title);
+                            }
+                            if (opts.show_single_test_title !== undefined) {
+                                showSingleTestTitle = Boolean(opts.show_single_test_title);
+                            }
+                        }
+                        savedFingerprint = currentFingerprint;
+                        const savedBy = ld.layout.saved_by || '';
+                        updateSavedBanner(true, savedBy ? `Saved layout by ${savedBy}` : 'Saved layout applied');
+                    } else {
+                        updateSavedBanner(false);
+                    }
+                } catch (_) { updateSavedBanner(false); }
+            } else {
+                updateSavedBanner(false);
+            }
+
+            renderCurrent();
         } catch (e) {
-            alert('Error during bulk print: ' + e.message);
-        } finally {
-            setTimeout(() => { overlay.classList.remove('active'); }, 1000);
+            document.getElementById('preview').innerHTML = `<div style="padding:30px;text-align:center;color:#b91c1c;font-weight:800;">Error: ${e.message}</div>`;
         }
     }
 
-    function printContinuousIframe(htmlContent) {
-        let iframe = document.getElementById('bulk-print-iframe');
-        if (iframe) iframe.remove();
-
-        iframe = document.createElement('iframe');
-        iframe.id = 'bulk-print-iframe';
-        iframe.style.cssText = 'position:fixed;left:-9999px;top:0;width:210mm;height:297mm;border:none;';
-        document.body.appendChild(iframe);
-
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.open();
-        doc.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <title>Shift Bulk Print Reports</title>
-                <style>
-                    @page { size: A4 portrait; margin: 0; }
-                    html, body { margin: 0; padding: 0; background: #fff; }
-                    .report-a4-page {
-                        page-break-after: always !important;
-                        box-sizing: border-box;
-                        width: 210mm;
-                        height: 297mm;
-                        max-height: 297mm;
-                        overflow: hidden;
-                    }
-                    .report-a4-page:last-child {
-                        page-break-after: auto !important;
-                    }
-                </style>
-            </head>
-            <body>${htmlContent}</body>
-            </html>
-        `);
-        doc.close();
-
-        const win = iframe.contentWindow;
-        win.focus();
-        setTimeout(() => {
-            win.print();
-        }, 500);
+    function computeFingerprint(rows) {
+        const names = [...new Set((rows || []).map(r => (r.test_name || '').trim()).filter(Boolean))];
+        return window.LabPrintLayout?.buildFingerprint(names) || names.sort().join('|');
     }
 
-    function printSinglePatient(mrNo) {
-        const date = document.getElementById('filter-date').value;
-        window.open(`/page/lab-test-print/${mrNo}${date ? `?date=${encodeURIComponent(date)}` : ''}`, '_blank');
-        printedMrSet.add(mrNo);
-        renderTable();
+    function derivePageMapFromPages(pages) {
+        const map = {};
+        (pages || []).forEach((page, pageIdx) => {
+            (page.blocks || []).forEach(b => { map[b.name] = pageIdx; });
+        });
+        return map;
     }
 
-    function logPrintAudit(mrNo) {
+    function ensureTestOrder(rows, pages) {
+        if (!currentTestOrder || !currentTestOrder.length) {
+            const order = [];
+            (pages || []).forEach(page => {
+                (page.blocks || []).forEach(b => {
+                    if (b.name && !order.includes(b.name)) order.push(b.name);
+                });
+            });
+            for (const r of rows || []) {
+                const name = (r.test_name || '').trim();
+                if (name && !order.includes(name)) order.push(name);
+            }
+            currentTestOrder = order;
+        }
+    }
+
+    function removePageSlot(targetPageIdx) {
+        if (!currentPageMap) currentPageMap = {};
+        const newMap = {};
+        for (const [tName, pIdx] of Object.entries(currentPageMap)) {
+            const pageNum = Number(pIdx);
+            if (pageNum === targetPageIdx) {
+                selectedTestNames.delete(tName);
+            } else if (pageNum > targetPageIdx) {
+                newMap[tName] = pageNum - 1;
+            } else {
+                newMap[tName] = pageNum;
+            }
+        }
+        currentPageMap = newMap;
+        if (extraPageSlots > 0) extraPageSlots--;
+        rebuildFromCurrentMap();
+    }
+
+    function clearDragHighlights() {
+        document.querySelectorAll('.drag-over-above, .drag-over-below, .drag-over').forEach(el => {
+            el.classList.remove('drag-over-above', 'drag-over-below', 'drag-over');
+        });
+    }
+
+    function moveTestInOrder(testName, targetTestName, dropAfter, targetPageIdx) {
+        if (!currentPageMap) currentPageMap = {};
+        if (targetPageIdx === 'off') {
+            selectedTestNames.delete(testName);
+        } else {
+            selectedTestNames.add(testName);
+            currentPageMap[testName] = Number(targetPageIdx);
+        }
+
+        const oldIdx = currentTestOrder.indexOf(testName);
+        if (oldIdx !== -1) currentTestOrder.splice(oldIdx, 1);
+
+        if (targetTestName) {
+            const targetIdx = currentTestOrder.indexOf(targetTestName);
+            if (targetIdx !== -1) {
+                const insertIdx = dropAfter ? targetIdx + 1 : targetIdx;
+                currentTestOrder.splice(insertIdx, 0, testName);
+            } else {
+                currentTestOrder.push(testName);
+            }
+        } else {
+            let lastIdx = -1;
+            currentTestOrder.forEach((t, idx) => {
+                if (currentPageMap[t] === Number(targetPageIdx)) lastIdx = idx;
+            });
+            if (lastIdx !== -1) {
+                currentTestOrder.splice(lastIdx + 1, 0, testName);
+            } else {
+                currentTestOrder.push(testName);
+            }
+        }
+        rebuildFromCurrentMap();
+    }
+
+    function attachItemDragEvents(item) {
+        item.addEventListener('dragstart', e => {
+            draggedTestName = item.dataset.testName;
+            e.dataTransfer.setData('text/plain', item.dataset.testName);
+            item.classList.add('dragging');
+        });
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            draggedTestName = null;
+            clearDragHighlights();
+        });
+        item.addEventListener('dragover', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            clearDragHighlights();
+            const rect = item.getBoundingClientRect();
+            const dropAfter = e.clientY > (rect.top + rect.height / 2);
+            if (dropAfter) item.classList.add('drag-over-below');
+            else item.classList.add('drag-over-above');
+        });
+        item.addEventListener('dragleave', e => {
+            e.stopPropagation();
+            item.classList.remove('drag-over-above', 'drag-over-below');
+        });
+        item.addEventListener('drop', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            clearDragHighlights();
+            const testName = e.dataTransfer.getData('text/plain') || draggedTestName;
+            if (!testName) return;
+            const targetTestName = item.dataset.testName;
+            const targetPageIdx = item.dataset.pageIdx;
+            const rect = item.getBoundingClientRect();
+            const dropAfter = e.clientY > (rect.top + rect.height / 2);
+            moveTestInOrder(testName, targetTestName, dropAfter, targetPageIdx);
+        });
+    }
+
+    function attachGroupDropEvents(groupEl) {
+        groupEl.addEventListener('dragover', e => {
+            e.preventDefault();
+            if (!e.target.closest('.test-option')) {
+                clearDragHighlights();
+                groupEl.classList.add('drag-over');
+            }
+        });
+        groupEl.addEventListener('dragleave', e => {
+            if (!groupEl.contains(e.relatedTarget)) groupEl.classList.remove('drag-over');
+        });
+        groupEl.addEventListener('drop', e => {
+            e.preventDefault();
+            groupEl.classList.remove('drag-over');
+            clearDragHighlights();
+            const testName = e.dataTransfer.getData('text/plain') || draggedTestName;
+            if (!testName) return;
+            const targetPage = groupEl.dataset.page;
+            moveTestInOrder(testName, null, false, targetPage);
+        });
+    }
+
+    function uniqueSortedTests(rows) {
+        const set = new Set();
+        for (const r of rows || []) {
+            const name = (r.test_name || '').trim();
+            if (name) set.add(name);
+        }
+        return Array.from(set).sort((a, b) => a.localeCompare(b));
+    }
+
+    function buildSidebar(rows, pages) {
+        const list = document.getElementById('tests-list');
+        const allTestNames = uniqueSortedTests(rows);
+        if (!allTestNames.length) {
+            list.innerHTML = `<div style="font-size:12px;color:#64748b;">No tests available.</div>`;
+            return;
+        }
+
+        ensureTestOrder(rows, pages);
+
+        const admin = isAdmin();
+        const adminContainer = document.getElementById('admin-mode-container');
+        const adminActions = document.getElementById('admin-layout-actions');
+        const dropdown = document.getElementById('admin-layout-dropdown');
+        const noteEl = document.getElementById('tests-note');
+
+        if (!admin) {
+            adminContainer.style.display = 'none';
+            adminActions.style.display = 'none';
+            document.getElementById('admin-display-toggles').style.display = 'none';
+            adminViewMode = 'normal';
+        } else {
+            adminContainer.style.display = 'block';
+            dropdown.value = adminViewMode;
+            if (adminViewMode === 'editor') {
+                adminActions.style.display = 'flex';
+                if (noteEl) noteEl.textContent = 'Drag tests between pages or drop above/below each other to reorder.';
+                const togglesPanel = document.getElementById('admin-display-toggles');
+                togglesPanel.style.display = 'block';
+                document.getElementById('toggle-category-title').checked = showCategoryTitle;
+                document.getElementById('toggle-group-test-title').checked = showGroupTestTitle;
+                document.getElementById('toggle-single-test-title').checked = showSingleTestTitle;
+            } else {
+                adminActions.style.display = 'none';
+                document.getElementById('admin-display-toggles').style.display = 'none';
+                if (noteEl) noteEl.textContent = 'Check or uncheck tests to include in print.';
+            }
+        }
+
+        list.innerHTML = '';
+
+        if (adminViewMode === 'normal' || !admin) {
+            allTestNames.forEach(name => {
+                const isChecked = selectedTestNames.has(name);
+                const item = document.createElement('label');
+                item.className = 'test-option normal-item';
+                item.innerHTML = `<input type="checkbox" class="test-checkbox" value="${escapeHtml(name)}" ${isChecked ? 'checked' : ''}><span class="test-label" title="${escapeHtml(name)}">${escapeHtml(name)}</span>`;
+                list.appendChild(item);
+            });
+
+            list.querySelectorAll('.test-checkbox').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    if (cb.checked) selectedTestNames.add(cb.value);
+                    else selectedTestNames.delete(cb.value);
+                    rebuildFromCurrentMap();
+                });
+            });
+            return;
+        }
+
+        // Editor View (Admin only)
+        const pageGroups = {};
+        const assignedTests = new Set();
+        (pages || []).forEach((page, pgIdx) => {
+            (page.blocks || []).forEach(b => {
+                if (!pageGroups[pgIdx]) pageGroups[pgIdx] = [];
+                pageGroups[pgIdx].push(b.name);
+                assignedTests.add(b.name);
+            });
+        });
+        const unprinted = allTestNames.filter(n => !assignedTests.has(n) && !selectedTestNames.has(n));
+
+        const renderedPageCount = (pages || []).length;
+        const mapPageCount = currentPageMap ? (Math.max(-1, ...Object.values(currentPageMap).map(Number).filter(n => !isNaN(n))) + 1) : 0;
+        const totalPageCount = Math.max(renderedPageCount, mapPageCount, extraPageSlots, 1);
+
+        for (let i = 0; i < totalPageCount; i++) {
+            if (!pageGroups[i]) pageGroups[i] = [];
+        }
+
+        Object.keys(pageGroups).map(Number).sort((a, b) => a - b).forEach(pgIdx => {
+            const groupEl = document.createElement('div');
+            groupEl.className = 'page-group';
+            groupEl.dataset.page = pgIdx;
+
+            const removeBtnHtml = (totalPageCount > 1)
+                ? `<button type="button" class="remove-page-btn" data-page="${pgIdx}" title="Remove Page ${pgIdx + 1}" style="border:none;background:none;color:#ef4444;font-weight:bold;cursor:pointer;font-size:12px;padding:0 4px;">✕</button>`
+                : '';
+
+            groupEl.innerHTML = `<div class="page-group-header" style="display:flex;justify-content:space-between;align-items:center;"><div><span class="pg-badge">P${pgIdx + 1}</span> Page ${pgIdx + 1}</div>${removeBtnHtml}</div>`;
+
+            const testsInPage = pageGroups[pgIdx] || [];
+            if (!testsInPage.length) {
+                const emptySlot = document.createElement('div');
+                emptySlot.style.cssText = 'font-size:11px;color:#94a3b8;padding:6px 8px;font-style:italic;text-align:center;border:1px dashed #cbd5e1;border-radius:4px;margin:2px 0;';
+                emptySlot.textContent = 'Empty page (drag tests here)';
+                groupEl.appendChild(emptySlot);
+            } else {
+                testsInPage.forEach(name => {
+                    const isChecked = selectedTestNames.has(name);
+                    const item = document.createElement('label');
+                    item.className = 'test-option';
+                    item.draggable = true;
+                    item.dataset.testName = name;
+                    item.dataset.pageIdx = pgIdx;
+                    item.innerHTML = `<span class="drag-handle" title="Drag to move">⠿</span><input type="checkbox" class="test-checkbox" value="${escapeHtml(name)}" ${isChecked ? 'checked' : ''}><span class="test-label" title="${escapeHtml(name)}">${escapeHtml(name)}</span>`;
+                    groupEl.appendChild(item);
+                    attachItemDragEvents(item);
+                });
+            }
+
+            list.appendChild(groupEl);
+            attachGroupDropEvents(groupEl);
+        });
+
+        list.querySelectorAll('.remove-page-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                removePageSlot(Number(btn.dataset.page));
+            });
+        });
+
+        if (unprinted.length) {
+            const groupEl = document.createElement('div');
+            groupEl.className = 'page-group';
+            groupEl.dataset.page = 'off';
+            groupEl.innerHTML = `<div class="page-group-header" style="background:#fef9c3;color:#92400e;">Excluded from Print</div>`;
+            unprinted.forEach(name => {
+                const item = document.createElement('label');
+                item.className = 'test-option';
+                item.draggable = true;
+                item.dataset.testName = name;
+                item.dataset.pageIdx = 'off';
+                item.innerHTML = `<span class="drag-handle">⠿</span><input type="checkbox" class="test-checkbox" value="${escapeHtml(name)}"><span class="test-label" title="${escapeHtml(name)}">${escapeHtml(name)}</span>`;
+                groupEl.appendChild(item);
+                attachItemDragEvents(item);
+            });
+            list.appendChild(groupEl);
+            attachGroupDropEvents(groupEl);
+        }
+
+        list.querySelectorAll('.test-checkbox').forEach(cb => {
+            cb.addEventListener('change', () => {
+                if (cb.checked) selectedTestNames.add(cb.value);
+                else selectedTestNames.delete(cb.value);
+                rebuildFromCurrentMap();
+            });
+        });
+    }
+
+    function rebuildFromCurrentMap() {
+        const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+        const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+        if (pages) {
+            currentPageMap = derivePageMapFromPages(pages);
+            buildSidebar(allRows, pages);
+        }
+    }
+
+    function renderCurrent() {
+        const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+        const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+        if (pages) buildSidebar(allRows, pages);
+    }
+
+    function updateSavedBanner(show, label) {
+        const banner = document.getElementById('layout-saved-banner');
+        const txt = document.getElementById('layout-saved-text');
+        if (show) {
+            banner.classList.add('active');
+            txt.textContent = label || 'Saved layout applied';
+        } else {
+            banner.classList.remove('active');
+        }
+    }
+
+    function toParamList(testValues, testName) {
+        if (!testValues || typeof testValues !== 'object') return [];
+        const values = Object.values(testValues).filter(v => v && typeof v === 'object');
+        const targetOrder = currentGroupOrders && (currentGroupOrders[testName] || currentGroupOrders[(testName || '').trim()]);
+        if (targetOrder && Array.isArray(targetOrder) && targetOrder.length > 0) {
+            const orderMap = {};
+            targetOrder.forEach((name, idx) => {
+                if (name) orderMap[name.trim().toLowerCase()] = idx;
+            });
+            values.sort((a, b) => {
+                const na = (a.name || '').trim().toLowerCase();
+                const nb = (b.name || '').trim().toLowerCase();
+                const ia = na in orderMap ? orderMap[na] : 999;
+                const ib = nb in orderMap ? orderMap[nb] : 999;
+                if (ia !== ib) return ia - ib;
+                return na.localeCompare(nb);
+            });
+        }
+        return values;
+    }
+
+    function groupByCategoryAndTest(rows) {
+        const out = {};
+        for (const r of rows) {
+            const cat = (r.category || 'General').trim() || 'General';
+            if (!out[cat]) out[cat] = {};
+            const tname = (r.test_name || 'Test').trim() || 'Test';
+            if (!out[cat][tname]) out[cat][tname] = { params: [], remarks: '' };
+            out[cat][tname].params.push(...toParamList(r.test_values, tname));
+            const rm = (r.remarks || '').trim();
+            if (rm) {
+                const existing = out[cat][tname].remarks;
+                out[cat][tname].remarks = existing ? `${existing}; ${rm}` : rm;
+            }
+        }
+        return out;
+    }
+
+    function paginateReport(categories, settings) {
+        if (currentPageMap && Object.keys(currentPageMap).length) {
+            const fn = window.LabPrintLayout?.applyManualPageOverrides;
+            if (fn) return fn(categories, settings, currentPageMap, currentTestOrder);
+        }
+        const combined = Boolean(settings?.combine_categories_on_same_page ?? 1);
+        if (combined) {
+            const fn = window.LabPrintLayout?.paginateCombinedCategories;
+            if (fn) return fn(categories, settings);
+        }
+        const fn = window.LabPrintLayout?.paginateByCategory;
+        if (!fn) return [];
+        return fn(categories, settings);
+    }
+
+    function applyPrintSettings(s) {
+        const layout = window.LabPrintLayout?.getPageLayout
+            ? window.LabPrintLayout.getPageLayout(s)
+            : { headerPx: s.header_height ?? 140, footerPx: 72, bodyBudgetPx: 600 };
+        let style = document.getElementById('lab-print-settings-style');
+        if (!style) {
+            style = document.createElement('style');
+            style.id = 'lab-print-settings-style';
+            document.head.appendChild(style);
+        }
+        style.innerHTML = `
+            .report-page {
+                width: 210mm;
+                height: 297mm;
+                min-height: 297mm;
+                max-height: 297mm;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                padding: ${s.page_top_margin ?? 25}mm ${s.page_right_margin ?? 15}mm ${s.page_bottom_margin ?? 25}mm ${s.page_left_margin ?? 15}mm;
+            }
+            .page-header {
+                flex: 0 0 auto;
+                min-height: 0;
+                max-height: ${layout.headerPx}px;
+                overflow: hidden;
+            }
+            .patient-header-grid {
+                margin-bottom: ${s.patient_info_bottom_margin ?? 6}px !important;
+            }
+            .page-body {
+                flex: 1 1 auto;
+                min-height: 0;
+                max-height: ${layout.bodyBudgetPx}px;
+                overflow: hidden;
+            }
+            .page-footer {
+                flex: 0 0 ${layout.footerPx}px;
+                height: ${layout.footerPx}px;
+                min-height: ${layout.footerPx}px;
+                max-height: ${layout.footerPx}px;
+                overflow: hidden;
+                box-sizing: border-box;
+            }
+            .category-title {
+                font-size: ${s.category_font_size ?? 18}px;
+                font-weight: 800;
+                margin-bottom: ${s.category_padding_bottom ?? 4}px;
+            }
+            .test-group {
+                font-size: ${s.group_font_size ?? 15}px;
+                padding-top: ${s.group_padding_top ?? 8}px;
+                padding-bottom: ${s.group_padding_bottom ?? 2}px;
+            }
+            thead th {
+                padding: ${s.table_header_padding_vertical ?? 8}px 4px;
+            }
+            tbody td {
+                padding: ${s.table_cell_padding_vertical ?? 4}px 4px;
+                font-size: ${s.result_font_size ?? 14}px;
+            }
+            .test-remarks { font-size: ${Math.max(10, (s.result_font_size ?? 14) - 2)}px; }
+            .footer, .footer-left { font-size: ${s.footer_font_size ?? 11}px; }
+            .page-footer { padding-top: ${s.footer_padding_top ?? 20}px; }
+            @media print {
+                @page { size: A4 portrait !important; margin: 0 !important; }
+                html, body { width: 210mm !important; }
+                .report-page {
+                    width: 210mm !important;
+                    height: 297mm !important;
+                    min-height: 297mm !important;
+                    max-height: 297mm !important;
+                    page-break-after: always;
+                    overflow: hidden;
+                }
+                .report-page.last-page { page-break-after: auto; }
+            }
+        `;
+    }
+
+    function renderAndReturnPages(patient, rows, settings) {
+        const now = new Date();
+        const rawCreatedAt = (rows && rows.length && (rows[0].created_at || rows[rows.length - 1].created_at)) || patient?.created_at;
+        let reportDate = '';
+        if (rawCreatedAt) {
+            const d = new Date(rawCreatedAt);
+            reportDate = !isNaN(d.getTime()) ? d.toLocaleString() : String(rawCreatedAt);
+        } else {
+            reportDate = now.toLocaleString();
+        }
+
+        const categories = groupByCategoryAndTest(rows);
+        const catNames = Object.keys(categories);
+        catNames.sort((a, b) => a.localeCompare(b));
+
+        const cleanVal = (val, emptyRepl = '') => {
+            if (val === null || val === undefined) return emptyRepl;
+            const s = String(val).trim();
+            if (s === '' || s === '-' || s === '0' || s === 'N/A' || s === 'None' || s === 'null' || s === '—' || s === '--') return emptyRepl;
+            return s;
+        };
+
+        const cleanAge = (ageVal) => {
+            if (ageVal === null || ageVal === undefined) return '';
+            const s = String(ageVal).trim();
+            if (s === '' || s === '-' || s === '0' || s === '0 Yrs' || s === '0 Y' || s === '—' || s === '--') return '';
+            return s.replace(/(\d+)\s*(Yrs|Y|Years)?/i, '$1 Yrs');
+        };
+
+        const pName = `${cleanVal(patient.salutation, '')} ${cleanVal(patient.patient_name, '')}`.trim();
+        const rawGender = cleanVal(patient.gender, '');
+        const ageStr = cleanAge(patient.age);
+        let ageSex = '';
+        if (ageStr && rawGender) ageSex = `${ageStr} / ${rawGender}`;
+        else if (ageStr) ageSex = ageStr;
+        else if (rawGender) ageSex = rawGender;
+
+        const rawRelation = cleanVal(patient.relation_type || patient.relation, '');
+        const rawRelationName = cleanVal(patient.relation_name, '');
+        const relationMap = { W: 'W/O', S: 'S/O', D: 'D/O', C: 'C/O', H: 'H/O', F: 'F/O', M: 'M/O' };
+        const relationKey = rawRelation.replace(/\s+/g, '').toUpperCase();
+        const relation = relationMap[relationKey] || rawRelation || 'Relation';
+
+        const rawToken = cleanVal(patient.patient_token, '');
+        const pToken = rawToken || '';
+
+        const footerHtml = `
+            <div class="page-footer">
+                <div class="footer">${escapeHtml((settings?.footer_line1 || 'ELECTRONICALLY VERIFIED REPORT, SIGNATURE(S) NOT REQUIRED').toUpperCase())}</div>
+                <div class="footer-left">${escapeHtml(settings?.footer_line3 || 'GMMMC SUKKUR')}</div>
+            </div>
+        `;
+
+        const headerHtml = `
+            <div class="page-header">
+                <div class="patient-header-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 6px;">
+                    <div class="info-box" style="border: 1.5px solid #222; border-radius: 14px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; background: #fff;">
+                        <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Patient MR # :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(patient.mr_no || activePatientMr || '')}</span></div>
+                        <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Patient Name :</span> <span style="font-weight: 700; color: #111;">${escapeHtml(pName)}</span></div>
+                        <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Report Date :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(reportDate)}</span></div>
+                        <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">SHIFT :</span> <span style="font-weight: 500; color: #111;">${escapeHtml((cleanVal(patient.shift, '')).toUpperCase())}</span></div>
+                    </div>
+                    <div class="info-box" style="border: 1.5px solid #222; border-radius: 14px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; background: #fff;">
+                        <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Age/Gender :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(ageSex)}</span></div>
+                        <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">${escapeHtml(relation)} :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(rawRelationName)}</span></div>
+                        <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">Reported On :</span> <span style="font-weight: 500; color: #111;">${escapeHtml(now.toLocaleString())}</span></div>
+                        <div style="display: flex; align-items: center; font-size: 13px;"><span style="width: 145px; font-weight: 600; color: #333;">PATIENT TOKEN NO:</span> <span style="font-weight: 500; color: #111;">${escapeHtml(pToken)}</span></div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        function shouldHideGroupTitle(name, settings) {
+            if (!name) return false;
+            const configured = settings?.hidden_group_titles || 'UCE, HEP B, C, UC, HEP B C, HEP B / C, HEP B, C (ICT), HEP B, C ELISA, HBSAG / HCV';
+            const list = configured.split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
+            const cleanName = String(name).trim().toUpperCase();
+            if (list.includes(cleanName)) return true;
+            const strippedName = cleanName.replace(/[\/&,]/g, ' ').replace(/\s+/g, ' ').trim();
+            for (const item of list) {
+                const strippedItem = item.replace(/[\/&,]/g, ' ').replace(/\s+/g, ' ').trim();
+                if (strippedName === strippedItem) return true;
+            }
+            return false;
+        }
+
+        function renderTestBlock(t, hideSingle) {
+            const isSingleParam = (t.params || []).length === 1;
+            const isHiddenGroup = shouldHideGroupTitle(t.name, settings);
+            let html = `<tbody class="test-block">`;
+            const settingsWouldShow = !hideSingle || !isSingleParam;
+            const adminAllows = isSingleParam ? showSingleTestTitle : showGroupTestTitle;
+            const showTitle = settingsWouldShow && adminAllows && !isHiddenGroup;
+            if (showTitle) {
+                html += `<tr><td class="test-group" colspan="3" style="padding-left: 4px;">${escapeHtml(t.name)}</td></tr>`;
+            }
+            for (const p of (t.params || [])) {
+                let nm = p.name || '';
+                const rawVal = p.value;
+                const val = (rawVal === null || rawVal === undefined || rawVal === '') ? '-'
+                    : (rawVal === 0 || rawVal === '0') ? '' : String(rawVal);
+                const unit = p.unit ? String(p.unit) : '';
+                const res = `${escapeHtml(val)}${unit ? ' ' + escapeHtml(unit) : ''}`;
+                const rng = fmtRange(p.normal_min, p.normal_max);
+                const paramPaddingLeft = showTitle ? '18px' : '4px';
+                html += `<tr><td style="padding-left: ${paramPaddingLeft};">${escapeHtml(nm)}</td><td class="result-col">${res}</td><td class="range-col">${rng}</td></tr>`;
+            }
+            if (t.remarks) {
+                html += `<tr><td colspan="3" class="test-remarks"><span class="test-remarks-label">Remarks:</span>${escapeHtml(t.remarks)}</td></tr>`;
+            }
+            html += `</tbody>`;
+            return html;
+        }
+
+        function renderCombinedPageBody(page) {
+            const hideSingle = Boolean(settings?.hide_single_param_title ?? 1);
+            const blocks = page.blocks || [];
+            const primaryCat = blocks.length ? blocks[0].category : '';
+            const isTrulyCombined = blocks.some(b => b.category !== primaryCat);
+            const hideCatTitle = isTrulyCombined && !showCategoryTitle;
+            const catTitleHtml = hideCatTitle
+                ? ''
+                : `<div class="category-title">${escapeHtml(primaryCat)}</div>`;
+            const categoryStyle = hideCatTitle ? 'border-top:none; padding-top:0;' : '';
+            let body = `
+                <div class="category" style="${categoryStyle}">
+                    ${catTitleHtml}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test Name</th>
+                                <th class="result-col result-col-header">Result</th>
+                                <th class="range-col">Range</th>
+                            </tr>
+                        </thead>`;
+            for (const t of blocks) {
+                const isPrimary = (t.category === primaryCat);
+                const isSingleParam = (t.params || []).length === 1;
+                const isHiddenGroup = shouldHideGroupTitle(t.name, settings);
+                const catSuffix = (!isPrimary && !isSingleParam && showGroupTestTitle && !isHiddenGroup) ? ` (${t.category})` : '';
+                const groupTitle = `${t.name}${catSuffix}`;
+                const settingsWouldShow = !hideSingle || !isSingleParam;
+                const adminAllows = isSingleParam ? showSingleTestTitle : true;
+                const showTitle = settingsWouldShow && adminAllows && !isHiddenGroup;
+
+                body += `<tbody class="test-block">`;
+                if (showTitle) {
+                    body += `<tr><td class="test-group" colspan="3" style="padding-left: 4px;">${escapeHtml(groupTitle)}</td></tr>`;
+                }
+                for (const p of (t.params || [])) {
+                    let nm = p.name || '';
+                    const rawVal = p.value;
+                    const val = (rawVal === null || rawVal === undefined || rawVal === '') ? '-'
+                        : (rawVal === 0 || rawVal === '0') ? '' : String(rawVal);
+                    const unit = p.unit ? String(p.unit) : '';
+                    const res = `${escapeHtml(val)}${unit ? ' ' + escapeHtml(unit) : ''}`;
+                    const rng = fmtRange(p.normal_min, p.normal_max);
+                    const paramPaddingLeft = showTitle ? '18px' : '4px';
+                    body += `<tr><td style="padding-left: ${paramPaddingLeft};">${escapeHtml(nm)}</td><td class="result-col">${res}</td><td class="range-col">${rng}</td></tr>`;
+                }
+                if (t.remarks) {
+                    body += `<tr><td colspan="3" class="test-remarks"><span class="test-remarks-label">Remarks:</span>${escapeHtml(t.remarks)}</td></tr>`;
+                }
+                body += `</tbody>`;
+            }
+            body += `</table></div>`;
+            return body;
+        }
+
+        function renderPerCategoryPage(page) {
+            const hideSingle = Boolean(settings?.hide_single_param_title ?? 1);
+            const catTitleHtml = showCategoryTitle ? `<div class="category-title">${escapeHtml(page.category)}</div>` : '';
+            const categoryStyle = showCategoryTitle ? '' : 'border-top:none; padding-top:0;';
+            let body = `
+                <div class="category" style="${categoryStyle}">
+                    ${catTitleHtml}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Test Name</th>
+                                <th class="result-col result-col-header">Result</th>
+                                <th class="range-col">Range</th>
+                            </tr>
+                        </thead>`;
+            for (const t of (page.blocks || [])) {
+                body += renderTestBlock(t, hideSingle);
+            }
+            body += `</table></div>`;
+            return body;
+        }
+
+        let html = ``;
+        if (!catNames.length) {
+            html += `<div style="padding:24px;text-align:center;color:#475569;font-weight:800;">No lab tests selected or found.</div>`;
+            document.getElementById('preview').innerHTML = html;
+            return [];
+        }
+
+        const pages = paginateReport(categories, settings);
+        const isCombined = (Boolean(settings?.combine_categories_on_same_page ?? 1)
+            && !!window.LabPrintLayout?.paginateCombinedCategories)
+            || (currentPageMap && Object.keys(currentPageMap).length > 0);
+
+        pages.forEach((page, pageIdx) => {
+            const isLast = pageIdx === pages.length - 1;
+            let bodyContent = '';
+            if (isCombined && page.blocks) {
+                bodyContent = renderCombinedPageBody(page);
+            } else {
+                bodyContent = renderPerCategoryPage({ category: page.category, blocks: page.blocks });
+            }
+
+            html += `
+                <div class="report-page${isLast ? ' last-page' : ''}">
+                    ${headerHtml}
+                    <div class="page-body">
+                        ${bodyContent}
+                    </div>
+                    ${footerHtml}
+                </div>
+            `;
+        });
+
+        document.getElementById('preview').innerHTML = html;
+        return pages;
+    }
+
+    // ── Print & Triggering Logic ──────────────────────────────────────────────
+    function testBlockIsAllZero(rows, testName) {
+        const testRows = rows.filter(r => (r.test_name || '').trim() === testName);
+        if (!testRows.length) return false;
+        let hasParams = false;
+        for (const row of testRows) {
+            const vals = Object.values((row.test_values && typeof row.test_values === 'object') ? row.test_values : {});
+            for (const v of vals) {
+                if (v && typeof v === 'object' && 'value' in v) {
+                    hasParams = true;
+                    const val = v.value;
+                    if (val !== 0 && val !== '0' && val !== null && val !== undefined && val !== '') return false;
+                }
+            }
+        }
+        return hasParams;
+    }
+
+    function triggerLabPrintWithCheck(advanceToNext = false) {
+        if (!activePatientMr) return;
+
+        const zeroTests = [];
+        for (const name of selectedTestNames) {
+            if (testBlockIsAllZero(allRows, name)) {
+                zeroTests.push(name);
+            }
+        }
+
+        if (zeroTests.length > 0) {
+            const overlay = document.getElementById('zero-warn-overlay');
+            const list = document.getElementById('zero-warn-list');
+            list.innerHTML = zeroTests.map(n => `• ${escapeHtml(n)}`).join('<br>');
+            overlay.style.display = 'flex';
+
+            document.getElementById('zero-warn-cancel').onclick = () => { overlay.style.display = 'none'; };
+            document.getElementById('zero-warn-proceed').onclick = () => {
+                overlay.style.display = 'none';
+                executePrint(advanceToNext);
+            };
+            return;
+        }
+
+        executePrint(advanceToNext);
+    }
+
+    function executePrint(advanceToNext = false) {
         try {
-            fetch('/api/audit/log-print', {
+            const loggedInUser = localStorage.getItem('userName') || localStorage.getItem('userEmail') || 'Staff';
+            const userId = localStorage.getItem('userId') || '';
+            const ptName = currentPatient?.patient_name || '';
+            const testList = Array.from(selectedTestNames).join(', ');
+            const prefix = window.location.pathname.startsWith('/offline') ? '/offline' : '';
+            fetch(`${prefix}/api/audit/log-print`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    mr_no: mrNo,
-                    user_name: localStorage.getItem('userName') || 'Staff',
-                    details: 'Bulk shift print'
+                    mr_no: activePatientMr,
+                    patient_name: ptName,
+                    user_name: loggedInUser,
+                    user_id: userId,
+                    details: `Printed test(s): ${testList || 'Selected tests'}`
                 })
             }).catch(() => {});
         } catch (_) {}
-    }
 
-    // Stream print mode
-    async function streamPrintAndNext() {
-        if (activeStreamIndex < 0 || activeStreamIndex >= visiblePatients.length) return;
-        const p = visiblePatients[activeStreamIndex];
-        printedMrSet.add(p.mr_no);
-        logPrintAudit(p.mr_no);
-
-        // Print active preview
-        const content = document.getElementById('stream-a4-content').innerHTML;
-        if (content) printContinuousIframe(content);
-
-        // Advance to next
-        if (activeStreamIndex < visiblePatients.length - 1) {
-            selectStreamPatient(activeStreamIndex + 1, true);
+        if (activePatientMr) {
+            printedInSessionSet.add(activePatientMr);
+            renderQueueCards();
         }
-        renderStreamQueue();
+
+        printLabReport({ contentEl: document.getElementById('preview'), settings: currentSettings });
+
+        if (advanceToNext) {
+            setTimeout(() => {
+                if (activePatientIndex < visiblePatients.length - 1) {
+                    selectPatientByIndex(activePatientIndex + 1, true);
+                }
+            }, 300);
+        }
     }
 
-    // Keyboard Shortcuts
-    document.addEventListener('keydown', (e) => {
-        if (activeMode === 'stream') {
-            if (e.key === 'Enter' || e.code === 'Space') {
-                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'SELECT' && e.target.tagName !== 'TEXTAREA') {
-                    e.preventDefault();
-                    streamPrintAndNext();
+    // ── Wire Admin Selector / Layout Actions ──────────────────────────────────
+    function hookSelectorActions() {
+        document.getElementById('select-all-tests').addEventListener('click', () => {
+            allRows.forEach(r => {
+                const n = (r.test_name || '').trim();
+                if (n) selectedTestNames.add(n);
+            });
+            document.querySelectorAll('.test-checkbox').forEach(cb => cb.checked = true);
+            rebuildFromCurrentMap();
+        });
+
+        document.getElementById('clear-all-tests').addEventListener('click', () => {
+            selectedTestNames.clear();
+            document.querySelectorAll('.test-checkbox').forEach(cb => cb.checked = false);
+            rebuildFromCurrentMap();
+        });
+
+        document.getElementById('auto-optimize-btn').addEventListener('click', () => {
+            currentPageMap = null;
+            currentTestOrder = [];
+            extraPageSlots = 0;
+            updateSavedBanner(false);
+            rebuildFromCurrentMap();
+        });
+
+        document.getElementById('add-page-btn').addEventListener('click', () => {
+            const renderedPageCount = document.querySelectorAll('#preview .report-page').length;
+            const mapPageCount = currentPageMap ? (Math.max(-1, ...Object.values(currentPageMap).map(Number).filter(n => !isNaN(n))) + 1) : 0;
+            extraPageSlots = Math.max(renderedPageCount, mapPageCount, extraPageSlots) + 1;
+            rebuildFromCurrentMap();
+        });
+
+        if (isAdmin()) {
+            const dropdown = document.getElementById('admin-layout-dropdown');
+            if (dropdown) {
+                dropdown.addEventListener('change', (e) => {
+                    adminViewMode = e.target.value;
+                    localStorage.setItem('labPrintAdminViewMode', adminViewMode);
+                    renderCurrent();
+                });
+            }
+
+            document.getElementById('toggle-category-title').addEventListener('change', (e) => {
+                showCategoryTitle = e.target.checked;
+                localStorage.setItem('labPrintShowCategoryTitle', showCategoryTitle);
+                renderCurrent();
+            });
+            document.getElementById('toggle-group-test-title').addEventListener('change', (e) => {
+                showGroupTestTitle = e.target.checked;
+                localStorage.setItem('labPrintShowGroupTestTitle', showGroupTestTitle);
+                renderCurrent();
+            });
+            document.getElementById('toggle-single-test-title').addEventListener('change', (e) => {
+                showSingleTestTitle = e.target.checked;
+                localStorage.setItem('labPrintShowSingleTestTitle', showSingleTestTitle);
+                renderCurrent();
+            });
+
+            document.getElementById('save-layout-btn').addEventListener('click', async () => {
+                const fp = currentFingerprint;
+                if (!fp) return alert('No tests loaded.');
+                const btn = document.getElementById('save-layout-btn');
+                btn.disabled = true; btn.textContent = '⏳ Saving…';
+                try {
+                    const res = await fetch('/api/lab/print-layout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-User-Email': getUserEmail(),
+                            'X-User-Role': 'admin',
+                        },
+                        body: JSON.stringify({
+                            fingerprint: fp,
+                            layout: {
+                                page_map: currentPageMap || {},
+                                test_order: currentTestOrder || [],
+                                test_count: selectedTestNames.size,
+                                display_options: {
+                                    show_category_title: showCategoryTitle,
+                                    show_group_test_title: showGroupTestTitle,
+                                    show_single_test_title: showSingleTestTitle
+                                }
+                            }
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.status === 'ok') {
+                        savedFingerprint = fp;
+                        updateSavedBanner(true, `Saved by ${getUserEmail()}`);
+                        btn.textContent = '✓ Saved!';
+                        setTimeout(() => { btn.textContent = '💾 Save Layout'; btn.disabled = false; }, 1800);
+                    } else {
+                        alert('Save failed: ' + (data.detail || data.message || 'Unknown error'));
+                        btn.textContent = '💾 Save Layout'; btn.disabled = false;
+                    }
+                } catch (err) {
+                    alert('Network error: ' + err.message);
+                    btn.textContent = '💾 Save Layout'; btn.disabled = false;
                 }
-            } else if (e.key === 'ArrowRight' || (e.altKey && e.key.toLowerCase() === 'n')) {
-                if (activeStreamIndex < visiblePatients.length - 1) selectStreamPatient(activeStreamIndex + 1, true);
-            } else if (e.key === 'ArrowLeft' || (e.altKey && e.key.toLowerCase() === 'p')) {
-                if (activeStreamIndex > 0) selectStreamPatient(activeStreamIndex - 1, true);
+            });
+
+            document.getElementById('clear-layout-btn').addEventListener('click', async () => {
+                const fp = savedFingerprint || currentFingerprint;
+                if (!fp) return;
+                if (!confirm('Delete the saved layout for this test set?')) return;
+                const btn = document.getElementById('clear-layout-btn');
+                btn.disabled = true; btn.textContent = '⏳…';
+                try {
+                    const res = await fetch(`/api/lab/print-layout?fingerprint=${encodeURIComponent(fp)}`, {
+                        method: 'DELETE',
+                        headers: { 'X-User-Role': 'admin', 'X-User-Email': getUserEmail() }
+                    });
+                    const data = await res.json();
+                    if (data.status === 'ok') {
+                        savedFingerprint = null;
+                        currentPageMap = null;
+                        currentTestOrder = [];
+                        updateSavedBanner(false);
+                        rebuildFromCurrentMap();
+                    }
+                } catch (err) { alert('Error: ' + err.message); }
+                btn.textContent = '✕ Clear Saved'; btn.disabled = false;
+            });
+        }
+    }
+
+    // ── Keyboard Shortcuts ────────────────────────────────────────────────────
+    document.addEventListener('keydown', (e) => {
+        // Ctrl + Shift + Enter / Ctrl + Shift + P => Print & Next
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'Enter' || e.key.toLowerCase() === 'p')) {
+            e.preventDefault();
+            triggerLabPrintWithCheck(true);
+        }
+        // Ctrl + P / Ctrl + Enter => Print
+        else if ((e.ctrlKey || e.metaKey) && !e.shiftKey && (e.key.toLowerCase() === 'p' || e.key === 'Enter')) {
+            e.preventDefault();
+            triggerLabPrintWithCheck(false);
+        }
+        // Alt + N => Next Patient
+        else if (e.altKey && e.key.toLowerCase() === 'n') {
+            e.preventDefault();
+            if (activePatientIndex < visiblePatients.length - 1) {
+                selectPatientByIndex(activePatientIndex + 1, true);
+            }
+        }
+        // Alt + P => Prev Patient
+        else if (e.altKey && e.key.toLowerCase() === 'p') {
+            e.preventDefault();
+            if (activePatientIndex > 0) {
+                selectPatientByIndex(activePatientIndex - 1, true);
             }
         }
     });
 
+    // ── Boot ──────────────────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', async () => {
         initDate();
         await loadFilterMetadata();
-        await loadPrintSettings();
-        await loadShiftRecords();
+        hookSelectorActions();
+        await loadQueue();
 
-        // Filters
-        document.getElementById('filter-date').addEventListener('change', () => loadShiftRecords());
-        document.getElementById('filter-shift').addEventListener('change', () => loadShiftRecords());
-        document.getElementById('filter-status').addEventListener('change', () => applyFilters());
-        document.getElementById('token-from').addEventListener('input', () => applyFilters());
-        document.getElementById('token-to').addEventListener('input', () => applyFilters());
-        document.getElementById('filter-search').addEventListener('input', () => applyFilters());
+        // Wire Filter Events
+        document.getElementById('filter-date').addEventListener('change', () => loadQueue());
+        document.getElementById('filter-shift').addEventListener('change', () => loadQueue());
+        document.getElementById('filter-category').addEventListener('change', () => loadQueue());
+        document.getElementById('token-from').addEventListener('input', () => applyQueueFilters());
+        document.getElementById('token-to').addEventListener('input', () => applyQueueFilters());
+        document.getElementById('queue-search').addEventListener('input', () => applyQueueFilters());
 
-        // Selection buttons
-        document.getElementById('btn-select-completed').addEventListener('click', () => {
-            selectedMrSet.clear();
-            visiblePatients.filter(p => p.status === 'Completed').forEach(p => selectedMrSet.add(p.mr_no));
-            renderTable();
-            updateSelectedUi();
+        document.querySelectorAll('.status-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                activeStatusFilter = this.dataset.status;
+                applyQueueFilters();
+            });
         });
 
-        document.getElementById('btn-select-all').addEventListener('click', () => {
-            selectedMrSet.clear();
-            visiblePatients.forEach(p => selectedMrSet.add(p.mr_no));
-            renderTable();
-            updateSelectedUi();
+        document.getElementById('btn-prev-patient').addEventListener('click', () => {
+            if (activePatientIndex > 0) selectPatientByIndex(activePatientIndex - 1, true);
         });
-
-        document.getElementById('btn-clear-selection').addEventListener('click', () => {
-            selectedMrSet.clear();
-            renderTable();
-            updateSelectedUi();
+        document.getElementById('btn-next-patient').addEventListener('click', () => {
+            if (activePatientIndex < visiblePatients.length - 1) selectPatientByIndex(activePatientIndex + 1, true);
         });
-
-        document.getElementById('th-master-checkbox').addEventListener('change', function () {
-            if (this.checked) {
-                visiblePatients.forEach(p => selectedMrSet.add(p.mr_no));
-            } else {
-                selectedMrSet.clear();
-            }
-            renderTable();
-            updateSelectedUi();
-        });
-
-        // Mode switch
-        document.getElementById('btn-mode-table').addEventListener('click', () => {
-            activeMode = 'table';
-            document.getElementById('btn-mode-table').classList.add('active');
-            document.getElementById('btn-mode-stream').classList.remove('active');
-            document.getElementById('table-view').style.display = 'block';
-            document.getElementById('stream-view').style.display = 'none';
-        });
-
-        document.getElementById('btn-mode-stream').addEventListener('click', () => {
-            activeMode = 'stream';
-            document.getElementById('btn-mode-stream').classList.add('active');
-            document.getElementById('btn-mode-table').classList.remove('active');
-            document.getElementById('table-view').style.display = 'none';
-            document.getElementById('stream-view').style.display = 'grid';
-            renderStreamQueue();
-        });
-
-        // Trigger bulk print
-        document.getElementById('btn-trigger-bulk-print').addEventListener('click', triggerOneClickBulkPrint);
-
-        // Stream buttons
-        document.getElementById('btn-stream-prev').addEventListener('click', () => {
-            if (activeStreamIndex > 0) selectStreamPatient(activeStreamIndex - 1, true);
-        });
-        document.getElementById('btn-stream-next').addEventListener('click', () => {
-            if (activeStreamIndex < visiblePatients.length - 1) selectStreamPatient(activeStreamIndex + 1, true);
-        });
-        document.getElementById('btn-stream-print-next').addEventListener('click', streamPrintAndNext);
     });
 </script>
 {% endblock %}

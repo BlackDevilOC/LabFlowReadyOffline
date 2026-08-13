@@ -717,14 +717,22 @@
             <h1>Update Test Results</h1>
             <p>Search and open a patient to enter or update test results (data loads from the database on the next page).</p>
         </div>
-        <a href="{{ url_prefix }}/register" class="new-report-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            New Patient
-        </a>
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <a href="{{ url_prefix }}/page/fast-results" class="new-report-btn" style="background:#16a34a;" title="Fast sequential multi-result entry">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                Fast Results Entry
+            </a>
+            <a href="{{ url_prefix }}/register" class="new-report-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                New Patient
+            </a>
+        </div>
     </div>
 
     <!-- Stats strip -->

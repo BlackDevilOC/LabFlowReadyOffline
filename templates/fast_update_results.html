@@ -588,8 +588,12 @@
         border: none;
         color: #ef4444;
         cursor: pointer;
-        padding: 2px;
+        padding: 2px 4px;
         border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s, color 0.15s;
     }
 
     .delete-test-btn:hover {
@@ -605,6 +609,170 @@
         border-radius: 3px;
         text-transform: uppercase;
         font-weight: bold;
+    }
+
+    /* Add Test Section */
+    .add-test-section {
+        background: var(--surface);
+        border: 2px dashed var(--border-dark);
+        border-radius: 6px;
+        padding: 12px;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        position: relative;
+        grid-column: 1 / -1;
+    }
+
+    .add-test-toggle-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 6px;
+        background: var(--primary);
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s, transform 0.15s;
+        flex-shrink: 0;
+    }
+
+    .add-test-toggle-btn:hover {
+        background: var(--primary-hover);
+        transform: scale(1.05);
+    }
+
+    .add-test-toggle-btn:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .add-test-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    .add-test-dropdown-wrap {
+        display: none;
+        position: absolute;
+        bottom: calc(100% + 6px);
+        left: 12px;
+        width: 380px;
+        max-width: calc(100vw - 40px);
+        background: var(--surface);
+        border: 1px solid var(--border-dark);
+        border-radius: 8px;
+        box-shadow: var(--shadow-lg);
+        z-index: 100;
+        padding: 10px;
+    }
+
+    .add-test-dropdown-wrap.open {
+        display: block;
+    }
+
+    .add-test-search-box {
+        margin-bottom: 6px;
+    }
+
+    .add-test-search-input {
+        width: 100%;
+        padding: 7px 10px;
+        border: 1px solid var(--border-dark);
+        border-radius: 6px;
+        font-size: 12px;
+        color: var(--text);
+        background: var(--surface-subtle);
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .add-test-search-input:focus {
+        border-color: var(--primary);
+    }
+
+    .add-test-list-container {
+        max-height: 220px;
+        overflow-y: auto;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        background: var(--surface);
+    }
+
+    .add-test-item {
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+        transition: background 0.1s;
+    }
+
+    .add-test-item:last-child {
+        border-bottom: none;
+    }
+
+    .add-test-item:hover,
+    .add-test-item.selected {
+        background: var(--primary-light);
+        color: var(--primary);
+    }
+
+    .add-test-item-badge {
+        font-size: 9px;
+        font-weight: 700;
+        padding: 1px 5px;
+        border-radius: 3px;
+        text-transform: uppercase;
+    }
+
+    .add-test-item-badge.group {
+        background: #fef3c7;
+        color: #b45309;
+    }
+
+    .add-test-item-badge.single {
+        background: #e0e7ff;
+        color: #3730a3;
+    }
+
+    .add-test-empty {
+        padding: 14px;
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-muted);
+    }
+
+    .add-test-confirm-btn {
+        margin-top: 8px;
+        width: 100%;
+        padding: 8px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+    .add-test-confirm-btn:hover:not(:disabled) {
+        background: var(--primary-hover);
+    }
+
+    .add-test-confirm-btn:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
     }
 
     /* Parameters Table */
@@ -1152,13 +1320,51 @@
 
     async function fetchTestsCatalog() {
         try {
+            const response = await fetch("/tests");
+            if (response.ok) {
+                const data = await response.json();
+                const showIndividualTests = Boolean(data.allow_single_tests || data.test_selection_mode === 'group_and_single');
+                const individualTests = showIndividualTests
+                    ? (data.tests || [])
+                        .filter(t => !t.name.startsWith('#'))
+                        .map(t => ({
+                            id: t.id,
+                            name: t.name,
+                            status: t.status,
+                            value: t.id,
+                            isGroup: false
+                        }))
+                    : (data.tests || [])
+                        .filter(t => !t.name.startsWith('#'))
+                        .map(t => ({
+                            id: t.id,
+                            name: t.name,
+                            status: t.status,
+                            value: t.id,
+                            isGroup: false
+                        }));
+                const groupTests = (data.group_test || []).map(t => ({
+                    id: t.id,
+                    name: t.group_name,
+                    status: t.status,
+                    value: JSON.stringify(t.component_ids),
+                    isGroup: true
+                }));
+                return [...individualTests, ...groupTests];
+            }
+        } catch (e) {
+            console.error("Error fetching tests from /tests:", e);
+        }
+        try {
             const res = await fetch('/api/admin/tests-catalog');
             const data = await res.json();
             if (data.status === 'Success' && data.tests) {
                 return data.tests.map(t => ({
                     id: t.id,
                     name: t.name || '',
-                    category: t.category || 'General',
+                    status: t.status ?? true,
+                    value: t.id,
+                    isGroup: false,
                 }));
             }
         } catch (_) {}
@@ -1504,13 +1710,266 @@
         });
 
         if (activePatientRecords.length === 0) {
-            html += '<div style="padding:40px;text-align:center;color:var(--text-muted);font-size:13px;">No tests assigned for this patient.</div>';
+            html += '<div style="padding:40px;text-align:center;color:var(--text-muted);font-size:13px;">No tests assigned for this patient. Use the button below to add one.</div>';
         }
+
+        html += buildAddTestSectionHtml();
 
         container.innerHTML = html;
         container.classList.toggle('single-test', activePatientRecords.length === 1);
 
+        if (addTestDropdownOpen) {
+            document.getElementById('add-test-dropdown-wrap')?.classList.add('open');
+        }
+
         setupCompactNavigation();
+    }
+
+    // ── Add Test Dropdown & API Logic ─────────────────────────────────────────
+    let currentFilteredAddTests = [];
+    let selectedAddTestIndex = -1;
+    let addTestDropdownOpen = false;
+
+    function getExistingTestNames() {
+        return new Set(
+            activePatientRecords
+                .map(r => (r.test_name || '').trim().toLowerCase())
+                .filter(Boolean)
+        );
+    }
+
+    function renderAddTestOptions(query = '') {
+        const listContainer = document.getElementById('add-test-list-container');
+        const confirmBtn = document.getElementById('add-test-confirm-btn');
+        const valInput = document.getElementById('add-test-selected-value');
+        if (!listContainer) return;
+
+        const existing = getExistingTestNames();
+        const activeAvailable = availableTests.filter(test => {
+            if (test.status !== true && test.status !== undefined) return false;
+            if (existing.has((test.name || '').trim().toLowerCase())) return false;
+            return true;
+        });
+
+        const q = query.trim().toLowerCase();
+        currentFilteredAddTests = q
+            ? activeAvailable.filter(t => (t.name || '').toLowerCase().includes(q))
+            : activeAvailable;
+
+        selectedAddTestIndex = -1;
+        if (valInput) valInput.value = '';
+        if (confirmBtn) confirmBtn.disabled = true;
+
+        if (activeAvailable.length === 0) {
+            listContainer.innerHTML = `<div class="add-test-empty">All available active tests are already assigned.</div>`;
+            return;
+        }
+
+        if (currentFilteredAddTests.length === 0) {
+            listContainer.innerHTML = `<div class="add-test-empty">No matching active tests found.</div>`;
+            return;
+        }
+
+        listContainer.innerHTML = currentFilteredAddTests.map((t, idx) => `
+            <div class="add-test-item" data-index="${idx}" onclick="selectAddTestItem(${idx})" ondblclick="confirmAndAddSingleTest(${idx})">
+                <span class="add-test-item-name">${escapeHtml(t.name)}</span>
+                <span class="add-test-item-badge ${t.isGroup ? 'group' : 'single'}">${t.isGroup ? 'Group' : 'Single'}</span>
+            </div>
+        `).join('');
+    }
+
+    function selectAddTestItem(index) {
+        const listContainer = document.getElementById('add-test-list-container');
+        const confirmBtn = document.getElementById('add-test-confirm-btn');
+        const valInput = document.getElementById('add-test-selected-value');
+        if (!listContainer || index < 0 || index >= currentFilteredAddTests.length) return;
+
+        selectedAddTestIndex = index;
+        const items = listContainer.querySelectorAll('.add-test-item');
+        items.forEach((item, i) => {
+            item.classList.toggle('selected', i === index);
+            if (i === index) item.scrollIntoView({ block: 'nearest' });
+        });
+
+        const selectedTest = currentFilteredAddTests[index];
+        if (valInput) valInput.value = selectedTest.value;
+        if (confirmBtn) confirmBtn.disabled = false;
+    }
+
+    function confirmAndAddSingleTest(index) {
+        selectAddTestItem(index);
+        addSingleTest();
+    }
+
+    function onAddTestSearchInput(val) {
+        renderAddTestOptions(val);
+    }
+
+    function onAddTestKeyDown(e) {
+        if (!addTestDropdownOpen) return;
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (currentFilteredAddTests.length === 0) return;
+            let next = selectedAddTestIndex + 1;
+            if (next >= currentFilteredAddTests.length) next = 0;
+            selectAddTestItem(next);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (currentFilteredAddTests.length === 0) return;
+            let prev = selectedAddTestIndex - 1;
+            if (prev < 0) prev = currentFilteredAddTests.length - 1;
+            selectAddTestItem(prev);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (selectedAddTestIndex >= 0 && selectedAddTestIndex < currentFilteredAddTests.length) {
+                addSingleTest();
+            } else if (currentFilteredAddTests.length === 1) {
+                selectAddTestItem(0);
+                addSingleTest();
+            }
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            toggleAddTestDropdown(false);
+        }
+    }
+
+    function buildAddTestSectionHtml() {
+        return `
+            <div class="add-test-section" id="add-test-section">
+                <button type="button" class="add-test-toggle-btn" id="add-test-toggle-btn" title="Add test to patient" onclick="toggleAddTestDropdown()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <span class="add-test-label">Add Test to Patient</span>
+                <div class="add-test-dropdown-wrap" id="add-test-dropdown-wrap">
+                    <div class="add-test-search-box">
+                        <input type="text" id="add-test-search-input" class="add-test-search-input" placeholder="Type to search test..." autocomplete="off" oninput="onAddTestSearchInput(this.value)" onkeydown="onAddTestKeyDown(event)">
+                        <input type="hidden" id="add-test-selected-value" value="">
+                    </div>
+                    <div class="add-test-list-container" id="add-test-list-container">
+                        <!-- Filtered active test items -->
+                    </div>
+                    <button type="button" class="add-test-confirm-btn" id="add-test-confirm-btn" onclick="addSingleTest()" disabled>Add Test</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function toggleAddTestDropdown(forceOpen) {
+        const wrap = document.getElementById('add-test-dropdown-wrap');
+        const searchInput = document.getElementById('add-test-search-input');
+        if (!wrap) return;
+
+        addTestDropdownOpen = typeof forceOpen === 'boolean' ? forceOpen : !addTestDropdownOpen;
+        wrap.classList.toggle('open', addTestDropdownOpen);
+
+        if (addTestDropdownOpen) {
+            if (searchInput) searchInput.value = '';
+            renderAddTestOptions('');
+            const existing = getExistingTestNames();
+            const activeAvailable = availableTests.filter(t => (t.status === true || t.status === undefined) && !existing.has((t.name || '').trim().toLowerCase()));
+            if (activeAvailable.length === 0) {
+                showToast('All available active tests are already assigned', 'error');
+            } else if (searchInput) {
+                setTimeout(() => searchInput.focus(), 50);
+            }
+        }
+    }
+
+    async function addSingleTest() {
+        if (!activePatientMr) return;
+        const valInput = document.getElementById('add-test-selected-value');
+        const confirmBtn = document.getElementById('add-test-confirm-btn');
+        const toggleBtn = document.getElementById('add-test-toggle-btn');
+        const selectedTest = valInput ? valInput.value : '';
+        if (!selectedTest) {
+            showToast('Please select a test from the list first', 'error');
+            return;
+        }
+
+        if (confirmBtn) {
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = 'Adding...';
+        }
+        if (toggleBtn) toggleBtn.disabled = true;
+
+        try {
+            const res = await fetch(`/api/test-results/patient/${activePatientMr}/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': localStorage.getItem('userEmail') || ''
+                },
+                body: JSON.stringify({ selected_test: selectedTest })
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                showToast('Test added successfully', 'success');
+                addTestDropdownOpen = false;
+                await loadActivePatientTestData(activePatientMr);
+
+                // Update test badges in queue cards
+                if (visiblePatients[activePatientIndex]) {
+                    const addedNames = currentFilteredAddTests[selectedAddTestIndex]?.name || 'Test';
+                    if (!visiblePatients[activePatientIndex].tests) visiblePatients[activePatientIndex].tests = [];
+                    visiblePatients[activePatientIndex].tests.push({ test_name: addedNames, status: 'Pending' });
+                    renderQueueCards();
+                }
+            } else {
+                showToast(result.message || 'Failed to add test', 'error');
+            }
+        } catch (e) {
+            showToast(`Error: ${e.message}`, 'error');
+        } finally {
+            if (confirmBtn) {
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = 'Add Test';
+            }
+            if (toggleBtn) toggleBtn.disabled = false;
+        }
+    }
+
+    function getDeletingPerson() {
+        const name = (localStorage.getItem('userName') || '').trim();
+        if (name) return name;
+        const email = (localStorage.getItem('userEmail') || '').trim();
+        if (email) return email.includes('@') ? email.split('@')[0] : email;
+        return 'Staff';
+    }
+
+    async function deleteTestRecord(recordId) {
+        if (!recordId) return;
+        const rec = activePatientRecords.find(r => String(r.id) === String(recordId));
+        const testName = rec?.test_name ? ` (${rec.test_name})` : '';
+        if (!confirm(`Delete this test${testName}?`)) return;
+
+        try {
+            const res = await fetch(`/api/test-results/delete/${recordId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ person_deleting: getDeletingPerson() })
+            });
+            const result = await res.json();
+            if (result.status === 'Success') {
+                activePatientRecords = activePatientRecords.filter(r => String(r.id) !== String(recordId));
+                renderWorkspaceForm();
+                showToast('Test deleted successfully', 'success');
+
+                // Update test badges on left patient card
+                if (visiblePatients[activePatientIndex] && visiblePatients[activePatientIndex].tests) {
+                    visiblePatients[activePatientIndex].tests = visiblePatients[activePatientIndex].tests.filter(
+                        t => String(t.id) !== String(recordId) && (rec ? t.test_name !== rec.test_name : true)
+                    );
+                    renderQueueCards();
+                }
+            } else {
+                showToast('Failed to delete test', 'error');
+            }
+        } catch (e) {
+            showToast('Error: ' + e.message, 'error');
+        }
     }
 
     function setupCompactNavigation() {
@@ -1573,9 +2032,9 @@
         const btnSave = document.getElementById('btn-save-results');
         const statusIndicator = document.getElementById('save-status-indicator');
 
-        btnSaveNext.disabled = true;
-        btnSave.disabled = true;
-        statusIndicator.textContent = 'Saving…';
+        if (btnSaveNext) btnSaveNext.disabled = true;
+        if (btnSave) btnSave.disabled = true;
+        if (statusIndicator) statusIndicator.textContent = 'Saving…';
 
         // Gather values from DOM
         const inputs = document.querySelectorAll('.param-input-field');
@@ -1608,7 +2067,7 @@
             if (result.status === 'Success') {
                 showToast(`Saved Token #${visiblePatients[activePatientIndex]?.patient_token || ''} (MR ${activePatientMr})`, 'success');
                 savedInSessionSet.add(activePatientMr);
-                statusIndicator.textContent = '✓ Saved';
+                if (statusIndicator) statusIndicator.textContent = '✓ Saved';
 
                 // Update patient card visually
                 if (visiblePatients[activePatientIndex]) {
@@ -1619,7 +2078,6 @@
                 if (openPrint) {
                     window.open(`/page/lab-test-print/${activePatientMr}`, '_blank');
                 } else if (advanceToNext) {
-                    // Advance to next patient!
                     if (activePatientIndex < visiblePatients.length - 1) {
                         selectPatientByIndex(activePatientIndex + 1, true);
                     } else {
@@ -1628,14 +2086,14 @@
                 }
             } else {
                 showToast('Failed to save results: ' + (result.message || 'Error'), 'error');
-                statusIndicator.textContent = 'Save Failed';
+                if (statusIndicator) statusIndicator.textContent = 'Save Failed';
             }
         } catch (e) {
             showToast('Error saving: ' + e.message, 'error');
-            statusIndicator.textContent = 'Error';
+            if (statusIndicator) statusIndicator.textContent = 'Error';
         } finally {
-            btnSaveNext.disabled = false;
-            btnSave.disabled = false;
+            if (btnSaveNext) btnSaveNext.disabled = false;
+            if (btnSave) btnSave.disabled = false;
         }
     }
 
@@ -1671,25 +2129,6 @@
                 showToast('Saved test', 'success');
             } else {
                 showToast('Failed to save test', 'error');
-            }
-        } catch (e) {
-            showToast('Error: ' + e.message, 'error');
-        }
-    }
-
-    async function deleteTestRecord(recordId) {
-        if (!recordId || !confirm('Delete this test?')) return;
-        try {
-            const res = await fetch(`/api/test-results/delete/${recordId}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ person_deleting: localStorage.getItem('userName') || 'Staff' })
-            });
-            const result = await res.json();
-            if (result.status === 'Success') {
-                activePatientRecords = activePatientRecords.filter(r => r.id !== recordId);
-                renderWorkspaceForm();
-                showToast('Test deleted', 'success');
             }
         } catch (e) {
             showToast('Error: ' + e.message, 'error');
