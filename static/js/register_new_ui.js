@@ -541,11 +541,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // ── Form submit guard ────────────────────────────────────────────────
     const form = document.getElementById("newRegisterForm");
+    let isRegisterSubmitting = false;
+
     if (form) {
         form.addEventListener("submit", (e) => {
             if (selectedTests.length === 0) {
                 e.preventDefault();
                 alert("Please select at least one test before saving.");
+                return false;
+            }
+
+            if (isRegisterSubmitting) {
+                e.preventDefault();
+                return false;
+            }
+
+            isRegisterSubmitting = true;
+
+            const saveBtn = document.getElementById("saveBtn");
+            if (saveBtn) {
+                saveBtn.disabled = true;
+                saveBtn.innerHTML = `⏳ REGISTERING...`;
+                saveBtn.style.opacity = "0.7";
+                saveBtn.style.cursor = "not-allowed";
+            }
+
+            const loadingModal = document.getElementById("registerLoadingModal");
+            if (loadingModal) {
+                loadingModal.style.display = "flex";
             }
         });
     }

@@ -635,26 +635,54 @@ def upsert_invoice_settings_from_supabase(row: dict):
 
 
 def insert_fitness_patient(item: dict) -> dict:
-    """Insert a fitness patient record into local SQLite database."""
+    """Insert or update a fitness patient record into local SQLite database."""
+    mr_no = item.get("mr_no")
     with get_db_conn() as conn:
         cursor = conn.cursor()
-        cursor.execute("""
-            INSERT INTO fitness_patients (
-                patient_name, gender, relation_type, relation_name, report_date, mr_no,
-                hb, wbc, neut, lymph, mono, eosino, plt, hiv, hbsag, hcv, vdrl, created_by
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (
-            item.get("patient_name"), item.get("gender"), item.get("relation_type"),
-            item.get("relation_name"), item.get("report_date"), item.get("mr_no"),
-            item.get("hb"), item.get("wbc"), item.get("neut"), item.get("lymph"),
-            item.get("mono"), item.get("eosino"), item.get("plt"), item.get("hiv"),
-            item.get("hbsag"), item.get("hcv"), item.get("vdrl"),
-            item.get("user_email") or item.get("created_by") or "Offline User"
-        ))
-        row_id = cursor.lastrowid
-        cursor.execute("SELECT * FROM fitness_patients WHERE id = ?", (row_id,))
-        row = cursor.fetchone()
-        return dict(row) if row else {"id": row_id, **item}
+        existing_id = None
+        if mr_no and str(mr_no).strip():
+            cursor.execute("SELECT id FROM fitness_patients WHERE mr_no = ?", (str(mr_no).strip(),))
+            row = cursor.fetchone()
+            if row:
+                existing_id = row["id"]
+
+        if existing_id:
+            cursor.execute("""
+                UPDATE fitness_patients SET
+                    patient_name = ?, gender = ?, relation_type = ?, relation_name = ?,
+                    report_date = ?, hb = ?, wbc = ?, neut = ?, lymph = ?, mono = ?,
+                    eosino = ?, plt = ?, hiv = ?, hbsag = ?, hcv = ?, vdrl = ?, created_by = ?
+                WHERE id = ?
+            """, (
+                item.get("patient_name"), item.get("gender"), item.get("relation_type"),
+                item.get("relation_name"), item.get("report_date"), item.get("hb"),
+                item.get("wbc"), item.get("neut"), item.get("lymph"), item.get("mono"),
+                item.get("eosino"), item.get("plt"), item.get("hiv"), item.get("hbsag"),
+                item.get("hcv"), item.get("vdrl"),
+                item.get("user_email") or item.get("created_by") or "Offline User",
+                existing_id
+            ))
+            cursor.execute("SELECT * FROM fitness_patients WHERE id = ?", (existing_id,))
+            updated_row = cursor.fetchone()
+            return dict(updated_row) if updated_row else {"id": existing_id, **item}
+        else:
+            cursor.execute("""
+                INSERT INTO fitness_patients (
+                    patient_name, gender, relation_type, relation_name, report_date, mr_no,
+                    hb, wbc, neut, lymph, mono, eosino, plt, hiv, hbsag, hcv, vdrl, created_by
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                item.get("patient_name"), item.get("gender"), item.get("relation_type"),
+                item.get("relation_name"), item.get("report_date"), item.get("mr_no"),
+                item.get("hb"), item.get("wbc"), item.get("neut"), item.get("lymph"),
+                item.get("mono"), item.get("eosino"), item.get("plt"), item.get("hiv"),
+                item.get("hbsag"), item.get("hcv"), item.get("vdrl"),
+                item.get("user_email") or item.get("created_by") or "Offline User"
+            ))
+            row_id = cursor.lastrowid
+            cursor.execute("SELECT * FROM fitness_patients WHERE id = ?", (row_id,))
+            row = cursor.fetchone()
+            return dict(row) if row else {"id": row_id, **item}
 
 def list_fitness_patients(search: str = None, date_from: str = None, date_to: str = None) -> list[dict]:
     """Retrieve fitness patients from local SQLite database."""

@@ -1,0 +1,22 @@
+{
+    "patient_name": "ahg",
+    "gender": "Male",
+    "relation_type": "S/O:",
+    "relation_name": "j",
+    "report_date": "24/08/2026",
+    "mr_no": "12865",
+    "hb": null,
+    "wbc": null,
+    "neut": null,
+    "lymph": null,
+    "mono": null,
+    "eosino": null,
+    "plt": null,
+    "hiv": "Negative",
+    "hbsag": "Negative",
+    "hcv": "Negative",
+    "vdrl": "Negative",
+    "user_email": "admin@admin.com",
+    "synced": true,
+    "saved_at": "2026-08-24 15:40:19"
+}

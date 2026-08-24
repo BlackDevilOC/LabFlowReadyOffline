@@ -107,12 +107,12 @@
       "IgG Positive"
     ],
     "VDRL SYPHILIS": [
-      "Non-Reactive",
-      "Reactive"
+      "Negative",
+      "Positive"
     ],
     "Anti HCV (ICT)": [
-      "Non-Reactive",
-      "Reactive"
+      "Negative",
+      "Positive"
     ],
     "Anti HCV ELISA": [
       "Non-Reactive",
@@ -166,16 +166,14 @@
       "Both (P.V & P.F)"
     ],
     "VDRL": [
-      "Non-Reactive",
-      "Reactive"
+      "Negative",
+      "Positive"
     ],
     "HBsAg": [
       "Negative",
       "Positive"
     ],
     "Anti HCV": [
-      "Non-Reactive",
-      "Reactive",
       "Negative",
       "Positive"
     ],

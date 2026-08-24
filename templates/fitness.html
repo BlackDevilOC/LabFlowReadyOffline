@@ -3,7 +3,7 @@
 {% block head %}
 <style>
     :root {
-        /* Optimized defaults for small office paper (header disabled by default) */
+        /* Optimized defaults: 45mm top margin */
         --m-top: 45mm;
         --m-right: 15mm;
         --m-bottom: 20mm;
@@ -14,51 +14,80 @@
         box-sizing: border-box;
     }
 
-    /* body styling removed to inherit main theme */
-
-    /* Navigation Controls */
-    #print-btn {
-        position: fixed;
-        top: 75px;
-        right: 80px;
-        z-index: 1000;
-        padding: 10px 20px;
-        cursor: pointer;
-        background: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    #admin-btn {
+    /* Navigation & Action Controls */
+    .header-actions-bar {
         position: fixed;
         top: 75px;
         right: 20px;
         z-index: 1000;
-        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #save-btn {
+        padding: 9px 18px;
         cursor: pointer;
-        background: #333;
+        background: #10b981;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 13px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        transition: background 0.2s;
+    }
+
+    #save-btn:hover {
+        background: #059669;
+    }
+
+    #print-btn {
+        padding: 9px 18px;
+        cursor: pointer;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 13px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        transition: background 0.2s;
+    }
+
+    #print-btn:hover {
+        background: #1d4ed8;
+    }
+
+    #admin-btn {
+        padding: 9px;
+        cursor: pointer;
+        background: #334155;
         color: white;
         border: none;
         border-radius: 50%;
-        width: 45px;
-        height: 45px;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     }
 
     #admin-panel {
         display: none;
         position: fixed;
-        top: 130px;
+        top: 125px;
         right: 20px;
-        width: 220px;
-        background: #222;
+        width: 240px;
+        background: #1e293b;
         color: white;
         padding: 20px;
-        border-radius: 8px;
+        border-radius: 10px;
         z-index: 1001;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        border: 1px solid #334155;
     }
 
     .admin-group {
@@ -69,17 +98,40 @@
         display: block;
         margin-bottom: 5px;
         font-size: 11px;
-        color: #888;
+        color: #94a3b8;
         text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     .admin-group input {
         width: 100%;
-        background: #444;
+        background: #0f172a;
         color: #fff;
-        border: 1px solid #666;
-        padding: 8px;
-        border-radius: 4px;
+        border: 1px solid #475569;
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 13px;
+    }
+
+    /* Status Badge */
+    #status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #334155;
+    }
+
+    #badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #10b981;
     }
 
     /* Report Paper Structure */
@@ -89,11 +141,11 @@
         margin: 20px auto;
         background: white;
         padding: var(--m-top) var(--m-right) var(--m-bottom) var(--m-left);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
         transition: padding 0.1s ease;
     }
 
-    /* Modern Patient Info Card – single professional strip */
+    /* Modern Patient Info Card */
     .patient-info-card {
         border: 1.5px solid #334155;
         border-radius: 12px;
@@ -152,8 +204,7 @@
         min-width: 0;
     }
 
-
-    /* Unified Table System for Left-to-Right Pattern */
+    /* Unified Table System */
     h3 {
         font-size: 15px;
         margin: 25px 0 10px 0;
@@ -169,22 +220,9 @@
         table-layout: fixed;
     }
 
-    /* Matching the reference column distribution */
-    .col-1 {
-        width: 40%;
-    }
-
-    /* Test Name */
-    .col-2 {
-        width: 25%;
-    }
-
-    /* Result */
-    .col-3 {
-        width: 35%;
-    }
-
-    /* Normal Range */
+    .col-1 { width: 40%; }
+    .col-2 { width: 25%; }
+    .col-3 { width: 35%; }
 
     thead th {
         border: 1px solid black;
@@ -201,7 +239,6 @@
         border: none;
     }
 
-    /* Result Cell Logic */
     .res-container {
         display: flex;
         align-items: baseline;
@@ -211,7 +248,7 @@
         font-weight: bold;
         border: none;
         background: transparent;
-        width: 50px;
+        width: 55px;
         text-align: left;
         font-family: inherit;
         font-size: 13px;
@@ -223,20 +260,14 @@
         font-weight: normal;
     }
 
-    /* Serology: dedicated two-column layout */
     .serology-table {
         width: 100%;
         border-collapse: collapse;
         table-layout: fixed;
     }
 
-    .serology-table td:first-child {
-        width: 40%;
-    }
-
-    .serology-table td:nth-child(2) {
-        width: 60%;
-    }
+    .serology-table td:first-child { width: 40%; }
+    .serology-table td:nth-child(2) { width: 60%; }
 
     .serology-table td {
         padding: 7px 8px;
@@ -249,14 +280,13 @@
         font-weight: bold;
         border: none;
         background: transparent;
-        width: 100px;
+        width: 110px;
         text-align: left;
         font-family: inherit;
         font-size: 13px;
         outline: none;
     }
 
-    /* Pathologist: Positioned 5 lines below last test */
     .pathologist {
         margin-top: 80px;
         text-align: right;
@@ -275,7 +305,10 @@
         nav,
         .no-print,
         .sidebar,
-        .top-bar {
+        .top-bar,
+        .header-actions-bar,
+        #admin-panel,
+        #fitness-auth-modal {
             display: none !important;
         }
 
@@ -340,14 +373,22 @@
 
 {% block content %}
 
-<button id="print-btn" class="no-print" onclick="triggerPrint()">Print Report</button>
-<button id="admin-btn" class="no-print" onclick="toggleAdmin(event)">⚙</button>
+<!-- Action Controls Top Right Bar -->
+<div class="header-actions-bar no-print">
+    <div id="status-badge">
+        <span id="badge-dot"></span>
+        <span id="badge-text">Ready</span>
+    </div>
+    <button id="save-btn" onclick="saveFitnessRecord()">Save Record</button>
+    <button id="print-btn" onclick="triggerPrint()">Print Report</button>
+    <button id="admin-btn" onclick="toggleAdmin(event)" title="Margin & Password Controls">⚙</button>
+</div>
 
+<!-- Admin Panel for Margins & Password -->
 <div id="admin-panel" class="no-print">
-    <h4 style="margin-top:0">Margin Control (mm)</h4>
+    <h4 style="margin-top:0; font-size:14px; border-bottom:1px solid #334155; padding-bottom:8px;">Margin Control (mm)</h4>
     <div class="admin-group" style="margin-bottom:10px;">
-        <label
-            style="display:flex;align-items:center;gap:6px;cursor:pointer;color:#fff;text-transform:none;font-size:12px;">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;color:#fff;text-transform:none;font-size:12px;">
             <input type="checkbox" id="inc-header" onchange="toggleHeaderSetting()"> Include Letterhead Header (30mm)
         </label>
     </div>
@@ -355,18 +396,36 @@
     <div class="admin-group"><label>Bottom</label><input type="number" id="m-b" oninput="apply()" value="20"></div>
     <div class="admin-group"><label>Left</label><input type="number" id="m-l" oninput="apply()" value="15"></div>
     <div class="admin-group"><label>Right</label><input type="number" id="m-r" oninput="apply()" value="15"></div>
-    <div class="admin-group" style="margin-top:15px; border-top:1px solid #444; padding-top:10px;">
-        <label>Admin & Records Password</label>
+    <div class="admin-group" style="margin-top:15px; border-top:1px solid #334155; padding-top:10px;">
+        <label>Admin Access Password</label>
         <input type="password" id="m-pwd" placeholder="New Password (default: admin)">
+    </div>
+    <button type="button" onclick="closeAdminPanel()" style="width:100%; margin-top:10px; background:#2563eb; color:#fff; border:none; padding:8px; border-radius:6px; font-weight:600; cursor:pointer;">Save & Close</button>
+</div>
+
+<!-- Fitness Page Password Access Modal Overlay -->
+<div id="fitness-auth-modal" class="no-print" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.75); backdrop-filter:blur(6px); z-index:99999; justify-content:center; align-items:center; padding:16px;">
+    <div style="background:#ffffff; width:100%; max-width:400px; border-radius:12px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.3); padding:28px 24px; text-align:center; font-family:sans-serif; color:#0f172a; border: 1px solid #e2e8f0;">
+        <div style="width:54px; height:54px; background:#eff6ff; color:#2563eb; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto; font-size:24px;">🔒</div>
+        <h3 style="margin:0 0 8px 0; font-size:18px; font-weight:700; color:#0f172a;">Fitness Register Access</h3>
+        <p style="margin:0 0 20px 0; font-size:13px; color:#64748b;">Please enter the password to access the Fitness Report workspace.</p>
+        
+        <div style="margin-bottom:16px; text-align:left;">
+            <input type="password" id="fitness-modal-pwd" placeholder="Enter Access Password" style="width:100%; padding:10px 14px; border:1.5px solid #cbd5e1; border-radius:8px; font-size:14px; outline:none; transition:border 0.2s;" onkeyup="if(event.key==='Enter')window.verifyFitnessModalPassword()">
+            <div id="fitness-modal-err" style="color:#dc2626; font-size:12px; font-weight:600; margin-top:6px; display:none;">Incorrect password. Please try again.</div>
+        </div>
+        
+        <div style="display:flex; gap:10px;">
+            <button type="button" onclick="window.verifyFitnessModalPassword()" style="flex:1; background:#2563eb; color:#fff; border:none; padding:10px 16px; border-radius:8px; font-weight:600; font-size:14px; cursor:pointer; box-shadow:0 2px 4px rgba(37,99,235,0.2);">Unlock Workspace</button>
+        </div>
     </div>
 </div>
 
 <div class="report-page">
-    <!-- Patient info – single professional card -->
+    <!-- Patient Info Card -->
     <div class="patient-info-card">
         <div class="patient-info-grid">
             <!-- Row 1 -->
-            <!-- Column 1: Name -->
             <div class="info-row">
                 <span class="info-label">Name:</span>
                 <span class="info-value">
@@ -374,7 +433,6 @@
                         placeholder="ENTER PATIENT NAME" tabindex="1">
                 </span>
             </div>
-            <!-- Column 2: Gender -->
             <div class="info-row">
                 <span class="info-label">Gender:</span>
                 <span class="info-value">
@@ -384,7 +442,6 @@
                     </select>
                 </span>
             </div>
-            <!-- Column 3: Relation -->
             <div class="info-row">
                 <span class="info-value">
                     <select id="relation-type" class="iv-field"
@@ -399,29 +456,27 @@
             </div>
 
             <!-- Row 2 -->
-            <!-- Column 1: Patient MR # -->
             <div class="info-row">
                 <span class="info-label">Patient MR #:</span>
                 <span class="info-value">
                     <input type="text" id="mr-no" class="iv-field" value="24156" placeholder="ENTER MR #" tabindex="5">
                 </span>
             </div>
-            <!-- Column 2: Date -->
             <div class="info-row">
                 <span class="info-label">Date:</span>
                 <span class="info-value">
                     <input type="text" id="report-date" class="iv-field" value="" tabindex="6">
                 </span>
             </div>
-            <!-- Column 3: empty space to maintain structure -->
             <div></div>
         </div>
     </div>
 
+    <!-- Hematology Section -->
     <div id="cbc-section">
         <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0 10px 0;">
             <h3 style="margin: 0; padding-left: 10px; border-left: 4px solid #333;">Hematology</h3>
-            <button class="remove-btn no-print" onclick="removeSection('cbc-section')" title="Remove Whole CBC Section"
+            <button type="button" class="remove-btn no-print" onclick="window.removeSection('cbc-section', event)" title="Remove Whole CBC Section"
                 style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:16px; padding:0 5px;">✕ Remove CBC Section</button>
         </div>
         <table>
@@ -486,75 +541,78 @@
         </table>
     </div>
 
-    <h3>Serology</h3>
-    <table class="serology-table">
-        <tbody>
-            <tr id="row-hiv">
-                <td>Anti HIV ( ICT )</td>
-                <td>
-                    <select class="sero-val" id="val-hiv"
-                        style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
-                        tabindex="14">
-                        <option value="Negative">Negative</option>
-                        <option value="Positive">Positive</option>
-                        <option value="Not Performed">Not Performed</option>
-                    </select>
-                </td>
-                <td class="no-print" style="width: 40px; text-align: right;">
-                    <button class="remove-btn" onclick="removeRow('row-hiv')" title="Remove Test"
-                        style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
-                </td>
-            </tr>
-            <tr id="row-hbsag">
-                <td>HbsAg ( ICT )</td>
-                <td>
-                    <select class="sero-val" id="val-hbsag"
-                        style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
-                        tabindex="15">
-                        <option value="Negative">Negative</option>
-                        <option value="Positive">Positive</option>
-                        <option value="Not Performed">Not Performed</option>
-                    </select>
-                </td>
-                <td class="no-print" style="width: 40px; text-align: right;">
-                    <button class="remove-btn" onclick="removeRow('row-hbsag')" title="Remove Test"
-                        style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
-                </td>
-            </tr>
-            <tr id="row-hcv">
-                <td>Anti HCV ( ICT )</td>
-                <td>
-                    <select class="sero-val" id="val-hcv"
-                        style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
-                        tabindex="16">
-                        <option value="Negative">Negative</option>
-                        <option value="Positive">Positive</option>
-                        <option value="Not Performed">Not Performed</option>
-                    </select>
-                </td>
-                <td class="no-print" style="width: 40px; text-align: right;">
-                    <button class="remove-btn" onclick="removeRow('row-hcv')" title="Remove Test"
-                        style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
-                </td>
-            </tr>
-            <tr id="row-vdrl">
-                <td>VDRL</td>
-                <td>
-                    <select class="sero-val" id="val-vdrl"
-                        style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
-                        tabindex="17">
-                        <option value="Negative">Negative</option>
-                        <option value="Positive">Positive</option>
-                        <option value="Not Performed">Not Performed</option>
-                    </select>
-                </td>
-                <td class="no-print" style="width: 40px; text-align: right;">
-                    <button class="remove-btn" onclick="removeRow('row-vdrl')" title="Remove Test"
-                        style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Serology Section -->
+    <div id="serology-section">
+        <h3>Serology</h3>
+        <table class="serology-table">
+            <tbody>
+                <tr id="row-hiv">
+                    <td>Anti HIV ( ICT )</td>
+                    <td>
+                        <select class="sero-val" id="val-hiv"
+                            style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
+                            tabindex="14">
+                            <option value="Negative">Negative</option>
+                            <option value="Positive">Positive</option>
+                            <option value="Not Performed">Not Performed</option>
+                        </select>
+                    </td>
+                    <td class="no-print" style="width: 40px; text-align: right;">
+                        <button type="button" class="remove-btn" onclick="window.removeRow('row-hiv', event)" title="Remove Test"
+                            style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
+                    </td>
+                </tr>
+                <tr id="row-hbsag">
+                    <td>HbsAg ( ICT )</td>
+                    <td>
+                        <select class="sero-val" id="val-hbsag"
+                            style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
+                            tabindex="15">
+                            <option value="Negative">Negative</option>
+                            <option value="Positive">Positive</option>
+                            <option value="Not Performed">Not Performed</option>
+                        </select>
+                    </td>
+                    <td class="no-print" style="width: 40px; text-align: right;">
+                        <button type="button" class="remove-btn" onclick="window.removeRow('row-hbsag', event)" title="Remove Test"
+                            style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
+                    </td>
+                </tr>
+                <tr id="row-hcv">
+                    <td>Anti HCV ( ICT )</td>
+                    <td>
+                        <select class="sero-val" id="val-hcv"
+                            style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
+                            tabindex="16">
+                            <option value="Negative">Negative</option>
+                            <option value="Positive">Positive</option>
+                            <option value="Not Performed">Not Performed</option>
+                        </select>
+                    </td>
+                    <td class="no-print" style="width: 40px; text-align: right;">
+                        <button type="button" class="remove-btn" onclick="window.removeRow('row-hcv', event)" title="Remove Test"
+                            style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
+                    </td>
+                </tr>
+                <tr id="row-vdrl">
+                    <td>VDRL</td>
+                    <td>
+                        <select class="sero-val" id="val-vdrl"
+                            style="cursor:pointer; border:none; background:transparent; font-weight:bold; font-family:inherit; font-size:13px; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;"
+                            tabindex="17">
+                            <option value="Negative">Negative</option>
+                            <option value="Positive">Positive</option>
+                            <option value="Not Performed">Not Performed</option>
+                        </select>
+                    </td>
+                    <td class="no-print" style="width: 40px; text-align: right;">
+                        <button type="button" class="remove-btn" onclick="window.removeRow('row-vdrl', event)" title="Remove Test"
+                            style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:14px; padding:0 5px;">✕</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 80px;">
         <div></div>
@@ -566,45 +624,81 @@
 
 {% block scripts %}
 <script>
-    (function checkFitnessAccess() {
-        const expectedPwd = localStorage.getItem('fitness_admin_password') || 'admin';
-        let sessionPwd = sessionStorage.getItem('fitness_pwd');
-        if (sessionPwd !== expectedPwd) {
-            const entered = prompt("Enter Fitness Register Access Password:");
-            if (entered === expectedPwd) {
-                sessionStorage.setItem('fitness_pwd', entered);
-            } else {
-                alert("Incorrect password. Access denied.");
-                document.body.innerHTML = `
-                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:70vh; font-family:sans-serif; color:#721c24; background:#f8d7da; border:1px solid #f5c6cb; padding:40px; border-radius:12px; margin:40px auto; max-width:600px; text-align:center;">
-                        <h2>🔒 Access Denied</h2>
-                        <p style="font-size:15px; margin:15px 0;">A valid password is required to access the Fitness Register page.</p>
-                        <button onclick="window.location.reload()" style="padding:10px 20px; background:#dc3545; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">Try Again</button>
-                    </div>
-                `;
-                return;
+    // Global row and section removal helpers attached to window
+    window.removeRow = function(rowId, e) {
+        if (e && e.preventDefault) e.preventDefault();
+        const row = document.getElementById(rowId);
+        if (row) {
+            row.remove();
+            window.markUnsavedChanges();
+        }
+    };
+
+    window.removeSection = function(secId, e) {
+        if (e && e.preventDefault) e.preventDefault();
+        const sec = document.getElementById(secId);
+        if (sec) {
+            sec.remove();
+            window.markUnsavedChanges();
+        }
+    };
+
+    window.markUnsavedChanges = function() {
+        const badgeDot = document.getElementById('badge-dot');
+        const badgeText = document.getElementById('badge-text');
+        if (badgeDot) badgeDot.style.background = '#f59e0b';
+        if (badgeText) badgeText.textContent = 'Unsaved Changes';
+    };
+
+    // Password Access Modal Verification
+    function checkFitnessAccess() {
+        const isUnlocked = sessionStorage.getItem('fitness_page_unlocked');
+        if (isUnlocked !== 'true') {
+            const modal = document.getElementById('fitness-auth-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                const pwdInput = document.getElementById('fitness-modal-pwd');
+                if (pwdInput) setTimeout(() => pwdInput.focus(), 100);
             }
         }
-    })();
+    }
+
+    window.verifyFitnessModalPassword = function() {
+        const expectedPwd = localStorage.getItem('fitness_admin_password') || 'admin';
+        const pwdInput = document.getElementById('fitness-modal-pwd');
+        const errDiv = document.getElementById('fitness-modal-err');
+        const entered = pwdInput ? pwdInput.value : '';
+
+        if (entered === expectedPwd) {
+            sessionStorage.setItem('fitness_page_unlocked', 'true');
+            sessionStorage.setItem('fitness_pwd', entered);
+            const modal = document.getElementById('fitness-auth-modal');
+            if (modal) modal.style.display = 'none';
+        } else {
+            if (errDiv) errDiv.style.display = 'block';
+            if (pwdInput) {
+                pwdInput.style.borderColor = '#dc2626';
+                pwdInput.select();
+            }
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', checkFitnessAccess);
 
     const panel = document.getElementById('admin-panel');
     const btn = document.getElementById('admin-btn');
 
     function toggleAdmin(e) {
         e.stopPropagation();
-        if (panel.style.display === 'block') close();
+        if (panel.style.display === 'block') closeAdminPanel();
         else {
             const currentPwd = localStorage.getItem('fitness_admin_password') || 'admin';
-            const entered = prompt("Admin Password:");
-            if (entered === currentPwd) {
-                const pwdInput = document.getElementById('m-pwd');
-                if (pwdInput) pwdInput.value = currentPwd;
-                panel.style.display = 'block';
-            } else if (entered !== null) {
-                alert("Incorrect Admin Password.");
-            }
+            const pwdInput = document.getElementById('m-pwd');
+            if (pwdInput) pwdInput.value = currentPwd;
+            panel.style.display = 'block';
         }
     }
+    window.toggleAdmin = toggleAdmin;
 
     function toggleHeaderSetting() {
         const inc = document.getElementById('inc-header').checked;
@@ -616,6 +710,7 @@
         }
         apply();
     }
+    window.toggleHeaderSetting = toggleHeaderSetting;
 
     function apply() {
         const r = document.documentElement;
@@ -624,8 +719,9 @@
         r.style.setProperty('--m-left', document.getElementById('m-l').value + 'mm');
         r.style.setProperty('--m-right', document.getElementById('m-r').value + 'mm');
     }
+    window.apply = apply;
 
-    function close() {
+    function closeAdminPanel() {
         const pwdInput = document.getElementById('m-pwd');
         const newPwd = pwdInput ? pwdInput.value.trim() : '';
         if (newPwd) {
@@ -643,43 +739,11 @@
         localStorage.setItem('medicalReportConfig', JSON.stringify(cfg));
         panel.style.display = 'none';
     }
+    window.closeAdminPanel = closeAdminPanel;
 
     document.addEventListener('click', (e) => {
-        if (panel.style.display === 'block' && !panel.contains(e.target) && e.target !== btn) close();
+        if (panel.style.display === 'block' && !panel.contains(e.target) && e.target !== btn) closeAdminPanel();
     });
-
-    // Remove row logic
-    function removeRow(rowId) {
-        const row = document.getElementById(rowId);
-        if (row) {
-            row.remove();
-            markUnsavedChanges();
-        }
-    }
-
-    // Remove entire section logic
-    function removeSection(secId) {
-        const sec = document.getElementById(secId);
-        if (sec) {
-            sec.remove();
-            markUnsavedChanges();
-        }
-    }
-
-    function markUnsavedChanges() {
-        const syncDot = document.getElementById('sync-dot');
-        const syncText = document.getElementById('sync-text');
-        const syncStatus = document.getElementById('sync-status');
-        const badgeDot = document.getElementById('badge-dot');
-        const badgeText = document.getElementById('badge-text');
-        if (syncStatus) {
-            syncStatus.style.background = '#6c757d';
-            if (syncDot) syncDot.style.background = '#ffc107';
-            if (syncText) syncText.textContent = 'Unsaved Changes';
-        }
-        if (badgeDot) badgeDot.style.background = '#ffc107';
-        if (badgeText) badgeText.textContent = 'Unsaved Changes';
-    }
 
     // Save Patient Record
     async function saveFitnessRecord() {
@@ -687,56 +751,33 @@
         const rName = (document.getElementById('relation-name')?.value || '').trim();
         const mrNo = (document.getElementById('mr-no')?.value || '').trim();
 
-        // Check if the record is just the initial default placeholder template (e.g. "rehan", "24156", "Mehar ahmed")
+        // Check if default placeholder template
         const isDefaultPlaceholder = !pName ||
             pName.toLowerCase() === 'rehan' ||
             mrNo === '24156' ||
             rName.toLowerCase() === 'mehar ahmed';
 
         if (isDefaultPlaceholder) {
-            console.log("Default template placeholder record detected — skipping database save.");
+            console.log("Default template placeholder record — skipping auto DB save.");
             return;
         }
 
-        const syncDot = document.getElementById('sync-dot');
-        const syncText = document.getElementById('sync-text');
-        const syncStatus = document.getElementById('sync-status');
+        const badgeDot = document.getElementById('badge-dot');
+        const badgeText = document.getElementById('badge-text');
         const saveBtn = document.getElementById('save-btn');
 
         function setStatus(state, text) {
-            const badgeDot = document.getElementById('badge-dot');
-            const badgeText = document.getElementById('badge-text');
-
-            if (syncStatus) {
-                if (syncText) syncText.textContent = text;
-            }
-
             if (state === 'saving') {
-                if (syncStatus) syncStatus.style.background = '#007bff';
-                if (syncDot) syncDot.style.background = '#ffffff';
-                if (saveBtn) {
-                    saveBtn.disabled = true;
-                    saveBtn.textContent = 'Saving...';
-                }
-                if (badgeDot) badgeDot.style.background = '#007bff';
+                if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = 'Saving...'; }
+                if (badgeDot) badgeDot.style.background = '#2563eb';
                 if (badgeText) badgeText.textContent = '... Saving to database';
             } else if (state === 'synced') {
-                if (syncStatus) syncStatus.style.background = '#28a745';
-                if (syncDot) syncDot.style.background = '#ffffff';
-                if (saveBtn) {
-                    saveBtn.disabled = false;
-                    saveBtn.textContent = 'Save Record';
-                }
-                if (badgeDot) badgeDot.style.background = '#28a745';
+                if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = 'Save Record'; }
+                if (badgeDot) badgeDot.style.background = '#10b981';
                 if (badgeText) badgeText.textContent = '✓ Record Saved to Database';
             } else if (state === 'offline') {
-                if (syncStatus) syncStatus.style.background = '#dc3545';
-                if (syncDot) syncDot.style.background = '#ffffff';
-                if (saveBtn) {
-                    saveBtn.disabled = false;
-                    saveBtn.textContent = 'Save Record';
-                }
-                if (badgeDot) badgeDot.style.background = '#ffc107';
+                if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = 'Save Record'; }
+                if (badgeDot) badgeDot.style.background = '#f59e0b';
                 if (badgeText) badgeText.textContent = 'Saved Locally (Sync Pending)';
             }
         }
@@ -769,9 +810,7 @@
         try {
             const response = await fetch('/api/fitness/save', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
 
@@ -784,23 +823,23 @@
             console.error("Save error:", e);
             setStatus('offline', 'Saved Locally/Offline');
 
-        // Backup locally in local storage queue for sync retry
-        try {
-            const localQueue = JSON.parse(localStorage.getItem('fitnessSyncQueue') || '[]');
-            payload.offline_id = 'off_' + Date.now();
-            payload.queued_at = new Date().toISOString();
-            localQueue.push(payload);
-            localStorage.setItem('fitnessSyncQueue', JSON.stringify(localQueue));
-        } catch (err) {
-            console.error("Local storage error:", err);
+            try {
+                const localQueue = JSON.parse(localStorage.getItem('fitnessSyncQueue') || '[]');
+                payload.offline_id = 'off_' + Date.now();
+                payload.queued_at = new Date().toISOString();
+                localQueue.push(payload);
+                localStorage.setItem('fitnessSyncQueue', JSON.stringify(localQueue));
+            } catch (err) {
+                console.error("Local storage error:", err);
+            }
         }
     }
+    window.saveFitnessRecord = saveFitnessRecord;
 
-    // Save Now, Push Later: Automatic background flusher for offline queue
+    // Automatic background flusher for offline queue
     async function flushFitnessSyncQueue() {
         const localQueue = JSON.parse(localStorage.getItem('fitnessSyncQueue') || '[]');
         if (!localQueue.length) return;
-        console.log(`Attempting background sync for ${localQueue.length} pending offline fitness records...`);
         const remaining = [];
         for (const payload of localQueue) {
             try {
@@ -816,11 +855,10 @@
         }
         localStorage.setItem('fitnessSyncQueue', JSON.stringify(remaining));
         if (remaining.length === 0) {
-            console.log("All offline fitness records successfully synced!");
             const badgeDot = document.getElementById('badge-dot');
             const badgeText = document.getElementById('badge-text');
             if (badgeText) badgeText.textContent = '✓ All Offline Records Synced';
-            if (badgeDot) badgeDot.style.background = '#28a745';
+            if (badgeDot) badgeDot.style.background = '#10b981';
         }
     }
 
@@ -828,10 +866,10 @@
     setInterval(flushFitnessSyncQueue, 30000);
 
     async function triggerPrint() {
-        // Silently save record before printing
         await saveFitnessRecord();
         window.print();
     }
+    window.triggerPrint = triggerPrint;
 
     window.onload = () => {
         const savedPwd = localStorage.getItem('fitness_admin_password') || 'admin';
@@ -865,14 +903,9 @@
         }
 
         // Auto-randomize CBC values within normal ranges
-        function rand(min, max, dec) {
-            return (Math.random() * (max - min) + min).toFixed(dec);
-        }
-        function randInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+        function rand(min, max, dec) { return (Math.random() * (max - min) + min).toFixed(dec); }
+        function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
-        // Set CBC values only if elements exist
         const hbField = document.getElementById('val-hb');
         if (hbField) hbField.value = rand(12.6, 15.5, 1);
 
@@ -882,12 +915,10 @@
         const pltField = document.getElementById('val-plt');
         if (pltField) pltField.value = randInt(200, 400);
 
-        // Differential must sum to 100
         let neut = randInt(55, 70);
         let lymph = randInt(20, 35);
         let mono = randInt(2, 6);
         let eosino = 100 - neut - lymph - mono;
-        // clamp eosinophils to valid range, adjust lymph if needed
         if (eosino < 1) { lymph += eosino - 1; eosino = 1; }
         if (eosino > 6) { lymph += eosino - 5; eosino = 5; }
 
@@ -906,26 +937,13 @@
         // Listen to changes on fields to reset status
         const allInputs = document.querySelectorAll('.report-page input, .report-page select');
         allInputs.forEach(input => {
-            input.addEventListener('input', () => {
-                const syncDot = document.getElementById('sync-dot');
-                const syncText = document.getElementById('sync-text');
-                const syncStatus = document.getElementById('sync-status');
-                const badgeDot = document.getElementById('badge-dot');
-                const badgeText = document.getElementById('badge-text');
-                if (syncStatus) {
-                    syncStatus.style.background = '#6c757d';
-                    if (syncDot) syncDot.style.background = '#ffc107';
-                    if (syncText) syncText.textContent = 'Unsaved Changes';
-                }
-                if (badgeDot) badgeDot.style.background = '#ffc107';
-                if (badgeText) badgeText.textContent = 'Unsaved Changes';
-            });
+            input.addEventListener('input', window.markUnsavedChanges);
         });
     };
 </script>
 
 <script>
-    // Pre-fill from Records page: if opened with ?prefill=1, load sessionStorage data
+    // Pre-fill from Records page: if opened with ?prefill=1
     (function prefillFromRecords() {
         const params = new URLSearchParams(window.location.search);
         if (!params.get('prefill')) return;
@@ -941,7 +959,6 @@
             set('relation-name', r.relation_name);
             set('mr-no', r.mr_no);
             set('report-date', r.report_date);
-            // Hematology
             set('val-hb', r.hb);
             set('val-wbc', r.wbc);
             set('val-neut', r.neut);
@@ -949,12 +966,10 @@
             set('val-mono', r.mono);
             set('val-eosino', r.eosino);
             set('val-plt', r.plt);
-            // Serology
             set('val-hiv', r.hiv);
             set('val-hbsag', r.hbsag);
             set('val-hcv', r.hcv);
             set('val-vdrl', r.vdrl);
-            // Auto-print after short delay for rendering
             setTimeout(() => window.print(), 600);
         } catch (e) { console.error('Prefill error:', e); }
     })();

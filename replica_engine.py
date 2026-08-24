@@ -322,10 +322,20 @@ class SupabaseReplicaEngine:
     def _get_sqlite_conn(self, location: str) -> sqlite3.Connection:
         """Returns a SQLite connection for a given replica location in WAL mode."""
         db_path = os.path.join(location, "database", "labflow_replica.db")
+        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+        if os.path.exists(db_path):
+            try:
+                import stat
+                os.chmod(db_path, stat.S_IWRITE | stat.S_IREAD)
+            except Exception:
+                pass
         conn = sqlite3.connect(db_path, timeout=30)
         conn.row_factory = sqlite3.Row
-        conn.execute("PRAGMA journal_mode=WAL")
-        conn.execute("PRAGMA synchronous=NORMAL")
+        try:
+            conn.execute("PRAGMA journal_mode=WAL")
+            conn.execute("PRAGMA synchronous=NORMAL")
+        except Exception:
+            pass
         return conn
 
     def _sync_sqlite_table(self, location: str, table_name: str, records: List[Dict[str, Any]], primary_keys: List[str]):
@@ -698,15 +708,29 @@ CREATE TABLE IF NOT EXISTS "{table_name}" (
                                 if not loc:
                                     continue
                                 try:
+                                    import stat
                                     # JSON snapshot
                                     json_path = os.path.join(loc, "tables", f"{table_name}.json")
                                     tmp_json = json_path + ".tmp"
+                                    if os.path.exists(json_path):
+                                        try: os.chmod(json_path, stat.S_IWRITE | stat.S_IREAD)
+                                        except Exception: pass
                                     with open(tmp_json, "w", encoding="utf-8") as jf:
                                         json.dump(all_rows, jf, indent=2, ensure_ascii=False)
-                                    os.replace(tmp_json, json_path)
+                                    try:
+                                        os.replace(tmp_json, json_path)
+                                    except Exception:
+                                        with open(json_path, "w", encoding="utf-8") as jf:
+                                            json.dump(all_rows, jf, indent=2, ensure_ascii=False)
+                                        if os.path.exists(tmp_json):
+                                            try: os.remove(tmp_json)
+                                            except Exception: pass
 
                                     # Table SQL files
                                     table_sql_path = os.path.join(loc, "sql", f"{table_name}_postgres.sql")
+                                    if os.path.exists(table_sql_path):
+                                        try: os.chmod(table_sql_path, stat.S_IWRITE | stat.S_IREAD)
+                                        except Exception: pass
                                     with open(table_sql_path, "w", encoding="utf-8") as sf:
                                         sf.write(full_pg_sql)
                                 except Exception as write_err:

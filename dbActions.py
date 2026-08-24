@@ -1085,8 +1085,8 @@ def authenticate_user(email: str, password: str):
 def save_fitness_record_db(item: dict, user="System"):
     try:
         save_log(item, category="SAVE_FITNESS_PAYLOAD", user=user)
-        supabase : Client = init_supabase()
-        
+        supabase: Client = init_supabase()
+
         db_payload = {
             "patient_name": item.get("patient_name"),
             "gender": item.get("gender"),
@@ -1107,13 +1107,28 @@ def save_fitness_record_db(item: dict, user="System"):
             "vdrl": item.get("vdrl"),
             "created_by": item.get("user_email") or user
         }
-        
-        response = supabase.table("fitness_patients").insert(db_payload).execute()
+
+        mr_no = item.get("mr_no")
+        existing_id = None
+        if mr_no and str(mr_no).strip():
+            try:
+                chk = supabase.table("fitness_patients").select("id").eq("mr_no", str(mr_no).strip()).execute()
+                if chk.data and len(chk.data) > 0:
+                    existing_id = chk.data[0]["id"]
+            except Exception as chk_err:
+                logger.warning(f"Check existing fitness patient error: {chk_err}")
+
+        if existing_id:
+            response = supabase.table("fitness_patients").update(db_payload).eq("id", existing_id).execute()
+            logger.info(f"Successfully updated existing fitness record in Supabase. ID: {existing_id}")
+        else:
+            response = supabase.table("fitness_patients").insert(db_payload).execute()
+            logger.info(f"Successfully saved new fitness record to Supabase. ID: {response.data[0]['id'] if response.data else 'OK'}")
+
         if not response.data:
-            logger.error("No data returned from save_fitness_record_db insert!")
+            logger.error("No data returned from save_fitness_record_db!")
             return None
-        
-        logger.info(f"Successfully saved fitness record to Supabase. ID: {response.data[0]['id']}")
+
         return response.data[0]
     except Exception as e:
         log_error(e, "SAVE_FITNESS_RECORD_FAILED", user=user)
