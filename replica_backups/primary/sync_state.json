@@ -1,39 +1,39 @@
 {
   "version": "1.0.0",
-  "last_sync_time": "2026-08-13T12:06:37.407003+00:00",
+  "last_sync_time": "2026-08-24T09:19:36.893861+00:00",
   "last_sync_type": "delta",
-  "total_sync_cycles": 2,
+  "total_sync_cycles": 6,
   "tables": {
     "patients": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-13T12:04:14.864637+00:00",
-      "max_id": 101333,
-      "row_count": 1244,
-      "last_sync_time": "2026-08-13T12:06:35.494889+00:00",
+      "last_created_at": "2026-08-24T09:02:06.855825+00:00",
+      "max_id": 104213,
+      "row_count": 4124,
+      "last_sync_time": "2026-08-24T09:19:34.848543+00:00",
       "status": "healthy"
     },
     "test_results_all": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-13T12:04:15.976179+00:00",
-      "max_id": 172542,
+      "last_created_at": "2026-08-24T09:02:08.47798+00:00",
+      "max_id": 180803,
       "row_count": 3779,
-      "last_sync_time": "2026-08-13T12:06:35.668878+00:00",
+      "last_sync_time": "2026-08-24T09:19:35.009542+00:00",
       "status": "healthy"
     },
     "tests": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-07T06:54:25.966168+00:00",
-      "max_id": 252,
+      "last_created_at": "2026-08-13T13:53:52.750681+00:00",
+      "max_id": 254,
       "row_count": 211,
-      "last_sync_time": "2026-08-13T12:06:35.860801+00:00",
+      "last_sync_time": "2026-08-24T09:19:35.172095+00:00",
       "status": "healthy"
     },
     "test_groups": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-07T06:54:53.926534+00:00",
-      "max_id": 112,
+      "last_created_at": "2026-08-13T13:54:28.769465+00:00",
+      "max_id": 113,
       "row_count": 97,
-      "last_sync_time": "2026-08-13T12:06:36.017043+00:00",
+      "last_sync_time": "2026-08-24T09:19:35.330417+00:00",
       "status": "healthy"
     },
     "shift": {
@@ -41,15 +41,15 @@
       "last_created_at": "2026-05-30T08:06:55.197257+00:00",
       "max_id": 5,
       "row_count": 5,
-      "last_sync_time": "2026-08-13T12:06:36.175638+00:00",
+      "last_sync_time": "2026-08-24T09:19:35.488736+00:00",
       "status": "healthy"
     },
     "users": {
       "last_updated_at": null,
-      "last_created_at": "2026-08-12T11:14:27.821478+00:00",
-      "max_id": 13,
+      "last_created_at": "2026-08-21T12:51:50.804433+00:00",
+      "max_id": 15,
       "row_count": 13,
-      "last_sync_time": "2026-08-13T12:06:36.335173+00:00",
+      "last_sync_time": "2026-08-24T09:19:35.638737+00:00",
       "status": "healthy"
     },
     "remarks": {
@@ -57,7 +57,7 @@
       "last_created_at": "2026-06-01T09:07:50.136776+00:00",
       "max_id": 54,
       "row_count": 54,
-      "last_sync_time": "2026-08-13T12:06:36.503241+00:00",
+      "last_sync_time": "2026-08-24T09:19:35.795734+00:00",
       "status": "healthy"
     },
     "invoice_settings": {
@@ -65,7 +65,7 @@
       "last_created_at": null,
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-13T12:06:36.665885+00:00",
+      "last_sync_time": "2026-08-24T09:19:35.953400+00:00",
       "status": "healthy"
     },
     "print_settings": {
@@ -73,15 +73,15 @@
       "last_created_at": "2026-02-11T20:23:29.470976",
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-13T12:06:36.820102+00:00",
+      "last_sync_time": "2026-08-24T09:19:36.110088+00:00",
       "status": "healthy"
     },
     "app_settings": {
-      "last_updated_at": "2026-08-11T15:30:25.544252+00:00",
+      "last_updated_at": "2026-08-19T14:17:42.269841+00:00",
       "last_created_at": null,
       "max_id": 1,
       "row_count": 1,
-      "last_sync_time": "2026-08-13T12:06:36.982069+00:00",
+      "last_sync_time": "2026-08-24T09:19:36.259646+00:00",
       "status": "healthy"
     },
     "lab_metadata": {
@@ -95,9 +95,9 @@
     "analytics_snapshots": {
       "last_updated_at": null,
       "last_created_at": null,
-      "max_id": 60,
+      "max_id": 100,
       "row_count": 31,
-      "last_sync_time": "2026-08-13T12:06:37.147334+00:00",
+      "last_sync_time": "2026-08-24T09:19:36.407283+00:00",
       "status": "healthy"
     }
   }

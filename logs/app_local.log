@@ -19614,3 +19614,217 @@ postgrest.exceptions.APIError: {'message': 'Cannot coerce the result to a single
 2026-08-13 17:06:37,409 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2133ms. Total updated: 0 rows across 11 tables.
 2026-08-13 17:06:40,484 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 1288
 2026-08-13 17:06:40,498 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 1288, date=None
+2026-08-24 14:09:48,191 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-24 14:09:51,591 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-24 14:09:51,687 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-24 14:09:51,750 - INFO - [LabFlow] - Triggered auto-push of pending offline patients on app boot.
+2026-08-24 14:09:51,758 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-24 14:09:51,760 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-24 14:09:51,760 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-24 14:09:51,767 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-24 14:09:52,175 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-24 14:09:52,180 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-24 14:09:52,206 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-24 14:09:57,978 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-24 14:10:03,087 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-24 14:10:03,481 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-24 14:10:03,709 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:04,217 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-24 14:10:04,448 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-24 14:10:04,450 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-24 14:10:04,738 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-24 14:10:04,788 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-24 14:10:04,986 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-24 14:10:05,195 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-24 14:10:05,401 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-24 14:10:05,610 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-24 14:10:05,939 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:05,994 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-24 14:10:05,996 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-24 14:10:06,216 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_groups' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:06,382 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'shift' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:06,530 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'users' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:06,687 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'remarks' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:06,861 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'invoice_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:07,027 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'print_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:07,185 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'app_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:07,407 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'analytics_snapshots' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:10:07,887 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 16120ms. Total updated: 16223 rows across 11 tables.
+2026-08-24 14:10:08,355 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-24 14:10:10,432 - INFO - [LabFlow] - Accessing Fluid Reports Hub
+2026-08-24 14:10:11,890 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:10:16,546 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:10:17,905 - INFO - [LabFlow] - Local JSON save success: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_24156_1787562617905.json
+2026-08-24 14:10:17,907 - INFO - [LabFlow] - Background Sync: Single attempt for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_24156_1787562617905.json
+2026-08-24 14:10:17,909 - INFO - [LabFlow] - [USER: admin@admin.com] [SAVE_FITNESS_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'rehan', 'gender': 'Male', 'relation_type': 'S/O:', 'relation_name': 'Mehar ahmed', 'report_date': '24/08/2026', 'mr_no': '24156', 'hb': '15.0', 'wbc': '8.0', 'neut': '60', 'lymph': '33', 'mono': '02', 'eosino': '05', 'plt': '398', 'hiv': 'Negative', 'hbsag': 'Negative', 'hcv': 'Negative', 'vdrl': 'Negative', 'user_email': 'admin@admin.com'}
+2026-08-24 14:10:18,170 - INFO - [LabFlow] - Successfully saved fitness record to Supabase. ID: 100198
+2026-08-24 14:10:18,173 - INFO - [LabFlow] - Background Sync: Single success for D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\records\fitness_24156_1787562617905.json
+2026-08-24 14:10:24,090 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:10:24,616 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-24 14:10:25,760 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:10:27,944 - INFO - [LabFlow] - Accessing Fluid Reports Hub
+2026-08-24 14:10:28,865 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:10:30,036 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-24 14:10:30,037 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2124ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:10:30,927 - INFO - [LabFlow] - User requested logout
+2026-08-24 14:10:30,932 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-24 14:10:52,364 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2314ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:11:15,040 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2526ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:11:37,710 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2658ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:12:00,155 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2428ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:12:22,251 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2088ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:12:44,480 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2213ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:13:07,139 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2649ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:13:29,298 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2139ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:13:51,386 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2077ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:14:13,567 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2169ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:14:29,030 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-24 14:14:29,818 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-24 14:14:34,745 - WARNING - [LabFlow] - Invoice settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
+2026-08-24 14:14:34,997 - WARNING - [LabFlow] - Lab print settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\print_settings.json'
+2026-08-24 14:14:35,213 - ERROR - [LabFlow] - [USER: System] [SYNC_USER_PREFERENCES_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 298, in sync_user_preferences_cache
+    shifts = sync_shifts_cache()
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 281, in sync_shifts_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+2026-08-24 14:14:35,456 - ERROR - [LabFlow] - [USER: System] [SYNC_REMARKS_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 732, in sync_remarks_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+2026-08-24 14:14:35,464 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-24 14:14:35,715 - WARNING - [LabFlow] - Offline DB sync tests failed: attempt to write a readonly database
+2026-08-24 14:14:35,779 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-24 14:14:35,876 - WARNING - [LabFlow] - Offline DB sync test groups failed: attempt to write a readonly database
+2026-08-24 14:14:36,025 - WARNING - [LabFlow] - Offline DB sync shifts failed: attempt to write a readonly database
+2026-08-24 14:14:36,176 - WARNING - [LabFlow] - Offline DB sync users failed: attempt to write a readonly database
+2026-08-24 14:14:36,334 - WARNING - [LabFlow] - Offline DB sync remarks failed: attempt to write a readonly database
+2026-08-24 14:14:36,592 - WARNING - [LabFlow] - Offline DB sync invoice settings failed: attempt to write a readonly database
+2026-08-24 14:14:36,594 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-24 14:14:36,630 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3049ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:14:38,025 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-24 14:14:39,889 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-24 14:14:47,569 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:14:48,785 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-24 14:14:59,786 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3148ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:15:10,235 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-24 14:15:12,489 - INFO - [LabFlow] - Loaded 198 fitness records from DB
+2026-08-24 14:15:22,100 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2301ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:15:45,005 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2894ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:16:07,331 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2312ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:16:29,703 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2353ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:16:34,934 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-24 14:16:36,569 - INFO - [LabFlow] - User requested logout
+2026-08-24 14:16:36,574 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-24 14:16:46,294 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-24 14:16:47,183 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-24 14:16:51,468 - WARNING - [LabFlow] - Invoice settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
+2026-08-24 14:16:51,705 - WARNING - [LabFlow] - Lab print settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\print_settings.json'
+2026-08-24 14:16:51,923 - ERROR - [LabFlow] - [USER: System] [SYNC_USER_PREFERENCES_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 298, in sync_user_preferences_cache
+    shifts = sync_shifts_cache()
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 281, in sync_shifts_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+2026-08-24 14:16:52,171 - ERROR - [LabFlow] - [USER: System] [SYNC_REMARKS_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 732, in sync_remarks_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+2026-08-24 14:16:52,175 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-24 14:16:52,423 - WARNING - [LabFlow] - Offline DB sync tests failed: attempt to write a readonly database
+2026-08-24 14:16:52,498 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-24 14:16:52,589 - WARNING - [LabFlow] - Offline DB sync test groups failed: attempt to write a readonly database
+2026-08-24 14:16:52,728 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3006ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:16:52,733 - WARNING - [LabFlow] - Offline DB sync shifts failed: attempt to write a readonly database
+2026-08-24 14:16:52,898 - WARNING - [LabFlow] - Offline DB sync users failed: attempt to write a readonly database
+2026-08-24 14:16:53,063 - WARNING - [LabFlow] - Offline DB sync remarks failed: attempt to write a readonly database
+2026-08-24 14:16:53,281 - WARNING - [LabFlow] - Offline DB sync invoice settings failed: attempt to write a readonly database
+2026-08-24 14:16:53,282 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-24 14:17:09,216 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:17:10,609 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:17:11,217 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-24 14:17:14,888 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2152ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:17:15,625 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:17:17,176 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-24 14:17:18,253 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-24 14:17:23,859 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-24 14:17:27,534 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-24 14:17:27,586 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-24 14:17:27,623 - INFO - [LabFlow] - Triggered auto-push of pending offline patients on app boot.
+2026-08-24 14:17:27,628 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-24 14:17:27,633 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-24 14:17:27,634 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-24 14:17:27,636 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-24 14:17:27,832 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-24 14:17:27,854 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-24 14:17:27,975 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-24 14:17:29,593 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:29,759 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-24 14:17:30,034 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [WinError 5] Access is denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\patients.json.tmp' -> 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\patients.json'
+2026-08-24 14:17:34,051 - WARNING - [LabFlow] - Invoice settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
+2026-08-24 14:17:34,263 - WARNING - [LabFlow] - Lab print settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\print_settings.json'
+2026-08-24 14:17:34,498 - ERROR - [LabFlow] - [USER: System] [SYNC_USER_PREFERENCES_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 298, in sync_user_preferences_cache
+    shifts = sync_shifts_cache()
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 281, in sync_shifts_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+2026-08-24 14:17:34,982 - ERROR - [LabFlow] - [USER: System] [SYNC_REMARKS_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 732, in sync_remarks_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+2026-08-24 14:17:34,985 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-24 14:17:35,303 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-24 14:17:35,438 - WARNING - [LabFlow] - Offline DB sync tests failed: attempt to write a readonly database
+2026-08-24 14:17:35,814 - WARNING - [LabFlow] - Offline DB sync test groups failed: attempt to write a readonly database
+2026-08-24 14:17:35,961 - WARNING - [LabFlow] - Offline DB sync shifts failed: attempt to write a readonly database
+2026-08-24 14:17:36,557 - WARNING - [LabFlow] - Offline DB sync users failed: attempt to write a readonly database
+2026-08-24 14:17:36,709 - WARNING - [LabFlow] - Offline DB sync remarks failed: attempt to write a readonly database
+2026-08-24 14:17:36,906 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-24 14:17:36,919 - WARNING - [LabFlow] - Offline DB sync invoice settings failed: attempt to write a readonly database
+2026-08-24 14:17:36,922 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-24 14:17:40,634 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-24 14:17:41,603 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:42,362 - INFO - [LabFlow] - Loaded 198 fitness records from DB
+2026-08-24 14:17:42,897 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [WinError 5] Access is denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\test_results_all.json.tmp' -> 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\test_results_all.json'
+2026-08-24 14:17:43,444 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:43,470 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\sql\\tests_postgres.sql'
+2026-08-24 14:17:43,647 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_groups' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:43,811 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'shift' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:43,968 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'users' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:44,142 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'remarks' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:44,335 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'invoice_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:44,504 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'print_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:44,675 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'app_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:44,890 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'analytics_snapshots' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-24 14:17:45,361 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 17722ms. Total updated: 16223 rows across 11 tables.
+2026-08-24 14:18:07,624 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2253ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:18:29,986 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2349ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:18:52,377 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2372ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:19:14,602 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2207ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:19:26,866 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-24 14:19:27,744 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-24 14:19:28,731 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-24 14:19:29,686 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-24 14:19:33,121 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4177, date=None
+2026-08-24 14:19:35,562 - INFO - [LabFlow] - Accessing Fluid Reports Hub
+2026-08-24 14:19:36,752 - INFO - [LabFlow] - Generating Ascitic Fluid DR report page
+2026-08-24 14:19:36,896 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2280ms. Total updated: 0 rows across 11 tables.
+2026-08-24 14:19:37,992 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-24 14:19:38,982 - INFO - [LabFlow] - Loaded 198 fitness records from DB
+2026-08-24 14:19:41,668 - INFO - [LabFlow] - Accessing Lab Print Records page

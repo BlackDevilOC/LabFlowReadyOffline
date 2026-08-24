@@ -55,6 +55,21 @@
       "show_single_test_title": false
     }
   },
+  "complete blood count|liver function test": {
+    "page_map": {},
+    "saved_at": "2026-08-18T08:58:21.967035Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 2,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
   "complete blood count|liver function test|uce": {
     "page_map": {
       "UCE": 0,
@@ -119,6 +134,23 @@
       "show_single_test_title": false
     }
   },
+  "glucose random (rbs)|hep b, c|pt (prothrombin time)|uce": {
+    "page_map": {},
+    "saved_at": "2026-08-19T13:41:45.951994Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 4,
+    "test_order": [
+      "UCE",
+      "PT (Prothrombin Time)",
+      "Hep B, C",
+      "Glucose Random (RBS)"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
   "complete blood count|lipid profile|liver function test|uce": {
     "page_map": {
       "UCE": 1,
@@ -158,6 +190,30 @@
       "UCE",
       "Hep B, C",
       "Uric Acid"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|dengue ns1 (ict)|hep b, c|liver function test|uce": {
+    "page_map": {
+      "UCE": 0,
+      "Hep B, C": 0,
+      "Dengue NS1 (ICT)": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1
+    },
+    "saved_at": "2026-08-15T08:59:55.437750Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 5,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "Dengue NS1 (ICT)"
     ],
     "display_options": {
       "show_category_title": false,
@@ -267,6 +323,60 @@
       "show_single_test_title": false
     }
   },
+  "amylase|calcium|glucose random (rbs)|lipid profile|liver function test|uce|uric acid": {
+    "page_map": {
+      "UCE": 0,
+      "Amylase": 0,
+      "Calcium": 0,
+      "Uric Acid": 0,
+      "Lipid Profile": 0,
+      "Liver Function Test": 0,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-15T12:34:32.172722Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 7,
+    "test_order": [
+      "Liver Function Test",
+      "Lipid Profile",
+      "UCE",
+      "Amylase",
+      "Calcium",
+      "Glucose Random (RBS)",
+      "Uric Acid"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|glucose random (rbs)|hep b, c|liver function test|uce|uric acid": {
+    "page_map": {
+      "UCE": 0,
+      "Hep B, C": 0,
+      "Uric Acid": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-17T13:37:19.024500Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 6,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "Glucose Random (RBS)",
+      "Uric Acid"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
   "amylase|complete blood count|dengue ns1 (ict)|hep b, c|liver function test|mp-ict|uc|uce": {
     "page_map": {
       "UC": 1,
@@ -297,6 +407,88 @@
       "show_single_test_title": false
     }
   },
+  "anti hiv (ict)|complete blood count|glucose random (rbs)|hep b, c|liver function test|uce": {
+    "page_map": {
+      "UCE": 0,
+      "Hep B, C": 0,
+      "Anti HIV (ICT)": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-13T12:25:33.352681Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 6,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "Glucose Random (RBS)",
+      "Anti HIV (ICT)"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|glucose random (rbs)|hep b, c|liver function test|pt (prothrombin time)|uce": {
+    "page_map": {
+      "UCE": 0,
+      "Hep B, C": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0,
+      "PT (Prothrombin Time)": 1
+    },
+    "saved_at": "2026-08-15T09:09:33.152710Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 6,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Glucose Random (RBS)",
+      "PT (Prothrombin Time)",
+      "Hep B, C"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "amylase|calcium|complete blood count|glucose random (rbs)|hep b, c|liver function test|uce|uric acid": {
+    "page_map": {
+      "UCE": 0,
+      "Amylase": 0,
+      "Calcium": 0,
+      "Hep B, C": 0,
+      "Uric Acid": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-15T08:42:13.801145Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 8,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "Amylase",
+      "Calcium",
+      "Glucose Random (RBS)",
+      "Uric Acid"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
   "calcium|complete blood count|hep b, c|lipid profile|liver function test|thyroid profile|uce|uric acid": {
     "page_map": {},
     "saved_at": "2026-08-09T08:06:10.071183Z",
@@ -316,6 +508,129 @@
       "show_category_title": false,
       "show_group_test_title": false,
       "show_single_test_title": false
+    }
+  },
+  "amylase|calcium|complete blood count|creatinine|glucose random (rbs)|hep b, c|liver function test|uric acid": {
+    "page_map": {
+      "Calcium": 0,
+      "Hep B, C": 0,
+      "Uric Acid": 0,
+      "Creatinine": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-15T08:40:41.991406Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 7,
+    "test_order": [
+      "Liver Function Test",
+      "Hep B, C",
+      "Amylase",
+      "Calcium",
+      "Creatinine",
+      "Glucose Random (RBS)",
+      "Uric Acid",
+      "COMPLETE BLOOD COUNT"
+    ],
+    "display_options": {
+      "show_category_title": true,
+      "show_group_test_title": true,
+      "show_single_test_title": true
+    }
+  },
+  "amylase|calcium|complete blood count|glucose random (rbs)|hba1c|lipid profile|liver function test|uce|uric acid": {
+    "page_map": {
+      "UCE": 0,
+      "HbA1c": 0,
+      "Amylase": 0,
+      "Calcium": 0,
+      "Uric Acid": 0,
+      "Lipid Profile": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-15T13:43:12.810771Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 9,
+    "test_order": [
+      "Liver Function Test",
+      "Lipid Profile",
+      "UCE",
+      "Amylase",
+      "Calcium",
+      "Glucose Random (RBS)",
+      "HbA1c",
+      "Uric Acid",
+      "COMPLETE BLOOD COUNT"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "amylase|complete blood count|electrolytes|glucose random (rbs)|hep b, c elisa|liver function test|thyroid profile": {
+    "page_map": {
+      "Amylase": 0,
+      "Electrolytes": 0,
+      "Hep B, C ELISA": 0,
+      "Thyroid Profile": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-19T08:57:27.090770Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 7,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "Thyroid Profile",
+      "Electrolytes",
+      "Hep B, C ELISA",
+      "Amylase",
+      "Glucose Random (RBS)"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "anti hiv (ict)|calcium|complete blood count|hep b, c|lipid profile|liver function test|tsh|uce|uric acid|vdrl syphilis": {
+    "page_map": {
+      "TSH": 0,
+      "UCE": 0,
+      "Calcium": 0,
+      "Hep B, C": 0,
+      "Uric Acid": 0,
+      "Lipid Profile": 0,
+      "VDRL SYPHILIS": 1,
+      "Anti HIV (ICT)": 1,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1
+    },
+    "saved_at": "2026-08-17T12:36:04.901971Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 10,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "Lipid Profile",
+      "UCE",
+      "Calcium",
+      "TSH",
+      "Uric Acid",
+      "Hep B, C",
+      "Anti HIV (ICT)",
+      "VDRL SYPHILIS"
+    ],
+    "display_options": {
+      "show_category_title": true,
+      "show_group_test_title": true,
+      "show_single_test_title": true
     }
   }
 }

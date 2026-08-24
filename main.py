@@ -361,11 +361,16 @@ def api_admin_offline_sync_log(search: str = None, limit: int = 200):
 @app.get("/api/fitness/records")
 def get_fitness_records_api(
     request: Request,
+    password: str = None,
     date_from: str = None,
     date_to: str = None,
     search: str = None,
     filters: str = None,
 ):
+    provided_pwd = password or request.headers.get("x-fitness-password")
+    if not provided_pwd or provided_pwd.strip() != "admin":
+        return JSONResponse(status_code=401, content={"status": "error", "message": "Invalid password for fitness records", "records": [], "total": 0})
+
     try:
         adv_filters = parse_advanced_filters(filters)
         records = get_fitness_records(

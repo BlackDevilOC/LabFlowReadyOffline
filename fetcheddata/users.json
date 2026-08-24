@@ -1,6 +1,25 @@
 {
   "users": [
     {
+      "id": 15,
+      "name": "Altaf",
+      "email": "altaf@lab.com",
+      "is_active": true,
+      "pwd": "6875",
+      "default_shift_id": 2,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
       "id": 12,
       "name": "Aman",
       "email": "aman@lab.com",
@@ -100,7 +119,7 @@
       "name": "Rehan Ahmed",
       "email": "admin@admin.com",
       "is_active": true,
-      "pwd": "admin",
+      "pwd": "Keeper@1",
       "default_shift_id": 2,
       "permissions": {
         "admin": true,
@@ -134,11 +153,30 @@
       }
     },
     {
+      "id": 14,
+      "name": "Sami",
+      "email": "sami@lab.com",
+      "is_active": true,
+      "pwd": "abc",
+      "default_shift_id": 1,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
       "id": 7,
       "name": "Uzair",
       "email": "uzair@lab.com",
       "is_active": true,
-      "pwd": "2002",
+      "pwd": "1999",
       "default_shift_id": 1,
       "permissions": {
         "admin": false,

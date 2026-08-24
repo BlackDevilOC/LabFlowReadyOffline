@@ -97,8 +97,8 @@
       "Positive"
     ],
     "HbsAg (ICT)": [
-      "Non-Reactive",
-      "Reactive"
+      "Negative",
+      "Positive"
     ],
     "Typhoid (ICT)": [
       "Negative",
@@ -170,8 +170,6 @@
       "Reactive"
     ],
     "HBsAg": [
-      "Non-Reactive",
-      "Reactive",
       "Negative",
       "Positive"
     ],
@@ -182,8 +180,6 @@
       "Positive"
     ],
     "Anti HIV": [
-      "Non-Reactive",
-      "Reactive",
       "Negative",
       "Positive"
     ],

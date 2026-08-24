@@ -252,6 +252,34 @@ def init_db():
         """)
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_sync_log_offline_mr ON mr_sync_log(offline_mr)")
 
+        # 11. fitness_patients table for offline storage
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS fitness_patients (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT DEFAULT (datetime('now', 'localtime')),
+            patient_name TEXT,
+            gender TEXT,
+            relation_type TEXT,
+            relation_name TEXT,
+            report_date TEXT,
+            mr_no TEXT,
+            hb TEXT,
+            wbc TEXT,
+            neut TEXT,
+            lymph TEXT,
+            mono TEXT,
+            eosino TEXT,
+            plt TEXT,
+            hiv TEXT,
+            hbsag TEXT,
+            hcv TEXT,
+            vdrl TEXT,
+            created_by TEXT,
+            synced INTEGER DEFAULT 0
+        )
+        """)
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_fitness_patients_mr_no ON fitness_patients(mr_no)")
+
         # --- Migration: add columns to existing databases that are missing them ---
         existing_cols = {row[1] for row in cursor.execute("PRAGMA table_info(mr_sync_log)").fetchall()}
         if "synced_at" not in existing_cols:
@@ -605,6 +633,48 @@ def upsert_invoice_settings_from_supabase(row: dict):
             row.get("printer_width"), row.get("logo_path"), row.get("qr_code_path")
         ))
 
+
+def insert_fitness_patient(item: dict) -> dict:
+    """Insert a fitness patient record into local SQLite database."""
+    with get_db_conn() as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO fitness_patients (
+                patient_name, gender, relation_type, relation_name, report_date, mr_no,
+                hb, wbc, neut, lymph, mono, eosino, plt, hiv, hbsag, hcv, vdrl, created_by
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            item.get("patient_name"), item.get("gender"), item.get("relation_type"),
+            item.get("relation_name"), item.get("report_date"), item.get("mr_no"),
+            item.get("hb"), item.get("wbc"), item.get("neut"), item.get("lymph"),
+            item.get("mono"), item.get("eosino"), item.get("plt"), item.get("hiv"),
+            item.get("hbsag"), item.get("hcv"), item.get("vdrl"),
+            item.get("user_email") or item.get("created_by") or "Offline User"
+        ))
+        row_id = cursor.lastrowid
+        cursor.execute("SELECT * FROM fitness_patients WHERE id = ?", (row_id,))
+        row = cursor.fetchone()
+        return dict(row) if row else {"id": row_id, **item}
+
+def list_fitness_patients(search: str = None, date_from: str = None, date_to: str = None) -> list[dict]:
+    """Retrieve fitness patients from local SQLite database."""
+    with get_db_conn() as conn:
+        cursor = conn.cursor()
+        query = "SELECT * FROM fitness_patients WHERE 1=1"
+        params = []
+        if date_from:
+            query += " AND report_date >= ?"
+            params.append(date_from)
+        if date_to:
+            query += " AND report_date <= ?"
+            params.append(date_to)
+        if search:
+            query += " AND (LOWER(patient_name) LIKE ? OR LOWER(mr_no) LIKE ?)"
+            s = f"%{search.lower()}%"
+            params.extend([s, s])
+        query += " ORDER BY id DESC"
+        cursor.execute(query, params)
+        return [dict(r) for r in cursor.fetchall()]
 
 if __name__ == "__main__":
     init_db()

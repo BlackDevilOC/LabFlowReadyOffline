@@ -351,10 +351,14 @@
             <input type="checkbox" id="inc-header" onchange="toggleHeaderSetting()"> Include Letterhead Header (30mm)
         </label>
     </div>
-    <div class="admin-group"><label>Top</label><input type="number" id="m-t" oninput="apply()" value="10"></div>
+    <div class="admin-group"><label>Top</label><input type="number" id="m-t" oninput="apply()" value="45"></div>
     <div class="admin-group"><label>Bottom</label><input type="number" id="m-b" oninput="apply()" value="20"></div>
     <div class="admin-group"><label>Left</label><input type="number" id="m-l" oninput="apply()" value="15"></div>
     <div class="admin-group"><label>Right</label><input type="number" id="m-r" oninput="apply()" value="15"></div>
+    <div class="admin-group" style="margin-top:15px; border-top:1px solid #444; padding-top:10px;">
+        <label>Admin & Records Password</label>
+        <input type="password" id="m-pwd" placeholder="New Password (default: admin)">
+    </div>
 </div>
 
 <div class="report-page">
@@ -414,67 +418,73 @@
         </div>
     </div>
 
-    <h3>Hematology</h3>
-    <table>
-        <thead>
-            <tr>
-                <th class="col-1">Test Name</th>
-                <th class="col-2">Result</th>
-                <th class="col-3">Normal Ranges</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id="row-hb">
-                <td>HAEMOGLOBIN</td>
-                <td class="res-container"><input type="text" class="res-val" id="val-hb" value="14.6" tabindex="7">
-                    <span class="unit">g/dl</span>
-                </td>
-                <td>M: 13.0 - 16.5 F: 12.0 - 15.0</td>
-            </tr>
-            <tr id="row-wbc">
-                <td>W.B.C</td>
-                <td class="res-container"><input type="text" class="res-val" id="val-wbc" value="6.6" tabindex="8">
-                    <span class="unit">x10E9/L</span>
-                </td>
-                <td>4.50 - 11.00</td>
-            </tr>
-            <tr id="row-neut">
-                <td>NEUTROPHILS</td>
-                <td class="res-container"><input type="text" class="res-val" id="val-neut" value="70" tabindex="9">
-                    <span class="unit">%</span>
-                </td>
-                <td>40.0 - 80.0</td>
-            </tr>
-            <tr id="row-lymph">
-                <td>LYMPHOCYTES</td>
-                <td class="res-container"><input type="text" class="res-val" id="val-lymph" value="25" tabindex="10">
-                    <span class="unit">%</span>
-                </td>
-                <td>20.0 - 40.0</td>
-            </tr>
-            <tr id="row-mono">
-                <td>MONOCYTES</td>
-                <td class="res-container"><input type="text" class="res-val" id="val-mono" value="03" tabindex="11">
-                    <span class="unit">%</span>
-                </td>
-                <td>2.0 - 10.0</td>
-            </tr>
-            <tr id="row-eosino">
-                <td>EOSINOPHILS</td>
-                <td class="res-container"><input type="text" class="res-val" id="val-eosino" value="02" tabindex="12">
-                    <span class="unit">%</span>
-                </td>
-                <td>0.0 - 6.0</td>
-            </tr>
-            <tr id="row-plt">
-                <td>PLATELETS</td>
-                <td class="res-container"><input type="text" class="res-val" id="val-plt" value="400" tabindex="13">
-                    <span class="unit">x10E9/L</span>
-                </td>
-                <td>150 – 450</td>
-            </tr>
-        </tbody>
-    </table>
+    <div id="cbc-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0 10px 0;">
+            <h3 style="margin: 0; padding-left: 10px; border-left: 4px solid #333;">Hematology</h3>
+            <button class="remove-btn no-print" onclick="removeSection('cbc-section')" title="Remove Whole CBC Section"
+                style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold; font-size:16px; padding:0 5px;">✕ Remove CBC Section</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-1">Test Name</th>
+                    <th class="col-2">Result</th>
+                    <th class="col-3">Normal Ranges</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="row-hb">
+                    <td>HAEMOGLOBIN</td>
+                    <td class="res-container"><input type="text" class="res-val" id="val-hb" value="14.6" tabindex="7">
+                        <span class="unit">g/dl</span>
+                    </td>
+                    <td>M: 13.0 - 16.5 F: 12.0 - 15.0</td>
+                </tr>
+                <tr id="row-wbc">
+                    <td>W.B.C</td>
+                    <td class="res-container"><input type="text" class="res-val" id="val-wbc" value="6.6" tabindex="8">
+                        <span class="unit">x10E9/L</span>
+                    </td>
+                    <td>4.50 - 11.00</td>
+                </tr>
+                <tr id="row-neut">
+                    <td>NEUTROPHILS</td>
+                    <td class="res-container"><input type="text" class="res-val" id="val-neut" value="70" tabindex="9">
+                        <span class="unit">%</span>
+                    </td>
+                    <td>40.0 - 80.0</td>
+                </tr>
+                <tr id="row-lymph">
+                    <td>LYMPHOCYTES</td>
+                    <td class="res-container"><input type="text" class="res-val" id="val-lymph" value="25" tabindex="10">
+                        <span class="unit">%</span>
+                    </td>
+                    <td>20.0 - 40.0</td>
+                </tr>
+                <tr id="row-mono">
+                    <td>MONOCYTES</td>
+                    <td class="res-container"><input type="text" class="res-val" id="val-mono" value="03" tabindex="11">
+                        <span class="unit">%</span>
+                    </td>
+                    <td>2.0 - 10.0</td>
+                </tr>
+                <tr id="row-eosino">
+                    <td>EOSINOPHILS</td>
+                    <td class="res-container"><input type="text" class="res-val" id="val-eosino" value="02" tabindex="12">
+                        <span class="unit">%</span>
+                    </td>
+                    <td>0.0 - 6.0</td>
+                </tr>
+                <tr id="row-plt">
+                    <td>PLATELETS</td>
+                    <td class="res-container"><input type="text" class="res-val" id="val-plt" value="400" tabindex="13">
+                        <span class="unit">x10E9/L</span>
+                    </td>
+                    <td>150 – 450</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <h3>Serology</h3>
     <table class="serology-table">
@@ -556,6 +566,27 @@
 
 {% block scripts %}
 <script>
+    (function checkFitnessAccess() {
+        const expectedPwd = localStorage.getItem('fitness_admin_password') || 'admin';
+        let sessionPwd = sessionStorage.getItem('fitness_pwd');
+        if (sessionPwd !== expectedPwd) {
+            const entered = prompt("Enter Fitness Register Access Password:");
+            if (entered === expectedPwd) {
+                sessionStorage.setItem('fitness_pwd', entered);
+            } else {
+                alert("Incorrect password. Access denied.");
+                document.body.innerHTML = `
+                    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:70vh; font-family:sans-serif; color:#721c24; background:#f8d7da; border:1px solid #f5c6cb; padding:40px; border-radius:12px; margin:40px auto; max-width:600px; text-align:center;">
+                        <h2>🔒 Access Denied</h2>
+                        <p style="font-size:15px; margin:15px 0;">A valid password is required to access the Fitness Register page.</p>
+                        <button onclick="window.location.reload()" style="padding:10px 20px; background:#dc3545; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">Try Again</button>
+                    </div>
+                `;
+                return;
+            }
+        }
+    })();
+
     const panel = document.getElementById('admin-panel');
     const btn = document.getElementById('admin-btn');
 
@@ -563,7 +594,15 @@
         e.stopPropagation();
         if (panel.style.display === 'block') close();
         else {
-            if (prompt("Admin Password:") === "admin") panel.style.display = 'block';
+            const currentPwd = localStorage.getItem('fitness_admin_password') || 'admin';
+            const entered = prompt("Admin Password:");
+            if (entered === currentPwd) {
+                const pwdInput = document.getElementById('m-pwd');
+                if (pwdInput) pwdInput.value = currentPwd;
+                panel.style.display = 'block';
+            } else if (entered !== null) {
+                alert("Incorrect Admin Password.");
+            }
         }
     }
 
@@ -573,7 +612,7 @@
         if (inc) {
             mt.value = 30;
         } else {
-            mt.value = 10;
+            mt.value = 45;
         }
         apply();
     }
@@ -587,12 +626,19 @@
     }
 
     function close() {
+        const pwdInput = document.getElementById('m-pwd');
+        const newPwd = pwdInput ? pwdInput.value.trim() : '';
+        if (newPwd) {
+            localStorage.setItem('fitness_admin_password', newPwd);
+            sessionStorage.setItem('fitness_pwd', newPwd);
+        }
         const cfg = {
             t: document.getElementById('m-t').value,
             b: document.getElementById('m-b').value,
             l: document.getElementById('m-l').value,
             r: document.getElementById('m-r').value,
-            incHeader: document.getElementById('inc-header').checked
+            incHeader: document.getElementById('inc-header').checked,
+            pwd: newPwd || (localStorage.getItem('fitness_admin_password') || 'admin')
         };
         localStorage.setItem('medicalReportConfig', JSON.stringify(cfg));
         panel.style.display = 'none';
@@ -607,25 +653,51 @@
         const row = document.getElementById(rowId);
         if (row) {
             row.remove();
-
-            // Set indicator state to unsaved changes
-            const syncDot = document.getElementById('sync-dot');
-            const syncText = document.getElementById('sync-text');
-            const syncStatus = document.getElementById('sync-status');
-            const badgeDot = document.getElementById('badge-dot');
-            const badgeText = document.getElementById('badge-text');
-            if (syncStatus) {
-                syncStatus.style.background = '#6c757d';
-                if (syncDot) syncDot.style.background = '#ffc107';
-                if (syncText) syncText.textContent = 'Unsaved Changes';
-            }
-            if (badgeDot) badgeDot.style.background = '#ffc107';
-            if (badgeText) badgeText.textContent = 'Unsaved Changes';
+            markUnsavedChanges();
         }
+    }
+
+    // Remove entire section logic
+    function removeSection(secId) {
+        const sec = document.getElementById(secId);
+        if (sec) {
+            sec.remove();
+            markUnsavedChanges();
+        }
+    }
+
+    function markUnsavedChanges() {
+        const syncDot = document.getElementById('sync-dot');
+        const syncText = document.getElementById('sync-text');
+        const syncStatus = document.getElementById('sync-status');
+        const badgeDot = document.getElementById('badge-dot');
+        const badgeText = document.getElementById('badge-text');
+        if (syncStatus) {
+            syncStatus.style.background = '#6c757d';
+            if (syncDot) syncDot.style.background = '#ffc107';
+            if (syncText) syncText.textContent = 'Unsaved Changes';
+        }
+        if (badgeDot) badgeDot.style.background = '#ffc107';
+        if (badgeText) badgeText.textContent = 'Unsaved Changes';
     }
 
     // Save Patient Record
     async function saveFitnessRecord() {
+        const pName = (document.getElementById('patient-name')?.value || '').trim();
+        const rName = (document.getElementById('relation-name')?.value || '').trim();
+        const mrNo = (document.getElementById('mr-no')?.value || '').trim();
+
+        // Check if the record is just the initial default placeholder template (e.g. "rehan", "24156", "Mehar ahmed")
+        const isDefaultPlaceholder = !pName ||
+            pName.toLowerCase() === 'rehan' ||
+            mrNo === '24156' ||
+            rName.toLowerCase() === 'mehar ahmed';
+
+        if (isDefaultPlaceholder) {
+            console.log("Default template placeholder record detected — skipping database save.");
+            return;
+        }
+
         const syncDot = document.getElementById('sync-dot');
         const syncText = document.getElementById('sync-text');
         const syncStatus = document.getElementById('sync-status');
@@ -712,18 +784,48 @@
             console.error("Save error:", e);
             setStatus('offline', 'Saved Locally/Offline');
 
-            // Backup locally in local storage queue for sync retry
-            try {
-                const localQueue = JSON.parse(localStorage.getItem('fitnessSyncQueue') || '[]');
-                payload.offline_id = 'off_' + Date.now();
-                payload.queued_at = new Date().toISOString();
-                localQueue.push(payload);
-                localStorage.setItem('fitnessSyncQueue', JSON.stringify(localQueue));
-            } catch (err) {
-                console.error("Local storage error:", err);
-            }
+        // Backup locally in local storage queue for sync retry
+        try {
+            const localQueue = JSON.parse(localStorage.getItem('fitnessSyncQueue') || '[]');
+            payload.offline_id = 'off_' + Date.now();
+            payload.queued_at = new Date().toISOString();
+            localQueue.push(payload);
+            localStorage.setItem('fitnessSyncQueue', JSON.stringify(localQueue));
+        } catch (err) {
+            console.error("Local storage error:", err);
         }
     }
+
+    // Save Now, Push Later: Automatic background flusher for offline queue
+    async function flushFitnessSyncQueue() {
+        const localQueue = JSON.parse(localStorage.getItem('fitnessSyncQueue') || '[]');
+        if (!localQueue.length) return;
+        console.log(`Attempting background sync for ${localQueue.length} pending offline fitness records...`);
+        const remaining = [];
+        for (const payload of localQueue) {
+            try {
+                const response = await fetch('/api/fitness/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) remaining.push(payload);
+            } catch (e) {
+                remaining.push(payload);
+            }
+        }
+        localStorage.setItem('fitnessSyncQueue', JSON.stringify(remaining));
+        if (remaining.length === 0) {
+            console.log("All offline fitness records successfully synced!");
+            const badgeDot = document.getElementById('badge-dot');
+            const badgeText = document.getElementById('badge-text');
+            if (badgeText) badgeText.textContent = '✓ All Offline Records Synced';
+            if (badgeDot) badgeDot.style.background = '#28a745';
+        }
+    }
+
+    window.addEventListener('online', flushFitnessSyncQueue);
+    setInterval(flushFitnessSyncQueue, 30000);
 
     async function triggerPrint() {
         // Silently save record before printing
@@ -732,9 +834,13 @@
     }
 
     window.onload = () => {
+        const savedPwd = localStorage.getItem('fitness_admin_password') || 'admin';
+        const pwdField = document.getElementById('m-pwd');
+        if (pwdField) pwdField.value = savedPwd;
+
         const s = JSON.parse(localStorage.getItem('medicalReportConfig'));
         if (s) {
-            document.getElementById('m-t').value = s.t ?? 10;
+            document.getElementById('m-t').value = s.t ?? 45;
             document.getElementById('m-b').value = s.b;
             document.getElementById('m-l').value = s.l;
             document.getElementById('m-r').value = s.r;
@@ -743,7 +849,7 @@
             }
             apply();
         } else {
-            document.getElementById('m-t').value = 10;
+            document.getElementById('m-t').value = 45;
             document.getElementById('inc-header').checked = false;
             apply();
         }

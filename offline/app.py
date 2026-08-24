@@ -39,6 +39,7 @@ try:
         upsert_tests_from_supabase, upsert_test_groups_from_supabase,
         upsert_shifts_from_supabase, upsert_users_from_supabase,
         upsert_remarks_from_supabase, upsert_invoice_settings_from_supabase,
+        insert_fitness_patient, list_fitness_patients,
     )
 except (ImportError, ModuleNotFoundError):
     from database import (
@@ -48,6 +49,7 @@ except (ImportError, ModuleNotFoundError):
         upsert_tests_from_supabase, upsert_test_groups_from_supabase,
         upsert_shifts_from_supabase, upsert_users_from_supabase,
         upsert_remarks_from_supabase, upsert_invoice_settings_from_supabase,
+        insert_fitness_patient, list_fitness_patients,
     )
 from dbActions import init_supabase
 
@@ -371,6 +373,75 @@ def admin_panel(request: Request, view: str = "offline-tests", date: str = None)
         "hide_sidebar": True,
         "url_prefix": "/offline"
     })
+
+
+# ----------------- Fitness & Fluid Reports (Offline Routes) -----------------
+
+@app.get("/page/fitness", include_in_schema=False)
+def offline_fitness_page(request: Request):
+    return templates.TemplateResponse('fitness.html', {"request": request, "title": "Fitness Report (Offline)", "name": "Offline User", "is_offline": True, "url_prefix": "/offline"})
+
+@app.get("/page/fitness-records", include_in_schema=False)
+def offline_fitness_records_page(request: Request):
+    return templates.TemplateResponse('fitness_records.html', {"request": request, "title": "Fitness Records (Offline)", "name": "Offline User", "is_offline": True, "url_prefix": "/offline"})
+
+@app.get("/page/fluid-reports", include_in_schema=False)
+def offline_fluid_reports_hub(request: Request):
+    return templates.TemplateResponse('fluid_reports.html', {"request": request, "title": "Fluid Reports Hub (Offline)", "name": "Offline User", "is_offline": True, "url_prefix": "/offline"})
+
+@app.get("/page/ascitic-fluid", include_in_schema=False)
+def offline_ascitic_fluid(request: Request):
+    return templates.TemplateResponse('ascitic_fluid.html', {"request": request, "title": "Ascitic Fluid DR Report (Offline)", "name": "Offline User", "is_offline": True, "url_prefix": "/offline"})
+
+@app.get("/page/csf-fluid", include_in_schema=False)
+def offline_csf_fluid(request: Request):
+    return templates.TemplateResponse('csf_fluid.html', {"request": request, "title": "CSF DR Report (Offline)", "name": "Offline User", "is_offline": True, "url_prefix": "/offline"})
+
+@app.get("/page/pleural-fluid", include_in_schema=False)
+def offline_pleural_fluid(request: Request):
+    return templates.TemplateResponse('pleural_fluid.html', {"request": request, "title": "Pleural Fluid For DR Report (Offline)", "name": "Offline User", "is_offline": True, "url_prefix": "/offline"})
+
+@app.post("/api/fitness/save")
+async def offline_save_fitness_patient(request: Request, background_tasks: BackgroundTasks):
+    try:
+        payload = await request.json()
+        saved_row = insert_fitness_patient(payload)
+
+        # Save Now (Local SQLite + JSON queue) & Push Later (Background sync to Supabase when network is online)
+        filename = None
+        try:
+            from dbActions import save_fitness_record_json, sync_single_record_bg, sync_offline_records
+            filename = save_fitness_record_json(payload)
+            background_tasks.add_task(sync_single_record_bg, payload, filename, "Offline User")
+            background_tasks.add_task(sync_offline_records, "Offline User")
+        except Exception as sync_err:
+            logger.warning(f"Offline background sync queueing warning: {sync_err}")
+
+        return {"status": "Success", "message": "Fitness record saved locally & queued for background sync", "data": saved_row, "json_file": filename}
+    except Exception as e:
+        logger.error(f"Offline fitness save error: {e}")
+        return JSONResponse(status_code=500, content={"status": "Error", "message": str(e)})
+
+@app.get("/api/fitness/records")
+def offline_get_fitness_records_api(
+    request: Request,
+    password: str = None,
+    date_from: str = None,
+    date_to: str = None,
+    search: str = None,
+):
+    # Password enforcement on Fitness Records
+    provided_pwd = password or request.headers.get("x-fitness-password")
+    if not provided_pwd or provided_pwd.strip() != "admin":
+        return JSONResponse(status_code=401, content={"status": "Unauthorized", "message": "Invalid password for fitness records."})
+
+    try:
+        records = list_fitness_patients(search=search, date_from=date_from, date_to=date_to)
+        return {"status": "Success", "count": len(records), "records": records}
+    except Exception as e:
+        logger.error(f"Offline get fitness records error: {e}")
+        return JSONResponse(status_code=500, content={"status": "Error", "message": str(e)})
+
 
 
 try:

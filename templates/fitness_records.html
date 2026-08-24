@@ -705,8 +705,29 @@
         } catch {}
     }
 
+    // ---- Password Authorization helper ----
+    function getFitnessPassword() {
+        let pwd = sessionStorage.getItem('fitness_pwd') || localStorage.getItem('fitness_admin_password');
+        if (!pwd) {
+            pwd = prompt("Enter Fitness Records Access Password:");
+            if (pwd) {
+                sessionStorage.setItem('fitness_pwd', pwd);
+            }
+        }
+        return pwd;
+    }
+
     // ---- Fetch records from server ----
     async function loadRecords() {
+        let pwd = getFitnessPassword();
+        if (!pwd) {
+            alert("Password required to access Fitness Records.");
+            setLoading(false);
+            allRecords = [];
+            applyFilters();
+            return;
+        }
+
         const singleDate = document.getElementById('filter-single-date').value;
         let from = document.getElementById('filter-from').value;
         let to = document.getElementById('filter-to').value;
@@ -717,6 +738,7 @@
         }
 
         const params = new URLSearchParams();
+        params.set('password', pwd);
         if (from) params.set('date_from', from);
         if (to) params.set('date_to', to);
         const advRoot = document.getElementById('advanced-search-root');
@@ -742,7 +764,18 @@
 
         setLoading(true);
         try {
-            const res = await fetch(url, { signal: fetchController.signal });
+            const res = await fetch(url, {
+                signal: fetchController.signal,
+                headers: { 'x-fitness-password': pwd }
+            });
+            if (res.status === 401) {
+                sessionStorage.removeItem('fitness_pwd');
+                alert("Incorrect password. Access denied.");
+                allRecords = [];
+                applyFilters();
+                setLoading(false);
+                return;
+            }
             const data = await res.json();
             allRecords = data.records || [];
             setCachedData(url, allRecords);
