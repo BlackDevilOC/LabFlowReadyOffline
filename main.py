@@ -83,9 +83,12 @@ def _safe_main_template_response(*args, **kwargs):
 
 templates.TemplateResponse = _safe_main_template_response
 
-# Mount the offline app under /offline
-from offline.app import app as offline_app
-app.mount("/offline", offline_app)
+# Mount legacy offline app under /offline if available
+try:
+    from offline.app import app as offline_app
+    app.mount("/offline", offline_app)
+except Exception:
+    logger.info("Legacy offline module not mounted (running in direct local PostgreSQL mode).")
 
 logger.info(f"App started. Assets path: {base_path}")
 

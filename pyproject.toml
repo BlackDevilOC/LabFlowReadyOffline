@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi[standard]>=0.128.4",
+    "psycopg2>=2.9.12",
     "pyinstaller>=6.18.0",
     "pywebview>=5.4",
     "reportlab>=4.2.5",

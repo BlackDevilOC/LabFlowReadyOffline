@@ -1,4 +1,4 @@
-from supabase import Client,create_client
+from supabase import Client, create_client
 from dotenv import load_dotenv
 from logdata import save_log, log_error, logger
 import os
@@ -6,7 +6,9 @@ import json
 import sys
 import random
 import shutil
+from typing import Any
 from pathlib import Path
+from local_postgres_client import get_local_postgres_client, LocalPostgresClient
 
 def get_base_path():
     if getattr(sys, 'frozen', False):
@@ -14,28 +16,31 @@ def get_base_path():
     return os.path.dirname(os.path.abspath(__file__))
 
 
-def init_supabase() -> Client:
+def init_supabase() -> Any:
     try:
         base_path = get_base_path()
         dotenv_path = os.path.join(base_path, ".env")
         
-        # Always reload fresh with override=True to support dynamic manual switching
         if os.path.exists(dotenv_path):
             load_dotenv(dotenv_path, override=True)
         else:
             load_dotenv(override=True)
 
+        target = os.getenv("ACTIVE_DB_TARGET", "local").strip().lower()
+        if target in ["local", "offline", "postgres", "local_postgres"]:
+            return get_local_postgres_client()
+
         SUPABASE_URL = str(os.getenv("SUPABASE_URL", "")).strip()
         SUPABASE_KEY = str(os.getenv("SUPABASE_KEY", "")).strip()
 
         if not SUPABASE_URL or not SUPABASE_KEY:
-            logger.warning("Supabase credentials not found in environment variables!")
+            logger.warning("Supabase credentials not found, switching to local PostgreSQL.")
+            return get_local_postgres_client()
 
-        supabase: Client = create_client(supabase_key=SUPABASE_KEY, supabase_url=SUPABASE_URL) 
-        return supabase
+        return get_local_postgres_client()
     except Exception as e:
-        log_error(e, "DB_INIT_FAILED")
-        raise
+        logger.warning(f"Defaulting to local PostgreSQL engine: {e}")
+        return get_local_postgres_client()
 
 def load_patient():
     try:
@@ -258,10 +263,13 @@ def sync_invoice_settings_cache() -> dict | None:
         cached["qr_url"] = "/fetcheddata/qr_placeholder.svg"
 
     settings_path = cache_dir / "invoice_settings.json"
-    with open(settings_path, "w", encoding="utf-8") as f:
-        json.dump(cached, f, indent=2, default=str)
+    try:
+        with open(settings_path, "w", encoding="utf-8") as f:
+            json.dump(cached, f, indent=2, default=str)
+        logger.info("Invoice settings cached to fetcheddata/")
+    except Exception as e:
+        logger.warning(f"Notice: Could not write invoice_settings.json cache file: {e}")
 
-    logger.info("Invoice settings cached to fetcheddata/")
     return cached
 
 

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabFlow Server Manager - Control Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.3);
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 40%);
+            padding: 24px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1 span {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-btns { display: flex; gap: 12px; }
+        .btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: var(--primary); border-color: var(--primary); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .card-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-success { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .badge-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+        .lan-card {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(17, 24, 39, 0.8));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .lan-url {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: #60a5fa;
+            font-size: 14px;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th { color: var(--text-muted); font-weight: 500; font-size: 12px; text-transform: uppercase; }
+
+        .table-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .table-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-name { font-weight: 600; }
+        .table-count { font-family: 'JetBrains Mono', monospace; color: var(--primary); font-size: 16px; font-weight: 700; }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot-green { background: var(--success); box-shadow: 0 0 8px var(--success); }
+        .dot-red { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🏥 <span>LabFlow Server Manager</span></h1>
+        <div class="nav-btns">
+            <a href="/" class="btn" style="background: var(--primary);">Dashboard</a>
+            <a href="/setup" class="btn">⚙️ Setup Config</a>
+        </div>
+    </div>
+
+    <!-- Status Overview Grid -->
+    <div class="grid">
+        <div class="card lan-card">
+            <div class="card-title">Local LAN Server Access</div>
+            <div style="font-size: 14px; color: var(--text-muted);">Share this URL with Client PCs over your Wi-Fi/Router:</div>
+            <div class="lan-url" id="lan-url">http://{{ local_ip }}:{{ config.SERVER_PORT or 8000 }}</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Worker 1 (Background Engine)</div>
+            <div id="worker1-status" class="card-value">
+                <span class="badge badge-danger">Checking...</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="worker1-detail">Port 8000</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Local PostgreSQL Database</div>
+            <div id="db-status" class="card-value">
+                <span class="badge badge-danger">Checking...</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="db-latency">Latency: -- ms</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Active LAN Client IPs</div>
+            <div class="card-value" id="client-count">0</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="total-requests">Total Requests: 0</div>
+        </div>
+    </div>
+
+    <!-- Core Tables Grid -->
+    <div class="section-title">
+        <span>📊 Local Database Tables (11 Core Tables)</span>
+        <span style="font-size: 12px; color: var(--text-muted);" id="last-updated">Auto-refreshing...</span>
+    </div>
+
+    <div class="table-grid" id="tables-container">
+        <!-- Dynamically populated tables -->
+    </div>
+
+    <!-- Connected LAN Clients & Recent Traffic -->
+    <div style="margin-top: 32px;" class="card">
+        <div class="card-title">📡 Connected LAN Clients & Traffic Log</div>
+        <table id="traffic-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Client IP</th>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Status</th>
+                    <th>Latency</th>
+                </tr>
+            </thead>
+            <tbody id="traffic-body">
+                <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No client traffic recorded yet.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function fetchStatus() {
+            try {
+                const res = await fetch('/api/live-status');
+                const data = await res.json();
+
+                // Update Worker 1 Status
+                const w1El = document.getElementById('worker1-status');
+                if (data.worker1_online) {
+                    w1El.innerHTML = `<span class="badge badge-success"><span class="status-dot dot-green"></span> ONLINE</span>`;
+                    document.getElementById('worker1-detail').innerText = `Uptime: ${data.worker1_metrics.uptime_seconds || 0}s`;
+                } else {
+                    w1El.innerHTML = `<span class="badge badge-danger"><span class="status-dot dot-red"></span> OFFLINE</span>`;
+                    document.getElementById('worker1-detail').innerText = `Port 8000 Engine not running`;
+                }
+
+                // Update Database Status
+                const dbEl = document.getElementById('db-status');
+                if (data.db_health.status === 'healthy') {
+                    dbEl.innerHTML = `<span class="badge badge-success"><span class="status-dot dot-green"></span> CONNECTED</span>`;
+                    document.getElementById('db-latency').innerText = `Database: ${data.db_health.database_name} (${data.db_health.latency_ms} ms)`;
+                } else {
+                    dbEl.innerHTML = `<span class="badge badge-danger"><span class="status-dot dot-red"></span> DISCONNECTED</span>`;
+                    document.getElementById('db-latency').innerText = data.db_health.message || 'Cannot reach local PostgreSQL';
+                }
+
+                // Update Client Counts & Metrics
+                if (data.worker1_metrics) {
+                    document.getElementById('client-count').innerText = data.worker1_metrics.active_client_count || 0;
+                    document.getElementById('total-requests').innerText = `Total Requests: ${data.worker1_metrics.total_requests || 0}`;
+
+                    // Populate Traffic Table
+                    const logs = data.worker1_metrics.recent_logs || [];
+                    const tbody = document.getElementById('traffic-body');
+                    if (logs.length > 0) {
+                        tbody.innerHTML = logs.slice(0, 8).map(l => `
+                            <tr>
+                                <td style="font-family: monospace;">${l.timestamp}</td>
+                                <td><span style="color: #60a5fa; font-family: monospace;">${l.ip}</span></td>
+                                <td><strong>${l.method}</strong></td>
+                                <td style="font-family: monospace;">${l.path}</td>
+                                <td><span class="badge ${l.status < 400 ? 'badge-success' : 'badge-danger'}">${l.status}</span></td>
+                                <td style="font-family: monospace;">${l.duration_ms} ms</td>
+                            </tr>
+                        `).join('');
+                    }
+                }
+
+                // Update Tables Grid
+                const tablesContainer = document.getElementById('tables-container');
+                if (data.tables && data.tables.length > 0) {
+                    tablesContainer.innerHTML = data.tables.map(t => `
+                        <div class="table-item">
+                            <div>
+                                <div class="table-name">${t.table_name}</div>
+                                <div style="font-size: 11px; color: ${t.exists ? '#10b981' : '#ef4444'};">${t.status}</div>
+                            </div>
+                            <div class="table-count">${t.row_count}</div>
+                        </div>
+                    `).join('');
+                }
+
+                document.getElementById('last-updated').innerText = `Updated at ${data.timestamp}`;
+            } catch (err) {
+                console.error("Status fetch failed", err);
+            }
+        }
+
+        // Poll every 3 seconds
+        fetchStatus();
+        setInterval(fetchStatus, 3000);
+    </script>
+</body>
+</html>

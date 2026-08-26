@@ -21000,3 +21000,365 @@ PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\L
 2026-08-24 15:44:01,322 - INFO - [LabFlow] - Adding tests to patient MR: 4180, Name: NIDA
 2026-08-24 15:44:01,532 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 4180
 2026-08-24 15:44:01,612 - INFO - [LabFlow] - Fetched full info for patient ID: 104216
+2026-08-26 13:51:30,191 - INFO - [LabFlow] - Loaded 4390 patients from database
+2026-08-26 13:51:30,196 - ERROR - [LabFlow] - [USER: System] [LOAD_TESTS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] QueryBuilder.select() takes from 1 to 3 positional arguments but 4 were given
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 58, in load_tests
+    q_tests = supabase.table('tests').select("id","name","status")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: QueryBuilder.select() takes from 1 to 3 positional arguments but 4 were given
+2026-08-26 13:51:43,594 - INFO - [LabFlow] - Loaded 4390 patients from database
+2026-08-26 13:51:43,907 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 13:51:50,603 - INFO - [LabFlow] - [USER: System] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'Test Offline Patient', 'mobile': '03001234567', 'gender': 'Male', 'age': 30, 'mr_no': 9999901}
+2026-08-26 13:51:50,759 - INFO - [LabFlow] - Successfully registered new patient. ID: 104480, MR No: 9999901
+2026-08-26 13:52:29,723 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-26 13:52:29,724 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-26 13:52:36,364 - DEBUG - [LabFlow] - Fetched 5 patients (limit: 5)
+2026-08-26 13:53:40,781 - INFO - [LabFlow] - Server is already running on 127.0.0.1:8000 — attaching desktop window.
+2026-08-26 13:53:40,783 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-26 13:54:27,585 - ERROR - [LabFlow] - Server did not start in time
+2026-08-26 13:55:41,971 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-26 13:56:28,006 - ERROR - [LabFlow] - Server did not start in time
+2026-08-26 14:01:02,220 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-26 14:01:05,888 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-26 14:01:05,889 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-26 14:01:05,948 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-26 14:01:06,006 - DEBUG - [LabFlow] - Offline auto-push trigger on startup error: No module named 'offline.app'
+2026-08-26 14:01:06,013 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-26 14:01:06,016 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-26 14:01:06,016 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-26 14:01:06,026 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-26 14:01:06,085 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-26 14:01:06,191 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-26 14:01:06,239 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-26 14:01:08,511 - INFO - [LabFlow] - Saved 15 users to fetcheddata/users.json
+2026-08-26 14:01:09,072 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:09,508 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\patients.json'
+2026-08-26 14:01:20,583 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:22,761 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\test_results_all.json'
+2026-08-26 14:01:23,410 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:23,460 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\sql\\tests_postgres.sql'
+2026-08-26 14:01:23,639 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_groups' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:24,307 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'shift' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:24,469 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'users' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:24,746 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'remarks' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:24,982 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'invoice_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:25,219 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'print_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:25,404 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'app_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:26,248 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'analytics_snapshots' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:01:27,488 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 20852ms. Total updated: 17166 rows across 11 tables.
+2026-08-26 14:01:50,573 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3065ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:02:06,224 - WARNING - [LabFlow] - Invoice settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
+2026-08-26 14:02:06,277 - WARNING - [LabFlow] - Lab print settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\print_settings.json'
+2026-08-26 14:02:06,328 - ERROR - [LabFlow] - [USER: System] [SYNC_USER_PREFERENCES_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 303, in sync_user_preferences_cache
+    shifts = sync_shifts_cache()
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 286, in sync_shifts_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+2026-08-26 14:02:06,433 - ERROR - [LabFlow] - [USER: System] [SYNC_REMARKS_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 737, in sync_remarks_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+2026-08-26 14:02:06,438 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-26 14:02:06,440 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: No module named 'offline.database'
+2026-08-26 14:02:06,759 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-26 14:02:07,991 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-26 14:02:08,288 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:02:13,479 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2891ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:02:16,428 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: ashdf
+2026-08-26 14:02:16,429 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'ashdf', 'relation': '-', 'relation_name': '-', 'mobile': '0', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Lab Admin', 'user_id': 1, 'pwd': '2404'}
+2026-08-26 14:02:16,519 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'patients': null value in column "mr_no" of relation "patients" violates not-null constraint
+DETAIL:  Failing row contains (104481, 2026-08-26 14:02:16.489464+05, null, Mr., ashdf, -, -, 0, MALE, 0, -, 0, EVENING, Lab Admin, 1, 2404).
+
+2026-08-26 14:02:16,523 - ERROR - [LabFlow] - [USER: admin@labflow.local] [REGISTER_NEW_PATIENT_FAILED] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] null value in column "mr_no" of relation "patients" violates not-null constraint
+DETAIL:  Failing row contains (104481, 2026-08-26 14:02:16.489464+05, null, Mr., ashdf, -, -, 0, MALE, 0, -, 0, EVENING, Lab Admin, 1, 2404).
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 76, in register_new_patient
+    response = supabase.table("patients").insert(item).execute()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 164, in execute
+    data = self._execute_insert(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 253, in _execute_insert
+    cursor.execute(sql, clean_vals)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "mr_no" of relation "patients" violates not-null constraint
+DETAIL:  Failing row contains (104481, 2026-08-26 14:02:16.489464+05, null, Mr., ashdf, -, -, 0, MALE, 0, -, 0, EVENING, Lab Admin, 1, 2404).
+
+2026-08-26 14:02:16,529 - ERROR - [LabFlow] - [USER: admin@labflow.local] [API_REGISTER_PATIENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] null value in column "mr_no" of relation "patients" violates not-null constraint
+DETAIL:  Failing row contains (104481, 2026-08-26 14:02:16.489464+05, null, Mr., ashdf, -, -, 0, MALE, 0, -, 0, EVENING, Lab Admin, 1, 2404).
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 710, in register_patient
+    patient_id, patient_mr_no = register_new_patient(patient, user=user)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 76, in register_new_patient
+    response = supabase.table("patients").insert(item).execute()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 164, in execute
+    data = self._execute_insert(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 253, in _execute_insert
+    cursor.execute(sql, clean_vals)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: null value in column "mr_no" of relation "patients" violates not-null constraint
+DETAIL:  Failing row contains (104481, 2026-08-26 14:02:16.489464+05, null, Mr., ashdf, -, -, 0, MALE, 0, -, 0, EVENING, Lab Admin, 1, 2404).
+
+2026-08-26 14:02:36,047 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2548ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:03:41,914 - INFO - [LabFlow] - [USER: System] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'Auto MR Patient', 'mobile': '-', 'gender': 'MALE', 'age': 25, 'shift': 'EVENING'}
+2026-08-26 14:03:41,974 - INFO - [LabFlow] - Successfully registered new patient. ID: 104482, MR No: 184152
+2026-08-26 14:09:59,756 - INFO - [LabFlow] - Server is already running on 127.0.0.1:8000 — attaching desktop window.
+2026-08-26 14:09:59,758 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-26 14:10:01,879 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-26 14:10:07,800 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-26 14:10:11,705 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-26 14:10:11,706 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-26 14:10:11,766 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-26 14:10:11,850 - DEBUG - [LabFlow] - Offline auto-push trigger on startup error: No module named 'offline.app'
+2026-08-26 14:10:11,857 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-26 14:10:11,858 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-26 14:10:11,858 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-26 14:10:11,867 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-26 14:10:11,896 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-26 14:10:11,923 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-26 14:10:12,014 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-26 14:10:14,069 - INFO - [LabFlow] - Saved 15 users to fetcheddata/users.json
+2026-08-26 14:10:14,366 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:15,434 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\patients.json'
+2026-08-26 14:10:21,810 - WARNING - [LabFlow] - Invoice settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
+2026-08-26 14:10:21,863 - WARNING - [LabFlow] - Lab print settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\print_settings.json'
+2026-08-26 14:10:21,912 - ERROR - [LabFlow] - [USER: System] [SYNC_USER_PREFERENCES_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 303, in sync_user_preferences_cache
+    shifts = sync_shifts_cache()
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 286, in sync_shifts_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+2026-08-26 14:10:21,965 - ERROR - [LabFlow] - [USER: System] [SYNC_REMARKS_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 737, in sync_remarks_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+2026-08-26 14:10:21,967 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-26 14:10:21,970 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: No module named 'offline.database'
+2026-08-26 14:10:22,323 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-26 14:10:23,131 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-26 14:10:23,493 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:10:23,993 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-26 14:10:24,398 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:10:24,968 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:26,639 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\test_results_all.json'
+2026-08-26 14:10:27,267 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:27,565 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\sql\\tests_postgres.sql'
+2026-08-26 14:10:27,755 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_groups' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:27,949 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'shift' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:28,202 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'users' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:28,377 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'remarks' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:28,590 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'invoice_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:28,775 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'print_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:28,951 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'app_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:29,183 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'analytics_snapshots' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:10:29,722 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: sdfas
+2026-08-26 14:10:29,751 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'sdfas', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Lab Admin', 'user_id': 1, 'pwd': '53336715'}
+2026-08-26 14:10:29,831 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 17956ms. Total updated: 17173 rows across 11 tables.
+2026-08-26 14:10:29,861 - INFO - [LabFlow] - Successfully registered new patient. ID: 104483, MR No: 184152
+2026-08-26 14:10:29,865 - INFO - [LabFlow] - Patient registered. ID: 104483, MR: 184152. Queuing test creation in background...
+2026-08-26 14:10:29,992 - INFO - [LabFlow] - [USER: admin@labflow.local] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184152
+2026-08-26 14:10:30,000 - INFO - [LabFlow] - Generating Invoice for patient: 104483
+2026-08-26 14:10:30,259 - INFO - [LabFlow] - Adding tests to patient MR: 184152, Name: sdfas
+2026-08-26 14:10:30,280 - INFO - [LabFlow] - Fetched full info for patient ID: 104483
+2026-08-26 14:10:30,449 - INFO - [LabFlow] - Successfully added 4 test records in test_results_all for patient 184152
+2026-08-26 14:10:32,868 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:10:33,828 - INFO - [LabFlow] - Accessing Fast Results Entry workspace
+2026-08-26 14:10:34,424 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:10:34,503 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+
+2026-08-26 14:10:34,504 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 162, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 206, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.AmbiguousColumn: column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+
+2026-08-26 14:10:40,307 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+
+2026-08-26 14:10:40,310 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 162, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 206, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.AmbiguousColumn: column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+
+2026-08-26 14:10:42,363 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:10:44,826 - INFO - [LabFlow] - Accessing Fast Results Entry workspace
+2026-08-26 14:10:45,442 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:10:45,627 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+
+2026-08-26 14:10:45,646 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 162, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 206, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.AmbiguousColumn: column reference "created_at" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "created_a...
+                                                          ^
+
+2026-08-26 14:10:47,596 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:10:48,035 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:10:49,150 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column reference "mr_no" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "mr_no" = ...
+                                                          ^
+
+2026-08-26 14:10:49,152 - ERROR - [LabFlow] - [USER: System] [API_GET_PATIENTS_LIMIT_100] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] column reference "mr_no" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "mr_no" = ...
+                                                          ^
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 1098, in get_patient_basic_info_with_limit
+    flat_data, meta = fetch_test_result_list_rows(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 162, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 206, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.AmbiguousColumn: column reference "mr_no" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "mr_no" = ...
+                                                          ^
+
+2026-08-26 14:10:52,175 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2316ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:11:02,870 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column reference "mr_no" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "mr_no" = ...
+                                                          ^
+
+2026-08-26 14:11:02,871 - ERROR - [LabFlow] - [USER: System] [API_GET_PATIENTS_LIMIT_100] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] column reference "mr_no" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "mr_no" = ...
+                                                          ^
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 1098, in get_patient_basic_info_with_limit
+    flat_data, meta = fetch_test_result_list_rows(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 162, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 206, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.AmbiguousColumn: column reference "mr_no" is ambiguous
+LINE 6:                 WHERE "delete_status" = false AND "mr_no" = ...
+                                                          ^
+
+2026-08-26 14:11:14,595 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2411ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:11:37,125 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2514ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:12:54,600 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-26 14:12:54,600 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-26 14:13:47,613 - ERROR - [LabFlow] - [USER: System] [ANALYTICS_FETCH_PATIENTS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] 'QueryBuilder' object has no attribute 'range'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\analytics_service.py", line 140, in fetch_patients_in_range
+    return _fetch_paginated(build_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\analytics_service.py", line 116, in _fetch_paginated
+    resp = query_builder().range(offset, offset + chunk_size - 1).execute()
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QueryBuilder' object has no attribute 'range'
+2026-08-26 14:13:47,616 - ERROR - [LabFlow] - [USER: System] [ANALYTICS_FETCH_TEST_RESULTS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] 'QueryBuilder' object has no attribute 'range'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\analytics_service.py", line 164, in fetch_test_results_in_range
+    return _fetch_paginated(build_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\analytics_service.py", line 116, in _fetch_paginated
+    resp = query_builder().range(offset, offset + chunk_size - 1).execute()
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QueryBuilder' object has no attribute 'range'
+2026-08-26 14:14:29,587 - ERROR - [LabFlow] - [USER: System] [ANALYTICS_FETCH_PATIENTS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] 'QueryBuilder' object has no attribute 'range'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\analytics_service.py", line 140, in fetch_patients_in_range
+    return _fetch_paginated(build_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\analytics_service.py", line 116, in _fetch_paginated
+    resp = query_builder().range(offset, offset + chunk_size - 1).execute()
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QueryBuilder' object has no attribute 'range'
+2026-08-26 14:14:29,590 - ERROR - [LabFlow] - [USER: System] [ANALYTICS_FETCH_TEST_RESULTS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] 'QueryBuilder' object has no attribute 'range'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\analytics_service.py", line 164, in fetch_test_results_in_range
+    return _fetch_paginated(build_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\analytics_service.py", line 116, in _fetch_paginated
+    resp = query_builder().range(offset, offset + chunk_size - 1).execute()
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'QueryBuilder' object has no attribute 'range'
+2026-08-26 14:17:21,914 - WARNING - [LabFlow] - Notice: Could not write invoice_settings.json cache file: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
+2026-08-26 14:17:22,145 - INFO - [LabFlow] - Loaded 4391 patients from database
+2026-08-26 14:17:22,339 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
