@@ -663,8 +663,7 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
 @app.get("/page/emergency-dr")
 @app.get("/offline/page/emergency-dr")
 def page_emergency_dr(request: Request):
-    """Dedicated full-screen Disaster Recovery and Live Diagnostic Console."""
-    return templates.TemplateResponse(request=request, name="emergency_dr.html", context={"title": "Disaster Recovery Console"})
+    return RedirectResponse(url="http://127.0.0.1:9000", status_code=302)
 
 
 
@@ -2361,31 +2360,14 @@ def _auto_pull_cloud_settings_sync():
 
 @app.on_event("startup")
 def on_app_startup():
-    """Auto-pull cloud settings and launch continuous Supabase replica background worker."""
-    import threading
-    threading.Thread(target=_auto_pull_cloud_settings_sync, daemon=True).start()
-    try:
-        from offline.app import sync_pending_offline_patients_background
-        threading.Thread(target=sync_pending_offline_patients_background, daemon=True).start()
-        logger.info("Triggered auto-push of pending offline patients on app boot.")
-    except Exception as e:
-        logger.debug(f"Offline auto-push trigger on startup error: {e}")
-    try:
-        engine = get_replica_engine()
-        engine.start_background_worker()
-        logger.info("Supabase continuous replica engine background worker started on app boot.")
-    except Exception as e:
-        logger.warning(f"Could not start replica engine on boot: {e}")
+    """Startup routine for 100% On-Premise Local PostgreSQL Engine mode."""
+    logger.info("LabFlow app started in 100% On-Premise Local PostgreSQL mode.")
 
 
 @app.on_event("shutdown")
 def on_app_shutdown():
-    """Stop continuous replica background worker cleanly on app shutdown."""
-    try:
-        engine = get_replica_engine()
-        engine.stop_background_worker()
-    except Exception as e:
-        logger.debug(f"Replica worker shutdown error: {e}")
+    """Shutdown routine for local PostgreSQL engine mode."""
+    logger.info("LabFlow app shutting down cleanly.")
 
 
 @app.get("/api/admin/cloud-settings/status")

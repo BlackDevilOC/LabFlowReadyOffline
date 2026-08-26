@@ -21362,3 +21362,307 @@ AttributeError: 'QueryBuilder' object has no attribute 'range'
 2026-08-26 14:17:21,914 - WARNING - [LabFlow] - Notice: Could not write invoice_settings.json cache file: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
 2026-08-26 14:17:22,145 - INFO - [LabFlow] - Loaded 4391 patients from database
 2026-08-26 14:17:22,339 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:35:57,595 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-26 14:36:01,890 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-26 14:36:01,891 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-26 14:36:01,958 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-26 14:36:02,000 - DEBUG - [LabFlow] - Offline auto-push trigger on startup error: No module named 'offline.app'
+2026-08-26 14:36:02,009 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-26 14:36:02,011 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-26 14:36:02,011 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-26 14:36:02,014 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-26 14:36:02,162 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-26 14:36:02,362 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-26 14:36:02,395 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-26 14:36:04,256 - INFO - [LabFlow] - Saved 15 users to fetcheddata/users.json
+2026-08-26 14:36:04,444 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:04,815 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\patients.json'
+2026-08-26 14:36:09,954 - WARNING - [LabFlow] - Notice: Could not write invoice_settings.json cache file: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
+2026-08-26 14:36:10,174 - WARNING - [LabFlow] - Lab print settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\print_settings.json'
+2026-08-26 14:36:10,832 - ERROR - [LabFlow] - [USER: System] [SYNC_USER_PREFERENCES_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 306, in sync_user_preferences_cache
+    shifts = sync_shifts_cache()
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 289, in sync_shifts_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+2026-08-26 14:36:10,994 - ERROR - [LabFlow] - [USER: System] [SYNC_REMARKS_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 740, in sync_remarks_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+2026-08-26 14:36:10,998 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-26 14:36:10,999 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: No module named 'offline.database'
+2026-08-26 14:36:11,331 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-26 14:36:13,028 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-26 14:36:14,267 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:36:14,863 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:16,225 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\test_results_all.json'
+2026-08-26 14:36:17,154 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:17,200 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: as
+2026-08-26 14:36:17,201 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'as', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Lab Admin', 'user_id': 1, 'pwd': '7750'}
+2026-08-26 14:36:17,218 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\sql\\tests_postgres.sql'
+2026-08-26 14:36:17,306 - INFO - [LabFlow] - Successfully registered new patient. ID: 104484, MR No: 184153
+2026-08-26 14:36:17,310 - INFO - [LabFlow] - Patient registered. ID: 104484, MR: 184153. Queuing test creation in background...
+2026-08-26 14:36:17,436 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_groups' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:17,639 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'shift' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:17,920 - INFO - [LabFlow] - [USER: admin@labflow.local] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184153
+2026-08-26 14:36:17,929 - INFO - [LabFlow] - Generating Invoice for patient: 104484
+2026-08-26 14:36:18,062 - INFO - [LabFlow] - Adding tests to patient MR: 184153, Name: as
+2026-08-26 14:36:18,159 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'users' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:18,286 - INFO - [LabFlow] - Fetched full info for patient ID: 104484
+2026-08-26 14:36:18,362 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'remarks' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:18,410 - INFO - [LabFlow] - Successfully added 4 test records in test_results_all for patient 184153
+2026-08-26 14:36:18,546 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'invoice_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:18,708 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'print_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:18,899 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'app_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:19,275 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'analytics_snapshots' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:36:20,123 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 18108ms. Total updated: 17174 rows across 11 tables.
+2026-08-26 14:36:20,406 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:36:22,128 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184153
+2026-08-26 14:36:22,613 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:36:32,737 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184153
+2026-08-26 14:36:32,750 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-26 14:36:35,606 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:36:36,271 - INFO - [LabFlow] - Accessing Fast Results Entry workspace
+2026-08-26 14:36:37,190 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:36:39,750 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-27T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-26 14:36:39,753 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-27T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 171, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 216, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-27T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-26 14:36:42,210 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-26T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-26 14:36:42,223 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-26T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 171, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 216, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-26T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-26 14:36:42,621 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2481ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:36:46,614 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:36:51,022 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 4363
+2026-08-26 14:36:51,871 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:36:52,352 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-26 14:36:55,935 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-26 14:37:05,120 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2487ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:37:07,436 - INFO - [LabFlow] - [USER: System] [ADMIN_CONFIG] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated test ID 168: Abnormal form
+2026-08-26 14:37:08,107 - INFO - [LabFlow] - [USER: System] [ADMIN_CONFIG] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated test ID 168: Abnormal form
+2026-08-26 14:37:27,451 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2324ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:37:29,911 - INFO - [LabFlow] - [USER: Anonymous] [ADMIN_USER] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated user ID 1
+2026-08-26 14:37:36,822 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-26 14:37:39,118 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-26 14:37:39,871 - INFO - [LabFlow] - Accessing Fast Print Stream workspace
+2026-08-26 14:37:49,874 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2408ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:38:14,469 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 4581ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:38:36,740 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2264ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:38:59,283 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2536ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:39:20,575 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-26 14:39:21,790 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-26 14:39:23,187 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3898ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:39:26,972 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-26 14:39:27,221 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-26 14:39:27,795 - INFO - [LabFlow] - Loaded 4392 fitness records from DB
+2026-08-26 14:39:29,232 - INFO - [LabFlow] - Accessing Fluid Reports Hub
+2026-08-26 14:39:52,486 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-26 14:39:54,690 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-26 14:39:54,691 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-26 14:39:54,750 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-26 14:39:54,776 - DEBUG - [LabFlow] - Offline auto-push trigger on startup error: No module named 'offline.app'
+2026-08-26 14:39:54,783 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-26 14:39:54,784 - INFO - [LabFlow.Replica] - Running initial full snapshot replication...
+2026-08-26 14:39:54,785 - INFO - [LabFlow.Replica] - Started continuous Supabase replica worker (polling interval: 20s)
+2026-08-26 14:39:54,790 - INFO - [LabFlow] - Supabase continuous replica engine background worker started on app boot.
+2026-08-26 14:39:54,843 - INFO - [LabFlow] - Cloud sync auto-pull completed successfully from Supabase.
+2026-08-26 14:39:54,885 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-26 14:39:54,907 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-26 14:39:57,498 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:39:57,808 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'patients' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\patients.json'
+2026-08-26 14:39:59,616 - INFO - [LabFlow] - Saved 15 users to fetcheddata/users.json
+2026-08-26 14:40:07,397 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:08,654 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'test_results_all' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\tables\\test_results_all.json'
+2026-08-26 14:40:09,339 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:09,363 - WARNING - [LabFlow.Replica] - Error saving snapshot for 'tests' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\replica_backups\\primary\\sql\\tests_postgres.sql'
+2026-08-26 14:40:09,538 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'test_groups' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:09,702 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'shift' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:09,922 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'users' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:10,086 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'remarks' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:10,296 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'invoice_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:10,469 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'print_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:10,642 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'app_settings' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:10,899 - WARNING - [LabFlow.Replica] - Error syncing SQLite for table 'analytics_snapshots' at D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary: attempt to write a readonly database
+2026-08-26 14:40:11,393 - INFO - [LabFlow.Replica] - Replication cycle (full) complete in 16601ms. Total updated: 17174 rows across 11 tables.
+2026-08-26 14:40:23,237 - WARNING - [LabFlow] - Notice: Could not write invoice_settings.json cache file: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\invoice_settings.json'
+2026-08-26 14:40:23,395 - WARNING - [LabFlow] - Lab print settings cache failed on login: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\print_settings.json'
+2026-08-26 14:40:23,446 - ERROR - [LabFlow] - [USER: System] [SYNC_USER_PREFERENCES_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 306, in sync_user_preferences_cache
+    shifts = sync_shifts_cache()
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 289, in sync_shifts_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\shifts.json'
+2026-08-26 14:40:23,610 - ERROR - [LabFlow] - [USER: System] [SYNC_REMARKS_CACHE] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 740, in sync_remarks_cache
+    with open(path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\LabFlowReady-main (1)\\LabFlowReady-main\\fetcheddata\\remarks.json'
+2026-08-26 14:40:23,614 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-26 14:40:23,618 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: No module named 'offline.database'
+2026-08-26 14:40:23,940 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-26 14:40:27,095 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-26 14:40:27,288 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:40:31,433 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'patients': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,434 - ERROR - [LabFlow.Replica] - Error syncing table 'patients': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,438 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'test_results_all': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,439 - ERROR - [LabFlow.Replica] - Error syncing table 'test_results_all': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,444 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'tests': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,446 - ERROR - [LabFlow.Replica] - Error syncing table 'tests': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,451 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'test_groups': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,455 - ERROR - [LabFlow.Replica] - Error syncing table 'test_groups': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,465 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'shift': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,468 - ERROR - [LabFlow.Replica] - Error syncing table 'shift': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,472 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'users': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,474 - ERROR - [LabFlow.Replica] - Error syncing table 'users': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,479 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'remarks': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,481 - ERROR - [LabFlow.Replica] - Error syncing table 'remarks': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,487 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'invoice_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,488 - ERROR - [LabFlow.Replica] - Error syncing table 'invoice_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,493 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'print_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,497 - ERROR - [LabFlow.Replica] - Error syncing table 'print_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,501 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'app_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,504 - ERROR - [LabFlow.Replica] - Error syncing table 'app_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,507 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'analytics_snapshots': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,508 - ERROR - [LabFlow.Replica] - Error syncing table 'analytics_snapshots': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:31,931 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 521ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:40:34,590 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: asdf
+2026-08-26 14:40:34,593 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'asdf', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Rehan', 'user_id': 1, 'pwd': '9622'}
+2026-08-26 14:40:34,649 - INFO - [LabFlow] - Successfully registered new patient. ID: 104485, MR No: 184154
+2026-08-26 14:40:34,650 - INFO - [LabFlow] - Patient registered. ID: 104485, MR: 184154. Queuing test creation in background...
+2026-08-26 14:40:34,769 - INFO - [LabFlow] - [USER: admin@labflow.local] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184154
+2026-08-26 14:40:34,778 - INFO - [LabFlow] - Generating Invoice for patient: 104485
+2026-08-26 14:40:34,919 - INFO - [LabFlow] - Fetched full info for patient ID: 104485
+2026-08-26 14:40:34,932 - INFO - [LabFlow] - Adding tests to patient MR: 184154, Name: asdf
+2026-08-26 14:40:35,275 - INFO - [LabFlow] - Successfully added 5 test records in test_results_all for patient 184154
+2026-08-26 14:40:36,249 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:40:37,369 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184154
+2026-08-26 14:40:37,626 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:40:42,081 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184154
+2026-08-26 14:40:42,092 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:40:42,960 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-26 14:40:44,112 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184154, date=None
+2026-08-26 14:40:47,241 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-26 14:40:47,393 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:40:47,808 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-26 14:40:49,696 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-26 14:40:49,846 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-26 14:40:50,079 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-26 14:40:51,964 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'patients': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,965 - ERROR - [LabFlow.Replica] - Error syncing table 'patients': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,969 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'test_results_all': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,971 - ERROR - [LabFlow.Replica] - Error syncing table 'test_results_all': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,976 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'tests': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,978 - ERROR - [LabFlow.Replica] - Error syncing table 'tests': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,981 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'test_groups': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,983 - ERROR - [LabFlow.Replica] - Error syncing table 'test_groups': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,987 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'shift': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,988 - ERROR - [LabFlow.Replica] - Error syncing table 'shift': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,993 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'users': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,994 - ERROR - [LabFlow.Replica] - Error syncing table 'users': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:51,998 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'remarks': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,000 - ERROR - [LabFlow.Replica] - Error syncing table 'remarks': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,004 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'invoice_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,006 - ERROR - [LabFlow.Replica] - Error syncing table 'invoice_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,010 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'print_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,012 - ERROR - [LabFlow.Replica] - Error syncing table 'print_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,016 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'app_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,018 - ERROR - [LabFlow.Replica] - Error syncing table 'app_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,026 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'analytics_snapshots': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,027 - ERROR - [LabFlow.Replica] - Error syncing table 'analytics_snapshots': [Errno 11001] getaddrinfo failed
+2026-08-26 14:40:52,529 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 587ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:41:12,567 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'patients': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,569 - ERROR - [LabFlow.Replica] - Error syncing table 'patients': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,572 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'test_results_all': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,573 - ERROR - [LabFlow.Replica] - Error syncing table 'test_results_all': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,578 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'tests': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,580 - ERROR - [LabFlow.Replica] - Error syncing table 'tests': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,584 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'test_groups': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,585 - ERROR - [LabFlow.Replica] - Error syncing table 'test_groups': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,589 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'shift': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,592 - ERROR - [LabFlow.Replica] - Error syncing table 'shift': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,597 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'users': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,599 - ERROR - [LabFlow.Replica] - Error syncing table 'users': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,604 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'remarks': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,607 - ERROR - [LabFlow.Replica] - Error syncing table 'remarks': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,611 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'invoice_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,612 - ERROR - [LabFlow.Replica] - Error syncing table 'invoice_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,619 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'print_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,621 - ERROR - [LabFlow.Replica] - Error syncing table 'print_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,625 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'app_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,626 - ERROR - [LabFlow.Replica] - Error syncing table 'app_settings': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,629 - ERROR - [LabFlow.Replica] - Failed to fetch records for table 'analytics_snapshots': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:12,632 - ERROR - [LabFlow.Replica] - Error syncing table 'analytics_snapshots': [Errno 11001] getaddrinfo failed
+2026-08-26 14:41:13,066 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 519ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:41:35,526 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2454ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:41:59,588 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 4044ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:42:22,644 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 3047ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:42:45,059 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2403ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:43:07,791 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2714ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:43:30,391 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2591ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:43:53,017 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2611ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:44:15,733 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2688ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:44:41,465 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 5724ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:45:04,036 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2313ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:45:26,391 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2340ms. Total updated: 0 rows across 11 tables.
+2026-08-26 14:45:48,845 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-26 14:45:48,845 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main

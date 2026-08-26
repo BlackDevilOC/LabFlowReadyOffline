@@ -141,18 +141,6 @@
       "default_shift_id": null
     },
     {
-      "id": 1,
-      "created_at": "2026-08-26 13:25:36.947361+05:00",
-      "email": "admin@labflow.local",
-      "pwd": "admin123",
-      "name": "Lab Admin",
-      "is_active": true,
-      "permissions": {
-        "role": "admin"
-      },
-      "default_shift_id": null
-    },
-    {
       "id": 5,
       "created_at": "2026-06-30 15:46:57.073835+05:00",
       "email": "nazeer@gmail.com",
@@ -171,6 +159,26 @@
         "update_results": true
       },
       "default_shift_id": 2
+    },
+    {
+      "id": 1,
+      "created_at": "2026-08-26 13:25:36.947361+05:00",
+      "email": "admin@labflow.local",
+      "pwd": "admin123",
+      "name": "Rehan",
+      "is_active": true,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      },
+      "default_shift_id": null
     },
     {
       "id": 6,

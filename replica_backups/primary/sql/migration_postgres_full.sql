@@ -1,6 +1,6 @@
 -- ========================================================
 -- LabFlow Master PostgreSQL Migration & Disaster Recovery
--- Generated at: 2026-08-26T09:11:36.529289+00:00
+-- Generated at: 2026-08-26T09:45:25.982334+00:00
 -- Destination: Any PostgreSQL (Neon, Supabase, Railway, RDS)
 -- ========================================================
 
