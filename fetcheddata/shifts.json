@@ -2,28 +2,28 @@
   "shifts": [
     {
       "id": 1,
-      "shift": "MORNING",
-      "created_at": "2026-05-30T08:06:03.247394+00:00"
+      "created_at": "2026-05-30 08:06:03.247394+00:00",
+      "shift": "MORNING"
     },
     {
       "id": 2,
-      "shift": "EVENING",
-      "created_at": "2026-05-30T08:06:14.405664+00:00"
+      "created_at": "2026-05-30 08:06:14.405664+00:00",
+      "shift": "EVENING"
     },
     {
       "id": 3,
-      "shift": "NIGHT",
-      "created_at": "2026-05-30T08:06:29.655061+00:00"
+      "created_at": "2026-05-30 08:06:29.655061+00:00",
+      "shift": "NIGHT"
     },
     {
       "id": 4,
-      "shift": "HOLIDAY",
-      "created_at": "2026-05-30T08:06:41.508626+00:00"
+      "created_at": "2026-05-30 08:06:41.508626+00:00",
+      "shift": "HOLIDAY"
     },
     {
       "id": 5,
-      "shift": "OPD",
-      "created_at": "2026-05-30T08:06:55.197257+00:00"
+      "created_at": "2026-05-30 08:06:55.197257+00:00",
+      "shift": "OPD"
     }
   ]
 }

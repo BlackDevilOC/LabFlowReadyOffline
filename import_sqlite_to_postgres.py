@@ -15,12 +15,20 @@ import psycopg2
 from psycopg2.extras import execute_values
 from dotenv import load_dotenv
 
-# Ensure local DB environment password is set to opd_pass
-os.environ["LOCAL_DB_HOST"] = "127.0.0.1"
-os.environ["LOCAL_DB_PORT"] = "5432"
-os.environ["LOCAL_DB_NAME"] = "labflow_db"
-os.environ["LOCAL_DB_USER"] = "postgres"
-os.environ["LOCAL_DB_PASS"] = "opd_pass"
+# Support CLI host parameter or environment host (e.g. python import_sqlite_to_postgres.py 192.168.1.4)
+target_host = "127.0.0.1"
+for arg in sys.argv[1:]:
+    if not arg.startswith("-"):
+        target_host = arg.strip()
+        break
+if "LOCAL_DB_HOST" in os.environ and target_host == "127.0.0.1":
+    target_host = os.environ["LOCAL_DB_HOST"].strip()
+
+os.environ["LOCAL_DB_HOST"] = target_host
+os.environ["LOCAL_DB_PORT"] = os.getenv("LOCAL_DB_PORT", "5432").strip()
+os.environ["LOCAL_DB_NAME"] = os.getenv("LOCAL_DB_NAME", "labflow_db").strip()
+os.environ["LOCAL_DB_USER"] = os.getenv("LOCAL_DB_USER", "postgres").strip()
+os.environ["LOCAL_DB_PASS"] = os.getenv("LOCAL_DB_PASS", "opd_pass").strip()
 
 from local_postgres_engine import get_connection, init_local_schema, get_db_config
 

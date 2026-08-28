@@ -72,6 +72,15 @@ class QueryBuilder:
     def insert(self, data: Union[Dict, List[Dict]], upsert: bool = False):
         self.action = "INSERT"
         self.payload = data if isinstance(data, list) else [data]
+        if upsert:
+            self.is_upsert = True
+        return self
+
+    def upsert(self, data: Union[Dict, List[Dict]], on_conflict: Optional[str] = None):
+        self.action = "INSERT"
+        self.is_upsert = True
+        self.on_conflict = on_conflict
+        self.payload = data if isinstance(data, list) else [data]
         return self
 
     def update(self, data: Dict):
@@ -151,13 +160,23 @@ class QueryBuilder:
         return self
 
     def _format_col(self, col: str) -> str:
-        if "." in col:
-            return col
         if self.join_patients:
+            if col.startswith("patients."):
+                sub_col = col.split(".", 1)[1]
+                return f'p."{sub_col}"' if sub_col == "user" else f'p.{sub_col}'
+            elif col.startswith("test_results_all."):
+                sub_col = col.split(".", 1)[1]
+                return f't."{sub_col}"' if sub_col == "user" else f't.{sub_col}'
+            
             patient_cols = ["relation", "relation_name", "age", "gender", "shift", "mobile", "patient_token", "user", "user_id"]
             if col in patient_cols:
                 return f'p."{col}"' if col == "user" else f"p.{col}"
             return f't."{col}"'
+
+        if "." in col:
+            t_name, sub_col = col.split(".", 1)
+            return f'"{t_name}"."{sub_col}"' if sub_col == "user" else f'"{t_name}".{sub_col}'
+
         if col == "user":
             return '"user"'
         return f'"{col}"'
@@ -274,7 +293,22 @@ class QueryBuilder:
 
             cols_sql = ", ".join(cols)
             placeholders = ", ".join(["%s"] * len(clean_vals))
-            sql = f'INSERT INTO public."{self.table_name}" ({cols_sql}) VALUES ({placeholders}) RETURNING *;'
+            
+            if getattr(self, "is_upsert", False):
+                raw_conflict = getattr(self, "on_conflict", None) or ("snapshot_type,date_from,date_to" if self.table_name == "analytics_snapshots" else "id")
+                conflict_cols = [f'"{c.strip()}"' for c in raw_conflict.split(",")]
+                conflict_target = ", ".join(conflict_cols)
+                
+                raw_cols = [c.strip() for c in raw_conflict.split(",")]
+                update_cols = [f'"{k}" = EXCLUDED."{k}"' for k in clean_item.keys() if k not in raw_cols and k != "id"]
+                if update_cols:
+                    conflict_sql = f' ON CONFLICT ({conflict_target}) DO UPDATE SET ' + ", ".join(update_cols)
+                else:
+                    conflict_sql = f' ON CONFLICT ({conflict_target}) DO NOTHING'
+                sql = f'INSERT INTO public."{self.table_name}" ({cols_sql}) VALUES ({placeholders}){conflict_sql} RETURNING *;'
+            else:
+                sql = f'INSERT INTO public."{self.table_name}" ({cols_sql}) VALUES ({placeholders}) RETURNING *;'
+
             cursor.execute(sql, clean_vals)
             row = cursor.fetchone()
             if row:

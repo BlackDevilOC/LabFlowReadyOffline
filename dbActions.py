@@ -17,30 +17,8 @@ def get_base_path():
 
 
 def init_supabase() -> Any:
-    try:
-        base_path = get_base_path()
-        dotenv_path = os.path.join(base_path, ".env")
-        
-        if os.path.exists(dotenv_path):
-            load_dotenv(dotenv_path, override=True)
-        else:
-            load_dotenv(override=True)
-
-        target = os.getenv("ACTIVE_DB_TARGET", "local").strip().lower()
-        if target in ["local", "offline", "postgres", "local_postgres"]:
-            return get_local_postgres_client()
-
-        SUPABASE_URL = str(os.getenv("SUPABASE_URL", "")).strip()
-        SUPABASE_KEY = str(os.getenv("SUPABASE_KEY", "")).strip()
-
-        if not SUPABASE_URL or not SUPABASE_KEY:
-            logger.warning("Supabase credentials not found, switching to local PostgreSQL.")
-            return get_local_postgres_client()
-
-        return get_local_postgres_client()
-    except Exception as e:
-        logger.warning(f"Defaulting to local PostgreSQL engine: {e}")
-        return get_local_postgres_client()
+    """Returns local PostgreSQL database client (100% On-Premise Local Server Mode)."""
+    return get_local_postgres_client()
 
 def load_patient():
     try:
@@ -1034,11 +1012,18 @@ def authenticate_user(email: str, password: str):
     email_norm = (email or "").strip().lower()
     try:
         supabase = init_supabase()
-        response = supabase.table("users").select("*").eq("email", email_norm).limit(1).execute()
+        response = supabase.table("users").select("*").execute()
         rows = response.data or []
-        if not rows:
+        row = None
+        for r in rows:
+            r_email = (r.get("email") or "").strip().lower()
+            r_name = (r.get("name") or "").strip().lower()
+            if email_norm in [r_email, r_name] or (r_email and email_norm == r_email.split("@")[0]):
+                row = r
+                break
+
+        if not row:
             return None
-        row = rows[0]
         if (row.get("pwd") or "") != (password or ""):
             return None
         schema_ready = _users_schema_ready(supabase)
@@ -1061,10 +1046,17 @@ def authenticate_user(email: str, password: str):
                 pass
         return user_out
     except Exception as e:
-        logger.warning(f"Supabase authenticate_user failed ({e}), checking local users cache.")
+        logger.warning(f"PostgreSQL authenticate_user failed ({e}), checking local users cache.")
         cached_users = _load_users_cache()
         for row in cached_users:
-            if (row.get("email") or "").strip().lower() == email_norm:
+            r_email = (row.get("email") or "").strip().lower()
+            r_name = (row.get("name") or "").strip().lower()
+            if email_norm in [r_email, r_name] or (r_email and email_norm == r_email.split("@")[0]):
+                if (row.get("pwd") or "") != (password or ""):
+                    return None
+                if row.get("is_active") is False:
+                    return {"disabled": True}
+                user_out = public_user_dict(row)
                 if (row.get("pwd") or "") != (password or ""):
                     return None
                 if row.get("is_active") is False:
@@ -1409,3 +1401,69 @@ def add_tests_to_patient_all(patient_id, patient_mr_no, patient_name, selected_t
     except Exception as e:
         log_error(e, "ADD_TESTS_TO_PATIENT_ALL_FAILED", user=user)
         return []
+
+
+def sync_latest_server_backup_to_local_pc() -> tuple[bool, str]:
+    """
+    Downloads the latest .sql database backup from the Linux server (192.168.1.4)
+    and saves it to local disk (e.g. C:\LabFlow_Backups\ or ~/LabFlow_Backups).
+    Ensures every workstation PC holds a fresh copy of the PostgreSQL database dump!
+    """
+    try:
+        import urllib.request
+        db_host = os.getenv("LOCAL_DB_HOST", "127.0.0.1")
+        if db_host == "127.0.0.1" or db_host == "localhost":
+            return False, "Running on localhost server; no LAN fetch needed."
+
+        server_port = os.getenv("SERVER_PORT", "8888")
+        server_url = f"http://{db_host}:{server_port}/api/server/backups/latest"
+        local_backup_dir = Path("C:/LabFlow_Backups") if os.name == "nt" else Path.home() / "LabFlow_Backups"
+        local_backup_dir.mkdir(parents=True, exist_ok=True)
+
+        req = urllib.request.Request(server_url, headers={"User-Agent": "LabFlowWorkstationClient"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            if resp.status == 200:
+                cd = resp.headers.get("Content-Disposition", "")
+                filename = "latest_server_backup.sql"
+                if "filename=" in cd:
+                    filename = cd.split("filename=")[-1].strip('"\'')
+                
+                dest_file = local_backup_dir / filename
+                with open(dest_file, "wb") as f:
+                    f.write(resp.read())
+                
+                size_mb = round(dest_file.stat().st_size / (1024 * 1024), 2)
+                msg = f"Saved latest server backup to workstation: {dest_file} ({size_mb} MB)"
+                logger.info(msg)
+                return True, msg
+    except Exception as e:
+        logger.warning(f"Could not auto-fetch server backup to workstation: {e}")
+        return False, str(e)
+    return False, "Failed to download backup"
+
+
+def sync_all_local_cache():
+    """Refreshes all local JSON cache files (users, print settings, invoice settings, remarks) from PostgreSQL."""
+    try:
+        list_login_users()
+        sync_invoice_settings_cache()
+        sync_lab_print_settings_cache()
+        sync_remarks_cache()
+        logger.info("Local background cache sync: All cache JSON files refreshed successfully.")
+    except Exception as e:
+        logger.warning(f"Local background cache refresh notice: {e}")
+
+
+def start_background_cache_refresh_worker(interval_seconds: int = 3600):
+    """Launches a background daemon thread that refreshes local caches on startup and every interval_seconds (default 1 hour)."""
+    import threading, time
+
+    def _worker_loop():
+        sync_all_local_cache()
+        while True:
+            time.sleep(interval_seconds)
+            sync_all_local_cache()
+
+    t = threading.Thread(target=_worker_loop, daemon=True)
+    t.start()
+    logger.info(f"Background cache refresh worker launched (Interval: {interval_seconds}s / 1 hour).")

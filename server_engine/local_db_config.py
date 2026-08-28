@@ -25,7 +25,7 @@ def load_config():
 
     return {
         "HOST": os.getenv("SERVER_HOST", "0.0.0.0"),
-        "PORT": int(os.getenv("SERVER_PORT", "8000")),
+        "PORT": int(os.getenv("SERVER_PORT", "8888")),
         "DB_HOST": os.getenv("LOCAL_DB_HOST", "127.0.0.1"),
         "DB_PORT": int(os.getenv("LOCAL_DB_PORT", "5432")),
         "DB_NAME": os.getenv("LOCAL_DB_NAME", "labflow_db"),

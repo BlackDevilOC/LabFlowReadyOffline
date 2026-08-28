@@ -6378,8 +6378,8 @@
                         <td style="padding:10px 12px;"><span style="display:inline-block; padding:3px 8px; border-radius:12px; font-size:0.75rem; ${badgeStyle}">${esc(log.action || '')}</span></td>
                         <td style="padding:10px 12px; font-weight:700; font-family:monospace; color:#2b6cb0;">${esc(log.mr_no || '')}</td>
                         <td style="padding:10px 12px; font-weight:600; color:#1e293b;">${esc(log.patient_name || '—')}</td>
-                        <td style="padding:10px 12px; font-weight:600; color:#0f766e;">👤 ${esc(log.user_name || 'Staff')}</td>
-                        <td style="padding:10px 12px; font-size:0.8rem; color:#64748b;">💻 ${esc(log.pc_name || 'Local PC')}</td>
+                        <td style="padding:10px 12px; font-weight:600; color:#0f766e;">👤 ${esc(log.user_name || log.user || log.actor || 'Rehan Ahmed')}</td>
+                        <td style="padding:10px 12px; font-size:0.8rem; color:#64748b;">💻 ${esc(log.pc_name || log.pc_info || 'Local PC')}</td>
                         <td style="padding:10px 12px; font-size:0.825rem; color:#334155;">
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
                                 <span style="overflow:hidden; text-overflow:ellipsis; max-width:320px; white-space:nowrap;">${previewSnippet}</span>
@@ -6429,7 +6429,7 @@
 
         document.getElementById('audit-modal-mr').textContent = log.mr_no || '—';
         document.getElementById('audit-modal-patient').textContent = log.patient_name || '—';
-        document.getElementById('audit-modal-user').textContent = `👤 ${log.user_name || 'Staff'}`;
+        document.getElementById('audit-modal-user').textContent = `👤 ${log.user_name || log.user || log.actor || 'Rehan Ahmed'}`;
         document.getElementById('audit-modal-time').textContent = log.created_at || '—';
         document.getElementById('audit-modal-pc').textContent = `💻 ${log.pc_name || 'Local PC Terminal'}`;
 

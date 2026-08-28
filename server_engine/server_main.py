@@ -51,8 +51,8 @@ def boot_server():
     print("=" * 65)
     print("Server engine is running. Press Ctrl+C to stop.\n")
 
-    # Import main FastAPI app from root main.py
-    from main import app
+    # Import standalone headless server_api app
+    from server_engine.server_api import app
     uvicorn.run(app, host=host, port=port, reload=False)
 
 if __name__ == "__main__":

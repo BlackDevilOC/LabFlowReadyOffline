@@ -5,19 +5,26 @@ import io
 from datetime import datetime, timezone
 from typing import Any
 
-from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
-from reportlab.lib.units import cm
-from reportlab.platypus import (
-    HRFlowable,
-    Paragraph,
-    SimpleDocTemplate,
-    Spacer,
-    Table,
-    TableStyle,
-)
+try:
+    from reportlab.lib import colors
+    from reportlab.lib.enums import TA_CENTER
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+    from reportlab.lib.units import cm
+    from reportlab.platypus import (
+        HRFlowable,
+        Paragraph,
+        SimpleDocTemplate,
+        Spacer,
+        Table,
+        TableStyle,
+    )
+except ImportError:
+    colors = None
+    TA_CENTER = None
+    A4 = None
+    ParagraphStyle = getSampleStyleSheet = cm = None
+    HRFlowable = Paragraph = SimpleDocTemplate = Spacer = Table = TableStyle = None
 
 from analytics_service import compute_overview, compute_telemetry, compute_tests
 

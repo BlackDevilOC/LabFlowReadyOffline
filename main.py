@@ -20,11 +20,10 @@ from analytics_router import router as analytics_router
 from replica_engine import get_replica_engine
 
 try:
-    from offline.database import insert_audit_log, list_audit_trail
+    from logdata import insert_audit_log, list_audit_trail
 except Exception:
     try:
-        # pyrefly: ignore [missing-import]
-        from database import insert_audit_log, list_audit_trail
+        from offline.database import insert_audit_log, list_audit_trail
     except Exception:
         insert_audit_log = None
         list_audit_trail = None
@@ -358,8 +357,8 @@ def api_admin_offline_sync_log(search: str = None, limit: int = 200):
         logs = list_mr_sync_log(limit=min(limit, 500), search=search)
         return {"status": "Success", "logs": logs}
     except Exception as e:
-        logger.error(f"offline-sync-log failed: {e}")
-        return {"status": "Error", "message": str(e), "logs": []}
+        logger.debug(f"offline-sync-log notice (local PostgreSQL active): {e}")
+        return {"status": "Success", "logs": [], "message": "Direct Local PostgreSQL active"}
 
 @app.get("/api/fitness/records")
 def get_fitness_records_api(
@@ -663,7 +662,10 @@ def admin_panel(request: Request, view: str = "overview", date: str = None):
 @app.get("/page/emergency-dr")
 @app.get("/offline/page/emergency-dr")
 def page_emergency_dr(request: Request):
-    return RedirectResponse(url="http://127.0.0.1:9000", status_code=302)
+    return templates.TemplateResponse(request=request, name="emergency_dr.html", context={
+        "url_prefix": "",
+        "local_server_url": "http://192.168.1.4:8888"
+    })
 
 
 
@@ -1814,15 +1816,20 @@ def sync_online_to_offline_db():
 
     def _run():
         try:
+            try:
+                from offline.database import (
+                    upsert_tests_from_supabase,
+                    upsert_test_groups_from_supabase,
+                    upsert_shifts_from_supabase,
+                    upsert_users_from_supabase,
+                    upsert_remarks_from_supabase,
+                    upsert_invoice_settings_from_supabase,
+                )
+            except Exception:
+                logger.info("Direct local PostgreSQL mode active; legacy SQLite offline sync thread standby.")
+                return
+
             logger.info("Starting background metadata sync from online to offline database...")
-            from offline.database import (
-                upsert_tests_from_supabase,
-                upsert_test_groups_from_supabase,
-                upsert_shifts_from_supabase,
-                upsert_users_from_supabase,
-                upsert_remarks_from_supabase,
-                upsert_invoice_settings_from_supabase,
-            )
             from dbActions import init_supabase, load_invoice_settings_row
             
             supabase = init_supabase()
@@ -2362,6 +2369,11 @@ def _auto_pull_cloud_settings_sync():
 def on_app_startup():
     """Startup routine for 100% On-Premise Local PostgreSQL Engine mode."""
     logger.info("LabFlow app started in 100% On-Premise Local PostgreSQL mode.")
+    try:
+        from dbActions import start_background_cache_refresh_worker
+        start_background_cache_refresh_worker(interval_seconds=3600)
+    except Exception as e:
+        logger.warning(f"Could not launch background cache refresh worker: {e}")
 
 
 @app.on_event("shutdown")

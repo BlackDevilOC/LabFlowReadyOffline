@@ -8,7 +8,7 @@
   "logo_path": "/static/images/hospital_logo.png",
   "qr_code_path": null,
   "is_active": true,
-  "updated_at": "2026-05-30T07:47:53.878769+00:00",
+  "updated_at": "2026-05-30 07:47:53.878769+00:00",
   "logo_url": "/fetcheddata/logo.png",
   "qr_url": "/fetcheddata/qr_placeholder.svg"
 }

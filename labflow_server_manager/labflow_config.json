@@ -1,9 +1,10 @@
 {
-  "LOCAL_DB_HOST": "127.0.0.1",
+  "LOCAL_DB_HOST": "192.168.1.4",
   "LOCAL_DB_PORT": 5432,
   "LOCAL_DB_NAME": "labflow_db",
   "LOCAL_DB_USER": "postgres",
   "LOCAL_DB_PASS": "opd_pass",
-  "SERVER_PORT": 8000,
-  "UPDATED_AT": "2026-08-26 13:25:45"
+  "SERVER_PORT": 8888,
+  "ADMIN_PORT": 9999,
+  "UPDATED_AT": "2026-08-28 16:39:46"
 }

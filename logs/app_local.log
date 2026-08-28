@@ -21666,3 +21666,451 @@ PermissionError: [Errno 13] Permission denied: 'D:\\rehan d DRIVE\\production\\L
 2026-08-26 14:45:26,391 - INFO - [LabFlow.Replica] - Replication cycle (delta) complete in 2340ms. Total updated: 0 rows across 11 tables.
 2026-08-26 14:45:48,845 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
 2026-08-26 14:45:48,845 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-27 18:19:38,132 - INFO - [LabFlow] - Loaded 4393 patients from database
+2026-08-27 18:20:40,284 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-27 18:20:44,608 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-27 18:20:44,608 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-27 18:20:44,667 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-27 18:20:44,712 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-27 18:20:44,801 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-27 18:20:44,842 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-27 18:20:57,832 - INFO - [LabFlow] - Saved 15 users to fetcheddata/users.json
+2026-08-27 18:21:23,725 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-27 18:21:23,884 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-27 18:21:23,978 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-27 18:21:24,032 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-27 18:21:24,034 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-27 18:21:24,037 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: No module named 'offline.database'
+2026-08-27 18:21:24,352 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-27 18:21:25,442 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-27 18:21:25,778 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-27 18:21:30,622 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: random
+2026-08-27 18:21:30,624 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'random', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'Morning', 'user': 'Rehan', 'user_id': 1, 'pwd': '3962585'}
+2026-08-27 18:21:30,689 - INFO - [LabFlow] - Successfully registered new patient. ID: 104486, MR No: 184155
+2026-08-27 18:21:30,694 - INFO - [LabFlow] - Patient registered. ID: 104486, MR: 184155. Queuing test creation in background...
+2026-08-27 18:21:30,906 - INFO - [LabFlow] - [USER: admin@labflow.local] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184155
+2026-08-27 18:21:30,939 - INFO - [LabFlow] - Generating Invoice for patient: 104486
+2026-08-27 18:21:31,055 - INFO - [LabFlow] - Adding tests to patient MR: 184155, Name: random
+2026-08-27 18:21:31,118 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184155
+2026-08-27 18:21:31,349 - INFO - [LabFlow] - Fetched full info for patient ID: 104486
+2026-08-27 18:21:32,936 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-27 18:21:34,383 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184155
+2026-08-27 18:21:34,851 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-27 18:21:38,440 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184155
+2026-08-27 18:21:38,453 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-27 18:21:39,815 - INFO - [LabFlow] - Accessing Fast Results Entry workspace
+2026-08-27 18:21:40,399 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-27 18:21:44,064 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-28T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-27 18:21:44,066 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-28T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 171, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 216, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-28T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-27 18:21:44,972 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-28T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-27 18:21:44,974 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-28T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 171, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 216, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-28T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-27 18:21:47,418 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-27 18:21:48,016 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-27 18:21:50,920 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184155, date=None
+2026-08-27 18:21:56,800 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-27 18:22:47,528 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-27 18:22:50,312 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184155, date=None
+2026-08-27 18:22:51,768 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-27 18:22:51,962 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-27 18:35:03,572 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-27 18:35:03,839 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-27 18:35:28,918 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: sanaullah
+2026-08-27 18:35:28,921 - INFO - [LabFlow] - [USER: admin@labflow.local] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'sanaullah', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'Morning', 'user': 'Rehan', 'user_id': 1, 'pwd': '33385'}
+2026-08-27 18:35:28,985 - INFO - [LabFlow] - Successfully registered new patient. ID: 104487, MR No: 184156
+2026-08-27 18:35:28,986 - INFO - [LabFlow] - Patient registered. ID: 104487, MR: 184156. Queuing test creation in background...
+2026-08-27 18:35:29,197 - INFO - [LabFlow] - [USER: admin@labflow.local] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184156
+2026-08-27 18:35:29,206 - INFO - [LabFlow] - Generating Invoice for patient: 104487
+2026-08-27 18:35:29,427 - INFO - [LabFlow] - Fetched full info for patient ID: 104487
+2026-08-27 18:35:29,447 - INFO - [LabFlow] - Adding tests to patient MR: 184156, Name: sanaullah
+2026-08-27 18:35:29,541 - INFO - [LabFlow] - Successfully added 2 test records in test_results_all for patient 184156
+2026-08-28 16:53:43,690 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 16:53:54,711 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 16:53:54,713 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 16:53:54,770 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 16:53:54,947 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 16:53:55,108 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 16:53:55,139 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 16:53:57,554 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 16:56:44,962 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 16:56:47,058 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 16:56:47,059 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 16:56:47,116 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 16:56:47,139 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 16:56:47,322 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 16:56:47,348 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 16:56:49,875 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 16:56:56,083 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 16:56:56,132 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 16:56:56,210 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 16:56:56,259 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 16:56:56,262 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 16:56:56,264 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: No module named 'offline.database'
+2026-08-28 16:56:56,579 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 16:56:58,446 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-28 16:56:58,689 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 16:56:59,919 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:57:01,167 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 5011
+2026-08-28 16:57:01,473 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 16:57:05,150 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:57:06,159 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 5011
+2026-08-28 16:57:06,390 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 16:57:08,708 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 5011
+2026-08-28 16:57:08,722 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:57:48,013 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:57:49,310 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:57:51,269 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:58:16,589 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:58:18,406 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 16:58:19,726 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:59:02,807 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 16:59:17,501 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 16:59:19,168 - INFO - [LabFlow] - Accessing Fast Results Entry workspace
+2026-08-28 16:59:19,505 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 16:59:23,561 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-28 16:59:23,562 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 171, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 216, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-28 16:59:25,226 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-28 16:59:25,228 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 171, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 216, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-28 16:59:26,402 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-28 16:59:26,403 - ERROR - [LabFlow] - [USER: System] [API_PRINT_RECORDS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 435, in get_print_records_api
+    rows, _meta = fetch_test_result_list_rows(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\patient_list_query.py", line 285, in fetch_test_result_list_rows
+    response = query.execute()
+               ^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 171, in execute
+    data = self._execute_select(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 216, in _execute_select
+    cursor.execute(sql, self.params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: invalid reference to FROM-clause entry for table "patients"
+LINE 6: ...' AND t."created_at" < '2026-08-29T00:00:00Z' AND patients.s...
+                                                             ^
+HINT:  Perhaps you meant to reference the table alias "p".
+
+2026-08-28 17:01:46,357 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:01:46,357 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:01:57,749 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:01:57,749 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:02:07,366 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:02:07,367 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:02:07,688 - INFO - [LabFlow] - Loaded 4934 fitness records from DB
+2026-08-28 17:02:19,842 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:02:19,842 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:02:20,099 - INFO - [LabFlow] - Loaded 4934 fitness records from DB
+2026-08-28 17:02:25,149 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 17:02:29,733 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:02:29,734 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:02:43,389 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:02:43,390 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:02:43,455 - INFO - [LabFlow] - [USER: Anonymous] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: None
+2026-08-28 17:02:43,530 - ERROR - [LabFlow] - [USER: Anonymous] [API_REGISTER_PATIENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] 1 validation error for GetAllDataFromRegPage
+patient_name
+  Field required [type=missing, input_value={}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.7/v/missing
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 691, in register_patient
+    item = GetAllDataFromRegPage(**data) # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\site-packages\pydantic\main.py", line 176, in __init__
+    self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for GetAllDataFromRegPage
+patient_name
+  Field required [type=missing, input_value={}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.7/v/missing
+2026-08-28 17:02:54,992 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:02:54,992 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:02:55,096 - INFO - [LabFlow] - [USER: Anonymous] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: Offline Patient Test
+2026-08-28 17:02:55,097 - INFO - [LabFlow] - [USER: Anonymous] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'Offline Patient Test', 'relation': 'S/O', 'relation_name': 'Test Father', 'mobile': '03001234567', 'gender': 'Male', 'age': 28, 'cnic': '-', 'patient_token': '0', 'shift': 'Morning', 'user': 'Rehan Ahmed', 'user_id': 1, 'pwd': '761329'}
+2026-08-28 17:02:55,158 - INFO - [LabFlow] - Successfully registered new patient. ID: 105048, MR No: 184152
+2026-08-28 17:02:55,159 - INFO - [LabFlow] - Patient registered. ID: 105048, MR: 184152. Queuing test creation in background...
+2026-08-28 17:02:55,252 - INFO - [LabFlow] - [USER: Anonymous] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184152
+2026-08-28 17:02:55,346 - INFO - [LabFlow] - Adding tests to patient MR: 184152, Name: Offline Patient Test
+2026-08-28 17:02:55,347 - INFO - [LabFlow] - Successfully added 0 test records in test_results_all for patient 184152
+2026-08-28 17:02:55,352 - INFO - [LabFlow] - Generating Invoice for patient: 105048
+2026-08-28 17:03:39,232 - INFO - [LabFlow] - Server is already running on 127.0.0.1:8000 — attaching desktop window.
+2026-08-28 17:03:39,233 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 17:03:40,299 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 17:03:52,385 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 17:03:54,301 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:03:54,353 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:03:54,479 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 17:03:54,564 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 17:03:54,743 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 17:03:54,765 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 17:03:59,617 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:04:07,141 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 17:04:07,174 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 17:04:07,267 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 17:04:07,302 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 17:04:07,303 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 17:04:07,309 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: No module named 'offline.database'
+2026-08-28 17:04:07,627 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:04:13,025 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:04:13,897 - INFO - [LabFlow] - Accessing Fast Results Entry workspace
+2026-08-28 17:04:14,218 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 17:04:21,681 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:04:22,959 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:04:24,698 - INFO - [LabFlow] - Accessing Fast Print Stream workspace
+2026-08-28 17:04:40,866 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:04:46,237 - ERROR - [LabFlow] - offline-sync-log failed: No module named 'offline.database'
+2026-08-28 17:04:47,463 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:04:48,128 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-28 17:04:51,810 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-28 17:04:52,306 - INFO - [LabFlow] - Loaded 4934 fitness records from DB
+2026-08-28 17:04:55,722 - INFO - [LabFlow] - Accessing Fluid Reports Hub
+2026-08-28 17:04:57,018 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-28 17:04:57,204 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 17:04:58,996 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:05:00,281 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:05:00,841 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:05:02,353 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 5011
+2026-08-28 17:05:02,591 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 17:05:03,233 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:05:03,809 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-28 17:05:03,945 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 17:05:06,260 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:05:06,681 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:07:18,778 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:07:19,234 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:09:59,972 - DEBUG - [LabFlow] - Analytics snapshot write skipped: 'QueryBuilder' object has no attribute 'upsert'
+2026-08-28 17:09:59,972 - INFO - [LabFlow] - [USER: admin@admin.com] [ANALYTICS_VIEW] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Analytics overview 2026-08-28..2026-08-28
+2026-08-28 17:10:04,893 - DEBUG - [LabFlow] - Analytics snapshot write skipped: 'QueryBuilder' object has no attribute 'upsert'
+2026-08-28 17:10:04,894 - INFO - [LabFlow] - [USER: admin@admin.com] [ANALYTICS_VIEW] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Analytics overview 2026-08-01..2026-08-28
+2026-08-28 17:10:10,779 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:10:11,245 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:10:12,213 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 5011
+2026-08-28 17:10:12,467 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 17:10:15,691 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 5011
+2026-08-28 17:10:15,706 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:13:42,347 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'analytics_snapshots': column "snapshot_date" of relation "analytics_snapshots" does not exist
+LINE 1: INSERT INTO public."analytics_snapshots" ("snapshot_date", "...
+                                                  ^
+
+2026-08-28 17:15:09,893 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:15:09,894 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:15:09,950 - INFO - [LabFlow] - [USER: admin@admin.com] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 5011 | Action: UPDATE_TEST_RESULTS | Details: Updated CBC test results
+2026-08-28 17:15:09,962 - ERROR - [LabFlow] - Online audit list error: list_audit_trail() got an unexpected keyword argument 'user_name'
+2026-08-28 17:15:29,925 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:15:29,925 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:15:29,977 - INFO - [LabFlow] - [USER: admin@admin.com] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 5011 | Action: UPDATE_TEST_RESULTS | Details: Updated CBC test results
+2026-08-28 17:16:43,726 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:16:43,727 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:17:06,626 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:17:06,626 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:17:46,157 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 17:17:48,238 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:17:48,247 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:17:48,387 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 17:17:48,464 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 17:17:48,632 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 17:17:48,655 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 17:17:51,321 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:17:56,382 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 17:17:56,435 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 17:17:56,493 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 17:17:56,544 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 17:17:56,546 - INFO - [LabFlow] - Direct local PostgreSQL mode active; legacy SQLite offline sync thread standby.
+2026-08-28 17:17:56,866 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:17:58,999 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:17:59,935 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 5011
+2026-08-28 17:18:00,192 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-28 17:18:02,723 - DEBUG - [LabFlow] - Audit log on bulk update error: insert_audit_log() got an unexpected keyword argument 'patient_name'
+2026-08-28 17:18:02,724 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 5011
+2026-08-28 17:18:02,762 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:19:03,786 - INFO - [LabFlow] - User requested logout
+2026-08-28 17:19:03,791 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 17:19:04,679 - INFO - [LabFlow.Replica] - Loaded existing sync state from D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\replica_backups\primary\sync_state.json
+2026-08-28 17:19:51,937 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 17:19:52,873 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:19:54,972 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:21:12,314 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:21:16,522 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 17:21:16,568 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 17:21:16,661 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 17:21:16,713 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 17:21:16,715 - INFO - [LabFlow] - Direct local PostgreSQL mode active; legacy SQLite offline sync thread standby.
+2026-08-28 17:21:17,033 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:22:42,257 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:22:43,144 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:22:49,793 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4974, date=None
+2026-08-28 17:24:45,506 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:24:45,608 - WARNING - [LabFlow] - Local background cache refresh notice: name 'load_remarks_list' is not defined
+2026-08-28 17:25:13,590 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:25:13,646 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 17:25:13,693 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 17:25:13,747 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 17:25:13,748 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-28 17:25:56,215 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 17:25:58,452 - INFO - [LabFlow] - Legacy offline module not mounted (running in direct local PostgreSQL mode).
+2026-08-28 17:25:58,453 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:25:58,512 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 17:25:58,537 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 17:25:58,539 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-28 17:25:58,574 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:25:58,627 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 17:25:58,672 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 17:25:58,673 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 17:25:58,695 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 17:25:58,715 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 17:25:58,716 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-28 17:26:00,970 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:26:02,492 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:29:10,453 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:30:15,606 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 17:30:18,082 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 17:30:18,130 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 17:30:18,154 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 17:30:18,156 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-28 17:30:18,207 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:30:18,252 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 17:30:18,285 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 17:30:18,321 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 17:30:18,322 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-28 17:30:18,428 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 17:30:18,458 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 17:30:20,262 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 17:30:27,251 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 17:30:27,310 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 17:30:27,400 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 17:30:27,455 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 17:30:27,457 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 17:30:27,516 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-28 17:30:27,574 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-28 17:30:27,636 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-28 17:30:27,685 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-28 17:30:27,753 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-28 17:30:27,775 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:30:27,811 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-28 17:30:27,823 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-28 17:30:45,053 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:30:48,070 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:30:49,186 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-28 17:31:08,245 - INFO - [LabFlow] - [USER: System] [ADMIN_CONFIG] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated test group ID 106: Albumin
+2026-08-28 17:31:08,740 - INFO - [LabFlow] - [USER: System] [ADMIN_CONFIG] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated test group ID 106: Albumin
+2026-08-28 17:31:21,789 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 17:31:22,476 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-28 17:31:24,214 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:31:25,047 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-28 17:40:21,626 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:40:23,385 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 17:40:24,179 - INFO - [LabFlow] - Accessing Fast Print Stream workspace

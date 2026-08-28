@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabFlow Server Manager - Control Panel</title>
+    <title>LabFlow Server Manager - Control Panel & Metrics</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -61,161 +61,213 @@
             color: var(--text-main);
             padding: 8px 16px;
             border-radius: 8px;
-            text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
         }
-        .btn:hover { background: var(--primary); border-color: var(--primary); }
+        .btn:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); }
+        .btn-primary { background: var(--primary); border-color: var(--primary); color: white; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-success { background: var(--success); border-color: var(--success); color: white; }
+        .btn-success:hover { background: #059669; }
 
-        .grid {
+        .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 16px;
             margin-bottom: 24px;
         }
 
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 16px;
+            backdrop-filter: blur(12px);
         }
 
         .card-title {
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-weight: 600;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
         }
 
         .card-value {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            border-radius: 4px;
+            transition: width 0.4s ease;
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: 9999px;
+            font-size: 11px;
             font-weight: 600;
+            letter-spacing: 0.3px;
         }
-        .badge-success { background: rgba(16, 185, 129, 0.15); color: var(--success); }
-        .badge-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+        .badge-success { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-danger { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
 
-        .lan-card {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(17, 24, 39, 0.8));
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .lan-url {
-            font-family: 'JetBrains Mono', monospace;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 8px 12px;
-            border-radius: 6px;
-            color: #60a5fa;
-            font-size: 14px;
-            margin-top: 8px;
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
             display: inline-block;
         }
+        .dot-green { background: #10b981; box-shadow: 0 0 8px #10b981; }
+        .dot-red { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
 
         .section-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 16px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
+
+        .table-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .table-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-name { font-weight: 600; font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+        .table-count { font-size: 16px; font-weight: 700; color: #60a5fa; font-family: 'JetBrains Mono', monospace; }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
+            font-size: 13px;
         }
-
         th, td {
-            padding: 12px;
+            padding: 10px 14px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
+        th { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 11px; }
 
-        th { color: var(--text-muted); font-weight: 500; font-size: 12px; text-transform: uppercase; }
-
-        .table-grid {
+        .backup-center {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 12px;
+            grid-template-columns: 1fr 2fr;
+            gap: 16px;
+            margin-bottom: 24px;
         }
-
-        .table-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .table-name { font-weight: 600; }
-        .table-count { font-family: 'JetBrains Mono', monospace; color: var(--primary); font-size: 16px; font-weight: 700; }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .dot-green { background: var(--success); box-shadow: 0 0 8px var(--success); }
-        .dot-red { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
     </style>
 </head>
 <body>
-
     <div class="header">
-        <h1>🏥 <span>LabFlow Server Manager</span></h1>
+        <h1>
+            <span>LabFlow Server</span> Control Panel
+        </h1>
         <div class="nav-btns">
-            <a href="/" class="btn" style="background: var(--primary);">Dashboard</a>
-            <a href="/setup" class="btn">⚙️ Setup Config</a>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 6px; border: 1px solid var(--border-color);">
+                IP: <strong style="color: #60a5fa;">{{ local_ip }}</strong>
+            </span>
+            <a href="/setup" class="btn">⚙️ Settings</a>
         </div>
     </div>
 
-    <!-- Status Overview Grid -->
-    <div class="grid">
-        <div class="card lan-card">
-            <div class="card-title">Local LAN Server Access</div>
-            <div style="font-size: 14px; color: var(--text-muted);">Share this URL with Client PCs over your Wi-Fi/Router:</div>
-            <div class="lan-url" id="lan-url">http://{{ local_ip }}:{{ config.SERVER_PORT or 8000 }}</div>
+    <!-- Live Metrics Grid -->
+    <div class="metrics-grid">
+        <div class="card">
+            <div class="card-title">🖥️ Server CPU Load</div>
+            <div class="card-value"><span id="cpu-val">0</span><span style="font-size: 14px; color: var(--text-muted);">%</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="cpu-bar" style="width: 0%;"></div></div>
         </div>
 
         <div class="card">
-            <div class="card-title">Worker 1 (Background Engine)</div>
-            <div id="worker1-status" class="card-value">
-                <span class="badge badge-danger">Checking...</span>
-            </div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="worker1-detail">Port 8000</div>
+            <div class="card-title">🧠 RAM Memory Usage</div>
+            <div class="card-value"><span id="ram-val">0</span><span style="font-size: 14px; color: var(--text-muted);">%</span></div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="ram-detail">0 MB / 0 MB</div>
+            <div class="progress-bar"><div class="progress-fill" id="ram-bar" style="width: 0%;"></div></div>
         </div>
 
         <div class="card">
-            <div class="card-title">Local PostgreSQL Database</div>
+            <div class="card-title">💾 Disk Free Space</div>
+            <div class="card-value"><span id="disk-free-val">0</span><span style="font-size: 14px; color: var(--text-muted);">GB</span></div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="disk-detail">0 GB Used</div>
+            <div class="progress-bar"><div class="progress-fill" id="disk-bar" style="width: 0%;"></div></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🗄️ PostgreSQL Database</div>
             <div id="db-status" class="card-value">
                 <span class="badge badge-danger">Checking...</span>
             </div>
             <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="db-latency">Latency: -- ms</div>
         </div>
+    </div>
+
+    <!-- Backup Management Center -->
+    <div class="backup-center">
+        <div class="card">
+            <div class="card-title">💾 Automated SQL Backup Center</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+                Produces standard <code>.sql</code> PostgreSQL dumps for 1-click restore across all lab PCs.
+            </p>
+            <button class="btn btn-success" style="width: 100%; justify-content: center;" onclick="triggerBackup()">
+                ⚡ Create .SQL Backup Now
+            </button>
+            <div id="backup-msg" style="font-size: 11px; margin-top: 10px; color: var(--success); font-family: monospace;"></div>
+        </div>
 
         <div class="card">
-            <div class="card-title">Active LAN Client IPs</div>
-            <div class="card-value" id="client-count">0</div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 8px;" id="total-requests">Total Requests: 0</div>
+            <div class="card-title">📦 Recent .SQL Database Backups</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th>Created At</th>
+                        <th>Size</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="backup-list-body">
+                    <tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Loading backups...</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -229,41 +281,28 @@
         <!-- Dynamically populated tables -->
     </div>
 
-    <!-- Connected LAN Clients & Recent Traffic -->
-    <div style="margin-top: 32px;" class="card">
-        <div class="card-title">📡 Connected LAN Clients & Traffic Log</div>
-        <table id="traffic-table">
-            <thead>
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Client IP</th>
-                    <th>Method</th>
-                    <th>Endpoint</th>
-                    <th>Status</th>
-                    <th>Latency</th>
-                </tr>
-            </thead>
-            <tbody id="traffic-body">
-                <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No client traffic recorded yet.</td></tr>
-            </tbody>
-        </table>
-    </div>
-
     <script>
+        async function triggerBackup() {
+            const msgEl = document.getElementById('backup-msg');
+            msgEl.innerText = "Creating .sql dump...";
+            try {
+                const res = await fetch('http://' + window.location.hostname + ':8000/api/server/backups/create', { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    msgEl.innerText = "✅ " + data.message;
+                    fetchStatus();
+                } else {
+                    msgEl.innerText = "❌ " + (data.detail || "Backup failed");
+                }
+            } catch (err) {
+                msgEl.innerText = "❌ Failed to reach backup API on port 8000";
+            }
+        }
+
         async function fetchStatus() {
             try {
                 const res = await fetch('/api/live-status');
                 const data = await res.json();
-
-                // Update Worker 1 Status
-                const w1El = document.getElementById('worker1-status');
-                if (data.worker1_online) {
-                    w1El.innerHTML = `<span class="badge badge-success"><span class="status-dot dot-green"></span> ONLINE</span>`;
-                    document.getElementById('worker1-detail').innerText = `Uptime: ${data.worker1_metrics.uptime_seconds || 0}s`;
-                } else {
-                    w1El.innerHTML = `<span class="badge badge-danger"><span class="status-dot dot-red"></span> OFFLINE</span>`;
-                    document.getElementById('worker1-detail').innerText = `Port 8000 Engine not running`;
-                }
 
                 // Update Database Status
                 const dbEl = document.getElementById('db-status');
@@ -275,27 +314,51 @@
                     document.getElementById('db-latency').innerText = data.db_health.message || 'Cannot reach local PostgreSQL';
                 }
 
-                // Update Client Counts & Metrics
+                // Update Hardware Metrics from Worker 1
                 if (data.worker1_metrics) {
-                    document.getElementById('client-count').innerText = data.worker1_metrics.active_client_count || 0;
-                    document.getElementById('total-requests').innerText = `Total Requests: ${data.worker1_metrics.total_requests || 0}`;
+                    const m = data.worker1_metrics;
+                    
+                    // CPU
+                    if (m.cpu_percent !== undefined) {
+                        document.getElementById('cpu-val').innerText = m.cpu_percent;
+                        document.getElementById('cpu-bar').style.width = m.cpu_percent + '%';
+                    }
 
-                    // Populate Traffic Table
-                    const logs = data.worker1_metrics.recent_logs || [];
-                    const tbody = document.getElementById('traffic-body');
-                    if (logs.length > 0) {
-                        tbody.innerHTML = logs.slice(0, 8).map(l => `
-                            <tr>
-                                <td style="font-family: monospace;">${l.timestamp}</td>
-                                <td><span style="color: #60a5fa; font-family: monospace;">${l.ip}</span></td>
-                                <td><strong>${l.method}</strong></td>
-                                <td style="font-family: monospace;">${l.path}</td>
-                                <td><span class="badge ${l.status < 400 ? 'badge-success' : 'badge-danger'}">${l.status}</span></td>
-                                <td style="font-family: monospace;">${l.duration_ms} ms</td>
-                            </tr>
-                        `).join('');
+                    // RAM
+                    if (m.memory) {
+                        document.getElementById('ram-val').innerText = m.memory.percent || 0;
+                        document.getElementById('ram-bar').style.width = (m.memory.percent || 0) + '%';
+                        document.getElementById('ram-detail').innerText = `${m.memory.used_mb || 0} MB / ${m.memory.total_mb || 0} MB`;
+                    }
+
+                    // Disk
+                    if (m.disk) {
+                        document.getElementById('disk-free-val').innerText = m.disk.free_gb || 0;
+                        document.getElementById('disk-bar').style.width = (m.disk.percent || 0) + '%';
+                        document.getElementById('disk-detail').innerText = `${m.disk.used_gb || 0} GB Used / ${m.disk.total_gb || 0} GB Total`;
                     }
                 }
+
+                // Fetch Backups List
+                try {
+                    const bRes = await fetch('http://' + window.location.hostname + ':8000/api/server/backups/list');
+                    const bData = await bRes.json();
+                    const tbody = document.getElementById('backup-list-body');
+                    if (bData.backups && bData.backups.length > 0) {
+                        tbody.innerHTML = bData.backups.slice(0, 5).map(b => `
+                            <tr>
+                                <td><code style="color: #60a5fa;">${b.filename}</code></td>
+                                <td style="font-size: 11px;">${b.created_at_formatted}</td>
+                                <td><strong>${b.size_mb} MB</strong></td>
+                                <td>
+                                    <a href="http://${window.location.hostname}:8000/api/server/backups/download/${b.filename}" class="btn" style="padding: 3px 8px; font-size: 11px;">⬇️ Download</a>
+                                </td>
+                            </tr>
+                        `).join('');
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">No .sql backups found. Click Create .SQL Backup Now.</td></tr>`;
+                    }
+                } catch (e) {}
 
                 // Update Tables Grid
                 const tablesContainer = document.getElementById('tables-container');

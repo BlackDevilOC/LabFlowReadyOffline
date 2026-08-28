@@ -78,22 +78,28 @@ def admin_dashboard(request: Request):
     """Renders the main Visual Admin Dashboard."""
     local_ip = get_local_ip()
     config = load_config()
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "local_ip": local_ip,
-        "config": config
-    })
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={
+            "local_ip": local_ip,
+            "config": config
+        }
+    )
 
 
 @app.get("/setup", response_class=HTMLResponse)
 def admin_setup(request: Request):
     """Renders the Database & Server Setup page."""
     config = load_config()
-    return templates.TemplateResponse("setup.html", {
-        "request": request,
-        "config": config,
-        "local_ip": get_local_ip()
-    })
+    return templates.TemplateResponse(
+        request=request,
+        name="setup.html",
+        context={
+            "config": config,
+            "local_ip": get_local_ip()
+        }
+    )
 
 
 @app.get("/api/live-status")
@@ -103,11 +109,11 @@ def get_live_status():
     db_health = check_db_health()
     tables = get_table_status()
 
-    # Poll Worker 1 background metrics
+    # Poll Worker 1 background metrics on port 8888
     worker1_metrics = {}
     worker1_online = False
     try:
-        req = urllib.request.Request("http://127.0.0.1:8000/server/metrics", headers={"User-Agent": "Worker2Admin"})
+        req = urllib.request.Request("http://127.0.0.1:8888/api/server/metrics", headers={"User-Agent": "Worker2Admin"})
         with urllib.request.urlopen(req, timeout=2) as resp:
             if resp.status == 200:
                 worker1_metrics = json.loads(resp.read().decode())
@@ -132,7 +138,7 @@ def save_database_config(
     db_name: str = Form("labflow_db"),
     db_user: str = Form("postgres"),
     db_pass: str = Form("postgres"),
-    server_port: int = Form(8000)
+    server_port: int = Form(8888)
 ):
     """Tests connection to PostgreSQL with provided parameters and saves labflow_config.json."""
     # Test connection
@@ -150,7 +156,7 @@ def save_database_config(
         msg = "Successfully connected to PostgreSQL server!"
     except Exception as e:
         test_passed = False
-        msg = f"PostgreSQL connection failed: {e}"
+        msg = f"Failed to connect to PostgreSQL: {e}"
 
     if test_passed:
         # Update os.environ and save config file
@@ -184,9 +190,9 @@ if __name__ == "__main__":
     import uvicorn
     local_ip = get_local_ip()
     print("=========================================================")
-    print("      LABFLOW WORKER 2: VISUAL ADMIN PANEL (PORT 9000)    ")
+    print("      LABFLOW WORKER 2: VISUAL ADMIN PANEL (PORT 9999)    ")
     print("=========================================================")
-    print(f" -> Local Dashboard: http://127.0.0.1:9000")
-    print(f" -> LAN Admin UI:    http://{local_ip}:9000")
+    print(f" -> Local Dashboard: http://127.0.0.1:9999")
+    print(f" -> LAN Admin UI:    http://{local_ip}:9999")
     print("=========================================================\n")
-    uvicorn.run(app, host="0.0.0.0", port=9000, reload=False)
+    uvicorn.run(app, host="0.0.0.0", port=9999, reload=False)

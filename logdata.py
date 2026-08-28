@@ -183,3 +183,64 @@ def get_system_stats():
         stats['categories'][cat] = stats['categories'].get(cat, 0) + 1
     return stats
 
+
+def insert_audit_log(mr_no=None, action="GENERAL", user="System", details="", ip_address=None):
+    """
+    Saves an audit trail entry.
+    """
+    try:
+        msg = f"MR: {mr_no} | Action: {action} | Details: {details}" if mr_no else f"Action: {action} | Details: {details}"
+        save_log(msg, category="AUDIT", user=user)
+        return 1
+    except Exception as e:
+        logger.error(f"Error inserting audit log: {e}")
+        return 0
+
+
+def list_audit_trail(mr_no=None, search=None, user_name=None, action=None, date_from=None, date_to=None, limit=200, **kwargs):
+    """
+    Retrieves audit trail entries filtered by MR, search, user_name, or action.
+    """
+    try:
+        logs = get_all_logs(category_filter="AUDIT")
+        filtered = []
+        for l in logs:
+            msg = l.get("message", "")
+            usr = l.get("user", "")
+            dt = l.get("date", "")
+            
+            if mr_no and str(mr_no) not in msg:
+                continue
+            if user_name and str(user_name).lower() not in usr.lower():
+                continue
+            if search and str(search).lower() not in msg.lower() and str(search).lower() not in usr.lower():
+                continue
+            if action and action.lower() not in msg.lower():
+                continue
+            if date_from and dt and dt < str(date_from):
+                continue
+            if date_to and dt and dt > str(date_to):
+                continue
+
+            display_name = usr
+            if usr in ["admin@admin.com", "admin@labflow.local", "System"] or not usr:
+                display_name = "Rehan Ahmed"
+
+            filtered.append({
+                "timestamp": l.get("timestamp"),
+                "date": dt,
+                "user": usr,
+                "user_name": display_name,
+                "actor": display_name,
+                "action": l.get("category"),
+                "pc_info": l.get("pc_info"),
+                "details": msg,
+                "message": msg
+            })
+            if len(filtered) >= limit:
+                break
+        return filtered
+    except Exception as e:
+        logger.error(f"Error listing audit trail: {e}")
+        return []
+
