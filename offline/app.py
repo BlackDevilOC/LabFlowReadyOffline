@@ -846,7 +846,7 @@ async def api_auth_login(request: Request):
         try:
             with get_db_conn() as conn:
                 cursor = conn.cursor()
-                cursor.execute("SELECT * FROM users WHERE LOWER(email) = ? LIMIT 1", (email,))
+                cursor.execute("SELECT * FROM users WHERE LOWER(email) = ? OR LOWER(name) = ? OR LOWER(email) LIKE ? LIMIT 1", (email, email, f"{email}%"))
                 r = cursor.fetchone()
                 if r:
                     user_row = dict(r)
@@ -861,13 +861,15 @@ async def api_auth_login(request: Request):
                     with open(path, "r", encoding="utf-8") as f:
                         data_cached = json.load(f)
                         for u in (data_cached.get("users") or []):
-                            if (u.get("email") or "").strip().lower() == email:
+                            u_email = (u.get("email") or "").strip().lower()
+                            u_name = (u.get("name") or "").strip().lower()
+                            if email in [u_email, u_name] or (u_email and email == u_email.split("@")[0]):
                                 user_row = u
                                 break
                 except Exception:
                     pass
             
-        if not user_row or user_row.get("pwd") != password:
+        if not user_row or (user_row.get("pwd") or "") != password:
             return {"status": "Error", "message": "Invalid email or password."}
         
         if user_row.get("is_active") is False:

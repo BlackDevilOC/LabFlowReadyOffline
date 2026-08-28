@@ -745,9 +745,13 @@
     let currentGroupOrders = {};
 
     function toParamList(testValues, testName) {
-        // test_values is jsonb map: key -> {name,value,unit,normal_min,normal_max}
-        if (!testValues || typeof testValues !== 'object') return [];
-        const values = Object.values(testValues).filter(v => v && typeof v === 'object');
+        if (!testValues) return [];
+        let parsed = testValues;
+        if (typeof parsed === 'string') {
+            try { parsed = JSON.parse(parsed); } catch (e) { return []; }
+        }
+        if (!parsed || typeof parsed !== 'object') return [];
+        const values = Object.values(parsed).filter(v => v && typeof v === 'object');
 
         const targetOrder = currentGroupOrders && (currentGroupOrders[testName] || currentGroupOrders[(testName || '').trim()]);
         if (targetOrder && Array.isArray(targetOrder) && targetOrder.length > 0) {
@@ -1384,7 +1388,11 @@
         if (!testRows.length) return false;
         let hasParams = false;
         for (const row of testRows) {
-            const vals = Object.values((row.test_values && typeof row.test_values === 'object') ? row.test_values : {});
+            let tvObj = row.test_values;
+            if (typeof tvObj === 'string') {
+                try { tvObj = JSON.parse(tvObj); } catch(e) {}
+            }
+            const vals = Object.values((tvObj && typeof tvObj === 'object') ? tvObj : {});
             for (const v of vals) {
                 if (v && typeof v === 'object' && 'value' in v) {
                     hasParams = true;
@@ -1463,8 +1471,6 @@
                 .page-body {
                     flex: 1 1 auto;
                     min-height: 0;
-                    max-height: ${layout.bodyBudgetPx}px;
-                    overflow: hidden;
                 }
                 .page-footer {
                     flex: 0 0 ${layout.footerPx}px;

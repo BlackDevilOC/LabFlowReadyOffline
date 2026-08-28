@@ -18,12 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isOfflinePath && window.location.pathname !== '/offline/login') {
         localStorage.setItem('workspaceMode', 'offline');
-        const isAuthed = localStorage.getItem('isLoggedIn') === 'true';
-        if (!isAuthed) {
-            window.location.href = '/login';
-            return;
-        }
-        return;
     }
 
     const isAuthenticated = localStorage.getItem('isLoggedIn') === 'true';
@@ -211,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (result.user.id != null) localStorage.setItem('userId', String(result.user.id));
                     }
 
-                    const targetUrl = isOffline ? '/offline/' : '/';
+                    const targetUrl = '/';
                     setTimeout(() => { window.location.href = targetUrl; }, 300);
                 } else {
                     showError((result.message || 'Invalid credentials') + ` • <a href="javascript:void(0)" onclick="openEmergencyDrModal()" style="color:#d97706; font-weight:700; text-decoration:underline;">⚡ Emergency DR</a>`);

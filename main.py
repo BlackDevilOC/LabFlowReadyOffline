@@ -1152,6 +1152,11 @@ def _normalize_test_result_row(row: dict) -> dict:
     if not row:
         return row
     tv = row.get("test_values") or {}
+    if isinstance(tv, str):
+        try:
+            tv = json.loads(tv)
+        except Exception:
+            tv = {}
     remarks = row.get("remarks")
     if isinstance(tv, dict):
         if tv.get("remarks") not in (None, "") and not remarks:

@@ -22114,3 +22114,153 @@ LINE 1: INSERT INTO public."analytics_snapshots" ("snapshot_date", "...
 2026-08-28 17:40:21,626 - INFO - [LabFlow] - Accessing Lab Print Records page
 2026-08-28 17:40:23,385 - INFO - [LabFlow] - Accessing Lab Print Records page
 2026-08-28 17:40:24,179 - INFO - [LabFlow] - Accessing Fast Print Stream workspace
+2026-08-28 17:40:27,292 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 18:01:43,352 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 18:02:03,287 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 18:08:57,416 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 18:10:01,164 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 18:11:40,426 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 18:11:58,773 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 18:15:50,550 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 18:15:58,611 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 18:15:58,660 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 18:15:58,947 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 18:15:58,949 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-28 18:15:58,986 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 18:15:59,065 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 18:15:59,094 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 18:15:59,133 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 18:15:59,138 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 18:15:59,179 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 18:15:59,184 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-28 18:16:02,911 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 18:16:06,480 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 18:16:06,527 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 18:16:06,623 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 18:16:06,669 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 18:16:06,672 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 18:16:06,730 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-28 18:16:06,777 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-28 18:16:06,956 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-28 18:16:06,998 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 18:16:07,027 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-28 18:16:07,071 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-28 18:16:07,156 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-28 18:16:07,161 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-28 18:16:08,859 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 18:16:10,108 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-28 18:16:30,587 - INFO - [LabFlow] - User requested logout
+2026-08-28 18:16:30,594 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 18:16:52,456 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 18:19:05,152 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 18:19:58,477 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 19:07:20,849 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 19:07:23,098 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 19:07:23,150 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 19:07:23,175 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 19:07:23,178 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-28 19:07:23,216 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 19:07:23,273 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 19:07:23,281 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 19:07:23,305 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 19:07:23,333 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 19:07:23,388 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 19:07:23,390 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-28 19:07:25,446 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 19:07:33,731 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 19:07:33,779 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 19:07:33,853 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 19:07:33,906 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 19:07:33,908 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 19:07:33,971 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-28 19:07:34,014 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-28 19:07:34,109 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-28 19:07:34,152 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-28 19:07:34,202 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-28 19:07:34,225 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 19:07:34,270 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-28 19:07:34,299 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-28 19:07:35,717 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 19:07:37,332 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-28 19:08:05,006 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 19:08:06,967 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 19:08:12,126 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 19:08:12,176 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 19:08:12,254 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 19:08:12,291 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 19:08:12,293 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 19:08:12,349 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-28 19:08:12,382 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-28 19:08:12,481 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-28 19:08:12,539 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-28 19:08:12,584 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-28 19:08:12,629 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 19:08:12,765 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-28 19:08:12,766 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-28 19:09:01,114 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 19:09:05,490 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 19:09:05,538 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 19:09:05,631 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 19:09:05,667 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 19:09:05,670 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 19:09:05,726 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-28 19:09:05,775 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-28 19:09:05,843 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-28 19:09:05,896 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-28 19:09:05,942 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-28 19:09:06,010 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-28 19:09:06,013 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-28 19:09:06,017 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 19:11:08,974 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 19:11:39,037 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 19:12:37,193 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 19:12:37,283 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-28 19:14:52,377 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 19:14:52,619 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-28 19:15:57,429 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 19:15:58,483 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 19:16:01,801 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 19:16:01,847 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 19:16:01,939 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 19:16:01,992 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 19:16:01,994 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 19:16:02,055 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-28 19:16:02,090 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-28 19:16:02,249 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-28 19:16:02,281 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-28 19:16:02,332 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 19:16:02,335 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-28 19:16:02,400 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-28 19:16:02,402 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-28 19:16:05,488 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 19:16:06,721 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-28 19:16:23,082 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-28 19:16:25,410 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-28 19:16:25,468 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-28 19:16:25,491 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-28 19:16:25,492 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-28 19:16:25,533 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 19:16:25,573 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 19:16:25,577 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-28 19:16:25,602 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-28 19:16:25,617 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 19:16:25,653 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 19:16:25,655 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-28 19:16:28,469 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-28 19:16:33,005 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-28 19:16:33,037 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-28 19:16:33,128 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-28 19:16:33,181 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-28 19:16:33,182 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-28 19:16:33,244 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-28 19:16:33,302 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-28 19:16:33,454 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-28 19:16:33,503 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-28 19:16:33,507 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-28 19:16:33,568 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-28 19:16:33,737 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-28 19:16:33,739 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-28 19:16:56,907 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 19:16:58,369 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-28 19:17:00,992 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-28 19:17:02,304 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5005, date=None

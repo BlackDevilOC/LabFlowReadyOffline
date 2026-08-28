@@ -576,6 +576,7 @@ def upsert_users_from_supabase(rows: list[dict]):
                 INSERT INTO users (id, created_at, email, pwd, name, is_active, permissions, default_shift_id)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(email) DO UPDATE SET
+                    pwd=excluded.pwd,
                     name=excluded.name,
                     is_active=excluded.is_active,
                     permissions=excluded.permissions,
