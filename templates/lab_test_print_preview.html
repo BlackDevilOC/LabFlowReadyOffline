@@ -677,7 +677,7 @@
 {% block scripts %}
 <script src="{{ url_for('static', path='/js/lab-print.js') }}"></script>
 <script>
-    const MR_NO = {{ mr_no }};
+    const MR_NO = "{{ mr_no }}";
     const DATE_FILTER = "{{ date }}".trim();
     let allRows = [];
     let selectedTestNames = new Set();
@@ -745,13 +745,9 @@
     let currentGroupOrders = {};
 
     function toParamList(testValues, testName) {
-        if (!testValues) return [];
-        let parsed = testValues;
-        if (typeof parsed === 'string') {
-            try { parsed = JSON.parse(parsed); } catch (e) { return []; }
-        }
-        if (!parsed || typeof parsed !== 'object') return [];
-        const values = Object.values(parsed).filter(v => v && typeof v === 'object');
+        // test_values is jsonb map: key -> {name,value,unit,normal_min,normal_max}
+        if (!testValues || typeof testValues !== 'object') return [];
+        const values = Object.values(testValues).filter(v => v && typeof v === 'object');
 
         const targetOrder = currentGroupOrders && (currentGroupOrders[testName] || currentGroupOrders[(testName || '').trim()]);
         if (targetOrder && Array.isArray(targetOrder) && targetOrder.length > 0) {
@@ -790,18 +786,47 @@
 
     // ── paginateReport: uses manual page map & test order if set, else auto ───
     function paginateReport(categories, settings) {
+        let pages = null;
         if (currentPageMap && Object.keys(currentPageMap).length) {
             const fn = window.LabPrintLayout?.applyManualPageOverrides;
-            if (fn) return fn(categories, settings, currentPageMap, currentTestOrder);
+            if (fn) {
+                try { pages = fn(categories, settings, currentPageMap, currentTestOrder); } catch (e) { }
+            }
         }
-        const combined = Boolean(settings?.combine_categories_on_same_page ?? 1);
-        if (combined) {
-            const fn = window.LabPrintLayout?.paginateCombinedCategories;
-            if (fn) return fn(categories, settings);
+        if (!pages || !pages.length) {
+            const combined = Boolean(settings?.combine_categories_on_same_page ?? 1);
+            if (combined) {
+                const fn = window.LabPrintLayout?.paginateCombinedCategories;
+                if (fn) {
+                    try { pages = fn(categories, settings); } catch (e) { }
+                }
+            }
         }
-        const fn = window.LabPrintLayout?.paginateByCategory;
-        if (!fn) { console.error('LabPrintLayout not loaded'); return []; }
-        return fn(categories, settings);
+        if (!pages || !pages.length) {
+            const fn = window.LabPrintLayout?.paginateByCategory;
+            if (fn) {
+                try { pages = fn(categories, settings); } catch (e) { }
+            }
+        }
+        // Guaranteed fallback if helper libraries returned null/empty
+        if (!pages || !pages.length) {
+            pages = [];
+            for (const [cat, testMap] of Object.entries(categories)) {
+                const blocks = [];
+                for (const [tName, entry] of Object.entries(testMap)) {
+                    blocks.push({
+                        category: cat,
+                        name: tName,
+                        params: entry.params || [],
+                        remarks: entry.remarks || ''
+                    });
+                }
+                if (blocks.length) {
+                    pages.push({ category: cat, blocks: blocks });
+                }
+            }
+        }
+        return pages || [];
     }
 
     function uniqueSortedTests(rows) {
@@ -1318,7 +1343,8 @@
         for (const r of allRows) {
             const name = (r.test_name || '').trim();
             if (!name || name.startsWith('#') || r.status === false) continue;
-            const rowDate = r.created_at ? r.created_at.split('T')[0] : '';
+            const rawDate = r.created_at || '';
+            const rowDate = rawDate ? String(rawDate).split('T')[0].split(' ')[0] : '';
             if (!DATE_FILTER || rowDate === DATE_FILTER) selectedTestNames.add(name);
         }
 
@@ -1388,11 +1414,7 @@
         if (!testRows.length) return false;
         let hasParams = false;
         for (const row of testRows) {
-            let tvObj = row.test_values;
-            if (typeof tvObj === 'string') {
-                try { tvObj = JSON.parse(tvObj); } catch(e) {}
-            }
-            const vals = Object.values((tvObj && typeof tvObj === 'object') ? tvObj : {});
+            const vals = Object.values((row.test_values && typeof row.test_values === 'object') ? row.test_values : {});
             for (const v of vals) {
                 if (v && typeof v === 'object' && 'value' in v) {
                     hasParams = true;
@@ -1458,36 +1480,37 @@
                     display: flex;
                     flex-direction: column;
                     padding: ${s.page_top_margin ?? 25}mm ${s.page_right_margin ?? 15}mm ${s.page_bottom_margin ?? 25}mm ${s.page_left_margin ?? 15}mm;
+                    position: relative;
                 }
                 .page-header {
                     flex: 0 0 auto;
                     min-height: 0;
-                    max-height: ${layout.headerPx}px;
-                    overflow: hidden;
+                    margin-bottom: ${s.header_bottom_margin ?? 10}px;
                 }
                 .patient-header-grid {
-                    margin-bottom: ${s.patient_info_bottom_margin ?? 6}px !important;
+                    margin-bottom: ${s.patient_info_bottom_margin ?? 4}px !important;
                 }
                 .page-body {
                     flex: 1 1 auto;
                     min-height: 0;
+                    overflow: visible;
                 }
                 .page-footer {
-                    flex: 0 0 ${layout.footerPx}px;
-                    height: ${layout.footerPx}px;
-                    min-height: ${layout.footerPx}px;
-                    max-height: ${layout.footerPx}px;
-                    overflow: hidden;
+                    flex: 0 0 auto;
+                    margin-top: auto;
+                    padding-top: ${s.footer_padding_top ?? 6}px;
+                    border-top: 1px solid #000;
                     box-sizing: border-box;
                 }
                 .info-grid { font-size: ${s.patient_info_font_size ?? 14}px; }
                 .label { font-size: ${s.patient_info_label_font_size ?? 14}px; }
                 .category {
-                    padding-top: ${s.category_padding_top ?? 6}px;
+                    padding-top: ${s.category_padding_top ?? 4}px;
                     border-top: ${s.category_border_width ?? 2}px solid #111;
+                    margin-top: 6px;
                 }
                 .category-title {
-                    font-size: ${s.category_font_size ?? 18}px;
+                    font-size: ${s.category_font_size ?? 16}px;
                     font-weight: 800;
                     margin-bottom: ${s.category_padding_bottom ?? 4}px;
                     margin-top: 0px;
@@ -1496,22 +1519,22 @@
                 }
                 .cat-sep-row td {
                     font-weight: 800;
-                    font-size: ${s.category_font_size ?? 18}px;
+                    font-size: ${s.category_font_size ?? 16}px;
                     text-transform: uppercase;
                     letter-spacing: .08em;
-                    padding-top: ${s.category_padding_top ?? 6}px;
+                    padding-top: ${s.category_padding_top ?? 4}px;
                     padding-bottom: ${s.category_padding_bottom ?? 4}px;
                     padding-left: 0;
                     border-top: ${s.category_border_width ?? 2}px solid #111;
                     color: #111;
                 }
                 .test-group {
-                    font-size: ${s.group_font_size ?? 15}px;
-                    padding-top: ${s.group_padding_top ?? 8}px;
+                    font-size: ${s.group_font_size ?? 14}px;
+                    padding-top: ${s.group_padding_top ?? 10}px;
                     padding-bottom: ${s.group_padding_bottom ?? 2}px;
                     padding-left: 4px;
                 }
-                table, thead th { font-size: ${s.test_name_font_size ?? 14}px; }
+                table, thead th { font-size: ${s.test_name_font_size ?? 12}px; }
                 thead th {
                     padding: ${s.table_header_padding_vertical ?? 8}px 4px;
                 }
@@ -1520,29 +1543,28 @@
                 thead th:first-child { padding-left: 4px; }
                 tbody td {
                     padding: ${s.table_cell_padding_vertical ?? 4}px 4px;
-                    font-size: ${s.result_font_size ?? 14}px;
+                    font-size: ${s.result_font_size ?? 13}px;
                 }
                 tbody td:first-child { padding-left: 4px; }
                 tbody.test-block + tbody.test-block {
                     border-top: 1px solid #e5e7eb;
                 }
-                .test-remarks { font-size: ${Math.max(10, (s.result_font_size ?? 14) - 2)}px; }
+                .test-remarks { font-size: ${Math.max(10, (s.result_font_size ?? 13) - 2)}px; }
                 .footer, .footer-left { font-size: ${s.footer_font_size ?? 11}px; }
-                .page-footer { padding-top: ${s.footer_padding_top ?? 20}px; }
                 @media print {
                     @page { size: A4 portrait !important; margin: 0 !important; }
                     html, body { width: 210mm !important; }
-                .report-page {
-                    width: 210mm !important;
-                    height: 297mm !important;
-                    min-height: 297mm !important;
-                    max-height: 297mm !important;
-                    page-break-after: always;
-                    overflow: hidden;
-                }
+                    .report-page {
+                        width: 210mm !important;
+                        height: 297mm !important;
+                        min-height: 297mm !important;
+                        max-height: 297mm !important;
+                        page-break-after: always;
+                        overflow: hidden;
+                    }
                     .report-page.last-page { page-break-after: auto; }
                 }
-            `;
+        `;
     }
 
     function renderAndReturnPages(patient, rows, settings) {
@@ -1603,10 +1625,15 @@
         const rawToken = cleanVal(patient.patient_token, '');
         const pToken = rawToken || '';
 
+        const fLine1 = settings?.footer_line1 || 'ELECTRONICALLY VERIFIED REPORT, SIGNATURE(S) NOT REQUIRED';
+        const fLine2 = settings?.footer_line2 ? settings.footer_line2.replace('{timestamp}', now.toLocaleString()) : '';
+        const fLine3 = settings?.footer_line3 || 'LabFlow System by rehan.mirani.dev@gmail.com';
+
         const footerHtml = `
                 <div class="page-footer">
-                    <div class="footer">${escapeHtml((settings?.footer_line1 || 'ELECTRONICALLY VERIFIED REPORT, SIGNATURE(S) NOT REQUIRED').toUpperCase())}</div>
-                    <div class="footer-left">${escapeHtml(settings?.footer_line3 || 'GMMMC SUKKUR')}</div>
+                    <div class="footer">${escapeHtml(fLine1.toUpperCase())}</div>
+                    ${fLine2 ? `<div class="footer" style="margin-top:2px; font-weight: 500;">${escapeHtml(fLine2)}</div>` : ''}
+                    <div class="footer-left" style="margin-top:3px;">${escapeHtml(fLine3)}</div>
                 </div>
             `;
 
@@ -1724,13 +1751,14 @@
             }
 
             for (const p of (t.params || [])) {
-                let nm = p.name || '';
-                const rawVal = p.value;
-                const val = (rawVal === null || rawVal === undefined || rawVal === '') ? '-'
-                    : (rawVal === 0 || rawVal === '0') ? '' : String(rawVal);
-                const unit = p.unit ? String(p.unit) : '';
+                let nm = p.name || p.param_name || p.test_name || '';
+                const rawVal = (p.value !== undefined && p.value !== null) ? p.value : (p.result !== undefined ? p.result : (p.val !== undefined ? p.val : (p.test_value !== undefined ? p.test_value : '')));
+                const val = (rawVal === null || rawVal === undefined || rawVal === '') ? '-' : String(rawVal);
+                const unit = (p.unit !== undefined && p.unit !== null) ? String(p.unit) : '';
                 const res = `${escapeHtml(val)}${unit ? ' ' + escapeHtml(unit) : ''}`;
-                const rng = fmtRange(p.normal_min, p.normal_max);
+                const minVal = (p.normal_min !== undefined && p.normal_min !== null) ? p.normal_min : (p.min_value !== undefined ? p.min_value : '');
+                const maxVal = (p.normal_max !== undefined && p.normal_max !== null) ? p.normal_max : (p.max_value !== undefined ? p.max_value : '');
+                const rng = fmtRange(minVal, maxVal);
                 const paramPaddingLeft = showTitle ? '18px' : '4px';
                 html += `<tr><td style="padding-left: ${paramPaddingLeft};">${escapeHtml(nm)}</td><td class="result-col">${res}</td><td class="range-col">${rng}</td></tr>`;
             }
@@ -1754,13 +1782,14 @@
                 html += `<tr><td class="test-group" colspan="3" style="padding-left: 4px;">${escapeHtml(t.name)}</td></tr>`;
             }
             for (const p of (t.params || [])) {
-                const nm = p.name || '';
-                const rawVal = p.value;
-                const val = (rawVal === null || rawVal === undefined || rawVal === '') ? '-'
-                    : (rawVal === 0 || rawVal === '0') ? '' : String(rawVal);
-                const unit = p.unit ? String(p.unit) : '';
+                let nm = p.name || p.param_name || p.test_name || '';
+                const rawVal = (p.value !== undefined && p.value !== null) ? p.value : (p.result !== undefined ? p.result : (p.val !== undefined ? p.val : (p.test_value !== undefined ? p.test_value : '')));
+                const val = (rawVal === null || rawVal === undefined || rawVal === '') ? '-' : String(rawVal);
+                const unit = (p.unit !== undefined && p.unit !== null) ? String(p.unit) : '';
                 const res = `${escapeHtml(val)}${unit ? ' ' + escapeHtml(unit) : ''}`;
-                const rng = fmtRange(p.normal_min, p.normal_max);
+                const minVal = (p.normal_min !== undefined && p.normal_min !== null) ? p.normal_min : (p.min_value !== undefined ? p.min_value : '');
+                const maxVal = (p.normal_max !== undefined && p.normal_max !== null) ? p.normal_max : (p.max_value !== undefined ? p.max_value : '');
+                const rng = fmtRange(minVal, maxVal);
                 const paramPaddingLeft = showTitle ? '18px' : '4px';
                 html += `<tr><td style="padding-left: ${paramPaddingLeft};">${escapeHtml(nm)}</td><td class="result-col">${res}</td><td class="range-col">${rng}</td></tr>`;
             }
@@ -1780,18 +1809,18 @@
         }
 
         const pages = paginateReport(categories, settings);
-        const isCombined = (Boolean(settings?.combine_categories_on_same_page ?? 1)
-            && !!window.LabPrintLayout?.paginateCombinedCategories)
-            || (currentPageMap && Object.keys(currentPageMap).length > 0);
 
         pages.forEach((page, pageIdx) => {
             const isLast = pageIdx === pages.length - 1;
             let bodyContent = '';
 
-            if (isCombined && page.blocks) {
+            if (page.blocks && page.blocks.length) {
                 bodyContent = renderCombinedPageBody(page);
-            } else {
-                bodyContent = renderPerCategoryPage({ category: page.category, blocks: page.blocks });
+            } else if (page.sections && page.sections.length) {
+                const allSecBlocks = page.sections.flatMap(s => s.blocks || []);
+                bodyContent = renderCombinedPageBody({ blocks: allSecBlocks });
+            } else if (page.category) {
+                bodyContent = renderPerCategoryPage({ category: page.category, blocks: page.blocks || [] });
             }
 
             html += `

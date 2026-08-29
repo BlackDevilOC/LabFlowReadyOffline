@@ -18,6 +18,7 @@ from search_utils import parse_advanced_filters, row_matches_advanced_filters
 from patient_list_query import fetch_test_result_list_rows, BROWSE_PATIENT_LIMIT
 from analytics_router import router as analytics_router
 from replica_engine import get_replica_engine
+from local_postgres_client import get_local_postgres_client
 
 try:
     from logdata import insert_audit_log, list_audit_trail
@@ -475,55 +476,167 @@ def get_print_records_api(
 
 
 @app.get("/api/lab/print/{mr_no}")
-def api_lab_print_payload(mr_no: int, date: str = None):
+def api_lab_print_payload(mr_no: str, date: str = None):
     """
-    Build lab print payload from test_results_all + patients table.
+    Build lab print payload from test_results_all + patients table using local PostgreSQL server DB.
     Returns patient header info and a list of records for the preview renderer.
     """
     try:
-        supabase = init_supabase()
+        db = get_local_postgres_client()
 
-        patient_resp = supabase.table("patients").select("*").eq("mr_no", mr_no).single().execute()
-        patient = patient_resp.data or {}
+        try:
+            mr_param = int(mr_no)
+        except (ValueError, TypeError):
+            mr_param = mr_no
 
-        q = supabase.table("test_results_all").select("*").eq("mr_no", mr_no).eq("delete_status", False)
+        patient_resp = db.table("patients").select("*").eq("mr_no", mr_param).execute()
+        p_list = patient_resp.data if patient_resp and patient_resp.data else []
+        patient = dict(p_list[0]) if p_list else {}
+        if patient.get("created_at") and hasattr(patient["created_at"], "isoformat"):
+            patient["created_at"] = patient["created_at"].isoformat()
+
+        q = db.table("test_results_all").select("*").eq("mr_no", mr_param).eq("delete_status", False)
         if date:
             q = q.gte("created_at", f"{date}T00:00:00Z").lte("created_at", f"{date}T23:59:59Z")
         tests_resp = q.order("created_at", desc=False).execute()
-        rows = tests_resp.data or []
+        rows = tests_resp.data if tests_resp and tests_resp.data else []
 
         # Normalize output for frontend
         normalized = []
         for r in rows:
             row = _normalize_test_result_row(dict(r))
+            c_at = row.get("created_at")
+            if c_at and hasattr(c_at, "isoformat"):
+                c_at = c_at.isoformat()
+            elif c_at:
+                c_at = str(c_at)
+            else:
+                c_at = ""
+
             normalized.append({
                 "id": row.get("id"),
                 "category": row.get("category") or "General",
                 "test_name": row.get("test_name") or "Test",
                 "test_values": row.get("test_values") or {},
                 "remarks": (row.get("remarks") or "").strip(),
-                "created_at": row.get("created_at"),
-                "status": row.get("status") or "Pending",
+                "created_at": c_at,
+                "status": row.get("status") or "Completed",
             })
+
         # Build group parameter order map from test_groups in DB
         group_orders = {}
         try:
-            tg_resp = supabase.table("test_groups").select("group_name, component_ids").execute()
-            t_resp = supabase.table("tests").select("id, name").execute()
-            test_names_by_id = {t["id"]: t["name"] for t in (t_resp.data or []) if t.get("id") and t.get("name")}
+            tg_resp = db.table("test_groups").select("group_name, component_ids").execute()
+            t_resp = db.table("tests").select("id, name").execute()
+            test_names_by_id = {}
+            for t in (t_resp.data or []):
+                if t.get("id") and t.get("name"):
+                    test_names_by_id[t["id"]] = t["name"]
+                    test_names_by_id[str(t["id"])] = t["name"]
+
             for g in (tg_resp.data or []):
                 g_name = (g.get("group_name") or "").strip()
                 c_ids = g.get("component_ids") or []
-                if g_name and c_ids:
-                    group_orders[g_name] = [test_names_by_id.get(cid) for cid in c_ids if test_names_by_id.get(cid)]
-        except Exception:
-            pass
+                if isinstance(c_ids, str):
+                    try:
+                        c_ids = json.loads(c_ids)
+                    except Exception:
+                        c_ids = []
+                if g_name and isinstance(c_ids, list):
+                    ordered = [test_names_by_id.get(cid) or test_names_by_id.get(str(cid)) for cid in c_ids]
+                    ordered_clean = [name for name in ordered if name]
+                    if ordered_clean:
+                        group_orders[g_name] = ordered_clean
+        except Exception as e:
+            logger.warning(f"Notice: building group_orders in api_lab_print_payload: {e}")
 
         return {"status": "ok", "patient": patient, "tests": normalized, "group_orders": group_orders}
     except Exception as e:
         log_error(e, "API_LAB_PRINT_PAYLOAD")
         return {"status": "error", "patient": None, "tests": [], "group_orders": {}}
 
+
+# ─── Custom Print Layout (per test-set fingerprint) ─────────────────────────
+
+PRINT_LAYOUTS_PATH = os.path.join(fetcheddata_dir, "print_layouts.json")
+
+
+def _load_print_layouts() -> dict:
+    if os.path.exists(PRINT_LAYOUTS_PATH):
+        try:
+            with open(PRINT_LAYOUTS_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+
+def _save_print_layouts(layouts: dict) -> None:
+    os.makedirs(fetcheddata_dir, exist_ok=True)
+    with open(PRINT_LAYOUTS_PATH, "w", encoding="utf-8") as f:
+        json.dump(layouts, f, indent=2, ensure_ascii=False)
+
+
+@app.get("/api/lab/print-layout")
+def api_get_print_layout(fingerprint: str = None):
+    """
+    Load a saved custom print layout for a given test-set fingerprint.
+    Returns {status, layout} where layout is null if not found.
+    """
+    if not fingerprint:
+        return {"status": "ok", "layout": None}
+    layouts = _load_print_layouts()
+    layout = layouts.get(fingerprint)
+    return {"status": "ok", "layout": layout, "fingerprint": fingerprint}
+
+
+@app.post("/api/lab/print-layout")
+async def api_save_print_layout(request: Request):
+    """
+    Save a custom print layout for a test-set fingerprint.
+    """
+    try:
+        data = await request.json()
+        fingerprint = (data.get("fingerprint") or "").strip()
+        layout = data.get("layout")
+        actor = get_current_user(request, form_data=data)
+        if not fingerprint:
+            raise HTTPException(status_code=400, detail="fingerprint is required")
+        if layout is None:
+            raise HTTPException(status_code=400, detail="layout is required")
+        layouts = _load_print_layouts()
+        layouts[fingerprint] = {
+            "page_map": layout.get("page_map", {}),   # {testName: pageIndex}
+            "test_order": layout.get("test_order", []), # [testName1, ...]
+            "saved_by": actor,
+            "saved_at": __import__("datetime").datetime.utcnow().isoformat() + "Z",
+            "test_count": layout.get("test_count", 0),
+            "display_options": layout.get("display_options", {}),  # visibility toggle states
+        }
+        _save_print_layouts(layouts)
+        logger.info(f"Print layout saved by {actor} for fingerprint {fingerprint[:40]}")
+        return {"status": "ok", "message": "Layout saved successfully."}
+    except HTTPException:
+        raise
+    except Exception as e:
+        log_error(e, "API_SAVE_PRINT_LAYOUT")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/api/lab/print-layout")
+async def api_delete_print_layout(request: Request, fingerprint: str = None):
+    """Delete a saved custom print layout."""
+    if not fingerprint:
+        raise HTTPException(status_code=400, detail="fingerprint is required")
+    layouts = _load_print_layouts()
+    removed = layouts.pop(fingerprint, None)
+    if removed is None:
+        return {"status": "ok", "message": "Layout not found (already deleted)."}
+    _save_print_layouts(layouts)
+    return {"status": "ok", "message": "Layout deleted."}
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 
 @app.get("/api/admin/lab-categories")
 def admin_lab_categories():
