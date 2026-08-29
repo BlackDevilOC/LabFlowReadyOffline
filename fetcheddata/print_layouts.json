@@ -632,5 +632,42 @@
       "show_group_test_title": true,
       "show_single_test_title": true
     }
+  },
+  "complete blood count|glucose random (rbs)|hep b, c|uce": {
+    "page_map": {},
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "UCE",
+      "Hep B, C",
+      "Glucose Random (RBS)"
+    ],
+    "saved_by": "admin@admin.com",
+    "saved_at": "2026-08-29T09:36:23.349788Z",
+    "test_count": 4,
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|liver function test|uc": {
+    "page_map": {
+      "UC": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 0
+    },
+    "saved_at": "2026-08-29T10:13:00Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 3,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UC"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
   }
 }

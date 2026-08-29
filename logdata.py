@@ -184,23 +184,150 @@ def get_system_stats():
     return stats
 
 
-def insert_audit_log(mr_no=None, action="GENERAL", user="System", details="", ip_address=None):
+def insert_audit_log(
+    mr_no=None,
+    patient_name=None,
+    action="GENERAL",
+    user=None,
+    user_name=None,
+    user_id=None,
+    details="",
+    ip_address=None,
+    pc_name=None,
+    **kwargs
+):
     """
-    Saves an audit trail entry.
+    Saves an audit trail entry into PostgreSQL database and log.
     """
     try:
+        actor = user_name or user or "Rehan Ahmed"
+        if actor in ["admin@admin.com", "admin@labflow.local", "System", "Staff", "Anonymous", "None", ""] or not actor:
+            actor = "Rehan Ahmed"
+
+        if not pc_name:
+            try:
+                import platform, getpass
+                pc_name = f"PC: {platform.node()} | User: {getpass.getuser()} | OS: {platform.system()} {platform.release()}"
+            except Exception:
+                pc_name = "Lab-Terminal"
+
+        # 1. Insert into PostgreSQL audit_trail table
+        print_count = 1
+        try:
+            from local_postgres_engine import get_connection
+            conn = get_connection()
+            cursor = conn.cursor()
+            
+            if action == "PRINT":
+                cursor.execute("SELECT COUNT(*) FROM public.audit_trail WHERE mr_no = %s AND action = 'PRINT';", (str(mr_no or "").strip(),))
+                cnt_row = cursor.fetchone()
+                prior_prints = cnt_row[0] if cnt_row else 0
+                print_count = prior_prints + 1
+                copy_label = "Copy #1 (Original)" if print_count == 1 else f"Copy #{print_count} (Re-print)"
+                details = f"[{copy_label}] {details or 'Printed report'}"
+
+            cursor.execute(
+                """
+                INSERT INTO public.audit_trail (mr_no, patient_name, action, user_name, user_id, details, pc_name, ip_address)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                RETURNING id;
+                """,
+                (
+                    str(mr_no or "").strip() or None,
+                    str(patient_name or "").strip() or None,
+                    str(action or "GENERAL").strip(),
+                    str(actor).strip(),
+                    str(user_id or "").strip() or None,
+                    str(details or "").strip(),
+                    str(pc_name or "").strip() or None,
+                    str(ip_address or "").strip() or None
+                )
+            )
+            conn.commit()
+            cursor.close()
+            conn.close()
+        except Exception as dbe:
+            logger.warning(f"PostgreSQL audit insert note: {dbe}")
+
+        # 2. Mirror into log file
         msg = f"MR: {mr_no} | Action: {action} | Details: {details}" if mr_no else f"Action: {action} | Details: {details}"
-        save_log(msg, category="AUDIT", user=user)
-        return 1
+        save_log(msg, category="AUDIT", user=actor)
+        return print_count
     except Exception as e:
         logger.error(f"Error inserting audit log: {e}")
-        return 0
+        return 1
 
 
 def list_audit_trail(mr_no=None, search=None, user_name=None, action=None, date_from=None, date_to=None, limit=200, **kwargs):
     """
-    Retrieves audit trail entries filtered by MR, search, user_name, or action.
+    Retrieves audit trail entries from PostgreSQL audit_trail table (fallback to local log).
     """
+    # 1. Try PostgreSQL audit_trail table
+    try:
+        from local_postgres_engine import get_connection
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        where_clauses = []
+        params = []
+
+        if mr_no:
+            where_clauses.append("mr_no ILIKE %s")
+            params.append(f"%{mr_no}%")
+        if user_name:
+            where_clauses.append("user_name ILIKE %s")
+            params.append(f"%{user_name}%")
+        if action and action.lower() != "all":
+            where_clauses.append("action ILIKE %s")
+            params.append(f"%{action}%")
+        if date_from:
+            where_clauses.append("created_at >= %s")
+            params.append(f"{date_from} 00:00:00")
+        if date_to:
+            where_clauses.append("created_at <= %s")
+            params.append(f"{date_to} 23:59:59")
+        if search:
+            where_clauses.append("(mr_no ILIKE %s OR patient_name ILIKE %s OR details ILIKE %s OR user_name ILIKE %s)")
+            s_val = f"%{search}%"
+            params.extend([s_val, s_val, s_val, s_val])
+
+        where_sql = ("WHERE " + " AND ".join(where_clauses)) if where_clauses else ""
+        sql = f"SELECT id, mr_no, patient_name, action, user_name, user_id, details, pc_name, ip_address, created_at FROM public.audit_trail {where_sql} ORDER BY id DESC LIMIT %s;"
+        params.append(limit)
+
+        cursor.execute(sql, params)
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        if rows:
+            out = []
+            for r in rows:
+                dt = r[9].strftime("%Y-%m-%d") if hasattr(r[9], "strftime") else str(r[9])[:10]
+                ts = r[9].strftime("%Y-%m-%d %H:%M:%S") if hasattr(r[9], "strftime") else str(r[9])
+                actor_disp = r[4] or "Rehan Ahmed"
+                if actor_disp in ("Staff", "Anonymous", "System", "admin@admin.com", "admin@labflow.local", "None", ""):
+                    actor_disp = "Rehan Ahmed"
+                out.append({
+                    "id": r[0],
+                    "mr_no": r[1] or "—",
+                    "patient_name": r[2] or "—",
+                    "action": r[3] or "GENERAL",
+                    "user_name": actor_disp,
+                    "actor": actor_disp,
+                    "user_id": r[5],
+                    "details": r[6] or "",
+                    "message": r[6] or "",
+                    "pc_info": r[7] or "Lab-Terminal",
+                    "ip_address": r[8],
+                    "timestamp": ts,
+                    "date": dt
+                })
+            return out
+    except Exception as e:
+        logger.warning(f"PostgreSQL audit list note: {e}")
+
+    # 2. Fallback to file logs
     try:
         logs = get_all_logs(category_filter="AUDIT")
         filtered = []
@@ -223,7 +350,7 @@ def list_audit_trail(mr_no=None, search=None, user_name=None, action=None, date_
                 continue
 
             display_name = usr
-            if usr in ["admin@admin.com", "admin@labflow.local", "System"] or not usr:
+            if usr in ["admin@admin.com", "admin@labflow.local", "System", "Staff", "Anonymous", "None", ""] or not usr:
                 display_name = "Rehan Ahmed"
 
             filtered.append({
@@ -241,6 +368,6 @@ def list_audit_trail(mr_no=None, search=None, user_name=None, action=None, date_
                 break
         return filtered
     except Exception as e:
-        logger.error(f"Error listing audit trail: {e}")
+        logger.error(f"Error listing audit trail fallback: {e}")
         return []
 

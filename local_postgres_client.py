@@ -10,10 +10,20 @@ import os
 import sys
 import json
 import logging
+import decimal
 from typing import Dict, List, Any, Optional, Union
-from datetime import datetime, timezone
+from datetime import datetime, date, timezone
 import psycopg2
 from psycopg2.extras import RealDictCursor
+
+
+def _json_serial(obj):
+    """JSON serializer for Decimal, datetime, and other custom objects."""
+    if isinstance(obj, decimal.Decimal):
+        return int(obj) if (obj % 1 == 0) else float(obj)
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    return str(obj)
 
 # Ensure local DB config is loaded
 root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -283,11 +293,31 @@ class QueryBuilder:
             cols = [f'"{k}"' for k in clean_item.keys()]
             vals = list(clean_item.values())
             
-            # Format JSON dicts for JSONB columns
+            # Format values (JSON dicts for JSONB columns, booleans for boolean columns)
+            BOOLEAN_COLS = {
+                "print_settings": {"display_verified_by", "display_pathologist_signature", "is_active"},
+                "tests": {"status"},
+                "test_groups": {"status"},
+                "users": {"is_active"},
+                "remarks": {"is_active"},
+                "invoice_settings": {"is_active"},
+                "test_results_all": {"delete_status"}
+            }
+            tbl_bools = BOOLEAN_COLS.get(self.table_name, set())
+
             clean_vals = []
-            for v in vals:
-                if isinstance(v, (dict, list)):
-                    clean_vals.append(json.dumps(v))
+            for k, v in clean_item.items():
+                if k in tbl_bools and v is not None:
+                    if isinstance(v, bool):
+                        clean_vals.append(v)
+                    elif isinstance(v, (int, float)):
+                        clean_vals.append(bool(v))
+                    elif isinstance(v, str):
+                        clean_vals.append(v.strip().lower() in ("true", "1", "yes", "on"))
+                    else:
+                        clean_vals.append(bool(v))
+                elif isinstance(v, (dict, list)):
+                    clean_vals.append(json.dumps(v, default=_json_serial))
                 else:
                     clean_vals.append(v)
 
@@ -320,13 +350,33 @@ class QueryBuilder:
         if not self.payload:
             return []
 
+        BOOLEAN_COLS = {
+            "print_settings": {"display_verified_by", "display_pathologist_signature", "is_active"},
+            "tests": {"status"},
+            "test_groups": {"status"},
+            "users": {"is_active"},
+            "remarks": {"is_active"},
+            "invoice_settings": {"is_active"},
+            "test_results_all": {"delete_status"}
+        }
+        tbl_bools = BOOLEAN_COLS.get(self.table_name, set())
+
         set_clauses = []
         set_params = []
 
         for k, v in self.payload.items():
             set_clauses.append(f'"{k}" = %s')
-            if isinstance(v, (dict, list)):
-                set_params.append(json.dumps(v))
+            if k in tbl_bools and v is not None:
+                if isinstance(v, bool):
+                    set_params.append(v)
+                elif isinstance(v, (int, float)):
+                    set_params.append(bool(v))
+                elif isinstance(v, str):
+                    set_params.append(v.strip().lower() in ("true", "1", "yes", "on"))
+                else:
+                    set_params.append(bool(v))
+            elif isinstance(v, (dict, list)):
+                set_params.append(json.dumps(v, default=_json_serial))
             else:
                 set_params.append(v)
 

@@ -1674,8 +1674,13 @@
 
             list.querySelectorAll('.test-checkbox').forEach(cb => {
                 cb.addEventListener('change', () => {
-                    if (cb.checked) selectedTestNames.add(cb.value);
-                    else selectedTestNames.delete(cb.value);
+                    if (cb.checked) {
+                        selectedTestNames.add(cb.value);
+                        if (!savedFingerprint) currentPageMap = null;
+                    } else {
+                        selectedTestNames.delete(cb.value);
+                        if (currentPageMap) delete currentPageMap[cb.value];
+                    }
                     rebuildFromCurrentMap();
                 });
             });
@@ -1766,8 +1771,13 @@
 
         list.querySelectorAll('.test-checkbox').forEach(cb => {
             cb.addEventListener('change', () => {
-                if (cb.checked) selectedTestNames.add(cb.value);
-                else selectedTestNames.delete(cb.value);
+                if (cb.checked) {
+                    selectedTestNames.add(cb.value);
+                    if (!savedFingerprint) currentPageMap = null;
+                } else {
+                    selectedTestNames.delete(cb.value);
+                    if (currentPageMap) delete currentPageMap[cb.value];
+                }
                 rebuildFromCurrentMap();
             });
         });
@@ -1777,7 +1787,9 @@
         const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
         const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
         if (pages) {
-            currentPageMap = derivePageMapFromPages(pages);
+            if (savedFingerprint) {
+                currentPageMap = derivePageMapFromPages(pages);
+            }
             buildSidebar(allRows, pages);
         }
     }
@@ -1847,7 +1859,7 @@
             const fn = window.LabPrintLayout?.applyManualPageOverrides;
             if (fn) return fn(categories, settings, currentPageMap, currentTestOrder);
         }
-        const combined = Boolean(settings?.combine_categories_on_same_page ?? 1);
+        const combined = (settings?.combine_categories_on_same_page !== 0 && settings?.combine_categories_on_same_page !== false);
         if (combined) {
             const fn = window.LabPrintLayout?.paginateCombinedCategories;
             if (fn) return fn(categories, settings);
@@ -2253,27 +2265,39 @@
                 if (n) selectedTestNames.add(n);
             });
             document.querySelectorAll('.test-checkbox').forEach(cb => cb.checked = true);
+            if (!savedFingerprint) currentPageMap = null;
             rebuildFromCurrentMap();
         });
 
         document.getElementById('clear-all-tests').addEventListener('click', () => {
             selectedTestNames.clear();
             document.querySelectorAll('.test-checkbox').forEach(cb => cb.checked = false);
+            if (!savedFingerprint) currentPageMap = null;
             rebuildFromCurrentMap();
         });
 
         document.getElementById('auto-optimize-btn').addEventListener('click', () => {
-            currentPageMap = null;
+            currentPageMap = null; // reset to auto-combine
             currentTestOrder = [];
             extraPageSlots = 0;
+            savedFingerprint = null;
             updateSavedBanner(false);
-            rebuildFromCurrentMap();
+            const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+            const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+            if (pages) {
+                buildSidebar(allRows, pages);
+            }
         });
 
         document.getElementById('add-page-btn').addEventListener('click', () => {
             const renderedPageCount = document.querySelectorAll('#preview .report-page').length;
             const mapPageCount = currentPageMap ? (Math.max(-1, ...Object.values(currentPageMap).map(Number).filter(n => !isNaN(n))) + 1) : 0;
             extraPageSlots = Math.max(renderedPageCount, mapPageCount, extraPageSlots) + 1;
+            if (!currentPageMap) {
+                const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+                const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+                currentPageMap = derivePageMapFromPages(pages);
+            }
             rebuildFromCurrentMap();
         });
 

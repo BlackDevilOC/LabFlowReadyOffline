@@ -567,8 +567,7 @@ def update_lab_print_settings_admin(payload: dict, actor: str = "Admin") -> dict
         numeric_fields = [
             "category_font_size", "group_font_size", "test_name_font_size",
             "result_font_size", "patient_info_font_size", "patient_info_label_font_size",
-            "footer_font_size", "display_verified_by", "display_pathologist_signature",
-            "hide_single_param_title", "combine_categories_on_same_page",
+            "footer_font_size", "hide_single_param_title", "combine_categories_on_same_page",
             "page_top_margin", "page_right_margin", "page_bottom_margin", "page_left_margin",
             "header_height", "header_bottom_margin", "patient_info_padding_vertical",
             "patient_info_padding_horizontal", "patient_info_min_height", "patient_info_row_gap",
@@ -578,6 +577,9 @@ def update_lab_print_settings_admin(payload: dict, actor: str = "Admin") -> dict
             "category_padding_top", "category_padding_bottom", "category_border_width",
             "group_padding_top", "group_padding_bottom", "group_padding_left",
             "footer_margin_top", "footer_padding_top", "signature_block_min_width"
+        ]
+        boolean_fields = [
+            "display_verified_by", "display_pathologist_signature", "is_active"
         ]
         str_fields = [
             "primary_color", "secondary_color", "border_color", "bg_light", "text_main", "text_muted", "hidden_group_titles"
@@ -596,13 +598,23 @@ def update_lab_print_settings_admin(payload: dict, actor: str = "Admin") -> dict
                 except (ValueError, TypeError):
                     pass
 
+        for key in boolean_fields:
+            if key in payload and payload[key] is not None:
+                val = payload[key]
+                if isinstance(val, bool):
+                    update_data[key] = val
+                elif isinstance(val, (int, float)):
+                    update_data[key] = bool(val)
+                elif isinstance(val, str):
+                    update_data[key] = val.strip().lower() in ("true", "1", "yes", "on")
+                else:
+                    update_data[key] = bool(val)
+
         for key in str_fields:
             if key in payload and payload[key] is not None:
                 update_data[key] = str(payload[key]).strip()
 
-        if "is_active" in payload:
-            update_data["is_active"] = bool(payload["is_active"])
-        else:
+        if "is_active" not in update_data:
             update_data["is_active"] = True
 
         if not update_data:

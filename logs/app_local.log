@@ -22758,3 +22758,774 @@ LINE 1: ... "footer_font_size" = 11, "display_verified_by" = 0, "displa...
                                                              ^
 HINT:  You will need to rewrite or cast the expression.
 
+2026-08-29 13:31:30,361 - ERROR - [LabFlow] - [USER: Anonymous] [UPDATE_LAB_PRINT_SETTINGS_ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] column "display_verified_by" is of type boolean but expression is of type integer
+LINE 1: ... "footer_font_size" = 11, "display_verified_by" = 0, "displa...
+                                                             ^
+HINT:  You will need to rewrite or cast the expression.
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 647, in update_lab_print_settings_admin
+    raise se
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 627, in update_lab_print_settings_admin
+    resp = supabase.table("print_settings").update(update_data).eq("id", row_id).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 194, in execute
+    data = self._execute_update(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 338, in _execute_update
+    cursor.execute(sql, all_params)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "display_verified_by" is of type boolean but expression is of type integer
+LINE 1: ... "footer_font_size" = 11, "display_verified_by" = 0, "displa...
+                                                             ^
+HINT:  You will need to rewrite or cast the expression.
+
+2026-08-29 13:40:16,236 - INFO - [LabFlow] - Server is already running on 127.0.0.1:8000 — attaching desktop window.
+2026-08-29 13:40:16,237 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 13:41:03,829 - ERROR - [LabFlow] - Server did not start in time
+2026-08-29 13:41:27,552 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 13:47:29,949 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 13:47:33,885 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 13:47:33,955 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 13:47:34,006 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 13:47:34,008 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 13:47:34,302 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 13:47:34,305 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 13:47:34,329 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 13:47:34,349 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 13:47:34,384 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 13:47:34,438 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 13:47:34,440 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 13:47:38,399 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 13:47:42,269 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 13:47:42,312 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 13:47:42,409 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 13:47:42,459 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 13:47:42,460 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 13:47:42,501 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 13:47:42,537 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 13:47:42,600 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 13:47:42,648 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 13:47:42,711 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 13:47:42,773 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 13:47:42,774 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 13:47:42,778 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 13:47:44,881 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:47:46,241 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 13:47:53,517 - INFO - [LabFlow] - Print layout saved to PostgreSQL by admin@admin.com for fingerprint complete blood count|glucose random (rbs
+2026-08-29 13:48:17,289 - INFO - [LabFlow] - Print layout saved to PostgreSQL by admin@admin.com for fingerprint complete blood count|glucose random (rbs
+2026-08-29 13:48:20,434 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 13:48:21,843 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:48:37,171 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 3689, date=2026-08-22
+2026-08-29 13:49:05,858 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:49:19,313 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'print_settings': column "hidden_group_titles" of relation "print_settings" does not exist
+LINE 1: ..._signature" = false, "primary_color" = '#111827', "hidden_gr...
+                                                             ^
+
+2026-08-29 13:49:19,440 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 13:49:19,442 - INFO - [LabFlow] - [USER: Anonymous] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 13:49:21,844 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'print_settings': column "hidden_group_titles" of relation "print_settings" does not exist
+LINE 1: ..._signature" = false, "primary_color" = '#111827', "hidden_gr...
+                                                             ^
+
+2026-08-29 13:49:21,973 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 13:49:21,974 - INFO - [LabFlow] - [USER: Anonymous] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 13:49:24,952 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'print_settings': column "hidden_group_titles" of relation "print_settings" does not exist
+LINE 1: ..._signature" = false, "primary_color" = '#111827', "hidden_gr...
+                                                             ^
+
+2026-08-29 13:49:25,077 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 13:49:25,078 - INFO - [LabFlow] - [USER: Anonymous] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 13:49:26,287 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 13:49:26,737 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:49:27,499 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 13:49:30,090 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:49:31,283 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184152, date=None
+2026-08-29 13:49:32,522 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:49:35,691 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5006, date=None
+2026-08-29 13:49:38,490 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:49:39,354 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 13:49:40,266 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:49:41,634 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5004, date=None
+2026-08-29 13:53:42,444 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 13:55:12,539 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 13:55:14,950 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 13:55:15,012 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 13:55:15,034 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 13:55:15,038 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 13:55:15,074 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 13:55:15,133 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 13:55:15,179 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 13:55:15,232 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 13:55:15,234 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 13:55:15,432 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 13:55:15,465 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 13:55:16,691 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 13:55:21,460 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 13:55:21,514 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 13:55:21,604 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 13:55:21,657 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 13:55:21,658 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 13:55:21,705 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 13:55:21,751 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 13:55:21,809 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 13:55:21,855 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 13:55:21,888 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 13:55:21,951 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 13:55:21,952 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 13:55:21,976 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 13:55:24,155 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 13:56:01,594 - INFO - [LabFlow] - [USER: admin@admin.com] [ANALYTICS_VIEW] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Analytics overview 2026-08-29..2026-08-29
+2026-08-29 14:04:23,496 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 14:04:52,065 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 14:04:54,396 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 14:04:54,468 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 14:04:54,496 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 14:04:54,580 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 14:04:54,582 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 14:04:54,623 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:04:54,670 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:04:54,699 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:04:54,752 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:04:54,753 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 14:04:54,881 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 14:04:54,909 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 14:04:56,871 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:05:02,358 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:05:02,404 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:05:02,498 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 14:05:02,548 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:05:02,551 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 14:05:02,615 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 14:05:02,674 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 14:05:02,868 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:05:03,503 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 14:05:03,542 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 14:05:03,575 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 14:05:04,191 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 14:05:04,193 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 14:05:24,243 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'app_settings': Object of type Decimal is not JSON serializable
+2026-08-29 14:05:24,245 - ERROR - [LabFlow] - [USER: System] [API_CLOUD_SETTINGS_PUSH] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Object of type Decimal is not JSON serializable
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 2442, in api_cloud_settings_push
+    }, on_conflict="setting_type").execute()
+                                   ^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 192, in execute
+    data = self._execute_insert(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 310, in _execute_insert
+    clean_vals.append(json.dumps(v))
+                      ^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Decimal is not JSON serializable
+2026-08-29 14:06:22,248 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'app_settings': Object of type Decimal is not JSON serializable
+2026-08-29 14:06:22,250 - ERROR - [LabFlow] - [USER: System] [API_CLOUD_SETTINGS_PUSH] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Object of type Decimal is not JSON serializable
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 2442, in api_cloud_settings_push
+    }, on_conflict="setting_type").execute()
+                                   ^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 192, in execute
+    return f'"{col}"'
+                   ^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 310, in _execute_insert
+    if k in tbl_bools and v is not None:
+                          ^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Decimal is not JSON serializable
+2026-08-29 14:06:35,392 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 14:06:43,503 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'app_settings': Object of type Decimal is not JSON serializable
+2026-08-29 14:06:43,505 - ERROR - [LabFlow] - [USER: System] [API_CLOUD_SETTINGS_PUSH] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Object of type Decimal is not JSON serializable
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 2442, in api_cloud_settings_push
+    }, on_conflict="setting_type").execute()
+                                   ^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 192, in execute
+    return f'"{col}"'
+                   ^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 310, in _execute_insert
+    if k in tbl_bools and v is not None:
+                          ^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Decimal is not JSON serializable
+2026-08-29 14:06:52,994 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'app_settings': Object of type Decimal is not JSON serializable
+2026-08-29 14:06:52,995 - ERROR - [LabFlow] - [USER: System] [API_CLOUD_SETTINGS_PUSH] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Object of type Decimal is not JSON serializable
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 2442, in api_cloud_settings_push
+    }, on_conflict="setting_type").execute()
+                                   ^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 192, in execute
+    return f'"{col}"'
+                   ^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 310, in _execute_insert
+    if k in tbl_bools and v is not None:
+                          ^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Decimal is not JSON serializable
+2026-08-29 14:07:04,759 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 14:07:07,038 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 14:07:07,095 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 14:07:07,122 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 14:07:07,260 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 14:07:07,261 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 14:07:07,303 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:07:07,350 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:07:07,390 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:07:07,454 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:07:07,455 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 14:07:07,573 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 14:07:07,609 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 14:07:08,646 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:07:12,272 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:07:12,319 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:07:12,408 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 14:07:12,461 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:07:12,462 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 14:07:12,523 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 14:07:12,556 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 14:07:12,615 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 14:07:12,660 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 14:07:12,709 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 14:07:12,771 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 14:07:12,772 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 14:07:12,777 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:07:18,575 - INFO - [LabFlow] - Master settings pushed to server database by Anonymous
+2026-08-29 14:07:25,891 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 14:07:28,397 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 14:07:28,448 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 14:07:28,469 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 14:07:28,771 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:07:28,772 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 14:07:28,776 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 14:07:28,779 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 14:07:28,811 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:07:28,853 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 14:07:28,865 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:07:28,887 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 14:07:28,904 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:07:28,950 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:07:28,952 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 14:07:30,223 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:07:33,421 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:07:33,468 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:07:33,559 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 14:07:33,614 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:07:33,616 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 14:07:33,676 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 14:07:33,720 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 14:07:33,781 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 14:07:33,831 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 14:07:33,879 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 14:07:33,937 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:07:33,941 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 14:07:33,951 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 14:07:59,975 - INFO - [LabFlow] - Master settings pushed to server database by Anonymous
+2026-08-29 14:08:01,483 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:08:01,843 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:08:03,436 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 14:08:10,144 - INFO - [LabFlow] - Print layout saved to PostgreSQL by admin@admin.com for fingerprint complete blood count|glucose random (rbs
+2026-08-29 14:08:30,249 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:08:30,866 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 14:08:31,131 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:08:32,930 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5010, date=None
+2026-08-29 14:08:37,801 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:08:39,289 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5004, date=None
+2026-08-29 14:08:41,626 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:08:42,777 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-29 14:08:46,497 - INFO - [LabFlow] - Accessing Fitness Records page
+2026-08-29 14:08:47,047 - INFO - [LabFlow] - Loaded 4935 fitness records from DB
+2026-08-29 14:08:47,354 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:08:48,113 - INFO - [LabFlow] - User requested logout
+2026-08-29 14:08:48,119 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 14:08:52,609 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:08:58,672 - INFO - [LabFlow] - Generating Invoice for patient: 19
+2026-08-29 14:08:58,716 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'patients': column "is_offline_sync" of relation "patients" does not exist
+LINE 1: ...ent_token", "shift", "user", "pwd", "created_at", "is_offlin...
+                                                             ^
+
+2026-08-29 14:08:58,844 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column "is_offline_sync" of relation "test_results_all" does not exist
+LINE 1: ..."test_values", "status", "remarks", "created_at", "is_offlin...
+                                                             ^
+
+2026-08-29 14:08:58,988 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column "is_offline_sync" of relation "test_results_all" does not exist
+LINE 1: ..."test_values", "status", "remarks", "created_at", "is_offlin...
+                                                             ^
+
+2026-08-29 14:08:59,094 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column "is_offline_sync" of relation "test_results_all" does not exist
+LINE 1: ..."test_values", "status", "remarks", "created_at", "is_offlin...
+                                                             ^
+
+2026-08-29 14:08:59,160 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column "is_offline_sync" of relation "test_results_all" does not exist
+LINE 1: ..."test_values", "status", "remarks", "created_at", "is_offlin...
+                                                             ^
+
+2026-08-29 14:09:00,700 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 185045
+2026-08-29 14:09:02,660 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 14:09:14,134 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 14:09:14,840 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:09:20,943 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:09:20,991 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:09:21,083 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 14:09:21,141 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:09:21,144 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 14:09:21,199 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 14:09:21,247 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 14:09:21,309 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 14:09:21,355 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 14:09:21,387 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 14:09:21,447 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 14:09:21,448 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 14:09:21,460 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:09:22,233 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 14:09:23,017 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-29 14:09:23,155 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 14:09:23,953 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:09:28,187 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 90000010, date=None
+2026-08-29 14:09:30,049 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:09:31,555 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 185042, date=None
+2026-08-29 14:09:32,890 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:09:33,779 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 185044, date=None
+2026-08-29 14:09:40,513 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:09:42,665 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5007, date=None
+2026-08-29 14:09:44,314 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:09:45,658 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4915, date=None
+2026-08-29 14:09:47,667 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:09:48,577 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 14:09:52,809 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:09:53,739 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-29 14:09:53,895 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 14:10:15,746 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:10:16,129 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-29 14:10:16,292 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 14:10:18,740 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: dasdg
+2026-08-29 14:10:18,742 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'dasdg', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Rehan Ahmed', 'user_id': 1, 'pwd': '58614'}
+2026-08-29 14:10:18,811 - INFO - [LabFlow] - Successfully registered new patient. ID: 105051, MR No: 184154
+2026-08-29 14:10:18,812 - INFO - [LabFlow] - Patient registered. ID: 105051, MR: 184154. Queuing test creation in background...
+2026-08-29 14:10:18,875 - INFO - [LabFlow] - [USER: admin@admin.com] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184154
+2026-08-29 14:10:18,877 - DEBUG - [LabFlow] - Audit log on register error: insert_audit_log() got an unexpected keyword argument 'patient_name'
+2026-08-29 14:10:18,883 - INFO - [LabFlow] - Generating Invoice for patient: 105051
+2026-08-29 14:10:18,962 - INFO - [LabFlow] - Adding tests to patient MR: 184154, Name: dasdg
+2026-08-29 14:10:19,019 - INFO - [LabFlow] - Fetched full info for patient ID: 105051
+2026-08-29 14:10:19,040 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184154
+2026-08-29 14:12:29,257 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:15:29,431 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 14:15:29,551 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: TEST101 | Action: REGISTER | Details: Registered test
+2026-08-29 14:16:48,157 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 14:16:50,696 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 14:16:50,751 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 14:16:50,781 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 14:16:51,027 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:16:51,028 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 14:16:51,033 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 14:16:51,033 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 14:16:51,074 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:16:51,095 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 14:16:51,106 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:16:51,160 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:16:51,163 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 14:16:51,211 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:16:51,216 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 14:16:52,343 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:16:58,133 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:16:58,181 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:16:58,276 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 14:16:58,310 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:16:58,312 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 14:16:58,358 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 14:16:58,405 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 14:16:58,464 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 14:16:58,515 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 14:16:58,563 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 14:16:58,633 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 14:16:58,635 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:16:58,636 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 14:18:26,315 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:18:26,692 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-29 14:18:26,890 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 14:18:27,579 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 14:18:28,474 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184154
+2026-08-29 14:18:28,750 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 14:18:31,580 - INFO - [LabFlow] - [USER: Staff] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184154 | Action: UPDATE_RESULT | Details: • COMPLETE BLOOD COUNT: param_37: 1 g/dl, param_38: 1 x10E12/L, param_39: 1 %, param_40: 1 fL, param_41: 1 pg, param_42: 0 g/dl, param_43: 0 x10E9/L, param_44: 0 %, param_45: 0 %, param_46: 0 %, param_47: 0 %, param_49: 0 x10E9/L
+2026-08-29 14:18:31,582 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184154
+2026-08-29 14:18:31,598 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 14:19:15,153 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:19:15,563 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-29 14:19:15,703 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 14:19:15,865 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 14:19:16,484 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:19:17,451 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 14:20:25,800 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 14:20:28,180 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 14:20:28,235 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 14:20:28,260 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 14:20:28,534 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:20:28,535 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 14:20:28,539 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 14:20:28,541 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 14:20:28,578 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:20:28,586 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 14:20:28,627 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:20:28,629 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 14:20:28,663 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:20:28,698 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:20:28,700 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 14:20:29,842 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 14:20:34,078 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 14:20:34,125 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:20:34,218 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 14:20:34,273 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 14:20:34,275 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 14:20:34,335 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 14:20:34,377 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 14:20:34,425 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 14:20:34,453 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 14:20:34,488 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 14:20:34,557 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 14:20:34,558 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 14:20:34,594 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:20:42,369 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:20:42,370 - INFO - [LabFlow] - [USER: Anonymous] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 14:20:44,431 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 14:20:44,432 - INFO - [LabFlow] - [USER: Anonymous] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 14:20:45,426 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 14:20:46,026 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:20:47,842 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 14:21:01,535 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 5008 | Action: PRINT | Details: [Copy #1 (Original)] Printed test(s): Serum Beta hCG, COMPLETE BLOOD COUNT, Liver Function Test, Glucose Random (RBS), Hep B, C, UCE
+2026-08-29 14:21:01,537 - INFO - [LabFlow] - [USER: Rehan Ahmed] [PRINT_EVENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Print report for MR#5008 by Rehan Ahmed (Copy #1)
+2026-08-29 14:21:06,386 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:21:07,484 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184154, date=None
+2026-08-29 14:21:08,199 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184154 | Action: PRINT | Details: [Copy #1 (Original)] Printed test(s): COMPLETE BLOOD COUNT
+2026-08-29 14:21:08,201 - INFO - [LabFlow] - [USER: Rehan Ahmed] [PRINT_EVENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Print report for MR#184154 by Rehan Ahmed (Copy #1)
+2026-08-29 14:21:16,291 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 14:21:18,283 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 14:28:06,359 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:01:58,004 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 15:02:00,224 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:02:00,275 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 15:02:00,298 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 15:02:00,534 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:02:00,535 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:02:00,539 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 15:02:00,541 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 15:02:00,597 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:02:00,630 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:02:00,668 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:02:00,726 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:02:00,728 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 15:02:00,791 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 15:02:00,819 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 15:02:19,143 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:02:22,910 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:02:22,955 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:02:23,049 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 15:02:23,102 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:02:23,104 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 15:02:23,162 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 15:02:23,209 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 15:02:23,259 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 15:02:23,292 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 15:02:23,353 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 15:02:23,424 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:02:23,428 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 15:02:23,439 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 15:02:24,668 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:02:27,051 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 15:02:59,306 - INFO - [LabFlow] - Print layout saved to PostgreSQL by admin@admin.com for fingerprint complete blood count|glucose random (rbs
+2026-08-29 15:03:02,096 - INFO - [LabFlow] - Print layout saved to PostgreSQL by admin@admin.com for fingerprint complete blood count|glucose random (rbs
+2026-08-29 15:03:06,282 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:03:08,347 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:03:13,755 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:03:16,682 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 15:03:19,915 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:03:21,995 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5004, date=None
+2026-08-29 15:03:43,081 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:03:43,082 - INFO - [LabFlow] - [USER: admin@admin.com] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:03:46,064 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:03:46,065 - INFO - [LabFlow] - [USER: admin@admin.com] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:03:47,946 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:03:48,604 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:03:49,074 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:03:49,333 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:03:50,923 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5004, date=None
+2026-08-29 15:04:18,714 - INFO - [LabFlow] - Print layout saved to PostgreSQL by admin@admin.com for fingerprint complete blood count|creatinine|hep b, c
+2026-08-29 15:04:20,948 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:04:30,418 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:04:30,419 - INFO - [LabFlow] - [USER: admin@admin.com] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:04:30,423 - INFO - [LabFlow] - Master settings pulled from server database by admin@admin.com
+2026-08-29 15:04:31,931 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:04:32,602 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:04:33,074 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:04:34,595 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4963, date=None
+2026-08-29 15:14:30,105 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:14:59,959 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 15:15:02,198 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:15:02,247 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 15:15:02,270 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 15:15:02,560 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:15:02,561 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:15:02,565 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 15:15:02,567 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 15:15:02,624 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:15:02,672 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:15:02,714 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:15:02,763 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:15:02,764 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 15:15:02,781 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 15:15:02,812 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 15:15:04,582 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:15:08,667 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:15:08,701 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:15:08,790 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 15:15:08,842 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:15:08,843 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 15:15:08,890 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 15:15:08,939 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 15:15:08,998 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 15:15:09,030 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 15:15:09,077 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 15:15:09,163 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:15:09,185 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 15:15:09,196 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 15:15:10,559 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:15:12,317 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:15:22,917 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:15:22,919 - INFO - [LabFlow] - [USER: admin@admin.com] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:15:24,516 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:15:24,517 - INFO - [LabFlow] - [USER: admin@admin.com] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:15:26,747 - INFO - [LabFlow] - Master settings pushed to server database by admin@admin.com
+2026-08-29 15:15:27,909 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:15:28,462 - INFO - [LabFlow] - Generating Fitness report page
+2026-08-29 15:15:31,406 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:15:32,583 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:16:57,055 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:16:58,118 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:16:59,726 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 15:17:16,073 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:17:17,585 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 15:20:38,342 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 15:20:41,355 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:20:41,409 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 15:20:41,441 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 15:20:41,697 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:20:41,698 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:20:41,703 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 15:20:41,706 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 15:20:41,763 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:20:41,799 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:20:41,854 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:20:41,904 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:20:41,908 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 15:20:41,982 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 15:20:42,013 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 15:20:43,404 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:20:47,436 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:20:47,482 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:20:47,573 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 15:20:47,624 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:20:47,627 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 15:20:47,684 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 15:20:47,733 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 15:20:47,943 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:20:48,144 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 15:20:48,191 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 15:20:48,255 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 15:20:48,951 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 15:20:48,953 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 15:20:58,176 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:20:58,178 - INFO - [LabFlow] - [USER: admin@admin.com] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:20:59,966 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:20:59,968 - INFO - [LabFlow] - [USER: admin@admin.com] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:21:02,361 - INFO - [LabFlow] - Master settings pushed to server database by admin@admin.com
+2026-08-29 15:21:04,143 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:21:04,721 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:21:06,024 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:21:08,105 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:21:09,441 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4963, date=None
+2026-08-29 15:24:41,656 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:24:52,478 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 15:24:55,336 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:24:55,390 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 15:24:55,417 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 15:24:55,721 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:24:55,722 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:24:55,726 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 15:24:55,728 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 15:24:55,758 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:24:55,789 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:24:55,826 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:24:55,841 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 15:24:55,860 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:24:55,865 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 15:24:55,871 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 15:25:01,397 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:25:04,753 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:25:04,802 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:25:04,877 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 15:25:04,929 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:25:04,932 - INFO - [LabFlow] - Starting background metadata sync from online to offline database...
+2026-08-29 15:25:04,989 - INFO - [LabFlow] - Offline DB: Synced 118 tests from Supabase
+2026-08-29 15:25:05,036 - INFO - [LabFlow] - Offline DB: Synced 98 test groups from Supabase
+2026-08-29 15:25:05,096 - INFO - [LabFlow] - Offline DB: Synced 5 shifts from Supabase
+2026-08-29 15:25:05,144 - INFO - [LabFlow] - Offline DB: Synced 11 users from Supabase
+2026-08-29 15:25:05,177 - INFO - [LabFlow] - Offline DB: Synced 54 remarks from Supabase
+2026-08-29 15:25:05,239 - INFO - [LabFlow] - Offline DB: Synced invoice settings from Supabase
+2026-08-29 15:25:05,240 - INFO - [LabFlow] - Background metadata sync to offline database complete.
+2026-08-29 15:25:05,254 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:25:06,564 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:25:08,868 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:25:17,614 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:25:18,157 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:25:19,365 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184152, date=None
+2026-08-29 15:26:12,194 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:26:13,792 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:26:14,587 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184154
+2026-08-29 15:26:14,869 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 15:26:17,163 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184154 | Action: UPDATE_RESULT | Details: • COMPLETE BLOOD COUNT: param_37: 1 g/dl, param_38: 1 x10E12/L, param_39: 1 %, param_40: 1 fL, param_41: 1 pg, param_42: 0 g/dl, param_43: 0 x10E9/L, param_44: 0 %, param_45: 0 %, param_46: 0 %, param_47: 0 %, param_49: 0 x10E9/L
+2026-08-29 15:26:17,165 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184154
+2026-08-29 15:26:17,177 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184154, date=None
+2026-08-29 15:26:18,576 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:26:19,938 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 5006
+2026-08-29 15:26:20,182 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 15:26:21,923 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 5006 | Action: UPDATE_RESULT | Details: • MP-ICT: param_58: Negative
+2026-08-29 15:26:21,924 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 5006
+2026-08-29 15:26:21,940 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:26:23,418 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 4960
+2026-08-29 15:26:23,663 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 15:26:25,001 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 4960 | Action: UPDATE_RESULT | Details: • HbA1c: param_8: 0 %
+• COMPLETE BLOOD COUNT: param_37: 11.1 g/dl, param_38: 3.19 x10E12/L, param_39: 31.2 %, param_40: 97.8 fL, param_41: 34.8 pg, param_42: 35.6 g/dl, param_43: 4.3 x10E9/L, param_44: 66 %, param_45: 27 %, param_46: 06 %, param_47: 01 %, param_49: 66 x10E9/L
+2026-08-29 15:26:25,003 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 4960
+2026-08-29 15:26:25,017 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:26:25,410 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-29 15:26:25,588 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 15:26:25,991 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:27:28,575 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:27:41,855 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:27:42,808 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184154, date=None
+2026-08-29 15:27:44,766 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:27:45,809 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:27:49,024 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:27:50,505 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 15:27:59,146 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:28:00,602 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 15:28:15,299 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:28:16,481 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:28:18,858 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:28:19,890 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 15:30:37,980 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:30:39,653 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 15:41:01,799 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-08-29 15:41:04,163 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-08-29 15:41:04,239 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-08-29 15:41:04,275 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-08-29 15:41:04,626 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:41:04,627 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-08-29 15:41:04,630 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-08-29 15:41:04,632 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-08-29 15:41:04,662 - INFO - [LabFlow] - Server ready — loading login page
+2026-08-29 15:41:04,677 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:41:04,703 - DEBUG - [LabFlow] - Accessing Login Page
+2026-08-29 15:41:04,716 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:41:04,774 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:41:04,816 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:41:04,820 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-08-29 15:41:06,327 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-08-29 15:41:12,113 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-08-29 15:41:12,147 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-08-29 15:41:12,223 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-08-29 15:41:12,273 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-08-29 15:41:12,275 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: cannot import name 'is_local_postgres_enabled' from 'local_postgres_client' (D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py)
+2026-08-29 15:41:12,595 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:41:14,058 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:41:15,154 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:41:17,416 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:41:18,106 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184154, date=None
+2026-08-29 15:41:19,050 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:41:20,618 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 15:41:33,821 - INFO - [LabFlow] - Print layout saved to PostgreSQL by admin@admin.com for fingerprint complete blood count|glucose random (rbs
+2026-08-29 15:41:37,796 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 15:41:38,746 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:41:40,548 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 15:41:41,659 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:41:43,892 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4963, date=None
+2026-08-29 15:41:52,915 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:41:54,436 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4963, date=None
+2026-08-29 15:41:56,659 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:41:58,508 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 15:42:19,392 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 5008 | Action: PRINT | Details: [Copy #2 (Re-print)] Printed test(s): Serum Beta hCG, COMPLETE BLOOD COUNT, Liver Function Test, Glucose Random (RBS), Hep B, C, UCE
+2026-08-29 15:42:19,394 - INFO - [LabFlow] - [USER: Rehan Ahmed] [PRINT_EVENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Print report for MR#5008 by Rehan Ahmed (Copy #2)
+2026-08-29 15:42:25,759 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:42:26,709 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184153, date=None
+2026-08-29 15:42:28,192 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184153 | Action: PRINT | Details: [Copy #1 (Original)] Printed test(s): Liver Function Test, Hep B, C, UCE, COMPLETE BLOOD COUNT
+2026-08-29 15:42:28,194 - INFO - [LabFlow] - [USER: Rehan Ahmed] [PRINT_EVENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Print report for MR#184153 by Rehan Ahmed (Copy #1)
+2026-08-29 15:45:58,698 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:00,295 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5011, date=None
+2026-08-29 15:46:02,025 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:03,474 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5008, date=None
+2026-08-29 15:46:06,449 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:09,170 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5010, date=None
+2026-08-29 15:46:10,970 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:12,626 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5004, date=None
+2026-08-29 15:46:14,248 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:16,451 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4962, date=None
+2026-08-29 15:46:18,939 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:20,314 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5004, date=None
+2026-08-29 15:46:23,369 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:24,138 - INFO - [LabFlow] - Accessing Fast Print Stream workspace
+2026-08-29 15:46:32,578 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:33,179 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:46:33,841 - INFO - [LabFlow] - Accessing Fast Results Entry workspace
+2026-08-29 15:46:34,176 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 15:46:41,034 - DEBUG - [LabFlow] - Accessing Home Page
+2026-08-29 15:46:41,827 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-08-29 15:46:43,587 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 4963, date=None
+2026-08-29 15:46:48,195 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-29 15:46:48,368 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 15:46:52,299 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-08-29 15:46:53,395 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 5005
+2026-08-29 15:46:53,625 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 15:46:56,066 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 5005 | Action: UPDATE_RESULT | Details: • Hep B, C: param_50: Negative, param_51: Negative
+2026-08-29 15:46:56,067 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 5005
+2026-08-29 15:46:56,081 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 5005, date=None
+2026-08-29 15:46:59,795 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-08-29 15:46:59,930 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-08-29 15:47:23,845 - DEBUG - [LabFlow] - Accessing Home Page

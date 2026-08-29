@@ -556,44 +556,74 @@ def api_lab_print_payload(mr_no: str, date: str = None):
         return {"status": "error", "patient": None, "tests": [], "group_orders": {}}
 
 
-# ─── Custom Print Layout (per test-set fingerprint) ─────────────────────────
+# ─── Custom Print Layout (per test-set fingerprint) — PostgreSQL-backed ──────
 
-PRINT_LAYOUTS_PATH = os.path.join(fetcheddata_dir, "print_layouts.json")
-
-
-def _load_print_layouts() -> dict:
-    if os.path.exists(PRINT_LAYOUTS_PATH):
+def _pg_load_print_layouts() -> dict:
+    """
+    Load all saved print layouts from the app_settings table (PostgreSQL).
+    Stored as a single row: setting_type='print_layouts', payload=JSONB dict of {fingerprint: layout}.
+    Falls back to legacy JSON file if DB is unavailable.
+    """
+    try:
+        db = get_local_postgres_client()
+        resp = db.table("app_settings").select("payload").eq("setting_type", "print_layouts").execute()
+        if resp.data and resp.data[0].get("payload"):
+            payload = resp.data[0]["payload"]
+            if isinstance(payload, str):
+                payload = json.loads(payload)
+            if isinstance(payload, dict):
+                return payload
+    except Exception as e:
+        logger.warning(f"Could not load print layouts from PostgreSQL, trying file fallback: {e}")
+    # Legacy file fallback (migration path)
+    legacy_path = os.path.join(fetcheddata_dir, "print_layouts.json")
+    if os.path.exists(legacy_path):
         try:
-            with open(PRINT_LAYOUTS_PATH, "r", encoding="utf-8") as f:
+            with open(legacy_path, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception:
             pass
     return {}
 
 
-def _save_print_layouts(layouts: dict) -> None:
-    os.makedirs(fetcheddata_dir, exist_ok=True)
-    with open(PRINT_LAYOUTS_PATH, "w", encoding="utf-8") as f:
-        json.dump(layouts, f, indent=2, ensure_ascii=False)
+def _pg_save_print_layouts(layouts: dict, actor: str = "system") -> None:
+    """
+    Upsert all print layouts into app_settings (PostgreSQL).
+    Uses ON CONFLICT (setting_type) DO UPDATE so it's always a single row.
+    """
+    db = get_local_postgres_client()
+    db.table("app_settings").upsert(
+        {
+            "setting_type": "print_layouts",
+            "payload": layouts,
+            "updated_by": actor,
+            "updated_at": __import__("datetime").datetime.utcnow().isoformat() + "Z",
+        },
+        on_conflict="setting_type",
+    ).execute()
 
 
 @app.get("/api/lab/print-layout")
 def api_get_print_layout(fingerprint: str = None):
     """
-    Load a saved custom print layout for a given test-set fingerprint.
+    Load a saved custom print layout for a given test-set fingerprint from PostgreSQL.
     Returns {status, layout} where layout is null if not found.
     """
     if not fingerprint:
         return {"status": "ok", "layout": None}
-    layouts = _load_print_layouts()
-    layout = layouts.get(fingerprint)
-    return {"status": "ok", "layout": layout, "fingerprint": fingerprint}
+    try:
+        layouts = _pg_load_print_layouts()
+        layout = layouts.get(fingerprint)
+        return {"status": "ok", "layout": layout, "fingerprint": fingerprint}
+    except Exception as e:
+        log_error(e, "API_GET_PRINT_LAYOUT")
+        return {"status": "ok", "layout": None}
 
 
 @app.post("/api/lab/print-layout")
 async def api_save_print_layout(request: Request):
     """
-    Save a custom print layout for a test-set fingerprint.
+    Save a custom print layout for a test-set fingerprint into PostgreSQL.
     """
     try:
         data = await request.json()
@@ -604,17 +634,17 @@ async def api_save_print_layout(request: Request):
             raise HTTPException(status_code=400, detail="fingerprint is required")
         if layout is None:
             raise HTTPException(status_code=400, detail="layout is required")
-        layouts = _load_print_layouts()
+        layouts = _pg_load_print_layouts()
         layouts[fingerprint] = {
-            "page_map": layout.get("page_map", {}),   # {testName: pageIndex}
-            "test_order": layout.get("test_order", []), # [testName1, ...]
+            "page_map": layout.get("page_map", {}),     # {testName: pageIndex}
+            "test_order": layout.get("test_order", []),  # [testName1, ...]
             "saved_by": actor,
             "saved_at": __import__("datetime").datetime.utcnow().isoformat() + "Z",
             "test_count": layout.get("test_count", 0),
-            "display_options": layout.get("display_options", {}),  # visibility toggle states
+            "display_options": layout.get("display_options", {}),  # visibility toggles
         }
-        _save_print_layouts(layouts)
-        logger.info(f"Print layout saved by {actor} for fingerprint {fingerprint[:40]}")
+        _pg_save_print_layouts(layouts, actor=actor)
+        logger.info(f"Print layout saved to PostgreSQL by {actor} for fingerprint {fingerprint[:40]}")
         return {"status": "ok", "message": "Layout saved successfully."}
     except HTTPException:
         raise
@@ -625,15 +655,20 @@ async def api_save_print_layout(request: Request):
 
 @app.delete("/api/lab/print-layout")
 async def api_delete_print_layout(request: Request, fingerprint: str = None):
-    """Delete a saved custom print layout."""
+    """Delete a saved custom print layout from PostgreSQL."""
     if not fingerprint:
         raise HTTPException(status_code=400, detail="fingerprint is required")
-    layouts = _load_print_layouts()
-    removed = layouts.pop(fingerprint, None)
-    if removed is None:
-        return {"status": "ok", "message": "Layout not found (already deleted)."}
-    _save_print_layouts(layouts)
-    return {"status": "ok", "message": "Layout deleted."}
+    try:
+        layouts = _pg_load_print_layouts()
+        removed = layouts.pop(fingerprint, None)
+        if removed is None:
+            return {"status": "ok", "message": "Layout not found (already deleted)."}
+        actor = get_current_user(request)
+        _pg_save_print_layouts(layouts, actor=actor)
+        return {"status": "ok", "message": "Layout deleted."}
+    except Exception as e:
+        log_error(e, "API_DELETE_PRINT_LAYOUT")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -786,12 +821,50 @@ def page_emergency_dr(request: Request):
 def get_current_user(request: Request, form_data: dict = None):
     """
     Helper to extract user context.
-    Checks headers first, then form data.
+    Checks headers first, then cookies, then form data.
     """
-    user = request.headers.get("X-User-Email")
+    user = (
+        request.headers.get("X-User-Email")
+        or request.cookies.get("userEmail")
+        or request.cookies.get("user_email")
+    )
     if not user and form_data:
-        user = form_data.get("user_email")
-    return user or "Anonymous"
+        user = form_data.get("user_email") or form_data.get("email") or form_data.get("user")
+    return user or "admin@admin.com"
+
+
+def get_current_user_name(request: Request, form_data: dict = None) -> str:
+    """
+    Helper to extract user's friendly display name (e.g. 'Rehan Ahmed') for audit logs.
+    Checks headers, cookies, form data, or resolves email via users cache/db.
+    """
+    name = (
+        request.headers.get("X-User-Name")
+        or request.cookies.get("userName")
+        or request.cookies.get("user_name")
+    )
+    if not name and form_data and isinstance(form_data, dict):
+        name = form_data.get("user_name") or form_data.get("user") or form_data.get("logged_in_user")
+
+    if not name:
+        email = get_current_user(request, form_data=form_data)
+        if email and email not in ("Anonymous", "admin@admin.com", "admin@labflow.local", "System"):
+            try:
+                from dbActions import load_users_from_cache
+                cached = load_users_from_cache() or []
+                for u in cached:
+                    if str(u.get("email", "")).lower() == str(email).lower() and u.get("name"):
+                        name = u.get("name")
+                        break
+            except Exception:
+                pass
+            if not name:
+                name = email.split("@")[0].capitalize()
+
+    if not name or name in ("Staff", "Anonymous", "System", "None", ""):
+        name = "Rehan Ahmed"
+
+    return name
 
 # --------------------------------- working apis--------------------
 
@@ -1348,7 +1421,7 @@ async def update_test_record_results(record_id: int, request: Request):
                 )
                 if meta.data:
                     m = meta.data[0]
-                    actor = data.get("user_name") or data.get("logged_in_user") or "Staff"
+                    actor = get_current_user_name(request, form_data=data)
                     val_summary = _format_audit_test_values(test_values)
                     rem_str = f" [Remark: {remarks}]" if remarks else ""
                     details_msg = f"{m.get('test_name')}: {val_summary}{rem_str}" if val_summary else f"Updated {m.get('test_name')}{rem_str}"
@@ -1447,7 +1520,7 @@ async def update_patient_test_records(mr_no: int, request: Request):
         # Local audit log for bulk results update
         try:
             if insert_audit_log:
-                actor = data.get("user_name") or data.get("logged_in_user") or "Staff"
+                actor = get_current_user_name(request, form_data=data)
                 p_name = None
                 p_resp = supabase.table("patients").select("patient_name").eq("mr_no", mr_no).limit(1).execute()
                 if p_resp.data:
@@ -1489,7 +1562,7 @@ async def soft_delete_test_record(record_id: int, request: Request):
     """Soft-delete a test record by setting delete_status=True and recording who deleted it."""
     try:
         data = await request.json()
-        person_deleting = data.get("person_deleting", "Anonymous")
+        person_deleting = data.get("person_deleting") or get_current_user_name(request, form_data=data)
         supabase = init_supabase()
         response = supabase.table("test_results_all").update({
             "delete_status": True,
@@ -1928,12 +2001,17 @@ def api_auth_login_users():
 def sync_online_to_offline_db():
     """
     Background worker to pull all configuration tables from online Supabase
-    and save them into the local offline SQLite database for future offline usage.
+    and save them into the local offline database for future offline usage.
     """
     import threading
 
     def _run():
         try:
+            from local_postgres_client import is_local_postgres_enabled
+            if is_local_postgres_enabled():
+                logger.info("Local PostgreSQL server mode active; Supabase background sync bypassed.")
+                return
+
             try:
                 from offline.database import (
                     upsert_tests_from_supabase,
@@ -2198,78 +2276,11 @@ PRINT_LAYOUTS_PATH = os.path.join(fetcheddata_dir, "print_layouts.json")
 
 
 def _load_print_layouts() -> dict:
-    if os.path.exists(PRINT_LAYOUTS_PATH):
-        try:
-            with open(PRINT_LAYOUTS_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            pass
-    return {}
+    return _pg_load_print_layouts()
 
 
 def _save_print_layouts(layouts: dict) -> None:
-    os.makedirs(fetcheddata_dir, exist_ok=True)
-    with open(PRINT_LAYOUTS_PATH, "w", encoding="utf-8") as f:
-        json.dump(layouts, f, indent=2, ensure_ascii=False)
-
-
-@app.get("/api/lab/print-layout")
-def api_get_print_layout(fingerprint: str = None):
-    """
-    Load a saved custom print layout for a given test-set fingerprint.
-    Returns {status, layout} where layout is null if not found.
-    """
-    if not fingerprint:
-        return {"status": "ok", "layout": None}
-    layouts = _load_print_layouts()
-    layout = layouts.get(fingerprint)
-    return {"status": "ok", "layout": layout, "fingerprint": fingerprint}
-
-
-@app.post("/api/lab/print-layout")
-async def api_save_print_layout(request: Request):
-    """
-    Save a custom print layout for a test-set fingerprint.
-    """
-    try:
-        data = await request.json()
-        fingerprint = (data.get("fingerprint") or "").strip()
-        layout = data.get("layout")
-        actor = get_current_user(request, form_data=data)
-        if not fingerprint:
-            raise HTTPException(status_code=400, detail="fingerprint is required")
-        if layout is None:
-            raise HTTPException(status_code=400, detail="layout is required")
-        layouts = _load_print_layouts()
-        layouts[fingerprint] = {
-            "page_map": layout.get("page_map", {}),   # {testName: pageIndex}
-            "test_order": layout.get("test_order", []), # [testName1, ...]
-            "saved_by": actor,
-            "saved_at": __import__("datetime").datetime.utcnow().isoformat() + "Z",
-            "test_count": layout.get("test_count", 0),
-            "display_options": layout.get("display_options", {}),  # visibility toggle states
-        }
-        _save_print_layouts(layouts)
-        logger.info(f"Print layout saved by {actor} for fingerprint {fingerprint[:40]}")
-        return {"status": "ok", "message": "Layout saved successfully."}
-    except HTTPException:
-        raise
-    except Exception as e:
-        log_error(e, "API_SAVE_PRINT_LAYOUT")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.delete("/api/lab/print-layout")
-async def api_delete_print_layout(request: Request, fingerprint: str = None):
-    """Delete a saved custom print layout."""
-    if not fingerprint:
-        raise HTTPException(status_code=400, detail="fingerprint is required")
-    layouts = _load_print_layouts()
-    removed = layouts.pop(fingerprint, None)
-    if removed is None:
-        return {"status": "ok", "message": "Layout not found (already deleted)."}
-    _save_print_layouts(layouts)
-    return {"status": "ok", "message": "Layout deleted."}
+    _pg_save_print_layouts(layouts)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -2370,11 +2381,11 @@ async def api_save_registration_options(request: Request):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# ─── Cloud Settings Sync (Push/Pull to Supabase) ──────────────────────────────
+# ─── Cloud & Server Settings Sync (Push/Pull to PostgreSQL / Supabase) ──────────
 
 @app.post("/api/admin/cloud-settings/push")
 async def api_cloud_settings_push(request: Request):
-    """Upload local fetcheddata JSON settings to Supabase for cross-PC sharing."""
+    """Upload local settings and layouts to server database for cross-PC sharing."""
     try:
         try:
             data = await request.json()
@@ -2382,13 +2393,15 @@ async def api_cloud_settings_push(request: Request):
             data = {}
         actor = get_current_user(request, form_data=data)
         
-        print_layouts = _load_print_layouts()
+        print_layouts = _pg_load_print_layouts()
+        print_settings_row = get_lab_print_settings_admin()
         test_selection_cfg = get_test_selection_config()
         registration_opts = _load_registration_options()
         test_suggestions_cfg = get_test_suggestions_config()
         
         payload = {
             "print_layouts": print_layouts,
+            "print_settings": print_settings_row,
             "test_selection_config": test_selection_cfg,
             "registration_options": registration_opts,
             "test_value_suggestions": test_suggestions_cfg,
@@ -2396,16 +2409,22 @@ async def api_cloud_settings_push(request: Request):
             "pushed_at": __import__("datetime").datetime.utcnow().isoformat() + "Z",
         }
         
-        supabase = init_supabase()
-        supabase.table("app_settings").upsert({
+        db = init_supabase()
+        db.table("app_settings").upsert({
             "setting_type": "all_app_settings",
             "payload": payload,
             "updated_by": actor,
             "updated_at": payload["pushed_at"]
         }, on_conflict="setting_type").execute()
         
-        logger.info(f"Cloud settings pushed to Supabase by {actor}")
-        return {"status": "Success", "message": "Local settings successfully uploaded to cloud!", "pushed_at": payload["pushed_at"], "pushed_by": actor}
+        logger.info(f"Master settings pushed to server database by {actor}")
+        return {
+            "status": "Success",
+            "message": "Workstation settings successfully uploaded to Server Database!",
+            "pushed_at": payload["pushed_at"],
+            "pushed_by": actor,
+            "layout_count": len(print_layouts) if isinstance(print_layouts, dict) else 0
+        }
     except Exception as e:
         log_error(e, "API_CLOUD_SETTINGS_PUSH")
         raise HTTPException(status_code=500, detail=f"Failed to upload settings: {str(e)}")
@@ -2413,7 +2432,7 @@ async def api_cloud_settings_push(request: Request):
 
 @app.post("/api/admin/cloud-settings/pull")
 async def api_cloud_settings_pull(request: Request):
-    """Fetch cloud settings from Supabase and overwrite local fetcheddata JSON files."""
+    """Fetch master settings from server database and apply to this workstation."""
     try:
         try:
             data = await request.json()
@@ -2421,22 +2440,26 @@ async def api_cloud_settings_pull(request: Request):
             data = {}
         actor = get_current_user(request, form_data=data)
         
-        supabase = init_supabase()
-        res = supabase.table("app_settings").select("*").eq("setting_type", "all_app_settings").execute()
+        db = init_supabase()
+        res = db.table("app_settings").select("*").eq("setting_type", "all_app_settings").execute()
         
         if not res.data:
-            return {"status": "Error", "message": "No cloud settings found in Supabase. Please push settings from your main PC first."}
+            return {"status": "Error", "message": "No master settings found in database. Please push settings from your main PC first."}
             
         cloud_entry = res.data[0]
         payload = cloud_entry.get("payload") or {}
         
         print_layouts = payload.get("print_layouts")
+        print_settings_row = payload.get("print_settings")
         test_selection_cfg = payload.get("test_selection_config")
         registration_opts = payload.get("registration_options")
         test_suggestions_cfg = payload.get("test_value_suggestions")
         
-        if print_layouts is not None:
-            _save_print_layouts(print_layouts)
+        if print_layouts is not None and isinstance(print_layouts, dict):
+            _pg_save_print_layouts(print_layouts, actor=actor)
+            
+        if print_settings_row is not None and isinstance(print_settings_row, dict):
+            update_lab_print_settings_admin(print_settings_row, actor=actor)
             
         if test_selection_cfg is not None:
             save_test_selection_config(test_selection_cfg)
@@ -2447,10 +2470,10 @@ async def api_cloud_settings_pull(request: Request):
         if test_suggestions_cfg is not None:
             save_test_suggestions_config(test_suggestions_cfg)
             
-        logger.info(f"Cloud settings pulled from Supabase by {actor}")
+        logger.info(f"Master settings pulled from server database by {actor}")
         return {
             "status": "Success",
-            "message": "Cloud settings successfully downloaded and applied to this PC!",
+            "message": "Master settings successfully downloaded and applied to this PC!",
             "pushed_by": payload.get("pushed_by", "Unknown"),
             "pushed_at": payload.get("pushed_at", "")
         }
@@ -2460,33 +2483,40 @@ async def api_cloud_settings_pull(request: Request):
 
 
 def _auto_pull_cloud_settings_sync():
-    """Background helper to pull latest master settings from Supabase Cloud on startup/login."""
+    """Background helper to pull latest master settings from server database on startup/login."""
     try:
-        supabase = init_supabase()
-        res = supabase.table("app_settings").select("*").eq("setting_type", "all_app_settings").execute()
+        db = init_supabase()
+        res = db.table("app_settings").select("*").eq("setting_type", "all_app_settings").execute()
         if res.data:
             payload = res.data[0].get("payload") or {}
             pl = payload.get("print_layouts")
+            ps = payload.get("print_settings")
             tsc = payload.get("test_selection_config")
             ro = payload.get("registration_options")
             tsug = payload.get("test_value_suggestions")
-            if pl is not None:
-                _save_print_layouts(pl)
+            if pl is not None and isinstance(pl, dict):
+                _pg_save_print_layouts(pl, actor="auto_sync")
+            if ps is not None and isinstance(ps, dict):
+                update_lab_print_settings_admin(ps, actor="auto_sync")
             if tsc is not None:
                 save_test_selection_config(tsc)
             if ro is not None:
                 _save_registration_options(ro)
             if tsug is not None:
                 save_test_suggestions_config(tsug)
-            logger.info("Cloud sync auto-pull completed successfully from Supabase.")
+            logger.info("Auto-sync: Latest master settings pulled successfully from server database.")
     except Exception as e:
-        logger.debug(f"Cloud auto-pull skipped (offline or unconfigured): {e}")
+        logger.debug(f"Master settings auto-pull notice: {e}")
 
 
 @app.on_event("startup")
 def on_app_startup():
     """Startup routine for 100% On-Premise Local PostgreSQL Engine mode."""
     logger.info("LabFlow app started in 100% On-Premise Local PostgreSQL mode.")
+    try:
+        _auto_pull_cloud_settings_sync()
+    except Exception as e:
+        logger.warning(f"Could not run initial master settings sync: {e}")
     try:
         from dbActions import start_background_cache_refresh_worker
         start_background_cache_refresh_worker(interval_seconds=3600)

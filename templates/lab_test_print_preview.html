@@ -786,26 +786,27 @@
 
     // ── paginateReport: uses manual page map & test order if set, else auto ───
     function paginateReport(categories, settings) {
+        const layoutSettings = { ...(settings || {}), show_category_title: showCategoryTitle };
         let pages = null;
         if (currentPageMap && Object.keys(currentPageMap).length) {
             const fn = window.LabPrintLayout?.applyManualPageOverrides;
             if (fn) {
-                try { pages = fn(categories, settings, currentPageMap, currentTestOrder); } catch (e) { }
+                try { pages = fn(categories, layoutSettings, currentPageMap, currentTestOrder); } catch (e) { }
             }
         }
         if (!pages || !pages.length) {
-            const combined = Boolean(settings?.combine_categories_on_same_page ?? 1);
+            const combined = (settings?.combine_categories_on_same_page !== 0 && settings?.combine_categories_on_same_page !== false);
             if (combined) {
                 const fn = window.LabPrintLayout?.paginateCombinedCategories;
                 if (fn) {
-                    try { pages = fn(categories, settings); } catch (e) { }
+                    try { pages = fn(categories, layoutSettings); } catch (e) { }
                 }
             }
         }
         if (!pages || !pages.length) {
             const fn = window.LabPrintLayout?.paginateByCategory;
             if (fn) {
-                try { pages = fn(categories, settings); } catch (e) { }
+                try { pages = fn(categories, layoutSettings); } catch (e) { }
             }
         }
         // Guaranteed fallback if helper libraries returned null/empty
@@ -1055,8 +1056,13 @@
 
             list.querySelectorAll('.test-checkbox').forEach(cb => {
                 cb.addEventListener('change', () => {
-                    if (cb.checked) selectedTestNames.add(cb.value);
-                    else selectedTestNames.delete(cb.value);
+                    if (cb.checked) {
+                        selectedTestNames.add(cb.value);
+                        if (!savedFingerprint) currentPageMap = null;
+                    } else {
+                        selectedTestNames.delete(cb.value);
+                        if (currentPageMap) delete currentPageMap[cb.value];
+                    }
                     rebuildFromCurrentMap();
                 });
             });
@@ -1150,8 +1156,13 @@
 
         list.querySelectorAll('.test-checkbox').forEach(cb => {
             cb.addEventListener('change', () => {
-                if (cb.checked) selectedTestNames.add(cb.value);
-                else selectedTestNames.delete(cb.value);
+                if (cb.checked) {
+                    selectedTestNames.add(cb.value);
+                    if (!savedFingerprint) currentPageMap = null;
+                } else {
+                    selectedTestNames.delete(cb.value);
+                    if (currentPageMap) delete currentPageMap[cb.value];
+                }
                 rebuildFromCurrentMap();
             });
         });
@@ -1162,7 +1173,9 @@
         const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
         const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
         if (pages) {
-            currentPageMap = derivePageMapFromPages(pages);
+            if (savedFingerprint) {
+                currentPageMap = derivePageMapFromPages(pages);
+            }
             buildSidebar(allRows, pages);
         }
     }
@@ -1181,27 +1194,39 @@
                 if (n) selectedTestNames.add(n);
             });
             document.querySelectorAll('.test-checkbox').forEach(cb => cb.checked = true);
+            if (!savedFingerprint) currentPageMap = null;
             rebuildFromCurrentMap();
         });
 
         document.getElementById('clear-all-tests').addEventListener('click', () => {
             selectedTestNames.clear();
             document.querySelectorAll('.test-checkbox').forEach(cb => cb.checked = false);
+            if (!savedFingerprint) currentPageMap = null;
             rebuildFromCurrentMap();
         });
 
         document.getElementById('auto-optimize-btn').addEventListener('click', () => {
-            currentPageMap = null; // reset to auto
+            currentPageMap = null; // reset to auto-combine
             currentTestOrder = [];
             extraPageSlots = 0;
+            savedFingerprint = null;
             updateSavedBanner(false);
-            rebuildFromCurrentMap();
+            const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+            const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+            if (pages) {
+                buildSidebar(allRows, pages);
+            }
         });
 
         document.getElementById('add-page-btn').addEventListener('click', () => {
             const renderedPageCount = document.querySelectorAll('#preview .report-page').length;
             const mapPageCount = currentPageMap ? (Math.max(-1, ...Object.values(currentPageMap).map(Number).filter(n => !isNaN(n))) + 1) : 0;
             extraPageSlots = Math.max(renderedPageCount, mapPageCount, extraPageSlots) + 1;
+            if (!currentPageMap) {
+                const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+                const pages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+                currentPageMap = derivePageMapFromPages(pages);
+            }
             rebuildFromCurrentMap();
         });
 
@@ -1472,35 +1497,39 @@
         style.innerHTML = `
                 body { color: ${s.primary_color || '#111'}; }
                 .report-page {
-                    width: 210mm;
-                    height: 297mm;
-                    min-height: 297mm;
-                    max-height: 297mm;
-                    overflow: hidden;
-                    display: flex;
-                    flex-direction: column;
-                    padding: ${s.page_top_margin ?? 25}mm ${s.page_right_margin ?? 15}mm ${s.page_bottom_margin ?? 25}mm ${s.page_left_margin ?? 15}mm;
-                    position: relative;
+                    box-sizing: border-box !important;
+                    width: 210mm !important;
+                    height: 297mm !important;
+                    min-height: 297mm !important;
+                    max-height: 297mm !important;
+                    overflow: hidden !important;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    justify-content: space-between !important;
+                    padding: ${s.page_top_margin ?? 25}mm ${s.page_right_margin ?? 15}mm ${s.page_bottom_margin ?? 25}mm ${s.page_left_margin ?? 15}mm !important;
+                    position: relative !important;
+                    background: #fff !important;
                 }
                 .page-header {
-                    flex: 0 0 auto;
-                    min-height: 0;
-                    margin-bottom: ${s.header_bottom_margin ?? 10}px;
+                    flex: 0 0 auto !important;
+                    box-sizing: border-box !important;
+                    margin-bottom: ${s.header_bottom_margin ?? 6}px !important;
                 }
                 .patient-header-grid {
                     margin-bottom: ${s.patient_info_bottom_margin ?? 4}px !important;
                 }
                 .page-body {
-                    flex: 1 1 auto;
-                    min-height: 0;
-                    overflow: visible;
+                    flex: 1 1 auto !important;
+                    min-height: 0 !important;
+                    box-sizing: border-box !important;
+                    overflow: hidden !important;
                 }
                 .page-footer {
-                    flex: 0 0 auto;
-                    margin-top: auto;
-                    padding-top: ${s.footer_padding_top ?? 6}px;
-                    border-top: 1px solid #000;
-                    box-sizing: border-box;
+                    flex: 0 0 auto !important;
+                    box-sizing: border-box !important;
+                    margin-top: auto !important;
+                    padding-top: ${s.footer_padding_top ?? 6}px !important;
+                    border-top: 1px solid #000 !important;
                 }
                 .info-grid { font-size: ${s.patient_info_font_size ?? 14}px; }
                 .label { font-size: ${s.patient_info_label_font_size ?? 14}px; }
@@ -1553,16 +1582,18 @@
                 .footer, .footer-left { font-size: ${s.footer_font_size ?? 11}px; }
                 @media print {
                     @page { size: A4 portrait !important; margin: 0 !important; }
-                    html, body { width: 210mm !important; }
+                    html, body { width: 210mm !important; margin: 0 !important; padding: 0 !important; }
                     .report-page {
+                        box-sizing: border-box !important;
                         width: 210mm !important;
                         height: 297mm !important;
                         min-height: 297mm !important;
                         max-height: 297mm !important;
-                        page-break-after: always;
-                        overflow: hidden;
+                        page-break-after: always !important;
+                        break-after: page !important;
+                        overflow: hidden !important;
                     }
-                    .report-page.last-page { page-break-after: auto; }
+                    .report-page.last-page { page-break-after: auto !important; break-after: auto !important; }
                 }
         `;
     }
@@ -1664,7 +1695,7 @@
             const catTitleHtml = showCategoryTitle
                 ? `<div class="category-title">${escapeHtml(page.category)}</div>`
                 : '';
-            const categoryStyle = showCategoryTitle ? '' : 'border-top:none; padding-top:0;';
+            const categoryStyle = showCategoryTitle ? '' : 'border-top:none; padding-top:0; margin-top:0;';
             let body = `
                     <div class="category" style="${categoryStyle}">
                         ${catTitleHtml}
@@ -1692,13 +1723,11 @@
             const hideSingle = Boolean(settings?.hide_single_param_title ?? 1);
             const blocks = page.blocks || [];
             const primaryCat = blocks.length ? blocks[0].category : '';
-            // showCategoryTitle only controls the heading on COMBINED pages (multiple categories forced together)
-            const isTrulyCombined = blocks.some(b => b.category !== primaryCat);
-            const hideCatTitle = isTrulyCombined && !showCategoryTitle;
+            const hideCatTitle = !showCategoryTitle;
             const catTitleHtml = hideCatTitle
                 ? ''
                 : `<div class="category-title">${escapeHtml(primaryCat)}</div>`;
-            const categoryStyle = hideCatTitle ? 'border-top:none; padding-top:0;' : '';
+            const categoryStyle = hideCatTitle ? 'border-top:none; padding-top:0; margin-top:0;' : '';
             let body = `
                     <div class="category" style="${categoryStyle}">
                         ${catTitleHtml}
@@ -1839,6 +1868,13 @@
     }
 
 
+
+    window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+            e.preventDefault();
+            triggerLabPrintWithCheck();
+        }
+    });
 
     load().catch(() => {
         document.getElementById('preview').innerHTML = `<div style="padding:30px;text-align:center;color:#b91c1c;font-weight:800;">Failed to load preview.</div>`;

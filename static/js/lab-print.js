@@ -39,17 +39,20 @@ function getFooterHeightPx(s) {
  */
 function getPageLayout(settings) {
     const s = settings || {};
-    const marginTopMm = s.page_top_margin ?? 25;
-    const marginBottomMm = s.page_bottom_margin ?? 25;
-    const headerPx = s.header_height ?? 140;
-    const footerPx = getFooterHeightPx(s);
+    const marginTopMm = Number(s.page_top_margin ?? 25);
+    const marginBottomMm = Number(s.page_bottom_margin ?? 15);
     const innerHeightPx = mmToPx(A4_HEIGHT_MM - marginTopMm - marginBottomMm);
-    const bodyBudgetPx = Math.max(80, innerHeightPx - headerPx - footerPx);
+    // Patient header box height inside .page-header (~105px)
+    const headerPx = 105;
+    // Electronic signature / footer height inside .page-footer (~45px)
+    const footerPx = 45;
+    // Real body budget available for test table blocks inside .page-body
+    const bodyBudgetPx = Math.max(300, innerHeightPx - headerPx - footerPx - 10);
     return {
         marginTopMm,
-        marginRightMm: s.page_right_margin ?? 15,
+        marginRightMm: Number(s.page_right_margin ?? 15),
         marginBottomMm,
-        marginLeftMm: s.page_left_margin ?? 15,
+        marginLeftMm: Number(s.page_left_margin ?? 15),
         headerPx,
         footerPx,
         bodyBudgetPx
@@ -61,13 +64,14 @@ function linePx(fontSize, lineHeight = 1.25) {
 }
 
 function estimateCategoryChromePx(s) {
-    const catFont = s?.category_font_size ?? 18;
-    const catPadTop = s?.category_padding_top ?? 6;
-    const catPadBottom = s?.category_padding_bottom ?? 4;
-    const catBorder = s?.category_border_width ?? 2;
-    const headFont = s?.test_name_font_size ?? 14;
-    const headPadV = s?.table_header_padding_vertical ?? 8;
-    const titleBlock = catBorder + catPadTop + linePx(catFont, 1.2) + catPadBottom + 4;
+    const showCat = s?.show_category_title !== false;
+    const catFont = Number(s?.category_font_size ?? 18);
+    const catPadTop = Number(s?.category_padding_top ?? 6);
+    const catPadBottom = Number(s?.category_padding_bottom ?? 4);
+    const catBorder = Number(s?.category_border_width ?? 2);
+    const headFont = Number(s?.test_name_font_size ?? 14);
+    const headPadV = Number(s?.table_header_padding_vertical ?? 8);
+    const titleBlock = showCat ? (catBorder + catPadTop + linePx(catFont, 1.2) + catPadBottom + 4) : 0;
     const theadBlock = headPadV * 2 + linePx(headFont, 1.2) + 2;
     return titleBlock + theadBlock;
 }
@@ -77,28 +81,46 @@ function estimateCategoryChromePx(s) {
  * Only the title row — no thead since one shared thead is already at the top.
  */
 function estimateCategorySeparatorRowPx(s) {
-    const catFont = s?.category_font_size ?? 18;
-    const catPadTop = s?.category_padding_top ?? 6;
-    const catPadBottom = s?.category_padding_bottom ?? 4;
-    const catBorder = s?.category_border_width ?? 2;
+    const catFont = Number(s?.category_font_size ?? 18);
+    const catPadTop = Number(s?.category_padding_top ?? 6);
+    const catPadBottom = Number(s?.category_padding_bottom ?? 4);
+    const catBorder = Number(s?.category_border_width ?? 2);
     return catBorder + catPadTop + Math.ceil(linePx(catFont, 1.2)) + catPadBottom;
 }
 
 function estimateTestTitleRowPx(s) {
-    const font = s?.group_font_size ?? 15;
-    const padTop = s?.group_padding_top ?? 8;
-    const padBottom = s?.group_padding_bottom ?? 2;
+    const font = Number(s?.group_font_size ?? 15);
+    const padTop = Number(s?.group_padding_top ?? 8);
+    const padBottom = Number(s?.group_padding_bottom ?? 2);
     return padTop + linePx(font, 1.2) + padBottom;
 }
 
-function estimateParamRowPx(s) {
-    const font = s?.result_font_size ?? 14;
-    const padV = s?.table_cell_padding_vertical ?? 4;
-    return padV * 2 + linePx(font, 1.25);
+function estimateParamRowPx(p, s) {
+    const font = Number(s?.result_font_size ?? 13);
+    const padV = Number(s?.table_cell_padding_vertical ?? 4);
+    let lineCount = 1;
+    if (p && typeof p === 'object') {
+        const minVal = String(p.normal_min ?? p.min_value ?? '');
+        const maxVal = String(p.normal_max ?? p.max_value ?? '');
+        const valStr = String(p.value ?? p.result ?? p.val ?? p.test_value ?? '');
+        const nameStr = String(p.name ?? p.param_name ?? p.test_name ?? '');
+        
+        const rangeText = (minVal && maxVal) ? `${minVal} - ${maxVal}` : (minVal || maxVal);
+        if (rangeText.includes('\n') || valStr.includes('\n') || nameStr.includes('\n')) {
+            const nlCount = Math.max(rangeText.split('\n').length, valStr.split('\n').length, nameStr.split('\n').length);
+            lineCount = Math.max(lineCount, nlCount);
+        } else {
+            const maxLen = Math.max(rangeText.length, nameStr.length, valStr.length);
+            if (maxLen > 60) {
+                lineCount = Math.max(lineCount, Math.ceil(maxLen / 48));
+            }
+        }
+    }
+    return padV * 2 + Math.ceil(font * 1.25 * lineCount);
 }
 
 function estimateRemarksRowPx(s) {
-    const font = Math.max(10, (s?.result_font_size ?? 14) - 2);
+    const font = Math.max(10, Number(s?.result_font_size ?? 14) - 2);
     return 6 + linePx(font, 1.35) + 4;
 }
 
@@ -124,7 +146,9 @@ function estimateTestBlockPx(block, s) {
     if ((!hideSingle || !isSingleParam) && !isHiddenGroup) {
         h += estimateTestTitleRowPx(s);
     }
-    h += (block.params?.length || 0) * estimateParamRowPx(s);
+    for (const p of (block.params || [])) {
+        h += estimateParamRowPx(p, s);
+    }
     if (block.remarks) h += estimateRemarksRowPx(s);
     return h;
 }
@@ -280,17 +304,8 @@ function paginateByCategory(categories, settings) {
 }
 
 /**
- * Pack ALL categories onto as few pages as possible.
- * FIRST category on a page costs full chrome (title row + thead).
- * SUBSEQUENT categories on the same page cost only a separator title row (no thead).
- * This produces ONE shared thead per page with category names as inline separators.
- */
-/**
- * Combined category pagination decision hierarchy:
- * 1. If ALL tests fit on 1 single page -> Return 1 page combined.
- * 2. If tests exceed 1 page, try standard per-category pagination. If <= 2 pages -> Return standard 2-page category report.
- * 3. If standard per-category produces 3+ pages, try packing single-parameter tests into free space on Page 1 & 2 to fit within 2 pages.
- * 4. Otherwise, fallback to standard multi-page (3+ pages) category report.
+ * Pack ALL categories onto as few pages as possible (Compact / Combined mode).
+ * Produces ONE shared thead per page with category names as inline separators.
  */
 function paginateCombinedCategories(categories, settings) {
     const layout = getPageLayout(settings);
@@ -315,48 +330,62 @@ function paginateCombinedCategories(categories, settings) {
 
     if (!allBlocks.length) return [];
 
-    // Calculate total height if all blocks were combined on 1 page
-    let totalSinglePagePx = firstCatCost;
-    for (const b of allBlocks) {
-        totalSinglePagePx += estimateTestBlockPx(b, settings);
-    }
+    // Priority sorting:
+    // 1. Multi-parameter tests first, sorted descending by parameter count (e.g. CBC -> LFT -> UCE)
+    // 2. Single-parameter tests, sorted by category then name
+    const multi = allBlocks.filter(b => (b.params || []).length > 1);
+    const single = allBlocks.filter(b => (b.params || []).length <= 1);
+    multi.sort((a, b) => (b.params?.length || 0) - (a.params?.length || 0));
+    single.sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
 
-    // Tier 1: If ALL tests fit on 1 single page -> Return 1 page combined!
-    if (totalSinglePagePx <= fullBudget) {
-        const multi = allBlocks.filter(b => (b.params || []).length > 1);
-        const single = allBlocks.filter(b => (b.params || []).length === 1);
-        multi.sort((a, b) => (b.params?.length || 0) - (a.params?.length || 0));
-        single.sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
+    const sortedBlocks = [...multi, ...single];
 
-        const sortedSinglePageBlocks = [...multi, ...single];
-        const pageCatMap = [];
-        for (const b of sortedSinglePageBlocks) {
-            let sec = pageCatMap.find(s => s.category === b.category);
-            if (!sec) { sec = { category: b.category, blocks: [] }; pageCatMap.push(sec); }
-            sec.blocks.push(b);
+    const pages = [];
+    let remBlocks = [...sortedBlocks];
+
+    while (remBlocks.length > 0) {
+        let currentPageBlocks = [];
+        let usedPx = firstCatCost;
+        let placedIndexes = [];
+
+        // Greedy fill current page up to fullBudget
+        for (let i = 0; i < remBlocks.length; i++) {
+            const b = remBlocks[i];
+            const px = estimateTestBlockPx(b, settings);
+            if (usedPx + px <= fullBudget) {
+                currentPageBlocks.push(b);
+                usedPx += px;
+                placedIndexes.push(i);
+            }
         }
-        return [{
+
+        if (currentPageBlocks.length === 0) {
+            // Force place at least 1 block to guarantee progress
+            const b = remBlocks.shift();
+            currentPageBlocks.push(b);
+        } else {
+            // Remove placed blocks from remBlocks in reverse index order
+            for (let i = placedIndexes.length - 1; i >= 0; i--) {
+                remBlocks.splice(placedIndexes[i], 1);
+            }
+        }
+
+        const pageCatMap = [];
+        for (const blk of currentPageBlocks) {
+            let sec = pageCatMap.find(s => s.category === blk.category);
+            if (!sec) { sec = { category: blk.category, blocks: [] }; pageCatMap.push(sec); }
+            sec.blocks.push(blk);
+        }
+        pages.push({
             sections: pageCatMap,
-            blocks: sortedSinglePageBlocks,
+            blocks: currentPageBlocks,
             continued: false
-        }];
+        });
     }
 
-    // Tier 2: Try standard per-category pagination (each category gets its own page)
-    const categoryPages = paginateByCategory(categories, settings);
-    if (categoryPages.length <= 2) {
-        return categoryPages;
-    }
-
-    // Tier 3: If standard category-wise produced 3+ pages, try packing single-parameter tests into free space on Page 1 & 2 to fit within 2 pages
-    const twoPagePacked = tryTwoPagePacking(categories, settings);
-    if (twoPagePacked && twoPagePacked.length <= 2) {
-        return twoPagePacked;
-    }
-
-    // Tier 4: Fallback to standard multi-page (3+ pages) category-wise report
-    return categoryPages;
+    return pages;
 }
+
 
 /**
  * Try packing multi-parameter blocks intact + single-parameter blocks into free space across max 2 pages.
@@ -475,39 +504,38 @@ html, body {
 }
 .lab-print-body { margin: 0; padding: 0; width: ${A4_WIDTH_MM}mm; }
 .report-page {
-    box-sizing: border-box;
-    width: ${A4_WIDTH_MM}mm;
-    height: ${A4_HEIGHT_MM}mm;
-    min-height: ${A4_HEIGHT_MM}mm;
-    max-height: ${A4_HEIGHT_MM}mm;
-    padding: ${top}mm ${right}mm ${bottom}mm ${left}mm;
+    box-sizing: border-box !important;
+    width: ${A4_WIDTH_MM}mm !important;
+    height: ${A4_HEIGHT_MM}mm !important;
+    min-height: ${A4_HEIGHT_MM}mm !important;
+    max-height: ${A4_HEIGHT_MM}mm !important;
+    padding: ${top}mm ${right}mm ${bottom}mm ${left}mm !important;
     page-break-after: always;
+    break-after: page;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     overflow: hidden;
+    position: relative;
+    background: #fff;
 }
-.report-page.last-page { page-break-after: auto; }
+.report-page.last-page { page-break-after: auto; break-after: auto; }
 .page-header {
     flex: 0 0 auto;
-    max-height: ${layout.headerPx}px;
-    overflow: hidden;
+    box-sizing: border-box;
+    margin-bottom: ${s?.header_bottom_margin ?? 6}px;
 }
 .page-body {
     flex: 1 1 auto;
     min-height: 0;
-    max-height: ${layout.bodyBudgetPx}px;
-    overflow: hidden;
+    box-sizing: border-box;
 }
 .page-footer {
-    flex: 0 0 ${layout.footerPx}px;
-    height: ${layout.footerPx}px;
-    min-height: ${layout.footerPx}px;
-    max-height: ${layout.footerPx}px;
-    overflow: hidden;
+    flex: 0 0 auto;
+    box-sizing: border-box;
     margin-top: auto;
     border-top: 1px solid #000;
-    padding-top: ${s?.footer_padding_top ?? 20}px;
-    box-sizing: border-box;
+    padding-top: ${s?.footer_padding_top ?? 6}px;
 }
 .patient-header-grid {
     display: grid;
@@ -744,30 +772,34 @@ function applyManualPageOverrides(categories, settings, pageMap, testOrder) {
         pages.push({ sections: pageCatMap, blocks: pageBlocks, continued: false });
     }
 
-    // Append unmapped blocks on a final extra page (or merge into last page if space)
+    // Append unmapped blocks: fit into any existing page with space, else create new page
     if (unmapped.length) {
         const layout = getPageLayout(settings);
         const firstCatCost = estimateCategoryChromePx(settings);
-        const lastPage = pages.length ? pages[pages.length - 1] : null;
-        let usedPx = lastPage ? firstCatCost + lastPage.blocks.reduce((s, b) => s + estimateTestBlockPx(b, settings), 0) : firstCatCost;
-        const overflowBlocks = [];
+
         for (const b of unmapped) {
             const px = estimateTestBlockPx(b, settings);
-            if (lastPage && usedPx + px <= layout.bodyBudgetPx) {
-                lastPage.blocks.push(b);
-                usedPx += px;
-            } else {
-                overflowBlocks.push(b);
+            let placed = false;
+
+            for (const page of pages) {
+                const usedPx = firstCatCost + (page.blocks || []).reduce((s, blk) => s + estimateTestBlockPx(blk, settings), 0);
+                if (usedPx + px <= layout.bodyBudgetPx) {
+                    page.blocks.push(b);
+                    let sec = page.sections.find(s => s.category === b.category);
+                    if (!sec) {
+                        sec = { category: b.category, blocks: [] };
+                        page.sections.push(sec);
+                    }
+                    sec.blocks.push(b);
+                    placed = true;
+                    break;
+                }
             }
-        }
-        if (overflowBlocks.length) {
-            const pageCatMap = [];
-            for (const b of overflowBlocks) {
-                let sec = pageCatMap.find(s => s.category === b.category);
-                if (!sec) { sec = { category: b.category, blocks: [] }; pageCatMap.push(sec); }
-                sec.blocks.push(b);
+
+            if (!placed) {
+                const newSec = [{ category: b.category, blocks: [b] }];
+                pages.push({ sections: newSec, blocks: [b], continued: false });
             }
-            pages.push({ sections: pageCatMap, blocks: overflowBlocks, continued: false });
         }
     }
 
