@@ -404,3 +404,11 @@ class LocalPostgresClient:
 def get_local_postgres_client() -> LocalPostgresClient:
     """Factory function returning a LocalPostgresClient instance."""
     return LocalPostgresClient()
+
+
+def is_local_postgres_enabled() -> bool:
+    """
+    Always returns True — this app runs exclusively in local PostgreSQL mode.
+    Kept for import compatibility with main.py's sync_online_to_offline_db().
+    """
+    return True

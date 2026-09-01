@@ -1,0 +1,213 @@
+{
+  "users": [
+    {
+      "id": 15,
+      "name": "Altaf",
+      "email": "altaf@lab.com",
+      "is_active": true,
+      "pwd": "6875",
+      "default_shift_id": 2,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 12,
+      "name": "Aman",
+      "email": "aman@lab.com",
+      "is_active": true,
+      "pwd": "aman100888",
+      "default_shift_id": 5,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": true,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 9,
+      "name": "BILAL",
+      "email": "bilal@lab.com",
+      "is_active": true,
+      "pwd": "privateaccount",
+      "default_shift_id": 2,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 11,
+      "name": "Daniyal",
+      "email": "daniyal@lab.com",
+      "is_active": true,
+      "pwd": "moosa0012",
+      "default_shift_id": 5,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 13,
+      "name": "Hamid",
+      "email": "hamid@gmail.com",
+      "is_active": true,
+      "pwd": "1234",
+      "default_shift_id": null,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 5,
+      "name": "Nazeer",
+      "email": "nazeer@gmail.com",
+      "is_active": true,
+      "pwd": "Kalwar@786",
+      "default_shift_id": 5,
+      "permissions": {
+        "admin": true,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": true,
+        "manage_tests": true,
+        "manage_users": true,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 1,
+      "name": "Rehan Ahmed",
+      "email": "admin@admin.com",
+      "is_active": true,
+      "pwd": "Keeper@1",
+      "default_shift_id": 2,
+      "permissions": {
+        "admin": true,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": true,
+        "manage_tests": true,
+        "manage_users": true,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 8,
+      "name": "Sakhar",
+      "email": "sakhar@lab.com",
+      "is_active": true,
+      "pwd": "Syedshah",
+      "default_shift_id": 5,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 14,
+      "name": "Sami",
+      "email": "sami@lab.com",
+      "is_active": true,
+      "pwd": "abc",
+      "default_shift_id": 1,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 7,
+      "name": "Uzair",
+      "email": "uzair@lab.com",
+      "is_active": true,
+      "pwd": "1999",
+      "default_shift_id": 1,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    },
+    {
+      "id": 10,
+      "name": "Waqar",
+      "email": "waqar@lab.com",
+      "is_active": true,
+      "pwd": "waqar",
+      "default_shift_id": 3,
+      "permissions": {
+        "admin": false,
+        "print": true,
+        "fitness": true,
+        "register": true,
+        "analytics": false,
+        "manage_tests": false,
+        "manage_users": false,
+        "fluid_reports": true,
+        "update_results": true
+      }
+    }
+  ]
+}

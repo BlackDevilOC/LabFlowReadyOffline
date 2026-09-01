@@ -55,6 +55,28 @@
       "show_single_test_title": false
     }
   },
+  "hep b, c|liver function test|tsh|uce": {
+    "page_map": {
+      "TSH": 0,
+      "UCE": 0,
+      "Hep B, C": 0,
+      "Liver Function Test": 0
+    },
+    "saved_at": "2026-08-31T13:13:21.518143Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 4,
+    "test_order": [
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "TSH"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
   "complete blood count|liver function test": {
     "page_map": {},
     "saved_at": "2026-08-18T08:58:21.967035Z",
@@ -90,6 +112,28 @@
       "show_single_test_title": false
     }
   },
+  "calcium|complete blood count|liver function test|uce": {
+    "page_map": {
+      "UCE": 0,
+      "Calcium": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 0
+    },
+    "saved_at": "2026-09-01T13:19:55.007566Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 4,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Calcium"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
   "complete blood count|hep b, c|liver function test|uc": {
     "page_map": {
       "UC": 0,
@@ -97,7 +141,7 @@
       "Liver Function Test": 0,
       "COMPLETE BLOOD COUNT": 0
     },
-    "saved_at": "2026-08-07T13:15:47.738204Z",
+    "saved_at": "2026-08-29T12:52:31.509772Z",
     "saved_by": "admin@admin.com",
     "test_count": 4,
     "test_order": [
@@ -107,8 +151,8 @@
       "Hep B, C"
     ],
     "display_options": {
-      "show_category_title": true,
-      "show_group_test_title": true,
+      "show_category_title": false,
+      "show_group_test_title": false,
       "show_single_test_title": false
     }
   },
@@ -149,6 +193,30 @@
       "show_category_title": false,
       "show_group_test_title": false,
       "show_single_test_title": false
+    }
+  },
+  "complete blood count|hep b, c|liver function test|tsh|uce": {
+    "page_map": {
+      "TSH": 0,
+      "UCE": 0,
+      "Hep B, C": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 0
+    },
+    "saved_at": "2026-09-01T08:39:36.320920Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 5,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Hep B, C",
+      "TSH"
+    ],
+    "display_options": {
+      "show_category_title": true,
+      "show_group_test_title": true,
+      "show_single_test_title": true
     }
   },
   "complete blood count|lipid profile|liver function test|uce": {
@@ -245,6 +313,30 @@
       "show_single_test_title": false
     }
   },
+  "complete blood count|hep b, c|liver function test|pt (prothrombin time)|uce": {
+    "page_map": {
+      "UCE": 0,
+      "Hep B, C": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "PT (Prothrombin Time)": 1
+    },
+    "saved_at": "2026-08-29T15:00:23.043374Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 5,
+    "test_order": [
+      "UCE",
+      "Liver Function Test",
+      "COMPLETE BLOOD COUNT",
+      "PT (Prothrombin Time)",
+      "Hep B, C"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
   "complete blood count|glucose random (rbs)|hep b, c|liver function test|tsh|uce": {
     "page_map": {
       "TSH": 0,
@@ -290,6 +382,32 @@
       "Hep B, C",
       "Glucose Random (RBS)",
       "HbA1c"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|glucose random (rbs)|hep b, c|liver function test|mp-ict|uce": {
+    "page_map": {
+      "UCE": 0,
+      "MP-ICT": 1,
+      "Hep B, C": 1,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-31T14:15:12.222358Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 6,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Glucose Random (RBS)",
+      "Hep B, C",
+      "MP-ICT"
     ],
     "display_options": {
       "show_category_title": false,
@@ -370,6 +488,30 @@
       "Hep B, C",
       "Glucose Random (RBS)",
       "Uric Acid"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
+  "complete blood count|glucose random (rbs)|liver function test|pt (prothrombin time)|uce": {
+    "page_map": {
+      "UCE": 0,
+      "Liver Function Test": 0,
+      "COMPLETE BLOOD COUNT": 1,
+      "Glucose Random (RBS)": 0,
+      "PT (Prothrombin Time)": 1
+    },
+    "saved_at": "2026-08-29T14:59:40.611930Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 5,
+    "test_order": [
+      "UCE",
+      "Liver Function Test",
+      "Glucose Random (RBS)",
+      "COMPLETE BLOOD COUNT",
+      "PT (Prothrombin Time)"
     ],
     "display_options": {
       "show_category_title": false,
@@ -571,6 +713,38 @@
       "show_single_test_title": false
     }
   },
+  "calcium|complete blood count|glucose random (rbs)|hba1c|hep b, c|lipid profile|liver function test|uce|uric acid": {
+    "page_map": {
+      "UCE": 1,
+      "HbA1c": 0,
+      "Calcium": 0,
+      "Hep B, C": 1,
+      "Uric Acid": 0,
+      "Lipid Profile": 1,
+      "Liver Function Test": 1,
+      "COMPLETE BLOOD COUNT": 0,
+      "Glucose Random (RBS)": 0
+    },
+    "saved_at": "2026-08-29T14:12:14.706133Z",
+    "saved_by": "admin@admin.com",
+    "test_count": 9,
+    "test_order": [
+      "COMPLETE BLOOD COUNT",
+      "Liver Function Test",
+      "UCE",
+      "Lipid Profile",
+      "Calcium",
+      "Glucose Random (RBS)",
+      "HbA1c",
+      "Hep B, C",
+      "Uric Acid"
+    ],
+    "display_options": {
+      "show_category_title": false,
+      "show_group_test_title": false,
+      "show_single_test_title": false
+    }
+  },
   "amylase|complete blood count|electrolytes|glucose random (rbs)|hep b, c elisa|liver function test|thyroid profile": {
     "page_map": {
       "Amylase": 0,
@@ -631,43 +805,6 @@
       "show_category_title": true,
       "show_group_test_title": true,
       "show_single_test_title": true
-    }
-  },
-  "complete blood count|glucose random (rbs)|hep b, c|uce": {
-    "page_map": {},
-    "test_order": [
-      "COMPLETE BLOOD COUNT",
-      "UCE",
-      "Hep B, C",
-      "Glucose Random (RBS)"
-    ],
-    "saved_by": "admin@admin.com",
-    "saved_at": "2026-08-29T09:36:23.349788Z",
-    "test_count": 4,
-    "display_options": {
-      "show_category_title": false,
-      "show_group_test_title": false,
-      "show_single_test_title": false
-    }
-  },
-  "complete blood count|liver function test|uc": {
-    "page_map": {
-      "UC": 0,
-      "Liver Function Test": 0,
-      "COMPLETE BLOOD COUNT": 0
-    },
-    "saved_at": "2026-08-29T10:13:00Z",
-    "saved_by": "admin@admin.com",
-    "test_count": 3,
-    "test_order": [
-      "COMPLETE BLOOD COUNT",
-      "Liver Function Test",
-      "UC"
-    ],
-    "display_options": {
-      "show_category_title": false,
-      "show_group_test_title": false,
-      "show_single_test_title": false
     }
   }
 }

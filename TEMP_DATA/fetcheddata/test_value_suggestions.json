@@ -1,0 +1,215 @@
+{
+  "presets": [
+    {
+      "name": "Negative / Positive",
+      "tags": [
+        "Negative",
+        "Positive"
+      ]
+    },
+    {
+      "name": "Non-Reactive / Reactive",
+      "tags": [
+        "Non-Reactive",
+        "Reactive"
+      ]
+    },
+    {
+      "name": "Malaria (MP / P.V / P.F)",
+      "tags": [
+        "Negative",
+        "Positive",
+        "P.V",
+        "P.F",
+        "Both (P.V & P.F)"
+      ]
+    },
+    {
+      "name": "Clear / Turbid",
+      "tags": [
+        "Clear",
+        "Slightly Turbid",
+        "Turbid"
+      ]
+    },
+    {
+      "name": "Nil / Trace / Present",
+      "tags": [
+        "Nil",
+        "Trace",
+        "Present",
+        "Absent"
+      ]
+    },
+    {
+      "name": "Normal / Abnormal",
+      "tags": [
+        "Normal",
+        "Abnormal"
+      ]
+    },
+    {
+      "name": "Blood Groups",
+      "tags": [
+        "A Positive",
+        "A Negative",
+        "B Positive",
+        "B Negative",
+        "O Positive",
+        "O Negative",
+        "AB Positive",
+        "AB Negative"
+      ]
+    }
+  ],
+  "by_test_name": {
+    "MP-ICT": [
+      "Negative",
+      "Positive P.V",
+      "Positive P.F",
+      "Positive (P.V & P.F)"
+    ],
+    "Hep B, C": [
+      "Negative",
+      "Positive"
+    ],
+    "Stool DR": [
+      "Normal",
+      "Semisolid",
+      "Watery",
+      "Formed",
+      "Nil",
+      "Absent",
+      "Present"
+    ],
+    "Urine DR": [
+      "Clear",
+      "Slightly Turbid",
+      "Turbid",
+      "Nil",
+      "Trace",
+      "Present",
+      "Absent",
+      "Normal"
+    ],
+    "HIV ELISA": [
+      "Non-Reactive",
+      "Reactive"
+    ],
+    "Widal Test": [
+      "Negative",
+      "Positive"
+    ],
+    "HbsAg (ICT)": [
+      "Negative",
+      "Positive"
+    ],
+    "Typhoid (ICT)": [
+      "Negative",
+      "Positive",
+      "IgM Positive",
+      "IgG Positive"
+    ],
+    "VDRL SYPHILIS": [
+      "Negative",
+      "Positive"
+    ],
+    "Anti HCV (ICT)": [
+      "Negative",
+      "Positive"
+    ],
+    "Anti HCV ELISA": [
+      "Non-Reactive",
+      "Reactive"
+    ],
+    "Anti HIV (ICT)": [
+      "Negative",
+      "Positive"
+    ],
+    "Dengue Profile": [
+      "Negative",
+      "Positive"
+    ],
+    "Hep B, C ELISA": [
+      "Non-Reactive",
+      "Reactive"
+    ],
+    "Dengue NS1 (ICT)": [
+      "Negative",
+      "Positive"
+    ],
+    "Pregnancy (Urine)": [
+      "Negative",
+      "Positive"
+    ],
+    "H. Pylori Ab (ICT)": [
+      "Negative",
+      "Positive"
+    ],
+    "H. Pylori IgG (ELISA)": [
+      "Negative",
+      "Positive"
+    ],
+    "Blood Grouping & Rh Type": [
+      "A Positive",
+      "A Negative",
+      "B Positive",
+      "B Negative",
+      "O Positive",
+      "O Negative",
+      "AB Positive",
+      "AB Negative"
+    ]
+  },
+  "by_param_name": {
+    "MP": [
+      "Negative",
+      "Positive",
+      "P.V",
+      "P.F",
+      "Both (P.V & P.F)"
+    ],
+    "VDRL": [
+      "Negative",
+      "Positive"
+    ],
+    "HBsAg": [
+      "Negative",
+      "Positive"
+    ],
+    "Anti HCV": [
+      "Negative",
+      "Positive"
+    ],
+    "Anti HIV": [
+      "Negative",
+      "Positive"
+    ],
+    "H. Pylori": [
+      "Negative",
+      "Positive"
+    ],
+    "Rh Factor": [
+      "Positive",
+      "Negative"
+    ],
+    "Dengue IgG": [
+      "Negative",
+      "Positive"
+    ],
+    "Dengue IgM": [
+      "Negative",
+      "Positive"
+    ],
+    "Dengue NS1": [
+      "Negative",
+      "Positive"
+    ],
+    "Blood Group": [
+      "A",
+      "B",
+      "AB",
+      "O"
+    ]
+  }
+}

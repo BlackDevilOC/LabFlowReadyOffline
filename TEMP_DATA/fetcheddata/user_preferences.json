@@ -1,0 +1,6 @@
+{
+  "user_id": 1,
+  "email": "admin@admin.com",
+  "default_shift_id": 2,
+  "default_shift": "EVENING"
+}

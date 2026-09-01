@@ -33,10 +33,31 @@ def get_base_path() -> str:
     return os.path.dirname(os.path.abspath(__file__))
 
 
+def _find_env_file() -> str | None:
+    """
+    Locate the .env file in either:
+      1. sys._MEIPASS  — where PyInstaller unpacks bundled data (the _internal/ dir)
+      2. next to the exe — for a manually placed .env override
+      3. cwd / source root — for development mode
+    """
+    candidates = []
+    if getattr(sys, 'frozen', False):
+        # _MEIPASS is the _internal/ folder where datas=[] files land
+        candidates.append(os.path.join(sys._MEIPASS, ".env"))  # type: ignore[attr-defined]
+        # Also check next to exe so admins can override with a local .env
+        candidates.append(os.path.join(os.path.dirname(sys.executable), ".env"))
+    candidates.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
+    candidates.append(".env")
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    return None
+
+
 def load_env_fresh():
     """Reloads .env file to ensure latest database credentials."""
-    env_file = os.path.join(get_base_path(), ".env")
-    if os.path.exists(env_file):
+    env_file = _find_env_file()
+    if env_file:
         load_dotenv(env_file, override=True)
     else:
         load_dotenv(override=True)
@@ -45,13 +66,15 @@ def load_env_fresh():
 def get_db_config() -> Dict[str, str]:
     """Retrieves local PostgreSQL connection parameters from environment or defaults."""
     load_env_fresh()
-    return {
+    cfg = {
         "host": os.getenv("LOCAL_DB_HOST", "127.0.0.1").strip(),
         "port": os.getenv("LOCAL_DB_PORT", "5432").strip(),
         "dbname": os.getenv("LOCAL_DB_NAME", "labflow_db").strip(),
         "user": os.getenv("LOCAL_DB_USER", "postgres").strip(),
         "password": os.getenv("LOCAL_DB_PASS", "postgres").strip()
     }
+    logger.debug(f"[DB Config] Host={cfg['host']}:{cfg['port']} DB={cfg['dbname']} (env file: {_find_env_file()})")
+    return cfg
 
 
 def ensure_database_exists() -> Tuple[bool, str]:

@@ -23559,3 +23559,107 @@ LINE 1: ..."test_values", "status", "remarks", "created_at", "is_offlin...
 2026-09-01 21:58:10,163 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
 2026-09-01 21:58:10,301 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
 2026-09-01 21:58:10,547 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 21:58:57,268 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:08:15,243 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-09-01 22:08:18,213 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-01 22:08:18,263 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-09-01 22:08:18,296 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-09-01 22:08:18,531 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:08:18,532 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-09-01 22:08:18,536 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-09-01 22:08:18,538 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-09-01 22:08:18,568 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:08:18,628 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:08:18,662 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:08:18,709 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:08:18,710 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-09-01 22:08:18,928 - INFO - [LabFlow] - Server ready — loading login page
+2026-09-01 22:08:19,046 - DEBUG - [LabFlow] - Accessing Login Page
+2026-09-01 22:08:27,148 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:08:35,925 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:08:35,973 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:08:36,062 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-09-01 22:08:36,114 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:08:36,116 - ERROR - [LabFlow] - Background metadata sync to offline database crashed: cannot import name 'is_local_postgres_enabled' from 'local_postgres_client' (D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py)
+2026-09-01 22:08:36,433 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:08:38,920 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 22:08:39,100 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:08:39,849 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:08:40,824 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 22:08:40,973 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:08:42,575 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-01 22:08:43,568 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:08:45,721 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184155
+2026-09-01 22:08:45,994 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:08:47,178 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-01 22:08:48,231 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:08:49,598 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184155
+2026-09-01 22:08:49,834 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:08:51,564 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184155 | Action: UPDATE_RESULT | Details: • VDRL SYPHILIS: param_60: 0
+• Dengue Profile: param_6: Negative, param_7: 0
+• Urine PT: param_112: 0
+2026-09-01 22:08:51,566 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184155
+2026-09-01 22:08:51,580 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:08:52,049 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-01 22:08:52,617 - INFO - [LabFlow] - Accessing Fast Print Stream workspace
+2026-09-01 22:09:05,152 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:09:05,737 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:09:06,264 - INFO - [LabFlow] - Accessing Fast Results Entry workspace
+2026-09-01 22:09:06,611 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:09:07,482 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:09:07,817 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:09:09,015 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-01 22:09:09,825 - INFO - [LabFlow] - Accessing Fast Print Stream workspace
+2026-09-01 22:09:18,424 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:38:40,415 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-09-01 22:38:43,834 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-01 22:38:43,883 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-09-01 22:38:43,922 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-09-01 22:38:44,191 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:38:44,192 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-09-01 22:38:44,195 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-09-01 22:38:44,197 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-09-01 22:38:44,226 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:38:44,242 - INFO - [LabFlow] - Server ready — loading login page
+2026-09-01 22:38:44,267 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:38:44,276 - DEBUG - [LabFlow] - Accessing Login Page
+2026-09-01 22:38:44,297 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:38:44,335 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:38:44,336 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-09-01 22:38:47,632 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:38:55,062 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:38:55,094 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:38:55,188 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-09-01 22:38:55,226 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:38:55,228 - INFO - [LabFlow] - Local PostgreSQL server mode active; Supabase background sync bypassed.
+2026-09-01 22:38:55,551 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:38:58,584 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 22:38:58,780 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:39:00,423 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:39:01,248 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-01 22:44:40,505 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-09-01 22:44:43,006 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-01 22:44:43,058 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-09-01 22:44:43,084 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-09-01 22:44:43,354 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:44:43,355 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-09-01 22:44:43,358 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-09-01 22:44:43,360 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-09-01 22:44:43,390 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:44:43,448 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:44:43,484 - INFO - [LabFlow] - Server ready — loading login page
+2026-09-01 22:44:43,495 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:44:43,532 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:44:43,537 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-09-01 22:44:43,549 - DEBUG - [LabFlow] - Accessing Login Page
+2026-09-01 22:44:46,277 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:44:49,773 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:44:49,804 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:44:49,882 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-09-01 22:44:49,915 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:44:49,917 - INFO - [LabFlow] - Local PostgreSQL server mode active; Supabase background sync bypassed.
+2026-09-01 22:44:50,240 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:44:51,275 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 22:44:51,468 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:45:03,947 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 22:45:04,075 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)

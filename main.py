@@ -603,6 +603,37 @@ def _pg_save_print_layouts(layouts: dict, actor: str = "system") -> None:
     ).execute()
 
 
+def _push_all_settings_to_pg_server(actor: str = "auto") -> None:
+    """
+    Assemble all admin-controlled settings and upsert the unified 'all_app_settings'
+    row in the local PostgreSQL server.  Called in the background after every admin
+    save so that any new EXE on any workstation picks up changes on next startup.
+    """
+    try:
+        db = get_local_postgres_client()
+        payload = {
+            "print_layouts": _pg_load_print_layouts(),
+            "print_settings": get_lab_print_settings_admin(),
+            "test_selection_config": get_test_selection_config(),
+            "registration_options": _load_registration_options(),
+            "test_value_suggestions": get_test_suggestions_config(),
+            "pushed_by": actor,
+            "pushed_at": datetime.utcnow().isoformat() + "Z",
+        }
+        db.table("app_settings").upsert(
+            {
+                "setting_type": "all_app_settings",
+                "payload": payload,
+                "updated_by": actor,
+                "updated_at": payload["pushed_at"],
+            },
+            on_conflict="setting_type",
+        ).execute()
+        logger.info(f"[AutoPush] All admin settings synced to PG server by '{actor}'")
+    except Exception as e:
+        logger.warning(f"[AutoPush] Could not push settings to PG server: {e}")
+
+
 @app.get("/api/lab/print-layout")
 def api_get_print_layout(fingerprint: str = None):
     """
@@ -621,9 +652,10 @@ def api_get_print_layout(fingerprint: str = None):
 
 
 @app.post("/api/lab/print-layout")
-async def api_save_print_layout(request: Request):
+async def api_save_print_layout(request: Request, background_tasks: BackgroundTasks):
     """
     Save a custom print layout for a test-set fingerprint into PostgreSQL.
+    Auto-pushes unified all_app_settings to PG server in the background.
     """
     try:
         data = await request.json()
@@ -644,6 +676,7 @@ async def api_save_print_layout(request: Request):
             "display_options": layout.get("display_options", {}),  # visibility toggles
         }
         _pg_save_print_layouts(layouts, actor=actor)
+        background_tasks.add_task(_push_all_settings_to_pg_server, actor)
         logger.info(f"Print layout saved to PostgreSQL by {actor} for fingerprint {fingerprint[:40]}")
         return {"status": "ok", "message": "Layout saved successfully."}
     except HTTPException:
@@ -654,8 +687,8 @@ async def api_save_print_layout(request: Request):
 
 
 @app.delete("/api/lab/print-layout")
-async def api_delete_print_layout(request: Request, fingerprint: str = None):
-    """Delete a saved custom print layout from PostgreSQL."""
+async def api_delete_print_layout(request: Request, background_tasks: BackgroundTasks, fingerprint: str = None):
+    """Delete a saved custom print layout from PostgreSQL. Auto-pushes unified settings to PG server."""
     if not fingerprint:
         raise HTTPException(status_code=400, detail="fingerprint is required")
     try:
@@ -665,6 +698,7 @@ async def api_delete_print_layout(request: Request, fingerprint: str = None):
             return {"status": "ok", "message": "Layout not found (already deleted)."}
         actor = get_current_user(request)
         _pg_save_print_layouts(layouts, actor=actor)
+        background_tasks.add_task(_push_all_settings_to_pg_server, actor)
         return {"status": "ok", "message": "Layout deleted."}
     except Exception as e:
         log_error(e, "API_DELETE_PRINT_LAYOUT")
@@ -1058,7 +1092,10 @@ def api_get_test_selection_config():
     return {"status": "Success", **cfg}
 
 @app.post("/api/admin/test-selection-config")
-def api_save_test_selection_config(payload: dict):
+async def api_save_test_selection_config(request: Request, background_tasks: BackgroundTasks):
+    """Save test selection config and auto-push all settings to PG server."""
+    payload = await request.json()
+    actor = get_current_user(request, form_data=payload)
     existing = get_test_selection_config()
     mode = payload.get("mode", existing.get("mode", "group_only"))
     allow_single = (mode == "group_and_single") or bool(payload.get("allow_single_tests", existing.get("allow_single_tests", False)))
@@ -1093,6 +1130,7 @@ def api_save_test_selection_config(payload: dict):
         "auto_select_regular": bool(payload.get("auto_select_regular", existing.get("auto_select_regular", False)))
     }
     save_test_selection_config(new_config)
+    background_tasks.add_task(_push_all_settings_to_pg_server, actor)
     return {"status": "Success", "config": new_config}
 
 
@@ -1103,13 +1141,15 @@ def api_get_test_suggestions():
 
 
 @app.post("/api/admin/test-suggestions")
-async def api_save_test_suggestions(request: Request):
+async def api_save_test_suggestions(request: Request, background_tasks: BackgroundTasks):
+    """Save test value suggestions and auto-push all settings to PG server."""
     try:
         data = await request.json()
         if not isinstance(data, dict):
             raise HTTPException(status_code=400, detail="Invalid payload")
         save_test_suggestions_config(data)
         actor = get_current_user(request, form_data=data)
+        background_tasks.add_task(_push_all_settings_to_pg_server, actor)
         logger.info(f"Test value suggestions updated by {actor}")
         return {"status": "Success", "message": "Test value suggestions saved successfully", "suggestions": data}
     except HTTPException:
@@ -2295,13 +2335,15 @@ def api_admin_get_print_settings():
 
 
 @app.post("/api/admin/print-settings")
-async def api_admin_update_print_settings(request: Request):
+async def api_admin_update_print_settings(request: Request, background_tasks: BackgroundTasks):
+    """Update print settings and auto-push all settings to PG server for cross-PC sync."""
     try:
         data = await request.json()
         actor = get_current_user(request, form_data=data)
         result = update_lab_print_settings_admin(data, actor=actor)
         if result.get("status") != "Success":
             raise HTTPException(status_code=400, detail=result.get("message", "Failed to update print settings"))
+        background_tasks.add_task(_push_all_settings_to_pg_server, actor)
         return result
     except HTTPException:
         raise
@@ -2364,14 +2406,15 @@ def api_get_registration_options():
 
 
 @app.post("/api/admin/registration-options")
-async def api_save_registration_options(request: Request):
-    """Save updated registration dropdown options and default values."""
+async def api_save_registration_options(request: Request, background_tasks: BackgroundTasks):
+    """Save updated registration dropdown options and default values. Auto-pushes all settings to PG server."""
     try:
         data = await request.json()
         if not isinstance(data, dict):
             raise HTTPException(status_code=400, detail="Invalid payload")
         _save_registration_options(data)
         actor = get_current_user(request, form_data=data)
+        background_tasks.add_task(_push_all_settings_to_pg_server, actor)
         logger.info(f"Registration options updated by {actor}")
         return {"status": "Success", "message": "Registration options saved successfully"}
     except HTTPException:

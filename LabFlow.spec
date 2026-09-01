@@ -20,7 +20,6 @@ a = Analysis(
         'offline',
         'offline.database',
         'offline.app',
-        'offline.dbActions',
         'replica_engine',
         'analytics_router',
         'patient_list_query',
