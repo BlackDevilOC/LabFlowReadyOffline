@@ -2223,14 +2223,20 @@
 
     function executePrint(advanceToNext = false) {
         try {
-            const loggedInUser = localStorage.getItem('userName') || localStorage.getItem('userEmail') || 'Staff';
+            const userEmail = localStorage.getItem('userEmail') || '';
+            const loggedInUser = (localStorage.getItem('userName') || userEmail || 'Staff').trim();
             const userId = localStorage.getItem('userId') || '';
             const ptName = currentPatient?.patient_name || '';
             const testList = Array.from(selectedTestNames).join(', ');
             const prefix = window.location.pathname.startsWith('/offline') ? '/offline' : '';
             fetch(`${prefix}/api/audit/log-print`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': userEmail,
+                    'X-User-Name': loggedInUser,
+                    'X-User-Id': userId
+                },
                 body: JSON.stringify({
                     mr_no: activePatientMr,
                     patient_name: ptName,

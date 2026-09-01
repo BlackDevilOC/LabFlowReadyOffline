@@ -58,10 +58,14 @@
         applySidebarPermissions,
         storeUserSession(user) {
             if (!user) return;
+            const email = user.email || '';
+            const name = user.name || (email.includes('@') ? email.split('@')[0] : email) || '';
+            const uid = user.id != null ? String(user.id) : '';
+
             global.localStorage.setItem('isLoggedIn', 'true');
-            global.localStorage.setItem('userEmail', user.email || '');
-            global.localStorage.setItem('userName', user.name || '');
-            if (user.id != null) global.localStorage.setItem('userId', String(user.id));
+            global.localStorage.setItem('userEmail', email);
+            global.localStorage.setItem('userName', name);
+            if (uid) global.localStorage.setItem('userId', uid);
             if (user.permissions) {
                 global.localStorage.setItem('userPermissions', JSON.stringify(user.permissions));
             } else {
@@ -77,10 +81,24 @@
             } else {
                 global.localStorage.removeItem('defaultShiftId');
             }
+
+            // Sync cookies so every HTTP request automatically carries user credentials
+            try {
+                document.cookie = `userEmail=${encodeURIComponent(email)}; path=/; max-age=31536000; SameSite=Lax`;
+                document.cookie = `userName=${encodeURIComponent(name)}; path=/; max-age=31536000; SameSite=Lax`;
+                document.cookie = `userId=${encodeURIComponent(uid)}; path=/; max-age=31536000; SameSite=Lax`;
+                document.cookie = `user_email=${encodeURIComponent(email)}; path=/; max-age=31536000; SameSite=Lax`;
+                document.cookie = `user_name=${encodeURIComponent(name)}; path=/; max-age=31536000; SameSite=Lax`;
+            } catch (e) {}
         },
         clearSession() {
             ['isLoggedIn', 'userEmail', 'userName', 'userId', 'userPermissions', 'defaultShift', 'defaultShiftId'].forEach(k => {
                 global.localStorage.removeItem(k);
+            });
+            ['userEmail', 'userName', 'userId', 'user_email', 'user_name'].forEach(k => {
+                try {
+                    document.cookie = `${k}=; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+                } catch (e) {}
             });
         },
     };

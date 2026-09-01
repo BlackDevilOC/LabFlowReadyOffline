@@ -34,8 +34,7 @@
         "COMPLETE BLOOD COUNT",
         "Liver Function Test",
         "UCE",
-        "Hep B, C",
-        "Dengue Profile"
+        "Hep B, C"
       ],
       "auto_select": false
     },

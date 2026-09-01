@@ -852,53 +852,119 @@ def page_emergency_dr(request: Request):
 
 
 
-def get_current_user(request: Request, form_data: dict = None):
+def _lookup_user_name_from_db_or_cache(identifier: str) -> str | None:
+    """Helper to find user's full display name given email, username, or user ID."""
+    if not identifier:
+        return None
+    ident = str(identifier).strip().lower()
+    if ident in ("anonymous", "staff", "system", "none", "", "null", "undefined"):
+        return None
+
+    # 1. Try fetcheddata/users.json cache
+    try:
+        users_file = os.path.join(fetcheddata_dir, "users.json")
+        if os.path.exists(users_file):
+            with open(users_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                users = data if isinstance(data, list) else data.get("users", [])
+                for u in users:
+                    u_email = str(u.get("email") or "").strip().lower()
+                    u_name = str(u.get("name") or "").strip()
+                    u_id = str(u.get("id") or "").strip()
+                    if ident in (u_email, u_name.lower(), u_id, u_email.split("@")[0]):
+                        if u_name:
+                            return u_name
+    except Exception:
+        pass
+
+    # 2. Try PostgreSQL database directly
+    try:
+        from local_postgres_client import get_local_postgres_client
+        db = get_local_postgres_client()
+        res = db.table("users").select("name, email, id").execute()
+        if res.data:
+            for u in res.data:
+                u_email = str(u.get("email") or "").strip().lower()
+                u_name = str(u.get("name") or "").strip()
+                u_id = str(u.get("id") or "").strip()
+                if ident in (u_email, u_name.lower(), u_id, u_email.split("@")[0]):
+                    if u_name:
+                        return u_name
+    except Exception:
+        pass
+
+    return None
+
+
+def get_current_user(request: Request, form_data: dict = None) -> str:
     """
-    Helper to extract user context.
-    Checks headers first, then cookies, then form data.
+    Helper to extract user email / username context.
+    Checks headers, cookies, and form data.
     """
     user = (
         request.headers.get("X-User-Email")
         or request.cookies.get("userEmail")
         or request.cookies.get("user_email")
+        or request.headers.get("X-User-Name")
+        or request.cookies.get("userName")
+        or request.cookies.get("user_name")
     )
-    if not user and form_data:
-        user = form_data.get("user_email") or form_data.get("email") or form_data.get("user")
-    return user or "admin@admin.com"
+    if not user and form_data and isinstance(form_data, dict):
+        user = (
+            form_data.get("user_email")
+            or form_data.get("email")
+            or form_data.get("user")
+            or form_data.get("user_name")
+            or form_data.get("logged_in_user")
+            or form_data.get("person_deleting")
+        )
+    return str(user or "Staff").strip()
 
 
 def get_current_user_name(request: Request, form_data: dict = None) -> str:
     """
-    Helper to extract user's friendly display name (e.g. 'Rehan Ahmed') for audit logs.
+    Helper to extract user's friendly display name (e.g. 'Nazeer' or 'Admin') for audit logs.
     Checks headers, cookies, form data, or resolves email via users cache/db.
     """
+    # 1. Direct name from headers, cookies, or payload
     name = (
         request.headers.get("X-User-Name")
         or request.cookies.get("userName")
         or request.cookies.get("user_name")
     )
     if not name and form_data and isinstance(form_data, dict):
-        name = form_data.get("user_name") or form_data.get("user") or form_data.get("logged_in_user")
+        name = (
+            form_data.get("user_name")
+            or form_data.get("logged_in_user")
+            or form_data.get("person_deleting")
+            or form_data.get("user")
+        )
 
-    if not name:
-        email = get_current_user(request, form_data=form_data)
-        if email and email not in ("Anonymous", "admin@admin.com", "admin@labflow.local", "System"):
-            try:
-                from dbActions import load_users_from_cache
-                cached = load_users_from_cache() or []
-                for u in cached:
-                    if str(u.get("email", "")).lower() == str(email).lower() and u.get("name"):
-                        name = u.get("name")
-                        break
-            except Exception:
-                pass
-            if not name:
-                name = email.split("@")[0].capitalize()
+    # If explicit name provided and valid, resolve full name or return it
+    if name and str(name).strip() and str(name).strip().lower() not in ("staff", "anonymous", "system", "none", "null", "undefined"):
+        resolved = _lookup_user_name_from_db_or_cache(str(name).strip())
+        if resolved:
+            return resolved
+        return str(name).strip()
 
-    if not name or name in ("Staff", "Anonymous", "System", "None", ""):
-        name = "Rehan Ahmed"
+    # 2. Try resolving via email
+    email = (
+        request.headers.get("X-User-Email")
+        or request.cookies.get("userEmail")
+        or request.cookies.get("user_email")
+    )
+    if not email and form_data and isinstance(form_data, dict):
+        email = form_data.get("user_email") or form_data.get("email")
 
-    return name
+    if email and str(email).strip() and str(email).strip().lower() not in ("none", "null", "undefined", ""):
+        resolved = _lookup_user_name_from_db_or_cache(str(email).strip())
+        if resolved:
+            return resolved
+        raw = str(email).strip().split("@")[0]
+        if raw.lower() not in ("none", "null", "staff", "anonymous"):
+            return raw.capitalize()
+
+    return "Staff"
 
 # --------------------------------- working apis--------------------
 
@@ -2166,7 +2232,18 @@ async def api_auth_login(request: Request):
         except Exception as offline_sync_err:
             logger.warning(f"Background offline DB sync failed to launch: {offline_sync_err}")
 
-        return {"status": "Success", "user": user}
+        # Set cookies on response so all future browser requests carry authenticated identity
+        user_name = user.get("name") or str(user.get("email") or "").split("@")[0].capitalize() or "Staff"
+        user_email = user.get("email") or ""
+        user_id_str = str(user.get("id") or "")
+        
+        response = JSONResponse({"status": "Success", "user": user})
+        response.set_cookie(key="userEmail", value=user_email, max_age=31536000, path="/", httponly=False, samesite="lax")
+        response.set_cookie(key="userName", value=user_name, max_age=31536000, path="/", httponly=False, samesite="lax")
+        response.set_cookie(key="userId", value=user_id_str, max_age=31536000, path="/", httponly=False, samesite="lax")
+        response.set_cookie(key="user_email", value=user_email, max_age=31536000, path="/", httponly=False, samesite="lax")
+        response.set_cookie(key="user_name", value=user_name, max_age=31536000, path="/", httponly=False, samesite="lax")
+        return response
     except Exception as e:
         log_error(e, "API_AUTH_LOGIN")
         raise HTTPException(status_code=500, detail=str(e))

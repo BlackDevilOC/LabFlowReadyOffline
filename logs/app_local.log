@@ -23663,3 +23663,93 @@ LINE 1: ..."test_values", "status", "remarks", "created_at", "is_offlin...
 2026-09-01 22:44:51,468 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
 2026-09-01 22:45:03,947 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
 2026-09-01 22:45:04,075 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:51:38,908 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-09-01 22:51:44,221 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-01 22:51:44,273 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-09-01 22:51:44,312 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-09-01 22:51:44,717 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:51:44,719 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-09-01 22:51:44,723 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-09-01 22:51:44,725 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-09-01 22:51:44,755 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:51:44,788 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:51:44,818 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:51:44,849 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:51:44,850 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-09-01 22:51:45,131 - INFO - [LabFlow] - Server ready — loading login page
+2026-09-01 22:51:45,177 - DEBUG - [LabFlow] - Accessing Login Page
+2026-09-01 22:51:46,298 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:51:49,899 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:51:49,946 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:51:50,005 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-09-01 22:51:50,057 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:51:50,059 - INFO - [LabFlow] - Local PostgreSQL server mode active; Supabase background sync bypassed.
+2026-09-01 22:51:50,384 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:51:51,620 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-01 22:51:53,171 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184157, date=None
+2026-09-01 22:52:25,389 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 22:52:25,584 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:52:27,783 - INFO - [LabFlow] - User requested logout
+2026-09-01 22:52:27,789 - DEBUG - [LabFlow] - Accessing Login Page
+2026-09-01 22:52:28,362 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-01 22:52:50,129 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-01 22:52:50,163 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-01 22:52:50,252 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-09-01 22:52:50,311 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-01 22:52:50,313 - INFO - [LabFlow] - Local PostgreSQL server mode active; Supabase background sync bypassed.
+2026-09-01 22:52:50,628 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-01 22:52:51,317 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:52:51,789 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 22:52:51,952 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:52:57,947 - INFO - [LabFlow] - [USER: nazeer@gmail.com] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: rehana
+2026-09-01 22:52:57,950 - INFO - [LabFlow] - [USER: nazeer@gmail.com] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Miss.', 'patient_name': 'rehana', 'relation': 'D', 'relation_name': '-', 'mobile': '-', 'gender': 'FEMALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Nazeer', 'user_id': 5, 'pwd': '25739'}
+2026-09-01 22:52:58,013 - INFO - [LabFlow] - Successfully registered new patient. ID: 105055, MR No: 184158
+2026-09-01 22:52:58,014 - INFO - [LabFlow] - Patient registered. ID: 105055, MR: 184158. Queuing test creation in background...
+2026-09-01 22:52:58,091 - INFO - [LabFlow] - [USER: nazeer@gmail.com] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184158
+2026-09-01 22:52:58,134 - INFO - [LabFlow] - [USER: nazeer] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184158 | Action: REGISTER | Details: Registered patient with 2 test(s): Uric Acid, PT (Prothrombin Time) (Shift: EVENING)
+2026-09-01 22:52:58,146 - INFO - [LabFlow] - Generating Invoice for patient: 105055
+2026-09-01 22:52:58,223 - INFO - [LabFlow] - Adding tests to patient MR: 184158, Name: rehana
+2026-09-01 22:52:58,318 - INFO - [LabFlow] - Successfully added 2 test records in test_results_all for patient 184158
+2026-09-01 22:52:58,406 - INFO - [LabFlow] - Fetched full info for patient ID: 105055
+2026-09-01 22:52:58,701 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:52:59,409 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184158
+2026-09-01 22:52:59,665 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:53:00,762 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184158 | Action: UPDATE_RESULT | Details: • Uric Acid: param_90: 0 mg/dl
+• PT (Prothrombin Time): param_250: 0 seconds, param_251: 0, param_252: 0 seconds
+2026-09-01 22:53:00,764 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184158
+2026-09-01 22:53:00,778 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184158, date=None
+2026-09-01 22:53:03,533 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 22:53:03,668 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:53:21,813 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 22:53:22,815 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184158
+2026-09-01 22:53:23,012 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 22:53:24,235 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184158 | Action: UPDATE_RESULT | Details: • Uric Acid: param_90: 0 mg/dl
+• PT (Prothrombin Time): param_250: 0 seconds, param_251: 0, param_252: 0 seconds
+2026-09-01 22:53:24,237 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184158
+2026-09-01 22:53:24,251 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184158, date=None
+2026-09-01 23:04:13,358 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 23:04:13,597 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-01 23:04:13,803 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 23:04:17,100 - INFO - [LabFlow] - [USER: nazeer@gmail.com] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: sdgdg
+2026-09-01 23:04:17,102 - INFO - [LabFlow] - [USER: nazeer@gmail.com] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'sdgdg', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Nazeer', 'user_id': 5, 'pwd': '27352543'}
+2026-09-01 23:04:17,159 - INFO - [LabFlow] - Successfully registered new patient. ID: 105056, MR No: 184159
+2026-09-01 23:04:17,160 - INFO - [LabFlow] - Patient registered. ID: 105056, MR: 184159. Queuing test creation in background...
+2026-09-01 23:04:17,238 - INFO - [LabFlow] - [USER: nazeer@gmail.com] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184159
+2026-09-01 23:04:17,289 - INFO - [LabFlow] - [USER: nazeer] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184159 | Action: REGISTER | Details: Registered patient with 5 test(s): COMPLETE BLOOD COUNT, Anti HIV (ICT), Glucose Random (RBS), UC, PT (Prothrombin Time) (Shift: EVENING)
+2026-09-01 23:04:17,301 - INFO - [LabFlow] - Generating Invoice for patient: 105056
+2026-09-01 23:04:17,384 - INFO - [LabFlow] - Adding tests to patient MR: 184159, Name: sdgdg
+2026-09-01 23:04:17,384 - INFO - [LabFlow] - Fetched full info for patient ID: 105056
+2026-09-01 23:04:17,626 - INFO - [LabFlow] - Successfully added 5 test records in test_results_all for patient 184159
+2026-09-01 23:04:17,762 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-01 23:04:18,171 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-01 23:04:18,891 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184159
+2026-09-01 23:04:19,146 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-01 23:04:22,058 - INFO - [LabFlow] - [USER: Nazeer] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184159 | Action: UPDATE_RESULT | Details: • COMPLETE BLOOD COUNT: param_37: 0 g/dl, param_38: 0 x10E12/L, param_39: 0 %, param_40: 0 fL, param_41: 0 pg, param_42: 0 g/dl, param_43: 0 x10E9/L, param_44: 0 %, param_45: 0 %, param_46: 0 %, param_47: 0 %, param_49: 0 x10E9/L
+• Anti HIV (ICT): param_116: Negative
+• Glucose Random (RBS): param_243: 0 mg/dl
+• UC: param_52: 0 mg/dl, param_53: 0 mg/dl
+• PT (Prothrombin Time): param_250: 0 seconds, param_251: 0, param_252: 0 seconds
+2026-09-01 23:04:22,061 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184159
+2026-09-01 23:04:22,073 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184159, date=None
+2026-09-01 23:04:43,158 - INFO - [LabFlow] - [USER: Nazeer] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184159 | Action: PRINT | Details: [Copy #1 (Original)] Printed test(s): COMPLETE BLOOD COUNT, Anti HIV (ICT), Glucose Random (RBS), UC, PT (Prothrombin Time)
+2026-09-01 23:04:43,160 - INFO - [LabFlow] - [USER: Nazeer] [PRINT_EVENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Print report for MR#184159 by Nazeer (Copy #1)

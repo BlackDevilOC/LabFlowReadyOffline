@@ -575,10 +575,20 @@
             btn.disabled = true;
         }
 
+        const currentUserEmail = localStorage.getItem('userEmail') || '';
+        const currentUserName = (localStorage.getItem('userName') || currentUserEmail || 'Staff').trim();
+        const currentUserId = localStorage.getItem('userId') || '';
+        updatedPayload.user_name = currentUserName;
+
         try {
             const res = await fetch(`/api/test-results/update/${RECORD_ID}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': currentUserEmail,
+                    'X-User-Name': currentUserName,
+                    'X-User-Id': currentUserId
+                },
                 body: JSON.stringify(updatedPayload)
             });
             const result = await res.json();

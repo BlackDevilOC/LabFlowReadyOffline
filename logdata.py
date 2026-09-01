@@ -198,11 +198,12 @@ def insert_audit_log(
 ):
     """
     Saves an audit trail entry into PostgreSQL database and log.
+    Preserves actual logged-in user name (e.g. nazeer, staff, admin).
     """
     try:
-        actor = user_name or user or "Rehan Ahmed"
-        if actor in ["admin@admin.com", "admin@labflow.local", "System", "Staff", "Anonymous", "None", ""] or not actor:
-            actor = "Rehan Ahmed"
+        actor = str(user_name or user or "").strip()
+        if not actor or actor in ["None", "null", "undefined", ""]:
+            actor = "Staff"
 
         if not pc_name:
             try:

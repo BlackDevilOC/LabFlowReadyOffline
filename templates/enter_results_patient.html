@@ -1769,11 +1769,20 @@
             Object.entries(rec?.test_values || {}).filter(([k]) => k !== 'remarks' && k !== 'test_values')
         );
 
+        const currentUserEmail = localStorage.getItem('userEmail') || '';
+        const currentUserName = (localStorage.getItem('userName') || currentUserEmail || 'Staff').trim();
+        const currentUserId = localStorage.getItem('userId') || '';
+
         try {
             const res = await fetch(`/api/test-results/update/${recordId}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ test_values: testValues, remarks: remarks || '' })
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': currentUserEmail,
+                    'X-User-Name': currentUserName,
+                    'X-User-Id': currentUserId
+                },
+                body: JSON.stringify({ test_values: testValues, remarks: remarks || '', user_name: currentUserName })
             });
             const result = await res.json();
             if (result.status === 'Success') {
@@ -1797,10 +1806,19 @@
         const testName = rec?.test_name ? ` (${rec.test_name})` : '';
         if (!confirm(`Delete this test${testName}?`)) return;
 
+        const currentUserEmail = localStorage.getItem('userEmail') || '';
+        const currentUserName = (localStorage.getItem('userName') || currentUserEmail || 'Staff').trim();
+        const currentUserId = localStorage.getItem('userId') || '';
+
         try {
             const res = await fetch(`/api/test-results/delete/${recordId}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': currentUserEmail,
+                    'X-User-Name': currentUserName,
+                    'X-User-Id': currentUserId
+                },
                 body: JSON.stringify({ person_deleting: getDeletingPerson() })
             });
             const result = await res.json();
@@ -1872,10 +1890,19 @@
             };
         });
 
+        const currentUserEmail = localStorage.getItem('userEmail') || '';
+        const currentUserName = (localStorage.getItem('userName') || currentUserEmail || 'Staff').trim();
+        const currentUserId = localStorage.getItem('userId') || '';
+
         try {
             const res = await fetch(`/api/test-results/patient/update/${MR_NO}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': currentUserEmail,
+                    'X-User-Name': currentUserName,
+                    'X-User-Id': currentUserId
+                },
                 body: JSON.stringify(payload)
             });
             const result = await res.json();

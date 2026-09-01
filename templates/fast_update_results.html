@@ -2057,10 +2057,19 @@
             payload[record.id] = { test_values: cleanValues, remarks: remarks };
         });
 
+        const currentUserEmail = localStorage.getItem('userEmail') || '';
+        const currentUserName = (localStorage.getItem('userName') || currentUserEmail || 'Staff').trim();
+        const currentUserId = localStorage.getItem('userId') || '';
+
         try {
             const res = await fetch(`/api/test-results/patient/update/${activePatientMr}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': currentUserEmail,
+                    'X-User-Name': currentUserName,
+                    'X-User-Id': currentUserId
+                },
                 body: JSON.stringify(payload)
             });
             const result = await res.json();
@@ -2118,11 +2127,20 @@
             Object.entries(rec?.test_values || {}).filter(([k]) => k !== 'remarks' && k !== 'test_values')
         );
 
+        const currentUserEmail = localStorage.getItem('userEmail') || '';
+        const currentUserName = (localStorage.getItem('userName') || currentUserEmail || 'Staff').trim();
+        const currentUserId = localStorage.getItem('userId') || '';
+
         try {
             const res = await fetch(`/api/test-results/update/${recordId}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ test_values: testValues, remarks: remarks })
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-Email': currentUserEmail,
+                    'X-User-Name': currentUserName,
+                    'X-User-Id': currentUserId
+                },
+                body: JSON.stringify({ test_values: testValues, remarks: remarks, user_name: currentUserName })
             });
             const result = await res.json();
             if (result.status === 'Success') {
