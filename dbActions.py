@@ -838,12 +838,18 @@ def delete_remark_admin(remark_id: int, actor: str = "Admin"):
 
 def loadPrintSettings():
     try:
+        row = load_lab_print_settings_row()
+        if row:
+            sync_lab_print_settings_cache()
+            return [row]
         cached = read_cached_lab_print_settings()
         if cached:
             return [cached]
-        row = sync_lab_print_settings_cache()
-        return [row] if row else []
+        return []
     except Exception as e:
+        cached = read_cached_lab_print_settings()
+        if cached:
+            return [cached]
         log_error(e, "LOAD_PRINT_SETTINGS")
         return []
 

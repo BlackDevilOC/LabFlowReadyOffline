@@ -23753,3 +23753,119 @@ LINE 1: ..."test_values", "status", "remarks", "created_at", "is_offlin...
 2026-09-01 23:04:22,073 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184159, date=None
 2026-09-01 23:04:43,158 - INFO - [LabFlow] - [USER: Nazeer] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184159 | Action: PRINT | Details: [Copy #1 (Original)] Printed test(s): COMPLETE BLOOD COUNT, Anti HIV (ICT), Glucose Random (RBS), UC, PT (Prothrombin Time)
 2026-09-01 23:04:43,160 - INFO - [LabFlow] - [USER: Nazeer] [PRINT_EVENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Print report for MR#184159 by Nazeer (Copy #1)
+2026-09-12 12:58:41,024 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-12 12:58:41,533 - INFO - [LabFlow] - [USER: Tester] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'DIAGNOSTIC_VERIFICATION_PATIENT', 'relation': 'S/O', 'relation_name': 'Test Father', 'mobile': '03001234567', 'gender': 'Male', 'age': 30, 'cnic': '12345-1234567-1', 'patient_token': 999, 'shift': 'Morning', 'user': 'System_Verifier'}
+2026-09-12 12:58:41,597 - INFO - [LabFlow] - Successfully registered new patient. ID: 105089, MR No: 184160
+2026-09-12 12:58:41,597 - INFO - [LabFlow] - Adding 1 tests to patient ID: 184160
+2026-09-12 12:58:41,647 - ERROR - [LabFlow.LocalPostgresClient] - Execution error on table 'test_results_all': column "patient_id" of relation "test_results_all" does not exist
+LINE 1: INSERT INTO public."test_results_all" ("patient_id", "test_i...
+                                               ^
+
+2026-09-12 12:58:41,648 - ERROR - [LabFlow] - [USER: Tester] [ADD_TESTS_TO_PATIENT_FAILED] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] column "patient_id" of relation "test_results_all" does not exist
+LINE 1: INSERT INTO public."test_results_all" ("patient_id", "test_i...
+                                               ^
+Traceback (most recent call last):
+  File "d:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\dbActions.py", line 82, in add_tests_to_patient
+    response = supabase.table("patient_test_results").insert(payload).execute()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 202, in execute
+    data = self._execute_insert(cursor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\local_postgres_client.py", line 342, in _execute_insert
+    cursor.execute(sql, clean_vals)
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "patient_id" of relation "test_results_all" does not exist
+LINE 1: INSERT INTO public."test_results_all" ("patient_id", "test_i...
+                                               ^
+
+2026-09-12 12:59:09,181 - INFO - [LabFlow] - Loaded 118 individual tests and 63 test groups (active_only=True)
+2026-09-12 12:59:09,331 - INFO - [LabFlow] - [USER: Tester] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'DIAGNOSTIC_VERIFICATION_PATIENT', 'relation': 'S/O', 'relation_name': 'Test Father', 'mobile': '03001234567', 'gender': 'Male', 'age': 30, 'cnic': '12345-1234567-1', 'patient_token': 999, 'shift': 'Morning', 'user': 'System_Verifier'}
+2026-09-12 12:59:09,381 - INFO - [LabFlow] - Successfully registered new patient. ID: 105090, MR No: 184160
+2026-09-12 12:59:09,451 - INFO - [LabFlow] - Adding tests to patient MR: 184160, Name: DIAGNOSTIC_VERIFICATION_PATIENT
+2026-09-12 12:59:09,515 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 184160
+2026-09-12 13:02:44,493 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-12 13:56:43,804 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-09-12 13:56:47,606 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-12 13:56:47,663 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-09-12 13:56:47,723 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-09-12 13:56:47,989 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-09-12 13:56:47,992 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-09-12 13:56:48,023 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-12 13:56:48,069 - INFO - [LabFlow] - Server ready — loading login page
+2026-09-12 13:56:48,094 - DEBUG - [LabFlow] - Accessing Login Page
+2026-09-12 13:56:48,111 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-12 13:56:48,147 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-12 13:56:48,182 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-12 13:56:48,183 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-09-12 13:56:49,569 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-12 13:56:55,293 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-12 13:56:55,341 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-12 13:56:55,434 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-09-12 13:56:55,492 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-12 13:56:55,494 - INFO - [LabFlow] - Local PostgreSQL server mode active; Supabase background sync bypassed.
+2026-09-12 13:56:55,494 - ERROR - [LabFlow] - [USER: System] [API_AUTH_LOGIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 2240, in api_auth_login
+    response = JSONResponse({"status": "Success", "user": user})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 189, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 46, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 192, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+2026-09-12 13:56:55,863 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-12 13:56:57,491 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-12 13:56:59,433 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 9583
+2026-09-12 13:56:59,704 - INFO - [LabFlow] - Loaded 120 individual tests and 63 test groups (active_only=True)
+2026-09-12 13:57:06,350 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 9583 | Action: UPDATE_RESULT | Details: • COMPLETE BLOOD COUNT: param_37: 11.5 g/dl, param_38: 2.81 x10E12/L, param_39: 30.4 %, param_40: 108 fL, param_41: 37.4 pg, param_42: 34.5 g/dl, param_43: 6.7 x10E9/L, param_44: 67 %, param_45: 28 %, param_46: 4 %, param_47: 01 %, param_49: 132 x10E9/L
+2026-09-12 13:57:06,352 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 9583
+2026-09-12 13:57:06,363 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-12 13:57:12,803 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 9583
+2026-09-12 13:57:13,040 - INFO - [LabFlow] - Loaded 120 individual tests and 63 test groups (active_only=True)
+2026-09-12 13:57:15,443 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 9583 | Action: UPDATE_RESULT | Details: • COMPLETE BLOOD COUNT: param_37: 10.5 g/dl, param_38: 2.81 x10E12/L, param_39: 30.4 %, param_40: 108 fL, param_41: 37.4 pg, param_42: 34.5 g/dl, param_43: 6.7 x10E9/L, param_44: 67 %, param_45: 28 %, param_46: 4 %, param_47: 01 %, param_49: 132 x10E9/L
+2026-09-12 13:57:15,446 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 9583
+2026-09-12 13:57:15,458 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-12 13:57:28,131 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-12 13:57:28,306 - INFO - [LabFlow] - Loaded 120 individual tests and 63 test groups (active_only=True)
+2026-09-12 13:57:48,782 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: BAKHTAWAR
+2026-09-12 13:57:48,783 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Miss.', 'patient_name': 'BAKHTAWAR', 'relation': 'D', 'relation_name': '-', 'mobile': '-', 'gender': 'FEMALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'MORNING', 'user': 'Rehan Ahmed', 'user_id': 1, 'pwd': '988935'}
+2026-09-12 13:57:48,850 - INFO - [LabFlow] - Successfully registered new patient. ID: 109620, MR No: 184152
+2026-09-12 13:57:48,852 - INFO - [LabFlow] - Patient registered. ID: 109620, MR: 184152. Queuing test creation in background...
+2026-09-12 13:57:48,955 - INFO - [LabFlow] - [USER: admin@admin.com] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 184152
+2026-09-12 13:57:48,995 - INFO - [LabFlow] - [USER: admin] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184152 | Action: REGISTER | Details: Registered patient with 4 test(s): COMPLETE BLOOD COUNT, Hep B, C, Liver Function Test, UCE (Shift: MORNING)
+2026-09-12 13:57:49,007 - INFO - [LabFlow] - Generating Invoice for patient: 109620
+2026-09-12 13:57:49,070 - INFO - [LabFlow] - Adding tests to patient MR: 184152, Name: BAKHTAWAR
+2026-09-12 13:57:49,245 - INFO - [LabFlow] - Successfully added 4 test records in test_results_all for patient 184152
+2026-09-12 13:57:49,282 - INFO - [LabFlow] - Fetched full info for patient ID: 109620
+2026-09-12 13:57:50,178 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-12 13:57:50,936 - INFO - [LabFlow] - Accessing Enter Patient Results Page for MR No: 184152
+2026-09-12 13:57:51,153 - INFO - [LabFlow] - Loaded 120 individual tests and 63 test groups (active_only=True)
+2026-09-12 13:57:54,636 - INFO - [LabFlow] - [USER: Staff] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184152 | Action: EDIT_PATIENT | Details: Updated demographics: patient_name, relation, relation_name, shift, patient_token, mobile, age, gender
+2026-09-12 13:57:54,638 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated patient info for MR: 184152
+2026-09-12 13:58:28,232 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184152 | Action: UPDATE_RESULT | Details: • COMPLETE BLOOD COUNT: param_37: 10.8 g/dl, param_38: 3.37 x10E12/L, param_39: 32.1 %, param_40: 95.3 fL, param_41: 32.0 pg, param_42: 33.6 g/dl, param_43: 6.7 x10E9/L, param_44: 50 %, param_45: 43 %, param_46: 05 %, param_47: 01 %, param_49: 191 x10E9/L
+• Hep B, C: param_50: Negative, param_51: Negative
+• Liver Function Test: param_32: 0.7 mg/dl, param_33: 0.2 mg/dl, param_34: 17 U/L, param_36: 218 IU/L
+• UCE: param_52: 20 mg/dl, param_53: 0.5 mg/dl, param_71: 140 mmol/L, param_72: 3.9 mmol/L, param_73: 101 mmol/L
+2026-09-12 13:58:28,234 - INFO - [LabFlow] - [USER: System] [DATA_MODIFICATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Updated all results for patient MR: 184152
+2026-09-12 13:58:28,246 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184152, date=None
+2026-09-12 13:58:30,164 - INFO - [LabFlow] - [USER: Rehan Ahmed] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 184152 | Action: PRINT | Details: [Copy #1 (Original)] Printed test(s): COMPLETE BLOOD COUNT, Hep B, C, Liver Function Test, UCE
+2026-09-12 13:58:30,166 - INFO - [LabFlow] - [USER: Rehan Ahmed] [PRINT_EVENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Print report for MR#184152 by Rehan Ahmed (Copy #1)
+2026-09-12 14:02:23,496 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-12 14:02:56,430 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json

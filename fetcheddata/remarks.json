@@ -1,575 +1,25 @@
 {
   "items": [
     {
-      "id": 42,
-      "remark_text": "Repeat sample required.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 95,
-      "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 31,
-      "remark_text": "Quantity not sufficient.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 88,
-      "sort_order": 3,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 26,
-      "remark_text": "Non-reactive.",
-      "test_name": "HIV (1 & 2)",
-      "category": null,
-      "usage_count": 80,
-      "sort_order": 302,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 45,
-      "remark_text": "Sample clotted; repeat advised.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 72,
-      "sort_order": 5,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 25,
-      "remark_text": "Non-reactive.",
-      "test_name": "HBsAg",
-      "category": null,
-      "usage_count": 70,
-      "sort_order": 311,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 24,
-      "remark_text": "Non-reactive.",
-      "test_name": "Anti HCV",
-      "category": null,
-      "usage_count": 65,
-      "sort_order": 321,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 23,
-      "remark_text": "Non-reactive.",
-      "test_name": "VDRL",
-      "category": null,
-      "usage_count": 60,
-      "sort_order": 331,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 10,
-      "remark_text": "Result verified on repeat sample.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 55,
-      "sort_order": 9,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 4,
-      "remark_text": "Sample rejected \u2014 inadequate volume.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 50,
-      "sort_order": 11,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 46,
-      "remark_text": "Sample received in wrong container.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 45,
-      "sort_order": 4,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 6,
-      "remark_text": "Repeat CBC \u2014 sample clotted.",
-      "test_name": "Complete Blood Count (CBC)",
-      "category": null,
-      "usage_count": 40,
-      "sort_order": 101,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 22,
-      "remark_text": "Non-reactive.",
-      "test_name": "HIV",
-      "category": null,
-      "usage_count": 40,
-      "sort_order": 801,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 36,
-      "remark_text": "Lipemic sample; results may be affected.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 40,
-      "sort_order": 7,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 11,
-      "remark_text": "Reactive screen; confirmatory test advised.",
-      "test_name": "HIV (1 & 2)",
-      "category": null,
-      "usage_count": 35,
-      "sort_order": 301,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 35,
-      "remark_text": "Icteric sample; interpret with caution.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 35,
-      "sort_order": 8,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 18,
-      "remark_text": "Sample contaminated; repeat mid-stream urine advised.",
-      "test_name": "Urine DR",
-      "category": null,
-      "usage_count": 30,
-      "sort_order": 501,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 21,
-      "remark_text": "Non-reactive.",
-      "test_name": "CBC",
-      "category": null,
-      "usage_count": 30,
-      "sort_order": 811,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 15,
-      "remark_text": "Critical value notified to requesting clinician.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 30,
-      "sort_order": 10,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 47,
-      "remark_text": "Hemolyzed sample; AST/ALT may be falsely elevated.",
-      "test_name": "Liver Function Test",
-      "category": null,
-      "usage_count": 28,
-      "sort_order": 201,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 29,
-      "remark_text": "Delayed report \u2014 sample received late.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 25,
-      "sort_order": 12,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 50,
-      "remark_text": "Patient on anticoagulant therapy.",
-      "test_name": "PT/INR",
-      "category": null,
-      "usage_count": 25,
-      "sort_order": 612,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 43,
-      "remark_text": "Fasting status not confirmed.",
-      "test_name": "RBS",
-      "category": null,
-      "usage_count": 25,
-      "sort_order": 401,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 48,
-      "remark_text": "Platelet clumps noted; manual count recommended.",
-      "test_name": "Complete Blood Count (CBC)",
-      "category": null,
-      "usage_count": 22,
-      "sort_order": 102,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 28,
-      "remark_text": "Reactive; confirm with neutralization if applicable.",
-      "test_name": "HBsAg",
-      "category": null,
-      "usage_count": 20,
-      "sort_order": 312,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 7,
-      "remark_text": "Correlation with clinical findings advised.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 20,
-      "sort_order": 13,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 12,
-      "remark_text": "Sample not fasting; interpret lipids with caution.",
-      "test_name": "UELFT",
-      "category": null,
-      "usage_count": 20,
-      "sort_order": 411,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 37,
-      "remark_text": "Sample hemolyzed.",
-      "test_name": "CBC",
-      "category": null,
-      "usage_count": 20,
-      "sort_order": 812,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 40,
-      "remark_text": "Previous result on file; trend comparison suggested.",
-      "test_name": null,
-      "category": null,
-      "usage_count": 18,
-      "sort_order": 14,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 33,
-      "remark_text": "Grossly hemolyzed; glucose may be falsely low.",
-      "test_name": "RBS",
-      "category": null,
-      "usage_count": 18,
-      "sort_order": 402,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 44,
-      "remark_text": "Reactive; repeat recommended.",
-      "test_name": "Anti HCV",
-      "category": null,
-      "usage_count": 18,
-      "sort_order": 322,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 27,
-      "remark_text": "Hemolysis may affect potassium.",
-      "test_name": "Serum Electrolytes",
-      "category": null,
-      "usage_count": 16,
-      "sort_order": 431,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 41,
-      "remark_text": "Repeat sample required.",
-      "test_name": "HIV",
-      "category": null,
-      "usage_count": 15,
-      "sort_order": 802,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 30,
-      "remark_text": "Marked leukocytosis; slide review performed.",
-      "test_name": "Complete Blood Count (CBC)",
-      "category": null,
-      "usage_count": 15,
-      "sort_order": 103,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 9,
-      "remark_text": "Reactive; titre follow-up advised.",
-      "test_name": "VDRL",
-      "category": null,
-      "usage_count": 15,
-      "sort_order": 332,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 53,
-      "remark_text": "Prolonged PT; sample not citrated properly suspected.",
-      "test_name": "PT/INR",
-      "category": null,
-      "usage_count": 15,
-      "sort_order": 611,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 19,
-      "remark_text": "icteric sample",
-      "test_name": "Liver Function Test",
-      "category": null,
-      "usage_count": 14,
-      "sort_order": 203,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 51,
-      "remark_text": "Creatinine elevated; confirm with eGFR/clinical context.",
-      "test_name": "Serum Creatinine",
-      "category": null,
-      "usage_count": 14,
-      "sort_order": 421,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 16,
-      "remark_text": "Anemia pattern; peripheral smear advised.",
-      "test_name": "Complete Blood Count (CBC)",
-      "category": null,
-      "usage_count": 12,
-      "sort_order": 104,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 32,
-      "remark_text": "Indeterminate; repeat in 2\u20134 weeks.",
-      "test_name": "HIV (1 & 2)",
-      "category": null,
-      "usage_count": 12,
-      "sort_order": 303,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 20,
-      "remark_text": "ESR elevated; correlate with CRP/clinical picture.",
-      "test_name": "ESR",
-      "category": null,
-      "usage_count": 12,
-      "sort_order": 601,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 34,
-      "remark_text": "Insufficient volume for culture.",
-      "test_name": "Urine DR",
-      "category": null,
-      "usage_count": 12,
-      "sort_order": 502,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 17,
-      "remark_text": "Ova not seen; repeat if clinical suspicion persists.",
-      "test_name": "Stool DR",
-      "category": null,
-      "usage_count": 10,
-      "sort_order": 511,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 5,
-      "remark_text": "Non-fasting sample; lipids may be affected.",
-      "test_name": "Liver Function Test",
-      "category": null,
-      "usage_count": 10,
-      "sort_order": 202,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 14,
-      "remark_text": "Traumatic tap suspected; repeat if clinically indicated.",
-      "test_name": "ASCITIC FLUID DR",
-      "category": null,
-      "usage_count": 10,
-      "sort_order": 701,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 39,
-      "remark_text": "Insufficient fluid for full panel.",
-      "test_name": "PLEURAL FLUID FOR DR",
-      "category": null,
-      "usage_count": 9,
-      "sort_order": 711,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 52,
-      "remark_text": "Cold agglutinin suspected; repeat at 37\u00b0C.",
-      "test_name": "Complete Blood Count (CBC)",
-      "category": null,
-      "usage_count": 8,
-      "sort_order": 105,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 13,
-      "remark_text": "Sample received without preservative.",
-      "test_name": "Stool DR",
-      "category": null,
-      "usage_count": 8,
-      "sort_order": 512,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 38,
-      "remark_text": "Sample hemolyzed.",
-      "test_name": "HBsAg",
-      "category": null,
-      "usage_count": 8,
-      "sort_order": 313,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 8,
-      "remark_text": "Marked hyperbilirubinemia; direct bilirubin suggested.",
-      "test_name": "UELFT",
-      "category": null,
-      "usage_count": 7,
-      "sort_order": 412,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 49,
-      "remark_text": "Biological false positive possible.",
-      "test_name": "VDRL",
-      "category": null,
-      "usage_count": 6,
-      "sort_order": 333,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
-      "id": 54,
-      "remark_text": "Sample received without request form.",
-      "test_name": "HIV (1 & 2)",
-      "category": null,
-      "usage_count": 5,
-      "sort_order": 304,
-      "is_active": true,
-      "created_at": "2026-06-01 09:07:50.136776+00:00",
-      "updated_at": "2026-06-01 09:07:50.136776+00:00"
-    },
-    {
       "id": 1,
       "remark_text": "Within normal limits.",
       "test_name": null,
       "category": null,
       "usage_count": 0,
       "sort_order": 1,
-      "is_active": true,
-      "created_at": "2026-06-01 06:00:18.463122+00:00",
+      "is_active": 1,
+      "created_at": "2026-06-01T06:00:18.463122+00:00",
+      "updated_at": "2026-06-01 06:00:18.463122+00:00"
+    },
+    {
+      "id": 2,
+      "remark_text": "Sample hemolyzed; interpret with caution.",
+      "test_name": null,
+      "category": "Hematology",
+      "usage_count": 0,
+      "sort_order": 2,
+      "is_active": 1,
+      "created_at": "2026-06-01T06:00:18.463122+00:00",
       "updated_at": "2026-06-01 06:00:18.463122+00:00"
     },
     {
@@ -579,20 +29,570 @@
       "category": null,
       "usage_count": 0,
       "sort_order": 0,
-      "is_active": true,
-      "created_at": "2026-06-01 09:05:52.926397+00:00",
+      "is_active": 1,
+      "created_at": "2026-06-01T09:05:52.926397+00:00",
       "updated_at": "2026-06-01 09:05:52.926397+00:00"
     },
     {
-      "id": 2,
-      "remark_text": "Sample hemolyzed; interpret with caution.",
+      "id": 4,
+      "remark_text": "Sample rejected \u2014 inadequate volume.",
       "test_name": null,
-      "category": "Hematology",
-      "usage_count": 0,
+      "category": null,
+      "usage_count": 50,
+      "sort_order": 11,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 5,
+      "remark_text": "Non-fasting sample; lipids may be affected.",
+      "test_name": "Liver Function Test",
+      "category": null,
+      "usage_count": 10,
+      "sort_order": 202,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 6,
+      "remark_text": "Repeat CBC \u2014 sample clotted.",
+      "test_name": "Complete Blood Count (CBC)",
+      "category": null,
+      "usage_count": 40,
+      "sort_order": 101,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 7,
+      "remark_text": "Correlation with clinical findings advised.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 20,
+      "sort_order": 13,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 8,
+      "remark_text": "Marked hyperbilirubinemia; direct bilirubin suggested.",
+      "test_name": "UELFT",
+      "category": null,
+      "usage_count": 7,
+      "sort_order": 412,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 9,
+      "remark_text": "Reactive; titre follow-up advised.",
+      "test_name": "VDRL",
+      "category": null,
+      "usage_count": 15,
+      "sort_order": 332,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 10,
+      "remark_text": "Result verified on repeat sample.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 55,
+      "sort_order": 9,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 11,
+      "remark_text": "Reactive screen; confirmatory test advised.",
+      "test_name": "HIV (1 & 2)",
+      "category": null,
+      "usage_count": 35,
+      "sort_order": 301,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 12,
+      "remark_text": "Sample not fasting; interpret lipids with caution.",
+      "test_name": "UELFT",
+      "category": null,
+      "usage_count": 20,
+      "sort_order": 411,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 13,
+      "remark_text": "Sample received without preservative.",
+      "test_name": "Stool DR",
+      "category": null,
+      "usage_count": 8,
+      "sort_order": 512,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 14,
+      "remark_text": "Traumatic tap suspected; repeat if clinically indicated.",
+      "test_name": "ASCITIC FLUID DR",
+      "category": null,
+      "usage_count": 10,
+      "sort_order": 701,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 15,
+      "remark_text": "Critical value notified to requesting clinician.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 30,
+      "sort_order": 10,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 16,
+      "remark_text": "Anemia pattern; peripheral smear advised.",
+      "test_name": "Complete Blood Count (CBC)",
+      "category": null,
+      "usage_count": 12,
+      "sort_order": 104,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 17,
+      "remark_text": "Ova not seen; repeat if clinical suspicion persists.",
+      "test_name": "Stool DR",
+      "category": null,
+      "usage_count": 10,
+      "sort_order": 511,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 18,
+      "remark_text": "Sample contaminated; repeat mid-stream urine advised.",
+      "test_name": "Urine DR",
+      "category": null,
+      "usage_count": 30,
+      "sort_order": 501,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 19,
+      "remark_text": "icteric sample",
+      "test_name": "Liver Function Test",
+      "category": null,
+      "usage_count": 14,
+      "sort_order": 203,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 20,
+      "remark_text": "ESR elevated; correlate with CRP/clinical picture.",
+      "test_name": "ESR",
+      "category": null,
+      "usage_count": 12,
+      "sort_order": 601,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 21,
+      "remark_text": "Non-reactive.",
+      "test_name": "CBC",
+      "category": null,
+      "usage_count": 30,
+      "sort_order": 811,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 22,
+      "remark_text": "Non-reactive.",
+      "test_name": "HIV",
+      "category": null,
+      "usage_count": 40,
+      "sort_order": 801,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 23,
+      "remark_text": "Non-reactive.",
+      "test_name": "VDRL",
+      "category": null,
+      "usage_count": 60,
+      "sort_order": 331,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 24,
+      "remark_text": "Non-reactive.",
+      "test_name": "Anti HCV",
+      "category": null,
+      "usage_count": 65,
+      "sort_order": 321,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 25,
+      "remark_text": "Non-reactive.",
+      "test_name": "HBsAg",
+      "category": null,
+      "usage_count": 70,
+      "sort_order": 311,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 26,
+      "remark_text": "Non-reactive.",
+      "test_name": "HIV (1 & 2)",
+      "category": null,
+      "usage_count": 80,
+      "sort_order": 302,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 27,
+      "remark_text": "Hemolysis may affect potassium.",
+      "test_name": "Serum Electrolytes",
+      "category": null,
+      "usage_count": 16,
+      "sort_order": 431,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 28,
+      "remark_text": "Reactive; confirm with neutralization if applicable.",
+      "test_name": "HBsAg",
+      "category": null,
+      "usage_count": 20,
+      "sort_order": 312,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 29,
+      "remark_text": "Delayed report \u2014 sample received late.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 25,
+      "sort_order": 12,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 30,
+      "remark_text": "Marked leukocytosis; slide review performed.",
+      "test_name": "Complete Blood Count (CBC)",
+      "category": null,
+      "usage_count": 15,
+      "sort_order": 103,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 31,
+      "remark_text": "Quantity not sufficient.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 88,
+      "sort_order": 3,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 32,
+      "remark_text": "Indeterminate; repeat in 2\u20134 weeks.",
+      "test_name": "HIV (1 & 2)",
+      "category": null,
+      "usage_count": 12,
+      "sort_order": 303,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 33,
+      "remark_text": "Grossly hemolyzed; glucose may be falsely low.",
+      "test_name": "RBS",
+      "category": null,
+      "usage_count": 18,
+      "sort_order": 402,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 34,
+      "remark_text": "Insufficient volume for culture.",
+      "test_name": "Urine DR",
+      "category": null,
+      "usage_count": 12,
+      "sort_order": 502,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 35,
+      "remark_text": "Icteric sample; interpret with caution.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 35,
+      "sort_order": 8,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 36,
+      "remark_text": "Lipemic sample; results may be affected.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 40,
+      "sort_order": 7,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 37,
+      "remark_text": "Sample hemolyzed.",
+      "test_name": "CBC",
+      "category": null,
+      "usage_count": 20,
+      "sort_order": 812,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 38,
+      "remark_text": "Sample hemolyzed.",
+      "test_name": "HBsAg",
+      "category": null,
+      "usage_count": 8,
+      "sort_order": 313,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 39,
+      "remark_text": "Insufficient fluid for full panel.",
+      "test_name": "PLEURAL FLUID FOR DR",
+      "category": null,
+      "usage_count": 9,
+      "sort_order": 711,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 40,
+      "remark_text": "Previous result on file; trend comparison suggested.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 18,
+      "sort_order": 14,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 41,
+      "remark_text": "Repeat sample required.",
+      "test_name": "HIV",
+      "category": null,
+      "usage_count": 15,
+      "sort_order": 802,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 42,
+      "remark_text": "Repeat sample required.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 95,
       "sort_order": 2,
-      "is_active": true,
-      "created_at": "2026-06-01 06:00:18.463122+00:00",
-      "updated_at": "2026-06-01 06:00:18.463122+00:00"
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 43,
+      "remark_text": "Fasting status not confirmed.",
+      "test_name": "RBS",
+      "category": null,
+      "usage_count": 25,
+      "sort_order": 401,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 44,
+      "remark_text": "Reactive; repeat recommended.",
+      "test_name": "Anti HCV",
+      "category": null,
+      "usage_count": 18,
+      "sort_order": 322,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 45,
+      "remark_text": "Sample clotted; repeat advised.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 72,
+      "sort_order": 5,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 46,
+      "remark_text": "Sample received in wrong container.",
+      "test_name": null,
+      "category": null,
+      "usage_count": 45,
+      "sort_order": 4,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 47,
+      "remark_text": "Hemolyzed sample; AST/ALT may be falsely elevated.",
+      "test_name": "Liver Function Test",
+      "category": null,
+      "usage_count": 28,
+      "sort_order": 201,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 48,
+      "remark_text": "Platelet clumps noted; manual count recommended.",
+      "test_name": "Complete Blood Count (CBC)",
+      "category": null,
+      "usage_count": 22,
+      "sort_order": 102,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 49,
+      "remark_text": "Biological false positive possible.",
+      "test_name": "VDRL",
+      "category": null,
+      "usage_count": 6,
+      "sort_order": 333,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 50,
+      "remark_text": "Patient on anticoagulant therapy.",
+      "test_name": "PT/INR",
+      "category": null,
+      "usage_count": 25,
+      "sort_order": 612,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 51,
+      "remark_text": "Creatinine elevated; confirm with eGFR/clinical context.",
+      "test_name": "Serum Creatinine",
+      "category": null,
+      "usage_count": 14,
+      "sort_order": 421,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 52,
+      "remark_text": "Cold agglutinin suspected; repeat at 37\u00b0C.",
+      "test_name": "Complete Blood Count (CBC)",
+      "category": null,
+      "usage_count": 8,
+      "sort_order": 105,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 53,
+      "remark_text": "Prolonged PT; sample not citrated properly suspected.",
+      "test_name": "PT/INR",
+      "category": null,
+      "usage_count": 15,
+      "sort_order": 611,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
+    },
+    {
+      "id": 54,
+      "remark_text": "Sample received without request form.",
+      "test_name": "HIV (1 & 2)",
+      "category": null,
+      "usage_count": 5,
+      "sort_order": 304,
+      "is_active": 1,
+      "created_at": "2026-06-01T09:07:50.136776+00:00",
+      "updated_at": "2026-06-01 09:07:50.136776+00:00"
     }
   ],
   "global": [
@@ -668,72 +668,21 @@
     }
   ],
   "by_test_name": {
-    "HIV (1 & 2)": [
+    "Liver Function Test": [
       {
-        "text": "Non-reactive.",
-        "usage_count": 80,
-        "id": 26
+        "text": "Hemolyzed sample; AST/ALT may be falsely elevated.",
+        "usage_count": 28,
+        "id": 47
       },
       {
-        "text": "Reactive screen; confirmatory test advised.",
-        "usage_count": 35,
-        "id": 11
+        "text": "icteric sample",
+        "usage_count": 14,
+        "id": 19
       },
       {
-        "text": "Indeterminate; repeat in 2\u20134 weeks.",
-        "usage_count": 12,
-        "id": 32
-      },
-      {
-        "text": "Sample received without request form.",
-        "usage_count": 5,
-        "id": 54
-      }
-    ],
-    "HBsAg": [
-      {
-        "text": "Non-reactive.",
-        "usage_count": 70,
-        "id": 25
-      },
-      {
-        "text": "Reactive; confirm with neutralization if applicable.",
-        "usage_count": 20,
-        "id": 28
-      },
-      {
-        "text": "Sample hemolyzed.",
-        "usage_count": 8,
-        "id": 38
-      }
-    ],
-    "Anti HCV": [
-      {
-        "text": "Non-reactive.",
-        "usage_count": 65,
-        "id": 24
-      },
-      {
-        "text": "Reactive; repeat recommended.",
-        "usage_count": 18,
-        "id": 44
-      }
-    ],
-    "VDRL": [
-      {
-        "text": "Non-reactive.",
-        "usage_count": 60,
-        "id": 23
-      },
-      {
-        "text": "Reactive; titre follow-up advised.",
-        "usage_count": 15,
-        "id": 9
-      },
-      {
-        "text": "Biological false positive possible.",
-        "usage_count": 6,
-        "id": 49
+        "text": "Non-fasting sample; lipids may be affected.",
+        "usage_count": 10,
+        "id": 5
       }
     ],
     "Complete Blood Count (CBC)": [
@@ -763,83 +712,6 @@
         "id": 52
       }
     ],
-    "HIV": [
-      {
-        "text": "Non-reactive.",
-        "usage_count": 40,
-        "id": 22
-      },
-      {
-        "text": "Repeat sample required.",
-        "usage_count": 15,
-        "id": 41
-      }
-    ],
-    "Urine DR": [
-      {
-        "text": "Sample contaminated; repeat mid-stream urine advised.",
-        "usage_count": 30,
-        "id": 18
-      },
-      {
-        "text": "Insufficient volume for culture.",
-        "usage_count": 12,
-        "id": 34
-      }
-    ],
-    "CBC": [
-      {
-        "text": "Non-reactive.",
-        "usage_count": 30,
-        "id": 21
-      },
-      {
-        "text": "Sample hemolyzed.",
-        "usage_count": 20,
-        "id": 37
-      }
-    ],
-    "Liver Function Test": [
-      {
-        "text": "Hemolyzed sample; AST/ALT may be falsely elevated.",
-        "usage_count": 28,
-        "id": 47
-      },
-      {
-        "text": "icteric sample",
-        "usage_count": 14,
-        "id": 19
-      },
-      {
-        "text": "Non-fasting sample; lipids may be affected.",
-        "usage_count": 10,
-        "id": 5
-      }
-    ],
-    "PT/INR": [
-      {
-        "text": "Patient on anticoagulant therapy.",
-        "usage_count": 25,
-        "id": 50
-      },
-      {
-        "text": "Prolonged PT; sample not citrated properly suspected.",
-        "usage_count": 15,
-        "id": 53
-      }
-    ],
-    "RBS": [
-      {
-        "text": "Fasting status not confirmed.",
-        "usage_count": 25,
-        "id": 43
-      },
-      {
-        "text": "Grossly hemolyzed; glucose may be falsely low.",
-        "usage_count": 18,
-        "id": 33
-      }
-    ],
     "UELFT": [
       {
         "text": "Sample not fasting; interpret lipids with caution.",
@@ -852,25 +724,43 @@
         "id": 8
       }
     ],
-    "Serum Electrolytes": [
+    "VDRL": [
       {
-        "text": "Hemolysis may affect potassium.",
-        "usage_count": 16,
-        "id": 27
+        "text": "Non-reactive.",
+        "usage_count": 60,
+        "id": 23
+      },
+      {
+        "text": "Reactive; titre follow-up advised.",
+        "usage_count": 15,
+        "id": 9
+      },
+      {
+        "text": "Biological false positive possible.",
+        "usage_count": 6,
+        "id": 49
       }
     ],
-    "Serum Creatinine": [
+    "HIV (1 & 2)": [
       {
-        "text": "Creatinine elevated; confirm with eGFR/clinical context.",
-        "usage_count": 14,
-        "id": 51
-      }
-    ],
-    "ESR": [
+        "text": "Non-reactive.",
+        "usage_count": 80,
+        "id": 26
+      },
       {
-        "text": "ESR elevated; correlate with CRP/clinical picture.",
+        "text": "Reactive screen; confirmatory test advised.",
+        "usage_count": 35,
+        "id": 11
+      },
+      {
+        "text": "Indeterminate; repeat in 2\u20134 weeks.",
         "usage_count": 12,
-        "id": 20
+        "id": 32
+      },
+      {
+        "text": "Sample received without request form.",
+        "usage_count": 5,
+        "id": 54
       }
     ],
     "Stool DR": [
@@ -892,11 +782,121 @@
         "id": 14
       }
     ],
+    "Urine DR": [
+      {
+        "text": "Sample contaminated; repeat mid-stream urine advised.",
+        "usage_count": 30,
+        "id": 18
+      },
+      {
+        "text": "Insufficient volume for culture.",
+        "usage_count": 12,
+        "id": 34
+      }
+    ],
+    "ESR": [
+      {
+        "text": "ESR elevated; correlate with CRP/clinical picture.",
+        "usage_count": 12,
+        "id": 20
+      }
+    ],
+    "CBC": [
+      {
+        "text": "Non-reactive.",
+        "usage_count": 30,
+        "id": 21
+      },
+      {
+        "text": "Sample hemolyzed.",
+        "usage_count": 20,
+        "id": 37
+      }
+    ],
+    "HIV": [
+      {
+        "text": "Non-reactive.",
+        "usage_count": 40,
+        "id": 22
+      },
+      {
+        "text": "Repeat sample required.",
+        "usage_count": 15,
+        "id": 41
+      }
+    ],
+    "Anti HCV": [
+      {
+        "text": "Non-reactive.",
+        "usage_count": 65,
+        "id": 24
+      },
+      {
+        "text": "Reactive; repeat recommended.",
+        "usage_count": 18,
+        "id": 44
+      }
+    ],
+    "HBsAg": [
+      {
+        "text": "Non-reactive.",
+        "usage_count": 70,
+        "id": 25
+      },
+      {
+        "text": "Reactive; confirm with neutralization if applicable.",
+        "usage_count": 20,
+        "id": 28
+      },
+      {
+        "text": "Sample hemolyzed.",
+        "usage_count": 8,
+        "id": 38
+      }
+    ],
+    "Serum Electrolytes": [
+      {
+        "text": "Hemolysis may affect potassium.",
+        "usage_count": 16,
+        "id": 27
+      }
+    ],
+    "RBS": [
+      {
+        "text": "Fasting status not confirmed.",
+        "usage_count": 25,
+        "id": 43
+      },
+      {
+        "text": "Grossly hemolyzed; glucose may be falsely low.",
+        "usage_count": 18,
+        "id": 33
+      }
+    ],
     "PLEURAL FLUID FOR DR": [
       {
         "text": "Insufficient fluid for full panel.",
         "usage_count": 9,
         "id": 39
+      }
+    ],
+    "PT/INR": [
+      {
+        "text": "Patient on anticoagulant therapy.",
+        "usage_count": 25,
+        "id": 50
+      },
+      {
+        "text": "Prolonged PT; sample not citrated properly suspected.",
+        "usage_count": 15,
+        "id": 53
+      }
+    ],
+    "Serum Creatinine": [
+      {
+        "text": "Creatinine elevated; confirm with eGFR/clinical context.",
+        "usage_count": 14,
+        "id": 51
       }
     ]
   },
