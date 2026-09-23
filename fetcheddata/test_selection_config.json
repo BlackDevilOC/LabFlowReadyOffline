@@ -15,7 +15,7 @@
     "Amylase",
     "Glucose Random (RBS)",
     "PT (Prothrombin Time)",
-    "Hep B, C ELISA",
+    "Blood Grouping",
     "Anti HIV (ICT)",
     "Uric Acid",
     "Dengue NS1 (ICT)",
@@ -24,7 +24,9 @@
     "Anti HCV ELISA",
     "HbA1c",
     "H. Pylori Ab (ICT)",
-    "Creatinine"
+    "Creatinine",
+    "ESR",
+    "Hep B, C ELISA"
   ],
   "quick_presets": [
     {
@@ -83,7 +85,7 @@
     "Anti HCV (ICT)": "Regular",
     "Anti HCV ELISA": "Popular",
     "Anti HIV (ICT)": "Popular",
-    "Blood Grouping": "Regular",
+    "Blood Grouping": "Popular",
     "Hep B, C ELISA": "Popular",
     "Bilirubin Total": "Regular",
     "Thyroid Profile": "Popular",
@@ -114,7 +116,7 @@
       "Amylase",
       "Glucose Random (RBS)",
       "PT (Prothrombin Time)",
-      "Hep B, C ELISA",
+      "Blood Grouping",
       "Anti HIV (ICT)",
       "Uric Acid",
       "Dengue NS1 (ICT)",
@@ -123,7 +125,9 @@
       "Anti HCV ELISA",
       "HbA1c",
       "H. Pylori Ab (ICT)",
-      "Creatinine"
+      "Creatinine",
+      "ESR",
+      "Hep B, C ELISA"
     ],
     "Regular": [
       "T3",

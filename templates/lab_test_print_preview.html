@@ -1263,6 +1263,15 @@
                 if (!fp) return alert('No tests loaded.');
                 const btn = document.getElementById('save-layout-btn');
                 btn.disabled = true; btn.textContent = '⏳ Saving…';
+
+                // If user didn't manually drag, ensure currentPageMap is derived from the currently rendered pages
+                let mapToSave = currentPageMap;
+                if (!mapToSave || Object.keys(mapToSave).length === 0) {
+                    const filteredRows = allRows.filter(r => selectedTestNames.has((r.test_name || '').trim()));
+                    const currentRenderedPages = renderAndReturnPages(currentPatient, filteredRows, currentSettings);
+                    mapToSave = derivePageMapFromPages(currentRenderedPages);
+                }
+
                 try {
                     const res = await fetch('/api/lab/print-layout', {
                         method: 'POST',
@@ -1274,9 +1283,10 @@
                         body: JSON.stringify({
                             fingerprint: fp,
                             layout: {
-                                page_map: currentPageMap || {},
+                                page_map: mapToSave || {},
                                 test_order: currentTestOrder || [],
                                 test_count: selectedTestNames.size,
+                                selected_tests: Array.from(selectedTestNames),
                                 display_options: {
                                     show_category_title: showCategoryTitle,
                                     show_group_test_title: showGroupTestTitle,
@@ -1288,6 +1298,7 @@
                     const data = await res.json();
                     if (data.status === 'ok') {
                         savedFingerprint = fp;
+                        currentPageMap = mapToSave;
                         updateSavedBanner(true, `Saved by ${getUserEmail()}`);
                         btn.textContent = '✓ Saved!';
                         setTimeout(() => { btn.textContent = '💾 Save Layout'; btn.disabled = false; }, 1800);
@@ -1321,7 +1332,7 @@
                         rebuildFromCurrentMap();
                     }
                 } catch (err) { alert('Error: ' + err.message); }
-                btn.textContent = '✕ Clear Saved'; btn.disabled = false;
+                btn.textContent = '🗑 Clear Saved'; btn.disabled = false;
             });
         }
     }
@@ -1378,10 +1389,17 @@
             try {
                 const lr = await fetch(`/api/lab/print-layout?fingerprint=${encodeURIComponent(currentFingerprint)}`);
                 const ld = await lr.json();
-                if (ld.status === 'ok' && ld.layout?.page_map && Object.keys(ld.layout.page_map).length) {
-                    currentPageMap = ld.layout.page_map;
+                if (ld.status === 'ok' && ld.layout) {
+                    if (ld.layout.page_map && Object.keys(ld.layout.page_map).length) {
+                        currentPageMap = ld.layout.page_map;
+                    }
                     if (Array.isArray(ld.layout.test_order) && ld.layout.test_order.length) {
                         currentTestOrder = ld.layout.test_order;
+                    }
+                    if (Array.isArray(ld.layout.selected_tests) && ld.layout.selected_tests.length) {
+                        selectedTestNames = new Set(ld.layout.selected_tests);
+                    } else if (currentPageMap && Object.keys(currentPageMap).length) {
+                        selectedTestNames = new Set(Object.keys(currentPageMap));
                     }
                     // Restore saved display options
                     const opts = ld.layout.display_options;

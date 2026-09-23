@@ -23869,3 +23869,141 @@ TypeError: Object of type datetime is not JSON serializable
 2026-09-12 13:58:30,166 - INFO - [LabFlow] - [USER: Rehan Ahmed] [PRINT_EVENT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Print report for MR#184152 by Rehan Ahmed (Copy #1)
 2026-09-12 14:02:23,496 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
 2026-09-12 14:02:56,430 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-12 14:03:20,285 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 184152, date=None
+2026-09-12 14:26:13,127 - INFO - [LabFlow] - [USER: TestRunner] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'patient_name': 'AUTO_SEQUENCE_TEST', 'relation': 'S/O', 'relation_name': 'Test', 'mobile': '03001234567', 'gender': 'Male', 'age': 25, 'cnic': '-', 'patient_token': 99, 'shift': 'MORNING', 'user': 'Rehan Ahmed'}
+2026-09-12 14:26:13,220 - INFO - [LabFlow] - Successfully registered new patient. ID: 109622, MR No: 9586
+2026-09-16 15:49:36,170 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-16 15:49:45,781 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 18:50:33,365 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-23 18:59:38,314 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-23 18:59:49,631 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-23 19:09:39,156 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-09-23 19:09:44,527 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-23 19:09:44,577 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-09-23 19:09:45,334 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-09-23 19:09:46,268 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:09:46,268 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-09-23 19:09:46,268 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-09-23 19:09:46,268 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-09-23 19:09:46,366 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-23 19:09:46,406 - INFO - [LabFlow] - Server ready — loading login page
+2026-09-23 19:09:46,406 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-23 19:09:46,438 - DEBUG - [LabFlow] - Accessing Login Page
+2026-09-23 19:09:46,454 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:09:46,523 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-23 19:09:46,558 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-09-23 19:09:48,216 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-23 19:09:51,527 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-23 19:09:51,558 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:09:51,625 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-09-23 19:09:51,658 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-23 19:09:51,658 - INFO - [LabFlow] - Local PostgreSQL server mode active; Supabase background sync bypassed.
+2026-09-23 19:09:51,658 - ERROR - [LabFlow] - [USER: System] [API_AUTH_LOGIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 2240, in api_auth_login
+    response = JSONResponse({"status": "Success", "user": user})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 189, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 46, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 192, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+2026-09-23 19:09:52,167 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-23 19:09:53,274 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-23 19:09:53,814 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-23 19:09:54,105 - INFO - [LabFlow] - Loaded 120 individual tests and 63 test groups (active_only=True)
+2026-09-23 19:10:00,563 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTRATION] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Received registration request for: random
+2026-09-23 19:10:00,564 - INFO - [LabFlow] - [USER: admin@admin.com] [REGISTER_PATIENT_PAYLOAD] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] {'salutation': 'Mr.', 'patient_name': 'random', 'relation': 'S', 'relation_name': '-', 'mobile': '-', 'gender': 'MALE', 'age': 0, 'cnic': '-', 'patient_token': '0', 'shift': 'EVENING', 'user': 'Rehan Ahmed', 'user_id': 1, 'pwd': '55863966'}
+2026-09-23 19:10:00,640 - INFO - [LabFlow] - Successfully registered new patient. ID: 113018, MR No: 12980
+2026-09-23 19:10:00,640 - INFO - [LabFlow] - Patient registered. ID: 113018, MR: 12980. Queuing test creation in background...
+2026-09-23 19:10:00,728 - INFO - [LabFlow] - [USER: admin@admin.com] [AUTH_SUCCESS] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] New patient registered: 12980
+2026-09-23 19:10:00,793 - INFO - [LabFlow] - [USER: admin] [AUDIT] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] MR: 12980 | Action: REGISTER | Details: Registered patient with 1 test(s): Albumin (Shift: EVENING)
+2026-09-23 19:10:00,802 - INFO - [LabFlow] - Generating Invoice for patient: 113018
+2026-09-23 19:10:00,874 - INFO - [LabFlow] - Adding tests to patient MR: 12980, Name: random
+2026-09-23 19:10:00,913 - INFO - [LabFlow] - Successfully added 1 test records in test_results_all for patient 12980
+2026-09-23 19:10:01,003 - INFO - [LabFlow] - Fetched full info for patient ID: 113018
+2026-09-23 19:10:02,091 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-23 19:10:03,485 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 12978, date=None
+2026-09-23 19:10:03,587 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:10:08,389 - INFO - [LabFlow] - Print layout saved to PostgreSQL by admin@admin.com for fingerprint tsh
+2026-09-23 19:10:08,540 - INFO - [LabFlow] - [AutoPush] All admin settings synced to PG server by 'admin@admin.com'
+2026-09-23 19:10:10,187 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-23 19:10:11,620 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 12974, date=None
+2026-09-23 19:10:11,729 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:10:22,988 - INFO - [LabFlow] - Master settings pushed to server database by Staff
+2026-09-23 19:10:28,740 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-23 19:10:29,184 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-23 19:10:29,818 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-23 19:10:31,197 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 12975, date=None
+2026-09-23 19:10:31,303 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:10:40,559 - INFO - [LabFlow] - Launching desktop window (splash) at 0,102
+2026-09-23 19:10:42,764 - INFO - [LabFlow] - App started. Assets path: D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main
+2026-09-23 19:10:42,814 - INFO - [LabFlow] - Starting Uvicorn server for desktop window...
+2026-09-23 19:10:42,830 - INFO - [LabFlow] - LabFlow app started in 100% On-Premise Local PostgreSQL mode.
+2026-09-23 19:10:43,096 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:10:43,096 - INFO - [LabFlow] - [USER: auto_sync] [ADMIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Lab print settings updated globally
+2026-09-23 19:10:43,111 - INFO - [LabFlow] - Auto-sync: Latest master settings pulled successfully from server database.
+2026-09-23 19:10:43,113 - INFO - [LabFlow] - Background cache refresh worker launched (Interval: 3600s / 1 hour).
+2026-09-23 19:10:43,164 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-23 19:10:43,200 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-23 19:10:43,233 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:10:43,266 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-23 19:10:43,266 - INFO - [LabFlow] - Local background cache sync: All cache JSON files refreshed successfully.
+2026-09-23 19:10:43,346 - INFO - [LabFlow] - Server ready — loading login page
+2026-09-23 19:10:43,373 - DEBUG - [LabFlow] - Accessing Login Page
+2026-09-23 19:10:44,847 - INFO - [LabFlow] - Saved 11 users to fetcheddata/users.json
+2026-09-23 19:10:47,111 - INFO - [LabFlow] - Invoice settings cached to fetcheddata/
+2026-09-23 19:10:47,162 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:10:47,228 - INFO - [LabFlow] - User preferences cached to fetcheddata/
+2026-09-23 19:10:47,269 - INFO - [LabFlow] - Remarks cached to fetcheddata/remarks.json
+2026-09-23 19:10:47,269 - INFO - [LabFlow] - Local PostgreSQL server mode active; Supabase background sync bypassed.
+2026-09-23 19:10:47,269 - ERROR - [LabFlow] - [USER: System] [API_AUTH_LOGIN] [PC_INFO: PC: Lab-Main-Pc | User: lal | OS: Windows 10] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\main.py", line 2240, in api_auth_login
+    response = JSONResponse({"status": "Success", "user": user})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 189, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 46, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "D:\rehan d DRIVE\production\LabFlowReady-main (1)\LabFlowReady-main\.venv\Lib\site-packages\starlette\responses.py", line 192, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\lal\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+2026-09-23 19:10:48,144 - DEBUG - [LabFlow] - Accessing Home Page
+2026-09-23 19:10:48,874 - DEBUG - [LabFlow] - Accessing Registration Page (New Checkbox UI default)
+2026-09-23 19:10:49,042 - INFO - [LabFlow] - Loaded 120 individual tests and 63 test groups (active_only=True)
+2026-09-23 19:10:50,761 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-23 19:10:50,928 - DEBUG - [LabFlow] - Accessing Update Results Page
+2026-09-23 19:10:51,860 - INFO - [LabFlow] - Accessing Lab Print Records page
+2026-09-23 19:10:54,076 - INFO - [LabFlow] - Accessing Lab Test Print Preview for MR: 12970, date=None
+2026-09-23 19:10:54,230 - INFO - [LabFlow] - Lab print settings cached to fetcheddata/print_settings.json
+2026-09-23 19:10:58,213 - INFO - [LabFlow] - User requested logout
+2026-09-23 19:10:58,213 - DEBUG - [LabFlow] - Accessing Login Page
